@@ -12,3 +12,23 @@
  * memoir stylesheet
  *
  */
+
+@font-face {
+  font-family: 'Army';
+  src: url('img/fonts/Army.woff2') format('woff2'), url('img/fonts/Army.woff') format('woff'),
+    url('img/fonts/Army.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gunplay';
+  src: url('img/fonts/Gunplay.woff2') format('woff2'), url('img/fonts/Gunplay.woff') format('woff'),
+    url('img/fonts/Gunplay.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@import 'modules/css/layout';

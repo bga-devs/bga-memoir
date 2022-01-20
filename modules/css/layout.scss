@@ -1,0 +1,73 @@
+html {
+  background: url('img/background.jpg');
+  background-size: 75px;
+}
+
+#m44-container {
+  display: flex;
+  flex-flow: column;
+
+  .m44-hrule {
+    height: 11px;
+    background: url('img/h_rule.jpg');
+    background-repeat: repeat-x;
+  }
+
+  #m44-top-part {
+    height: 71px;
+    background: url('img/game_top.png');
+    background-repeat: repeat-x;
+    position: relative;
+    z-index: 2;
+
+    #top-player {
+      height: 52px;
+      overflow: hidden;
+    }
+  }
+
+  #m44-central-part {
+    height: 600px;
+    display: flex;
+    margin-top: -6px;
+    margin-bottom: -4px;
+    //background: url('img/background.jpg');
+
+    #deck-holder {
+      width: 122px;
+      background: url('img/game_left.png');
+      background-repeat: repeat-y;
+    }
+
+    #m44-board-wrapper {
+      flex-grow: 2;
+    }
+
+    #right-side {
+      float: none;
+      margin-left: 0px;
+      margin-top: 0px;
+      width: 218px;
+      padding-left: 35px;
+      overflow: auto;
+      background: url('img/game_right.png');
+      background-repeat: repeat-y;
+    }
+  }
+
+  #m44-bottom-part {
+    height: 146px;
+    background: url('img/game_bottom.png');
+    background-repeat: repeat-x;
+    position: relative;
+    z-index: 2;
+
+    #bottom-player {
+      margin-top: 25px;
+    }
+  }
+}
+
+#left-side {
+  margin-right: 1px !important;
+}

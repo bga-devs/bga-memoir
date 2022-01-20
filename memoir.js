@@ -15,41 +15,48 @@
  *
  */
 
- var isDebug = window.location.host == 'studio.boardgamearena.com' || window.location.hash.indexOf('debug') > -1;
- var debug = isDebug ? console.info.bind(window.console) : function () {};
+var isDebug = window.location.host == 'studio.boardgamearena.com' || window.location.hash.indexOf('debug') > -1;
+var debug = isDebug ? console.info.bind(window.console) : function () {};
 
- define([
-   'dojo',
-   'dojo/_base/declare',
-   'ebg/core/gamegui',
-   'ebg/counter',
-   g_gamethemeurl + 'modules/js/Core/game.js',
-   g_gamethemeurl + 'modules/js/Core/modal.js',
-   g_gamethemeurl + 'modules/js/Players.js',
- ], function (dojo, declare) {
-   return declare('bgagame.memoir', [customgame.game], {
-     constructor() {
-       this._activeStates = [];
-       this._notifications = [
-         //['revealActionCard', 1100],
-       ];
+define([
+  'dojo',
+  'dojo/_base/declare',
+  'ebg/core/gamegui',
+  'ebg/counter',
+  g_gamethemeurl + 'modules/js/Core/game.js',
+  g_gamethemeurl + 'modules/js/Core/modal.js',
+  g_gamethemeurl + 'modules/js/Players.js',
+], function (dojo, declare) {
+  return declare('bgagame.memoir', [customgame.game], {
+    constructor() {
+      this._activeStates = [];
+      this._notifications = [
+        //['revealActionCard', 1100],
+      ];
 
-       // Fix mobile viewport (remove CSS zoom)
-       this.default_viewport = 'width=700';
-     },
+      // Fix mobile viewport (remove CSS zoom)
+      this.default_viewport = 'width=700';
+    },
 
-     /**
-      * Setup:
-      *	This method set up the game user interface according to current game situation specified in parameters
-      *	The method is called each time the game interface is displayed to a player, ie: when the game starts and when a player refreshes the game page (F5)
-      *
-      * Params :
-      *	- mixed gamedatas : contains all datas retrieved by the getAllDatas PHP method.
-      */
-     setup(gamedatas) {
-       debug('SETUP', gamedatas);
-       //this.setupPlayers();
-       this.inherited(arguments);
-     },
-   });
- });
+    /**
+     * Setup:
+     *	This method set up the game user interface according to current game situation specified in parameters
+     *	The method is called each time the game interface is displayed to a player, ie: when the game starts and when a player refreshes the game page (F5)
+     *
+     * Params :
+     *	- mixed gamedatas : contains all datas retrieved by the getAllDatas PHP method.
+     */
+    setup(gamedatas) {
+      debug('SETUP', gamedatas);
+      //this.setupPlayers();
+      this.inherited(arguments);
+
+      this.forEachPlayer((player) => {
+        dojo.place('overall_player_board_' + player.id, player.id == this.player_id ? 'bottom-player' : 'top-player');
+      });
+      dojo.place('right-side', 'm44-central-part');
+    },
+
+    updatePlayerOrdering() {},
+  });
+});

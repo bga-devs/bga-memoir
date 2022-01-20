@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /**
  *------
  * BGA framework: © Gregory Isabelli <gisabelli@boardgamearena.com> & Emmanuel Colin <ecolin@boardgamearena.com>
@@ -7,8 +8,73 @@
  * See http://en.boardgamearena.com/#!doc/Studio for more information.
  * -----
  *
- * memoir.css
+ * memoir.scss
  *
  * memoir stylesheet
  *
  */
+@font-face {
+  font-family: 'Army';
+  src: url("img/fonts/Army.woff2") format("woff2"), url("img/fonts/Army.woff") format("woff"), url("img/fonts/Army.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap; }
+@font-face {
+  font-family: 'Gunplay';
+  src: url("img/fonts/Gunplay.woff2") format("woff2"), url("img/fonts/Gunplay.woff") format("woff"), url("img/fonts/Gunplay.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; }
+html {
+  background: url("img/background.jpg");
+  background-size: 75px; }
+
+#m44-container {
+  display: flex;
+  flex-flow: column; }
+  #m44-container .m44-hrule {
+    height: 11px;
+    background: url("img/h_rule.jpg");
+    background-repeat: repeat-x; }
+  #m44-container #m44-top-part {
+    height: 71px;
+    background: url("img/game_top.png");
+    background-repeat: repeat-x;
+    position: relative;
+    z-index: 2; }
+    #m44-container #m44-top-part #top-player {
+      height: 52px;
+      overflow: hidden; }
+  #m44-container #m44-central-part {
+    height: 600px;
+    display: flex;
+    margin-top: -6px;
+    margin-bottom: -4px; }
+    #m44-container #m44-central-part #deck-holder {
+      width: 122px;
+      background: url("img/game_left.png");
+      background-repeat: repeat-y; }
+    #m44-container #m44-central-part #m44-board-wrapper {
+      flex-grow: 2; }
+    #m44-container #m44-central-part #right-side {
+      float: none;
+      margin-left: 0px;
+      margin-top: 0px;
+      width: 218px;
+      padding-left: 35px;
+      overflow: auto;
+      background: url("img/game_right.png");
+      background-repeat: repeat-y; }
+  #m44-container #m44-bottom-part {
+    height: 146px;
+    background: url("img/game_bottom.png");
+    background-repeat: repeat-x;
+    position: relative;
+    z-index: 2; }
+    #m44-container #m44-bottom-part #bottom-player {
+      margin-top: 25px; }
+
+#left-side {
+  margin-right: 1px !important; }
+
+/*# sourceMappingURL=memoir.css.map */

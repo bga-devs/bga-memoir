@@ -65,7 +65,7 @@ define(['dojo', 'dojo/_base/declare', 'ebg/core/gamegui'], (dojo, declare) => {
 
     onLoadingComplete() {
       debug('Loading complete');
-//      this.cancelLogs(this.gamedatas.canceledNotifIds);
+      //      this.cancelLogs(this.gamedatas.canceledNotifIds);
     },
 
     /*
@@ -888,6 +888,33 @@ define(['dojo', 'dojo/_base/declare', 'ebg/core/gamegui'], (dojo, declare) => {
       };
       o.setValue(defaultValue);
       return o;
+    },
+
+    /****************
+     ***** UTILS *****
+     ****************/
+    forEachPlayer(callback) {
+      Object.values(this.gamedatas.players).forEach(callback);
+    },
+
+    clientState(name, descriptionmyturn, args) {
+      this.setClientState(name, {
+        descriptionmyturn,
+        args,
+      });
+    },
+
+    addCancelStateBtn(text = null) {
+      if (text == null) {
+        text = _('Cancel');
+      }
+
+      this.addSecondaryActionButton('btnCancel', text, () => this.clearClientState());
+    },
+
+    clearClientState() {
+      //this.clearPossible();
+      this.restoreServerGameState();
     },
   });
 });
