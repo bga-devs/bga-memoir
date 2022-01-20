@@ -8,7 +8,9 @@
 
   <div id="m44-central-part">
     <div id="deck-holder"></div>
-    <div id="m44-board-wrapper"></div>
+    <div id="m44-board-wrapper">
+      <ul id="m44-board"></ul>
+    </div>
   </div>
 
   <div id="m44-bottom-part">

@@ -80,9 +80,11 @@ class memoir extends Table
   public function getAllDatas()
   {
     $pId = self::getCurrentPId();
+    $test = json_decode(self::getUniqueValueFromDB("SELECT value FROM global_variables LIMIT 1"), true);
     return [
       'prefs' => Preferences::getUiData($pId),
       'players' => Players::getUiData($pId),
+      'scenario' => $test,
     ];
   }
 

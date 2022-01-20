@@ -25,9 +25,9 @@ define([
   'ebg/counter',
   g_gamethemeurl + 'modules/js/Core/game.js',
   g_gamethemeurl + 'modules/js/Core/modal.js',
-  g_gamethemeurl + 'modules/js/Players.js',
+  g_gamethemeurl + 'modules/js/Board.js',
 ], function (dojo, declare) {
-  return declare('bgagame.memoir', [customgame.game], {
+  return declare('bgagame.memoir', [customgame.game, memoir.board], {
     constructor() {
       this._activeStates = [];
       this._notifications = [
@@ -51,10 +51,14 @@ define([
       //this.setupPlayers();
       this.inherited(arguments);
 
+      // Basic UI tweaking
       this.forEachPlayer((player) => {
         dojo.place('overall_player_board_' + player.id, player.id == this.player_id ? 'bottom-player' : 'top-player');
       });
       dojo.place('right-side', 'm44-central-part');
+
+      // Load board
+      this.setupBoard(gamedatas.scenario.board);
     },
 
     updatePlayerOrdering() {},

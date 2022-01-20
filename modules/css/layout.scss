@@ -41,6 +41,9 @@ html {
 
     #m44-board-wrapper {
       flex-grow: 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     #right-side {
