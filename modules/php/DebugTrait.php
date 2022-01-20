@@ -20,4 +20,11 @@ trait DebugTrait
     ScenarioLoader::load('SwordBeach');
     ScenarioLoader::setupScenario();
   }
+
+
+  function test3()
+  {
+    ScenarioLoader::load('test2');
+    ScenarioLoader::setupScenario();
+  }
 }

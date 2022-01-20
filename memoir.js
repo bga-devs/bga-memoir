@@ -58,7 +58,9 @@ define([
       dojo.place('right-side', 'm44-central-part');
 
       // Load board
-      this.setupBoard(gamedatas.scenario.board);
+      if (gamedatas.scenario) {
+        this.setupBoard(gamedatas.scenario.board);
+      }
     },
 
     updatePlayerOrdering() {},

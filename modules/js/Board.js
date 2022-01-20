@@ -4,10 +4,18 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
   }
 
   // prettier-ignore
-  const TERRAINS = ['airfield','airfieldX1','airfieldX','barracks','bled','cairfield','camp','cemetery','church','coastcurve','coast','cravine','curve','dairfield','dairfieldX','dam','dcamp','depot','descarpment','dhill','dridge','droadcurve','droadFL','droadFR','droad','droadX','factory','forest','fortress','hedgerow','highground','hillcurve','hillroad','hills','lakeA','lakeB','lakeC','lighthouse','marshes','mountain','oasis','pairfield','pairfieldX','palmtrees','pbeach','pcave','pheadquarter','phospital','pjungle','pmcave','pmouth','pond','powerplant','ppier','price','ptrenches','pvillage','radar','railcurve','railFL','railFR','rail','railroad','railX','ravine','riverFL','riverFR','river','riverY','roadcurve','roadFL','roadFR','road','roadX','roadY','station','village','wadi','wairfield','wcurved','wcurve','wfactory','wforest','whillforest','whill','whillvillage','wmarshes','wravine','wriver','wruins','wtrenches','wvillage'];
+  const TERRAINS = ['airfield','airfieldX','barracks','bled','buildings','cairfield','camp','cemetery','church','coastcurve','coast','cravine','curve','dairfield','dairfieldX','dam','dcamp','depot','descarpment','dhill','dridge','droadcurve','droadFL','droadFR','droad','droadX','factory','fortress','hedgerow','highground','hillcurve','hillroad','hills','lakeA','lakeB','lakeC','lighthouse','marshes','mountain','oasis','pairfield','pairfieldX','palmtrees','pbeach','pcave','pheadquarter','phospital','pjungle','pmcave','pmouth','pond','powerplant','ppier','price','ptrenches','pvillage','radar','railcurve','railFL','railFR','rail','railroad','railX','ravine','riverFL','riverFR','river','riverY','roadcurve','roadFL','roadFR','road','roadX','roadY','station','wadi','wairfield','wcastle','wchurch','wcurved','wcurve','wfactory','wforest','whillforest','whill','whillvillage','wmarshes','woods','wrailcurve','wrailFR','wrail','wrailroad','wravine','wriverFR','wriver','wroadcurve','wroadFL','wroadFR','wroad','wroadX','wroadY','wruins','wtrenches','wvillage'];
+  // prettier-ignore
+  const TERRAINS_ROTATIONS = {
+    3 : ['wadi','ptrenches','ravine','wtrenches','wravine','river','wriver','road','roadX','hillroad','droad','droadX','wroad','wroadX','airfield','airfieldX','pairfield','pairfieldX','cairfield','wairfield','dairfieldX','dairfield','rail','railX','station','railroad','wrail','wrailroad'],
+    6 : ['wcurve','cravine','curve','riverFL','riverFR','pond','dam','pmouth','lakeA','lakeB','lakeC','wriverFR','wcurved','coast','coastcurve','roadcurve','roadFL','roadFR','hillcurve','droadcurve','droadFL','droadFR','wroadcurve','wroadFL','wroadFR','railcurve','railFL','railFR','wrailcurve','wrailFR'],
+    2 : ['riverY','roadY','wroadY'],
+  };
 
   // prettier-ignore
-  const OBSTACLES = ['abatis','barge','bridge','brkbridge','bunker','casemate','dbunker','dragonteeth','droadblock','ford','hedgehog','loco','pbridge','pbunker','pcarrier','pdestroyer','pontoon','railbridge','roadblock','sand','wagon','wbunker','wire'];
+  const OBSTACLES = ['abatis','barge','bridge','brkbridge','bunker','casemate','dbunker','dragonteeth','droadblock','ford','hedgehog','loco','pbridge','pbunker','pcarrier','pdestroyer','pontoon','railbridge','roadblock','sand','wagon','wbridge','wbunker','wire','wpontoon','wrailbridge','wroadblock'];
+  // prettier-ignore
+  const OBSTACLES_ROTATION = { bunker: 180,wbunker : 180,dbunker : 180,ford : 60,roadblock : 60,droadblock : 60,wroadblock : 60,pontoon : -30,wpontoon : -30,dragonteeth : 60,railbridge : -60,wrailbridge : -60,bridge : -30,pbridge : -30,brkbridge : -30,wbridge : -30,wagon : -60,loco : 60,abatis : 60,wire : 180,sand : 180};
 
   return declare('memoir.board', null, {
     setupBoard(board) {
@@ -59,6 +67,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         if (hexagon.obstacle) {
           this.place('tplObstacleTile', hexagon.obstacle, cellC);
         }
+        if (hexagon.rect_terrain) {
+          this.place('tplObstacleTile', hexagon.rect_terrain, cellC);
+        }
       });
     },
 
@@ -72,21 +83,26 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     },
 
     tplTerrainTile(terrain) {
-      let map = {
-        buildings: 'village',
-        woods: 'forest',
-      };
-      let name = terrain.name;
-      if (map[name]) name = map[name];
+      let type = TERRAINS.findIndex((t) => t == terrain.name);
+      let rotation = 0;
+      if (terrain.orientation) {
+        let nbrRotation = 3;
+        if (TERRAINS_ROTATIONS[6].includes(terrain.name)) nbrRotation = -6;
+        if (TERRAINS_ROTATIONS[2].includes(terrain.name)) nbrRotation = 2;
+        rotation = (((terrain.orientation - 1) * 12) / nbrRotation + 12) % 12;
+      }
 
-      let type = TERRAINS.findIndex((t) => t == name);
-
-      return `<div class="hex-grid-content hex-grid-terrain" data-type="${type}"></div>`;
+      return `<div class="hex-grid-content hex-grid-terrain" data-type="${type}" data-rotation="${rotation}"></div>`;
     },
 
     tplObstacleTile(obstacle) {
       let type = OBSTACLES.findIndex((t) => t == obstacle.name);
-      return `<div class="hex-grid-content hex-grid-obstacle" data-type="${type}"></div>`;
+      let rotation = 0;
+      if (obstacle.orientation) {
+        let angle = OBSTACLES_ROTATION[obstacle.name] / -30;
+        rotation = ((obstacle.orientation - 1) * angle + 12) % 12;
+      }
+      return `<div class="hex-grid-content hex-grid-obstacle" data-type="${type}" data-rotation="${rotation}"></div>`;
     },
   });
 });
