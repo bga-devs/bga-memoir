@@ -11,5 +11,7 @@ trait DebugTrait
 {
   function test()
   {
+    ScenarioLoader::load('test');
+    ScenarioLoader::setupScenario();
   }
 }

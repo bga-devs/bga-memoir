@@ -13,7 +13,7 @@ class Cards extends \M44\Helpers\Pieces
 {
   protected static $table = 'cards';
   protected static $prefix = 'card_';
-  protected static $customFields = ['value', 'color'];
+  protected static $customFields = ['type', 'value', 'extra_datas'];
   protected static $autoreshuffle = false;
   protected static function cast($card)
   {
@@ -21,9 +21,9 @@ class Cards extends \M44\Helpers\Pieces
     return [
       'id' => $card['id'],
       'location' => $locations[0],
-      'value' => $card['value'],
-      'color' => $card['color'],
       'pId' => $locations[1] ?? null,
+      'type' => $card['type'],
+      'value' => $card['value'],
     ];
   }
 
@@ -48,35 +48,43 @@ class Cards extends \M44\Helpers\Pieces
   //////////////////////////////////
 
   /**
-   * setupNewGame: create the deck of cards
+   * Create a standard deck of cards
    */
-  public function setupNewGame($players, $options)
+  public function initStandardDeck()
   {
-    $colors = [
-      CARD_BLUE => 9,
-      CARD_GREEN => 9,
-      CARD_PINK => 9,
-      CARD_YELLOW => 9,
-      CARD_SUBMARINE => 4,
+    $deck = [
+      CARD_RECON => [2, 2, 2],
+      CARD_PROBE => [4, 5, 4],
+      CARD_ATTACK => [3, 4, 3],
+      CARD_ASSAULT => [2, 2, 2],
+      CARD_GENERAL_ADVANCE => 1,
+      CARD_PINCER_MOVE => 1,
+      CARD_RECON_IN_FORCE => 3,
     ];
 
     $cards = [];
-    foreach ($colors as $cId => $maxValue) {
-      for ($value = 1; $value <= $maxValue; $value++) {
+    foreach ($deck as $type => $occurences) {
+      if (\is_array($occurences)) {
+        foreach ($occurences as $value => $n) {
+          $cards[] = [
+            'type' => $type,
+            'value' => $value + 1,
+            'nbr' => $n,
+          ];
+        }
+      } else {
         $cards[] = [
-          'value' => $value,
-          'color' => $cId,
-          //          'player_id' => null,
+          'type' => $type,
+          'value' => 0,
+          'nbr' => $occurences,
         ];
       }
     }
 
+    self::DB()
+      ->delete()
+      ->run();
     self::create($cards, 'deck');
     self::shuffle('deck');
-
-    // Draw each player 5 cards
-    foreach ($players as $pId => $player) {
-      self::pickForLocation(4, 'deck', ['hand', $pId]);
-    }
   }
 }

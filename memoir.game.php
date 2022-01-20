@@ -70,7 +70,6 @@ class memoir extends Table
     Globals::setupNewGame($players, $options);
     Preferences::setupNewGame($players, $options);
     Players::setupNewGame($players, $options);
-    Cards::setupNewGame($players, $options);
 
     $this->activeNextPlayer();
   }

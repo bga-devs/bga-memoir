@@ -27,7 +27,8 @@ CREATE TABLE IF NOT EXISTS `cards` (
   `card_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `card_location` varchar(32) NOT NULL,
   `card_state` int(10) DEFAULT 0,
+  `type` int(10) NOT NULL,
   `value` int(10) NOT NULL,
-  `color` int(10) NOT NULL,
+  `extra_datas` JSON NULL,
   PRIMARY KEY (`card_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
