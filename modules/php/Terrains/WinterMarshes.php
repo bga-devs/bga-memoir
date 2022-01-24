@@ -6,7 +6,7 @@ class WinterMarshes extends \M44\Models\Terrain
   public function __construct($row)
   {
     parent::__construct($row);
-    $this->id = 'wmarshes';
+    $this->type = 'wmarshes';
     $this->name = clienttranslate('Winter Marshes');
     $this->landscape = 'winter';
     $this->vegetation = true;

@@ -6,7 +6,7 @@ class PrisonerCamp extends \M44\Models\Terrain
   public function __construct($row)
   {
     parent::__construct($row);
-    $this->id = 'camp';
+    $this->type = 'camp';
     $this->name = clienttranslate('Prisoner Camp');
     $this->landscape = 'country';
     $this->landmark = true;

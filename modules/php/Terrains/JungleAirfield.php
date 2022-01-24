@@ -6,7 +6,7 @@ class JungleAirfield extends \M44\Models\Terrain
   public function __construct($row)
   {
     parent::__construct($row);
-    $this->id = 'pairfield';
+    $this->type = 'pairfield';
     $this->name = clienttranslate('Jungle Airfield');
     $this->landscape = 'jungle';
     $this->air = true;

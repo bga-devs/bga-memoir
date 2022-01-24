@@ -6,7 +6,7 @@ class WinterRoadForkLeft extends \M44\Models\Terrain
   public function __construct($row)
   {
     parent::__construct($row);
-    $this->id = 'wroadFL';
+    $this->type = 'wroadFL';
     $this->name = clienttranslate('Winter Road Fork - Left');
     $this->landscape = 'winter';
     $this->road = true;

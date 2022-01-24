@@ -6,7 +6,7 @@ class WinterRailroadBridge extends \M44\Models\RectTerrain
   public function __construct($row)
   {
     parent::__construct($row);
-    $this->id = 'wrailbridge';
+    $this->type = 'wrailbridge';
     $this->name = clienttranslate('Winter Railroad Bridge');
     $this->landscape = 'winter';
     $this->water = true;

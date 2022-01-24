@@ -6,7 +6,7 @@ class FrozenRiverForkRight extends \M44\Models\Terrain
   public function __construct($row)
   {
     parent::__construct($row);
-    $this->id = 'wriverFR';
+    $this->type = 'wriverFR';
     $this->name = clienttranslate('Frozen River Fork - Right');
     $this->landscape = 'winter';
     $this->water = true;

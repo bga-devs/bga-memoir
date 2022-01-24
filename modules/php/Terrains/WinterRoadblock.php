@@ -6,7 +6,7 @@ class WinterRoadblock extends \M44\Models\RectTerrain
   public function __construct($row)
   {
     parent::__construct($row);
-    $this->id = 'wroadblock';
+    $this->type = 'wroadblock';
     $this->name = clienttranslate('Winter Roadblock');
     $this->landscape = 'winter';
     $this->block = true;

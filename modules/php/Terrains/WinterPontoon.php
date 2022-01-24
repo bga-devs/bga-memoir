@@ -6,7 +6,7 @@ class WinterPontoon extends \M44\Models\RectTerrain
   public function __construct($row)
   {
     parent::__construct($row);
-    $this->id = 'wpontoon';
+    $this->type = 'wpontoon';
     $this->name = clienttranslate('Winter Pontoon');
     $this->landscape = 'winter';
     $this->water = true;

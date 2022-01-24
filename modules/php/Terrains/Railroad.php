@@ -6,7 +6,7 @@ class Railroad extends \M44\Models\Terrain
   public function __construct($row)
   {
     parent::__construct($row);
-    $this->id = 'rail';
+    $this->type = 'rail';
     $this->name = clienttranslate('Railroad');
     $this->landscape = 'country';
     $this->rail = true;

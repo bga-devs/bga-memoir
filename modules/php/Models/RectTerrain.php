@@ -1,7 +1,7 @@
 <?php
 namespace M44\Models;
 
-class RectTerrain implements \JsonSerializable
+class RectTerrain extends Terrain
 {
   /*
    * STATIC INFORMATIONS
@@ -15,16 +15,4 @@ class RectTerrain implements \JsonSerializable
   protected $water = false;
   protected $road = false;
   protected $rail = false;
-
-  public function jsonSerialize()
-  {
-    return [
-      'id' => $this->id,
-      'pId' => $this->pId,
-      'name' => $this->name,
-      'location' => $this->location,
-      'state' => $this->state,
-      'tooltip' => $this->tooltip,
-    ];
-  }
 }

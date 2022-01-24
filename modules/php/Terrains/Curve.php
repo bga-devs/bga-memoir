@@ -6,7 +6,7 @@ class Curve extends \M44\Models\Terrain
   public function __construct($row)
   {
     parent::__construct($row);
-    $this->id = 'roadcurve';
+    $this->type = 'roadcurve';
     $this->name = clienttranslate('Curve');
     $this->landscape = 'country';
     $this->road = true;

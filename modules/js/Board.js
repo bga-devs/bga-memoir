@@ -18,7 +18,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
   const OBSTACLES_ROTATION = { bunker: 180,wbunker : 180,dbunker : 180,ford : 60,roadblock : 60,droadblock : 60,wroadblock : 60,pontoon : -30,wpontoon : -30,dragonteeth : 60,railbridge : -60,wrailbridge : -60,bridge : -30,pbridge : -30,brkbridge : -30,wbridge : -30,wagon : -60,loco : 60,abatis : 60,wire : 180,sand : 180};
 
   return declare('memoir.board', null, {
-    setupBoard(board) {
+    setupBoard(board, rotate = false) {
       // Get dimensions based on type
       let type = board.type.toLowerCase();
       $('m44-board').dataset.type = type;
@@ -35,12 +35,14 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       // Create cells
       for (let y = 0; y < dim.y; y++) {
         let size = dim.x - (y % 2 == 0 ? 0 : 1);
-        for (let x = 0; x < size; x++) {
+        for (let x = 0; x < size; x ++) {
           let col = 2 * x + (y % 2 == 0 ? 0 : 1);
 
           let type = 0;
           if (face == 'winter') {
             type = getRandomInt(30, 35);
+          } else if (face == 'desert') {
+            type = getRandomInt(19, 24);
           } else if (face == 'beach') {
             if (y < 3) type = getRandomInt(9, 12);
             else if (y < 4) type = getRandomInt(0, 1);
@@ -50,57 +52,54 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
             else if (y < 8) type = getRandomInt(25, 26);
             else type = getRandomInt(27, 28);
           }
-          this.place('tplBoardCell', { x: col, y, type }, 'm44-board');
+          this.place('tplBoardCell', { x: col, y, type, rotate }, 'm44-board');
 
           let cellC = $(`cell-container-${col}-${y}`);
-          cellC.style.gridRow = 3 * y + 1 + ' / span 4';
-          cellC.style.gridColumn = col + 1 + ' / span 2';
+          let realX = rotate? (2*size - col - (y % 2 == 0? 2 : 0)) : col;
+          let realY = rotate? (dim.y - y - 1) : y;
+          cellC.style.gridRow = 3 * realY + 1 + ' / span 4';
+          cellC.style.gridColumn = realX + 1 + ' / span 2';
         }
       }
 
       // Add terrains tiles
-      board.hexagons.forEach((hexagon) => {
-        let cellC = $(`cell-container-${hexagon.col}-${hexagon.row}`);
-        if (hexagon.terrain) {
-          this.place('tplTerrainTile', hexagon.terrain, cellC);
-        }
-        if (hexagon.obstacle) {
-          this.place('tplObstacleTile', hexagon.obstacle, cellC);
-        }
-        if (hexagon.rect_terrain) {
-          this.place('tplObstacleTile', hexagon.rect_terrain, cellC);
-        }
+      this.gamedatas.terrains.forEach((terrain) => {
+        let cellC = $(`cell-container-${terrain.x}-${terrain.y}`);
+        let tplName = TERRAINS.includes(terrain.type) ? 'tplTerrainTile' : 'tplObstacleTile';
+        terrain.rotate = rotate;
+        this.place(tplName, terrain, cellC);
       });
     },
 
     tplBoardCell(cell) {
+      let rotation = cell.rotate? 6 : 0;
       return `
     <li class="hex-grid-item" id="cell-container-${cell.x}-${cell.y}">
-      <div class="hex-grid-content hex-grid-background" data-type="${cell.type}"></div>
+      <div class="hex-grid-content hex-grid-background" data-type="${cell.type}" data-rotation="${rotation}"></div>
       <div class="hex-grid-content hex-cell" id="cell-${cell.x}-${cell.y}"></div>
     </li>
       `;
     },
 
     tplTerrainTile(terrain) {
-      let type = TERRAINS.findIndex((t) => t == terrain.name);
-      let rotation = 0;
-      if (terrain.orientation) {
+      let type = TERRAINS.findIndex((t) => t == terrain.type);
+      let rotation = terrain.rotate ? 6 : 0;
+      if (terrain.orientation != 1) {
         let nbrRotation = 3;
-        if (TERRAINS_ROTATIONS[6].includes(terrain.name)) nbrRotation = -6;
-        if (TERRAINS_ROTATIONS[2].includes(terrain.name)) nbrRotation = 2;
-        rotation = (((terrain.orientation - 1) * 12) / nbrRotation + 12) % 12;
+        if (TERRAINS_ROTATIONS[6].includes(terrain.type)) nbrRotation = -6;
+        if (TERRAINS_ROTATIONS[2].includes(terrain.type)) nbrRotation = 2;
+        rotation += (((terrain.orientation - 1) * 12) / nbrRotation + 12) % 12;
       }
 
       return `<div class="hex-grid-content hex-grid-terrain" data-type="${type}" data-rotation="${rotation}"></div>`;
     },
 
     tplObstacleTile(obstacle) {
-      let type = OBSTACLES.findIndex((t) => t == obstacle.name);
-      let rotation = 0;
-      if (obstacle.orientation) {
-        let angle = OBSTACLES_ROTATION[obstacle.name] / -30;
-        rotation = ((obstacle.orientation - 1) * angle + 12) % 12;
+      let type = OBSTACLES.findIndex((t) => t == obstacle.type);
+      let rotation = obstacle.rotate ? 6 : 0;
+      if (obstacle.orientation != 1) {
+        let angle = OBSTACLES_ROTATION[obstacle.type] / -30;
+        rotation += ((obstacle.orientation - 1) * angle + 12) % 12;
       }
       return `<div class="hex-grid-content hex-grid-obstacle" data-type="${type}" data-rotation="${rotation}"></div>`;
     },

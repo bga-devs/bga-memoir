@@ -6,7 +6,7 @@ class PacificVillage extends \M44\Models\Terrain
   public function __construct($row)
   {
     parent::__construct($row);
-    $this->id = 'pvillage';
+    $this->type = 'pvillage';
     $this->name = clienttranslate('Pacific Village');
     $this->landscape = 'jungle';
     $this->buildings = true;

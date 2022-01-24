@@ -6,7 +6,7 @@ class AircraftCarrier extends \M44\Models\RectTerrain
   public function __construct($row)
   {
     parent::__construct($row);
-    $this->id = 'pcarrier';
+    $this->type = 'pcarrier';
     $this->name = clienttranslate('Aircraft Carrier');
     $this->transport = true;
     $this->water = true;

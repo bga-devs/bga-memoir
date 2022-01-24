@@ -59,7 +59,9 @@ define([
 
       // Load board
       if (gamedatas.scenario) {
-        this.setupBoard(gamedatas.scenario.board);
+        // TODO : handle spectator
+        let rotate = this.gamedatas.players[this.player_id].no == 1;
+        this.setupBoard(gamedatas.scenario.board, rotate);
       }
     },
 

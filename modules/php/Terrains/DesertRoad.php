@@ -6,7 +6,7 @@ class DesertRoad extends \M44\Models\Terrain
   public function __construct($row)
   {
     parent::__construct($row);
-    $this->id = 'droad';
+    $this->type = 'droad';
     $this->name = clienttranslate('Desert Road');
     $this->landscape = 'sand';
     $this->road = true;

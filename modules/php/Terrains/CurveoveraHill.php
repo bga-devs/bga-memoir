@@ -6,7 +6,7 @@ class CurveoveraHill extends \M44\Models\Terrain
   public function __construct($row)
   {
     parent::__construct($row);
-    $this->id = 'hillcurve';
+    $this->type = 'hillcurve';
     $this->name = clienttranslate('Curve over a Hill');
     $this->landscape = 'country';
     $this->elevation = true;

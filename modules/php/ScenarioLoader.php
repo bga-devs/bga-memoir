@@ -6,6 +6,7 @@ use M44\Core\Preferences;
 use M44\Helpers\Utils;
 use M44\Managers\Cards;
 use M44\Managers\Players;
+use M44\Managers\Terrains;
 
 class ScenarioLoader
 {
@@ -34,5 +35,8 @@ class ScenarioLoader
     if($mode == STANDARD_DECK){
       Cards::initStandardDeck();
     }
+
+    // Create Terrains tiles
+    Terrains::loadScenario($scenario);
   }
 }

@@ -236,6 +236,13 @@ class Pieces extends DB_Manager
     return self::getSelectQuery()->get();
   }
 
+  public static function getAllOrdered()
+  {
+    return self::getSelectQuery()
+      ->orderBy([static::$prefix . 'state', 'ASC'])
+      ->get();
+  }
+
   /**
    * Get specific piece by id
    */

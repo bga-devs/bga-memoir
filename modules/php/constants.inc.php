@@ -9,9 +9,11 @@ const ST_M44 = 2;
 const ST_END_GAME = 99;
 
 /*
- * Card color constants
+ * Card constants
  */
 const STANDARD_DECK = 'STANDARD';
+const BREAKTHROUGH_DECK = 'BRKTHRU'; // TODO : check from editor
+const OVERLORD_DECK = 'OVERLORD'; // TODO : check from editor
 
 const INFINITY = 100;
 const LEFT_SECTION = 1;
@@ -34,9 +36,24 @@ const CARD_RECON_IN_FORCE = 6;
  * Stats
  */
 
+
+
+/*
+ * Troops
+ */
+const INFANTRY = 1;
+const ARMOR = 2;
+const ARTILLERY = 3;
+
 /*
  * Terrains
  */
+
+const WINTER_FACE = 'WINTER';
+const BEACH_FACE = 'BEACH';
+const COUNRY_FACE = 'COUNRY'; // TODO : check from editor
+const DESERT_FACE = 'DESERT'; // TODO : check from editor
+
 const TERRAIN_CLASSES = [
   'woods' => 'Woods',
   'hedgerow' => 'Hedgerows',
@@ -142,4 +159,32 @@ const TERRAIN_CLASSES = [
   'wrailroad' => 'WinterRailroadRoadCrossing',
   'wchurch' => 'WinterChurch',
   'wcastle' => 'WinterCastle',
+
+  'bunker' => 'Bunker',
+  'pbunker' => 'Bunker',//TODO : duplicate here, create the real class
+  'casemate' => 'FieldBunker',
+  'pcarrier' => 'AircraftCarrier',
+  'pdestroyer' => 'Destroyership',
+  'barge' => 'LandingCrafts',
+  'wbunker' => 'WinterFieldBunker',
+  'dbunker' => 'DesertBunker',
+  'ford' => 'Ford',
+  'roadblock' => 'Roadblock',
+  'droadblock' => 'DesertRoadblock',
+  'wroadblock' => 'WinterRoadblock',
+  'pontoon' => 'Pontoon',
+  'wpontoon' => 'WinterPontoon',
+  'dragonteeth' => 'DragonsTeeth',
+  'railbridge' => 'RailroadBridge',
+  'wrailbridge' => 'WinterRailroadBridge',
+  'bridge' => 'Bridge',
+  'pbridge' => 'Ropebridge',
+  'brkbridge' => 'BrokenBridge',
+  'wbridge' => 'WinterBridge',
+  'wagon' => 'Wagon',
+  'loco' => 'Locomotive',
+  'abatis' => 'Abatis',
+  'wire' => 'Barbedwire',
+  'sand' => 'SandBags',
+  'hedgehog' => 'Hedgehog',
 ];

@@ -6,7 +6,7 @@ class Pier extends \M44\Models\Terrain
   public function __construct($row)
   {
     parent::__construct($row);
-    $this->id = 'ppier';
+    $this->type = 'ppier';
     $this->name = clienttranslate('Pier');
     $this->landscape = 'sand';
     $this->manmade = true;

@@ -6,7 +6,7 @@ class RicePaddies extends \M44\Models\Terrain
   public function __construct($row)
   {
     parent::__construct($row);
-    $this->id = 'price';
+    $this->type = 'price';
     $this->name = clienttranslate('Rice Paddies');
     $this->landscape = 'jungle';
     $this->vegetation = true;

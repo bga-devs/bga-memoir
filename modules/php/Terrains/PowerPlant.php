@@ -6,7 +6,7 @@ class PowerPlant extends \M44\Models\Terrain
   public function __construct($row)
   {
     parent::__construct($row);
-    $this->id = 'powerplant';
+    $this->type = 'powerplant';
     $this->name = clienttranslate('Power Plant');
     $this->landscape = 'country';
     $this->landmark = true;

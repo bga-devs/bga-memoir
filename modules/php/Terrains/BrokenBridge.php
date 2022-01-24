@@ -6,7 +6,7 @@ class BrokenBridge extends \M44\Models\RectTerrain
   public function __construct($row)
   {
     parent::__construct($row);
-    $this->id = 'brkbridge';
+    $this->type = 'brkbridge';
     $this->name = clienttranslate('Broken Bridge');
     $this->water = true;
     $this->bridge = true;

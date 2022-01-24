@@ -6,7 +6,7 @@ class WinterRailroad extends \M44\Models\Terrain
   public function __construct($row)
   {
     parent::__construct($row);
-    $this->id = 'wrail';
+    $this->type = 'wrail';
     $this->name = clienttranslate('Winter Railroad');
     $this->landscape = 'winter';
     $this->rail = true;

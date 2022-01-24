@@ -6,7 +6,7 @@ class RailroadBridge extends \M44\Models\RectTerrain
   public function __construct($row)
   {
     parent::__construct($row);
-    $this->id = 'railbridge';
+    $this->type = 'railbridge';
     $this->name = clienttranslate('Railroad Bridge');
     $this->water = true;
     $this->bridge = true;

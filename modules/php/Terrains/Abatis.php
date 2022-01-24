@@ -6,7 +6,7 @@ class Abatis extends \M44\Models\RectTerrain
   public function __construct($row)
   {
     parent::__construct($row);
-    $this->id = 'abatis';
+    $this->type = 'abatis';
     $this->name = clienttranslate('Abatis');
     $this->landscape = 'country';
     $this->block = true;

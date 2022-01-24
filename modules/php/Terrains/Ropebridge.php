@@ -6,7 +6,7 @@ class Ropebridge extends \M44\Models\RectTerrain
   public function __construct($row)
   {
     parent::__construct($row);
-    $this->id = 'pbridge';
+    $this->type = 'pbridge';
     $this->name = clienttranslate('Rope bridge');
     $this->landscape = 'jungle';
     $this->water = true;

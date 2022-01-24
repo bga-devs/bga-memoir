@@ -6,7 +6,7 @@ class WinterForestonaHill extends \M44\Models\Terrain
   public function __construct($row)
   {
     parent::__construct($row);
-    $this->id = 'whillforest';
+    $this->type = 'whillforest';
     $this->name = clienttranslate('Winter Forest on a Hill');
     $this->landscape = 'winter';
     $this->vegetation = true;

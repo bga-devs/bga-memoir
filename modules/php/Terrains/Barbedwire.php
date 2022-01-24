@@ -6,7 +6,7 @@ class Barbedwire extends \M44\Models\Obstacle
   public function __construct($row)
   {
     parent::__construct($row);
-    $this->id = 'wire';
+    $this->type = 'wire';
     $this->name = clienttranslate('Barbed wire');
     $this->manmade = true;
   }

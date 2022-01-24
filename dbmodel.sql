@@ -32,3 +32,13 @@ CREATE TABLE IF NOT EXISTS `cards` (
   `extra_datas` JSON NULL,
   PRIMARY KEY (`card_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `terrains` (
+  `tile_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `tile_location` varchar(32) NOT NULL,
+  `tile_state` int(10) DEFAULT 0,
+  `type` VARCHAR(255) NOT NULL,
+  `orientation` int(10) NOT NULL,
+  `extra_datas` JSON NULL,
+  PRIMARY KEY (`tile_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

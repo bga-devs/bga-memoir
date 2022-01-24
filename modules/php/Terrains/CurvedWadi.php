@@ -6,7 +6,7 @@ class CurvedWadi extends \M44\Models\Terrain
   public function __construct($row)
   {
     parent::__construct($row);
-    $this->id = 'wcurve';
+    $this->type = 'wcurve';
     $this->name = clienttranslate('Curved Wadi');
     $this->landscape = 'sand';
     $this->elevation = true;

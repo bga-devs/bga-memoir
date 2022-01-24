@@ -36,6 +36,7 @@ use M44\Core\Globals;
 use M44\Core\Preferences;
 use M44\Managers\Cards;
 use M44\Managers\Players;
+use M44\Managers\Terrains;
 
 class memoir extends Table
 {
@@ -85,6 +86,7 @@ class memoir extends Table
       'prefs' => Preferences::getUiData($pId),
       'players' => Players::getUiData($pId),
       'scenario' => $test,
+      'terrains' => Terrains::getUiData(),
     ];
   }
 

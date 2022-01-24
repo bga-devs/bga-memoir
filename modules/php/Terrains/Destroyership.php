@@ -6,7 +6,7 @@ class Destroyership extends \M44\Models\RectTerrain
   public function __construct($row)
   {
     parent::__construct($row);
-    $this->id = 'pdestroyer';
+    $this->type = 'pdestroyer';
     $this->name = clienttranslate('Destroyer ship');
     $this->transport = true;
     $this->water = true;
