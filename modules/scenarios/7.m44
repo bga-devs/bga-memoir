@@ -1,0 +1,401 @@
+{
+	"meta_data": {
+		"can_translate": "false",
+		"software": "sed 1.2",
+		"scenario_id": "7",
+		"create_by": 8860,
+		"create_date": "2008-11-14 11:52:33",
+		"mod_by": 1408078,
+		"mod_date": "2021-10-19 17:16:03",
+		"ownerID": 8860,
+		"author_id": 8860,
+		"status": "GAME"
+	},
+	"game_info": {
+		"front": "WESTERN",
+		"operationID": "20",
+		"date_begin": "1944-06-06",
+		"date_end": "1944-06-06",
+		"type": "HISTORICAL",
+		"starting": "PLAYER2",
+		"side_player1": "AXIS",
+		"side_player2": "ALLIES",
+		"country_player1": "DE",
+		"country_player2": "US",
+		"cards_player1": 4,
+		"cards_player2": 6,
+		"victory_player1": 4,
+		"victory_player2": 4,
+		"victory_conditions": [
+			{
+				"standard": {}
+			}
+		]
+	},
+	"board": {
+		"type": "STANDARD",
+		"face": "BEACH",
+		"hexagons": [
+			{
+				"row": 0,
+				"col": 12,
+				"obstacle": {
+					"name": "wire",
+					"orientation": 1
+				}
+			},
+			{
+				"row": 0,
+				"col": 18,
+				"terrain": {
+					"name": "woods"
+				},
+				"tags": [
+					{
+						"name": "medal1"
+					}
+				]
+			},
+			{
+				"row": 0,
+				"col": 20,
+				"terrain": {
+					"name": "woods"
+				},
+				"tags": [
+					{
+						"name": "medal1"
+					}
+				]
+			},
+			{
+				"row": 1,
+				"col": 3,
+				"obstacle": {
+					"name": "wire",
+					"orientation": 1
+				}
+			},
+			{
+				"row": 1,
+				"col": 11,
+				"obstacle": {
+					"name": "wire",
+					"orientation": 1
+				}
+			},
+			{
+				"row": 1,
+				"col": 13,
+				"obstacle": {
+					"name": "sand",
+					"orientation": 1
+				},
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 2,
+				"col": 2,
+				"obstacle": {
+					"name": "wire",
+					"orientation": 1
+				}
+			},
+			{
+				"row": 2,
+				"col": 4,
+				"rect_terrain": {
+					"name": "bunker",
+					"orientation": 1
+				},
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 2,
+				"col": 14,
+				"rect_terrain": {
+					"name": "bunker",
+					"orientation": 1
+				},
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 2,
+				"col": 22,
+				"obstacle": {
+					"name": "wire",
+					"orientation": 1
+				}
+			},
+			{
+				"row": 3,
+				"col": 3,
+				"obstacle": {
+					"name": "wire",
+					"orientation": 1
+				}
+			},
+			{
+				"row": 3,
+				"col": 7,
+				"obstacle": {
+					"name": "sand",
+					"orientation": 1
+				},
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 3,
+				"col": 21,
+				"obstacle": {
+					"name": "wire",
+					"orientation": 1
+				}
+			},
+			{
+				"row": 3,
+				"col": 23,
+				"rect_terrain": {
+					"name": "bunker",
+					"orientation": 1
+				},
+				"unit": {
+					"name": "gunger"
+				}
+			},
+			{
+				"row": 4,
+				"col": 0,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 4,
+				"col": 2,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 4,
+				"col": 4,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 4,
+				"col": 6,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 4,
+				"col": 8,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 4,
+				"col": 10,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 4,
+				"col": 12,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 4,
+				"col": 14,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 4,
+				"col": 16,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 4,
+				"col": 18,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 4,
+				"col": 20,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 4,
+				"col": 22,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 4,
+				"col": 24,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 5,
+				"col": 19,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 5,
+				"col": 21,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 6,
+				"col": 0,
+				"unit": {
+					"name": "inf2us"
+				}
+			},
+			{
+				"row": 6,
+				"col": 20,
+				"terrain": {
+					"name": "hills"
+				},
+				"rect_terrain": {
+					"name": "bunker",
+					"orientation": 1
+				},
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 7,
+				"col": 1,
+				"unit": {
+					"name": "inf2us"
+				}
+			},
+			{
+				"row": 7,
+				"col": 3,
+				"unit": {
+					"name": "inf2us"
+				}
+			},
+			{
+				"row": 7,
+				"col": 7,
+				"unit": {
+					"name": "inf2us"
+				}
+			},
+			{
+				"row": 7,
+				"col": 9,
+				"unit": {
+					"name": "inf2us"
+				}
+			},
+			{
+				"row": 7,
+				"col": 11,
+				"unit": {
+					"name": "inf2us"
+				}
+			},
+			{
+				"row": 7,
+				"col": 13,
+				"unit": {
+					"name": "inf2us"
+				}
+			},
+			{
+				"row": 8,
+				"col": 14,
+				"unit": {
+					"name": "inf2us"
+				}
+			},
+			{
+				"row": 8,
+				"col": 16,
+				"unit": {
+					"name": "inf2us"
+				}
+			}
+		],
+		"labels": [
+			{
+				"row": 4,
+				"col": 12,
+				"text": [
+					"Cliff"
+				]
+			},
+			{
+				"row": 5,
+				"col": 13,
+				"text": [
+					""
+				]
+			}
+		]
+	},
+	"packs": {},
+	"text": {
+		"en": {
+			"name": "Pointe-du-Hoc",
+			"historical": "Planners felt that the German batteries on Pointe-du-Hoc would be one of the most daunting threats to Allied forces landing on Omaha in the morning of D-Day. Set atop 100 foot cliffs west of the beach, the guns' range were such that they'd be able to score direct hits on any troops landing on the beach below. The 2nd Rangers, under the command of Lieutenant Colonel James E. Rudder, were tasked with silencing them.\n\nFollowing a difficult approach and despite intense firing from the German garrison, the first of about 200 Rangers leading the assault were on top of the cliffs within minutes. They were surprised to find that the guns had been withdrawn off the point three days before. Finding only dummies made from timber in the gun casemates, Ranger patrols infiltrated south looking for the missing guns.\n\nMeanwhile two significant concentrations of Germans remained on the point for much of the morning. The anti-aircraft position in the southwest bunker and the observation bunker at the tip of the point were the most dangerous and resisted repeated Ranger attacks.\n\nA Ranger patrol finally found the guns unguarded, but ready to fire, in an apple orchard inland. The patrol placed incendiary thermite grenades in the guns and accomplished their mission.\n\nThe stage is set, the battle lines are drawn, and you are in command. The rest is history.",
+			"description": "Axis Player: Take 4 command cards\n\nAllied Player: Take 6 command cards.\nYou move first.",
+			"victory": "4 Medals\nAn Allied unit that captures a forest hex at the Axis side or the battlefield counts as one victory medal. Place an objective medal on each forest hex. The medal, once gained, continues to count toward the Allied victory even if the unit moves off the hex or is eliminated.",
+			"rules": "The hill that runs along the beach is a cliff. Moving up the cliff from the beach is a 2 hex move. From the inland side, treat it as a normal hill in battle and for movement.\n\nThe Axis player is in control of the Bunkers and may claim them as a defensive position.\n\nAll the Allied units are Special Forces Ranger units. Therefore, there is no need to place Ranger badges with the units.\n\nRangers may move 1 or 2 hexes and still battle."
+		},
+		"fr": {
+			"name": "Pointe-du-Hoc",
+			"sdate": "June 6, 1944",
+			"historical": "Les Alliés craignaient que les batteries allemandes de la Pointe du Hoc ne fussent l'une des plus terribles menaces pour les forces alliées débarquant sur Omaha Beach au matin du 6 juin. Situées au sommet de falaises de 30 mètres, à l'ouest des plages, la portée de tir de ces pièces d'artillerie était telle qu?elles pourraient faire pleuvoir un déluge ininterrompu d?obus sur toutes les troupes des plages en contrebas. Les 2ème Rangers, sous le commandement du Lieutenant Colonel James E. Rudder, se virent donc confier la redoutable mission de neutraliser ces canons. \n\nAprès une approche difficile, et malgré un feu nourri de la garnison allemande, les premiers des 200 Rangers mènent leur assaut et atteignent, dans des conditions incroyables, le sommet des falaises en quelques minutes. Il leur faut alors constater avec stupéfaction que les canons ne sont plus là ! Trois jours plus tôt, à l?insu des services de renseignements alliés, ils ont été enlevés de leurs affûts et déplacés. Ne trouvant que des pièces factices dans les casemates d'artillerie, les Rangers s'infiltrent vers le sud à la recherche des canons manquants !\n\nPendant ce temps, deux groupes d'Allemands restent en position menaçante sur la Pointe. Le poste de canons anti-aériens dans le bunker sud-ouest, ainsi que le bunker d'observation à l'extrémité de la Pointe, se révèlent particulièrement meurtriers, et résistent longtemps aux attaques répétées des Rangers. Plus au sud, une patrouille de Rangers finit par trouver les canons, sans garnison mais prêts au tir, dissimulés dans un verger de pommiers. Deux grenades incendiaires glissées dans les canons se chargent de les mettre hors de combat. La mission est accomplie !\n\nLe théâtre des opérations est fixé, les troupes sont en position, et l?Histoire est entre vos mains. À vous de jouer !",
+			"description": "Joueur allemand :\n- Prenez 4 cartes de Commandement\n\nJoueur allié :\n- Prenez 6 cartes de Commandement\n- Vous jouez en premier",
+			"rules": "Les collines qui longent la plage sont des falaises. Escalader ces falaises nécessite deux points de déplacement. De l'intérieur des terres, ces falaises ont le même effet que des collines normales sur le combat et le déplacement.\n\nSeul le joueur allemand peut utiliser les bunkers comme moyen de défense.\n\nToutes les unités alliées sont des forces spéciales. Il est donc inutile de placer des badges pour les distinguer des unités régulières. Il suffit juste de se souvenir qu'elles peuvent se déplacer de deux hexagones et tirer dans le même tour.",
+			"victory": "4 médailles\nUne unité alliée qui capture une forêt sur le bord allemand du plateau\nde jeu remporte une médaille de Victoire. La médaille reste définitivement\nacquise, même si l'unité alliée quitte l'hexagone ou est éliminée.",
+			"mod_date": "2008-04-07T17:34:11",
+			"ownerID": "6"
+		},
+		"de": {
+			"name": "Pointe-du-Hoc",
+			"historical": "Die alliierten Befehlshaber gingen davon aus, dass bei der Landung ihrer Streitkräfte am Omaha Beach am Morgen des D-Days die deutschen Geschützbatterien auf Pointe du Hoc eine äußerst gefährliche Bedrohung darstellen würden. Aufgrund ihrer Stationierung auf der Spitze einer 30m hohen Klippe westlich des Strandes konnten sie jegliche Truppenverbände am tiefer gelegenen Strand unter Beschuss nehmen. Die 2. Rangereeinheit unter dem Befehl von Lieutenant Colonel James E. Rudder sollte diese Stellung zum Schweigen bringen.\n\nDer Vorstoß stellte sich als schwierig heraus, doch trotz heftigen Feuers der deutschen Garnisonen gelang es den ersten der etwa 200 Ranger in nur wenigen Minuten die Felsen zu erklimmen, wo sie zu Ihrer Überraschung lediglich Holzattrappen vorfanden. Die eigentlichen Geschütze waren bereits drei Tage zuvor abgezogen worden, weshalb die Ranger auf der Suche nach ihnen Patrouillen in den Süden schickten.\n\nWährenddessen konzentrierten sich die deutschen Kräften in der Früh an zwei Punkten: Die Flugabwehrstellungen im Südwestbunker und der Beobachtungsbunker auf der Spitze der Klippe waren hart umkämpft und widerstanden den ständigen Angriffen der Ranger.\n\nEine Rangerpatrouille fand schließlich in einem Apfelhain im Inland die unbewachten aber feuerbereiten Geschütze, die sie mittels Thermitgranaten zerstörten und so ihre Mission vollendeten.\n\nDie Vorbereitungen sind abgeschlossen, die Fronten abgesteckt, und Sie haben das Kommando. Der Rest ist Geschichte.",
+			"description": "Achsenspieler: Nehmen Sie 4 Kommandokarten.\n\nAlliierter Spieler: Nehmen Sie 6 Kommandokarten.\nSie beginnen die Schlacht.",
+			"victory": "4 Siegpunkte.\nDie Einnahme eines Waldfeldes durch eine alliierte Einheit ist einen Siegpunkt wert. Legen Sie auf jedes Waldfeld einen Orden. Nimmt eine alliierte Einheit ein Waldfeld ein, zählt der Orden als Siegpunkt, der auch dann erhalten bleibt, wenn die Einheit das Feld verlässt oder vernichtet wird.",
+			"rules": "Die entlang des Strandes verlaufenden Hügel gelten als Klippe. Das Betreten der Klippen vom Strand aus gilt für Infanterieeinheiten als 2-Feld-Bewegung, für Panzereinheiten ist diese Bewegung gar nicht möglich. Vom Landesinneren her wird die Klippe hinsichtlich Bewegung und Kampf wie eine normale Hügellandschaft behandelt.\n\nDer Achsenspieler kontrolliert die Bunker und kann sie als Verteidigungspositionen benutzen. \n\nDa es sich bei allen alliierten Einheiten um Spezialeinheiten (Ranger), handelt ist es unnötig sie mit entsprechenden Abzeichen zu versehen. Rangereinheiten dürfen bis zu 2 Felder weit ziehen und trotzdem kämpfen."
+		}
+	}
+}

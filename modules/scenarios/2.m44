@@ -1,0 +1,526 @@
+{
+	"meta_data": {
+		"scenario_id": "2",
+		"status": "GAME",
+		"can_translate": "false",
+		"mod_date": "2010-09-29 10:50:04",
+		"ownerID": 8860,
+		"software": "sed 1.2",
+		"create_by": 8860,
+		"create_date": "2008-11-14 11:52:33",
+		"mod_by": 4,
+		"author_id": 8860
+	},
+	"game_info": {
+		"front": "WESTERN",
+		"operationID": "21",
+		"date_begin": "1944-06-06",
+		"date_end": "1944-06-06",
+		"type": "HISTORICAL",
+		"starting": "PLAYER2",
+		"side_player1": "AXIS",
+		"side_player2": "ALLIES",
+		"country_player1": "DE",
+		"cards_player1": 4,
+		"cards_player2": 6,
+		"victory_player1": 4,
+		"victory_player2": 4,
+		"victory_conditions": [
+			{
+				"standard": {}
+			}
+		],
+		"expert_mode": 0
+	},
+	"board": {
+		"type": "STANDARD",
+		"face": "COUNTRY",
+		"hexagons": [
+			{
+				"row": 0,
+				"col": 0,
+				"terrain": {
+					"name": "buildings"
+				},
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 0,
+				"col": 2,
+				"terrain": {
+					"name": "buildings"
+				}
+			},
+			{
+				"row": 0,
+				"col": 8,
+				"terrain": {
+					"name": "curve",
+					"orientation": 4
+				}
+			},
+			{
+				"row": 0,
+				"col": 10,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 0,
+				"col": 12,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 1,
+				"col": 7,
+				"terrain": {
+					"name": "river",
+					"orientation": 2
+				}
+			},
+			{
+				"row": 1,
+				"col": 11,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 1,
+				"col": 21,
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 2,
+				"col": 4,
+				"terrain": {
+					"name": "buildings"
+				},
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 2,
+				"col": 6,
+				"terrain": {
+					"name": "river",
+					"orientation": 2
+				},
+				"rect_terrain": {
+					"name": "bridge",
+					"orientation": 5
+				},
+				"tags": [
+					{
+						"name": "medal1"
+					}
+				]
+			},
+			{
+				"row": 2,
+				"col": 8,
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 2,
+				"col": 10,
+				"obstacle": {
+					"name": "wire",
+					"orientation": 1
+				}
+			},
+			{
+				"row": 2,
+				"col": 24,
+				"terrain": {
+					"name": "curve",
+					"orientation": 6
+				}
+			},
+			{
+				"row": 3,
+				"col": 5,
+				"terrain": {
+					"name": "river",
+					"orientation": 2
+				}
+			},
+			{
+				"row": 3,
+				"col": 7,
+				"obstacle": {
+					"name": "sand",
+					"orientation": 1
+				},
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 3,
+				"col": 9,
+				"obstacle": {
+					"name": "wire",
+					"orientation": 1
+				}
+			},
+			{
+				"row": 3,
+				"col": 19,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 3,
+				"col": 23,
+				"terrain": {
+					"name": "river",
+					"orientation": 2
+				}
+			},
+			{
+				"row": 4,
+				"col": 0,
+				"terrain": {
+					"name": "buildings"
+				}
+			},
+			{
+				"row": 4,
+				"col": 4,
+				"terrain": {
+					"name": "river",
+					"orientation": 2
+				}
+			},
+			{
+				"row": 4,
+				"col": 6,
+				"obstacle": {
+					"name": "wire",
+					"orientation": 1
+				}
+			},
+			{
+				"row": 4,
+				"col": 8,
+				"obstacle": {
+					"name": "wire",
+					"orientation": 1
+				}
+			},
+			{
+				"row": 4,
+				"col": 10,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 4,
+				"col": 22,
+				"terrain": {
+					"name": "river",
+					"orientation": 2
+				}
+			},
+			{
+				"row": 5,
+				"col": 3,
+				"terrain": {
+					"name": "river",
+					"orientation": 2
+				}
+			},
+			{
+				"row": 5,
+				"col": 5,
+				"unit": {
+					"name": "infus"
+				}
+			},
+			{
+				"row": 5,
+				"col": 11,
+				"terrain": {
+					"name": "curve",
+					"orientation": 6
+				}
+			},
+			{
+				"row": 5,
+				"col": 13,
+				"terrain": {
+					"name": "curve",
+					"orientation": 5
+				}
+			},
+			{
+				"row": 5,
+				"col": 21,
+				"terrain": {
+					"name": "river",
+					"orientation": 2
+				},
+				"rect_terrain": {
+					"name": "bridge",
+					"orientation": 5
+				},
+				"tags": [
+					{
+						"name": "medal1"
+					}
+				]
+			},
+			{
+				"row": 6,
+				"col": 2,
+				"terrain": {
+					"name": "river",
+					"orientation": 2
+				}
+			},
+			{
+				"row": 6,
+				"col": 4,
+				"unit": {
+					"name": "infus"
+				}
+			},
+			{
+				"row": 6,
+				"col": 6,
+				"unit": {
+					"name": "infus"
+				}
+			},
+			{
+				"row": 6,
+				"col": 10,
+				"terrain": {
+					"name": "curve",
+					"orientation": 2
+				}
+			},
+			{
+				"row": 6,
+				"col": 12,
+				"terrain": {
+					"name": "curve",
+					"orientation": 3
+				}
+			},
+			{
+				"row": 6,
+				"col": 20,
+				"terrain": {
+					"name": "river",
+					"orientation": 2
+				}
+			},
+			{
+				"row": 6,
+				"col": 24,
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 7,
+				"col": 1,
+				"terrain": {
+					"name": "river",
+					"orientation": 2
+				}
+			},
+			{
+				"row": 7,
+				"col": 9,
+				"unit": {
+					"name": "infus"
+				}
+			},
+			{
+				"row": 7,
+				"col": 11,
+				"unit": {
+					"name": "infus"
+				}
+			},
+			{
+				"row": 7,
+				"col": 15,
+				"unit": {
+					"name": "infus"
+				}
+			},
+			{
+				"row": 7,
+				"col": 17,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 7,
+				"col": 19,
+				"terrain": {
+					"name": "river",
+					"orientation": 2
+				}
+			},
+			{
+				"row": 7,
+				"col": 21,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 8,
+				"col": 0,
+				"terrain": {
+					"name": "river",
+					"orientation": 2
+				}
+			},
+			{
+				"row": 8,
+				"col": 10,
+				"unit": {
+					"name": "infus"
+				}
+			},
+			{
+				"row": 8,
+				"col": 14,
+				"unit": {
+					"name": "infus"
+				}
+			},
+			{
+				"row": 8,
+				"col": 16,
+				"terrain": {
+					"name": "woods"
+				},
+				"unit": {
+					"name": "infus"
+				}
+			},
+			{
+				"row": 8,
+				"col": 18,
+				"terrain": {
+					"name": "river",
+					"orientation": 2
+				}
+			},
+			{
+				"row": 8,
+				"col": 22,
+				"terrain": {
+					"name": "woods"
+				}
+			}
+		],
+		"labels": [
+			{
+				"row": 0,
+				"col": 2,
+				"text": [
+					"le Port"
+				]
+			},
+			{
+				"row": 0,
+				"col": 8,
+				"text": [
+					"Caen Canal"
+				]
+			},
+			{
+				"row": 2,
+				"col": 6,
+				"text": [
+					"Pegasus",
+					"  Bridge"
+				]
+			},
+			{
+				"row": 2,
+				"col": 24,
+				"text": [
+					"River",
+					"Orne"
+				]
+			},
+			{
+				"row": 4,
+				"col": 2,
+				"text": [
+					"Benouville"
+				]
+			},
+			{
+				"row": 5,
+				"col": 5,
+				"text": [
+					"Howard"
+				]
+			},
+			{
+				"row": 5,
+				"col": 11,
+				"text": [
+					"Pond Impassable"
+				]
+			},
+			{
+				"row": 5,
+				"col": 21,
+				"text": [
+					"Orne Bridge"
+				]
+			}
+		]
+	},
+	"packs": {},
+	"text": {
+		"en": {
+			"name": "Pegasus Bridge",
+			"historical": "The late hours of June 5, 1944... Led by Major John Howard, the men of Oxford and Buckinghamshire Light Infantry* step aboard six Horsa gliders on a secret airfield in Dorset. Their mission: to launch the first airborne assault of D-Day and capture two bridges, one astride the Caen Canal, the other over the Orne river, in Normandy.\n\nA few minutes past midnight, now June 6, 1944, the gliders clip through the treetops and land in a small patch of rough field, between a pond and the Caen Canal, only yards away from their objective! Major Howard and his troops pour out of the planes, achieving complete surprise and rushing the stunned German forces. Despite furious opposition from a heavily sandbagged machine gun nest at the end of now famous \"Pegasus\" bridge, they capture their objective within moments. To the east, the Orne bridge is secured equally rapidly, giving British troops the first victory of D-Day!\n\nThe stage is set, the battle lines are drawn, and you are in command. The rest is history.\n\n\n\n* Although all British units involved in the raid on Pegasus Bridge were elite forces, for the sake of simplicity this introductory scenario is using regular infantry units instead.",
+			"description": "Axis Player: Take 2 command cards (Germans were surprised). Draw two cards after turns 1 and 2. You will then have a hand of 4 command cards for the rest of the battle.\n\nAllied Player: British: Major John Howard\nTake 6 command cards.\nYou move first.",
+			"victory": "4 Medals\nAn Allied unit that captures a bridge hex counts as one victory medal. Place an objective medal on each of the bridges. As long as the Allied unit remains on the bridge hex, it continues to count toward the Allied victory. If the unit moves off or is eliminated, it no longer counts."
+		},
+		"fr": {
+			"name": "Pegasus Bridge",
+			"subtitle": "",
+			"historical": "Tard dans la nuit, 5 juin 1944... Menés par le major John Howard, les hommes de l'Infanterie Légère du Oxford & Buckinghamshire* montent à bord de six planeurs Horsa sur l'aérodrome secret de Dorset. Leur mission : lancer le premier assaut aéroporté du Jour J et capturer deux ponts, l'un sur le canal de Caen, l'autre sur la rivière de l'Orne, en Normandie. \n\nQuelques minutes après minuit, le 6 juin 1944, les planeurs rasent les arbres et atterrissent dans un petit carré de champs entre un étang et le canal de Caen, à quelques dizaines de mètres seulement de leur objectif ! Le major Howard et ses troupes se ruent hors des avions, et prennent complètement par surprise les forces allemandes. Malgré l'opposition féroce d'un nid de mitrailleuse protégé par des sacs de sables en bout du pont, désormais devenu célèbre sous le nom de \"Pegasus Bridge\", les commandos capturent leur objectif en quelques instants. À l'est, le pont sur l'Orne est pris aussi rapidement, donnant aux troupes britanniques la première victoire du Jour J !\n\nLe théâtre des opérations est fixé, les troupes sont en position, et l?Histoire est entre vos mains. À vous de jouer !\n\n\n\n*Bien que toutes les unités britanniques soient des unités d'élite, elles sont jouées comme des unités régulières dans ce scénario d'introduction pour une raison de simplicité.",
+			"description": "Joueur allemand :\n- Commencez avec 2 cartes de commandement (les Allemands furent surpris).\n- Tirez 2 cartes après le premier tour, et 2 nouvelles cartes après le second. Vous aurez ainsi 4 cartes en main pour le reste de la partie.\n\nJoueur allié :\n- Commandant : major John Howard de la 6ème Division Aéroportée Britannique\n- Prenez 6 cartes de Commandement\n- Vous jouez en premier",
+			"victory": "4 médailles\nUne unité alliée qui capture un pont gagne une médaille de Victoire. Placer une pièce médaille sur chacun des ponts. Tant que l'unité alliée occupe le pont, la médaille est acquise au joueur allié. Si l'unité quitte le pont ou est éliminée, la médaille est remise en jeu.",
+			"rules": "",
+			"bibliography": ""
+		},
+		"de": {
+			"name": "Pegasusbrücke",
+			"subtitle": "",
+			"historical": "In den späten Stunden des 5. Juni 1944… Auf einem versteckten Flugfeld in Dorset gehen die Männer der Oxford und Buckinghamshire leichten Infanterie(*) unter der Führung von Major John Howard von Bord der sechs Horsa-Lastensegler. Ihre Mission, die Eroberung zweier Brücken, die eine über den Caen-Kanal und die andere über den Orne in der Normandie, wird der erste Angriff im Rahmen des D-Days sein.\n\nAm 6. Juni 1944, wenige Minuten nach Mitternacht, brechen die Segelflugzeuge durch die Baumwipfel und landen nur ein paar Meter vom Ziel entfernt auf einem kleinen, unebenen Ackerstück zwischen einem Teich und dem Caen-Kanal. Major Howard und seine Truppen stürmen aus den Flugzeugen und überrennen die völlig überraschten und nichts ahnenden deutschen Truppen. Trotz heftigen Widerstands einer mit Sandsäcken schwer befestigten Maschinengeschützstellung am Ende der heute berühmten „Pegasusbrücke“ nehmen sie das Ziel in wenigen Augenblicken ein. Die Ornebrücke im Osten wird ebenso schnell gesichert und beschert den britischen Truppen den ersten Sieg des D-Days.\n\nDie Vorbereitungen sind abgeschlossen, die Fronten abgesteckt, und Sie haben das Kommando. Der Rest ist Geschichte.\n\n\n\n* Obwohl es sich bei den am Angriff auf die Pegasusbrücke beteiligten Soldaten um Eliteeinheiten handelte, kommen in diesem einführenden Szenario der Einfachheit halber reguläre Infanterieeinheiten zum Einsatz.",
+			"description": "Achsenspieler: Nehmen Sie 2 Kommandokarten (die Deutschen wurden überrascht). Ziehen Sie zwei Karten nach dem ersten, weitere zwei nach dem nächsten Zug, so dass Ihnen für den Rest der Schlacht 4 Kommandokarten zur Verfügung stehen.\n\nAlliierter Spieler: Britisch: Major John Howard. Nehmen Sie 6 Kommandokarten. Sie beginnen die Schlacht.",
+			"victory": "4 Siegpunkte.\nDie Einnahme einer Brücke durch eine alliierte Einheit ist einen Siegpunkt wert. Legen Sie einen Orden auf jede der beiden Brücken. Nimmt eine alliierte Einheit eine Brücke ein, zählt der Orden als Siegpunkt, sobald die Einheit die Brücke verlässt oder vernichtet wird, geht der Siegpunkt wieder verloren.",
+			"rules": "",
+			"bibliography": ""
+		}
+	}
+}

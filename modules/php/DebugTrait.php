@@ -27,4 +27,10 @@ trait DebugTrait
     ScenarioLoader::load('test2');
     ScenarioLoader::setupScenario();
   }
+
+  function load($scenario)
+  {
+    ScenarioLoader::load($scenario);
+    ScenarioLoader::setupScenario();
+  }
 }

@@ -1,0 +1,595 @@
+{
+	"meta_data": {
+		"scenario_id": "29",
+		"status": "GAME",
+		"can_translate": "false",
+		"mod_date": "2010-05-27 06:35:44",
+		"ownerID": 8860,
+		"software": "sed 1.2",
+		"create_by": 8860,
+		"create_date": "2008-11-14 11:52:33",
+		"mod_by": 291520,
+		"author_id": 8860
+	},
+	"game_info": {
+		"front": "WESTERN",
+		"date_begin": "1944-11-19",
+		"date_end": "1944-11-23",
+		"type": "HISTORICAL",
+		"starting": "PLAYER2",
+		"side_player1": "AXIS",
+		"side_player2": "ALLIES",
+		"country_player1": "DE",
+		"country_player2": "FR",
+		"cards_player1": 4,
+		"cards_player2": 6,
+		"victory_player1": 5,
+		"victory_player2": 5,
+		"victory_conditions": [
+			{
+				"standard": {}
+			}
+		]
+	},
+	"board": {
+		"type": "STANDARD",
+		"face": "COUNTRY",
+		"hexagons": [
+			{
+				"row": 0,
+				"col": 6,
+				"unit": {
+					"name": "tankger"
+				}
+			},
+			{
+				"row": 0,
+				"col": 10,
+				"terrain": {
+					"name": "buildings"
+				},
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 0,
+				"col": 12,
+				"terrain": {
+					"name": "buildings"
+				}
+			},
+			{
+				"row": 0,
+				"col": 16,
+				"unit": {
+					"name": "tankger"
+				}
+			},
+			{
+				"row": 0,
+				"col": 18,
+				"terrain": {
+					"name": "river",
+					"orientation": 2
+				}
+			},
+			{
+				"row": 1,
+				"col": 3,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 1,
+				"col": 7,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 1,
+				"col": 13,
+				"terrain": {
+					"name": "buildings"
+				}
+			},
+			{
+				"row": 1,
+				"col": 17,
+				"terrain": {
+					"name": "curve",
+					"orientation": 1
+				},
+				"rect_terrain": {
+					"name": "bridge",
+					"orientation": 3
+				}
+			},
+			{
+				"row": 1,
+				"col": 21,
+				"terrain": {
+					"name": "woods"
+				},
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 2,
+				"col": 2,
+				"terrain": {
+					"name": "buildings"
+				},
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 2,
+				"col": 8,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 2,
+				"col": 10,
+				"obstacle": {
+					"name": "sand",
+					"orientation": 1
+				},
+				"unit": {
+					"name": "gunger"
+				}
+			},
+			{
+				"row": 2,
+				"col": 18,
+				"terrain": {
+					"name": "curve",
+					"orientation": 4
+				}
+			},
+			{
+				"row": 2,
+				"col": 24,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 3,
+				"col": 5,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 3,
+				"col": 7,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 3,
+				"col": 13,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 3,
+				"col": 15,
+				"obstacle": {
+					"name": "sand",
+					"orientation": 1
+				},
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 3,
+				"col": 17,
+				"terrain": {
+					"name": "river",
+					"orientation": 2
+				}
+			},
+			{
+				"row": 3,
+				"col": 19,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 3,
+				"col": 21,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 4,
+				"col": 0,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 4,
+				"col": 8,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 4,
+				"col": 16,
+				"terrain": {
+					"name": "curve",
+					"orientation": 1
+				}
+			},
+			{
+				"row": 4,
+				"col": 18,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 4,
+				"col": 20,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 4,
+				"col": 24,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 5,
+				"col": 1,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 5,
+				"col": 5,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 5,
+				"col": 7,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 5,
+				"col": 11,
+				"terrain": {
+					"name": "buildings"
+				},
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 5,
+				"col": 17,
+				"terrain": {
+					"name": "curve",
+					"orientation": 4
+				}
+			},
+			{
+				"row": 5,
+				"col": 19,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 5,
+				"col": 23,
+				"terrain": {
+					"name": "buildings"
+				},
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 6,
+				"col": 2,
+				"unit": {
+					"name": "tankus"
+				}
+			},
+			{
+				"row": 6,
+				"col": 6,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 6,
+				"col": 8,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 6,
+				"col": 10,
+				"obstacle": {
+					"name": "wire",
+					"orientation": 1
+				}
+			},
+			{
+				"row": 6,
+				"col": 12,
+				"obstacle": {
+					"name": "wire",
+					"orientation": 1
+				}
+			},
+			{
+				"row": 6,
+				"col": 14,
+				"obstacle": {
+					"name": "wire",
+					"orientation": 1
+				}
+			},
+			{
+				"row": 6,
+				"col": 16,
+				"terrain": {
+					"name": "river",
+					"orientation": 2
+				}
+			},
+			{
+				"row": 6,
+				"col": 18,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 6,
+				"col": 22,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 7,
+				"col": 1,
+				"unit": {
+					"name": "tankus"
+				}
+			},
+			{
+				"row": 7,
+				"col": 3,
+				"unit": {
+					"name": "tankus"
+				}
+			},
+			{
+				"row": 7,
+				"col": 5,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 7,
+				"col": 7,
+				"unit": {
+					"name": "infus"
+				}
+			},
+			{
+				"row": 7,
+				"col": 15,
+				"terrain": {
+					"name": "curve",
+					"orientation": 1
+				}
+			},
+			{
+				"row": 7,
+				"col": 17,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 7,
+				"col": 19,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 7,
+				"col": 23,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 8,
+				"col": 4,
+				"unit": {
+					"name": "infus"
+				}
+			},
+			{
+				"row": 8,
+				"col": 6,
+				"unit": {
+					"name": "infus"
+				}
+			},
+			{
+				"row": 8,
+				"col": 8,
+				"unit": {
+					"name": "infus"
+				}
+			},
+			{
+				"row": 8,
+				"col": 10,
+				"unit": {
+					"name": "infus"
+				}
+			},
+			{
+				"row": 8,
+				"col": 12,
+				"unit": {
+					"name": "infus"
+				}
+			},
+			{
+				"row": 8,
+				"col": 14,
+				"unit": {
+					"name": "infus"
+				}
+			},
+			{
+				"row": 8,
+				"col": 16,
+				"terrain": {
+					"name": "river",
+					"orientation": 3
+				}
+			},
+			{
+				"row": 8,
+				"col": 18,
+				"unit": {
+					"name": "tankus"
+				}
+			},
+			{
+				"row": 8,
+				"col": 20,
+				"unit": {
+					"name": "infus"
+				}
+			},
+			{
+				"row": 8,
+				"col": 22,
+				"unit": {
+					"name": "tankus"
+				}
+			},
+			{
+				"row": 8,
+				"col": 24,
+				"unit": {
+					"name": "tankus"
+				}
+			}
+		],
+		"labels": [
+			{
+				"row": 0,
+				"col": 14,
+				"text": [
+					"Saverne"
+				]
+			},
+			{
+				"row": 0,
+				"col": 18,
+				"text": [
+					"Rhine-Marne Canal"
+				]
+			},
+			{
+				"row": 1,
+				"col": 1,
+				"text": [
+					"La Petite-Pierre"
+				]
+			},
+			{
+				"row": 3,
+				"col": 11,
+				"text": [
+					"Saverne Gap"
+				]
+			},
+			{
+				"row": 4,
+				"col": 22,
+				"text": [
+					"Dabo"
+				]
+			},
+			{
+				"row": 5,
+				"col": 13,
+				"text": [
+					"Phalsbourg"
+				]
+			}
+		]
+	},
+	"packs": {},
+	"text": {
+		"en": {
+			"name": "Saverne Gap",
+			"subtitle": "Vosges",
+			"historical": "The Saverne Gap, cutting through the Vosges mountains, was the key to Strasbourg, capital city of Alsace. On November 21st, the US Seventh Army XV Corps, under the command of General Wade Hampton Halslip, arrived to the front lines at Phalsbourg.\n\nWith the infantry progressing forward into the Saverne Gap, General Leclerc divided his 2nd French Armor division into two task forces. The first would move well north of the Gap by La Petite-Pierre, the other on secondary roads in the south through heavily forested mountains by Dabo. If the plan worked, they would take Saverne simultaneously from both the north and south, avoiding the strong defenses expected in the Gap itself.\n\nThe plan worked to perfection. One of the south French armor group was even able to rush through Saverne's western end and climb to the Gap, taking the German defenses from behind. German forces, few in numbers, fought valiantly; but, without support or reserves, they were unable to stop the three-pronged Allied attack; they crumbled, leaving the door to Strasbourg wide open.\n\nThe stage is set, the battle lines are drawn, and you are in command. The rest is history.",
+			"description": "Axis Player: Take 4 command cards.\n\nAllied Player: Take 6 command cards.\nYou move first.",
+			"victory": "5 Medals\nIf Allied units occupy 2 town hexes in Saverne at the end of their turn, they win immediately.",
+			"rules": "The hills are impassable.\nArtillery may not fire over hills."
+		},
+		"fr": {
+			"name": "Trouée de Saverne",
+			"subtitle": "Vosges",
+			"sdate": "November 19-23, 1944",
+			"historical": "Le col de Saverne, véritable trouée au travers des Vosges, était la clé pour Strasbourg. Le 21 novembre, le XV Corps de la 7ème Armée, sous le commandement du général Wade Hampton Haislip, arrive sur la ligne de front de Phalsbourg.\n\nAlors que l'infanterie pousse vers le col de Saverne, le général Leclerc divise sa 2ème Division Blindée en deux forces. La première moitié contournera par le nord via La Petite-Pierre, pendant que la deuxième empruntera des routes secondaires au sud, au travers des montagnes couvertes de forêts, en passant par Dabo. Si le plan fonctionne, Saverne sera pris simultanément par le sud et le nord, évitant ainsi les défenses solides de la trouée elle-même.\n\nLe plan fonctionnera à la perfection. L'une des colonnes blindées françaises venant du sud pourra même traverser les quartiers ouest de Saverne et remonter vers le col, prenant ainsi les défenses allemandes à revers. Bien que peu nombreuses, les forces allemandes combattront vaillamment. Mais sans réserves ni support, elles ne pourront stopper la triple attaque des Alliés.\n\nLe verrou de Saverne venait enfin de sauter, ouvrant grande la voie vers Strasbourg.\n\nLe théâtre des opérations est fixé, les troupes sont en position, et l?Histoire est entre vos mains. À vous de jouer, et à bientôt sur Mémoire 45?",
+			"description": "Joueur allemand :\n- Prenez 4 cartes de Commandement\n\nJoueur allié :\n- Prenez 6 cartes de Commandement\n- Vous jouez en premier",
+			"rules": "Les collines sont infranchissables.\nDans ce scénario, l'artillerie ne peut pas tirer par-dessus les collines.",
+			"victory": "5 médailles\nSi les unités alliées occupent deux hexagones de Saverne à la fin de leur tour, elles gagnent immédiatement.",
+			"bibliography": "",
+			"mod_date": "2008-04-07T17:19:04",
+			"ownerID": "6"
+		},
+		"de": {
+			"name": "Saverneschlucht",
+			"subtitle": "Vogesen",
+			"historical": "Die durch die Vogesen verlaufende Saverneschlucht war der Schlüssel zu Straßburg, der Hauptstadt des Elsass. Am 21. September erreichte das XV. Korps der 7. US-Armee unter dem Kommando von General Wade Hampton Halslip die Frontlinie bei Phalsbourg.\n\nWährend die Infanterie weiter in die Saverneschlucht vorrückte, teilte General Leclerc seine französische 2. Panzerdivision in zwei Einsatzgruppen auf. Die Erste bewegte sich nördlich der Schlucht nach Le Petite-Pierre, die Zweite auf Nebenstraßen im Süden durch stark bewaldete Berglandschaften bei Dabo. Wenn der Plan funktionierte, würden sie Saverne von Norden und Süden gleichzeitig einnehmen können und so die in der Schlucht selbst zu erwartenden Verteidigungsstellungen umgehen.\n\nDer Plan ging voll auf. Eine der südlichen französischen Panzergruppen war in der Lage durch die westlichen Randgebiete von Saverne zur Schlucht vorzudringen und der deutschen Verteidigung in den Rücken zu fallen. Trotz Unterzahl kämpften die deutschen Truppen tapfer, doch ohne Unterstützung und Reserven gelang es ihnen nicht die drei Angriffsspitzen der Alliierten aufzuhalten. Sie wurden zerschlagen und der Weg nach Straßburg war frei.\n\nDie Vorbereitungen sind abgeschlossen, die Fronten abgesteckt, und Sie haben das Kommando. Der Rest ist Geschichte.",
+			"description": "Achsenspieler: Nehmen Sie 4 Kommandokarten.\n\nAlliierter Spieler: Nehmen Sie 6 Kommandokarten.\nSie beginnen die Schlacht.",
+			"victory": "5 Siegpunkte.\n\nStehen am Ende eines Zuges alliierte Einheiten auf 2 Stadtfeldern von Saverne gewinnt der alliierte Spieler sofort.",
+			"rules": "Alle Hügel sind unpassierbar.\n\nArtillerieeinheiten können nicht über Hügel hinweg feuern."
+		}
+	}
+}

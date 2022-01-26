@@ -1,0 +1,391 @@
+{
+	"meta_data": {
+		"scenario_id": "5",
+		"status": "GAME",
+		"can_translate": "false",
+		"mod_date": "2010-05-26 06:43:47",
+		"ownerID": 8860,
+		"software": "sed 1.2",
+		"create_by": 8860,
+		"create_date": "2008-11-14 11:52:33",
+		"mod_by": 291520,
+		"author_id": 8860
+	},
+	"game_info": {
+		"front": "WESTERN",
+		"date_begin": "1944-06-10",
+		"date_end": "1944-06-10",
+		"type": "HISTORICAL",
+		"starting": "PLAYER2",
+		"side_player1": "AXIS",
+		"side_player2": "ALLIES",
+		"country_player1": "DE",
+		"country_player2": "FR",
+		"cards_player1": 4,
+		"cards_player2": 5,
+		"victory_player1": 4,
+		"victory_player2": 4,
+		"victory_conditions": [
+			{
+				"standard": {}
+			}
+		]
+	},
+	"board": {
+		"type": "STANDARD",
+		"face": "COUNTRY",
+		"hexagons": [
+			{
+				"row": 0,
+				"col": 0,
+				"unit": {
+					"name": "tank2ger",
+					"nbr_units": 4
+				}
+			},
+			{
+				"row": 0,
+				"col": 8,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 0,
+				"col": 14,
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 0,
+				"col": 16,
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 1,
+				"col": 1,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 1,
+				"col": 3,
+				"unit": {
+					"name": "tank2ger",
+					"nbr_units": 4
+				}
+			},
+			{
+				"row": 1,
+				"col": 5,
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 1,
+				"col": 7,
+				"terrain": {
+					"name": "buildings"
+				}
+			},
+			{
+				"row": 1,
+				"col": 11,
+				"terrain": {
+					"name": "buildings"
+				}
+			},
+			{
+				"row": 1,
+				"col": 13,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 1,
+				"col": 21,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 1,
+				"col": 23,
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 2,
+				"col": 2,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 2,
+				"col": 4,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 2,
+				"col": 20,
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 3,
+				"col": 5,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 3,
+				"col": 9,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 3,
+				"col": 11,
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 3,
+				"col": 13,
+				"terrain": {
+					"name": "buildings"
+				}
+			},
+			{
+				"row": 3,
+				"col": 23,
+				"terrain": {
+					"name": "buildings"
+				}
+			},
+			{
+				"row": 4,
+				"col": 0,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 4,
+				"col": 2,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 4,
+				"col": 6,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 4,
+				"col": 10,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 4,
+				"col": 16,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 4,
+				"col": 18,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 4,
+				"col": 20,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 5,
+				"col": 3,
+				"unit": {
+					"name": "inf2us",
+					"nbr_units": 3
+				}
+			},
+			{
+				"row": 5,
+				"col": 15,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 5,
+				"col": 17,
+				"unit": {
+					"name": "inf2us",
+					"nbr_units": 3
+				}
+			},
+			{
+				"row": 5,
+				"col": 19,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 6,
+				"col": 4,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 6,
+				"col": 6,
+				"unit": {
+					"name": "inf2us",
+					"nbr_units": 3
+				}
+			},
+			{
+				"row": 6,
+				"col": 8,
+				"terrain": {
+					"name": "buildings"
+				}
+			},
+			{
+				"row": 6,
+				"col": 12,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 6,
+				"col": 16,
+				"unit": {
+					"name": "inf2us",
+					"nbr_units": 3
+				}
+			},
+			{
+				"row": 6,
+				"col": 22,
+				"terrain": {
+					"name": "woods"
+				},
+				"unit": {
+					"name": "inf2us",
+					"nbr_units": 3
+				}
+			},
+			{
+				"row": 7,
+				"col": 3,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 7,
+				"col": 7,
+				"unit": {
+					"name": "inf2us",
+					"nbr_units": 3
+				}
+			},
+			{
+				"row": 7,
+				"col": 9,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 7,
+				"col": 11,
+				"unit": {
+					"name": "inf2us",
+					"nbr_units": 3
+				}
+			},
+			{
+				"row": 8,
+				"col": 14,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 8,
+				"col": 20,
+				"terrain": {
+					"name": "woods"
+				}
+			}
+		],
+		"labels": [
+			{
+				"row": 1,
+				"col": 9,
+				"text": [
+					"Mont",
+					"Mouchet"
+				]
+			}
+		]
+	},
+	"packs": {},
+	"text": {
+		"en": {
+			"name": "Mont Mouchet",
+			"historical": "On June 10th, three tactical groups from the Wermacht, about 2,000 men with armored support, converged on Mont Mouchet. Simultaneously moving in from the west (Saint Flour), north (Langeac and Pinols) and east (Le Puy-en-Velay et Saugues) they were determined to trap all French Resistance troops in the area. Violent fighting occurred during the entire day. The French companies made use of their knowledge of the wooded and hilly terrain to hold off the advances and finally forced the enemy to temporarily fall back to their starting positions.\n\nThe stage is set, the battle lines are drawn, and you are in command. The rest is history.",
+			"description": "Axis Player: Take 4 command cards\n\nAllied Player: Take 5 command cards.\nYou move first.",
+			"victory": "4 Medals\nEliminating an Axis tank unit counts as two victory medals for the Allied player.",
+			"rules": "The Axis Special Forces tank units have 4 figures. \n\nAll the Allied units are French Resistance infantry. Therefore, there is no need to place Resistance badges with the units. These units only have 3 figures. A Resistance unit may move onto terrain and still battle. When retreating, the unit may move back 1, 2 or 3 hexes before it regroups. "
+		},
+		"fr": {
+			"name": "Mont Mouchet",
+			"sdate": "June 10, 1944",
+			"historical": "Le 10 juin, trois groupes tactiques de la Wermacht, soit une force d'environ 2000 hommes avec un soutien blindé, convergent vers le Mont Mouchet, décidés à anéantir la résistance locale. Venant de l'ouest (Saint Flour), du nord (Langeac et Pinols), et de l'est (Le Puy-en-Velay et Saugues), ils espèrent saisir l'ensemble du groupe de Résistants dans la nasse. De violents accrochages ont lieu toute la journée. Les compagnies françaises tirent profit du terrain montagneux et forestier pour contenir les avances de l'ennemi, et le forcer à se replier sur ses positions de départ.\n\nLe théâtre des opérations est fixé, les troupes sont en position, et l?Histoire est entre vos mains. À vous de jouer !",
+			"description": "Joueur allemand :\n- Prenez 4 cartes de Commandement\n\nJoueur allié :\n- Prenez 5 cartes de Commandement\n- Vous jouez en premier",
+			"rules": "Les unités allemandes de blindés d'élite ont 4 figurines\nde tank.\n\nToutes les unités alliées sont des Résistants. Il est donc inutile de placer des badges Résistance. Ces unités ne contiennent que 3 figurines. Une unité de Résistants peut pénétrer sur un terrain et combattre dans le même tour. Lors d'une retraite, elle peut reculer de 1, 2 ou 3 hexagones.",
+			"victory": "4 médailles\nChaque unité blindée d'élite éliminée rapporte deux médailles de Victoire au joueur allié au lieu d'une.",
+			"bibliography": "",
+			"mod_date": "2008-04-07T16:58:48",
+			"ownerID": "6"
+		},
+		"de": {
+			"name": "Mont Mouchet",
+			"historical": "Am 10. Juni trafen drei taktische Gruppen der Wehrmacht, etwa 2.000 Männer mit Panzerunterstützung, auf Mont Mouchet zusammen. Durch die gleichzeitige Annäherung von Westen (Saint Flour), Norden (Langeac und Pinols) und Osten (Le Puy-en-Velay und Saugues) versuchten sie die Truppen der französischen Résistance zu stellen, was den ganzen Tag über zu schweren Kampfhandlungen führte. Aufgrund ihrer Kenntnis des umliegenden bewaldeten und hügeligen Geländes brachten die Franzosen den Vormarsch zum Erliegen und zwangen den Feind letztlich zum Rückzug.\n\nDie Vorbereitungen sind abgeschlossen, die Fronten abgesteckt, und Sie haben das Kommando. Der Rest ist Geschichte.",
+			"description": "Achsenspieler: Nehmen Sie 4 Kommandokarten.\n\nAlliierter Spieler: Nehmen Sie 5 Kommandokarten.\nSie beginnen die Schlacht.",
+			"victory": "4 Siegpunkte.\n\nJede zerstörte Panzereinheit ist zwei Siegpunkte wert.",
+			"rules": "Die deutschen Panzer-Spezialeinheiten bestehen aus 4 Figuren.\n\nAlle alliierten Spezialeinheiten sind Kämpfer der französischen Résistance, weshalb es unnötig ist sie mit den entsprechenden Abzeichen zu bestücken. Diese Einheiten bestehen nur aus 3 Figuren, können sich dafür auf jedem Gelände bewegen und trotzdem kämpfen. Beim Rückzug können sie sich pro Flagge bis zu 3 Feldern weit zurückziehen."
+		}
+	}
+}

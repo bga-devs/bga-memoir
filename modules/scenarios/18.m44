@@ -1,0 +1,574 @@
+{
+	"meta_data": {
+		"scenario_id": "18",
+		"status": "GAME",
+		"can_translate": "false",
+		"mod_date": "2010-05-27 06:28:08",
+		"ownerID": 8860,
+		"software": "sed 1.2",
+		"create_by": 8860,
+		"create_date": "2008-11-14 11:52:33",
+		"mod_by": 291520,
+		"author_id": 8860
+	},
+	"game_info": {
+		"front": "MEDITERRANEAN",
+		"date_begin": "1944-08-25",
+		"date_end": "1944-08-25",
+		"type": "HISTORICAL",
+		"starting": "PLAYER1",
+		"side_player1": "AXIS",
+		"side_player2": "ALLIES",
+		"country_player1": "DE",
+		"country_player2": "US",
+		"cards_player1": 5,
+		"cards_player2": 5,
+		"victory_player1": 6,
+		"victory_player2": 6,
+		"victory_conditions": [
+			{
+				"standard": {}
+			}
+		]
+	},
+	"board": {
+		"type": "STANDARD",
+		"face": "COUNTRY",
+		"hexagons": [
+			{
+				"row": 0,
+				"col": 0,
+				"terrain": {
+					"name": "buildings"
+				},
+				"unit": {
+					"name": "tankger"
+				}
+			},
+			{
+				"row": 0,
+				"col": 2,
+				"terrain": {
+					"name": "buildings"
+				}
+			},
+			{
+				"row": 0,
+				"col": 8,
+				"unit": {
+					"name": "tankger"
+				}
+			},
+			{
+				"row": 0,
+				"col": 10,
+				"unit": {
+					"name": "gunger"
+				}
+			},
+			{
+				"row": 0,
+				"col": 12,
+				"terrain": {
+					"name": "curve",
+					"orientation": 2
+				}
+			},
+			{
+				"row": 0,
+				"col": 14,
+				"terrain": {
+					"name": "river",
+					"orientation": 1
+				}
+			},
+			{
+				"row": 0,
+				"col": 16,
+				"terrain": {
+					"name": "river",
+					"orientation": 1
+				},
+				"tags": [
+					{
+						"name": "medal1"
+					}
+				]
+			},
+			{
+				"row": 0,
+				"col": 18,
+				"terrain": {
+					"name": "river",
+					"orientation": 1
+				}
+			},
+			{
+				"row": 0,
+				"col": 20,
+				"terrain": {
+					"name": "curve",
+					"orientation": 3
+				}
+			},
+			{
+				"row": 1,
+				"col": 1,
+				"terrain": {
+					"name": "buildings"
+				}
+			},
+			{
+				"row": 1,
+				"col": 3,
+				"unit": {
+					"name": "tankger"
+				}
+			},
+			{
+				"row": 1,
+				"col": 7,
+				"unit": {
+					"name": "infger",
+					"nbr_units": 3
+				}
+			},
+			{
+				"row": 1,
+				"col": 9,
+				"unit": {
+					"name": "infger",
+					"nbr_units": 3
+				}
+			},
+			{
+				"row": 1,
+				"col": 11,
+				"unit": {
+					"name": "infger",
+					"nbr_units": 3
+				}
+			},
+			{
+				"row": 1,
+				"col": 13,
+				"unit": {
+					"name": "inf2ger",
+					"badge": "badge4"
+				}
+			},
+			{
+				"row": 1,
+				"col": 23,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 2,
+				"col": 0,
+				"unit": {
+					"name": "infger",
+					"nbr_units": 3
+				}
+			},
+			{
+				"row": 2,
+				"col": 4,
+				"unit": {
+					"name": "inf2ger",
+					"badge": "badge4"
+				}
+			},
+			{
+				"row": 2,
+				"col": 8,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 2,
+				"col": 20,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 2,
+				"col": 22,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 2,
+				"col": 24,
+				"unit": {
+					"name": "tankger"
+				}
+			},
+			{
+				"row": 3,
+				"col": 3,
+				"unit": {
+					"name": "infger",
+					"nbr_units": 3
+				}
+			},
+			{
+				"row": 3,
+				"col": 7,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 3,
+				"col": 15,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 3,
+				"col": 19,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 3,
+				"col": 21,
+				"terrain": {
+					"name": "woods"
+				},
+				"unit": {
+					"name": "infger",
+					"nbr_units": 3
+				}
+			},
+			{
+				"row": 3,
+				"col": 23,
+				"unit": {
+					"name": "inf2ger",
+					"badge": "badge4"
+				}
+			},
+			{
+				"row": 4,
+				"col": 2,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 4,
+				"col": 6,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 4,
+				"col": 10,
+				"terrain": {
+					"name": "hills"
+				},
+				"unit": {
+					"name": "infus"
+				}
+			},
+			{
+				"row": 4,
+				"col": 12,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 4,
+				"col": 14,
+				"terrain": {
+					"name": "hills"
+				},
+				"unit": {
+					"name": "infus"
+				}
+			},
+			{
+				"row": 4,
+				"col": 18,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 4,
+				"col": 20,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 5,
+				"col": 13,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 5,
+				"col": 19,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 5,
+				"col": 21,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 6,
+				"col": 6,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 6,
+				"col": 8,
+				"terrain": {
+					"name": "hills"
+				},
+				"unit": {
+					"name": "infus"
+				}
+			},
+			{
+				"row": 6,
+				"col": 10,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 6,
+				"col": 14,
+				"unit": {
+					"name": "infus"
+				}
+			},
+			{
+				"row": 6,
+				"col": 16,
+				"unit": {
+					"name": "infus"
+				}
+			},
+			{
+				"row": 6,
+				"col": 20,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 7,
+				"col": 3,
+				"terrain": {
+					"name": "buildings"
+				},
+				"unit": {
+					"name": "infus"
+				},
+				"tags": [
+					{
+						"name": "medal2"
+					}
+				]
+			},
+			{
+				"row": 7,
+				"col": 7,
+				"unit": {
+					"name": "gunus"
+				}
+			},
+			{
+				"row": 7,
+				"col": 9,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 7,
+				"col": 13,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 7,
+				"col": 17,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 7,
+				"col": 23,
+				"terrain": {
+					"name": "buildings"
+				},
+				"unit": {
+					"name": "infus"
+				},
+				"tags": [
+					{
+						"name": "medal2"
+					}
+				]
+			},
+			{
+				"row": 8,
+				"col": 6,
+				"unit": {
+					"name": "infus"
+				}
+			},
+			{
+				"row": 8,
+				"col": 14,
+				"unit": {
+					"name": "tankus"
+				}
+			},
+			{
+				"row": 8,
+				"col": 16,
+				"unit": {
+					"name": "tankus"
+				}
+			},
+			{
+				"row": 8,
+				"col": 18,
+				"unit": {
+					"name": "infus"
+				}
+			},
+			{
+				"row": 8,
+				"col": 20,
+				"unit": {
+					"name": "infus"
+				}
+			}
+		],
+		"labels": [
+			{
+				"row": 0,
+				"col": 2,
+				"text": [
+					"Montélimar"
+				]
+			},
+			{
+				"row": 0,
+				"col": 20,
+				"text": [
+					"Rhone",
+					"River"
+				]
+			},
+			{
+				"row": 3,
+				"col": 17,
+				"text": [
+					"Condillac",
+					"Pass"
+				]
+			},
+			{
+				"row": 4,
+				"col": 6,
+				"text": [
+					"294"
+				]
+			},
+			{
+				"row": 4,
+				"col": 20,
+				"text": [
+					"Hill",
+					"Impassable"
+				]
+			},
+			{
+				"row": 5,
+				"col": 13,
+				"text": [
+					"300"
+				]
+			},
+			{
+				"row": 6,
+				"col": 2,
+				"text": [
+					"Bonlieu"
+				]
+			},
+			{
+				"row": 6,
+				"col": 22,
+				"text": [
+					"Grane"
+				]
+			},
+			{
+				"row": 7,
+				"col": 9,
+				"text": [
+					"430"
+				]
+			}
+		]
+	},
+	"packs": {},
+	"text": {
+		"en": {
+			"name": "Montélimar",
+			"subtitle": "Campaign for Southern France",
+			"historical": "The Montelimar battle square, bounded on three sides by rivers, covered ground that alternated between flat open farmland and rugged hills and woods. Route N-7, the main north-south artery, runs along the Rhone River and was vital to the German forces.\n\nBy August 22nd, Allied forces had moved quickly north from the Anvil/Dragoon landing beaches and now threatened supplies moving down N-7 and this important northern escape route. Skirmishes broke out in the area, as both sides tried to determine the strength of the other side.\n\nOn the 24th, the fog of war for the German forces dissipated when a detailed copy of the Allies operational plans for August 25th fell into their hands. The German plan of attack on the 25th was ambitious, but with a coordinated effort, the plan would cut off American forces on Hill 300 and in the Condillac Pass. Groupe Thiem in the north took Grane, but failed to advance south. The attacks against Hill 430 never began and although the 326th Grenadiers did take Bonlieu, they were driven back by American Artillery. The American effort to cut the N-7 road, failed when a strong counterattack forced them to retire back into the hills. The action at Montelimar this day ended in a stalemate.\n\nThe stage is set, the battle lines are drawn, and you are in command. The rest is history.",
+			"description": "Axis Player: Take 5 command cards\nYou move first.\n\nAllied Player: Take 5 command cards.",
+			"victory": "6 Medals\nAn Axis unit that captures the town of Bonlieu or Grane counts as one Victory Medal. Place an Objective Medal in each of these towns. As long as the Axis unit remains on the Town hex, it continues to count toward the Axis victory. If the unit moves off or is eliminated, it no longer counts. An Allied unit that captures any hex adjacent to the Rhone counts as one victory medal. Only one objective medal is gained, even if more than one hex is captured. As long as the Allied unit remains in an adjacent hex, it continues to count toward the Allied victory. If the unit moves off or is eliminated, it no longer counts.",
+			"rules": "The Hill hexes north of the Condillac pass (Allies right) are impassable.\n\nThe Axis Special Force infantry units are elite Panzer Grenadier units. Place an Axis badge in the same hex as these units to distinguish them from the other units. The Panzer Grenadier units may move 1 or 2 hexes and still battle. The other German infantry units only have 3 figures. "
+		},
+		"fr": {
+			"name": "Montélimar",
+			"subtitle": "Campagne de Provence",
+			"sdate": "August 25, 1944",
+			"historical": "La bataille pour Montélimar se déroule sur une alternance de champs cultivés et de hauteurs accidentées et boisées, bordés sur trois côtés par des rivières. La Nationale 7, artère allant du nord au sud le long du Rhône, est vitale pour les forces allemandes. Le 22 août, les forces alliées ayant progressé rapidement vers le nord depuis les plages du débarquement de Provence (Opération Anvil/Dragoon), elles menacent désormais cet axe vital de ravitaillement et de retraite. Des accrochages éclatent dans la région, chaque bord essayant d?évaluer les forces adverses. Le 24 août, les doutes côté allemand se dissipent : les plans opérationnels détaillés des Alliés pour la journée du 25 août sont tombés entre leurs mains !\n\nLe plan d'attaque des Allemands pour le 25 est ambitieux : par un effort coordonné, ils pourraient isoler les forces américaines sur la colline 300 et le col de Condillac. Le groupe Thiem, au nord, prend Grane, mais n'arrive pas à avancer plus au sud. Les attaques contre la colline 430 ne viennent jamais, et bien que le 326ème Grenadiers prenne Bonlieu, il est ensuite repoussé par l'artillerie américaine. Les Américains tentent alors de couper la Nationale 7 mais échouent : une forte contre-attaque les force à se retirer dans les collines. La bataille de Montélimar finit ce jour-là sur une impasse.\n\nLe théâtre des opérations est fixé, les troupes sont en position, et l?Histoire est entre vos mains. À vous de jouer !",
+			"description": "Joueur allemand :\n- Prenez 5 cartes de Commandement\n- Vous jouez en premier\n\nJoueur allié :\n- Prenez 5 cartes de Commandement",
+			"rules": "Toutes les collines au nord du col de Condillac (flanc droit allié) sont infranchissables.\n\nLes forces spéciales allemandes sont des unités \"Grenadier\" d'élite. Placez un badge de force spéciale sur l'hexagone de cette unité pour la distinguer des unités régulières. Les forces spéciales peuvent se déplacer de deux hexagones et combattre dans le même tour.\n\nAttention : dans ce scénario, les forces régulières allemandes ne contiennent que 3 figurines au lieu de 4 !",
+			"victory": "6 médailles\n\nUne unité allemande qui occupe les villes de Bonlieu ou de Grane remporte une médaille de Victoire supplémentaire. Placez une pièce médaille sur chacune de ces villes. Tant qu'une unité allemande occupe la ville, la médaille est conservée par le joueur. Si l'unité s'en va ou est éliminée, la médaille est remise en jeu.\n\nUne unité alliée qui occupe un hexagone le long du Rhône remporte une médaille de Victoire supplémentaire (une seule médaille peut ainsi être gagnée). Placez une seule pièce médaille sur le Rhône. Tant qu'une unité alliée occupe un hexagone en bordure du Rhône, la médaille est conservée par le joueur. Si l'unité s'en va ou est éliminée, la médaille est remise en jeu.",
+			"bibliography": "",
+			"mod_date": "2008-04-07T18:00:54",
+			"ownerID": "6"
+		},
+		"de": {
+			"name": "Montélimar",
+			"subtitle": "Invasion in Südfrankreich – Erste Angriffswelle",
+			"historical": "Das an drei Seiten von Flüssen begrenzte Schlachtfeld von Montélimar bestand abwechselnd aus flachem, offenen Farmland sowie aus zerfurchten Felsen und Wäldern. Lebenswichtig für die deutschen Truppen war die entlang der Rhone verlaufende Route N-7, die Hauptverkehrsader von Norden nach Süden.\n\nNachdem die Alliierten im Rahmen von Operation Anvil/Dragoon nach ihrer Landung an Stränden im Süden und einem raschen nördlichen Vormarsch die N-7 um den 22. August herum erreichten, stellten sie eine Gefahr für Versorgungslieferungen entlang dieser Strecke dar und blockierten einen wichtigen Fluchtweg nach Norden. In dem Gebiet kam es daraufhin zu mehreren Scharmützeln, in denen beide Seiten versuchten die jeweilige gegnerische Stärke einzuschätzen.\n\nAm 24. August lichtete sich der Nebel des Krieges für die deutschen Truppen als ihnen die genauen Pläne der anstehenden alliierten Operationen für den folgenden Tag in die Hände fielen. Der deutsche Angriffsplan für den 25. August war zwar ehrgeizig, hätte jedoch durch einen koordinierten Einsatz aller Kräften die Amerikaner von Hügel 300 und dem Condillac-Pass abgeschnitten. Im Norden gelang der Gruppe Thiem die Einnahme von Grane, der weitere Vorstoß nach Süden scheiterte jedoch. Die Angriffe gegen Hügel 430 konnten so gar nicht erst beginnen, und außerdem wurden die 326. Grenadiere nach der erfolgreichen Einnahme von Bonlieu durch Artilleriefeuer der Alliierten wieder zurückgedrängt. Auf der anderen Seite scheiterten auch die amerikanischen Bemühungen die N-7 zu unterbrechen an einem starken Gegenangriff, der sie zum Rückzug in die Hügel zwang. Die Kampfhandlungen bei Montelimar endeten an diesem Tag mit einer Pattsituation.\n\nDie Vorbereitungen sind abgeschlossen, die Fronten abgesteckt, und Sie haben das Kommando. Der Rest ist Geschichte.",
+			"description": "Achsenspieler: Nehmen Sie 5 Kommandokarten.\nSie beginnen die Schlacht.\n\nAlliierter Spieler: Nehmen Sie 5 Kommandokarten.",
+			"victory": "6 Siegpunkte.\n\nDie Einnahme von Bonlieu oder Grane durch eine Achseneinheit ist einen Siegpunkt wert. Legen Sie auf jedes der beiden Stadtfelder einen Orden. Nimmt eine Achseneinheit eines dieser Felder ein, zählt der Orden als Siegpunkt, sobald die Einheit die Stadt verlässt oder vernichtet wird, geht der Siegpunkt wieder verloren.\n\nDie Einnahme von mindesten einem Nachbarfeld der Rhone durch eine alliierte Einheit ist einen Siegpunkt wert. Nimmt eine alliierte Einheit eines dieser Felder ein, zählt der Orden als Siegpunkt, sobald die Einheit das Feld verlässt oder vernichtet wird, geht der Siegpunkt wieder verloren.",
+			"rules": "Die Hügelkette nördlich des Condillac-Passes (rechte Flanke des alliierten Spielers) ist unpassierbar.\n\nDie deutschen Infanterie-Spezialeinheiten sind Elite-Panzergrenadiereinheiten. Legen Sie zur Unterscheidung Achsenabzeichen zu diesen Einheiten. Die Panzergrenadiere können bis zu 2 Feldern weit ziehen und trotzdem kämpfen. Alle übrigen deutschen Infanterieeinheiten bestehen nur aus 3 Figuren."
+		}
+	}
+}

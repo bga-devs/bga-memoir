@@ -616,5 +616,23 @@ html {
       #m44-board .hex-grid-item .hex-grid-obstacle[data-type='24'] {
         background-position-x: 0%;
         background-position-y: 100%; }
+  #m44-board .hex-label-container {
+    z-index: 40;
+    margin: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    opacity: 0.7;
+    pointer-events: none; }
+    #m44-board .hex-label-container .hex-label {
+      background: #ffffff;
+      padding: 1px 3px;
+      border-radius: 5px;
+      border: 1px solid #000000;
+      font-size: 12px;
+      text-align: center;
+      white-space: nowrap; }
+  #m44-board:hover .hex-label-container {
+    opacity: 0.2; }
 
 /*# sourceMappingURL=memoir.css.map */

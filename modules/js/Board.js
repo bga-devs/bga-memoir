@@ -35,14 +35,17 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       // Create cells
       for (let y = 0; y < dim.y; y++) {
         let size = dim.x - (y % 2 == 0 ? 0 : 1);
-        for (let x = 0; x < size; x ++) {
+        for (let x = 0; x < size; x++) {
           let col = 2 * x + (y % 2 == 0 ? 0 : 1);
+          let row = y;
 
           let type = 0;
           if (face == 'winter') {
             type = getRandomInt(30, 35);
           } else if (face == 'desert') {
             type = getRandomInt(19, 24);
+          } else if (face == 'country') {
+            type = getRandomInt(9, 12);
           } else if (face == 'beach') {
             if (y < 3) type = getRandomInt(9, 12);
             else if (y < 4) type = getRandomInt(0, 1);
@@ -55,24 +58,31 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           this.place('tplBoardCell', { x: col, y, type, rotate }, 'm44-board');
 
           let cellC = $(`cell-container-${col}-${y}`);
-          let realX = rotate? (2*size - col - (y % 2 == 0? 2 : 0)) : col;
-          let realY = rotate? (dim.y - y - 1) : y;
+          let realX = rotate ? 2 * size - col - (y % 2 == 0 ? 2 : 0) : col;
+          let realY = rotate ? dim.y - y - 1 : y;
           cellC.style.gridRow = 3 * realY + 1 + ' / span 4';
           cellC.style.gridColumn = realX + 1 + ' / span 2';
+
+          // Add terrains tiles
+          board.grid[col][row].terrains.forEach((terrain) => {
+            let tplName = TERRAINS.includes(terrain.type) ? 'tplTerrainTile' : 'tplObstacleTile';
+            terrain.rotate = rotate;
+            this.place(tplName, terrain, cellC);
+          });
+
+          // Add labels
+          let labels = board.grid[col][row].labels;
+          if (labels.length > 0) {
+            let label = labels.map((t) => _(t)).join('<br />');
+            let area = 3 * realY + 4 + ' / ' + (+realX + 1) + ' / span ' + labels.length + ' / span 2';
+            this.place('tplTileLabel', { label, area }, 'm44-board');
+          }
         }
       }
-
-      // Add terrains tiles
-      this.gamedatas.terrains.forEach((terrain) => {
-        let cellC = $(`cell-container-${terrain.x}-${terrain.y}`);
-        let tplName = TERRAINS.includes(terrain.type) ? 'tplTerrainTile' : 'tplObstacleTile';
-        terrain.rotate = rotate;
-        this.place(tplName, terrain, cellC);
-      });
     },
 
     tplBoardCell(cell) {
-      let rotation = cell.rotate? 6 : 0;
+      let rotation = cell.rotate ? 6 : 0;
       return `
     <li class="hex-grid-item" id="cell-container-${cell.x}-${cell.y}">
       <div class="hex-grid-content hex-grid-background" data-type="${cell.type}" data-rotation="${rotation}"></div>
@@ -88,9 +98,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         let nbrRotation = 3;
         if (TERRAINS_ROTATIONS[6].includes(terrain.type)) nbrRotation = -6;
         if (TERRAINS_ROTATIONS[2].includes(terrain.type)) nbrRotation = 2;
-        rotation += (((terrain.orientation - 1) * 12) / nbrRotation + 12) % 12;
+        rotation += ((terrain.orientation - 1) * 12) / nbrRotation + 12;
       }
-
+      rotation = rotation % 12;
       return `<div class="hex-grid-content hex-grid-terrain" data-type="${type}" data-rotation="${rotation}"></div>`;
     },
 
@@ -99,9 +109,17 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       let rotation = obstacle.rotate ? 6 : 0;
       if (obstacle.orientation != 1) {
         let angle = OBSTACLES_ROTATION[obstacle.type] / -30;
-        rotation += ((obstacle.orientation - 1) * angle + 12) % 12;
+        rotation += (obstacle.orientation - 1) * angle + 12;
       }
+      rotation = rotation % 12;
       return `<div class="hex-grid-content hex-grid-obstacle" data-type="${type}" data-rotation="${rotation}"></div>`;
+    },
+
+    tplTileLabel(label) {
+      return `
+      <div class="hex-label-container" style="grid-area:${label.area}">
+        <div class="hex-label">${label.label}</div>
+      </div>`;
     },
   });
 });

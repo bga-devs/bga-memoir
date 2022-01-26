@@ -17,14 +17,19 @@ class Board extends \APP_DbObject
   ];
 
   protected static $grid = [];
+  public function getScenario()
+  {
+    $scenario = self::getUniqueValueFromDB("SELECT value FROM global_variables WHERE name = 'scenario' LIMIT 1");
+    return is_null($scenario) ? null : json_decode($scenario, true);
+  }
+
   public function init()
   {
     // Try to fetch scenario from DB
-    $scenario = self::getUniqueValueFromDB("SELECT value FROM global_variables WHERE name = 'scenario' LIMIT 1");
+    $scenario = self::getScenario();
     if (is_null($scenario)) {
       return;
     }
-    $scenario = json_decode($scenario, true);
 
     // Create the board
     self::$grid = [];
@@ -36,6 +41,7 @@ class Board extends \APP_DbObject
         self::$grid[$col][$y] = [
           'terrains' => [],
           'units' => [],
+          'labels' => [],
         ];
       }
     }
@@ -44,6 +50,26 @@ class Board extends \APP_DbObject
     foreach (Terrains::getAllOrdered() as $terrain) {
       self::$grid[$terrain->getX()][$terrain->getY()]['terrains'][] = $terrain;
     }
+
+    // Add the labels
+    foreach ($scenario['board']['labels'] as $labels) {
+      foreach ($labels['text'] as $label) {
+        self::$grid[$labels['col']][$labels['row']]['labels'][] = $label;
+      }
+    }
+  }
+
+  public function getUiData()
+  {
+    $scenario = self::getScenario();
+    if (is_null($scenario)) {
+      return null;
+    }
+    return [
+      'type' => $scenario['board']['type'],
+      'face' => $scenario['board']['face'],
+      'grid' => self::$grid,
+    ];
   }
 
   protected function isValidCell($cell)

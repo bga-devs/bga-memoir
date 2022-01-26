@@ -58,10 +58,10 @@ define([
       dojo.place('right-side', 'm44-central-part');
 
       // Load board
-      if (gamedatas.scenario) {
+      if (gamedatas.board) {
         // TODO : handle spectator
         let rotate = this.gamedatas.players[this.player_id].no == 1;
-        this.setupBoard(gamedatas.scenario.board, rotate);
+        this.setupBoard(gamedatas.board, rotate);
       }
     },
 

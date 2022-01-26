@@ -1,0 +1,380 @@
+{
+	"meta_data": {
+		"scenario_id": "3",
+		"status": "GAME",
+		"can_translate": "false",
+		"mod_date": "2010-06-03 11:45:41",
+		"ownerID": 8860,
+		"software": "sed 1.2",
+		"create_by": 8860,
+		"create_date": "2008-11-14 11:52:33",
+		"mod_by": 344648,
+		"author_id": 8860
+	},
+	"game_info": {
+		"front": "WESTERN",
+		"operationID": "20",
+		"date_begin": "1944-06-06",
+		"date_end": "1944-06-06",
+		"type": "HISTORICAL",
+		"starting": "PLAYER2",
+		"side_player1": "AXIS",
+		"side_player2": "ALLIES",
+		"country_player1": "DE",
+		"country_player2": "US",
+		"cards_player1": 4,
+		"cards_player2": 5,
+		"victory_player1": 4,
+		"victory_player2": 4,
+		"victory_conditions": [
+			{
+				"standard": {}
+			}
+		],
+		"expert_mode": 0
+	},
+	"board": {
+		"type": "STANDARD",
+		"face": "COUNTRY",
+		"hexagons": [
+			{
+				"row": 0,
+				"col": 0,
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 0,
+				"col": 2,
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 0,
+				"col": 4,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 0,
+				"col": 6,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 0,
+				"col": 8,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 0,
+				"col": 16,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 0,
+				"col": 18,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 0,
+				"col": 22,
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 0,
+				"col": 24,
+				"unit": {
+					"name": "tankger"
+				}
+			},
+			{
+				"row": 1,
+				"col": 1,
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 1,
+				"col": 5,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 1,
+				"col": 7,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 1,
+				"col": 15,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 1,
+				"col": 17,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 1,
+				"col": 19,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 1,
+				"col": 21,
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 1,
+				"col": 23,
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 2,
+				"col": 0,
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 2,
+				"col": 6,
+				"terrain": {
+					"name": "buildings"
+				}
+			},
+			{
+				"row": 2,
+				"col": 8,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 2,
+				"col": 18,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 2,
+				"col": 20,
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 2,
+				"col": 22,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 2,
+				"col": 24,
+				"terrain": {
+					"name": "buildings"
+				}
+			},
+			{
+				"row": 3,
+				"col": 5,
+				"terrain": {
+					"name": "buildings"
+				}
+			},
+			{
+				"row": 3,
+				"col": 13,
+				"terrain": {
+					"name": "buildings"
+				}
+			},
+			{
+				"row": 4,
+				"col": 8,
+				"terrain": {
+					"name": "hedgerow"
+				}
+			},
+			{
+				"row": 4,
+				"col": 12,
+				"terrain": {
+					"name": "buildings"
+				},
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 4,
+				"col": 14,
+				"terrain": {
+					"name": "buildings"
+				}
+			},
+			{
+				"row": 4,
+				"col": 22,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 5,
+				"col": 3,
+				"terrain": {
+					"name": "hills"
+				},
+				"obstacle": {
+					"name": "sand",
+					"orientation": 2
+				},
+				"unit": {
+					"name": "infus"
+				}
+			},
+			{
+				"row": 5,
+				"col": 19,
+				"terrain": {
+					"name": "hedgerow"
+				}
+			},
+			{
+				"row": 6,
+				"col": 12,
+				"unit": {
+					"name": "infus"
+				}
+			},
+			{
+				"row": 7,
+				"col": 7,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 7,
+				"col": 13,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 7,
+				"col": 15,
+				"unit": {
+					"name": "infus"
+				}
+			},
+			{
+				"row": 7,
+				"col": 17,
+				"terrain": {
+					"name": "hedgerow"
+				}
+			},
+			{
+				"row": 7,
+				"col": 21,
+				"unit": {
+					"name": "infus"
+				}
+			},
+			{
+				"row": 8,
+				"col": 8,
+				"unit": {
+					"name": "infus"
+				}
+			},
+			{
+				"row": 8,
+				"col": 14,
+				"unit": {
+					"name": "infus"
+				}
+			}
+		],
+		"labels": [
+			{
+				"row": 2,
+				"col": 4,
+				"text": [
+					"Neuville-",
+					"au-Plain"
+				]
+			},
+			{
+				"row": 2,
+				"col": 24,
+				"text": [
+					"Fouville"
+				]
+			},
+			{
+				"row": 3,
+				"col": 15,
+				"text": [
+					"Sainte Mère-Eglise"
+				]
+			}
+		]
+	},
+	"packs": {},
+	"text": {
+		"en": {
+			"name": "Sainte-Mère-Eglise",
+			"historical": "Establishment of a defensive base at Ste. Mère-Église was one of the key objectives of the US 82nd Airborne Division. In contrast with other regiments, the 505th Parachute Infantry, landing northwest of Ste. Mère-Église, had one of the most accurate drops. Rapidly regrouping and tipped by a French native to the presence of German troops in town, the paratroopers planned to surround Ste. Mère-Église and move in with knives, bayonets and grenades. \nIn the meantime, to the north, Lt. Turner Turnbull deployed his force on high ground near Neuville-au-Plain, engaging and fighting the enemy to a draw. This bought some crucial time for the battalions around Ste. Mère-Église, giving them a chance to meet the German southern thrust and annihilate several enemy units. This led to an overestimation by German command of American strength in this sector, and as a result, the Germans withdrew. \n\nThe stage is set, the battle lines are drawn, and you are in command. The rest is history.",
+			"description": "Axis Player: Take 4 command cards\n\nAllied Player: Take 5 command cards.\nYou move first.\n",
+			"victory": "4 Medals\n",
+			"rules": "Before the Allied side takes its first turn, the Allied player has an additional airdrop.\n\nHold 4 Infantry figures in your hand about 12 inches - roughly the height of the box set on its side - above the battlefield.\n\nDrop the figures. If a figure falls off the board or lands in a hex with another friendly or enemy unit, this figure is out of action and placed back into the box. No Victory Medal is awarded to the Axis player on this occasion.\n\nIf the figure is not out-of-action, place an additional 3 figures from the box into the Infantry figure's hex. The unit landed safely and is ready for action."
+		},
+		"fr": {
+			"name": "Sainte-Mère-Eglise",
+			"historical": "L'établissement d'une base de défense à Sainte Mère-Église était l'un des objectifs majeurs de la 82ème Division Aéroportée Américaine. Contrairement aux deux autres régiments de cette division, la 505ème Infanterie de Parachutistes eut l'un des meilleurs parachutages, au nord-ouest de Sainte Mère-Église. Un rassemblement rapide lui permit de poursuivre rapidement sa mission. Sur les renseignements d'un Français leur apprenant que les Allemands s'étaient établis à Sainte Mère-Église, plan fut fait d'encercler la ville, puis d'y pénétrer au couteau, à la baïonnette et à la Grenade.\n\nPendant ce temps, le lieutenant Turner Turnbull déployait ses forces sur les hauteurs, près de Neuville-au-Plain. Contenant l?ennemi, elles permettent aux bataillons autour de Sainte Mère-Église de contrer l'assaut allemand au sud. Les unités allemandes ainsi anéanties conduisirent rapidement le commandement allemand à surestimer la taille des forces américaines dans ce secteur, et à ordonner la retraite.\n\nLe théâtre des opérations est fixé, les troupes sont en position, et l?Histoire est entre vos mains. À vous de jouer !",
+			"description": "Joueur allemand :\n- Prenez 4 cartes de Commandement\n\nJoueur allié :\n- Prenez 5 cartes de Commandement\n- Vous jouez en premier",
+			"victory": "4 médailles",
+			"rules": "Avant que le joueur allié ne commence, il bénéficie d'un parachutage supplémentaire. Prenez 4 figurines d'infanterie dans votre main fermée, et mettez-la à environ 30 cm (la hauteur de la boîte, mise sur le coté) au-dessus du champ de bataille. Laissez tomber les figurines. Si une figurine tombe en dehors du plateau de jeu, ou sur un hexagone déjà occupé par une unité amie ou ennemie, elle est perdue et remise dans la boîte. Le joueur allemand ne remporte aucune médaille à cette occasion. Si la figurine atterrit avec succès sur un hexagone non occupé, complétez-la avec 3 autres figurines. L'unité est prête à l'action."
+		},
+		"de": {
+			"name": "Sainte-Mère-Eglise",
+			"historical": "Die Errichtung einer Verteidigungsbasis bei Sainte-Mère-Église war eines der Schlüsselziele der 82. US-Luftlandedivision. Im Gegensatz zu anderen Regimentern gelang der 505. Fallschirminfanterie nordwestlich von Sainte-Mère-Église eine sehr genaue Landung. Ein einheimischer Franzose informierte sie über die Anwesenheit deutscher Truppen in der Stadt, so dass sie sich schnell gruppierten und Sainte-Mère-Église umzingelten, um die Stadt mit Messern, Bajonetten und Handgranaten bewaffnet einzunehmen.\n\nIn der Zwischenzeit brachte Leutnant Turner Turnbull seine Streitkräfte im Hochland nahe Neuville-au-Plain in Stellung, wo er den Gegner in Kampfhandlungen verwickelte. Dadurch gewannen die Bataillone um Sainte-Mère-Église die nötige Zeit, sich um den südlichen Vorstoß der deutschen Truppen zu kümmern und mehrere feindliche Einheiten zu vernichten. Da das deutsche Oberkommando infolgedessen die amerikanische Kampfstärke in diesem Bereich überschätzte, zogen sich die deutschen Truppen zurück.\n\nDie Vorbereitungen sind abgeschlossen, die Fronten abgesteckt, und Sie haben das Kommando. Der Rest ist Geschichte.",
+			"description": "Achsenspieler: Nehmen Sie 4 Kommandokarten.\n\nAlliierter Spieler: Nehmen Sie 5 Kommandokarten.\nSie beginnen die Schlacht.",
+			"victory": "4 Siegpunkte\n",
+			"rules": "Vor Spielbeginn erhält der alliierte Spieler einen weiteren Fallschirmabwurf.\n\nHalte Sie 4 Infanteriefiguren in ca. 30cm Höhe über das Spielfeld (etwa die Höhe der Spielbox).\n\nLassen Sie die Figuren fallen. Fällt eine Figur vom Spielbrett oder auf ein Feld, das bereits von einer eigenen oder feindlichen Einheit besetzt ist, so wird diese Figur aus dem Spiel entfernt, zählt allerdings nicht als Siegpunkt für den Achsenspieler.\n\nAlle übrigen Figuren gelten als sicher gelandet und werden jeweils mit 3 weiteren Figuren zu einer vollwertigen und einsatzbereiten Einheit ergänzt."
+		}
+	}
+}

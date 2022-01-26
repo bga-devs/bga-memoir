@@ -1,0 +1,391 @@
+{
+	"meta_data": {
+		"scenario_id": "19",
+		"status": "GAME",
+		"can_translate": "false",
+		"mod_date": "2010-05-26 06:45:19",
+		"ownerID": 8860,
+		"software": "sed 1.2",
+		"create_by": 8860,
+		"create_date": "2008-11-14 11:52:33",
+		"mod_by": 291520,
+		"author_id": 8860
+	},
+	"game_info": {
+		"front": "WESTERN",
+		"date_begin": "1944-07-21",
+		"date_end": "1944-07-21",
+		"type": "HISTORICAL",
+		"starting": "PLAYER1",
+		"side_player1": "AXIS",
+		"side_player2": "ALLIES",
+		"country_player1": "DE",
+		"country_player2": "FR",
+		"cards_player1": 4,
+		"cards_player2": 4,
+		"victory_player1": 4,
+		"victory_player2": 4,
+		"victory_conditions": [
+			{
+				"standard": {}
+			}
+		]
+	},
+	"board": {
+		"type": "STANDARD",
+		"face": "COUNTRY",
+		"hexagons": [
+			{
+				"row": 0,
+				"col": 18,
+				"terrain": {
+					"name": "buildings"
+				}
+			},
+			{
+				"row": 1,
+				"col": 5,
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 1,
+				"col": 7,
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 1,
+				"col": 9,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 1,
+				"col": 13,
+				"terrain": {
+					"name": "buildings"
+				}
+			},
+			{
+				"row": 1,
+				"col": 15,
+				"terrain": {
+					"name": "buildings"
+				}
+			},
+			{
+				"row": 1,
+				"col": 21,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 2,
+				"col": 2,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 2,
+				"col": 8,
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 2,
+				"col": 12,
+				"terrain": {
+					"name": "buildings"
+				}
+			},
+			{
+				"row": 2,
+				"col": 16,
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 2,
+				"col": 18,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 3,
+				"col": 5,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 3,
+				"col": 13,
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 3,
+				"col": 17,
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 3,
+				"col": 19,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 3,
+				"col": 21,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 3,
+				"col": 23,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 4,
+				"col": 0,
+				"unit": {
+					"name": "inf2us",
+					"nbr_units": 3
+				}
+			},
+			{
+				"row": 4,
+				"col": 2,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 4,
+				"col": 6,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 4,
+				"col": 8,
+				"unit": {
+					"name": "inf2us",
+					"nbr_units": 3
+				}
+			},
+			{
+				"row": 4,
+				"col": 18,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 5,
+				"col": 7,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 5,
+				"col": 9,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 5,
+				"col": 13,
+				"unit": {
+					"name": "inf2us",
+					"nbr_units": 3
+				}
+			},
+			{
+				"row": 5,
+				"col": 21,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 6,
+				"col": 2,
+				"unit": {
+					"name": "inf2us",
+					"nbr_units": 3
+				}
+			},
+			{
+				"row": 6,
+				"col": 4,
+				"unit": {
+					"name": "inf2us",
+					"nbr_units": 3
+				}
+			},
+			{
+				"row": 6,
+				"col": 10,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 6,
+				"col": 12,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 7,
+				"col": 3,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 7,
+				"col": 11,
+				"unit": {
+					"name": "inf2us",
+					"nbr_units": 3
+				}
+			},
+			{
+				"row": 7,
+				"col": 13,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 7,
+				"col": 17,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 7,
+				"col": 21,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 7,
+				"col": 23,
+				"unit": {
+					"name": "inf2us",
+					"nbr_units": 3
+				}
+			},
+			{
+				"row": 8,
+				"col": 8,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 8,
+				"col": 12,
+				"unit": {
+					"name": "inf2us",
+					"nbr_units": 3
+				}
+			},
+			{
+				"row": 8,
+				"col": 18,
+				"unit": {
+					"name": "inf2us",
+					"nbr_units": 3
+				}
+			},
+			{
+				"row": 8,
+				"col": 20,
+				"unit": {
+					"name": "inf2us",
+					"nbr_units": 3
+				}
+			}
+		],
+		"labels": [
+			{
+				"row": 0,
+				"col": 16,
+				"text": [
+					"Vassieux"
+				]
+			},
+			{
+				"row": 3,
+				"col": 9,
+				"text": [
+					"Airfield"
+				]
+			},
+			{
+				"row": 4,
+				"col": 14,
+				"text": [
+					"Airfield"
+				]
+			}
+		]
+	},
+	"packs": {},
+	"text": {
+		"en": {
+			"name": "Vassieux",
+			"subtitle": "Vercors",
+			"historical": "Hotbed of the French Resistance, the \"Maquis\"of Vercors became one of the largest of its kind in the early months of 1944, with countless young French recruits joining up. Resistance camps were established around many villages such as Vassieux, because of its geographical configuration and strategic importance.\n\nBy July 14, 1944, the Resistance had completed the airfield - code-named \"Taille-Crayon\"(Pencil Sharpener) - and just received a drop from US flying fortresses when German planes appeared and bombed the village.\n\nOn July 21 at 9:00 AM, French Resistance, working to repair the airfield, were taken by surprise when 20 German planes and gliders came flying out of the morning mist. The gliders landed and German troops poured out, making for the houses in the village. The Resistance around Vassieux rushed to help their comrades and dislodge the Germans from the buildings, but all attacks through the day failed.\n\nThe stage is set, the battle lines are drawn, and you are in command. The rest is history.",
+			"description": "Axis Player: Take 4 command cards\nYou move first.\n\nAllied Player: Take 4 command cards.",
+			"victory": "4 Medals\nWhen 'Their Finest Hour' command card is played, do not reshuffle the command deck. Should the command card deck run out of cards and the Allied player has not won, the battle ends as an Axis player victory.",
+			"rules": "All the Allied units are French Resistance infantry. Therefore, there is no need to place Resistance badges with the units. These units only have 3 figures. A Resistance unit may move onto terrain and still battle. When retreating, the unit may move back 1, 2 or 3 hexes before it regroups."
+		},
+		"fr": {
+			"name": "Vassieux",
+			"subtitle": "Vercors",
+			"sdate": "July 24, 1944",
+			"historical": "Haut lieu de la Résistance française, le \"Maquis\" du Vercors fut l'un des plus importants groupes de Résistants. Dès le début de 1944, un nombre toujours croissant de jeunes recrues rejoignent ses rangs. Des camps de Résistants sont établis autour de nombreux villages comme Vassieux, du fait de leur situation géographique et importance stratégique.\n\nLe 14 juillet 1944, la Résistance a achevé la construction d'une piste d'atterrissage (nom de code \"Taille-Crayon\"), et réceptionne les premiers parachutages des forteresses volantes américaines. Mais peu après leur passage, des avions allemands apparaissent et bombardent le village.\n\nLe 21 juillet à 9h00, les Résistants, occupés à réparer la piste d'atterrissage, sont brutalement surpris par l'arrivée silencieuse de 20 avions allemands surgissant du brouillard matinal, tirant derrière eux des planeurs remplis de troupes. Ces dernières investissent rapidement les maisons du village. La Résistance autour de Vassieux se précipite pour aider ses camarades et déloger les Allemands des bâtiments,mais échoue malgré des attaques répétées toute la journée durant.\n\nLe théâtre des opérations est fixé, les troupes sont en position, et l?Histoire est entre vos mains. À vous de jouer !",
+			"description": "Joueur allemand :\n- Prenez 4 cartes de Commandement\n- Vous jouez en premier\n\nJoueur allié :\n- Prenez 4 cartes de Commandement",
+			"rules": "Toutes les unités alliées sont des Résistants. Il est donc inutile de placer des badges Résistance.Ces unités ne contiennent que 3 figurines. Une unité de Résistants peut pénétrer sur un terrain et combattre dans le même tour. Lors d'une retraite, elle peut reculer de 1, 2 ou 3 hexagones.",
+			"victory": "4 médailles\nQuand vous jouez la carte \"Action héroïque\", ne re-mélangez pas les cartes pour reconstituer une pioche. Si les Résistants n'ont pas gagné lorsque la pioche est épuisée, le joueur allemand remporte la partie !",
+			"bibliography": "",
+			"mod_date": "2008-04-07T17:02:59",
+			"ownerID": "6"
+		},
+		"de": {
+			"name": "Vassieux",
+			"subtitle": "Vercors",
+			"historical": "Der Maquis von Vercor, Brutstätte der französischen Résistance, wurde in den ersten Monaten des Jahres 1944 zu einer der größten Widerstandsgruppen, der sich zahllose junge französische Rekruten anschlossen. Aufgrund der geographischen Lage und der strategischen Bedeutung wurden viele Stützpunkte in der Nähe umliegender Orte wie Vassieux errichtet.\n\nAm 14. Juli 1944 vollendete der Widerstand die Arbeiten an einem Flugfeld – Codename „Taille-Crayon“ (Bleistiftanspitzer) – und empfing gerade einen Versorgungsabwurf von amerikanischen „Flying Fortresses“, als auf einmal deutsche Flugzeuge auftauchten und die Stadt bombardierten.\n\nAm 21. Juli um 9 Uhr morgens wurden die Widerstandskämpfer während einer Reparatur des Flugfeldes von 20 deutschen Flugzeugen und Seglern, die plötzlich aus dem Morgennebel auftauchten, überrascht. Aus den Seglern strömten deutsche Truppen, die sofort in Richtung Stadt vorrückten. Die Kämpfer um Vassieux eilten ihren Kameraden zur Hilfe und versuchten die Deutschen von den Häusern zu vertreiben, doch alle Angriffe an diesem Tag schlugen fehl.\n\nDie Vorbereitungen sind abgeschlossen, die Fronten abgesteckt, und Sie haben das Kommando. Der Rest ist Geschichte.",
+			"description": "Achsenspieler: Nehmen Sie 4 Kommandokarten.\nSie beginnen die Schlacht.\n\nAlliierter Spieler: Nehmen Sie 4 Kommandokarten.",
+			"victory": "4 Siegpunkte.\n\nNach dem Ausspielen der Taktikkarte ‚Ihre größte Stunde‘ wird der Kartenstapel nicht neu gemischt. Sollte der Nachziehstapel vor einem Sieg der alliierten Seite verbraucht sein, endet das Spiel mit einem Sieg der Achsenstreitkräfte.\nSonderregeln",
+			"rules": "Alle alliierten Spezialeinheiten sind Kämpfer der französischen Résistance, weshalb es unnötig ist sie mit den entsprechenden Abzeichen zu bestücken. Diese Einheiten bestehen nur aus 3 Figuren, können sich dafür auf jedem Gelände bewegen und trotzdem kämpfen. Beim Rückzug können sie sich pro Flagge bis zu 3 Feldern weit zurückziehen."
+		}
+	}
+}

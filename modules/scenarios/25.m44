@@ -1,0 +1,525 @@
+{
+	"meta_data": {
+		"scenario_id": "25",
+		"status": "GAME",
+		"can_translate": "false",
+		"mod_date": "2010-09-29 10:59:53",
+		"ownerID": 8860,
+		"software": "sed 1.2",
+		"create_by": 8860,
+		"create_date": "2008-11-14 11:52:33",
+		"mod_by": 4,
+		"author_id": 8860
+	},
+	"game_info": {
+		"front": "WESTERN",
+		"operationID": "19",
+		"date_begin": "1944-09-17",
+		"date_end": "1944-09-19",
+		"type": "HISTORICAL",
+		"starting": "PLAYER1",
+		"side_player1": "AXIS",
+		"side_player2": "ALLIES",
+		"country_player1": "DE",
+		"cards_player1": 6,
+		"cards_player2": 6,
+		"victory_player1": 5,
+		"victory_player2": 5,
+		"victory_conditions": [
+			{
+				"standard": {}
+			}
+		],
+		"expert_mode": 0
+	},
+	"board": {
+		"type": "STANDARD",
+		"face": "COUNTRY",
+		"hexagons": [
+			{
+				"row": 0,
+				"col": 0,
+				"unit": {
+					"name": "inf2ger",
+					"badge": "badge4"
+				}
+			},
+			{
+				"row": 0,
+				"col": 2,
+				"unit": {
+					"name": "tank2ger",
+					"nbr_units": 4,
+					"badge": "badge4"
+				}
+			},
+			{
+				"row": 0,
+				"col": 4,
+				"unit": {
+					"name": "tank2ger",
+					"nbr_units": 4,
+					"badge": "badge4"
+				}
+			},
+			{
+				"row": 0,
+				"col": 6,
+				"terrain": {
+					"name": "woods"
+				},
+				"unit": {
+					"name": "tank2ger",
+					"nbr_units": 4,
+					"badge": "badge4"
+				}
+			},
+			{
+				"row": 0,
+				"col": 8,
+				"unit": {
+					"name": "inf2ger",
+					"badge": "badge4"
+				}
+			},
+			{
+				"row": 0,
+				"col": 12,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 0,
+				"col": 14,
+				"unit": {
+					"name": "gunger"
+				}
+			},
+			{
+				"row": 0,
+				"col": 18,
+				"unit": {
+					"name": "tankger"
+				}
+			},
+			{
+				"row": 0,
+				"col": 22,
+				"terrain": {
+					"name": "river",
+					"orientation": 2
+				}
+			},
+			{
+				"row": 0,
+				"col": 24,
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 1,
+				"col": 1,
+				"terrain": {
+					"name": "river",
+					"orientation": 1
+				}
+			},
+			{
+				"row": 1,
+				"col": 3,
+				"terrain": {
+					"name": "river",
+					"orientation": 1
+				}
+			},
+			{
+				"row": 1,
+				"col": 5,
+				"terrain": {
+					"name": "river",
+					"orientation": 1
+				}
+			},
+			{
+				"row": 1,
+				"col": 7,
+				"terrain": {
+					"name": "river",
+					"orientation": 1
+				}
+			},
+			{
+				"row": 1,
+				"col": 9,
+				"terrain": {
+					"name": "river",
+					"orientation": 1
+				}
+			},
+			{
+				"row": 1,
+				"col": 11,
+				"terrain": {
+					"name": "curve",
+					"orientation": 5
+				}
+			},
+			{
+				"row": 1,
+				"col": 13,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 1,
+				"col": 15,
+				"unit": {
+					"name": "tankger"
+				}
+			},
+			{
+				"row": 1,
+				"col": 17,
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 1,
+				"col": 21,
+				"terrain": {
+					"name": "river",
+					"orientation": 2
+				}
+			},
+			{
+				"row": 1,
+				"col": 23,
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 2,
+				"col": 4,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 2,
+				"col": 8,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 2,
+				"col": 10,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 2,
+				"col": 12,
+				"terrain": {
+					"name": "river",
+					"orientation": 3
+				}
+			},
+			{
+				"row": 2,
+				"col": 20,
+				"terrain": {
+					"name": "river",
+					"orientation": 2
+				}
+			},
+			{
+				"row": 2,
+				"col": 22,
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 3,
+				"col": 13,
+				"terrain": {
+					"name": "curve",
+					"orientation": 2
+				}
+			},
+			{
+				"row": 3,
+				"col": 15,
+				"terrain": {
+					"name": "river",
+					"orientation": 1
+				},
+				"rect_terrain": {
+					"name": "bridge",
+					"orientation": 2
+				}
+			},
+			{
+				"row": 3,
+				"col": 17,
+				"terrain": {
+					"name": "river",
+					"orientation": 1
+				}
+			},
+			{
+				"row": 3,
+				"col": 19,
+				"terrain": {
+					"name": "curve",
+					"orientation": 3
+				}
+			},
+			{
+				"row": 3,
+				"col": 21,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 4,
+				"col": 6,
+				"terrain": {
+					"name": "buildings"
+				},
+				"obstacle": {
+					"name": "sand",
+					"orientation": 2
+				},
+				"unit": {
+					"name": "inf2us"
+				}
+			},
+			{
+				"row": 4,
+				"col": 10,
+				"terrain": {
+					"name": "buildings"
+				},
+				"obstacle": {
+					"name": "sand",
+					"orientation": 2
+				},
+				"unit": {
+					"name": "inf2us"
+				}
+			},
+			{
+				"row": 4,
+				"col": 14,
+				"rect_terrain": {
+					"name": "bridge",
+					"orientation": 2
+				}
+			},
+			{
+				"row": 5,
+				"col": 1,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 5,
+				"col": 7,
+				"terrain": {
+					"name": "buildings"
+				}
+			},
+			{
+				"row": 5,
+				"col": 13,
+				"rect_terrain": {
+					"name": "bridge",
+					"orientation": 2
+				}
+			},
+			{
+				"row": 5,
+				"col": 17,
+				"terrain": {
+					"name": "buildings"
+				}
+			},
+			{
+				"row": 6,
+				"col": 20,
+				"terrain": {
+					"name": "buildings"
+				},
+				"obstacle": {
+					"name": "sand",
+					"orientation": 2
+				},
+				"unit": {
+					"name": "inf2us"
+				}
+			},
+			{
+				"row": 7,
+				"col": 1,
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 7,
+				"col": 3,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 7,
+				"col": 7,
+				"terrain": {
+					"name": "buildings"
+				},
+				"obstacle": {
+					"name": "sand",
+					"orientation": 2
+				},
+				"unit": {
+					"name": "inf2us"
+				}
+			},
+			{
+				"row": 7,
+				"col": 13,
+				"terrain": {
+					"name": "buildings"
+				},
+				"obstacle": {
+					"name": "sand",
+					"orientation": 2
+				},
+				"unit": {
+					"name": "gunus"
+				}
+			},
+			{
+				"row": 7,
+				"col": 17,
+				"terrain": {
+					"name": "buildings"
+				},
+				"obstacle": {
+					"name": "sand",
+					"orientation": 2
+				},
+				"unit": {
+					"name": "gunus"
+				}
+			},
+			{
+				"row": 7,
+				"col": 21,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 8,
+				"col": 0,
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 8,
+				"col": 12,
+				"terrain": {
+					"name": "buildings"
+				},
+				"obstacle": {
+					"name": "sand",
+					"orientation": 2
+				},
+				"unit": {
+					"name": "inf2us"
+				}
+			}
+		],
+		"labels": [
+			{
+				"row": 1,
+				"col": 3,
+				"text": [
+					"Lower Rhine"
+				]
+			},
+			{
+				"row": 2,
+				"col": 16,
+				"text": [
+					"Enter Exit",
+					"Bridge"
+				]
+			},
+			{
+				"row": 4,
+				"col": 14,
+				"text": [
+					"Arnhem",
+					"Bridge"
+				]
+			},
+			{
+				"row": 5,
+				"col": 9,
+				"text": [
+					"ARNHEM"
+				]
+			},
+			{
+				"row": 6,
+				"col": 12,
+				"text": [
+					"Enter Exit",
+					"Bridge"
+				]
+			}
+		]
+	},
+	"packs": {},
+	"text": {
+		"en": {
+			"name": "Arnhem Bridge",
+			"historical": "The largest Airborne drop ever designed, Operation Market Garden was Field Marshall Bernard Montgomery's plan to end the war on the Western Front early. If successful, it would threaten the flanks of German defenses along the Siegfried line and behind the Rhine River, helping an Allied crossing and precipitating the fall of Berlin. The operation famously ended up being \"a bridge too far\", handing Montgomery his only high-profile defeat.\n\nThe airborne plan on 17th September was for the 1st British Airborne Division to secure Arnhem bridge and the high ground to the north. At the Bridge, 2nd Battalion Lieutenant Colonel Frost commanded a force of about 500 men that took up a strong position at the northern end of the bridge. The Germans soon discovered that the airborne troops were a formidable enemy, and more than infantry assaults were needed to blast Frost's men out of their houses. A charge by the 9th SS Reconnaissance Battalion across the bridge was destroyed; likewise were attacks from the north. Despite being short of ammunition and with no food or water, the airborne force held the northern part of the bridge, denying the Germans a crossing place, until the night of 20/21 September. The last British resistance near the bridge ceased on September 23rd.\n\nThe stage is set, the battle lines are drawn, and you are in command. The rest is history.",
+			"description": "Axis Player: Take 6 command cards.\nYou move first.\n\nAllied Player: Take 6 command cards.",
+			"victory": "5 Medals",
+			"rules": "All the Allied units are Special Forces Elite Airborne units. Therefore, there is no need to place badges with the units. These units may move 1 or 2 hexes and still battle.\n\nThe Axis Special Forces tank units have 4 figures.\n\nThe Axis Special Forces infantry are Elite Grenadier units. Place an Axis special force token in the same hex with these units to distinguish them from the other units. The Elite Grenadier units may move 1 or 2 hexes and still battle.\n\nUnits may only enter or exit Arnhem Bridge from or onto the hexes as noted at the ends of the bridge. Movement along the span of bridge is normal.\n\nInfantry units may not target units on the opposite side of the Rhine River, which is too wide in this section."
+		},
+		"fr": {
+			"name": "Arnhem Bridge",
+			"subtitle": "",
+			"historical": "La plus grande opération aéroportée de l'histoire militaire, l'opération \"Market Garden\", était la botte secrète de Montgomery pour en finir au plus vite avec la guerre sur le front ouest. Son succès menacerait le flanc des défenses allemandes le long de la ligne Siegfried et par-delà le Rhin, ce qui permettrait aux Alliés de précipiter la chute de Berlin. L'opération, connue comme ayant voulu aller \"un pont trop loin\", se révélera en fait être la seule défaite majeure de Montgomery.\n\nLe plan du 17 septembre était pour la 1ère Division Aéroportée Britannique de prendre le pont de Arnhem et les hauteurs sur la rive nord. Au pont, le 2ème bataillon commandé par le lieutenant colonel Frost comptait environ 500 hommes. Ils prirent une position consolidée au nord du pont.\n\nLes Allemands allaient bientôt découvrir à quel point les troupes de parachutistes étaient des ennemis redoutables, lorsque leurs assauts d'infanterie s'anéantissent en essayant vainement de déloger les hommes de Frost des maisons. Venant du sud, une charge du 9ème bataillon SS de reconnaissance est détruite lors de son assaut sur le pont. Les attaques allemandes venant du nord connaissent le même sort.\n\nMalgré le manque de munitions, sans eau ni nourriture, les Britanniques tiendront la partie nord du pont, interdisant toute traversée aux allemands, jusqu'à la nuit du 20 au 21 septembre ! La dernière résistance près du pont cesse le 23 septembre.\n\nLe théâtre des opérations est fixé, les troupes sont en position, et l'Histoire est entre vos mains. À vous de jouer !",
+			"description": "Joueur allemand :\n- Prenez 6 cartes de Commandement\n- Vous jouez en premier\n\nJoueur allié :\n- Prenez 6 cartes de Commandement",
+			"victory": "5 médailles",
+			"rules": "Toutes les unités alliées sont des forces spéciales. Il est donc inutile de placer des badges de forces spéciales. Ces unités peuvent se déplacer de deux hexagones et combattre dans le même tour.\n\nLes forces spéciales allemandes sont des unités \"Grenadier\"d'élite. Elles peuvent se déplacer de deux hexagones et combattre dans le même tour. Les unités blindées d'élite allemandes\nont 4 figurines de tanks. Placez un badge de force spéciale sur l'hexagone de ces unités d'infanterie et de blindés pour les distinguer des unités régulières\n\nLes unités ne peuvent entrer et sortir du pont de Arnhem que par les deux hexagones marqués \"entrée/sortie du pont\". Sur le pont, les mouvements restent normaux.\n\nLes unités d'infanterie ne peuvent pas tirer par dessus le Rhin, car le fleuve est trop large.",
+			"bibliography": ""
+		},
+		"de": {
+			"name": "Brücke von Arnheim",
+			"subtitle": "",
+			"historical": "Das Ziel der größten je geplanten Luftlandeoperation, Feldmarschall Bernard Montgomerys Operation „Market Garden“, war die rasche Beendigung des Krieges an der Westfront. Bei einem Erfolg wären die Flanken der deutschen Verteidigung entlang der Siegfriedlinie und hinter dem Rhein bedroht gewesen, wodurch die Alliierten bei Arnheim den Rhein hätten überschreiten können, was letztlich zur schnelleren Einnahme von Berlin geführt hätte. Bekanntermaßen endete die Operation damit, dass „eine Brücke zu lang“ war, und sie bescherte Montgomery seine einzige berühmte Niederlage.\n\nEntsprechend dem Luftlandeplan vom 17. September sollte die britische 1. Luftlandedivision die Brücke von Arnheim und die Hochebenen im Norden einnehmen. An der Brücke selbst befehligte Lieutenant Colonel Frost einen Trupp von etwa 500 Mann, der sich am nördlichen Ende der Brücke verschanzt hatte. Die Deutschen erkannten schnell, dass die Luftlandetruppen eindrucksvolle Gegner waren und es mehr als bloßer Infanterieangriffe bedurfte, um Frosts Männer aus ihren Häusern zu jagen. Ein Angriff über die Brücke durch das 9. SS-Aufklärungsbataillon wurde zerschlagen, nicht viel besser erging es den Angriffen aus dem Norden. Trotz Munitionsknappheit und ohne jegliches Wasser oder Nahrung hielt die Luftlandetruppe den nördlichen Teil der Brücke und verhinderte bis zur Nacht vom 20./21. September ein Überschreiten der Deutschen. Am 23. September jedoch brach der letzte britische Widerstand nahe der Brücke zusammen.\n\nDie Vorbereitungen sind abgeschlossen, die Fronten abgesteckt, und Sie haben das Kommando. Der Rest ist Geschichte.",
+			"description": "Achsenspieler: Nehmen Sie 6 Kommandokarten.\nSie beginnen die Schlacht.\n\nAlliierter Spieler: Nehmen Sie 6 Kommandokarten.",
+			"victory": "5 Siegpunkte.",
+			"rules": "Alle alliierten Spezialeinheiten sind Elite-Luftlandeeinheiten, weshalb es unnötig ist sie mit den entsprechenden Abzeichen zu bestücken. Diese Einheiten können bis zu 2 Feldern weit ziehen und trotzdem kämpfen.\n\nDie deutschen Panzer-Spezialeinheiten bestehen aus 4 Figuren.\n\nDie deutschen Infanterie-Spezialeinheiten sind Elite-Grenadiereinheiten. Legen Sie zur Unterscheidung Achsenabzeichen zu diesen Einheiten. Die Elitegrenadiere können bis zu 2 Feldern weit ziehen und trotzdem kämpfen. \n\nDie Brücke von Arnheim kann nur an den entsprechend markierten Feldern betreten oder verlassen werden, die Bewegung entlang der Brücke ist normal.\n\nDa der Rhein in diesem Bereich zu breit ist, können Infanterieeinheiten keine Ziele auf der jeweils gegenüberliegenden Rheinseite unter Beschuss nehmen.",
+			"bibliography": ""
+		}
+	}
+}
