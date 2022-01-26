@@ -23,6 +23,17 @@ CREATE TABLE IF NOT EXISTS `user_preferences` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `teams` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `side` int(10) NOT NULL, --AXIS / ALLIES
+  `country` int(10) NOT NULL,
+  `cards` int(10) NOT NULL, -- NBR OF CARDS IN HAND
+  `medals` int(10) NOT NULL, -- NBR OF MEDALS WON
+  `victory` int(10) NOT NULL, -- NBR OF MEDALS NEEDED TO WIN
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 CREATE TABLE IF NOT EXISTS `cards` (
   `card_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `card_location` varchar(32) NOT NULL,

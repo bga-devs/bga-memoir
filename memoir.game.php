@@ -37,6 +37,7 @@ use M44\Core\Preferences;
 use M44\Managers\Cards;
 use M44\Managers\Players;
 use M44\Managers\Terrains;
+use M44\Board;
 
 class memoir extends Table
 {
@@ -51,6 +52,7 @@ class memoir extends Table
     self::initGameStateLabels([
       'logging' => 10,
     ]);
+    Board::init();
   }
 
   public static function get()

@@ -1,14 +1,14 @@
 <?php
 namespace M44\Terrains;
 
-class Bunker extends \M44\Models\RectTerrain
+class PBunker extends \M44\Models\RectTerrain
 {
   public function __construct($row)
   {
     parent::__construct($row);
-    $this->type = 'bunker';
+    $this->type = 'pbunker';
     $this->name = clienttranslate('Bunker');
-    $this->landscape = 'country';
+    $this->landscape = 'jungle';
     $this->bunker = true;
 
     $this->impassable = [ARMOR, INFANTRY];

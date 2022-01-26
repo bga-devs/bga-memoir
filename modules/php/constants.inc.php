@@ -161,7 +161,7 @@ const TERRAIN_CLASSES = [
   'wcastle' => 'WinterCastle',
 
   'bunker' => 'Bunker',
-  'pbunker' => 'Bunker',//TODO : duplicate here, create the real class
+  'pbunker' => 'PBunker',
   'casemate' => 'FieldBunker',
   'pcarrier' => 'AircraftCarrier',
   'pdestroyer' => 'Destroyership',

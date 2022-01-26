@@ -37,7 +37,7 @@ class Terrain implements \JsonSerializable
 
   public function __construct($row)
   {
-    if($row != null){
+    if ($row != null) {
       $this->id = $row['id'];
       $this->x = $row['x'];
       $this->y = $row['y'];
@@ -57,5 +57,18 @@ class Terrain implements \JsonSerializable
       'type' => $this->type,
       'name' => $this->name,
     ];
+  }
+
+  public function getId()
+  {
+    return $this->id;
+  }
+  public function getX()
+  {
+    return $this->x;
+  }
+  public function getY()
+  {
+    return $this->y;
   }
 }
