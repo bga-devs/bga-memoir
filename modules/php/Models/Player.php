@@ -23,6 +23,7 @@ class Player extends \M44\Helpers\DB_Model
     'eliminated' => 'player_eliminated',
     'score' => 'player_score',
     'zombie' => 'player_zombie',
+    'team' => 'team_side'
   ];
 
   /*

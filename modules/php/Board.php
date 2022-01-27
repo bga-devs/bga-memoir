@@ -7,6 +7,7 @@ use M44\Helpers\Utils;
 use M44\Managers\Cards;
 use M44\Managers\Players;
 use M44\Managers\Terrains;
+use M44\Managers\Troops;
 
 class Board extends \APP_DbObject
 {
@@ -40,7 +41,7 @@ class Board extends \APP_DbObject
         $col = 2 * $x + ($y % 2 == 0 ? 0 : 1);
         self::$grid[$col][$y] = [
           'terrains' => [],
-          'units' => [],
+          'unit' => null,
           'labels' => [],
         ];
       }
@@ -49,6 +50,11 @@ class Board extends \APP_DbObject
     // Add the terrains
     foreach (Terrains::getAllOrdered() as $terrain) {
       self::$grid[$terrain->getX()][$terrain->getY()]['terrains'][] = $terrain;
+    }
+
+    // Add the units
+    foreach (Troops::getAllOrdered() as $unit) {
+      self::$grid[$unit->getX()][$unit->getY()]['unit'] = $unit;
     }
 
     // Add the labels

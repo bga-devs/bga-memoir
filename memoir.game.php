@@ -36,7 +36,7 @@ use M44\Core\Globals;
 use M44\Core\Preferences;
 use M44\Managers\Cards;
 use M44\Managers\Players;
-use M44\Managers\Terrains;
+use M44\Managers\Teams;
 use M44\Board;
 
 class memoir extends Table
@@ -87,6 +87,7 @@ class memoir extends Table
       'prefs' => Preferences::getUiData($pId),
       'players' => Players::getUiData($pId),
       'board' => Board::getUiData(),
+      'teams' => Teams::getAll(),
     ];
   }
 

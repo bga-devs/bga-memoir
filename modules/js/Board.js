@@ -17,8 +17,10 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
   // prettier-ignore
   const OBSTACLES_ROTATION = { bunker: 180,wbunker : 180,dbunker : 180,ford : 60,roadblock : 60,droadblock : 60,wroadblock : 60,pontoon : -30,wpontoon : -30,dragonteeth : 60,railbridge : -60,wrailbridge : -60,bridge : -30,pbridge : -30,brkbridge : -30,wbridge : -30,wagon : -60,loco : 60,abatis : 60,wire : 180,sand : 180};
 
+  const ALLIES_NATIONS = ['brit', 'us'];
+
   return declare('memoir.board', null, {
-    setupBoard(board, rotate = false) {
+    setupBoard(board, rotate, bottomTeam) {
       // Get dimensions based on type
       let type = board.type.toLowerCase();
       $('m44-board').dataset.type = type;
@@ -57,11 +59,12 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           }
           this.place('tplBoardCell', { x: col, y, type, rotate }, 'm44-board');
 
-          let cellC = $(`cell-container-${col}-${y}`);
+          let cellC = $(`cell-background-${col}-${y}`);
           let realX = rotate ? 2 * size - col - (y % 2 == 0 ? 2 : 0) : col;
           let realY = rotate ? dim.y - y - 1 : y;
           cellC.style.gridRow = 3 * realY + 1 + ' / span 4';
           cellC.style.gridColumn = realX + 1 + ' / span 2';
+          $(`cell-container-${col}-${y}`).style.gridArea = cellC.style.gridArea;
 
           // Add terrains tiles
           board.grid[col][row].terrains.forEach((terrain) => {
@@ -69,6 +72,13 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
             terrain.rotate = rotate;
             this.place(tplName, terrain, cellC);
           });
+
+          // Add units
+          let unit = board.grid[col][row].unit;
+          if (unit) {
+            unit.orientation = bottomTeam != (ALLIES_NATIONS.includes(unit.nation) ? 'ALLIES' : 'AXIS') ? 1 : 0;
+            this.place('tplUnit', unit, `cell-${col}-${y}`);
+          }
 
           // Add labels
           let labels = board.grid[col][row].labels;
@@ -84,9 +94,11 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     tplBoardCell(cell) {
       let rotation = cell.rotate ? 6 : 0;
       return `
-    <li class="hex-grid-item" id="cell-container-${cell.x}-${cell.y}">
+    <li class="hex-grid-item" id="cell-background-${cell.x}-${cell.y}">
       <div class="hex-grid-content hex-grid-background" data-type="${cell.type}" data-rotation="${rotation}"></div>
-      <div class="hex-grid-content hex-cell" id="cell-${cell.x}-${cell.y}"></div>
+    </li>
+    <li class="hex-grid-item hex-cell-container" id="cell-container-${cell.x}-${cell.y}">
+      <div class='hex-cell' id="cell-${cell.x}-${cell.y}"></div>
     </li>
       `;
     },
@@ -119,6 +131,17 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       return `
       <div class="hex-label-container" style="grid-area:${label.area}">
         <div class="hex-label">${label.label}</div>
+      </div>`;
+    },
+
+    tplUnit(unit) {
+      return `
+      <div id="unit-${unit.id}" class="memoir-unit" data-figures="${unit.figures}" data-type="${unit.type}" data-nation="${unit.nation}" data-orientation="${unit.orientation}">
+        <div class="memoir-unit-meeple"></div>
+        <div class="memoir-unit-meeple"></div>
+        <div class="memoir-unit-meeple"></div>
+        <div class="memoir-unit-meeple"></div>
+        <div class="memoir-unit-meeple"></div>
       </div>`;
     },
   });

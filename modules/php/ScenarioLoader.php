@@ -7,6 +7,8 @@ use M44\Helpers\Utils;
 use M44\Managers\Cards;
 use M44\Managers\Players;
 use M44\Managers\Terrains;
+use M44\Managers\Troops;
+use M44\Managers\Teams;
 
 class ScenarioLoader
 {
@@ -36,7 +38,13 @@ class ScenarioLoader
       Cards::initStandardDeck();
     }
 
+    // Create Teams
+    Teams::loadScenario($scenario, false);
+
     // Create Terrains tiles
     Terrains::loadScenario($scenario);
+
+    // Create Troops
+    Troops::loadScenario($scenario);
   }
 }

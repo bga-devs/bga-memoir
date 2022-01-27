@@ -52,16 +52,17 @@ define([
       this.inherited(arguments);
 
       // Basic UI tweaking
+      let pId = this.isSpectator ? Object.values(this.gamedatas.players)[0] : this.player_id;
       this.forEachPlayer((player) => {
-        dojo.place('overall_player_board_' + player.id, player.id == this.player_id ? 'bottom-player' : 'top-player');
+        dojo.place('overall_player_board_' + player.id, player.id == pId ? 'bottom-player' : 'top-player');
       });
       dojo.place('right-side', 'm44-central-part');
 
       // Load board
       if (gamedatas.board) {
-        // TODO : handle spectator
-        let rotate = this.gamedatas.players[this.player_id].no == 1;
-        this.setupBoard(gamedatas.board, rotate);
+        let bottomTeam = this.gamedatas.players[pId].team;
+        let rotate = this.gamedatas.players[pId].no == 1;
+        this.setupBoard(gamedatas.board, rotate, bottomTeam);
       }
     },
 

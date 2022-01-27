@@ -24,14 +24,14 @@ CREATE TABLE IF NOT EXISTS `user_preferences` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `teams` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `side` int(10) NOT NULL, --AXIS / ALLIES
-  `country` int(10) NOT NULL,
-  `cards` int(10) NOT NULL, -- NBR OF CARDS IN HAND
-  `medals` int(10) NOT NULL, -- NBR OF MEDALS WON
-  `victory` int(10) NOT NULL, -- NBR OF MEDALS NEEDED TO WIN
-  PRIMARY KEY (`id`)
+  `side` varchar(255) NOT NULL,
+  `country` varchar(255) NOT NULL,
+  `cards` int(10) NOT NULL,
+  `medals` int(10) NOT NULL,
+  `victory` int(10) NOT NULL,
+  PRIMARY KEY (`side`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE `player` ADD `team_side` varchar(255) NOT NULL DEFAULT '';
 
 
 CREATE TABLE IF NOT EXISTS `cards` (
@@ -52,4 +52,16 @@ CREATE TABLE IF NOT EXISTS `terrains` (
   `orientation` int(10) NOT NULL,
   `extra_datas` JSON NULL,
   PRIMARY KEY (`tile_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `troops` (
+  `troop_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `troop_location` varchar(32) NOT NULL,
+  `troop_state` int(10) DEFAULT 0,
+  `type` VARCHAR(255) NOT NULL,
+  `nation` VARCHAR(255) NOT NULL,
+  `figures` int(10) NOT NULL,
+  `badge` varchar(255),
+  `extra_datas` JSON NULL,
+  PRIMARY KEY (`troop_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

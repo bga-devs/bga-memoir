@@ -195,3 +195,19 @@ const TERRAIN_CLASSES = [
   'sand' => 'SandBags',
   'hedgehog' => 'Hedgehog',
 ];
+
+const TROOP_CLASSES = [
+  'inf2' => 'SpecialForces',
+  'tank2' => 'EliteArmor',
+  'inf' => 'Infantry',
+  'tank' => 'Armor',
+  'gun' => 'Artillery',
+];
+
+const TROOP_FIGURES = [
+  'inf2' => 4,
+  'tank2' => 3,
+  'inf' => 4,
+  'tank' => 3,
+  'gun' => 2,
+];
