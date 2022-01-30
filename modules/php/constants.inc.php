@@ -9,11 +9,16 @@ const ST_PREPARE_TURN = 3;
 const ST_PLAY_CARD = 4;
 const ST_SELECT_UNIT = 5;
 const ST_MOVE_UNIT = 6;
-const ST_SELECT_ATTACK = 7;
-const ST_SELECT_ATTACK_TARGET = 8;
+const ST_ATTACK = 7;
+const ST_PRE_AMBUSH = 8;
 const ST_OPPONENT_AMBUSH = 9;
-const ST_ATTACK_RESOLVE = 10;
-const ST_END_ROUND = 11;
+const ST_POST_AMBUSH = 10;
+const ST_ATTACK_THROW = 11;
+const ST_ATTACK_RESOLVE = 12;
+const ST_END_ROUND = 13;
+const ST_AMBUSH_ATTACK = 14;
+const ST_AMBUSH_RESOLVE = 15;
+const ST_CHANGE_PLAYER = 95;
 
 const ST_END_GAME = 99;
 

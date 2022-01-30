@@ -33,6 +33,130 @@ $machinestates = [
     'transitions' => ['done' => ST_M44],
   ],
 
+  ST_PREPARE_TURN => [
+    'name' => 'prepareTurn',
+    'description' => '',
+    'descriptionmyturn' => '',
+    'type' => 'game',
+    'action' => 'stPrepareTurn',
+    'transitions' => ['playCard' => ST_PLAY_CARD],
+  ],
+
+  ST_PLAY_CARD => [
+    'name' => 'playCard',
+    'description' => clienttranslate('Players must play a card'),
+    'descriptionmyturn' => clienttranslate('${you} must play a card'),
+    'type' => 'multipleactiveplayer',
+    'args' => 'argsPlayCard',
+    'possibleactions' => ['actPlayCard'],
+    'transitions' => ['moveUnits' => ST_SELECT_UNIT],
+  ],
+
+  ST_SELECT_UNIT => [
+    'name' => 'selectUnits',
+    'description' => clienttranslate('${actplayer} must select units in sections ${section}'),
+    'descriptionmyturn' => clienttranslate('${you} must select units in sections ${section}'),
+    'type' => 'multipleactiveplayer',
+    'args' => 'argsSelectUnits',
+    'possibleactions' => ['actSelectUnits'],
+    'transitions' => ['moveUnits' => ST_MOVE_UNIT],
+  ],
+
+  ST_MOVE_UNIT => [
+    'name' => 'moveUnits',
+    'description' => clienttranslate('${actplayer} must move selected units'),
+    'descriptionmyturn' => clienttranslate('${you} must move selected units'),
+    'type' => 'multipleactiveplayer',
+    'args' => 'argsMoveUnits',
+    'possibleactions' => ['actMoveUnits'],
+    'transitions' => ['moveUnits' => ST_MOVE_UNIT],
+  ],
+
+  ST_ATTACK => [
+    'name' => 'attackUnit',
+    'description' => clienttranslate('${actplayer} must select an unit and its target'),
+    'descriptionmyturn' => clienttranslate('${you} must select an unit and its target'),
+    'type' => 'multipleactiveplayer',
+    'args' => 'argsAttackUnit',
+    'possibleactions' => ['actAttackUnit'],
+    'transitions' => ['ambush' => ST_PRE_AMBUSH, 'attack' => ST_ATTACK_THROW], // attack if not close assault
+  ],
+
+  ST_PRE_AMBUSH => [
+    'name' => 'preAmbush',
+    'description' => '',
+    'descriptionmyturn' => '',
+    'type' => 'game',
+    'action' => 'stChangePlayer',
+    'transitions' => ['next' => ST_OPPONENT_AMBUSH],
+  ],
+
+  ST_OPPONENT_AMBUSH => [
+    'name' => 'opponentAmbush',
+    'description' => clienttranslate('${actplayer} can react to the attack'),
+    'descriptionmyturn' => clienttranslate('${you} can react to the attack'),
+    'type' => 'activeplayer',
+    'args' => 'argsOpponentAmbush',
+    'possibleactions' => ['actAmbush', 'actPassAmbush'],
+    'transitions' => ['pass' => ST_POST_AMBUSH, 'ambush' => ST_AMBUSH_ATTACK],
+  ],
+
+  ST_AMBUSH_ATTACK => [
+    'name' => 'ambushAttack',
+    'description' => '',
+    'descriptionmyturn' => '',
+    'type' => 'game',
+    'action' => 'stAttackThrow',
+    'transitions' => ['next' => ST_AMBUSH_RESOLVE, 'endAmbush' => ST_POST_AMBUSH],
+  ],
+
+  ST_AMBUSH_RESOLVE => [
+    'name' => 'attackResolve',
+    'description' => clienttranslate('${actplayer} must retreat the unit'),
+    'descriptionmyturn' => clienttranslate('${you} must retreat the unit'),
+    'type' => 'activeplayer',
+    'args' => 'argsAttackResolve',
+    'possibleactions' => ['actRetreat'],
+    'transitions' => ['endRound' => ST_POST_AMBUSH],
+  ],
+
+  ST_POST_AMBUSH => [
+    'name' => 'preAmbush',
+    'description' => '',
+    'descriptionmyturn' => '',
+    'type' => 'game',
+    'action' => 'stChangePlayer',
+    'transitions' => ['next' => ST_ATTACK_THROW],
+  ],
+
+  ST_ATTACK_THROW => [
+    'name' => 'attackThrow',
+    'description' => '',
+    'descriptionmyturn' => '',
+    'type' => 'game',
+    'action' => 'stAttackThrow',
+    'transitions' => ['next' => ST_ATTACK_RESOLVE, 'endRound' => ST_END_ROUND, 'attack' => ST_ATTACK],
+  ],
+
+  ST_ATTACK_RESOLVE => [
+    'name' => 'attackResolve',
+    'description' => clienttranslate('${actplayer} must retreat the unit'),
+    'descriptionmyturn' => clienttranslate('${you} must retreat the unit'),
+    'type' => 'multipleactiveplayer',
+    'args' => 'argsAttackResolve',
+    'possibleactions' => ['actRetreat'],
+    'transitions' => ['endRound' => ST_END_ROUND, 'attack' => ST_ATTACK],
+  ],
+
+  ST_END_ROUND => [
+    'name' => 'endRound',
+    'description' => '',
+    'descriptionmyturn' => '',
+    'type' => 'game',
+    'action' => 'stEndRound', // draw cards
+    'transitions' => ['next' => ST_PREPARE_TURN],
+  ],
+
   // Final state.
   // Please do not modify (and do not overload action/args methods).
   ST_END_GAME => [
