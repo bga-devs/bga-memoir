@@ -18,10 +18,20 @@ class Board extends \APP_DbObject
   ];
 
   protected static $grid = [];
+  protected static $scenario = null;
   public function getScenario()
   {
-    $scenario = self::getUniqueValueFromDB("SELECT value FROM global_variables WHERE name = 'scenario' LIMIT 1");
-    return is_null($scenario) ? null : json_decode($scenario, true);
+    if (self::$scenario == null) {
+      $scenario = self::getUniqueValueFromDB("SELECT value FROM global_variables WHERE name = 'scenario' LIMIT 1");
+      self::$scenario = is_null($scenario) ? null : json_decode($scenario, true);
+    }
+    return self::$scenario;
+  }
+
+  public function getMode()
+  {
+    $scenario = self::getScenario();
+    return is_null($scenario) ? null : $scenario['board']['type'];
   }
 
   public function init()

@@ -4,6 +4,7 @@ use M44\Core\Globals;
 use M44\Core\Notifications;
 use M44\Managers\Players;
 use M44\Helpers\Utils;
+use M44\Board;
 
 /**
  * Cards: id, value, color
@@ -15,16 +16,23 @@ class Cards extends \M44\Helpers\Pieces
   protected static $prefix = 'card_';
   protected static $customFields = ['type', 'value', 'extra_datas'];
   protected static $autoreshuffle = false;
-  protected static function cast($card)
+  protected static function cast($row)
   {
-    $locations = explode('_', $card['location']);
-    return [
-      'id' => $card['id'],
-      'location' => $locations[0],
-      'pId' => $locations[1] ?? null,
-      'type' => $card['type'],
-      'value' => $card['value'],
+    $locations = explode('_', $row['location']);
+    $row['player_id'] = $locations[1] ?? null;
+    return self::getInstance($row['type'], $row);
+  }
+
+  public function getInstance($type, $row = null)
+  {
+    $mode = Board::getMode();
+    $dirs = [
+      \STANDARD_DECK => 'Standard',
+      // TODO
     ];
+
+    $className = '\M44\Cards\\' . $dirs[$mode] . '\\' . \CARD_CLASSES[$type];
+    return new $className($row);
   }
 
   //////////////////////////////////
@@ -46,6 +54,25 @@ class Cards extends \M44\Helpers\Pieces
   ///////////// SETTERS //////////////
   //////////////////////////////////
   //////////////////////////////////
+
+  /**
+   * Load a scenario
+   */
+  public function loadScenario($scenario)
+  {
+    self::DB()
+      ->delete()
+      ->run();
+    $mode = $scenario['board']['type'];
+
+    if ($mode == STANDARD_DECK) {
+      Cards::initStandardDeck();
+      foreach (Players::getAll() as $pId => $player) {
+        $team = $player->getTeam();
+        self::pickForLocation($team['cards'], 'deck', ['hand', $pId]);
+      }
+    }
+  }
 
   /**
    * Create a standard deck of cards

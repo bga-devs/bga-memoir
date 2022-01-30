@@ -49,13 +49,14 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           } else if (face == 'country') {
             type = getRandomInt(9, 12);
           } else if (face == 'beach') {
-            if (y < 3) type = getRandomInt(9, 12);
-            else if (y < 4) type = getRandomInt(0, 1);
-            else if (y < 5) type = getRandomInt(2, 3);
-            else if (y < 6) type = getRandomInt(4, 5);
-            else if (y < 7) type = getRandomInt(6, 7);
-            else if (y < 8) type = getRandomInt(25, 26);
-            else type = getRandomInt(27, 28);
+            let b = dim.y - y;
+            if (b < 2) type = 27 + (x % 2);
+            else if (b < 3) type = 25 + (x % 2);
+            else if (b < 4) type = 6 + (x % 2);
+            else if (b < 5) type = 4 + (x % 2);
+            else if (b < 6) type = 2 + (x % 2);
+            else if (b < 7) type = 0 + (x % 2);
+            else type = getRandomInt(9, 12);
           }
           this.place('tplBoardCell', { x: col, y, type, rotate }, 'm44-board');
 

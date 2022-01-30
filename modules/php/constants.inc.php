@@ -37,6 +37,16 @@ const CARD_GENERAL_ADVANCE = 4;
 const CARD_PINCER_MOVE = 5;
 const CARD_RECON_IN_FORCE = 6;
 
+const CARD_CLASSES = [
+  CARD_RECON => 'Recon',
+  CARD_PROBE => 'Probe',
+  CARD_ATTACK => 'Attack',
+  CARD_ASSAULT => 'Assault',
+  CARD_GENERAL_ADVANCE => 'GeneralAdvance',
+  CARD_PINCER_MOVE => 'PincerMove',
+  CARD_RECON_IN_FORCE => 'ReconInForce',
+];
+
 /*
  * Game options
  */

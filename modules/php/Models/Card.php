@@ -29,7 +29,8 @@ class Card implements \JsonSerializable
       $this->id = $row['id'];
       $this->location = $row['location'];
       $this->pId = $row['player_id'];
-      $this->state = $row['state'];
+      $this->state = (int) $row['state'];
+      $this->value = (int) $row['value'];
       $this->extraDatas = json_decode(\stripslashes($row['extra_datas']), true);
       if ($this->pId != null) {
         $this->pId = (int) $this->pId;
@@ -67,16 +68,26 @@ class Card implements \JsonSerializable
   {
     return $this->state;
   }
+  public function getText()
+  {
+    return $this->text;
+  }
+  public function getSubtitle()
+  {
+    return $this->subtitle;
+  }
 
   public function jsonSerialize()
   {
     return [
       'id' => $this->id,
       'pId' => $this->pId,
-      'name' => $this->name,
       'location' => $this->location,
       'state' => $this->state,
-      'tooltip' => $this->tooltip,
+      'value' => $this->value,
+      'name' => $this->name,
+      'subtitle' => $this->getSubtitle(),
+      'text' => $this->getText(),
     ];
   }
 

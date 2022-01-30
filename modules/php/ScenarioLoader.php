@@ -34,12 +34,12 @@ class ScenarioLoader
 
     // Game mode : standard, breakthrouh, overlord
     $mode = $scenario['board']['type'];
-    if($mode == STANDARD_DECK){
-      Cards::initStandardDeck();
-    }
 
     // Create Teams
     Teams::loadScenario($scenario, false);
+
+    // Create cards
+    Cards::loadScenario($scenario);
 
     // Create Terrains tiles
     Terrains::loadScenario($scenario);

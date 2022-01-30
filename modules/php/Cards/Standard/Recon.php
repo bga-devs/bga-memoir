@@ -1,7 +1,7 @@
 <?php
-namespace M44\Cards;
+namespace M44\Cards\Standard;
 
-class Recon implements \M44\Models\SectionCard
+class Recon extends \M44\Models\SectionCard
 {
   public function __construct($row)
   {

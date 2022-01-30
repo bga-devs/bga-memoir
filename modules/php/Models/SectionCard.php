@@ -2,7 +2,7 @@
 namespace M44\Models;
 use M44\Managers\Players;
 
-class SectionCard implements Card
+class SectionCard extends Card
 {
   protected $subtitles = [];
   protected $texts = [];
@@ -11,19 +11,19 @@ class SectionCard implements Card
 
   public function getSubtitle()
   {
-    return $this->subtitles[$this->value] ?? $this->subtitle;
+    return $this->subtitles[$this->value - 1] ?? $this->subtitle;
   }
 
   public function getText()
   {
-    return $this->texts[$this->value] ?? $this->text;
+    return $this->texts[$this->value - 1] ?? $this->text;
   }
 
   public function getSections()
   {
     if ($this->nUnits != null) {
       $sections = [0, 0, 0];
-      $sections[$this->value] = $this->nUnits;
+      $sections[$this->value - 1] = $this->nUnits;
       return $sections;
     } else {
       return $this->sections;

@@ -26,8 +26,9 @@ define([
   g_gamethemeurl + 'modules/js/Core/game.js',
   g_gamethemeurl + 'modules/js/Core/modal.js',
   g_gamethemeurl + 'modules/js/Board.js',
+  g_gamethemeurl + 'modules/js/Players.js',
 ], function (dojo, declare) {
-  return declare('bgagame.memoir', [customgame.game, memoir.board], {
+  return declare('bgagame.memoir', [customgame.game, memoir.board, memoir.players], {
     constructor() {
       this._activeStates = [];
       this._notifications = [
@@ -48,18 +49,13 @@ define([
      */
     setup(gamedatas) {
       debug('SETUP', gamedatas);
-      //this.setupPlayers();
       this.inherited(arguments);
 
-      // Basic UI tweaking
-      let pId = this.isSpectator ? Object.values(this.gamedatas.players)[0] : this.player_id;
-      this.forEachPlayer((player) => {
-        dojo.place('overall_player_board_' + player.id, player.id == pId ? 'bottom-player' : 'top-player');
-      });
-      dojo.place('right-side', 'm44-central-part');
+      this.setupPlayers();
 
       // Load board
       if (gamedatas.board) {
+        let pId = this.isSpectator ? Object.values(this.gamedatas.players)[0] : this.player_id;
         let bottomTeam = this.gamedatas.players[pId].team;
         let rotate = this.gamedatas.players[pId].no == 1;
         this.setupBoard(gamedatas.board, rotate, bottomTeam);

@@ -15,7 +15,14 @@ class Teams extends \M44\Helpers\DB_Manager
 
   public function getAll()
   {
-    return self::DB()->get(false);
+    return self::DB()->get();
+  }
+
+  public function getSide($side)
+  {
+    return self::DB()
+      ->where('side', $side)
+      ->getSingle();
   }
 
   /**

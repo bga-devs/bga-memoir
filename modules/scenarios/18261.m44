@@ -1,0 +1,724 @@
+{
+	"meta_data": {
+		"software": "sed 1.2",
+		"scenario_id": "18261",
+		"create_by": 222901,
+		"create_date": "2016-09-10 21:23:19",
+		"mod_by": 1408078,
+		"mod_date": "2021-09-30 15:33:46",
+		"ownerID": 222901,
+		"author_id": 222901,
+		"status": "APPROVED"
+	},
+	"game_info": {
+		"date_begin": "1941-09-22",
+		"front": "EASTERN",
+		"type": "HISTORICAL",
+		"starting": "PLAYER2",
+		"side_player1": "AXIS",
+		"side_player2": "ALLIES",
+		"country_player1": "RO",
+		"country_player2": "RU",
+		"cards_player1": 5,
+		"cards_player2": 6,
+		"victory_player1": 12,
+		"victory_player2": 12
+	},
+	"board": {
+		"type": "BRKTHRU",
+		"face": "BEACH",
+		"hexagons": [
+			{
+				"row": 0,
+				"col": 2,
+				"obstacle": {
+					"name": "wire",
+					"orientation": 1
+				}
+			},
+			{
+				"row": 0,
+				"col": 4,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 0,
+				"col": 14,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 1,
+				"col": 1,
+				"obstacle": {
+					"name": "wire",
+					"orientation": 1
+				}
+			},
+			{
+				"row": 1,
+				"col": 3,
+				"obstacle": {
+					"name": "sand",
+					"orientation": 1
+				},
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 1,
+				"col": 23,
+				"terrain": {
+					"name": "buildings"
+				},
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 2,
+				"col": 2,
+				"obstacle": {
+					"name": "wire",
+					"orientation": 1
+				}
+			},
+			{
+				"row": 2,
+				"col": 24,
+				"terrain": {
+					"name": "buildings"
+				},
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 3,
+				"col": 7,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 3,
+				"col": 9,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 3,
+				"col": 11,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 3,
+				"col": 15,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 3,
+				"col": 17,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 3,
+				"col": 19,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 3,
+				"col": 23,
+				"terrain": {
+					"name": "buildings"
+				},
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 4,
+				"col": 6,
+				"obstacle": {
+					"name": "wire",
+					"orientation": 1
+				}
+			},
+			{
+				"row": 4,
+				"col": 10,
+				"terrain": {
+					"name": "pheadquarter"
+				},
+				"obstacle": {
+					"name": "sand",
+					"orientation": 1
+				},
+				"unit": {
+					"name": "infger"
+				},
+				"tags": [
+					{
+						"name": "medal6"
+					}
+				]
+			},
+			{
+				"row": 4,
+				"col": 12,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 4,
+				"col": 24,
+				"terrain": {
+					"name": "lakeA",
+					"orientation": 2
+				}
+			},
+			{
+				"row": 5,
+				"col": 1,
+				"obstacle": {
+					"name": "wire",
+					"orientation": 1
+				}
+			},
+			{
+				"row": 5,
+				"col": 7,
+				"obstacle": {
+					"name": "wire",
+					"orientation": 1
+				}
+			},
+			{
+				"row": 6,
+				"col": 0,
+				"obstacle": {
+					"name": "wire",
+					"orientation": 1
+				}
+			},
+			{
+				"row": 6,
+				"col": 2,
+				"obstacle": {
+					"name": "sand",
+					"orientation": 1
+				},
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 6,
+				"col": 6,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 6,
+				"col": 20,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 6,
+				"col": 24,
+				"terrain": {
+					"name": "lakeB",
+					"orientation": 4
+				}
+			},
+			{
+				"row": 7,
+				"col": 1,
+				"obstacle": {
+					"name": "wire",
+					"orientation": 1
+				}
+			},
+			{
+				"row": 7,
+				"col": 11,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 7,
+				"col": 15,
+				"obstacle": {
+					"name": "sand",
+					"orientation": 1
+				},
+				"unit": {
+					"name": "gunger"
+				},
+				"tags": [
+					{
+						"name": "medal6"
+					}
+				]
+			},
+			{
+				"row": 7,
+				"col": 23,
+				"terrain": {
+					"name": "cemetery"
+				}
+			},
+			{
+				"row": 8,
+				"col": 6,
+				"obstacle": {
+					"name": "sand",
+					"orientation": 1
+				},
+				"unit": {
+					"name": "gunger"
+				},
+				"tags": [
+					{
+						"name": "medal6"
+					}
+				]
+			},
+			{
+				"row": 8,
+				"col": 20,
+				"terrain": {
+					"name": "buildings"
+				},
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 8,
+				"col": 24,
+				"terrain": {
+					"name": "lakeB",
+					"orientation": 4
+				}
+			},
+			{
+				"row": 9,
+				"col": 1,
+				"terrain": {
+					"name": "buildings"
+				},
+				"obstacle": {
+					"name": "sand",
+					"orientation": 1
+				},
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 9,
+				"col": 11,
+				"obstacle": {
+					"name": "sand",
+					"orientation": 1
+				},
+				"unit": {
+					"name": "gunger"
+				},
+				"tags": [
+					{
+						"name": "medal6"
+					}
+				]
+			},
+			{
+				"row": 9,
+				"col": 17,
+				"terrain": {
+					"name": "lighthouse"
+				},
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 9,
+				"col": 23,
+				"terrain": {
+					"name": "buildings"
+				},
+				"unit": {
+					"name": "infger"
+				}
+			},
+			{
+				"row": 10,
+				"col": 4,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 10,
+				"col": 6,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 10,
+				"col": 20,
+				"terrain": {
+					"name": "woods"
+				}
+			},
+			{
+				"row": 10,
+				"col": 24,
+				"terrain": {
+					"name": "lakeB",
+					"orientation": 4
+				}
+			},
+			{
+				"row": 11,
+				"col": 1,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 11,
+				"col": 3,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 11,
+				"col": 5,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 11,
+				"col": 7,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 11,
+				"col": 9,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 11,
+				"col": 11,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 11,
+				"col": 13,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 11,
+				"col": 15,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 11,
+				"col": 17,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 11,
+				"col": 19,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 11,
+				"col": 21,
+				"terrain": {
+					"name": "hills"
+				}
+			},
+			{
+				"row": 12,
+				"col": 24,
+				"terrain": {
+					"name": "lakeB",
+					"orientation": 4
+				}
+			},
+			{
+				"row": 14,
+				"col": 2,
+				"unit": {
+					"name": "inf2ru",
+					"badge": "badge25"
+				}
+			},
+			{
+				"row": 14,
+				"col": 8,
+				"unit": {
+					"name": "inf2ru",
+					"badge": "badge25"
+				}
+			},
+			{
+				"row": 14,
+				"col": 14,
+				"unit": {
+					"name": "inf2ru",
+					"badge": "badge25"
+				}
+			},
+			{
+				"row": 14,
+				"col": 20,
+				"unit": {
+					"name": "inf2ru",
+					"badge": "badge25"
+				}
+			},
+			{
+				"row": 15,
+				"col": 5,
+				"unit": {
+					"name": "inf2ru",
+					"badge": "badge25"
+				}
+			},
+			{
+				"row": 15,
+				"col": 11,
+				"unit": {
+					"name": "inf2ru",
+					"badge": "badge25"
+				}
+			},
+			{
+				"row": 15,
+				"col": 17,
+				"unit": {
+					"name": "inf2ru",
+					"badge": "badge25"
+				}
+			},
+			{
+				"row": 15,
+				"col": 23,
+				"unit": {
+					"name": "inf2ru",
+					"badge": "badge25"
+				}
+			},
+			{
+				"row": 16,
+				"col": 2,
+				"rect_terrain": {
+					"name": "pdestroyer"
+				}
+			},
+			{
+				"row": 16,
+				"col": 14,
+				"rect_terrain": {
+					"name": "pdestroyer"
+				}
+			}
+		],
+		"labels": [
+			{
+				"row": 2,
+				"col": 22,
+				"text": [
+					"Novi ",
+					"Bilyari"
+				]
+			},
+			{
+				"row": 3,
+				"col": 1,
+				"text": [
+					"Toward the ",
+					"Odessa front line"
+				]
+			},
+			{
+				"row": 3,
+				"col": 13,
+				"text": [
+					"Hill 57.3"
+				]
+			},
+			{
+				"row": 4,
+				"col": 0,
+				"text": [
+					""
+				]
+			},
+			{
+				"row": 4,
+				"col": 8,
+				"text": [
+					"Romanian",
+					"HQ"
+				]
+			},
+			{
+				"row": 4,
+				"col": 10,
+				"text": [
+					""
+				]
+			},
+			{
+				"row": 8,
+				"col": 0,
+				"text": [
+					"Chebanka"
+				]
+			},
+			{
+				"row": 8,
+				"col": 22,
+				"text": [
+					"Grigorevka"
+				]
+			},
+			{
+				"row": 15,
+				"col": 1,
+				"text": [
+					""
+				]
+			},
+			{
+				"row": 15,
+				"col": 9,
+				"text": [
+					"Black Sea"
+				]
+			},
+			{
+				"row": 15,
+				"col": 15,
+				"text": [
+					""
+				]
+			},
+			{
+				"row": 16,
+				"col": 2,
+				"text": [
+					""
+				]
+			},
+			{
+				"row": 16,
+				"col": 4,
+				"text": [
+					"Destroyer",
+					"Bezuprechnyj"
+				]
+			},
+			{
+				"row": 16,
+				"col": 16,
+				"text": [
+					"Destroyer",
+					"Bojskij"
+				]
+			}
+		],
+		"groups": [
+			{
+				"group_id": "",
+				"hexes": [
+					{
+						"col": 1,
+						"row": 3
+					},
+					{
+						"col": 10,
+						"row": 4
+					},
+					{
+						"col": 9,
+						"row": 5
+					},
+					{
+						"col": 11,
+						"row": 5
+					},
+					{
+						"col": 1,
+						"row": 15
+					}
+				]
+			}
+		]
+	},
+	"packs": {
+		"terrain": 1,
+		"eastern": 1,
+		"pacific": 1
+	},
+	"text": {
+		"en": {
+			"name": "[Ukraine] Soviet raid on Grigorevka",
+			"subtitle": "Assault of the 3rd Naval Infantry Regiment\t",
+			"historical": "In September 1941, the city of Odessa was on the front line, surrounded by the Romanian army and under heavy fire from the artillery batteries of the 15th Romanian division positioned near Grigorevka. In order to help the defenders of the city, the Black Sea Fleet ordered a raid to destroy those big guns.\nDuring the night of September 21st, 23 paratroopers led by Starshina Kuznetsov were dropped on the site. Then, the 3rd Naval Infantry Regiment, under the command of Captain Koren, landed in front of Grigorevka, supported by the destroyers Bojskij and Bezuprechnyj. \nThe Soviet paratroopers managed to destroy a regimental HQ while the sea-landed troops captured the enemy batteries. Once their mission was complete, the naval infantrymen slipped back across the Soviet lines near Odessa.\nThe stage is set, the battle lines are drawn, and you are in command. The rest is history.",
+			"description": "Axis Player [Romania]\nTake 5 Command cards. \n\nAllied Player [Soviet Union]\nTake 6 Command cards. You move first.",
+			"victory": "12 medals.\nEach artillery battery destroyed is worth an additional permanent medal objective for the Allied player.\nThe hex with the Romanian HQ is a temporary Medal Objective for the Allied player.",
+			"rules": "- Red Army rules (Nations 2) are in effect. \n- All Allied Infantry units are Elite (Troops 2 - Specialized Units). Badges are not required.\n- Destroyer rules (Troops 12) are in effect.\n- Capture HQ/supply Tent rules (Actions 17) are in effect.\n- Night Attacks rules (Actions 19) are in effect.\n- Use the Paradrop rules (Actions 20): on the first turn, the Allied player drops 6 Elite Infantry units on the board, one at a time.",
+			"bibliography": "- English.Battlefield.Ru.\nRemember, see the two memorials about this battle at Grigorevka."
+		},
+		"fr": {
+			"name": "[Ukraine] Raid sur Grigorevka",
+			"subtitle": "Assaut des fusiliers marins soviétiques\t",
+			"historical": "En septembre 1941, la ville d’Odessa se retrouva assiégée par l’armée roumaine et pilonnée par les batteries d’artillerie de la 15e division roumaine, déployée près de Grigorevka. Afin de soulager les défenseurs d’Odessa, le commandement de la Flotte de la Mer Noire ordonna un débarquement visant à détruire ces pièces d’artillerie. \nSous les ordres du capitaine Koren, le 3e régiment de fusiliers marins débarqua dans la nuit du 21 au 22 septembre devant Grigorevka, appuyé par les tirs des destroyers Bojskij et Bezuprechnyj. Un peu plus tôt, 23 parachutistes, commandés par le Starshina Kuznetsov, furent largués sur la zone. \nCes derniers réussirent à détruire un PC régimentaire roumain. Les troupes débarquées, elles, parvinrent à capturer les batteries ennemies. Leur mission remplie, les fusiliers marins rejoignirent à pied les lignes soviétiques devant Odessa.\nLe théâtre des opérations est fixé, les troupes sont en position, l'Histoire est entre vos mains. A vous de jouer ! ",
+			"description": "Joueur de l'Axe [Roumanie]\nPrenez 5 cartes de Commandement. \n\nJoueur des Alliés [Union Soviétique]\nPrenez 6 cartes de Commandement. Vous jouez en premier.",
+			"victory": "12 médailles.\nChaque unité d’artillerie détruite rapporte une médaille-objectif définitive supplémentaire au joueur allié.\nL’hex contenant le PC roumain (Romanian HQ) rapporte une médaille-objectif temporaire au joueur allié.",
+			"rules": "- Appliquez les règles de l’Armée Rouge (Nations 2).\n- Toutes les unités d’infanterie alliées sont des troupes d’élite (Troupes 2 - Unités spécialisées). Mettre des badges est inutile.\n- Appliquez les règles de Destroyer (Troupes 12).\n- Appliquez les règles de Capture du quartier-général de campagne (Actions 17).\n- Appliquez les règles d’Attaques nocturnes (Actions 19).\n- Appliquez les règles de Parachutage (Actions 20) : au début de son premier tour, le joueur allié largue, une par une, 6 unités d’infanterie d’élite sur le plateau. ",
+			"bibliography": "- English.Battlefield.Ru.\nPour mémoire, voir les deux monuments remémorant le débarquement et le parachutage à Grigorevka."
+		}
+	}
+}

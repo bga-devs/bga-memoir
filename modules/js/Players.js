@@ -1,36 +1,36 @@
 define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
-  return declare('foogame.players', null, {
-    // Utils to iterate over players array/object
-    forEachPlayer(callback) {
-      Object.values(this.gamedatas.players).forEach(callback);
-    },
-
+  return declare('memoir.players', null, {
     getPlayerColor(pId) {
       return this.gamedatas.players[pId].color;
     },
 
     setupPlayers() {
+      // Basic UI tweaking
+      let pId = this.isSpectator ? Object.values(this.gamedatas.players)[0] : this.player_id;
       this.forEachPlayer((player) => {
-        this.place('tplPlayerHand', player, 'main-container');
+        dojo.place('overall_player_board_' + player.id, player.id == pId ? 'bottom-player' : 'top-player');
+      });
+      dojo.place('right-side', 'm44-central-part');
 
-        player.cards.forEach((card) => {
-          this.place('tplCard', card, 'player-hand-' + player.id);
-        });
+      this.forEachPlayer((player) => {
+        player.cards.forEach((card) => this.addCard(card, 'hand'));
       });
     },
 
-    tplPlayerHand(player) {
-      return `
-        <div class='player-container' style='border-color:#${player.color}'>
-          <div class='player-name' style='color:#${player.color}'>${player.name}</div>
-          <div class='player-hand' id="player-hand-${player.id}"></div>
-        </div>
-      `;
+    addCard(card, container) {
+      let tplName = 'tplSectionCard';
+      this.place(tplName, card, container);
+      // TODO : add tooltip
     },
 
-    tplCard(card) {
+    tplSectionCard(card) {
       return `
-        <div class='foo-card' data-color='${card.color}' data-value='${card.value}'></div>
+        <div id='card-${card.id}' class='section-card' data-type='${card.type}' data-value='${card.value}'>
+          <div class='card-title'>${_(card.name)}</div>
+          <div class='card-subtitle'>${_(card.subtitle)}</div>
+          <div class='card-illustration'></div>
+          <div class='card-text'>${_(card.text)}</div>
+        </div>
       `;
     },
   });

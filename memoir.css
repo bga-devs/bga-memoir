@@ -93,6 +93,12 @@ html {
   #m44-board[data-type='standard'] {
     grid-template-columns: repeat(27, 1fr);
     grid-template-rows: repeat(28, 1fr); }
+  #m44-board[data-type='overlord'] {
+    grid-template-columns: repeat(53, 1fr);
+    grid-template-rows: repeat(28, 1fr); }
+  #m44-board[data-type='brkthru'] {
+    grid-template-columns: repeat(27, 1fr);
+    grid-template-rows: repeat(52, 1fr); }
   #m44-board .hex-grid-item {
     position: relative;
     height: 0;

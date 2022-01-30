@@ -6,6 +6,7 @@ use M44\Core\Preferences;
 use M44\Helpers\Utils;
 use M44\Managers\Cards;
 use M44\Managers\Players;
+use M44\Managers\Teams;
 
 /*
  * Player: all utility functions concerning a player
@@ -53,5 +54,10 @@ class Player extends \M44\Helpers\DB_Model
   public function getCards()
   {
     return Cards::getOfPlayer($this->id);
+  }
+
+  public function getTeam()
+  {
+    return Teams::getSide($this->team);
   }
 }
