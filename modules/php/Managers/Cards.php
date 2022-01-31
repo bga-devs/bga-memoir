@@ -87,6 +87,22 @@ class Cards extends \M44\Helpers\Pieces
       CARD_GENERAL_ADVANCE => 1,
       CARD_PINCER_MOVE => 1,
       CARD_RECON_IN_FORCE => 3,
+
+      CARD_AIR_POWER => 1,
+      CARD_AMBUSH => 1,
+      CARD_ARMOR_ASSAULT => [1, 1], // TWO COPIES
+      CARD_ARTILLERY_BOMBARD => 1,
+      CARD_BARRAGE => 1,
+      CARD_BEHIND_LINES => 1,
+      CARD_CLOSE_ASSAULT => 1,
+      CARD_COUNTER_ATTACK => [1, 1], // TWO COPIES
+      CARD_DIG_IN => 1,
+      CARD_DIRECT_FROM_HQ => [1, 1], // TWO COPIES
+      CARD_FIREFIGHT => 1,
+      CARD_INFANTRY_ASSAULT => [1, 1], // TWO COPIES
+      CARD_MEDICS => 1,
+      CARD_MOVE_OUT => [1, 1], // TWO COPIES
+      CARD_FINEST_HOUR => 1,
     ];
 
     $cards = [];
@@ -95,7 +111,7 @@ class Cards extends \M44\Helpers\Pieces
         foreach ($occurences as $value => $n) {
           $cards[] = [
             'type' => $type,
-            'value' => $value + 1,
+            'value' => $value,
             'nbr' => $n,
           ];
         }

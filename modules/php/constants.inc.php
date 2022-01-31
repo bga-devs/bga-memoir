@@ -42,6 +42,22 @@ const CARD_GENERAL_ADVANCE = 4;
 const CARD_PINCER_MOVE = 5;
 const CARD_RECON_IN_FORCE = 6;
 
+const CARD_AIR_POWER = 10;
+const CARD_AMBUSH = 11;
+const CARD_ARMOR_ASSAULT = 12; // TWO COPIES
+const CARD_ARTILLERY_BOMBARD = 14;
+const CARD_BARRAGE = 15;
+const CARD_BEHIND_LINES = 16;
+const CARD_CLOSE_ASSAULT = 17;
+const CARD_COUNTER_ATTACK = 18; // TWO COPIES
+const CARD_DIG_IN = 20;
+const CARD_DIRECT_FROM_HQ = 21; // TWO COPIES
+const CARD_FIREFIGHT = 23;
+const CARD_INFANTRY_ASSAULT = 24; // TWO COPIES
+const CARD_MEDICS = 26;
+const CARD_MOVE_OUT = 27; // TWO COPIES
+const CARD_FINEST_HOUR = 29;
+
 const CARD_CLASSES = [
   CARD_RECON => 'Recon',
   CARD_PROBE => 'Probe',
@@ -50,6 +66,21 @@ const CARD_CLASSES = [
   CARD_GENERAL_ADVANCE => 'GeneralAdvance',
   CARD_PINCER_MOVE => 'PincerMove',
   CARD_RECON_IN_FORCE => 'ReconInForce',
+  CARD_AIR_POWER => 'AirPower',
+  CARD_AMBUSH => 'Ambush',
+  CARD_ARMOR_ASSAULT => 'ArmorAssault',
+  CARD_ARTILLERY_BOMBARD => 'ArtilleryBombard',
+  CARD_BARRAGE => 'Barrage',
+  CARD_BEHIND_LINES => 'BehindEnnemyLines',
+  CARD_CLOSE_ASSAULT => 'CloseAssault',
+  CARD_COUNTER_ATTACK => 'CounterAttack',
+  CARD_DIG_IN => 'DigIn',
+  CARD_DIRECT_FROM_HQ => 'DirectFromHQ',
+  CARD_FIREFIGHT => 'Firefight',
+  CARD_INFANTRY_ASSAULT => 'InfantryAssault',
+  CARD_MEDICS => 'MedicsAndMechanics',
+  CARD_MOVE_OUT => 'MoveOut',
+  CARD_FINEST_HOUR => 'FinestHour',
 ];
 
 /*
