@@ -24,6 +24,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       // Get dimensions based on type
       let type = board.type.toLowerCase();
       $('m44-board').dataset.type = type;
+      $('ebd-body').dataset.deckMode = type;
 
       let dimensions = {
         standard: { x: 13, y: 9 },

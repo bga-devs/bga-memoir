@@ -1,13 +1,13 @@
 <?php
 namespace M44\Cards\Standard;
 
-class BehindEnnemyLines extends \M44\Models\Card
+class BehindEnemyLines extends \M44\Models\Card
 {
   public function __construct($row)
   {
     parent::__construct($row);
     $this->type = \CARD_BEHIND_LINES;
-    $this->name = clienttranslate('Behind Ennemy Lines');
+    $this->name = clienttranslate('Behind Enemy Lines');
     $this->text = [
       clienttranslate('Issue an order to 1 <INFANTRY> unit.'),
       clienttranslate('Unit may move up to 3 hexes.'),

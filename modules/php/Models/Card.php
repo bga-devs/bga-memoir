@@ -84,6 +84,7 @@ class Card implements \JsonSerializable
       'pId' => $this->pId,
       'location' => $this->location,
       'state' => $this->state,
+      'type' => $this->type,
       'value' => $this->value,
       'name' => $this->name,
       'subtitle' => $this->getSubtitle(),

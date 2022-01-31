@@ -59,14 +59,22 @@ html {
   }
 
   #m44-bottom-part {
-    height: 146px;
+    height: 220px;
     background: url('img/game_bottom.png');
     background-repeat: repeat-x;
+    background-size: auto 100%;
     position: relative;
     z-index: 2;
+    display: flex;
 
     #bottom-player {
       margin-top: 25px;
+    }
+
+    #hand {
+      display: flex;
+      column-gap: 5px;
+      --memoirCardScale: 0.4;
     }
   }
 }

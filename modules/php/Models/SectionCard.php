@@ -11,19 +11,19 @@ class SectionCard extends Card
 
   public function getSubtitle()
   {
-    return $this->subtitles[$this->value - 1] ?? $this->subtitle;
+    return $this->subtitles[$this->value] ?? $this->subtitle;
   }
 
   public function getText()
   {
-    return $this->texts[$this->value - 1] ?? $this->text;
+    return $this->texts[$this->value] ?? $this->text;
   }
 
   public function getSections()
   {
     if ($this->nUnits != null) {
       $sections = [0, 0, 0];
-      $sections[$this->value - 1] = $this->nUnits;
+      $sections[$this->value] = $this->nUnits;
       return $sections;
     } else {
       return $this->sections;
