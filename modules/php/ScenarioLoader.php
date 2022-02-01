@@ -1,5 +1,6 @@
 <?php
 namespace M44;
+use M44\Core\Game;
 use M44\Core\Globals;
 use M44\Core\Notifications;
 use M44\Core\Preferences;
@@ -17,9 +18,19 @@ class ScenarioLoader
    */
   function load($id)
   {
-    $content = file_get_contents(dirname(__FILE__) . '/../scenarios/' . $id . '.m44');
+    /*
+    $content = file_get_contents(dirname(__FILE__) . '/../cenarios/' . $id . '.m44');
     $t = \json_decode($content, true);
-    Globals::setScenario($t);
+*/
+    require_once dirname(__FILE__) . '/Scenarios/list.inc.php';
+    if (!isset($scenariosMap[$id])) {
+      throw new BgaVisibleSystemException('Invalid scenario id');
+    }
+    $name = $scenariosMap[$id];
+    $scenarios = [];
+    require_once dirname(__FILE__) . '/Scenarios/' . $name . '.php';
+
+    Globals::setScenario($scenarios[$id]);
   }
 
   /**
@@ -46,5 +57,12 @@ class ScenarioLoader
 
     // Create Troops
     Troops::loadScenario($scenario);
+
+    // Activate player
+    $infos = $scenario['game_info'];
+    $startingSide = $infos['side_' . \strtolower($infos['starting'])];
+    Globals::setSideTurn($startingSide);
+    Globals::setTurn(0);
+    //Game::get()->stPrepareTurn();
   }
 }

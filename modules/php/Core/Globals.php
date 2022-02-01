@@ -11,6 +11,8 @@ class Globals extends \M44\Helpers\DB_Manager
   protected static $initialized = false;
   protected static $variables = [
     'scenario' => 'obj',
+    'turn' => 'int',
+    'sideTurn' => 'str', // Store which side is currently playing
   ];
 
   protected static $table = 'global_variables';
