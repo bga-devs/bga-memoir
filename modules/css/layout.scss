@@ -44,6 +44,9 @@ html {
       display: flex;
       justify-content: center;
       align-items: center;
+      overflow: auto;
+      position: relative;
+      z-index: 1;
     }
 
     #right-side {

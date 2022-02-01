@@ -13,7 +13,7 @@ class Assault extends \M44\Models\SectionCard
       clienttranslate('Issue an order to all units in the Center'),
       clienttranslate('Issue an order to all units on the Right Flank')
     ];
-    $this->text = clienttranslate('Order ALL Units');
+    $this->text = [clienttranslate('Order ALL Units')];
     $this->nUnits = \INFINITY;
   }
 }

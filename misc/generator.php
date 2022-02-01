@@ -37,9 +37,9 @@ const CARD_CLASSES = [
 foreach(CARD_CLASSES as $type => $class){
   $fp = fopen("Cards/".$class.'.php', 'w');
 fwrite($fp, "<?php
-namespace M44\Cards\Standard;
+namespace M44\Cards\Breakthrough;
 
-class ".$class." extends \M44\Models\Card
+class ".$class." extends \M44\Cards\Standard
 {
 public function __construct(\$row){
 parent::__construct(\$row);

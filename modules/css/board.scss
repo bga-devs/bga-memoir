@@ -16,12 +16,12 @@
   &[data-type='overlord'] {
     grid-template-columns: repeat(53, 1fr);
     grid-template-rows: repeat(28, 1fr);
+    width: 1500px;
   }
   &[data-type='brkthru'] {
     grid-template-columns: repeat(27, 1fr);
     grid-template-rows: repeat(52, 1fr);
   }
-
 
   .hex-grid-item {
     position: relative;
@@ -98,6 +98,7 @@
     justify-content: center;
     opacity: 0.7;
     pointer-events: none;
+display:none; // TODO
 
     .hex-label {
       background: #ffffff;

@@ -13,7 +13,7 @@ class Probe extends \M44\Models\SectionCard
       clienttranslate('Issue an order to 2 units in the Center'),
       clienttranslate('Issue an order to 2 units on the Right Flank')
     ];
-    $this->text = clienttranslate('Order 2 Units');
+    $this->text = [clienttranslate('Order 2 Units')];
     $this->nUnits = 2;
   }
 }

@@ -27,8 +27,9 @@ class Cards extends \M44\Helpers\Pieces
   {
     $mode = Board::getMode();
     $dirs = [
-      \STANDARD_DECK => 'Standard',
-      // TODO
+      STANDARD_DECK => 'Standard',
+      BREAKTHROUGH_DECK => 'Breakthrough',
+      OVERLORD_DECK => 'Overlord',
     ];
 
     $className = '\M44\Cards\\' . $dirs[$mode] . '\\' . \CARD_CLASSES[$type];
@@ -65,8 +66,11 @@ class Cards extends \M44\Helpers\Pieces
       ->run();
     $mode = $scenario['board']['type'];
 
-    if ($mode == STANDARD_DECK) {
-      Cards::initStandardDeck();
+    // Create deck
+    self::initDeck(self::$decks[$mode] ?? self::$decks[STANDARD_DECK]);
+
+    // Draw cards TODO
+    if (true || $mode == STANDARD_DECK) {
       foreach (Players::getAll() as $pId => $player) {
         $team = $player->getTeam();
         self::pickForLocation($team['cards'], 'deck', ['hand', $pId]);
@@ -74,37 +78,8 @@ class Cards extends \M44\Helpers\Pieces
     }
   }
 
-  /**
-   * Create a standard deck of cards
-   */
-  public function initStandardDeck()
+  public function initDeck($deck)
   {
-    $deck = [
-      CARD_RECON => [2, 2, 2],
-      CARD_PROBE => [4, 5, 4],
-      CARD_ATTACK => [3, 4, 3],
-      CARD_ASSAULT => [2, 2, 2],
-      CARD_GENERAL_ADVANCE => 1,
-      CARD_PINCER_MOVE => 1,
-      CARD_RECON_IN_FORCE => 3,
-
-      CARD_AIR_POWER => 1,
-      CARD_AMBUSH => 1,
-      CARD_ARMOR_ASSAULT => [1, 1], // TWO COPIES
-      CARD_ARTILLERY_BOMBARD => 1,
-      CARD_BARRAGE => 1,
-      CARD_BEHIND_LINES => 1,
-      CARD_CLOSE_ASSAULT => 1,
-      CARD_COUNTER_ATTACK => [1, 1], // TWO COPIES
-      CARD_DIG_IN => 1,
-      CARD_DIRECT_FROM_HQ => [1, 1], // TWO COPIES
-      CARD_FIREFIGHT => 1,
-      CARD_INFANTRY_ASSAULT => [1, 1], // TWO COPIES
-      CARD_MEDICS => 1,
-      CARD_MOVE_OUT => [1, 1], // TWO COPIES
-      CARD_FINEST_HOUR => 1,
-    ];
-
     $cards = [];
     foreach ($deck as $type => $occurences) {
       if (\is_array($occurences)) {
@@ -130,4 +105,58 @@ class Cards extends \M44\Helpers\Pieces
     self::create($cards, 'deck');
     self::shuffle('deck');
   }
+
+  protected static $decks = [
+    // OVERLORD is the same as STANDARD
+    \STANDARD_DECK => [
+      CARD_RECON => [2, 2, 2],
+      CARD_PROBE => [4, 5, 4],
+      CARD_ATTACK => [3, 4, 3],
+      CARD_ASSAULT => [2, 2, 2],
+      CARD_GENERAL_ADVANCE => 1,
+      CARD_PINCER_MOVE => 1,
+      CARD_RECON_IN_FORCE => 3,
+
+      CARD_AIR_POWER => 1,
+      CARD_AMBUSH => 1,
+      CARD_ARMOR_ASSAULT => [1, 1], // TWO COPIES
+      CARD_ARTILLERY_BOMBARD => 1,
+      CARD_BARRAGE => 1,
+      CARD_BEHIND_LINES => 1,
+      CARD_CLOSE_ASSAULT => 1,
+      CARD_COUNTER_ATTACK => [1, 1], // TWO COPIES
+      CARD_DIG_IN => 1,
+      CARD_DIRECT_FROM_HQ => [1, 1], // TWO COPIES
+      CARD_FIREFIGHT => 1,
+      CARD_INFANTRY_ASSAULT => [1, 1], // TWO COPIES
+      CARD_MEDICS => 1,
+      CARD_MOVE_OUT => [1, 1], // TWO COPIES
+      CARD_FINEST_HOUR => 1,
+    ],
+    \BREAKTHROUGH_DECK => [
+      CARD_RECON => [2, 2, 2],
+      CARD_PROBE => [5, 6, 5],
+      CARD_ATTACK => [4, 5, 4],
+      CARD_ASSAULT => [3, 3, 3],
+      CARD_GENERAL_ADVANCE => 2,
+      CARD_PINCER_MOVE => 2,
+      CARD_RECON_IN_FORCE => 4,
+
+      CARD_AIR_POWER => 1,
+      CARD_AMBUSH => 2,
+      CARD_ARMOR_ASSAULT => [2, 1],
+      CARD_ARTILLERY_BOMBARD => 2,
+      CARD_BARRAGE => 1,
+      CARD_BEHIND_LINES => 1,
+      CARD_CLOSE_ASSAULT => 1,
+      CARD_COUNTER_ATTACK => [2, 1],
+      CARD_DIG_IN => 1,
+      CARD_DIRECT_FROM_HQ => [2, 1],
+      CARD_FIREFIGHT => 2,
+      CARD_INFANTRY_ASSAULT => [1, 1],
+      CARD_MEDICS => 1,
+      CARD_MOVE_OUT => [2, 1],
+      CARD_FINEST_HOUR => 2,
+    ],
+  ];
 }

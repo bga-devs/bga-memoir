@@ -15,12 +15,102 @@
     transform-origin: top left;
     border-radius: 25px;
     position: relative;
+    font-family: 'Gunplay';
+
+    .card-title,
+    .card-text-container {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card-title {
+      top: 21px;
+      left: 20px;
+      right: 20px;
+      bottom: 427px;
+      font-size: 32px;
+      color: #5c1b0f;
+      text-transform: uppercase;
+      color: #5c1b0f;
+    }
+
+    .card-subtitle {
+      position: absolute;
+      top: 64px;
+      left: 35px;
+      right: 35px;
+      bottom: 398px;
+      font-size: 19px;
+      line-height: 20px;
+      text-align: center;
+    }
+
+    .card-text-container {
+      top: 420px;
+      left: 20px;
+      right: 20px;
+      bottom: 20px;
+      padding: 0px 3px;
+      display: flex;
+
+      .card-text {
+        text-align: center;
+        font-size: 24px;
+      }
+    }
   }
 }
 
+.tactic-card .card-resizable {
+  .card-title {
+    top: 21px;
+    left: 20px;
+    right: 20px;
+    bottom: 427px;
+    font-size: 29px;
+    color: #5c1b0f;
+  }
+
+  .card-text-container {
+    top: 280px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    padding: 0px 12px;
+
+    .card-text {
+      text-align: center;
+      font-size: 15px;
+
+      span.desc-unit {
+        color: #23698e;
+      }
+    }
+  }
+}
+
+// SPRITE
+.section-card {
+  .card-resizable {
+    background-size: 500% 300%;
+  }
+
+  @for $i from 0 through 16 {
+    &[data-type='#{$i}'] .card-resizable {
+      background-position-x: ($i % 5) * 100% / 4;
+      background-position-y: (($i - ($i % 5)) / 5) * 100% / 2;
+    }
+  }
+}
 .tactic-card {
+  .card-resizable {
+    background-size: 500% 400%;
+  }
+
   @for $i from 0 through 20 {
-    &[data-type='#{$i + 10}'] .card-resizable {
+    &[data-type='#{$i + 20}'] .card-resizable {
       background-position-x: ($i % 5) * 100% / 4;
       background-position-y: (($i - ($i % 5)) / 5) * 100% / 3;
     }
@@ -32,110 +122,158 @@
 #######################*/
 [data-deck-mode='standard'] .section-card {
   .card-resizable {
-    background-image: url('img/standard_section_background.jpg');
-    background-size: 100% 100%;
-
-    .card-title {
-      position: absolute;
-      top: 21px;
-      left: 20px;
-      right: 20px;
-      bottom: 427px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: 'Gunplay';
-      font-size: 32px;
-      text-transform: uppercase;
-      color: #5c1b0f;
-    }
-
-    .card-subtitle {
-      position: absolute;
-      top: 64px;
-      left: 35px;
-      right: 35px;
-      bottom: 398px;
-      font-family: 'Gunplay';
-      font-size: 19px;
-      text-align: center;
-      line-height: 20px;
-    }
-
-    .card-illustration {
-      position: absolute;
-      top: 339px;
-      left: 40px;
-      right: 40px;
-      bottom: 80px;
-      background-image: url('img/standard_section_illustrations.png');
-      background-size: 100% 500%;
-    }
-
-    .card-text-container {
-      position: absolute;
-      top: 420px;
-      left: 20px;
-      right: 20px;
-      bottom: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 0px 12px;
-
-      .card-text {
-        text-align: center;
-        font-family: 'Gunplay';
-        font-size: 23px;
-      }
-    }
+    background-image: url('img/card_sections.jpg');
   }
 
-  &[data-value='1'] .card-resizable .card-illustration {
-    background-position-y: 25%;
-  }
-  &[data-value='2'] .card-resizable .card-illustration {
-    background-position-y: 50%;
+  &[data-type='0'],
+  &[data-type='1'],
+  &[data-type='2'] {
+    .card-resizable .card-text-container .card-text {
+      font-size: 17px;
+      line-height: 19px;
+      letter-spacing: -1px;
+    }
   }
 }
 
 [data-deck-mode='standard'] .tactic-card .card-resizable {
-  background-image: url('img/standard_tactics.jpg');
-  background-size: 500% 400%;
+  background-image: url('img/card_tactics.jpg');
+}
+
+/*#######################
+##### OVERLORD DECK #####
+#######################*/
+[data-deck-mode='overlord'] .section-card {
+  .card-resizable {
+    background-image: url('img/overlord/card_sections.jpg');
+
+    .card-title {
+      bottom: 435px;
+      font-size: 32px;
+      color: #fed166;
+    }
+
+    .card-subtitle {
+      top: 60px;
+      color: white;
+    }
+
+    .card-text-container {
+      top: 375px;
+      bottom: 25px;
+
+      .card-text {
+        font-size: 23px;
+        color: white;
+      }
+    }
+  }
+
+  &[data-type='0'],
+  &[data-type='1'],
+  &[data-type='2'] {
+    .card-resizable .card-text-container .card-text > div:nth-of-type(2) {
+      font-size: 15px;
+      line-height: 19px;
+      letter-spacing: -1px;
+    }
+  }
+}
+
+[data-deck-mode='overlord'] .tactic-card .card-resizable {
+  background-image: url('img/overlord/card_tactics.jpg');
 
   .card-title {
-    position: absolute;
-    top: 21px;
-    left: 20px;
-    right: 20px;
-    bottom: 427px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Gunplay';
-    font-size: 29px;
-    text-transform: uppercase;
-    color: #5c1b0f;
+    top: 15px;
+    color: #fed166;
+    font-size: 28px;
   }
 
   .card-text-container {
-    position: absolute;
     top: 280px;
-    left: 20px;
-    right: 20px;
     bottom: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     padding: 0px 12px;
 
     .card-text {
-      text-align: center;
-      font-family: 'Gunplay';
-      font-size: 15px;
+      font-size: 12px;
+      color: white;
+      font-family: 'Oswald';
+      line-height: 18px;
 
       span.desc-unit {
-        color: #23698e;
+        color: white;
+        font-family: 'Gunplay';
+        font-size: 15px;
+      }
+    }
+  }
+}
+
+/*###########################
+##### BREAKTHROUGH DECK #####
+###########################*/
+[data-deck-mode='brkthru'] .section-card {
+  .card-resizable {
+    background-image: url('img/breakthrough/card_sections.jpg');
+
+    .card-title {
+      top: 10px;
+      bottom: 440px;
+      font-size: 30px;
+      color: #ffe2a5;
+    }
+
+    .card-subtitle {
+      top: 59px;
+      color: white;
+      bottom: 420px;
+    }
+
+    .card-text-container {
+      top: 375px;
+      bottom: 40px;
+
+      .card-text {
+        font-size: 20px;
+      }
+    }
+  }
+
+  &[data-type='0'],
+  &[data-type='1'],
+  &[data-type='2'] {
+    .card-resizable .card-text-container .card-text > div:nth-of-type(2) {
+      font-size: 14px;
+      line-height: 18px;
+      letter-spacing: -1px;
+    }
+  }
+}
+
+[data-deck-mode='brkthru'] .tactic-card .card-resizable {
+  background-image: url('img/breakthrough/card_tactics.jpg');
+
+  .card-title {
+    top: 15px;
+    color: #fed166;
+    font-size: 28px;
+  }
+
+  .card-text-container {
+    top: 275px;
+    bottom: 45px;
+    padding: 0px 20px;
+
+    .card-text {
+      font-size: 13px;
+      color: white;
+      font-family: 'Oswald';
+      line-height: 23px;
+
+      span.desc-unit {
+        color: white;
+        font-family: 'Gunplay';
+        font-size: 15px;
       }
     }
   }

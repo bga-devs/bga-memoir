@@ -13,7 +13,7 @@ class Attack extends \M44\Models\SectionCard
       clienttranslate('Issue an order to 3 units in the Center'),
       clienttranslate('Issue an order to 3 units on the Right Flank')
     ];
-    $this->text = clienttranslate('Order 3 Units');
+    $this->text = [clienttranslate('Order 3 Units')];
     $this->nUnits = 3;
   }
 }

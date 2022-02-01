@@ -15,7 +15,7 @@ class Recon extends \M44\Models\SectionCard
     ];
     $this->text = [
       clienttranslate('Order 1 Unit'),
-      clienttranslate('When drawing a new Commander card, draw two, choose one and discard the other'),
+      clienttranslate('When drawing a new Command card, draw two, choose one and discard the other'),
     ];
     $this->nUnits = 1;
   }

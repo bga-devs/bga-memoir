@@ -25,6 +25,12 @@
   font-weight: normal;
   font-style: normal;
   font-display: swap; }
+@font-face {
+  font-family: 'Oswald';
+  src: url("img/fonts/Oswald-Regular.woff2") format("woff2"), url("img/fonts/Oswald-Regular.woff") format("woff"), url("img/fonts/Oswald-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; }
 html {
   background: url("img/background.jpg");
   background-size: 75px; }
@@ -58,7 +64,10 @@ html {
       flex-grow: 2;
       display: flex;
       justify-content: center;
-      align-items: center; }
+      align-items: center;
+      overflow: auto;
+      position: relative;
+      z-index: 1; }
     #m44-container #m44-central-part #right-side {
       float: none;
       margin-left: 0px;
@@ -101,7 +110,8 @@ html {
     grid-template-rows: repeat(28, 1fr); }
   #m44-board[data-type='overlord'] {
     grid-template-columns: repeat(53, 1fr);
-    grid-template-rows: repeat(28, 1fr); }
+    grid-template-rows: repeat(28, 1fr);
+    width: 1500px; }
   #m44-board[data-type='brkthru'] {
     grid-template-columns: repeat(27, 1fr);
     grid-template-rows: repeat(52, 1fr); }
@@ -633,7 +643,8 @@ html {
     display: flex;
     justify-content: center;
     opacity: 0.7;
-    pointer-events: none; }
+    pointer-events: none;
+    display: none; }
     #m44-board .hex-label-container .hex-label {
       background: #ffffff;
       padding: 1px 3px;
@@ -937,69 +948,185 @@ html {
     transform: scale(var(--memoirCardScale));
     transform-origin: top left;
     border-radius: 25px;
-    position: relative; }
+    position: relative;
+    font-family: 'Gunplay'; }
+    .section-card .card-resizable .card-title,
+    .section-card .card-resizable .card-text-container,
+    .tactic-card .card-resizable .card-title,
+    .tactic-card .card-resizable .card-text-container {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+    .section-card .card-resizable .card-title,
+    .tactic-card .card-resizable .card-title {
+      top: 21px;
+      left: 20px;
+      right: 20px;
+      bottom: 427px;
+      font-size: 32px;
+      color: #5c1b0f;
+      text-transform: uppercase;
+      color: #5c1b0f; }
+    .section-card .card-resizable .card-subtitle,
+    .tactic-card .card-resizable .card-subtitle {
+      position: absolute;
+      top: 64px;
+      left: 35px;
+      right: 35px;
+      bottom: 398px;
+      font-size: 19px;
+      line-height: 20px;
+      text-align: center; }
+    .section-card .card-resizable .card-text-container,
+    .tactic-card .card-resizable .card-text-container {
+      top: 420px;
+      left: 20px;
+      right: 20px;
+      bottom: 20px;
+      padding: 0px 3px;
+      display: flex; }
+      .section-card .card-resizable .card-text-container .card-text,
+      .tactic-card .card-resizable .card-text-container .card-text {
+        text-align: center;
+        font-size: 24px; }
 
-.tactic-card[data-type='10'] .card-resizable {
+.tactic-card .card-resizable .card-title {
+  top: 21px;
+  left: 20px;
+  right: 20px;
+  bottom: 427px;
+  font-size: 29px;
+  color: #5c1b0f; }
+.tactic-card .card-resizable .card-text-container {
+  top: 280px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  padding: 0px 12px; }
+  .tactic-card .card-resizable .card-text-container .card-text {
+    text-align: center;
+    font-size: 15px; }
+    .tactic-card .card-resizable .card-text-container .card-text span.desc-unit {
+      color: #23698e; }
+
+.section-card .card-resizable {
+  background-size: 500% 300%; }
+.section-card[data-type='0'] .card-resizable {
   background-position-x: 0%;
   background-position-y: 0%; }
-.tactic-card[data-type='11'] .card-resizable {
+.section-card[data-type='1'] .card-resizable {
   background-position-x: 25%;
   background-position-y: 0%; }
-.tactic-card[data-type='12'] .card-resizable {
+.section-card[data-type='2'] .card-resizable {
   background-position-x: 50%;
   background-position-y: 0%; }
-.tactic-card[data-type='13'] .card-resizable {
+.section-card[data-type='3'] .card-resizable {
   background-position-x: 75%;
   background-position-y: 0%; }
-.tactic-card[data-type='14'] .card-resizable {
+.section-card[data-type='4'] .card-resizable {
   background-position-x: 100%;
   background-position-y: 0%; }
-.tactic-card[data-type='15'] .card-resizable {
+.section-card[data-type='5'] .card-resizable {
   background-position-x: 0%;
-  background-position-y: 33.3333333333%; }
-.tactic-card[data-type='16'] .card-resizable {
+  background-position-y: 50%; }
+.section-card[data-type='6'] .card-resizable {
   background-position-x: 25%;
-  background-position-y: 33.3333333333%; }
-.tactic-card[data-type='17'] .card-resizable {
+  background-position-y: 50%; }
+.section-card[data-type='7'] .card-resizable {
   background-position-x: 50%;
-  background-position-y: 33.3333333333%; }
-.tactic-card[data-type='18'] .card-resizable {
+  background-position-y: 50%; }
+.section-card[data-type='8'] .card-resizable {
   background-position-x: 75%;
-  background-position-y: 33.3333333333%; }
-.tactic-card[data-type='19'] .card-resizable {
+  background-position-y: 50%; }
+.section-card[data-type='9'] .card-resizable {
   background-position-x: 100%;
-  background-position-y: 33.3333333333%; }
+  background-position-y: 50%; }
+.section-card[data-type='10'] .card-resizable {
+  background-position-x: 0%;
+  background-position-y: 100%; }
+.section-card[data-type='11'] .card-resizable {
+  background-position-x: 25%;
+  background-position-y: 100%; }
+.section-card[data-type='12'] .card-resizable {
+  background-position-x: 50%;
+  background-position-y: 100%; }
+.section-card[data-type='13'] .card-resizable {
+  background-position-x: 75%;
+  background-position-y: 100%; }
+.section-card[data-type='14'] .card-resizable {
+  background-position-x: 100%;
+  background-position-y: 100%; }
+.section-card[data-type='15'] .card-resizable {
+  background-position-x: 0%;
+  background-position-y: 150%; }
+.section-card[data-type='16'] .card-resizable {
+  background-position-x: 25%;
+  background-position-y: 150%; }
+
+.tactic-card .card-resizable {
+  background-size: 500% 400%; }
 .tactic-card[data-type='20'] .card-resizable {
   background-position-x: 0%;
-  background-position-y: 66.6666666667%; }
+  background-position-y: 0%; }
 .tactic-card[data-type='21'] .card-resizable {
   background-position-x: 25%;
-  background-position-y: 66.6666666667%; }
+  background-position-y: 0%; }
 .tactic-card[data-type='22'] .card-resizable {
   background-position-x: 50%;
-  background-position-y: 66.6666666667%; }
+  background-position-y: 0%; }
 .tactic-card[data-type='23'] .card-resizable {
   background-position-x: 75%;
-  background-position-y: 66.6666666667%; }
+  background-position-y: 0%; }
 .tactic-card[data-type='24'] .card-resizable {
   background-position-x: 100%;
-  background-position-y: 66.6666666667%; }
+  background-position-y: 0%; }
 .tactic-card[data-type='25'] .card-resizable {
   background-position-x: 0%;
-  background-position-y: 100%; }
+  background-position-y: 33.3333333333%; }
 .tactic-card[data-type='26'] .card-resizable {
   background-position-x: 25%;
-  background-position-y: 100%; }
+  background-position-y: 33.3333333333%; }
 .tactic-card[data-type='27'] .card-resizable {
   background-position-x: 50%;
-  background-position-y: 100%; }
+  background-position-y: 33.3333333333%; }
 .tactic-card[data-type='28'] .card-resizable {
   background-position-x: 75%;
-  background-position-y: 100%; }
+  background-position-y: 33.3333333333%; }
 .tactic-card[data-type='29'] .card-resizable {
   background-position-x: 100%;
-  background-position-y: 100%; }
+  background-position-y: 33.3333333333%; }
 .tactic-card[data-type='30'] .card-resizable {
+  background-position-x: 0%;
+  background-position-y: 66.6666666667%; }
+.tactic-card[data-type='31'] .card-resizable {
+  background-position-x: 25%;
+  background-position-y: 66.6666666667%; }
+.tactic-card[data-type='32'] .card-resizable {
+  background-position-x: 50%;
+  background-position-y: 66.6666666667%; }
+.tactic-card[data-type='33'] .card-resizable {
+  background-position-x: 75%;
+  background-position-y: 66.6666666667%; }
+.tactic-card[data-type='34'] .card-resizable {
+  background-position-x: 100%;
+  background-position-y: 66.6666666667%; }
+.tactic-card[data-type='35'] .card-resizable {
+  background-position-x: 0%;
+  background-position-y: 100%; }
+.tactic-card[data-type='36'] .card-resizable {
+  background-position-x: 25%;
+  background-position-y: 100%; }
+.tactic-card[data-type='37'] .card-resizable {
+  background-position-x: 50%;
+  background-position-y: 100%; }
+.tactic-card[data-type='38'] .card-resizable {
+  background-position-x: 75%;
+  background-position-y: 100%; }
+.tactic-card[data-type='39'] .card-resizable {
+  background-position-x: 100%;
+  background-position-y: 100%; }
+.tactic-card[data-type='40'] .card-resizable {
   background-position-x: 0%;
   background-position-y: 133.3333333333%; }
 
@@ -1007,89 +1134,100 @@ html {
 ##### STANDARD DECK #####
 #######################*/
 [data-deck-mode='standard'] .section-card .card-resizable {
-  background-image: url("img/standard_section_background.jpg");
-  background-size: 100% 100%; }
-  [data-deck-mode='standard'] .section-card .card-resizable .card-title {
-    position: absolute;
-    top: 21px;
-    left: 20px;
-    right: 20px;
-    bottom: 427px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Gunplay';
-    font-size: 32px;
-    text-transform: uppercase;
-    color: #5c1b0f; }
-  [data-deck-mode='standard'] .section-card .card-resizable .card-subtitle {
-    position: absolute;
-    top: 64px;
-    left: 35px;
-    right: 35px;
-    bottom: 398px;
-    font-family: 'Gunplay';
-    font-size: 19px;
-    text-align: center;
-    line-height: 20px; }
-  [data-deck-mode='standard'] .section-card .card-resizable .card-illustration {
-    position: absolute;
-    top: 339px;
-    left: 40px;
-    right: 40px;
-    bottom: 80px;
-    background-image: url("img/standard_section_illustrations.png");
-    background-size: 100% 500%; }
-  [data-deck-mode='standard'] .section-card .card-resizable .card-text-container {
-    position: absolute;
-    top: 420px;
-    left: 20px;
-    right: 20px;
-    bottom: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0px 12px; }
-    [data-deck-mode='standard'] .section-card .card-resizable .card-text-container .card-text {
-      text-align: center;
-      font-family: 'Gunplay';
-      font-size: 23px; }
-[data-deck-mode='standard'] .section-card[data-value='1'] .card-resizable .card-illustration {
-  background-position-y: 25%; }
-[data-deck-mode='standard'] .section-card[data-value='2'] .card-resizable .card-illustration {
-  background-position-y: 50%; }
+  background-image: url("img/card_sections.jpg"); }
+[data-deck-mode='standard'] .section-card[data-type='0'] .card-resizable .card-text-container .card-text, [data-deck-mode='standard'] .section-card[data-type='1'] .card-resizable .card-text-container .card-text, [data-deck-mode='standard'] .section-card[data-type='2'] .card-resizable .card-text-container .card-text {
+  font-size: 17px;
+  line-height: 19px;
+  letter-spacing: -1px; }
 
 [data-deck-mode='standard'] .tactic-card .card-resizable {
-  background-image: url("img/standard_tactics.jpg");
-  background-size: 500% 400%; }
-  [data-deck-mode='standard'] .tactic-card .card-resizable .card-title {
-    position: absolute;
-    top: 21px;
-    left: 20px;
-    right: 20px;
-    bottom: 427px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Gunplay';
-    font-size: 29px;
-    text-transform: uppercase;
-    color: #5c1b0f; }
-  [data-deck-mode='standard'] .tactic-card .card-resizable .card-text-container {
-    position: absolute;
+  background-image: url("img/card_tactics.jpg"); }
+
+/*#######################
+##### OVERLORD DECK #####
+#######################*/
+[data-deck-mode='overlord'] .section-card .card-resizable {
+  background-image: url("img/overlord/card_sections.jpg"); }
+  [data-deck-mode='overlord'] .section-card .card-resizable .card-title {
+    bottom: 435px;
+    font-size: 32px;
+    color: #fed166; }
+  [data-deck-mode='overlord'] .section-card .card-resizable .card-subtitle {
+    top: 60px;
+    color: white; }
+  [data-deck-mode='overlord'] .section-card .card-resizable .card-text-container {
+    top: 375px;
+    bottom: 25px; }
+    [data-deck-mode='overlord'] .section-card .card-resizable .card-text-container .card-text {
+      font-size: 23px;
+      color: white; }
+[data-deck-mode='overlord'] .section-card[data-type='0'] .card-resizable .card-text-container .card-text > div:nth-of-type(2), [data-deck-mode='overlord'] .section-card[data-type='1'] .card-resizable .card-text-container .card-text > div:nth-of-type(2), [data-deck-mode='overlord'] .section-card[data-type='2'] .card-resizable .card-text-container .card-text > div:nth-of-type(2) {
+  font-size: 15px;
+  line-height: 19px;
+  letter-spacing: -1px; }
+
+[data-deck-mode='overlord'] .tactic-card .card-resizable {
+  background-image: url("img/overlord/card_tactics.jpg"); }
+  [data-deck-mode='overlord'] .tactic-card .card-resizable .card-title {
+    top: 15px;
+    color: #fed166;
+    font-size: 28px; }
+  [data-deck-mode='overlord'] .tactic-card .card-resizable .card-text-container {
     top: 280px;
-    left: 20px;
-    right: 20px;
     bottom: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     padding: 0px 12px; }
-    [data-deck-mode='standard'] .tactic-card .card-resizable .card-text-container .card-text {
-      text-align: center;
-      font-family: 'Gunplay';
-      font-size: 15px; }
-      [data-deck-mode='standard'] .tactic-card .card-resizable .card-text-container .card-text span.desc-unit {
-        color: #23698e; }
+    [data-deck-mode='overlord'] .tactic-card .card-resizable .card-text-container .card-text {
+      font-size: 12px;
+      color: white;
+      font-family: 'Oswald';
+      line-height: 18px; }
+      [data-deck-mode='overlord'] .tactic-card .card-resizable .card-text-container .card-text span.desc-unit {
+        color: white;
+        font-family: 'Gunplay';
+        font-size: 15px; }
+
+/*###########################
+##### BREAKTHROUGH DECK #####
+###########################*/
+[data-deck-mode='brkthru'] .section-card .card-resizable {
+  background-image: url("img/breakthrough/card_sections.jpg"); }
+  [data-deck-mode='brkthru'] .section-card .card-resizable .card-title {
+    top: 10px;
+    bottom: 440px;
+    font-size: 30px;
+    color: #ffe2a5; }
+  [data-deck-mode='brkthru'] .section-card .card-resizable .card-subtitle {
+    top: 59px;
+    color: white;
+    bottom: 420px; }
+  [data-deck-mode='brkthru'] .section-card .card-resizable .card-text-container {
+    top: 375px;
+    bottom: 40px; }
+    [data-deck-mode='brkthru'] .section-card .card-resizable .card-text-container .card-text {
+      font-size: 20px; }
+[data-deck-mode='brkthru'] .section-card[data-type='0'] .card-resizable .card-text-container .card-text > div:nth-of-type(2), [data-deck-mode='brkthru'] .section-card[data-type='1'] .card-resizable .card-text-container .card-text > div:nth-of-type(2), [data-deck-mode='brkthru'] .section-card[data-type='2'] .card-resizable .card-text-container .card-text > div:nth-of-type(2) {
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: -1px; }
+
+[data-deck-mode='brkthru'] .tactic-card .card-resizable {
+  background-image: url("img/breakthrough/card_tactics.jpg"); }
+  [data-deck-mode='brkthru'] .tactic-card .card-resizable .card-title {
+    top: 15px;
+    color: #fed166;
+    font-size: 28px; }
+  [data-deck-mode='brkthru'] .tactic-card .card-resizable .card-text-container {
+    top: 275px;
+    bottom: 45px;
+    padding: 0px 20px; }
+    [data-deck-mode='brkthru'] .tactic-card .card-resizable .card-text-container .card-text {
+      font-size: 13px;
+      color: white;
+      font-family: 'Oswald';
+      line-height: 23px; }
+      [data-deck-mode='brkthru'] .tactic-card .card-resizable .card-text-container .card-text span.desc-unit {
+        color: white;
+        font-family: 'Gunplay';
+        font-size: 15px; }
 
 /*# sourceMappingURL=memoir.css.map */

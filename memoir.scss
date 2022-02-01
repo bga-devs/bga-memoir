@@ -30,6 +30,14 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: 'Oswald';
+  src: url('img/fonts/Oswald-Regular.woff2') format('woff2'), url('img/fonts/Oswald-Regular.woff') format('woff'),
+    url('img/fonts/Oswald-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
 @import 'modules/css/layout';
 @import 'modules/css/board';

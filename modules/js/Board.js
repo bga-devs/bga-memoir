@@ -86,7 +86,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           let labels = board.grid[col][row].labels;
           if (labels.length > 0) {
             let label = labels.map((t) => _(t)).join('<br />');
-            let area = 3 * realY + 4 + ' / ' + (+realX + 1) + ' / span ' + labels.length + ' / span 2';
+            let area = 3 * realY + 4 + ' / ' + (+realX + 1) + ' / auto / span 2';
             this.place('tplTileLabel', { label, area }, 'm44-board');
           }
         }
