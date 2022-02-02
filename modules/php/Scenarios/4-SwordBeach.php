@@ -385,14 +385,14 @@ $scenarios[4] = [
         'row' => 0,
         'col' => 4,
         'text' => [
-          0 => 'Riva Bella',
+          0 => clienttranslate('Riva Bella'),
         ],
       ],
       1 => [
         'row' => 0,
         'col' => 22,
         'text' => [
-          0 => 'Lion sur Mer',
+          0 => clienttranslate('Lion sur Mer'),
         ],
       ],
     ],
@@ -400,7 +400,7 @@ $scenarios[4] = [
   'text' => [
     'en' => [
       'name' => clienttranslate('Sword Beach'),
-      'historical' => clienttranslate('The 8th Brigade Group of the 3rd British Division, supported by Commandos of the 1st Special Service Brigade and the amphibious Sherman tanks of the 13th and 18th Hussars, formed the first wave of Allied forces to land on \"Sword\" beach, near the mouth of the Orne River, on the morning of June 6, 1944.
+      'historical' => clienttranslate('The 8th Brigade Group of the 3rd British Division, supported by Commandos of the 1st Special Service Brigade and the amphibious Sherman tanks of the 13th and 18th Hussars, formed the first wave of Allied forces to land on "Sword" beach, near the mouth of the Orne River, on the morning of June 6, 1944.
 
 The tanks were to land first and engage the enemy before the infantry arrived. The heavy seas slowed the approach and both tanks and infantry came ashore together. The bad weather, coupled with stiff German resistance, delayed the inland advance. While commandos - including the first French troops to set foot back on their homeland that day - captured the Casino at Riva Bella, the bulk of the Allied forces failed to push inland and capture Caen, their objective for the day. The consequences of this, the biggest set-back of Allied operations on D-Day, were to be felt well into July, and the city of Caen itself would pay a dear price for it.
 

@@ -446,14 +446,14 @@ $scenarios[23] = [
         'row' => 1,
         'col' => 13,
         'text' => [
-          0 => 'Toulon',
+          0 => clienttranslate('Toulon'),
         ],
       ],
       1 => [
         'row' => 2,
         'col' => 4,
         'text' => [
-          0 => 'Hyeres',
+          0 => clienttranslate('Hyeres'),
         ],
       ],
     ],

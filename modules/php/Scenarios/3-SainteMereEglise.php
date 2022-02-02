@@ -336,22 +336,22 @@ $scenarios[3] = [
         'row' => 2,
         'col' => 4,
         'text' => [
-          0 => 'Neuville-',
-          1 => 'au-Plain',
+          0 => clienttranslate('Neuville-'),
+          1 => clienttranslate('au-Plain'),
         ],
       ],
       1 => [
         'row' => 2,
         'col' => 24,
         'text' => [
-          0 => 'Fouville',
+          0 => clienttranslate('Fouville'),
         ],
       ],
       2 => [
         'row' => 3,
         'col' => 15,
         'text' => [
-          0 => 'Sainte Mère-Eglise',
+          0 => clienttranslate('Sainte Mère-Eglise'),
         ],
       ],
     ],

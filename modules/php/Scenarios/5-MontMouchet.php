@@ -357,8 +357,8 @@ $scenarios[5] = [
         'row' => 1,
         'col' => 9,
         'text' => [
-          0 => 'Mont',
-          1 => 'Mouchet',
+          0 => clienttranslate('Mont'),
+          1 => clienttranslate('Mouchet'),
         ],
       ],
     ],

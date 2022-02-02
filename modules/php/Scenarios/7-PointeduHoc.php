@@ -362,14 +362,14 @@ $scenarios[7] = [
         'row' => 4,
         'col' => 12,
         'text' => [
-          0 => 'Cliff',
+          0 => clienttranslate('Cliff'),
         ],
       ],
       1 => [
         'row' => 5,
         'col' => 13,
         'text' => [
-          0 => '',
+          0 => clienttranslate(''),
         ],
       ],
     ],

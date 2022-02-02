@@ -901,101 +901,101 @@ $scenarios[13] = [
         'row' => 0,
         'col' => 4,
         'text' => [
-          0 => 'Coleville-',
-          1 => 'sur-Mer',
+          0 => clienttranslate('Coleville-'),
+          1 => clienttranslate('sur-Mer'),
         ],
       ],
       1 => [
         'row' => 0,
         'col' => 20,
         'text' => [
-          0 => 'Saint -Laurent-',
-          1 => 'sur-Mer',
+          0 => clienttranslate('Saint -Laurent-'),
+          1 => clienttranslate('sur-Mer'),
         ],
       ],
       2 => [
         'row' => 0,
         'col' => 44,
         'text' => [
-          0 => 'Vieville-',
-          1 => 'sur-Mer',
+          0 => clienttranslate('Vieville-'),
+          1 => clienttranslate('sur-Mer'),
         ],
       ],
       3 => [
         'row' => 3,
         'col' => 7,
         'text' => [
-          0 => 'E-3',
+          0 => clienttranslate('E-3'),
         ],
       ],
       4 => [
         'row' => 3,
         'col' => 17,
         'text' => [
-          0 => 'E-1',
+          0 => clienttranslate('E-1'),
         ],
       ],
       5 => [
         'row' => 3,
         'col' => 29,
         'text' => [
-          0 => 'D-3',
+          0 => clienttranslate('D-3'),
         ],
       ],
       6 => [
         'row' => 3,
         'col' => 45,
         'text' => [
-          0 => 'D-1',
+          0 => clienttranslate('D-1'),
         ],
       ],
       7 => [
         'row' => 4,
         'col' => 0,
         'text' => [
-          0 => 'F-1',
+          0 => clienttranslate('F-1'),
         ],
       ],
       8 => [
         'row' => 4,
         'col' => 36,
         'text' => [
-          0 => 'Sea Wall',
+          0 => clienttranslate('Sea Wall'),
         ],
       ],
       9 => [
         'row' => 4,
         'col' => 42,
         'text' => [
-          0 => 'Sea Wall',
+          0 => clienttranslate('Sea Wall'),
         ],
       ],
       10 => [
         'row' => 6,
         'col' => 4,
         'text' => [
-          0 => 'Fox',
+          0 => clienttranslate('Fox'),
         ],
       ],
       11 => [
         'row' => 6,
         'col' => 18,
         'text' => [
-          0 => 'Easy',
+          0 => clienttranslate('Easy'),
         ],
       ],
       12 => [
         'row' => 6,
         'col' => 38,
         'text' => [
-          0 => 'Dog',
+          0 => clienttranslate('Dog'),
         ],
       ],
       13 => [
         'row' => 6,
         'col' => 50,
         'text' => [
-          0 => 'Charlie',
+          0 => clienttranslate('Charlie'),
         ],
       ],
     ],

@@ -484,87 +484,87 @@ $scenarios[11] = [
         'row' => 0,
         'col' => 2,
         'text' => [
-          0 => 'Colleville-',
-          1 => 'sur-Mer',
+          0 => clienttranslate('Colleville-'),
+          1 => clienttranslate('sur-Mer'),
         ],
       ],
       1 => [
         'row' => 0,
         'col' => 12,
         'text' => [
-          0 => 'Saint-Laurent-',
-          1 => 'sur-Mer',
+          0 => clienttranslate('Saint-Laurent-'),
+          1 => clienttranslate('sur-Mer'),
         ],
       ],
       2 => [
         'row' => 0,
         'col' => 22,
         'text' => [
-          0 => 'Vierville',
-          1 => 'sur-Mer',
+          0 => clienttranslate('Vierville'),
+          1 => clienttranslate('sur-Mer'),
         ],
       ],
       3 => [
         'row' => 3,
         'col' => 1,
         'text' => [
-          0 => 'E-3',
+          0 => clienttranslate('E-3'),
         ],
       ],
       4 => [
         'row' => 3,
         'col' => 7,
         'text' => [
-          0 => 'E-1',
+          0 => clienttranslate('E-1'),
         ],
       ],
       5 => [
         'row' => 3,
         'col' => 15,
         'text' => [
-          0 => 'D-3',
+          0 => clienttranslate('D-3'),
         ],
       ],
       6 => [
         'row' => 3,
         'col' => 23,
         'text' => [
-          0 => 'D-1',
+          0 => clienttranslate('D-1'),
         ],
       ],
       7 => [
         'row' => 4,
         'col' => 20,
         'text' => [
-          0 => 'Sea Wall',
+          0 => clienttranslate('Sea Wall'),
         ],
       ],
       8 => [
         'row' => 6,
         'col' => 2,
         'text' => [
-          0 => 'Fox',
+          0 => clienttranslate('Fox'),
         ],
       ],
       9 => [
         'row' => 6,
         'col' => 8,
         'text' => [
-          0 => 'Easy',
+          0 => clienttranslate('Easy'),
         ],
       ],
       10 => [
         'row' => 6,
         'col' => 16,
         'text' => [
-          0 => 'Dog',
+          0 => clienttranslate('Dog'),
         ],
       ],
       11 => [
         'row' => 6,
         'col' => 24,
         'text' => [
-          0 => 'Charlie',
+          0 => clienttranslate('Charlie'),
         ],
       ],
     ],
@@ -573,7 +573,7 @@ $scenarios[11] = [
     'en' => [
       'name' => clienttranslate('First Assault Wave'),
       'subtitle' => clienttranslate('Omaha Beach'),
-      'historical' => clienttranslate('\"Never had there been a dawn like this.\" - Cornelius Ryan, The Longest Day
+      'historical' => clienttranslate('"Never had there been a dawn like this." - Cornelius Ryan, The Longest Day
 
 The US assault waves on Omaha Beach were led by the 116th Regimental Combat Team, destined for Dog sector on the left; and the 16th Regimental Combat Team hitting Easy and Fox sectors. The first wave also included two battalions of tanks from the 741st and 743rd. A persistent swell and strong undertow kept pushing the incoming troops toward the wrong sections of the beach. Heavily-fortified German positions delivered a withering roll of fire the moment any LCA crash-landed in. Exhausted and sea-sick survivors reaching the water\'s edge would find no protection, save for a 200-yard dash to the seawall. Many simply collapsed, or tried to find cover behind the numerous beach obstructions. Yet in the face of intense small arms and artillery fire, a handful of young soldiers rallied and began to act. The first infiltrations were made between the E-1 and E-3 exits. Advances against other strong points were also successful and while it was not apparent at the time, German defenses were starting to crumble.
 

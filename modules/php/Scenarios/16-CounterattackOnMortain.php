@@ -489,58 +489,58 @@ $scenarios[16] = [
         'row' => 0,
         'col' => 6,
         'text' => [
-          0 => 'Sourdeval',
+          0 => clienttranslate('Sourdeval'),
         ],
       ],
       1 => [
         'row' => 2,
         'col' => 0,
         'text' => [
-          0 => 'Cherence',
+          0 => clienttranslate('Cherence'),
         ],
       ],
       2 => [
         'row' => 3,
         'col' => 11,
         'text' => [
-          0 => 'St. Barthelemy',
+          0 => clienttranslate('St. Barthelemy'),
         ],
       ],
       3 => [
         'row' => 3,
         'col' => 21,
         'text' => [
-          0 => 'Hill 317',
+          0 => clienttranslate('Hill 317'),
         ],
       ],
       4 => [
         'row' => 4,
         'col' => 0,
         'text' => [
-          0 => 'River See',
+          0 => clienttranslate('River See'),
         ],
       ],
       5 => [
         'row' => 4,
         'col' => 20,
         'text' => [
-          0 => 'Montain',
+          0 => clienttranslate('Montain'),
         ],
       ],
       6 => [
         'row' => 6,
         'col' => 4,
         'text' => [
-          0 => 'Le Mesnil-',
-          1 => 'Adelee',
+          0 => clienttranslate('Le Mesnil-'),
+          1 => clienttranslate('Adelee'),
         ],
       ],
       7 => [
         'row' => 8,
         'col' => 22,
         'text' => [
-          0 => 'St.',
-          1 => 'Hilaire',
+          0 => clienttranslate('St.'),
+          1 => clienttranslate('Hilaire'),
         ],
       ],
     ],
@@ -549,13 +549,13 @@ $scenarios[16] = [
     'en' => [
       'name' => clienttranslate('Counter-attack on Mortain'),
       'subtitle' => clienttranslate('Unternehmen Lüttich'),
-      'historical' => clienttranslate('\"We must strike like lightning!\" - Adolf Hitler to Field Marshall Von Kluge
+      'historical' => clienttranslate('"We must strike like lightning!" - Adolf Hitler to Field Marshall Von Kluge
 
 \'Operation Lüttich\' began shortly before midnight on the evening of August 3rd. Under direct orders from Hitler, four armored divisions launched a counterattack westward across the Cotentin Peninsula toward Avranches. Their objective: to cut Patton\'s forces in half, thereby bottling up the Allied breakout.
 
 The 2nd SS Panzer Division pushed into Mortain before dawn and sent a column toward St. Hilaire. But the value of holding Mortain was severely undermined by the 120th Infantry entrenched on hill 317. The 2nd Panzer Division drove west along the River See until it was halted near Le Mesnil-Adelee. In the center, 1st SS Panzer and Panzer Lehr Division were stopped after taking St. Barthelemy. The northernmost element of the push, the 116th Panzer Division failed to launch its attack.
 
-The US commander, \"Lightning Joe\" Collins, countered and ordered armored and additional infantry forward from the reserve. By late morning, Allied aircraft swarmed the area; with a clear view of the German advance from Hill 317, the 120th was able to call in accurate air and artillery fire all day.
+The US commander, "Lightning Joe" Collins, countered and ordered armored and additional infantry forward from the reserve. By late morning, Allied aircraft swarmed the area; with a clear view of the German advance from Hill 317, the 120th was able to call in accurate air and artillery fire all day.
 
 The stage is set, the battle lines are drawn, and you are in command. The rest is history.'),
       'description' => clienttranslate('Axis Player: Take 5 command cards

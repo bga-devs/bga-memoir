@@ -524,42 +524,42 @@ $scenarios[29] = [
         'row' => 0,
         'col' => 14,
         'text' => [
-          0 => 'Saverne',
+          0 => clienttranslate('Saverne'),
         ],
       ],
       1 => [
         'row' => 0,
         'col' => 18,
         'text' => [
-          0 => 'Rhine-Marne Canal',
+          0 => clienttranslate('Rhine-Marne Canal'),
         ],
       ],
       2 => [
         'row' => 1,
         'col' => 1,
         'text' => [
-          0 => 'La Petite-Pierre',
+          0 => clienttranslate('La Petite-Pierre'),
         ],
       ],
       3 => [
         'row' => 3,
         'col' => 11,
         'text' => [
-          0 => 'Saverne Gap',
+          0 => clienttranslate('Saverne Gap'),
         ],
       ],
       4 => [
         'row' => 4,
         'col' => 22,
         'text' => [
-          0 => 'Dabo',
+          0 => clienttranslate('Dabo'),
         ],
       ],
       5 => [
         'row' => 5,
         'col' => 13,
         'text' => [
-          0 => 'Phalsbourg',
+          0 => clienttranslate('Phalsbourg'),
         ],
       ],
     ],

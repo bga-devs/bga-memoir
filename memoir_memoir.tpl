@@ -9,7 +9,11 @@
   <div id="m44-central-part">
     <div id="deck-holder"></div>
     <div id="m44-board-wrapper">
-      <ul id="m44-board"></ul>
+      <div id="m44-board">
+        <div id="m44-board-terrains" class='m44-grid'></div>
+        <div id="m44-board-labels" class='m44-grid'></div>
+        <div id="m44-board-units" class='m44-grid'></div>
+      </div>
     </div>
   </div>
 

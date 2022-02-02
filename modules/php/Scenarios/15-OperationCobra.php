@@ -422,53 +422,53 @@ $scenarios[15] = [
         'row' => 0,
         'col' => 8,
         'text' => [
-          0 => 'St Gilles',
+          0 => clienttranslate('St Gilles'),
         ],
       ],
       1 => [
         'row' => 0,
         'col' => 22,
         'text' => [
-          0 => 'Marigny',
+          0 => clienttranslate('Marigny'),
         ],
       ],
       2 => [
         'row' => 2,
         'col' => 18,
         'text' => [
-          0 => 'Monreul',
-          1 => 'sur-Lozon',
+          0 => clienttranslate('Monreul'),
+          1 => clienttranslate('sur-Lozon'),
         ],
       ],
       3 => [
         'row' => 3,
         'col' => 3,
         'text' => [
-          0 => 'Hebecrevon',
+          0 => clienttranslate('Hebecrevon'),
         ],
       ],
       4 => [
         'row' => 4,
         'col' => 24,
         'text' => [
-          0 => 'Lozon',
-          1 => 'River',
+          0 => clienttranslate('Lozon'),
+          1 => clienttranslate('River'),
         ],
       ],
       5 => [
         'row' => 6,
         'col' => 0,
         'text' => [
-          0 => 'Vire',
-          1 => 'River',
+          0 => clienttranslate('Vire'),
+          1 => clienttranslate('River'),
         ],
       ],
       6 => [
         'row' => 8,
         'col' => 0,
         'text' => [
-          0 => 'Le Grand',
-          1 => 'Hamel',
+          0 => clienttranslate('Le Grand'),
+          1 => clienttranslate('Hamel'),
         ],
       ],
     ],
@@ -476,11 +476,11 @@ $scenarios[15] = [
   'text' => [
     'en' => [
       'name' => clienttranslate('Operation Cobra'),
-      'historical' => clienttranslate('Operation \"Cobra\" was predicated on the saturation bombing of German lines over a narrow front. After the bombing, an attack would be made by three infantry divisions, with two armored and one infantry divisions held in reserve of this breakout force. General Bradley\'s intention in Cobra was to get the US forces out of \"hedgerow hell\" and into the uplands further south where they would be able to maneuver.
+      'historical' => clienttranslate('Operation "Cobra" was predicated on the saturation bombing of German lines over a narrow front. After the bombing, an attack would be made by three infantry divisions, with two armored and one infantry divisions held in reserve of this breakout force. General Bradley\'s intention in Cobra was to get the US forces out of "hedgerow hell" and into the uplands further south where they would be able to maneuver.
 
 The ground attack began at 11.00 with the simple objective of seizing Marigny and St. Gilles. In the center, the bombing quickly put the old \'Panzer Lehr\' division out of action. But the western portion of the attack bogged down quickly against German defensive positions of the 13th Parachute Regiment, who had escaped most of the bombing. Around the town of Hebecrevon, Panther tanks and German infantry were also putting up a strong fight. As a result, first day gains were disappointing.
 
-The options of \"Lightning Joe\" Collins, commander of the US forces, were to continue the infantry attacks in hopes of securing a clean breakthrough; or act more boldly and commit the mechanized forces held in reserves the next day. Never a timid man, he opted for the latter. By late afternoon, the 3rd Armored Division was on the outskirts of Marigny and the 2nd Armored Division moving rapidly toward St. Gilles. An attempted counter attack by Kampfgruppe Heinz and remnants of Panzer Lehr could not stop the armored advance. The US forces had achieved their breakout.
+The options of "Lightning Joe" Collins, commander of the US forces, were to continue the infantry attacks in hopes of securing a clean breakthrough; or act more boldly and commit the mechanized forces held in reserves the next day. Never a timid man, he opted for the latter. By late afternoon, the 3rd Armored Division was on the outskirts of Marigny and the 2nd Armored Division moving rapidly toward St. Gilles. An attempted counter attack by Kampfgruppe Heinz and remnants of Panzer Lehr could not stop the armored advance. The US forces had achieved their breakout.
 
 The stage is set, the battle lines are drawn, and you are in command. The rest is history.'),
       'description' => clienttranslate('Axis Player: Take 4 command cards

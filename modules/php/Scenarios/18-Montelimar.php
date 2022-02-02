@@ -479,66 +479,66 @@ $scenarios[18] = [
         'row' => 0,
         'col' => 2,
         'text' => [
-          0 => 'Montélimar',
+          0 => clienttranslate('Montélimar'),
         ],
       ],
       1 => [
         'row' => 0,
         'col' => 20,
         'text' => [
-          0 => 'Rhone',
-          1 => 'River',
+          0 => clienttranslate('Rhone'),
+          1 => clienttranslate('River'),
         ],
       ],
       2 => [
         'row' => 3,
         'col' => 17,
         'text' => [
-          0 => 'Condillac',
-          1 => 'Pass',
+          0 => clienttranslate('Condillac'),
+          1 => clienttranslate('Pass'),
         ],
       ],
       3 => [
         'row' => 4,
         'col' => 6,
         'text' => [
-          0 => '294',
+          0 => clienttranslate('294'),
         ],
       ],
       4 => [
         'row' => 4,
         'col' => 20,
         'text' => [
-          0 => 'Hill',
-          1 => 'Impassable',
+          0 => clienttranslate('Hill'),
+          1 => clienttranslate('Impassable'),
         ],
       ],
       5 => [
         'row' => 5,
         'col' => 13,
         'text' => [
-          0 => '300',
+          0 => clienttranslate('300'),
         ],
       ],
       6 => [
         'row' => 6,
         'col' => 2,
         'text' => [
-          0 => 'Bonlieu',
+          0 => clienttranslate('Bonlieu'),
         ],
       ],
       7 => [
         'row' => 6,
         'col' => 22,
         'text' => [
-          0 => 'Grane',
+          0 => clienttranslate('Grane'),
         ],
       ],
       8 => [
         'row' => 7,
         'col' => 9,
         'text' => [
-          0 => '430',
+          0 => clienttranslate('430'),
         ],
       ],
     ],

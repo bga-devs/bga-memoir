@@ -445,43 +445,43 @@ $scenarios[24] = [
         'row' => 1,
         'col' => 13,
         'text' => [
-          0 => 'Bezange-La-Petite',
+          0 => clienttranslate('Bezange-La-Petite'),
         ],
       ],
       1 => [
         'row' => 2,
         'col' => 2,
         'text' => [
-          0 => 'Lezey',
+          0 => clienttranslate('Lezey'),
         ],
       ],
       2 => [
         'row' => 2,
         'col' => 22,
         'text' => [
-          0 => 'Marne-Rhine',
-          1 => 'Canal',
+          0 => clienttranslate('Marne-Rhine'),
+          1 => clienttranslate('Canal'),
         ],
       ],
       3 => [
         'row' => 3,
         'col' => 13,
         'text' => [
-          0 => 'Rechicourt',
+          0 => clienttranslate('Rechicourt'),
         ],
       ],
       4 => [
         'row' => 5,
         'col' => 21,
         'text' => [
-          0 => 'Bures',
+          0 => clienttranslate('Bures'),
         ],
       ],
       5 => [
         'row' => 7,
         'col' => 13,
         'text' => [
-          0 => 'Arracourt',
+          0 => clienttranslate('Arracourt'),
         ],
       ],
     ],
@@ -489,7 +489,7 @@ $scenarios[24] = [
   'text' => [
     'en' => [
       'name' => clienttranslate('Arracourt'),
-      'historical' => clienttranslate('Part of the problem for the German forces involved in the Lorraine counter-offensive was the \"Eastern\" outlook of many of the units. They were unfamiliar with the US Army and its very different tactics. On the Eastern front, tank formations were used as a shock force to punch through infantry, because the Red army had no anti-tank weapons and limited artillery support. This was not the case with the US Army, as would become painfully obvious in the following weeks.
+      'historical' => clienttranslate('Part of the problem for the German forces involved in the Lorraine counter-offensive was the "Eastern" outlook of many of the units. They were unfamiliar with the US Army and its very different tactics. On the Eastern front, tank formations were used as a shock force to punch through infantry, because the Red army had no anti-tank weapons and limited artillery support. This was not the case with the US Army, as would become painfully obvious in the following weeks.
 
 The early morning attack of September 19th was planned as a two brigade assault with the 113th Panzer Brigade attacking Lezey, while 111th Panzer Brigade drove toward Arracourt. But the 111th became lost during the night, after receiving bad instructions from a French farmer. The German column near Lezey emerged from the fog and was quickly engaged. Poor scouting of the area, prior to giving battle, put the German forces at a disadvantage, as the US tankers used the ridges in the area to conceal their movements. The tank battle intensified near Rechicourt with the US forces gaining the upper hand. Late in the day, Patton visited Arracourt. Believing German strength in the area had been spent, he ordered General Wood to continue his advance.
 

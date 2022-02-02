@@ -571,103 +571,103 @@ $scenarios[18261] = [
         'row' => 2,
         'col' => 22,
         'text' => [
-          0 => 'Novi ',
-          1 => 'Bilyari',
+          0 => clienttranslate('Novi '),
+          1 => clienttranslate('Bilyari'),
         ],
       ],
       1 => [
         'row' => 3,
         'col' => 1,
         'text' => [
-          0 => 'Toward the ',
-          1 => 'Odessa front line',
+          0 => clienttranslate('Toward the '),
+          1 => clienttranslate('Odessa front line'),
         ],
       ],
       2 => [
         'row' => 3,
         'col' => 13,
         'text' => [
-          0 => 'Hill 57.3',
+          0 => clienttranslate('Hill 57.3'),
         ],
       ],
       3 => [
         'row' => 4,
         'col' => 0,
         'text' => [
-          0 => '',
+          0 => clienttranslate(''),
         ],
       ],
       4 => [
         'row' => 4,
         'col' => 8,
         'text' => [
-          0 => 'Romanian',
-          1 => 'HQ',
+          0 => clienttranslate('Romanian'),
+          1 => clienttranslate('HQ'),
         ],
       ],
       5 => [
         'row' => 4,
         'col' => 10,
         'text' => [
-          0 => '',
+          0 => clienttranslate(''),
         ],
       ],
       6 => [
         'row' => 8,
         'col' => 0,
         'text' => [
-          0 => 'Chebanka',
+          0 => clienttranslate('Chebanka'),
         ],
       ],
       7 => [
         'row' => 8,
         'col' => 22,
         'text' => [
-          0 => 'Grigorevka',
+          0 => clienttranslate('Grigorevka'),
         ],
       ],
       8 => [
         'row' => 15,
         'col' => 1,
         'text' => [
-          0 => '',
+          0 => clienttranslate(''),
         ],
       ],
       9 => [
         'row' => 15,
         'col' => 9,
         'text' => [
-          0 => 'Black Sea',
+          0 => clienttranslate('Black Sea'),
         ],
       ],
       10 => [
         'row' => 15,
         'col' => 15,
         'text' => [
-          0 => '',
+          0 => clienttranslate(''),
         ],
       ],
       11 => [
         'row' => 16,
         'col' => 2,
         'text' => [
-          0 => '',
+          0 => clienttranslate(''),
         ],
       ],
       12 => [
         'row' => 16,
         'col' => 4,
         'text' => [
-          0 => 'Destroyer',
-          1 => 'Bezuprechnyj',
+          0 => clienttranslate('Destroyer'),
+          1 => clienttranslate('Bezuprechnyj'),
         ],
       ],
       13 => [
         'row' => 16,
         'col' => 16,
         'text' => [
-          0 => 'Destroyer',
-          1 => 'Bojskij',
+          0 => clienttranslate('Destroyer'),
+          1 => clienttranslate('Bojskij'),
         ],
       ],
     ],

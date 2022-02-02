@@ -432,49 +432,49 @@ $scenarios[23806] = [
         'row' => 0,
         'col' => 4,
         'text' => [
-          0 => 'Remichampagne',
+          0 => clienttranslate('Remichampagne'),
         ],
       ],
       1 => [
         'row' => 0,
         'col' => 18,
         'text' => [
-          0 => 'Hompré',
+          0 => clienttranslate('Hompré'),
         ],
       ],
       2 => [
         'row' => 2,
         'col' => 12,
         'text' => [
-          0 => 'Grandru',
+          0 => clienttranslate('Grandru'),
         ],
       ],
       3 => [
         'row' => 3,
         'col' => 11,
         'text' => [
-          0 => 'Chaumont',
+          0 => clienttranslate('Chaumont'),
         ],
       ],
       4 => [
         'row' => 3,
         'col' => 23,
         'text' => [
-          0 => 'Sainlez',
+          0 => clienttranslate('Sainlez'),
         ],
       ],
       5 => [
         'row' => 4,
         'col' => 4,
         'text' => [
-          0 => 'Remoiville',
+          0 => clienttranslate('Remoiville'),
         ],
       ],
       6 => [
         'row' => 6,
         'col' => 20,
         'text' => [
-          0 => 'Hollange',
+          0 => clienttranslate('Hollange'),
         ],
       ],
     ],
@@ -492,8 +492,8 @@ The hex of Chaumont is a Temporary Medal Objective worth 1 medal for the Axis pl
 The hex of Grandru is a Temporary Medal Objective worth 1 medal for the Allied player.'),
       'rules' => clienttranslate('- Special Weapon Asset rules (SWAs 1) are in effect for units equipped with antitank weapons (SWAs 2).
 - The Axis player lays out the minefields (Terrains 29).
-- Use \"Mobile Artillery\" rules (Troops 14) for the US artillery unit.
-- Use \"Winter Weather\" rules (Actions 26).'),
+- Use "Mobile Artillery" rules (Troops 14) for the US artillery unit.
+- Use "Winter Weather" rules (Actions 26).'),
       'bibliography' => clienttranslate('39-45 Magazine n°365 - Article on Bastogne.'),
     ],
   ],
