@@ -62,12 +62,32 @@ html {
       background-repeat: repeat-y; }
     #m44-container #m44-central-part #m44-board-wrapper {
       flex-grow: 2;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: auto;
-      position: relative;
-      z-index: 1; }
+      position: relative; }
+      #m44-container #m44-central-part #m44-board-wrapper #m44-board-scrollable {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        position: relative;
+        z-index: 1;
+        display: flex; }
+      #m44-container #m44-central-part #m44-board-wrapper #m44-board-zoom-in,
+      #m44-container #m44-central-part #m44-board-wrapper #m44-board-zoom-out {
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        right: 0px;
+        width: 40px;
+        height: 40px; }
+        #m44-container #m44-central-part #m44-board-wrapper #m44-board-zoom-in svg,
+        #m44-container #m44-central-part #m44-board-wrapper #m44-board-zoom-out svg {
+          width: 100%;
+          height: 100%;
+          cursor: pointer; }
+        #m44-container #m44-central-part #m44-board-wrapper #m44-board-zoom-in:hover svg,
+        #m44-container #m44-central-part #m44-board-wrapper #m44-board-zoom-out:hover svg {
+          color: white; }
+      #m44-container #m44-central-part #m44-board-wrapper #m44-board-zoom-in {
+        right: 40px; }
     #m44-container #m44-central-part #right-side {
       float: none;
       margin-left: 0px;
@@ -95,31 +115,48 @@ html {
 #left-side {
   margin-right: 1px !important; }
 
+:root {
+  --memoirBoardScale: 1; }
+
 #m44-board {
-  display: grid;
-  width: 900px;
-  list-style-type: none;
   padding: 0;
-  margin: 0;
-  /*
-  grid-template-columns: repeat((2 * size) + 1, 1fr);
-  grid-template-rows: repeat((3 * height) + 1, 1fr);
-*/ }
+  margin: auto;
+  position: relative; }
+  #m44-board .m44-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: grid;
+    padding: 0;
+    margin: 0;
+    list-style-type: none; }
+    #m44-board .m44-grid#m44-board-terrains {
+      z-index: 1; }
+    #m44-board .m44-grid#m44-board-labels {
+      z-index: 2; }
+    #m44-board .m44-grid#m44-board-units {
+      z-index: 3; }
   #m44-board[data-type='standard'] {
-    grid-template-columns: repeat(27, 1fr);
-    grid-template-rows: repeat(28, 1fr); }
+    width: calc(var(--memoirBoardScale) * 900px);
+    height: calc(var(--memoirBoardScale) * 539.933px); }
+    #m44-board[data-type='standard'] .m44-grid {
+      grid-template-columns: repeat(27, 1fr);
+      grid-template-rows: repeat(28, 1fr); }
   #m44-board[data-type='overlord'] {
-    grid-template-columns: repeat(53, 1fr);
-    grid-template-rows: repeat(28, 1fr);
-    width: 1500px; }
-  #m44-board[data-type='brkthru'] {
+    width: calc(var(--memoirBoardScale) * 1500px);
+    height: calc(var(--memoirBoardScale) * 539.933px); }
+    #m44-board[data-type='overlord'] .m44-grid {
+      grid-template-columns: repeat(53, 1fr);
+      grid-template-rows: repeat(28, 1fr); }
+  #m44-board[data-type='brkthru'] .m44-grid {
     grid-template-columns: repeat(27, 1fr);
     grid-template-rows: repeat(52, 1fr); }
   #m44-board .hex-grid-item {
     position: relative;
     height: 0;
-    padding-bottom: 115.7%;
-    z-index: 5; }
+    padding-bottom: 115.7%; }
     #m44-board .hex-grid-item * {
       visibility: visible; }
     #m44-board .hex-grid-item .hex-grid-content {
@@ -128,7 +165,6 @@ html {
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 2;
       clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
       -webkit-clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); }
       #m44-board .hex-grid-item .hex-grid-content[data-rotation='1'] {
@@ -637,14 +673,12 @@ html {
         background-position-x: 0%;
         background-position-y: 100%; }
   #m44-board .hex-label-container {
-    z-index: 40;
     margin: auto;
     width: 100%;
     display: flex;
     justify-content: center;
     opacity: 0.7;
-    pointer-events: none;
-    display: none; }
+    pointer-events: none; }
     #m44-board .hex-label-container .hex-label {
       background: #ffffff;
       padding: 1px 3px;
@@ -652,19 +686,19 @@ html {
       border: 1px solid #000000;
       font-size: 12px;
       text-align: center;
-      white-space: nowrap; }
+      white-space: nowrap;
+      transform: scale(var(--memoirBoardScale));
+      transform-origin: bottom center; }
   #m44-board:hover .hex-label-container {
     opacity: 0.2; }
-  #m44-board .hex-cell-container {
-    z-index: 50; }
-    #m44-board .hex-cell-container .hex-cell {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      padding: 7% 0;
-      box-sizing: border-box; }
+  #m44-board .hex-cell-container .hex-cell {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 7% 0;
+    box-sizing: border-box; }
 
 .memoir-unit {
   width: 100%;

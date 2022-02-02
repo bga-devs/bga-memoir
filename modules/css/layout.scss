@@ -41,12 +41,41 @@ html {
 
     #m44-board-wrapper {
       flex-grow: 2;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: auto;
       position: relative;
-      z-index: 1;
+
+      #m44-board-scrollable {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        position: relative;
+        z-index: 1;
+        display: flex;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+
+      #m44-board-zoom-in,
+      #m44-board-zoom-out {
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        right: 0px;
+        width: 40px;
+        height: 40px;
+
+        svg {
+          width: 100%;
+          height: 100%;
+          cursor: pointer;
+        }
+        &:hover svg {
+          color: white;
+        }
+      }
+
+      #m44-board-zoom-in {
+        right: 40px;
+      }
     }
 
     #right-side {

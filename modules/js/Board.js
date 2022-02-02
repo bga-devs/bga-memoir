@@ -39,60 +39,93 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       for (let y = 0; y < dim.y; y++) {
         let size = dim.x - (y % 2 == 0 ? 0 : 1);
         for (let x = 0; x < size; x++) {
+          // Compute coresponding col (2 scale on x-axis)
           let col = 2 * x + (y % 2 == 0 ? 0 : 1);
           let row = y;
 
-          let type = 0;
-          if (face == 'winter') {
-            type = getRandomInt(30, 35);
-          } else if (face == 'desert') {
-            type = getRandomInt(19, 24);
-          } else if (face == 'country') {
-            type = getRandomInt(9, 12);
-          } else if (face == 'beach') {
-            let b = dim.y - y;
-            if (b < 2) type = 27 + (x % 2);
-            else if (b < 3) type = 25 + (x % 2);
-            else if (b < 4) type = 6 + (x % 2);
-            else if (b < 5) type = 4 + (x % 2);
-            else if (b < 6) type = 2 + (x % 2);
-            else if (b < 7) type = 0 + (x % 2);
-            else type = getRandomInt(9, 12);
-          }
-          this.place('tplBoardCell', { x: col, y, type, rotate }, 'm44-board');
-
-          let cellC = $(`cell-background-${col}-${y}`);
+          // Take into account rotation
           let realX = rotate ? 2 * size - col - (y % 2 == 0 ? 2 : 0) : col;
           let realY = rotate ? dim.y - y - 1 : y;
+
+          // Background and terrains
+          let type = this.getBackgroundType(face, dim, x, y);
+          let cellC = this.place('tplBoardBackgroundCell', { x: col, y, type, rotate }, 'm44-board-terrains');
           cellC.style.gridRow = 3 * realY + 1 + ' / span 4';
           cellC.style.gridColumn = realX + 1 + ' / span 2';
-          $(`cell-container-${col}-${y}`).style.gridArea = cellC.style.gridArea;
-
-          // Add terrains tiles
           board.grid[col][row].terrains.forEach((terrain) => {
             let tplName = TERRAINS.includes(terrain.type) ? 'tplTerrainTile' : 'tplObstacleTile';
             terrain.rotate = rotate;
             this.place(tplName, terrain, cellC);
           });
 
-          // Add units
-          let unit = board.grid[col][row].unit;
-          if (unit) {
-            unit.orientation = bottomTeam != (ALLIES_NATIONS.includes(unit.nation) ? 'ALLIES' : 'AXIS') ? 1 : 0;
-            this.place('tplUnit', unit, `cell-${col}-${y}`);
-          }
-
           // Add labels
           let labels = board.grid[col][row].labels;
           if (labels.length > 0) {
             let label = labels.map((t) => _(t)).join('<br />');
             let area = 3 * realY + 4 + ' / ' + (+realX + 1) + ' / auto / span 2';
-            this.place('tplTileLabel', { label, area }, 'm44-board');
+            this.place('tplTileLabel', { label, area }, 'm44-board-labels');
+          }
+
+          // Units
+          let cell = this.place('tplBoardCell', { x: col, y }, 'm44-board-units');
+          cell.style.gridArea = cellC.style.gridArea;
+
+          let unit = board.grid[col][row].unit;
+          if (unit) {
+            unit.orientation = bottomTeam != (ALLIES_NATIONS.includes(unit.nation) ? 'ALLIES' : 'AXIS') ? 1 : 0;
+            this.place('tplUnit', unit, `cell-${col}-${y}`);
           }
         }
       }
+
+
+      this._boardScale = 1; // TODO
+      dojo.connect($('m44-board-zoom-in'), 'click', () => this.incBoardScale(0.1));
+      dojo.connect($('m44-board-zoom-out'), 'click', () => this.incBoardScale(-0.1));
     },
 
+    incBoardScale(delta) {
+      this._boardScale += delta;
+      document.documentElement.style.setProperty('--memoirBoardScale', this._boardScale);
+      //TODO localStorage.setItem('agricolaCardScale', scale);
+    },
+
+
+    getBackgroundType(face, dim, x, y) {
+      let type = 0;
+      if (face == 'winter') {
+        type = getRandomInt(30, 35);
+      } else if (face == 'desert') {
+        type = getRandomInt(19, 24);
+      } else if (face == 'country') {
+        type = getRandomInt(9, 12);
+      } else if (face == 'beach') {
+        let b = dim.y - y;
+        if (b < 2) type = 27 + (x % 2);
+        else if (b < 3) type = 25 + (x % 2);
+        else if (b < 4) type = 6 + (x % 2);
+        else if (b < 5) type = 4 + (x % 2);
+        else if (b < 6) type = 2 + (x % 2);
+        else if (b < 7) type = 0 + (x % 2);
+        else type = getRandomInt(9, 12);
+      }
+      return type;
+    },
+
+    tplBoardBackgroundCell(cell) {
+      let rotation = cell.rotate ? 6 : 0;
+      return `<li class="hex-grid-item" id="cell-background-${cell.x}-${cell.y}">
+      <div class="hex-grid-content hex-grid-background" data-type="${cell.type}" data-rotation="${rotation}"></div>
+    </li>`;
+    },
+
+    tplBoardCell(cell) {
+      return `<li class="hex-grid-item hex-cell-container" id="cell-container-${cell.x}-${cell.y}">
+      <div class='hex-cell' id="cell-${cell.x}-${cell.y}"></div>
+    </li>`;
+    },
+
+    /*
     tplBoardCell(cell) {
       let rotation = cell.rotate ? 6 : 0;
       return `
@@ -104,6 +137,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     </li>
       `;
     },
+*/
 
     tplTerrainTile(terrain) {
       let type = TERRAINS.findIndex((t) => t == terrain.type);
