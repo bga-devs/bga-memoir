@@ -1,0 +1,393 @@
+.m44-dice-wrapper {
+  width: 64px;
+  height: 64px;
+  position: relative;
+  transform: scale(calc(0.8 * var(--memoirBoardScale)));
+  transform-origin: center center;
+
+  .m44-dice {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 64px;
+    height: 64px;
+    background-image: url('img/dice_animations.png');
+    background-size: 800% 2000%;
+  }
+
+  .m44-dice-shadow {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 64px;
+    height: 64px;
+    background-image: url('img/dice_others.png');
+    background-size: 100% 200%;
+  }
+
+  &.animated {
+    .m44-dice-shadow {
+      animation: slideDiceShadow 1s;
+      animation-fill-mode: forwards;
+    }
+  }
+
+  @for $j from 0 to 5 {
+    &[data-result='#{$j}'] {
+      .m44-dice {
+        background-position-x: 100%;
+        background-position-y: ($j * 4 + 3) * 100% / 19;
+      }
+
+      &.animated .m44-dice {
+        animation: rollDice_#{$j} 1s, rollDiceTrajectory 1s;
+        animation-fill-mode: forwards;
+      }
+    }
+  }
+}
+
+// Background image animation
+@for $j from 0 to 5 {
+  @keyframes rollDice_#{$j} {
+    @for $i from 0 to 32 {
+      #{$i * 100% / 31 + 0.0001},
+      #{($i+1) * 100% / 31} {
+        background-position-x: ($i % 8) * 100% / 7;
+        background-position-y: ($j * 4 + (($i - ($i % 8)) / 8)) * 100% / 19;
+      }
+    }
+  }
+}
+
+// Horizontal sliding of the shadow
+@keyframes slideDiceShadow {
+  0% {
+    transform: translateX(270%) translateY(-50%);
+  }
+  10.00% {
+    transform: translateX(232.7792185456302%) translateY(-50%);
+  }
+  48.00% {
+    transform: translateX(113.42322849675475%) translateY(0%);
+  }
+  63.00% {
+    transform: translateX(83.31192191727543%) translateY(-15%);
+  }
+  79.00% {
+    transform: translateX(46.58910143196837%) translateY(0%);
+  }
+  87.00% {
+    transform: translateX(28.78034067096386%) translateY(-10%);
+  }
+  100% {
+    transform: translateX(0%) translateY(0%);
+  }
+}
+
+// Follow the path of the roll trajectory
+@keyframes rollDiceTrajectory {
+  0.00% {
+    transform: translateX(200%) translateY(-200%);
+  }
+  1.00% {
+    transform: translateX(197.41225171916932%) translateY(-203.5753329457789%);
+  }
+  2.00% {
+    transform: translateX(194.80571672460724%) translateY(-207.05296430348378%);
+  }
+  3.00% {
+    transform: translateX(192.1759873226953%) translateY(-210.40506131527857%);
+  }
+  4.00% {
+    transform: translateX(189.51866662298585%) translateY(-213.59977412425803%);
+  }
+  5.00% {
+    transform: translateX(186.8290012304001%) translateY(-216.59718998181404%);
+  }
+  6.00% {
+    transform: translateX(184.10228096254198%) translateY(-219.34792726296104%);
+  }
+  7.00% {
+    transform: translateX(181.33458426847153%) translateY(-221.79221727226346%);
+  }
+  8.00% {
+    transform: translateX(178.52348043479628%) translateY(-223.85637493536774%);
+  }
+  9.00% {
+    transform: translateX(175.66967166760742%) translateY(-225.45222492770657%);
+  }
+  10.00% {
+    transform: translateX(172.7792185456302%) translateY(-226.47801986857198%);
+  }
+  11.00% {
+    transform: translateX(169.86630563190622%) translateY(-226.82549893805114%);
+  }
+  12.00% {
+    transform: translateX(166.95527246987245%) translateY(-226.3939477237682%);
+  }
+  13.00% {
+    transform: translateX(164.08021386604776%) translateY(-225.11080020039586%);
+  }
+  14.00% {
+    transform: translateX(161.28028051080742%) translateY(-222.95407709731307%);
+  }
+  15.00% {
+    transform: translateX(158.59142535601916%) translateY(-219.96125221012184%);
+  }
+  16.00% {
+    transform: translateX(156.0391222780365%) translateY(-216.21748803908753%);
+  }
+  17.00% {
+    transform: translateX(153.63518994553232%) translateY(-211.8340295348601%);
+  }
+  18.00% {
+    transform: translateX(151.37966076801848%) translateY(-206.9245892946605%);
+  }
+  19.00% {
+    transform: translateX(149.26472405312708%) translateY(-201.59105816702066%);
+  }
+  20.00% {
+    transform: translateX(147.27861514803843%) translateY(-195.91834041012285%);
+  }
+  21.00% {
+    transform: translateX(145.40822980677422%) translateY(-189.97418153041144%);
+  }
+  22.00% {
+    transform: translateX(143.64073386262208%) translateY(-183.8116933162932%);
+  }
+  23.00% {
+    transform: translateX(141.96449230080987%) translateY(-177.47170671044924%);
+  }
+  24.00% {
+    transform: translateX(140.3687937776546%) translateY(-170.98661674751557%);
+  }
+  25.00% {
+    transform: translateX(138.84465005518936%) translateY(-164.3811572803321%);
+  }
+  26.00% {
+    transform: translateX(137.38391014117124%) translateY(-157.6753564171149%);
+  }
+  27.00% {
+    transform: translateX(135.9799084793195%) translateY(-150.8845078278914%);
+  }
+  28.00% {
+    transform: translateX(134.62649806554376%) translateY(-144.02155231037713%);
+  }
+  29.00% {
+    transform: translateX(133.31870944135264%) translateY(-137.09647522511537%);
+  }
+  30.00% {
+    transform: translateX(132.05195666081232%) translateY(-130.11774117371598%);
+  }
+  31.00% {
+    transform: translateX(130.8224424094452%) translateY(-123.09223661172615%);
+  }
+  32.00% {
+    transform: translateX(129.62657463301562%) translateY(-116.02575763923122%);
+  }
+  33.00% {
+    transform: translateX(128.46175516898631%) translateY(-108.9228378394664%);
+  }
+  34.00% {
+    transform: translateX(127.32505095653028%) translateY(-101.78795340853726%);
+  }
+  35.00% {
+    transform: translateX(126.21412851079077%) translateY(-94.62437541282867%);
+  }
+  36.00% {
+    transform: translateX(125.12719990702792%) translateY(-87.43480104742989%);
+  }
+  37.00% {
+    transform: translateX(124.06202348733532%) translateY(-80.22238660446666%);
+  }
+  38.00% {
+    transform: translateX(123.01738389501674%) translateY(-72.98879631069622%);
+  }
+  39.00% {
+    transform: translateX(121.99150941008827%) translateY(-65.73621087704177%);
+  }
+  40.00% {
+    transform: translateX(120.98310905365928%) translateY(-58.46635191739008%);
+  }
+  41.00% {
+    transform: translateX(119.99096746903346%) translateY(-51.18076888423926%);
+  }
+  42.00% {
+    transform: translateX(119.01425281207207%) translateY(-43.880494745921354%);
+  }
+  43.00% {
+    transform: translateX(118.05163629278721%) translateY(-36.5670215678049%);
+  }
+  44.00% {
+    transform: translateX(117.10242650825833%) translateY(-29.241210156833287%);
+  }
+  45.00% {
+    transform: translateX(116.1656025588606%) translateY(-21.904150868468125%);
+  }
+  46.00% {
+    transform: translateX(115.24062428606234%) translateY(-14.556417574005007%);
+  }
+  47.00% {
+    transform: translateX(114.32674627108985%) translateY(-7.198928467516875%);
+  }
+  48.00% {
+    transform: translateX(113.42322849675475%) translateY(0.16745564405288568%);
+  }
+  49.00% {
+    transform: translateX(112.13469112263228%) translateY(-4.8753235916768%);
+  }
+  50.00% {
+    transform: translateX(110.7029253122528%) translateY(-11.624796060488329%);
+  }
+  51.00% {
+    transform: translateX(109.17240771911389%) translateY(-18.219438053749933%);
+  }
+  52.00% {
+    transform: translateX(107.53571656499037%) translateY(-24.631646362143776%);
+  }
+  53.00% {
+    transform: translateX(105.78467925129816%) translateY(-30.826931320804956%);
+  }
+  54.00% {
+    transform: translateX(103.91154990469306%) translateY(-36.76466284200578%);
+  }
+  55.00% {
+    transform: translateX(101.9089175501207%) translateY(-42.395832317102915%);
+  }
+  56.00% {
+    transform: translateX(99.77043802562659%) translateY(-47.66253613237145%);
+  }
+  57.00% {
+    transform: translateX(97.49242204843942%) translateY(-52.49831999178216%);
+  }
+  58.00% {
+    transform: translateX(95.0747480828896%) translateY(-56.828867562556276%);
+  }
+  59.00% {
+    transform: translateX(92.52251252472338%) translateY(-60.57441073460691%);
+  }
+  60.00% {
+    transform: translateX(89.84767448383192%) translateY(-63.656903011733945%);
+  }
+  61.00% {
+    transform: translateX(87.06941769046739%) translateY(-66.00604516022773%);
+  }
+  62.00% {
+    transform: translateX(84.21386691201387%) translateY(-67.56927056941232%);
+  }
+  63.00% {
+    transform: translateX(81.31192191727543%) translateY(-68.3166805447875%);
+  }
+  64.00% {
+    transform: translateX(78.39644865211136%) translateY(-68.24729950515078%);
+  }
+  65.00% {
+    transform: translateX(75.49887353989409%) translateY(-67.38408230232574%);
+  }
+  66.00% {
+    transform: translateX(72.6470971191806%) translateY(-65.76955279931549%);
+  }
+  67.00% {
+    transform: translateX(69.86413554500524%) translateY(-63.45719580086896%);
+  }
+  68.00% {
+    transform: translateX(67.16816245116595%) translateY(-60.505660953395335%);
+  }
+  69.00% {
+    transform: translateX(64.57311392777979%) translateY(-56.972450160712654%);
+  }
+  70.00% {
+    transform: translateX(62.09016382927241%) translateY(-52.909900484978635%);
+  }
+  71.00% {
+    transform: translateX(59.728584314439026%) translateY(-48.36541369520892%);
+  }
+  72.00% {
+    transform: translateX(57.496806413961245%) translateY(-43.379218169224316%);
+  }
+  73.00% {
+    transform: translateX(55.40386098769014%) translateY(-37.98500015207589%);
+  }
+  74.00% {
+    transform: translateX(53.46019411082978%) translateY(-32.21024807882237%);
+  }
+  75.00% {
+    transform: translateX(51.678294164232554%) translateY(-26.078605446842012%);
+  }
+  76.00% {
+    transform: translateX(50.074683331385614%) translateY(-19.609182170277943%);
+  }
+  77.00% {
+    transform: translateX(48.67068740871827%) translateY(-12.820801227625475%);
+  }
+  78.00% {
+    transform: translateX(47.495109337134465%) translateY(-5.733318565711993%);
+  }
+  79.00% {
+    transform: translateX(46.58910143196837%) translateY(0.6021631504615934%);
+  }
+  80.00% {
+    transform: translateX(45.61161569870303%) translateY(-6.686461400555851%);
+  }
+  81.00% {
+    transform: translateX(44.14282674736491%) translateY(-13.366036345564636%);
+  }
+  82.00% {
+    transform: translateX(42.21314212729608%) translateY(-19.15966878444304%);
+  }
+  83.00% {
+    transform: translateX(39.904813803708066%) translateY(-23.87809596390579%);
+  }
+  84.00% {
+    transform: translateX(37.32104919204842%) translateY(-27.454347103757655%);
+  }
+  85.00% {
+    transform: translateX(34.5577237308955%) translateY(-29.913098669708948%);
+  }
+  86.00% {
+    transform: translateX(31.69128200604724%) translateY(-31.316558310201536%);
+  }
+  87.00% {
+    transform: translateX(28.78034067096386%) translateY(-31.724466027106235%);
+  }
+  88.00% {
+    transform: translateX(25.872637586277836%) translateY(-31.17383651898854%);
+  }
+  89.00% {
+    transform: translateX(23.013302997309985%) translateY(-29.668055626492425%);
+  }
+  90.00% {
+    transform: translateX(20.254213729441666%) translateY(-27.17337971743725%);
+  }
+  91.00% {
+    transform: translateX(17.665890179774753%) translateY(-23.618878299688216%);
+  }
+  92.00% {
+    transform: translateX(15.354848909961433%) translateY(-18.911985933266802%);
+  }
+  93.00% {
+    transform: translateX(13.47983170928819%) translateY(-13.001168975829113%);
+  }
+  94.00% {
+    transform: translateX(12.238072064008138%) translateY(-6.018016115453722%);
+  }
+  95.00% {
+    transform: translateX(11.66991441485153%) translateY(0.7169947967089629%);
+  }
+  96.00% {
+    transform: translateX(9.683354477388924%) translateY(-4.935293142065857%);
+  }
+  97.00% {
+    transform: translateX(7.218473356964009%) translateY(-9.009262856582103%);
+  }
+  98.00% {
+    transform: translateX(4.356751267286187%) translateY(-9.70462270544736%);
+  }
+  99.00% {
+    transform: translateX(1.8333250644064776%) translateY(-5.9971272002942815%);
+  }
+  100.00% {
+    transform: translateX(0%) translateY(0%);
+  }
+}

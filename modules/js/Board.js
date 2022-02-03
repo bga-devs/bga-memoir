@@ -180,5 +180,27 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         <div class="memoir-unit-meeple"></div>
       </div>`;
     },
+
+    ////////////////////////////
+    //    ____  _
+    //   |  _ \(_) ___ ___
+    //   | | | | |/ __/ _ \
+    //   | |_| | | (_|  __/
+    //   |____/|_|\___\___|
+    /////////////////////////////
+    rollDice(cell, results) {
+      let o = $(`cell-${cell.x}-${cell.y}`);
+      results.forEach((result) => {
+        let die = this.place('tplDice', { result, animated: true }, o);
+        die.style.transform = 'translateX(100%)';
+      });
+    },
+
+    tplDice(dice) {
+      return `<div class="m44-dice-wrapper ${dice.animated ? 'animated' : ''}" data-result="${dice.result}">
+        <div class="m44-dice-shadow"></div>
+        <div class="m44-dice"></div>
+      </div>`;
+    },
   });
 });
