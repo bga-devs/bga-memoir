@@ -27,7 +27,7 @@ html {
   }
 
   #m44-central-part {
-    height: 600px;
+    max-height: 600px; // TODO
     display: flex;
     margin-top: -6px;
     margin-bottom: -4px;
@@ -35,6 +35,7 @@ html {
 
     #deck-holder {
       width: 122px;
+      flex-shrink: 0;
       background: url('img/game_left.png');
       background-repeat: repeat-y;
     }
@@ -42,6 +43,7 @@ html {
     #m44-board-wrapper {
       flex-grow: 2;
       position: relative;
+      overflow: hidden;
 
       #m44-board-scrollable {
         width: 100%;
@@ -49,7 +51,6 @@ html {
         overflow: auto;
         position: relative;
         z-index: 1;
-        display: flex;
         padding: 20px;
         box-sizing: border-box;
       }
@@ -83,6 +84,7 @@ html {
       margin-left: 0px;
       margin-top: 0px;
       width: 218px;
+      flex-shrink: 0;
       padding-left: 35px;
       overflow: auto;
       background: url('img/game_right.png');

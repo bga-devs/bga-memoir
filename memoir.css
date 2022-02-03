@@ -52,24 +52,27 @@ html {
       height: 52px;
       overflow: hidden; }
   #m44-container #m44-central-part {
-    height: 600px;
+    max-height: 600px;
     display: flex;
     margin-top: -6px;
     margin-bottom: -4px; }
     #m44-container #m44-central-part #deck-holder {
       width: 122px;
+      flex-shrink: 0;
       background: url("img/game_left.png");
       background-repeat: repeat-y; }
     #m44-container #m44-central-part #m44-board-wrapper {
       flex-grow: 2;
-      position: relative; }
+      position: relative;
+      overflow: hidden; }
       #m44-container #m44-central-part #m44-board-wrapper #m44-board-scrollable {
         width: 100%;
         height: 100%;
         overflow: auto;
         position: relative;
         z-index: 1;
-        display: flex; }
+        padding: 20px;
+        box-sizing: border-box; }
       #m44-container #m44-central-part #m44-board-wrapper #m44-board-zoom-in,
       #m44-container #m44-central-part #m44-board-wrapper #m44-board-zoom-out {
         position: absolute;
@@ -93,6 +96,7 @@ html {
       margin-left: 0px;
       margin-top: 0px;
       width: 218px;
+      flex-shrink: 0;
       padding-left: 35px;
       overflow: auto;
       background: url("img/game_right.png");
@@ -146,13 +150,16 @@ html {
       grid-template-rows: repeat(28, 1fr); }
   #m44-board[data-type='overlord'] {
     width: calc(var(--memoirBoardScale) * 1500px);
-    height: calc(var(--memoirBoardScale) * 539.933px); }
+    height: calc(var(--memoirBoardScale) * 467.133px); }
     #m44-board[data-type='overlord'] .m44-grid {
-      grid-template-columns: repeat(53, 1fr);
+      grid-template-columns: repeat(52, 1fr);
       grid-template-rows: repeat(28, 1fr); }
-  #m44-board[data-type='brkthru'] .m44-grid {
-    grid-template-columns: repeat(27, 1fr);
-    grid-template-rows: repeat(52, 1fr); }
+  #m44-board[data-type='brkthru'] {
+    width: calc(var(--memoirBoardScale) * 800px);
+    height: calc(var(--memoirBoardScale) * 891.8px); }
+    #m44-board[data-type='brkthru'] .m44-grid {
+      grid-template-columns: repeat(27, 1fr);
+      grid-template-rows: repeat(52, 1fr); }
   #m44-board .hex-grid-item {
     position: relative;
     height: 0;
@@ -699,6 +706,14 @@ html {
     height: 100%;
     padding: 7% 0;
     box-sizing: border-box; }
+  #m44-board .board-divider {
+    margin-left: -1px;
+    z-index: 2;
+    width: 2px;
+    background-image: linear-gradient(to bottom, #ac0202 75%, transparent 25%);
+    background-size: 2px 16px; }
+  #m44-board[data-type='overlord'] .board-divider:nth-of-type(2n + 1) {
+    background-image: linear-gradient(to bottom, #c62525a3 60%, transparent 40%); }
 
 .memoir-unit {
   width: 100%;

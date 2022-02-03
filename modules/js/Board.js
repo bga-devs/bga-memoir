@@ -78,8 +78,19 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         }
       }
 
+      // Add sections dividers
+      let dividers = {
+        standard: [9, 19],
+        overlord: [9, 19, 27, 35, 45],
+        brkthru: [9, 19],
+      };
+      dividers[type].forEach((x) => {
+        let o = this.place('tplBoardDivider', {}, 'm44-board-terrains');
+        o.style.gridRow = '1 / span ' + 3 * (dim.y + 1);
+        o.style.gridColumn = x + ' / span 1';
+      });
 
-      this._boardScale = 1; // TODO
+      this._boardScale = 1; // TODO localStorage
       dojo.connect($('m44-board-zoom-in'), 'click', () => this.incBoardScale(0.1));
       dojo.connect($('m44-board-zoom-out'), 'click', () => this.incBoardScale(-0.1));
     },
@@ -89,7 +100,6 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       document.documentElement.style.setProperty('--memoirBoardScale', this._boardScale);
       //TODO localStorage.setItem('agricolaCardScale', scale);
     },
-
 
     getBackgroundType(face, dim, x, y) {
       let type = 0;
@@ -125,20 +135,6 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     </li>`;
     },
 
-    /*
-    tplBoardCell(cell) {
-      let rotation = cell.rotate ? 6 : 0;
-      return `
-    <li class="hex-grid-item" id="cell-background-${cell.x}-${cell.y}">
-      <div class="hex-grid-content hex-grid-background" data-type="${cell.type}" data-rotation="${rotation}"></div>
-    </li>
-    <li class="hex-grid-item hex-cell-container" id="cell-container-${cell.x}-${cell.y}">
-      <div class='hex-cell' id="cell-${cell.x}-${cell.y}"></div>
-    </li>
-      `;
-    },
-*/
-
     tplTerrainTile(terrain) {
       let type = TERRAINS.findIndex((t) => t == terrain.type);
       let rotation = terrain.rotate ? 6 : 0;
@@ -161,6 +157,10 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       }
       rotation = rotation % 12;
       return `<div class="hex-grid-content hex-grid-obstacle" data-type="${type}" data-rotation="${rotation}"></div>`;
+    },
+
+    tplBoardDivider() {
+      return '<li class="board-divider"></li>';
     },
 
     tplTileLabel(label) {
