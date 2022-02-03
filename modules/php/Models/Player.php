@@ -7,6 +7,7 @@ use M44\Helpers\Utils;
 use M44\Managers\Cards;
 use M44\Managers\Players;
 use M44\Managers\Teams;
+use M44\Managers\Troops;
 
 /*
  * Player: all utility functions concerning a player
@@ -65,5 +66,20 @@ class Player extends \M44\Helpers\DB_Model
   public function getTeam()
   {
     return Teams::getSide($this->team);
+  }
+
+  public function getTroopsInSection($section)
+  {
+    return Troops::getInSection($this->team, $section);
+  }
+
+  public function getTroopsBySections()
+  {
+    $troops = [];
+    for ($i = 0; $i < 3; $i++) {
+      $troops[$i] = $this->getTroopsInSection($i);
+    }
+
+    return $troops;
   }
 }

@@ -58,6 +58,8 @@ CREATE TABLE IF NOT EXISTS `troops` (
   `troop_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `troop_location` varchar(32) NOT NULL,
   `troop_state` int(10) DEFAULT 0,
+  `x` int(10) NULL,
+  `y` int(10) NULL,
   `type` VARCHAR(255) NOT NULL,
   `nation` VARCHAR(255) NOT NULL,
   `figures` int(10) NOT NULL,

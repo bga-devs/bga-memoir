@@ -33,11 +33,18 @@ class SectionCard extends Card
 
   public function getArgsOrderUnits()
   {
+    $player = $this->getPlayer();
+    $troops = [];
+    foreach ($this->getSections() as $i => $n) {
+      $troops[] = $n == 0 ? [] : $player->getTroopsInSection($i)->getIds();
+    }
+
     return [
       'i18n' => ['desc'],
       'n' => $this->nUnits,
       'desc' => $this->orderUnitsTitles[$this->value] ?? '',
       'sections' => $this->getSections(),
+      'troops' => $troops,
     ];
   }
 }

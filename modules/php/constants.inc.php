@@ -28,6 +28,10 @@ const ST_CHANGE_PLAYER = 95;
 
 const ST_END_GAME = 99;
 
+
+const AXIS = 'AXIS';
+const ALLIES = 'ALLIES';
+
 /*
  * Card constants
  */

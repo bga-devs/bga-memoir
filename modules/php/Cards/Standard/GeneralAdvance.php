@@ -9,7 +9,7 @@ class GeneralAdvance extends \M44\Models\SectionCard
     $this->type = \CARD_GENERAL_ADVANCE;
     $this->name = clienttranslate('General advance');
     $this->subtitle = clienttranslate('Issue an order to 2 units in each section');
-    $this->text = clienttranslate('Order 2 Units in each section');
+    $this->text = [clienttranslate('Order 2 Units in each section')];
     $this->sections = [2, 2, 2];
   }
 }

@@ -4,6 +4,7 @@ use M44\Core\Globals;
 use M44\Core\Notifications;
 use M44\Managers\Players;
 use M44\Helpers\Utils;
+use M44\Board;
 
 /**
  * Troops
@@ -12,13 +13,10 @@ class Troops extends \M44\Helpers\Pieces
 {
   protected static $table = 'troops';
   protected static $prefix = 'troop_';
-  protected static $customFields = ['type', 'nation', 'figures', 'badge', 'extra_datas'];
+  protected static $customFields = ['x', 'y', 'type', 'nation', 'figures', 'badge', 'extra_datas'];
   protected static $autoreshuffle = false;
   protected static function cast($row)
   {
-    $locations = explode('_', $row['location']);
-    $row['x'] = $locations[0];
-    $row['y'] = $locations[1];
     return self::getInstance($row['type'], $row['badge'], $row);
   }
 
@@ -42,6 +40,36 @@ class Troops extends \M44\Helpers\Pieces
     return self::getAllOrdered()->ui();
   }
 
+  public static $sections = [
+    STANDARD_DECK => [0, 7, 17, 24],
+    BREAKTHROUGH_DECK => [0, 7, 17, 24],
+    OVERLORD_DECK => [], // TODO : handle subsections
+  ];
+
+  public static function addSectionClause(&$q, $section)
+  {
+    $mode = Board::getMode();
+    $sections = self::$sections[$mode];
+    $q = $q->where('x', '>=', $sections[$section])->where('x', '<=', $sections[$section + 1]);
+  }
+
+  public static function addTeamClause(&$q, $side)
+  {
+    $nations = [
+      ALLIES => ['fr', 'gb', 'us', 'ru', 'ch'],
+      AXIS => ['ger', 'jp', 'it'],
+    ];
+    $q = $q->whereIn('nation', $nations[$side]);
+  }
+
+  public static function getInSection($side, $section)
+  {
+    $query = self::getSelectQuery();
+    self::addTeamClause($query, $side);
+    self::addSectionClause($query, $section);
+    return $query->get();
+  }
+
   //////////////////////////////////
   //////////////////////////////////
   ///////////// SETTERS //////////////
@@ -63,7 +91,9 @@ class Troops extends \M44\Helpers\Pieces
         $data = self::getTypeAndNation($hex['unit']);
         $troop = self::getInstance($data['type'], $data['badge']);
         $data['figures'] = $troop->getMaxUnits();
-        $data['location'] = $hex['col'] . '_' . $hex['row'];
+        $data['location'] = 'board';
+        $data['x'] = $hex['col'];
+        $data['y'] = $hex['row'];
         $troops[] = $data;
       }
     }
