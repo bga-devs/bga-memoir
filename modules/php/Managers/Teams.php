@@ -1,5 +1,6 @@
 <?php
 namespace M44\Managers;
+use M44\Core\Globals;
 
 /**
  * Teams
@@ -23,6 +24,11 @@ class Teams extends \M44\Helpers\DB_Manager
     return self::DB()
       ->where('side', $side)
       ->getSingle();
+  }
+
+  public function getSideTurn()
+  {
+    return self::getSide(Globals::getSideTurn());
   }
 
   /**

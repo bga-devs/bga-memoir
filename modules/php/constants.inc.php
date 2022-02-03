@@ -7,8 +7,8 @@ const ST_GAME_SETUP = 1;
 const ST_M44 = 2;
 const ST_PREPARE_TURN = 3;
 const ST_PLAY_CARD = 4;
-const ST_SELECT_UNIT = 5;
-const ST_MOVE_UNIT = 6;
+const ST_ORDER_UNITS = 5;
+const ST_MOVE_UNITS = 6;
 const ST_ATTACK = 7;
 const ST_PRE_AMBUSH = 8;
 const ST_OPPONENT_AMBUSH = 9;
@@ -18,6 +18,12 @@ const ST_ATTACK_RESOLVE = 12;
 const ST_END_ROUND = 13;
 const ST_AMBUSH_ATTACK = 14;
 const ST_AMBUSH_RESOLVE = 15;
+
+const ST_OVERLORD_PLAY_CARD = 40;
+const ST_OVERLORD_SELECT_UNIT = 41;
+const ST_OVERLORD_MOVE_UNIT = 42;
+const ST_OVERLORD_ATTACK = 43;
+
 const ST_CHANGE_PLAYER = 95;
 
 const ST_END_GAME = 99;
@@ -26,8 +32,8 @@ const ST_END_GAME = 99;
  * Card constants
  */
 const STANDARD_DECK = 'STANDARD';
-const BREAKTHROUGH_DECK = 'BRKTHRU'; // TODO : check from editor
-const OVERLORD_DECK = 'OVERLORD'; // TODO : check from editor
+const BREAKTHROUGH_DECK = 'BRKTHRU';
+const OVERLORD_DECK = 'OVERLORD';
 
 const INFINITY = 100;
 const LEFT_SECTION = 1;

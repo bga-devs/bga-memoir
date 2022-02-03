@@ -436,7 +436,7 @@ define(['dojo', 'dojo/_base/declare', 'ebg/core/gamegui'], (dojo, declare) => {
           clearPos: true,
           beforeBrother: null,
 
-          phantom: false,
+          phantom: true,
         },
         options,
       );

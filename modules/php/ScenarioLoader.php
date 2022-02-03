@@ -63,6 +63,6 @@ class ScenarioLoader
     $startingSide = $infos['side_' . \strtolower($infos['starting'])];
     Globals::setSideTurn($startingSide);
     Globals::setTurn(0);
-    //Game::get()->stPrepareTurn();
+    Game::get()->gamestate->jumpToState(\ST_PREPARE_TURN);
   }
 }

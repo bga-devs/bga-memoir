@@ -29,6 +29,7 @@
   <div id="m44-bottom-part">
     <div id="bottom-player"></div>
     <div id="hand"></div>
+    <div id="inplay"></div>
   </div>
 </div>
 {OVERALL_GAME_FOOTER}

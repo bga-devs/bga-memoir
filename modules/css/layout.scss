@@ -101,6 +101,8 @@ html {
     z-index: 2;
     display: flex;
 
+    --memoirCardScale: 0.4;
+
     #bottom-player {
       margin-top: 25px;
     }
@@ -108,7 +110,13 @@ html {
     #hand {
       display: flex;
       column-gap: 5px;
-      --memoirCardScale: 0.4;
+    }
+
+    #inplay {
+      .tactic-card,
+      .section-card {
+        margin-top: -20px;
+      }
     }
   }
 }

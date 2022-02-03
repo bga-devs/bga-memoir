@@ -39,6 +39,10 @@
   font-display: swap;
 }
 
+.phantom {
+  visibility: hidden;
+}
+
 @import 'modules/css/layout';
 @import 'modules/css/board';
 @import 'modules/css/units';

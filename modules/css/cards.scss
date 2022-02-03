@@ -4,6 +4,10 @@
 
 .section-card,
 .tactic-card {
+  &.moving {
+    --memoirCardScale: 0.4;
+  }
+
   width: calc(var(--memoirCardScale) * 314px);
   height: calc(var(--memoirCardScale) * 503px);
   overflow: hidden;
@@ -59,6 +63,14 @@
         text-align: center;
         font-size: 24px;
       }
+    }
+  }
+
+  &.selectable {
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.1);
     }
   }
 }

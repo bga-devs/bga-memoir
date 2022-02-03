@@ -141,6 +141,29 @@ class Players extends \M44\Helpers\DB_Manager
    */
   public function changeActive($pId)
   {
+    $pId = is_int($pId) ? $pId : $pId->getId();
     Game::get()->gamestate->changeActivePlayer($pId);
+  }
+
+  /**
+   * Get the player of one side
+   */
+  public function getSide($side = null)
+  {
+    $side = $side ?? Globals::getSideTurn();
+    return self::DB()
+      ->where('team_side', $side)
+      ->getSingle();
+  }
+
+  /**
+   * Get the players of one side in case of teams
+   */
+  public function getSideTeam($side = null)
+  {
+    $side = $side ?? Globals::getSideTurn();
+    return self::DB()
+      ->where('team_side', $side)
+      ->get();
   }
 }

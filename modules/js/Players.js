@@ -12,8 +12,12 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       });
       dojo.place('right-side', 'm44-central-part');
 
+      // TODO : handle other players
       this.forEachPlayer((player) => {
         player.cards.forEach((card) => this.addCard(card, 'hand'));
+        if (player.inplay) {
+          this.addCard(player.inplay, 'inplay');
+        }
       });
     },
 
@@ -45,9 +49,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     },
 
     formatDesc(card) {
-      if(card.desc) return;
+      if (card.desc) return;
 
-      card.desc = "<div>" + card.text.map((t) => _(t)).join('</div><div>') + "</div>";
+      card.desc = '<div>' + card.text.map((t) => _(t)).join('</div><div>') + '</div>';
       card.desc = card.desc.replace(new RegExp('<ARMOR>', 'g'), '<span class="desc-unit">' + _('ARMOR') + '</span>');
       card.desc = card.desc.replace(
         new RegExp('<INFANTRY>', 'g'),
@@ -57,6 +61,22 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         new RegExp('<ARTILLERY>', 'g'),
         '<span class="desc-unit">' + _('ARTILLERY') + '</span>',
       );
+    },
+
+    onEnteringStatePlayCard(args) {
+      args._private.cardIds.forEach((cardId) => {
+        this.onClick('card-' + cardId, () => this.takeAction('actPlayCard', { cardId }));
+      });
+    },
+
+    notif_playCard(n) {
+      debug('Notif: playing a card', n);
+      if (this.player_id == n.args.player_id) {
+        this.slide('card-' + n.args.card.id, 'inplay');
+      } else {
+        // TODO
+        // this.addCard()
+      }
     },
   });
 });

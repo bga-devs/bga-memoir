@@ -13,7 +13,6 @@ class Card implements \JsonSerializable
   protected $text = '';
   protected $deck = STANDARD_DECK;
 
-
   /*
    * DYNAMIC INFORMATIONS
    */
@@ -101,5 +100,13 @@ class Card implements \JsonSerializable
   {
     $this->extraDatas[$variable] = $value;
     self::DB()->update(['extra_datas' => \addslashes(\json_encode($this->extraDatas))], $this->id);
+  }
+
+  public function getArgsOrderUnits()
+  {
+    return [
+      'n' => '',
+      'desc' => '',
+    ];
   }
 }

@@ -33,4 +33,14 @@ abstract class Utils extends \APP_DbObject
     $array = $new;
     return true;
   }
+
+  public static function privatise($data, $pId = null)
+  {
+    $key = $pId ?? 'active';
+    return [
+      '_private' => [
+        $key => $data,
+      ],
+    ];
+  }
 }

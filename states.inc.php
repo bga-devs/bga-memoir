@@ -44,32 +44,32 @@ $machinestates = [
 
   ST_PLAY_CARD => [
     'name' => 'playCard',
-    'description' => clienttranslate('Players must play a card'),
+    'description' => clienttranslate('${actplayer} must play a card'),
     'descriptionmyturn' => clienttranslate('${you} must play a card'),
-    'type' => 'multipleactiveplayer',
+    'type' => 'activeplayer',
     'args' => 'argsPlayCard',
     'possibleactions' => ['actPlayCard'],
-    'transitions' => ['moveUnits' => ST_SELECT_UNIT],
+    'transitions' => ['selectUnits' => ST_ORDER_UNITS],
   ],
 
-  ST_SELECT_UNIT => [
-    'name' => 'selectUnits',
-    'description' => clienttranslate('${actplayer} must select units in sections ${section}'),
-    'descriptionmyturn' => clienttranslate('${you} must select units in sections ${section}'),
-    'type' => 'multipleactiveplayer',
-    'args' => 'argsSelectUnits',
-    'possibleactions' => ['actSelectUnits'],
-    'transitions' => ['moveUnits' => ST_MOVE_UNIT],
+  ST_ORDER_UNITS => [
+    'name' => 'orderUnits',
+    'description' => clienttranslate('${actplayer} must order ${n} unit(s) ${desc}'),
+    'descriptionmyturn' => clienttranslate('${you} must order ${n} unit(s) ${desc}'),
+    'type' => 'activeplayer',
+    'args' => 'argsOrderUnits',
+    'possibleactions' => ['actOrderUnits'],
+    'transitions' => ['moveUnits' => ST_MOVE_UNITS],
   ],
 
-  ST_MOVE_UNIT => [
+  ST_MOVE_UNITS => [
     'name' => 'moveUnits',
     'description' => clienttranslate('${actplayer} must move selected units'),
     'descriptionmyturn' => clienttranslate('${you} must move selected units'),
     'type' => 'multipleactiveplayer',
     'args' => 'argsMoveUnits',
     'possibleactions' => ['actMoveUnits'],
-    'transitions' => ['moveUnits' => ST_MOVE_UNIT],
+    'transitions' => ['moveUnits' => ST_MOVE_UNITS],
   ],
 
   ST_ATTACK => [
@@ -155,6 +155,55 @@ $machinestates = [
     'type' => 'game',
     'action' => 'stEndRound', // draw cards
     'transitions' => ['next' => ST_PREPARE_TURN],
+  ],
+
+  /////////////////////////////////////////////
+  //   ___                 _               _
+  //  / _ \__   _____ _ __| | ___  _ __ __| |
+  // | | | \ \ / / _ \ '__| |/ _ \| '__/ _` |
+  // | |_| |\ V /  __/ |  | | (_) | | | (_| |
+  //  \___/  \_/ \___|_|  |_|\___/|_|  \__,_|
+  //
+  /////////////////////////////////////////////
+
+  ST_OVERLORD_PLAY_CARD => [
+    'name' => 'playCard',
+    'description' => clienttranslate('Players must play a card'),
+    'descriptionmyturn' => clienttranslate('${you} must play a card'),
+    'type' => 'multipleactiveplayer',
+    'args' => 'argsOverlordPlayCard',
+    'possibleactions' => ['actPlayCard'],
+    'transitions' => ['moveUnits' => ST_ORDER_UNITS],
+  ],
+
+  ST_OVERLORD_SELECT_UNIT => [
+    'name' => 'selectUnits',
+    'description' => clienttranslate('${actplayer} must select units in sections ${section}'),
+    'descriptionmyturn' => clienttranslate('${you} must select units in sections ${section}'),
+    'type' => 'multipleactiveplayer',
+    'args' => 'argsOverlordSelectUnits',
+    'possibleactions' => ['actSelectUnits'],
+    'transitions' => ['moveUnits' => ST_MOVE_UNITS],
+  ],
+
+  ST_OVERLORD_MOVE_UNIT => [
+    'name' => 'moveUnits',
+    'description' => clienttranslate('${actplayer} must move selected units'),
+    'descriptionmyturn' => clienttranslate('${you} must move selected units'),
+    'type' => 'multipleactiveplayer',
+    'args' => 'argsOverlordMoveUnits',
+    'possibleactions' => ['actMoveUnits'],
+    'transitions' => ['moveUnits' => ST_MOVE_UNITS],
+  ],
+
+  ST_OVERLORD_ATTACK => [
+    'name' => 'attackUnit',
+    'description' => clienttranslate('${actplayer} must select an unit and its target'),
+    'descriptionmyturn' => clienttranslate('${you} must select an unit and its target'),
+    'type' => 'multipleactiveplayer',
+    'args' => 'argsOverlordAttackUnit',
+    'possibleactions' => ['actAttackUnit'],
+    'transitions' => ['ambush' => ST_PRE_AMBUSH, 'attack' => ST_ATTACK_THROW], // attack if not close assault
   ],
 
   // Final state.

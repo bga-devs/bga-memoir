@@ -34,4 +34,13 @@ class action_memoir extends APP_GameAction
       self::trace('Complete reinitialization of board game');
     }
   }
+
+  public function actPlayCard()
+  {
+    self::setAjaxMode();
+    $cardId = self::getArg('cardId', AT_posint, false);
+    $this->game->actPlayCard($cardId);
+    self::ajaxResponse();
+  }
+
 }

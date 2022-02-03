@@ -42,7 +42,9 @@ use M44\Board;
 class memoir extends Table
 {
   use M44\DebugTrait;
-  use M44\States\DrawCardTrait;
+  use M44\States\PrepareTurnTrait;
+  use M44\States\PlayCardTrait;
+  use M44\States\OrderUnitsTrait;
 
   public static $instance = null;
   function __construct()

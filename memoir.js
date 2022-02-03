@@ -30,10 +30,8 @@ define([
 ], function (dojo, declare) {
   return declare('bgagame.memoir', [customgame.game, memoir.board, memoir.players], {
     constructor() {
-      this._activeStates = [];
-      this._notifications = [
-        //['revealActionCard', 1100],
-      ];
+      this._activeStates = ['playCard'];
+      this._notifications = [['playCard', 1000]];
 
       // Fix mobile viewport (remove CSS zoom)
       this.default_viewport = 'width=700';

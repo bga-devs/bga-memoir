@@ -8,6 +8,7 @@ class SectionCard extends Card
   protected $texts = [];
   protected $sections = [];
   protected $nUnits = null;
+  protected $orderUnitsTitles = [];
 
   public function getSubtitle()
   {
@@ -28,5 +29,15 @@ class SectionCard extends Card
     } else {
       return $this->sections;
     }
+  }
+
+  public function getArgsOrderUnits()
+  {
+    return [
+      'i18n' => ['desc'],
+      'n' => $this->nUnits,
+      'desc' => $this->orderUnitsTitles[$this->value] ?? '',
+      'sections' => $this->getSections(),
+    ];
   }
 }

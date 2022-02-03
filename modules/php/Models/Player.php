@@ -24,7 +24,7 @@ class Player extends \M44\Helpers\DB_Model
     'eliminated' => 'player_eliminated',
     'score' => 'player_score',
     'zombie' => 'player_zombie',
-    'team' => 'team_side'
+    'team' => 'team_side',
   ];
 
   /*
@@ -41,6 +41,7 @@ class Player extends \M44\Helpers\DB_Model
     $current = $this->id == $currentPlayerId;
     $data = array_merge($data, [
       'cards' => $current ? $this->getCards()->toArray() : [],
+      'inplay' => $this->getCardInPlay(),
     ]);
 
     return $data;
@@ -54,6 +55,11 @@ class Player extends \M44\Helpers\DB_Model
   public function getCards()
   {
     return Cards::getOfPlayer($this->id);
+  }
+
+  public function getCardInPlay()
+  {
+    return Cards::getInPlayOfPlayer($this->id);
   }
 
   public function getTeam()

@@ -31,6 +31,9 @@
   font-weight: normal;
   font-style: normal;
   font-display: swap; }
+.phantom {
+  visibility: hidden; }
+
 html {
   background: url("img/background.jpg");
   background-size: 75px; }
@@ -108,13 +111,16 @@ html {
     background-size: auto 100%;
     position: relative;
     z-index: 2;
-    display: flex; }
+    display: flex;
+    --memoirCardScale: 0.4; }
     #m44-container #m44-bottom-part #bottom-player {
       margin-top: 25px; }
     #m44-container #m44-bottom-part #hand {
       display: flex;
-      column-gap: 5px;
-      --memoirCardScale: 0.4; }
+      column-gap: 5px; }
+    #m44-container #m44-bottom-part #inplay .tactic-card,
+    #m44-container #m44-bottom-part #inplay .section-card {
+      margin-top: -20px; }
 
 #left-side {
   margin-right: 1px !important; }
@@ -990,6 +996,9 @@ html {
   width: calc(var(--memoirCardScale) * 314px);
   height: calc(var(--memoirCardScale) * 503px);
   overflow: hidden; }
+  .section-card.moving,
+  .tactic-card.moving {
+    --memoirCardScale: 0.4; }
   .section-card .card-resizable,
   .tactic-card .card-resizable {
     width: 314px;
@@ -1039,6 +1048,12 @@ html {
       .tactic-card .card-resizable .card-text-container .card-text {
         text-align: center;
         font-size: 24px; }
+  .section-card.selectable,
+  .tactic-card.selectable {
+    cursor: pointer; }
+    .section-card.selectable:hover,
+    .tactic-card.selectable:hover {
+      transform: scale(1.1); }
 
 .tactic-card .card-resizable .card-title {
   top: 21px;

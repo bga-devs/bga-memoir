@@ -18,5 +18,10 @@ class Recon extends \M44\Models\SectionCard
       clienttranslate('When drawing a new Command card, draw two, choose one and discard the other'),
     ];
     $this->nUnits = 1;
+    $this->orderUnitsTitles = [
+      clienttranslate('on the Left Flank'),
+      clienttranslate('in the Center'),
+      clienttranslate('on the Right Flank'),
+    ];
   }
 }

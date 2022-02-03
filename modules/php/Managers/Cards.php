@@ -50,11 +50,25 @@ class Cards extends \M44\Helpers\Pieces
     return self::getInLocation(['hand', $pId]);
   }
 
+  /**
+   * getInPlayOfPlayer: return the cards played by a player
+   */
+  public static function getInPlayOfPlayer($pId)
+  {
+    return self::getInLocation(['inplay', $pId])->first();
+  }
+
   //////////////////////////////////
   //////////////////////////////////
-  ///////////// SETTERS //////////////
+  ///////////// SETTERS ////////////
   //////////////////////////////////
   //////////////////////////////////
+
+  public static function play($player, $cardId)
+  {
+    self::move($cardId, ['inplay', $player->getId()]);
+    return self::get($cardId);
+  }
 
   /**
    * Load a scenario
