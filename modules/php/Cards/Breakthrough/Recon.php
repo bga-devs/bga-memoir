@@ -6,6 +6,7 @@ class Recon extends \M44\Cards\Standard\Recon
   public function __construct($row)
   {
     parent::__construct($row);
+    $this->nUnitsOnTheMove = 2;
     $this->subtitles = [];
     $this->subtitle = clienttranslate('Order 1 Unit + 2 On the Move');
     $t = clienttranslate(

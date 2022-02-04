@@ -17,6 +17,15 @@ class Troops extends \M44\Helpers\Pieces
   protected static $autoreshuffle = false;
   protected static function cast($row)
   {
+    $mode = Board::getMode();
+    $sections = self::$sections[$mode];
+    $row['sections'] = [];
+    for ($i = 0; $i < 3; $i++) {
+      if ($sections[$i] <= $row['x'] && $row['x'] <= $sections[$i + 1]) {
+        $row['sections'][] = $i;
+      }
+    }
+
     return self::getInstance($row['type'], $row['badge'], $row);
   }
 

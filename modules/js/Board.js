@@ -17,7 +17,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
   // prettier-ignore
   const OBSTACLES_ROTATION = { bunker: 180,wbunker : 180,dbunker : 180,ford : 60,roadblock : 60,droadblock : 60,wroadblock : 60,pontoon : -30,wpontoon : -30,dragonteeth : 60,railbridge : -60,wrailbridge : -60,bridge : -30,pbridge : -30,brkbridge : -30,wbridge : -30,wagon : -60,loco : 60,abatis : 60,wire : 180,sand : 180};
 
-  const ALLIES_NATIONS = ['brit', 'us'];
+  const ALLIES_NATIONS = ['gb', 'us', 'ru'];
 
   return declare('memoir.board', null, {
     setupBoard(board, rotate, bottomTeam) {
@@ -170,15 +170,85 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       </div>`;
     },
 
+    //////////////////////////////////////////
+    //    _____
+    //   |_   _| __ ___   ___  _ __  ___
+    //     | || '__/ _ \ / _ \| '_ \/ __|
+    //     | || | | (_) | (_) | |_) \__ \
+    //     |_||_|  \___/ \___/| .__/|___/
+    //                        |_|
+    //////////////////////////////////////////
+
     tplUnit(unit) {
       return `
-      <div id="unit-${unit.id}" class="memoir-unit" data-figures="${unit.figures}" data-type="${unit.type}" data-nation="${unit.nation}" data-orientation="${unit.orientation}">
-        <div class="memoir-unit-meeple"></div>
-        <div class="memoir-unit-meeple"></div>
-        <div class="memoir-unit-meeple"></div>
-        <div class="memoir-unit-meeple"></div>
-        <div class="memoir-unit-meeple"></div>
+      <div id="unit-${unit.id}" class="m44-unit" data-figures="${unit.figures}" data-type="${unit.type}" data-nation="${unit.nation}" data-orientation="${unit.orientation}">
+        <div class='m44-meeples-container'>
+          <div class="m44-unit-meeple"></div>
+          <div class="m44-unit-meeple"></div>
+          <div class="m44-unit-meeple"></div>
+          <div class="m44-unit-meeple"></div>
+          <div class="m44-unit-meeple"></div>
+        </div>
       </div>`;
+    },
+
+    makeTroopsSelectable(troops, callback, checkCallback, className = 'selected') {
+      this._selectedTroops = [];
+      this._selectableTroops = troops;
+
+      Object.keys(troops).forEach((troopId) => {
+        this.onClick('unit-' + troopId, () => {
+          let troopIndex = this._selectedTroops.findIndex((t) => t == troopId);
+          let selected = troopIndex !== -1; // Already selected ?
+          // Should we take the click into account ?
+          if (callback(troopId, this._selectableTroops[troopId], selected)) {
+            if (selected) {
+              this._selectedTroops.splice(troopIndex, 1);
+              // Ad-hoc case when a selected troop switch to "on the move" instead of completely unselected
+              if (className != 'activated' || !$('unit-' + troopId).classList.contains('onTheMove')) {
+                $('unit-' + troopId).classList.remove(className);
+              }
+            } else {
+              this._selectedTroops.push(troopId);
+              $('unit-' + troopId).classList.add(className);
+            }
+          }
+
+          // Update unselectable troops
+          let minFilling = this.getMinFillingOfSections();
+          Object.keys(this._selectableTroops).forEach((troopId) => {
+            let troopIndex = this._selectedTroops.findIndex((t) => t == troopId);
+            let selected = troopIndex !== -1; // Already selected ?
+            let selectable = checkCallback(troopId, this._selectableTroops[troopId], selected, minFilling);
+            $('unit-' + troopId).classList.toggle('unselectable', !selectable);
+          });
+        });
+      });
+    },
+
+    /**
+     * getMinFillingOfSections: handle units that are on two sections
+     */
+    getMinFillingOfSections() {
+      let fillings = [[0, 0, 0]];
+      this._selectedTroops.forEach((troopId) => {
+        let t = [];
+        this._selectableTroops[troopId].sections.forEach((section) => {
+          fillings.forEach((filling) => {
+            let newFilling = filling.slice();
+            newFilling[section]++;
+            t.push(newFilling);
+          });
+        });
+        fillings = t;
+      });
+      let minFilling = [10, 10, 10];
+      fillings.forEach((filling) => {
+        for (let i = 0; i < 3; i++) {
+          minFilling[i] = Math.min(minFilling[i], filling[i]);
+        }
+      });
+      return minFilling;
     },
 
     ////////////////////////////

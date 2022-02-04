@@ -1,21 +1,76 @@
-.memoir-unit {
+.m44-unit {
   width: 100%;
-  height: 0;
-  padding-bottom: 100%;
+  height: 100%;
   //background: rgba(255, 0, 0, 0.2);
   position: relative;
 
-  .memoir-unit-meeple {
+  .m44-meeples-container {
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
     position: absolute;
-    overflow: hidden;
-    background-image: url('img/units.png');
-    background-repeat: no-repeat;
+    top: 7%;
+
+    .m44-unit-meeple {
+      position: absolute;
+      overflow: hidden;
+      background-image: url('img/units.png');
+      background-repeat: no-repeat;
+
+      // TODO : remove
+      background-color: #ff000070;
+      border-radius: 50%;
+      width: 40%;
+      height: 40%;
+      &:nth-of-type(1) {
+        left: 5%;
+        top: 5%;
+      }
+      &:nth-of-type(2) {
+        left: 50%;
+        top: 5%;
+      }
+      &:nth-of-type(3) {
+        left: 5%;
+        top: 50%;
+      }
+      &:nth-of-type(4) {
+        left: 50%;
+        top: 50%;
+      }
+    }
   }
 
   @for $i from 1 through 4 {
-    &[data-figures='#{$i}'] .memoir-unit-meeple:nth-of-type(#{$i}) ~ .memoir-unit-meeple {
+    &[data-figures='#{$i}'] .m44-unit-meeple:nth-of-type(#{$i}) ~ .m44-unit-meeple {
       display: none;
     }
+  }
+
+  &.selectable {
+    cursor: pointer;
+  }
+  &.unselectable {
+    cursor: default;
+  }
+
+  &.activated {
+    background-image: url('img/hex_highlights.png');
+    background-size: 400% 200%;
+    background-position: 100% 0%;
+  }
+
+  &.onTheMove::before {
+    content:'';
+    display: block;
+    position: absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    background-image: url('img/hex_highlights.png');
+    background-size: 400% 200%;
+    background-position: 0% 0%;
   }
 }
 
@@ -23,18 +78,22 @@ $INFANTRY: 1;
 $ARMOR: 2;
 $ARTILLERY: 3;
 
+$BOTTOM: 0;
+$TOP: 1;
+
 // FORMAT :
 //   ORIENTATION
 //      TYPE (INF, TANK, GUN)
 //        NATION, WIDTH, W/H RATIO, BG SIZE, BG POSX, BG POSY, POSITIONS
 $units: (
-  0: (
+  $BOTTOM: (
     $INFANTRY: (
       'ger' 50% 1.3333 1137.78% 46.3597% 34.949% (23% -2%, 52% 14%, 4% 19%, 33% 33%),
       'us' 50% 1.4063 1066.67% 0.107759% 0.265252% (24% 3%, 52% 14%, 2% 24%, 33% 35%),
+      'ru' 50% 1.1698 966.038% 0.108932% 35.3093% (24% 3%, 52% 14%, 2% 24%, 33% 35%),
     ),
   ),
-  1: (
+  $TOP: (
     $INFANTRY: (
       'ger' 43% 1.4773 1163.64% 10.4701% 0.26178% (22% -2%, 50% 11%, 3% 18%, 32% 28%),
       'us' 50% 1.25 1066.67% 69.5043% 34.949% (22% 2%, 49% 17%, 7% 23%, 32% 34%),
@@ -45,12 +104,15 @@ $units: (
 @each $orientation, $unitsData in $units {
   @each $type, $map in $unitsData {
     @each $nation, $width, $ratio, $bgSize, $bgPosX, $bgPosY, $positions in $map {
-      .memoir-unit[data-orientation='#{$orientation}'][data-type='#{$type}'][data-nation='#{$nation}']
-        .memoir-unit-meeple {
+      .m44-unit[data-orientation='#{$orientation}'][data-type='#{$type}'][data-nation='#{$nation}'] .m44-unit-meeple {
         width: $width;
         height: $width * $ratio;
         background-size: $bgSize;
         background-position: $bgPosX $bgPosY;
+
+        // TODO : remove
+        background-color: transparent;
+        border-radius: none;
 
         $i: 1;
         @each $x, $y in $positions {
@@ -172,12 +234,6 @@ $units: (
   height: 120px;
   background-position: 57.9646% 34.949%;
   background-size: 853.333%;
-}
-.ruinf_bottom {
-  width: 106px;
-  height: 124px;
-  background-position: 0.108932% 35.3093%;
-  background-size: 966.038%;
 }
 .ruinf_top {
   width: 106px;

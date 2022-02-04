@@ -27,10 +27,11 @@ define([
   g_gamethemeurl + 'modules/js/Core/modal.js',
   g_gamethemeurl + 'modules/js/Board.js',
   g_gamethemeurl + 'modules/js/Players.js',
+  g_gamethemeurl + 'modules/js/States/OrderUnits.js',
 ], function (dojo, declare) {
-  return declare('bgagame.memoir', [customgame.game, memoir.board, memoir.players], {
+  return declare('bgagame.memoir', [customgame.game, memoir.board, memoir.players, memoir.orderUnits], {
     constructor() {
-      this._activeStates = ['playCard'];
+      this._activeStates = ['playCard', 'orderUnits'];
       this._notifications = [['playCard', 1000]];
 
       // Fix mobile viewport (remove CSS zoom)

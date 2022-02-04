@@ -1,6 +1,7 @@
 <?php
 namespace M44\Models;
 use M44\Managers\Players;
+use M44\Helpers\Collection;
 
 class SectionCard extends Card
 {
@@ -8,6 +9,7 @@ class SectionCard extends Card
   protected $texts = [];
   protected $sections = [];
   protected $nUnits = null;
+  protected $nUnitsOnTheMove = null;
   protected $orderUnitsTitles = [];
 
   public function getSubtitle()
@@ -22,7 +24,7 @@ class SectionCard extends Card
 
   public function getSections()
   {
-    if ($this->nUnits != null) {
+    if ($this->nUnits != null && empty($this->sections)) {
       $sections = [0, 0, 0];
       $sections[$this->value] = $this->nUnits;
       return $sections;
@@ -34,14 +36,17 @@ class SectionCard extends Card
   public function getArgsOrderUnits()
   {
     $player = $this->getPlayer();
-    $troops = [];
+    $troops = new Collection();
     foreach ($this->getSections() as $i => $n) {
-      $troops[] = $n == 0 ? [] : $player->getTroopsInSection($i)->getIds();
+      if ($n > 0 || $this->nUnitsOnTheMove > 0) {
+        $troops = $troops->merge($player->getTroopsInSection($i)->getPositions());
+      }
     }
 
     return [
       'i18n' => ['desc'],
       'n' => $this->nUnits,
+      'nOnTheMove' => $this->nUnitsOnTheMove,
       'desc' => $this->orderUnitsTitles[$this->value] ?? '',
       'sections' => $this->getSections(),
       'troops' => $troops,

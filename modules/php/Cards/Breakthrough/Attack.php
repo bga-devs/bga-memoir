@@ -6,6 +6,7 @@ class Attack extends \M44\Cards\Standard\Attack
   public function __construct($row)
   {
     parent::__construct($row);
+    $this->nUnitsOnTheMove = 1;
     $this->subtitles = [];
     $this->subtitle = clienttranslate('Order 3 Units + 1 On the Move');
     $t = clienttranslate('+ 1 On the Move');

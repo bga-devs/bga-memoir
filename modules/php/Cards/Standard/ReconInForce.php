@@ -10,6 +10,8 @@ class ReconInForce extends \M44\Models\SectionCard
     $this->name = clienttranslate('Recon in force');
     $this->subtitle = clienttranslate('Issue an order to 1 unit in each section');
     $this->text = [clienttranslate('Order 1 Unit in each section')];
+    $this->nUnits = 1;
     $this->sections = [1, 1, 1];
+    $this->orderUnitsTitles = [clienttranslate('in each section')];
   }
 }

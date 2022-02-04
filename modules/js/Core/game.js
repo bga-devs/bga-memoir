@@ -716,6 +716,7 @@ define(['dojo', 'dojo/_base/declare', 'ebg/core/gamegui'], (dojo, declare) => {
       let safeCallback = (evt) => {
         if (this.isInterfaceLocked()) return false;
         if (this._helpMode) return false;
+        if ($(node).classList.contains('unselectable')) return false;
         callback(evt);
       };
 
@@ -895,6 +896,10 @@ define(['dojo', 'dojo/_base/declare', 'ebg/core/gamegui'], (dojo, declare) => {
      ****************/
     forEachPlayer(callback) {
       Object.values(this.gamedatas.players).forEach(callback);
+    },
+
+    getArgs() {
+      return this.gamedatas.gamestate.args;
     },
 
     clientState(name, descriptionmyturn, args) {

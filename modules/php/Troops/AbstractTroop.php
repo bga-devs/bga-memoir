@@ -6,6 +6,7 @@ class AbstractTroop implements \JsonSerializable
   protected $id = null;
   protected $x = null;
   protected $y = null;
+  protected $sections = null;
   protected $type = null;
   protected $nation = null;
   protected $nUnits = null;
@@ -22,9 +23,10 @@ class AbstractTroop implements \JsonSerializable
   public function __construct($row)
   {
     if ($row != null) {
-      $this->id = $row['id'];
-      $this->x = $row['x'];
-      $this->y = $row['y'];
+      $this->id = (int) $row['id'];
+      $this->x = (int) $row['x'];
+      $this->y = (int) $row['y'];
+      $this->sections = $row['sections'];
       $this->nation = $row['nation'];
       $this->nUnits = $row['figures'];
       $this->badge = $row['badge'];
@@ -38,6 +40,7 @@ class AbstractTroop implements \JsonSerializable
       'id' => $this->id,
       'x' => $this->x,
       'y' => $this->y,
+      'sections' => $this->sections,
 
       'type' => $this->type,
       'nation' => $this->nation,

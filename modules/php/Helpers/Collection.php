@@ -62,4 +62,16 @@ class Collection extends \ArrayObject
       return $elem->jsonSerialize();
     })->toArray();
   }
+
+  public function getPositions()
+  {
+    return $this->map(function ($elem) {
+      $d = $elem->jsonSerialize();
+      return [
+        'x' => $d['x'],
+        'y' => $d['y'],
+        'sections' => $d['sections'],
+      ];
+    });
+  }
 }
