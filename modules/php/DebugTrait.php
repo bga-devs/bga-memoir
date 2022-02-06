@@ -21,7 +21,6 @@ trait DebugTrait
     ScenarioLoader::setupScenario();
   }
 
-
   function test3()
   {
     ScenarioLoader::load('test2');
@@ -32,5 +31,10 @@ trait DebugTrait
   {
     ScenarioLoader::load($scenario);
     ScenarioLoader::setupScenario();
+  }
+
+  function vt()
+  {
+    $this->actOrderUnits([10, 11], []);
   }
 }

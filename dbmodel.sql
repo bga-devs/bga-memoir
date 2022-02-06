@@ -64,6 +64,9 @@ CREATE TABLE IF NOT EXISTS `troops` (
   `nation` VARCHAR(255) NOT NULL,
   `figures` int(10) NOT NULL,
   `badge` varchar(255),
+  `activation_card` int(10) DEFAULT 0,
+  `moves` int(1) DEFAULT 0,
+  `fights` int(1) DEFAULT 0,
   `extra_datas` JSON NULL,
   PRIMARY KEY (`troop_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

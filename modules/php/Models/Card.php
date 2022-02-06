@@ -2,8 +2,11 @@
 namespace M44\Models;
 use M44\Managers\Players;
 
-class Card implements \JsonSerializable
+class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
 {
+  protected static $table = 'cards';
+  protected static $primary = 'card_id';
+
   /*
    * STATIC INFORMATIONS
    */

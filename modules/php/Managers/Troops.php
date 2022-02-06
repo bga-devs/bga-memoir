@@ -13,7 +13,18 @@ class Troops extends \M44\Helpers\Pieces
 {
   protected static $table = 'troops';
   protected static $prefix = 'troop_';
-  protected static $customFields = ['x', 'y', 'type', 'nation', 'figures', 'badge', 'extra_datas'];
+  protected static $customFields = [
+    'x',
+    'y',
+    'type',
+    'nation',
+    'figures',
+    'badge',
+    'activation_card',
+    'moves',
+    'fights',
+    'extra_datas',
+  ];
   protected static $autoreshuffle = false;
   protected static function cast($row)
   {
