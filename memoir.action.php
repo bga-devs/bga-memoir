@@ -43,4 +43,18 @@ class action_memoir extends APP_GameAction
     self::ajaxResponse();
   }
 
+  public function actOrderUnits()
+  {
+    self::setAjaxMode();
+    $troopIds = $this->getNumberList('troopIds');
+    $onTheMoveIds = $this->getNumberList('troopOnTheMoveIds');
+    $this->game->actOrderUnits($troopIds, $onTheMoveIds);
+    self::ajaxResponse();
+  }
+
+  public function getNumberList($name, $mandatory = true)
+  {
+    $t = $this->getArg($name, AT_numberlist, $mandatory);
+    return $t == '' ? [] : explode(';', $t);
+  }
 }

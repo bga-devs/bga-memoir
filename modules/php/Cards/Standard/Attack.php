@@ -6,7 +6,7 @@ class Attack extends \M44\Models\SectionCard
   public function __construct($row)
   {
     parent::__construct($row);
-    $this->type = CARD_ASSAULT;
+    $this->type = CARD_ATTACK;
     $this->name = clienttranslate('Attack');
     $this->subtitles = [
       clienttranslate('Issue an order to 3 units on the Left Flank'),

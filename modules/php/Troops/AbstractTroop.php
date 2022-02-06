@@ -58,6 +58,8 @@ class AbstractTroop extends \M44\Helpers\DB_Manager implements \JsonSerializable
       'name' => $this->name,
       'figures' => $this->nUnits,
       'badge' => $this->badge,
+      'activationCard' => $this->activationCard,
+      'onTheMove' => $this->datas['onTheMove'] ?? false,
     ];
   }
 
@@ -93,10 +95,12 @@ class AbstractTroop extends \M44\Helpers\DB_Manager implements \JsonSerializable
     return $this->activationCard;
   }
 
-  public function setActivationCard($cardId)
+  public function activate($card, $onTheMove = false)
   {
+    $cardId = is_int($card) ? $card : $card->getId();
     $this->activationCard = $cardId;
     self::DB()->update(['activation_card' => $this->activationCard], $this->id);
+    $this->setExtraDatas('onTheMove', $onTheMove);
   }
 
   public function getActivationPlayer()

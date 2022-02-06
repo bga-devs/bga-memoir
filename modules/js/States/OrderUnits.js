@@ -66,5 +66,12 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
       return false;
     },
+
+    onClickConfirmOrders() {
+      this.takeAction('actOrderUnits', {
+        troopIds: this._selectedTroops.join(';'),
+        troopOnTheMoveIds: this._selectedTroopsOnTheMove.join(';'),
+      });
+    },
   });
 });

@@ -2,6 +2,7 @@
 namespace M44\States;
 
 use M44\Core\Globals;
+use M44\Core\Notifications;
 use M44\Managers\Players;
 use M44\Managers\Teams;
 use M44\Managers\Troops;
@@ -15,41 +16,42 @@ trait OrderUnitsTrait
     return $card->getArgsOrderUnits();
   }
 
-  function actOrderUnits($units, $onTheMove)
+
+  function actOrderUnits($unitIds, $onTheMoveIds, $auto = false)
   {
+    // Sanity checks
+    if(!$auto){
+      $this->checkAction('actOrderUnits');
+    }
     $player = Players::getCurrent();
-
-    $args = $this->argsOrderUnits();
-    if (count($units) > $args['n']) {
+    $args = $this->argsOrderUnits($player);
+    if (count($unitIds) > $args['n']) {
       throw new \BgaVisibleSystemException('More units than authorized. Should not happen');
     }
-
-    if (count($onTheMove) > $args['nOnTheMove']) {
-      throw new \BgaVisibleSystemException('More units than authorized. Should not happen');
+    if (count($onTheMoveIds) > $args['nOnTheMove']) {
+      throw new \BgaVisibleSystemException('More on the move units than authorized. Should not happen');
     }
 
-    $troopsId = $args['troops']->getIds();
-
-    if (count(array_diff($units, $troopsId)) != 0) {
+    $selectableIds = $args['troops']->getIds();
+    if (count(array_diff($unitIds, $selectableIds)) != 0) {
       throw new \feException('You selected a troop that cannot be selected');
     }
 
-    if (count(array_diff($onTheMove, $troopsId)) != 0) {
+    if (count(array_diff($onTheMoveIds, $selectableIds)) != 0) {
       throw new \feException('You selected a troop that cannot be selected');
     }
 
+    // Flag the units as activated by the corresponding card
     $card = $player->getCardInPlay();
-
-    foreach ($units as $unit) {
-      $troop = Troops::get($unit);
-      $troop->setActivationCard($card->getId());
+    foreach ($unitIds as $unitId) {
+      Troops::get($unitId)->activate($card);
+    }
+    foreach ($onTheMoveIds as $unitId) {
+      Troops::get($unitId)->activate($card, true);
     }
 
-    foreach ($onTheMove as $unitO) {
-      $troop = Troops::get($unitO);
-      $troop->setActivationCard($card->getId());
-      $troop->setExtraDatas('onTheMove', true);
-    }
+    // Notify
+    //Notifications::orderUnits($player, Troop::get($unitIds), Troops::get($onTheMoveIds));
 
     $this->gamestate->nextState('moveUnits');
   }
