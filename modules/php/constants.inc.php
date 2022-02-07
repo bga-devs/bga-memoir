@@ -96,6 +96,8 @@ const CARD_CLASSES = [
 /*
  * Game options
  */
+const OPTION_SCENARIO = 101;
+
 
 /*
  * Stats

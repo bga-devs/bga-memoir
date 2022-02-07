@@ -38,6 +38,7 @@ use M44\Managers\Cards;
 use M44\Managers\Players;
 use M44\Managers\Teams;
 use M44\Board;
+use M44\ScenarioLoader;
 
 class memoir extends Table
 {
@@ -54,6 +55,7 @@ class memoir extends Table
     self::$instance = $this;
     self::initGameStateLabels([
       'logging' => 10,
+      'scenario' => OPTION_SCENARIO,
     ]);
     Board::init();
   }
@@ -78,6 +80,13 @@ class memoir extends Table
     Players::setupNewGame($players, $options);
 
     $this->activeNextPlayer();
+  }
+
+  public function stDummyState()
+  {
+    $scenario = (int) self::getGameStateValue('scenario');
+    ScenarioLoader::load($scenario);
+    ScenarioLoader::setupScenario();
   }
 
   /*
