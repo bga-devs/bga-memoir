@@ -1,6 +1,7 @@
 <?php
 namespace M44\Troops;
 
+use M44\Board;
 use M44\Managers\Players;
 
 class AbstractTroop extends \M44\Helpers\DB_Manager implements \JsonSerializable
@@ -75,14 +76,16 @@ class AbstractTroop extends \M44\Helpers\DB_Manager implements \JsonSerializable
   {
     return $this->y;
   }
+  public function getPos()
+  {
+    return [
+      'x' => $this->x,
+      'y' => $this->y,
+    ];
+  }
   public function getMaxUnits()
   {
     return $this->maxUnits;
-  }
-
-  public function getMoves()
-  {
-    return $this->moves;
   }
 
   public function getFights()
@@ -145,5 +148,33 @@ class AbstractTroop extends \M44\Helpers\DB_Manager implements \JsonSerializable
   {
     $this->extraDatas[$variable] = $value;
     self::DB()->update(['extra_datas' => \addslashes(\json_encode($this->extraDatas))], $this->id);
+  }
+
+  /////////////////////////////////
+  //  __  __  _____     _______
+  // |  \/  |/ _ \ \   / / ____|
+  // | |\/| | | | \ \ / /|  _|
+  // | |  | | |_| |\ V / | |___
+  // |_|  |_|\___/  \_/  |_____|
+  /////////////////////////////////
+
+  public function getMovementRadius()
+  {
+    return $this->movementRadius;
+  }
+
+  public function getMovementAndAttackRadius()
+  {
+    return $this->movementAndAttackRadius;
+  }
+
+  public function getMoves()
+  {
+    return $this->moves;
+  }
+
+  public function getPossibleMoves()
+  {
+    return Board::getReachableCells($this);
   }
 }

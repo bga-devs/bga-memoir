@@ -90,6 +90,14 @@ class Troops extends \M44\Helpers\Pieces
     return $query->get();
   }
 
+  public static function getActivatedByCard($card)
+  {
+    $cardId = is_int($card) ? $card : $card->getId();
+    return self::getSelectQuery()
+      ->where('activation_card', $cardId)
+      ->get();
+  }
+
   //////////////////////////////////
   //////////////////////////////////
   ///////////// SETTERS //////////////

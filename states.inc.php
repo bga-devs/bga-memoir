@@ -64,8 +64,8 @@ $machinestates = [
 
   ST_MOVE_UNITS => [
     'name' => 'moveUnits',
-    'description' => clienttranslate('${actplayer} must move selected units'),
-    'descriptionmyturn' => clienttranslate('${you} must move selected units'),
+    'description' => clienttranslate('${actplayer} may move activated units'),
+    'descriptionmyturn' => clienttranslate('${you} may move activated units'),
     'type' => 'activeplayer',
     'args' => 'argsMoveUnits',
     'possibleactions' => ['actMoveUnits'],

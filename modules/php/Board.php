@@ -43,13 +43,10 @@ class Board extends \APP_DbObject
     }
 
     // Create the board
-    self::$grid = [];
-    $dim = self::$dimensions[$scenario['board']['type']];
-    for ($y = 0; $y < $dim['y']; $y++) {
-      $size = $dim['x'] - ($y % 2 == 0 ? 0 : 1);
-      for ($x = 0; $x < $size; $x++) {
-        $col = 2 * $x + ($y % 2 == 0 ? 0 : 1);
-        self::$grid[$col][$y] = [
+    self::$grid = self::createGrid();
+    foreach (self::$grid as $x => $col) {
+      foreach ($col as $y => $cell) {
+        self::$grid[$x][$y] = [
           'terrains' => [],
           'unit' => null,
           'labels' => [],
@@ -91,5 +88,101 @@ class Board extends \APP_DbObject
   protected function isValidCell($cell)
   {
     return isset(self::$grid[$cell['x']][$cell['y']]);
+  }
+
+  protected function getNeighbours($cell)
+  {
+    $directions = [
+      ['x' => -2, 'y' => 0],
+      ['x' => -1, 'y' => -1],
+      ['x' => 1, 'y' => -1],
+      ['x' => 2, 'y' => 0],
+      ['x' => 1, 'y' => 1],
+      ['x' => -1, 'y' => 1],
+    ];
+
+    $cells = [];
+    foreach ($directions as $dir) {
+      $newCell = [
+        'x' => $cell['x'] + $dir['x'],
+        'y' => $cell['y'] + $dir['y'],
+      ];
+      if (self::isValidCell($newCell)) {
+        $cells[] = $newCell;
+      }
+    }
+    return $cells;
+  }
+
+  public static function getReachableCells($troop)
+  {
+    // Compute remaining moves for the unit
+    $m = $troop->getMovementRadius() - $troop->getMoves();
+    return self::getReachableCellsAtDistance($troop, $m);
+  }
+
+  public static function getReachableCellsAtDistance($troop, $d)
+  {
+    $queue = new \SplPriorityQueue();
+    $queue->setExtractFlags(\SplPriorityQueue::EXTR_BOTH);
+    $queue->insert(
+      [
+        'cell' => $troop->getPos(),
+      ],
+      0
+    );
+    $gridMarkers = self::createGrid(false);
+    $cells = [];
+
+    while (!$queue->isEmpty()) {
+      // Extract the top node and adds it to the result
+      $node = $queue->extract();
+      $cell = $node['data']['cell'];
+      $cell['d'] = $node['priority'];
+      if ($gridMarkers[$cell['x']][$cell['y']] !== false) {
+        continue;
+      }
+      $gridMarkers[$cell['x']][$cell['y']] = $cell;
+      $cells[] = $cell;
+
+      // Look at neighbours
+      foreach (self::getNeighbours($cell) as $nextCell) {
+        if ($gridMarkers[$nextCell['x']][$nextCell['y']] !== false) {
+          continue;
+        }
+
+        $dist = $cell['d'] + self::getDeplacementCost($troop, $cell, $nextCell);
+        if ($dist <= $d) {
+          $queue->insert(
+            [
+              'cell' => $nextCell,
+            ],
+            $dist
+          );
+        }
+      }
+    }
+
+    return $cells;
+  }
+
+  public static function getDeplacementCost($troop, $source, $target)
+  {
+    return 1;
+  }
+
+  public static function createGrid($defaultValue = null)
+  {
+    $mode = self::getMode();
+    $dim = self::$dimensions[$mode];
+    $g = [];
+    for ($y = 0; $y < $dim['y']; $y++) {
+      $size = $dim['x'] - ($y % 2 == 0 ? 0 : 1);
+      for ($x = 0; $x < $size; $x++) {
+        $col = 2 * $x + ($y % 2 == 0 ? 0 : 1);
+        $g[$col][$y] = $defaultValue;
+      }
+    }
+    return $g;
   }
 }

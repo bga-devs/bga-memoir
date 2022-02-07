@@ -10,5 +10,8 @@ trait MoveUnitsTrait
 {
   public function argsMoveUnits()
   {
+    $player = $player ?? Players::getActive();
+    $card = $player->getCardInPlay();
+    return $card->getArgsMoveUnits();
   }
 }
