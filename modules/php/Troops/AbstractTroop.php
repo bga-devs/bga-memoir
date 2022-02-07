@@ -68,6 +68,10 @@ class AbstractTroop extends \M44\Helpers\DB_Manager implements \JsonSerializable
   {
     return $this->id;
   }
+  public function getType()
+  {
+    return $this->type;
+  }
   public function getX()
   {
     return $this->x;

@@ -138,7 +138,7 @@ class Board extends \APP_DbObject
       // Extract the top node and adds it to the result
       $node = $queue->extract();
       $cell = $node['data']['cell'];
-      $cell['d'] = $node['priority'];
+      $cell['d'] = -$node['priority'];
       if ($gridMarkers[$cell['x']][$cell['y']] !== false) {
         continue;
       }
@@ -148,18 +148,19 @@ class Board extends \APP_DbObject
       }
 
       // Look at neighbours
-      foreach (self::getNeighbours($cell) as $nextCell) {
+      $neighbours = self::getNeighbours($cell);
+      foreach ($neighbours as $nextCell) {
         if ($gridMarkers[$nextCell['x']][$nextCell['y']] !== false) {
           continue;
         }
 
-        $dist = $cell['d'] + self::getDeplacementCost($troop, $cell, $nextCell);
+        $dist = $cell['d'] + self::getDeplacementCost($troop, $cell, $nextCell, $d);
         if ($dist <= $d) {
           $queue->insert(
             [
               'cell' => $nextCell,
             ],
-            $dist
+            -$dist
           );
         }
       }
@@ -169,12 +170,34 @@ class Board extends \APP_DbObject
     return $cells;
   }
 
-  public static function getDeplacementCost($troop, $source, $target)
+  public static function getDeplacementCost($troop, $source, $target, $d)
   {
+    // Get corresponding cells
+    $sourceCell = self::$grid[$source['x']][$source['y']];
     $targetCell = self::$grid[$target['x']][$target['y']];
+
+    // If there is a unit => can't go there
     if (!empty($targetCell['units'])) {
       return \INFINITY;
     }
+
+    // If there is an impassable terrain => can't go there
+    foreach ($targetCell['terrains'] as $terrain) {
+      $impassable = $terrain->getImpassable();
+      if ($impassable === true || (is_array($impassable) && in_array($troop->getType(), $impassable))) {
+        return \INFINITY;
+      }
+    }
+
+    // If I'm coming from a 'must stop' terrain, can't go there unless dist = 0
+    if($source['d'] > 0){
+      foreach ($sourceCell['terrains'] as $terrain) {
+        if($terrain->mustStopWhenEntering()){
+          return \INFINITY;
+        }
+      }
+    }
+
     return 1;
   }
 

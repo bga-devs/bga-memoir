@@ -10,5 +10,6 @@ class Curves extends \M44\Models\Terrain
     $this->name = clienttranslate('Curves');
     $this->landscape = 'country';
     $this->water = true;
+    $this->impassable = true;
   }
 }

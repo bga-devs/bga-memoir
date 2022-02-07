@@ -71,4 +71,19 @@ class Terrain implements \JsonSerializable
   {
     return $this->y;
   }
+
+  public function getName()
+  {
+    return $this->name;
+  }
+
+  public function getImpassable()
+  {
+    return $this->impassable;
+  }
+
+  public function mustStopWhenEntering()
+  {
+    return $this->mustStop;
+  }
 }

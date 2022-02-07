@@ -9,6 +9,7 @@ class River extends \M44\Models\Terrain
     $this->type = 'river';
     $this->name = clienttranslate('River');
     $this->landscape = 'country';
+    $this->impassable = true;
     $this->water = true;
   }
 }
