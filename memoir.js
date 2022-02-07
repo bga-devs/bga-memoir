@@ -31,7 +31,7 @@ define([
 ], function (dojo, declare) {
   return declare('bgagame.memoir', [customgame.game, memoir.board, memoir.players, memoir.orderUnits], {
     constructor() {
-      this._activeStates = ['playCard', 'orderUnits'];
+      this._activeStates = ['playCard', 'orderUnits', 'moveUnits'];
       this._notifications = [['playCard', 1000]];
 
       // Fix mobile viewport (remove CSS zoom)
@@ -59,6 +59,12 @@ define([
         let rotate = this.gamedatas.players[pId].no == 1;
         this.setupBoard(gamedatas.board, rotate, bottomTeam);
       }
+    },
+
+    clearPossible() {
+      this.inherited(arguments);
+      dojo.query('.moving').removeClass('moving');
+      dojo.query('.forMove').removeClass('forMove');
     },
 
     updatePlayerOrdering() {},

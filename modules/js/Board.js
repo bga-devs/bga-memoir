@@ -70,10 +70,12 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           let cell = this.place('tplBoardCell', { x: col, y }, 'm44-board-units');
           cell.style.gridArea = cellC.style.gridArea;
 
-          let unit = board.grid[col][row].unit;
-          if (unit) {
-            unit.orientation = bottomTeam != (ALLIES_NATIONS.includes(unit.nation) ? 'ALLIES' : 'AXIS') ? 1 : 0;
-            this.place('tplUnit', unit, `cell-${col}-${y}`);
+          let units = board.grid[col][row].units;
+          if (units.length > 0) {
+            units.forEach((unit) => {
+              unit.orientation = bottomTeam != (ALLIES_NATIONS.includes(unit.nation) ? 'ALLIES' : 'AXIS') ? 1 : 0;
+              this.place('tplUnit', unit, `cell-${col}-${y}`);
+            });
           }
         }
       }

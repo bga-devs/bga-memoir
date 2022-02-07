@@ -73,5 +73,36 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         troopOnTheMoveIds: this._selectedTroopsOnTheMove.join(';'),
       });
     },
+
+    /////////////////////////////////
+    //  __  __  _____     _______
+    // |  \/  |/ _ \ \   / / ____|
+    // | |\/| | | | \ \ / /|  _|
+    // | |  | | |_| |\ V / | |___
+    // |_|  |_|\___/  \_/  |_____|
+    /////////////////////////////////
+
+    onEnteringStateMoveUnits(args) {
+      Object.keys(args.troops).forEach((troopId) => {
+        this.onClick('unit-' + troopId, () => {
+          this.clientState('moveUnitsChooseTarget', _('Select the destination hex'), {
+            troopId,
+            cells: args.troops[troopId],
+          });
+        });
+      });
+
+      this.addPrimaryActionButton('btnMoveUnitsDone', _('Done'), () => this.takeAction('actMoveUnitsDone'));
+    },
+
+    onEnteringStateMoveUnitsChooseTarget(args) {
+      this.addCancelStateBtn();
+      $('unit-' + args.troopId).classList.add('moving');
+      args.cells.forEach((cell) => {
+        let oCell = $(`cell-${cell.x}-${cell.y}`);
+        this.onClick(oCell, () => debug(cell));
+        oCell.classList.add('forMove');
+      });
+    },
   });
 });

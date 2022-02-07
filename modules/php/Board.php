@@ -48,7 +48,7 @@ class Board extends \APP_DbObject
       foreach ($col as $y => $cell) {
         self::$grid[$x][$y] = [
           'terrains' => [],
-          'unit' => null,
+          'units' => [],
           'labels' => [],
         ];
       }
@@ -61,7 +61,7 @@ class Board extends \APP_DbObject
 
     // Add the units
     foreach (Troops::getAllOrdered() as $unit) {
-      self::$grid[$unit->getX()][$unit->getY()]['unit'] = $unit;
+      self::$grid[$unit->getX()][$unit->getY()]['units'][] = $unit;
     }
 
     // Add the labels
@@ -117,7 +117,7 @@ class Board extends \APP_DbObject
   public static function getReachableCells($troop)
   {
     // Compute remaining moves for the unit
-    $m = $troop->getMovementRadius() - $troop->getMoves();
+    $m = $troop->getMovementRadius() - $troop->getMoves() + 2;
     return self::getReachableCellsAtDistance($troop, $m);
   }
 
@@ -143,7 +143,9 @@ class Board extends \APP_DbObject
         continue;
       }
       $gridMarkers[$cell['x']][$cell['y']] = $cell;
-      $cells[] = $cell;
+      if ($cell['d'] > 0) {
+        $cells[] = $cell;
+      }
 
       // Look at neighbours
       foreach (self::getNeighbours($cell) as $nextCell) {
@@ -162,12 +164,17 @@ class Board extends \APP_DbObject
         }
       }
     }
+    //echo '<pre>'; var_dump($gridMarkers); echo '</pre>';
 
     return $cells;
   }
 
   public static function getDeplacementCost($troop, $source, $target)
   {
+    $targetCell = self::$grid[$target['x']][$target['y']];
+    if (!empty($targetCell['units'])) {
+      return \INFINITY;
+    }
     return 1;
   }
 
