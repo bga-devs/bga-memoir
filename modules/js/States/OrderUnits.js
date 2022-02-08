@@ -9,53 +9,53 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     //////////////////////////////////////
 
     onEnteringStateOrderUnits(args) {
-      this.makeTroopsSelectable(
-        args.troops,
-        this.onClickTroopToOrder.bind(this),
+      this.makeUnitsSelectable(
+        args.units,
+        this.onClickUnitToOrder.bind(this),
         this.isUnitSelectable.bind(this),
         'activated',
       );
 
-      this._selectedTroopsOnTheMove = [];
+      this._selectedUnitsOnTheMove = [];
       this.addPrimaryActionButton('btnConfirmOrder', _('Confirm orders'), () => this.onClickConfirmOrders());
     },
 
-    onClickTroopToOrder(troopId, pos, selected) {
-      let troopIndex = this._selectedTroopsOnTheMove.findIndex((t) => t == troopId);
-      let selectedOnTheMove = troopIndex !== -1;
+    onClickUnitToOrder(unitId, pos, selected) {
+      let unitIndex = this._selectedUnitsOnTheMove.findIndex((t) => t == unitId);
+      let selectedOnTheMove = unitIndex !== -1;
 
       if (!selected && !selectedOnTheMove) {
         let minFilling = this.getMinFillingOfSections();
         // If this unit can be selected without using "on the move", then go for it !
-        if (this.isUnitSelectable(troopId, pos, selected, minFilling, true)) {
+        if (this.isUnitSelectable(unitId, pos, selected, minFilling, true)) {
           return true;
         }
         // Otherwise, must flag it as "on the move"
         else {
-          this._selectedTroopsOnTheMove.push(troopId);
-          $('unit-' + troopId).classList.add('activated', 'onTheMove');
+          this._selectedUnitsOnTheMove.push(unitId);
+          $('unit-' + unitId).classList.add('activated', 'onTheMove');
         }
       } else if (selectedOnTheMove) {
-        this._selectedTroopsOnTheMove.splice(troopIndex, 1);
-        $('unit-' + troopId).classList.remove('activated', 'onTheMove');
+        this._selectedUnitsOnTheMove.splice(unitIndex, 1);
+        $('unit-' + unitId).classList.remove('activated', 'onTheMove');
         return false;
       } else {
         // Try to put it on the move if not full
-        if (this._selectedTroopsOnTheMove.length < this.getArgs().nOnTheMove) {
-          this._selectedTroopsOnTheMove.push(troopId);
-          $('unit-' + troopId).classList.add('activated', 'onTheMove');
+        if (this._selectedUnitsOnTheMove.length < this.getArgs().nOnTheMove) {
+          this._selectedUnitsOnTheMove.push(unitId);
+          $('unit-' + unitId).classList.add('activated', 'onTheMove');
         }
         return true;
       }
     },
 
-    isUnitSelectable(troopId, pos, selected, minFilling, ignoreOnTheMove = false) {
+    isUnitSelectable(unitId, pos, selected, minFilling, ignoreOnTheMove = false) {
       // A selected unit can always be unselected
       if (selected) return true;
       // A "on the move" unit can always be unselected
-      if (this._selectedTroopsOnTheMove.includes(troopId)) return true;
+      if (this._selectedUnitsOnTheMove.includes(unitId)) return true;
       // If there is still "on the move" units left, the unit can be selected
-      if (!ignoreOnTheMove && this._selectedTroopsOnTheMove.length < this.getArgs().nOnTheMove) return true;
+      if (!ignoreOnTheMove && this._selectedUnitsOnTheMove.length < this.getArgs().nOnTheMove) return true;
       // Try to find a section with still enough room
       let sections = this.getArgs().sections;
       for (let i = 0; i < 3; i++) {
@@ -69,8 +69,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
     onClickConfirmOrders() {
       this.takeAction('actOrderUnits', {
-        troopIds: this._selectedTroops.join(';'),
-        troopOnTheMoveIds: this._selectedTroopsOnTheMove.join(';'),
+        unitIds: this._selectedUnits.join(';'),
+        unitOnTheMoveIds: this._selectedUnitsOnTheMove.join(';'),
       });
     },
 
@@ -83,11 +83,11 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     /////////////////////////////////
 
     onEnteringStateMoveUnits(args) {
-      Object.keys(args.troops).forEach((troopId) => {
-        this.onClick('unit-' + troopId, () => {
+      Object.keys(args.units).forEach((unitId) => {
+        this.onClick('unit-' + unitId, () => {
           this.clientState('moveUnitsChooseTarget', _('Select the destination hex'), {
-            troopId,
-            cells: args.troops[troopId],
+            unitId,
+            cells: args.units[unitId],
           });
         });
       });
@@ -97,7 +97,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
     onEnteringStateMoveUnitsChooseTarget(args) {
       this.addCancelStateBtn();
-      $('unit-' + args.troopId).classList.add('moving');
+      $('unit-' + args.unitId).classList.add('moving');
       args.cells.forEach((cell) => {
         let oCell = $(`cell-${cell.x}-${cell.y}`);
         this.onClick(oCell, () => debug(cell));

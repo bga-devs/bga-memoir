@@ -1,5 +1,5 @@
 <?php
-namespace M44\Troops;
+namespace M44\Units;
 
 class SpecialForces extends Infantry
 {

@@ -1,13 +1,13 @@
 <?php
-namespace M44\Troops;
+namespace M44\Units;
 
 use M44\Board;
 use M44\Managers\Players;
 
-class AbstractTroop extends \M44\Helpers\DB_Manager implements \JsonSerializable
+class AbstractUnit extends \M44\Helpers\DB_Manager implements \JsonSerializable
 {
-  protected static $table = 'troops';
-  protected static $primary = 'troop_id';
+  protected static $table = 'units';
+  protected static $primary = 'unit_id';
 
   protected $id = null;
   protected $x = null;

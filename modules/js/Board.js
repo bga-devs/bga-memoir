@@ -200,35 +200,35 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       </div>`;
     },
 
-    makeTroopsSelectable(troops, callback, checkCallback, className = 'selected') {
-      this._selectedTroops = [];
-      this._selectableTroops = troops;
+    makeUnitsSelectable(units, callback, checkCallback, className = 'selected') {
+      this._selectedUnits = [];
+      this._selectableUnits = units;
 
-      Object.keys(troops).forEach((troopId) => {
-        this.onClick('unit-' + troopId, () => {
-          let troopIndex = this._selectedTroops.findIndex((t) => t == troopId);
-          let selected = troopIndex !== -1; // Already selected ?
+      Object.keys(units).forEach((unitId) => {
+        this.onClick('unit-' + unitId, () => {
+          let unitIndex = this._selectedUnits.findIndex((t) => t == unitId);
+          let selected = unitIndex !== -1; // Already selected ?
           // Should we take the click into account ?
-          if (callback(troopId, this._selectableTroops[troopId], selected)) {
+          if (callback(unitId, this._selectableUnits[unitId], selected)) {
             if (selected) {
-              this._selectedTroops.splice(troopIndex, 1);
-              // Ad-hoc case when a selected troop switch to "on the move" instead of completely unselected
-              if (className != 'activated' || !$('unit-' + troopId).classList.contains('onTheMove')) {
-                $('unit-' + troopId).classList.remove(className);
+              this._selectedUnits.splice(unitIndex, 1);
+              // Ad-hoc case when a selected unit switch to "on the move" instead of completely unselected
+              if (className != 'activated' || !$('unit-' + unitId).classList.contains('onTheMove')) {
+                $('unit-' + unitId).classList.remove(className);
               }
             } else {
-              this._selectedTroops.push(troopId);
-              $('unit-' + troopId).classList.add(className);
+              this._selectedUnits.push(unitId);
+              $('unit-' + unitId).classList.add(className);
             }
           }
 
-          // Update unselectable troops
+          // Update unselectable units
           let minFilling = this.getMinFillingOfSections();
-          Object.keys(this._selectableTroops).forEach((troopId) => {
-            let troopIndex = this._selectedTroops.findIndex((t) => t == troopId);
-            let selected = troopIndex !== -1; // Already selected ?
-            let selectable = checkCallback(troopId, this._selectableTroops[troopId], selected, minFilling);
-            $('unit-' + troopId).classList.toggle('unselectable', !selectable);
+          Object.keys(this._selectableUnits).forEach((unitId) => {
+            let unitIndex = this._selectedUnits.findIndex((t) => t == unitId);
+            let selected = unitIndex !== -1; // Already selected ?
+            let selectable = checkCallback(unitId, this._selectableUnits[unitId], selected, minFilling);
+            $('unit-' + unitId).classList.toggle('unselectable', !selectable);
           });
         });
       });
@@ -239,9 +239,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
      */
     getMinFillingOfSections() {
       let fillings = [[0, 0, 0]];
-      this._selectedTroops.forEach((troopId) => {
+      this._selectedUnits.forEach((unitId) => {
         let t = [];
-        this._selectableTroops[troopId].sections.forEach((section) => {
+        this._selectableUnits[unitId].sections.forEach((section) => {
           fillings.forEach((filling) => {
             let newFilling = filling.slice();
             newFilling[section]++;

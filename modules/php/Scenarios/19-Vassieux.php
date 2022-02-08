@@ -368,7 +368,7 @@ $scenarios[19] = [
 
 By July 14, 1944, the Resistance had completed the airfield - code-named "Taille-Crayon"(Pencil Sharpener) - and just received a drop from US flying fortresses when German planes appeared and bombed the village.
 
-On July 21 at 9:00 AM, French Resistance, working to repair the airfield, were taken by surprise when 20 German planes and gliders came flying out of the morning mist. The gliders landed and German troops poured out, making for the houses in the village. The Resistance around Vassieux rushed to help their comrades and dislodge the Germans from the buildings, but all attacks through the day failed.
+On July 21 at 9:00 AM, French Resistance, working to repair the airfield, were taken by surprise when 20 German planes and gliders came flying out of the morning mist. The gliders landed and German units poured out, making for the houses in the village. The Resistance around Vassieux rushed to help their comrades and dislodge the Germans from the buildings, but all attacks through the day failed.
 
 The stage is set, the battle lines are drawn, and you are in command. The rest is history.'),
       'description' => clienttranslate('Axis Player: Take 4 command cards

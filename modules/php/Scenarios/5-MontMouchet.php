@@ -366,7 +366,7 @@ $scenarios[5] = [
   'text' => [
     'en' => [
       'name' => clienttranslate('Mont Mouchet'),
-      'historical' => clienttranslate('On June 10th, three tactical groups from the Wermacht, about 2,000 men with armored support, converged on Mont Mouchet. Simultaneously moving in from the west (Saint Flour), north (Langeac and Pinols) and east (Le Puy-en-Velay et Saugues) they were determined to trap all French Resistance troops in the area. Violent fighting occurred during the entire day. The French companies made use of their knowledge of the wooded and hilly terrain to hold off the advances and finally forced the enemy to temporarily fall back to their starting positions.
+      'historical' => clienttranslate('On June 10th, three tactical groups from the Wermacht, about 2,000 men with armored support, converged on Mont Mouchet. Simultaneously moving in from the west (Saint Flour), north (Langeac and Pinols) and east (Le Puy-en-Velay et Saugues) they were determined to trap all French Resistance units in the area. Violent fighting occurred during the entire day. The French companies made use of their knowledge of the wooded and hilly terrain to hold off the advances and finally forced the enemy to temporarily fall back to their starting positions.
 
 The stage is set, the battle lines are drawn, and you are in command. The rest is history.'),
       'description' => clienttranslate('Axis Player: Take 4 command cards

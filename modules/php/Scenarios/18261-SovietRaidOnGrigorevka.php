@@ -704,8 +704,8 @@ $scenarios[18261] = [
       'name' => clienttranslate('[Ukraine] Soviet raid on Grigorevka'),
       'subtitle' => clienttranslate('Assault of the 3rd Naval Infantry Regiment	'),
       'historical' => clienttranslate('In September 1941, the city of Odessa was on the front line, surrounded by the Romanian army and under heavy fire from the artillery batteries of the 15th Romanian division positioned near Grigorevka. In order to help the defenders of the city, the Black Sea Fleet ordered a raid to destroy those big guns.
-During the night of September 21st, 23 paratroopers led by Starshina Kuznetsov were dropped on the site. Then, the 3rd Naval Infantry Regiment, under the command of Captain Koren, landed in front of Grigorevka, supported by the destroyers Bojskij and Bezuprechnyj. 
-The Soviet paratroopers managed to destroy a regimental HQ while the sea-landed troops captured the enemy batteries. Once their mission was complete, the naval infantrymen slipped back across the Soviet lines near Odessa.
+During the night of September 21st, 23 parauniters led by Starshina Kuznetsov were dropped on the site. Then, the 3rd Naval Infantry Regiment, under the command of Captain Koren, landed in front of Grigorevka, supported by the destroyers Bojskij and Bezuprechnyj. 
+The Soviet parauniters managed to destroy a regimental HQ while the sea-landed units captured the enemy batteries. Once their mission was complete, the naval infantrymen slipped back across the Soviet lines near Odessa.
 The stage is set, the battle lines are drawn, and you are in command. The rest is history.'),
       'description' => clienttranslate('Axis Player [Romania]
 Take 5 Command cards. 
@@ -716,8 +716,8 @@ Take 6 Command cards. You move first.'),
 Each artillery battery destroyed is worth an additional permanent medal objective for the Allied player.
 The hex with the Romanian HQ is a temporary Medal Objective for the Allied player.'),
       'rules' => clienttranslate('- Red Army rules (Nations 2) are in effect. 
-- All Allied Infantry units are Elite (Troops 2 - Specialized Units). Badges are not required.
-- Destroyer rules (Troops 12) are in effect.
+- All Allied Infantry units are Elite (Units 2 - Specialized Units). Badges are not required.
+- Destroyer rules (Units 12) are in effect.
 - Capture HQ/supply Tent rules (Actions 17) are in effect.
 - Night Attacks rules (Actions 19) are in effect.
 - Use the Paradrop rules (Actions 20): on the first turn, the Allied player drops 6 Elite Infantry units on the board, one at a time.'),

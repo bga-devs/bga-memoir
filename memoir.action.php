@@ -46,9 +46,9 @@ class action_memoir extends APP_GameAction
   public function actOrderUnits()
   {
     self::setAjaxMode();
-    $troopIds = $this->getNumberList('troopIds');
-    $onTheMoveIds = $this->getNumberList('troopOnTheMoveIds');
-    $this->game->actOrderUnits($troopIds, $onTheMoveIds);
+    $unitIds = $this->getNumberList('unitIds');
+    $onTheMoveIds = $this->getNumberList('unitOnTheMoveIds');
+    $this->game->actOrderUnits($unitIds, $onTheMoveIds);
     self::ajaxResponse();
   }
 

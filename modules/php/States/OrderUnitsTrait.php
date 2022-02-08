@@ -5,7 +5,7 @@ use M44\Core\Globals;
 use M44\Core\Notifications;
 use M44\Managers\Players;
 use M44\Managers\Teams;
-use M44\Managers\Troops;
+use M44\Managers\Units;
 
 trait OrderUnitsTrait
 {
@@ -32,26 +32,26 @@ trait OrderUnitsTrait
       throw new \BgaVisibleSystemException('More on the move units than authorized. Should not happen');
     }
 
-    $selectableIds = $args['troops']->getIds();
+    $selectableIds = $args['units']->getIds();
     if (count(array_diff($unitIds, $selectableIds)) != 0) {
-      throw new \feException('You selected a troop that cannot be selected');
+      throw new \feException('You selected a unit that cannot be selected');
     }
 
     if (count(array_diff($onTheMoveIds, $selectableIds)) != 0) {
-      throw new \feException('You selected a troop that cannot be selected');
+      throw new \feException('You selected a unit that cannot be selected');
     }
 
     // Flag the units as activated by the corresponding card
     $card = $player->getCardInPlay();
     foreach ($unitIds as $unitId) {
-      Troops::get($unitId)->activate($card);
+      Units::get($unitId)->activate($card);
     }
     foreach ($onTheMoveIds as $unitId) {
-      Troops::get($unitId)->activate($card, true);
+      Units::get($unitId)->activate($card, true);
     }
 
     // Notify
-    //Notifications::orderUnits($player, Troop::get($unitIds), Troops::get($onTheMoveIds));
+    //Notifications::orderUnits($player, Unit::get($unitIds), Units::get($onTheMoveIds));
 
     $this->gamestate->nextState('moveUnits');
   }

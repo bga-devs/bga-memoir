@@ -7,7 +7,7 @@ use M44\Helpers\Utils;
 use M44\Managers\Cards;
 use M44\Managers\Players;
 use M44\Managers\Terrains;
-use M44\Managers\Troops;
+use M44\Managers\Units;
 
 class Board extends \APP_DbObject
 {
@@ -60,7 +60,7 @@ class Board extends \APP_DbObject
     }
 
     // Add the units
-    foreach (Troops::getAllOrdered() as $unit) {
+    foreach (Units::getAllOrdered() as $unit) {
       self::$grid[$unit->getX()][$unit->getY()]['units'][] = $unit;
     }
 
@@ -83,6 +83,124 @@ class Board extends \APP_DbObject
       'face' => $scenario['board']['face'],
       'grid' => self::$grid,
     ];
+  }
+
+  /////////////////////////////////
+  //  __  __  _____     _______
+  // |  \/  |/ _ \ \   / / ____|
+  // | |\/| | | | \ \ / /|  _|
+  // | |  | | |_| |\ V / | |___
+  // |_|  |_|\___/  \_/  |_____|
+  /////////////////////////////////
+
+  public static function getReachableCells($unit)
+  {
+    // Compute remaining moves for the unit
+    $m = $unit->getMovementRadius() - $unit->getMoves() + 2;
+    return self::getReachableCellsAtDistance($unit, $m);
+  }
+
+  public static function getReachableCellsAtDistance($unit, $d)
+  {
+    $queue = new \SplPriorityQueue();
+    $queue->setExtractFlags(\SplPriorityQueue::EXTR_BOTH);
+    $queue->insert(
+      [
+        'cell' => $unit->getPos(),
+      ],
+      0
+    );
+    $gridMarkers = self::createGrid(false);
+    $cells = [];
+
+    while (!$queue->isEmpty()) {
+      // Extract the top node and adds it to the result
+      $node = $queue->extract();
+      $cell = $node['data']['cell'];
+      $cell['d'] = -$node['priority'];
+      if ($gridMarkers[$cell['x']][$cell['y']] !== false) {
+        continue;
+      }
+      $gridMarkers[$cell['x']][$cell['y']] = $cell;
+      if ($cell['d'] > 0) {
+        $cells[] = $cell;
+      }
+
+      // Look at neighbours
+      $neighbours = self::getNeighbours($cell);
+      foreach ($neighbours as $nextCell) {
+        if ($gridMarkers[$nextCell['x']][$nextCell['y']] !== false) {
+          continue;
+        }
+
+        $dist = $cell['d'] + self::getDeplacementCost($unit, $cell, $nextCell, $d);
+        if ($dist <= $d) {
+          $queue->insert(
+            [
+              'cell' => $nextCell,
+            ],
+            -$dist
+          );
+        }
+      }
+    }
+    //echo '<pre>'; var_dump($gridMarkers); echo '</pre>';
+
+    return $cells;
+  }
+
+  public static function getDeplacementCost($unit, $source, $target, $d)
+  {
+    // Get corresponding cells
+    $sourceCell = self::$grid[$source['x']][$source['y']];
+    $targetCell = self::$grid[$target['x']][$target['y']];
+
+    // If there is a unit => can't go there
+    if (!empty($targetCell['units'])) {
+      return \INFINITY;
+    }
+
+    // If there is an impassable terrain => can't go there
+    foreach ($targetCell['terrains'] as $terrain) {
+      $impassable = $terrain->getImpassable();
+      if ($impassable === true || (is_array($impassable) && in_array($unit->getType(), $impassable))) {
+        return \INFINITY;
+      }
+    }
+
+    // If I'm coming from a 'must stop' terrain, can't go there unless dist = 0
+    if ($source['d'] > 0) {
+      foreach ($sourceCell['terrains'] as $terrain) {
+        if ($terrain->mustStopWhenEntering()) {
+          return \INFINITY;
+        }
+      }
+    }
+
+    return 1;
+  }
+
+  /////////////////////////////////////////////
+  //  ____      _     _   _   _ _   _ _
+  //  / ___|_ __(_) __| | | | | | |_(_) |___
+  // | |  _| '__| |/ _` | | | | | __| | / __|
+  // | |_| | |  | | (_| | | |_| | |_| | \__ \
+  //  \____|_|  |_|\__,_|  \___/ \__|_|_|___/
+  ////////////////////////////////////////////
+
+  public static function createGrid($defaultValue = null)
+  {
+    $mode = self::getMode();
+    $dim = self::$dimensions[$mode];
+    $g = [];
+    for ($y = 0; $y < $dim['y']; $y++) {
+      $size = $dim['x'] - ($y % 2 == 0 ? 0 : 1);
+      for ($x = 0; $x < $size; $x++) {
+        $col = 2 * $x + ($y % 2 == 0 ? 0 : 1);
+        $g[$col][$y] = $defaultValue;
+      }
+    }
+    return $g;
   }
 
   protected function isValidCell($cell)
@@ -112,107 +230,5 @@ class Board extends \APP_DbObject
       }
     }
     return $cells;
-  }
-
-  public static function getReachableCells($troop)
-  {
-    // Compute remaining moves for the unit
-    $m = $troop->getMovementRadius() - $troop->getMoves() + 2;
-    return self::getReachableCellsAtDistance($troop, $m);
-  }
-
-  public static function getReachableCellsAtDistance($troop, $d)
-  {
-    $queue = new \SplPriorityQueue();
-    $queue->setExtractFlags(\SplPriorityQueue::EXTR_BOTH);
-    $queue->insert(
-      [
-        'cell' => $troop->getPos(),
-      ],
-      0
-    );
-    $gridMarkers = self::createGrid(false);
-    $cells = [];
-
-    while (!$queue->isEmpty()) {
-      // Extract the top node and adds it to the result
-      $node = $queue->extract();
-      $cell = $node['data']['cell'];
-      $cell['d'] = -$node['priority'];
-      if ($gridMarkers[$cell['x']][$cell['y']] !== false) {
-        continue;
-      }
-      $gridMarkers[$cell['x']][$cell['y']] = $cell;
-      if ($cell['d'] > 0) {
-        $cells[] = $cell;
-      }
-
-      // Look at neighbours
-      $neighbours = self::getNeighbours($cell);
-      foreach ($neighbours as $nextCell) {
-        if ($gridMarkers[$nextCell['x']][$nextCell['y']] !== false) {
-          continue;
-        }
-
-        $dist = $cell['d'] + self::getDeplacementCost($troop, $cell, $nextCell, $d);
-        if ($dist <= $d) {
-          $queue->insert(
-            [
-              'cell' => $nextCell,
-            ],
-            -$dist
-          );
-        }
-      }
-    }
-    //echo '<pre>'; var_dump($gridMarkers); echo '</pre>';
-
-    return $cells;
-  }
-
-  public static function getDeplacementCost($troop, $source, $target, $d)
-  {
-    // Get corresponding cells
-    $sourceCell = self::$grid[$source['x']][$source['y']];
-    $targetCell = self::$grid[$target['x']][$target['y']];
-
-    // If there is a unit => can't go there
-    if (!empty($targetCell['units'])) {
-      return \INFINITY;
-    }
-
-    // If there is an impassable terrain => can't go there
-    foreach ($targetCell['terrains'] as $terrain) {
-      $impassable = $terrain->getImpassable();
-      if ($impassable === true || (is_array($impassable) && in_array($troop->getType(), $impassable))) {
-        return \INFINITY;
-      }
-    }
-
-    // If I'm coming from a 'must stop' terrain, can't go there unless dist = 0
-    if($source['d'] > 0){
-      foreach ($sourceCell['terrains'] as $terrain) {
-        if($terrain->mustStopWhenEntering()){
-          return \INFINITY;
-        }
-      }
-    }
-
-    return 1;
-  }
-
-  public static function createGrid($defaultValue = null)
-  {
-    $mode = self::getMode();
-    $dim = self::$dimensions[$mode];
-    $g = [];
-    for ($y = 0; $y < $dim['y']; $y++) {
-      $size = $dim['x'] - ($y % 2 == 0 ? 0 : 1);
-      for ($x = 0; $x < $size; $x++) {
-        $col = 2 * $x + ($y % 2 == 0 ? 0 : 1);
-        $g[$col][$y] = $defaultValue;
-      }
-    }
-    return $g;
   }
 }

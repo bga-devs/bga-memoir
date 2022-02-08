@@ -104,7 +104,7 @@ const OPTION_SCENARIO = 101;
  */
 
 /*
- * Troops
+ * Units
  */
 const INFANTRY = 1;
 const ARMOR = 2;

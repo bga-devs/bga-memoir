@@ -1,7 +1,7 @@
 <?php
 namespace M44\Models;
 use M44\Managers\Players;
-use M44\Managers\Troops;
+use M44\Managers\Units;
 use M44\Helpers\Collection;
 
 class SectionCard extends Card
@@ -37,10 +37,10 @@ class SectionCard extends Card
   public function getArgsOrderUnits()
   {
     $player = $this->getPlayer();
-    $troops = new Collection();
+    $units = new Collection();
     foreach ($this->getSections() as $i => $n) {
       if ($n > 0 || $this->nUnitsOnTheMove > 0) {
-        $troops = $troops->merge($player->getTroopsInSection($i)->getPositions());
+        $units = $units->merge($player->getUnitsInSection($i)->getPositions());
       }
     }
 
@@ -50,18 +50,18 @@ class SectionCard extends Card
       'nOnTheMove' => $this->nUnitsOnTheMove,
       'desc' => $this->orderUnitsTitles[$this->value] ?? '',
       'sections' => $this->getSections(),
-      'troops' => $troops,
+      'units' => $units,
     ];
   }
 
   public function getArgsMoveUnits()
   {
     $player = $this->getPlayer();
-    $troops = Troops::getActivatedByCard($this);
+    $units = Units::getActivatedByCard($this);
 
     return [
-      'troops' => $troops->map(function ($troop) {
-        return $troop->getPossibleMoves();
+      'units' => $units->map(function ($unit) {
+        return $unit->getPossibleMoves();
       }),
     ];
   }

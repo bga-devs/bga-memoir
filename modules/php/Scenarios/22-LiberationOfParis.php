@@ -449,7 +449,7 @@ It was perhaps this last action which set the Allied commanders thinking that th
 
 Leclerc\'s Frenchmen attacked towards Paris at dawn on the 24th of August, in two columns. The left column, under Colonel de Langlade, immediately ran into German defenses, and was held up for hours in a firefight that saw the destruction of a number of German tanks. The right hand column, under Colonel Billotte, faced even more serious opposition and was quickly bogged down outside the capital by a series of strong points in several small villages.
 
-That same night, defenses quickly evaporated when Choltitz ordered his troops to withdraw behind the Seine. The next day, August 25th, Choltitz surrendered to Leclerc at the Gare Montparnasse.
+That same night, defenses quickly evaporated when Choltitz ordered his units to withdraw behind the Seine. The next day, August 25th, Choltitz surrendered to Leclerc at the Gare Montparnasse.
 
 The stage is set, the battle lines are drawn, and you are in command. The rest is history.'),
       'description' => clienttranslate('Axis Player: Take 4 command cards.

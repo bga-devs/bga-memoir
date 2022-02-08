@@ -377,7 +377,7 @@ $scenarios[7] = [
   'text' => [
     'en' => [
       'name' => clienttranslate('Pointe-du-Hoc'),
-      'historical' => clienttranslate('Planners felt that the German batteries on Pointe-du-Hoc would be one of the most daunting threats to Allied forces landing on Omaha in the morning of D-Day. Set atop 100 foot cliffs west of the beach, the guns\' range were such that they\'d be able to score direct hits on any troops landing on the beach below. The 2nd Rangers, under the command of Lieutenant Colonel James E. Rudder, were tasked with silencing them.
+      'historical' => clienttranslate('Planners felt that the German batteries on Pointe-du-Hoc would be one of the most daunting threats to Allied forces landing on Omaha in the morning of D-Day. Set atop 100 foot cliffs west of the beach, the guns\' range were such that they\'d be able to score direct hits on any units landing on the beach below. The 2nd Rangers, under the command of Lieutenant Colonel James E. Rudder, were tasked with silencing them.
 
 Following a difficult approach and despite intense firing from the German garrison, the first of about 200 Rangers leading the assault were on top of the cliffs within minutes. They were surprised to find that the guns had been withdrawn off the point three days before. Finding only dummies made from timber in the gun casemates, Ranger patrols infiltrated south looking for the missing guns.
 

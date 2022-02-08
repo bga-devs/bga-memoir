@@ -1,7 +1,7 @@
 <?php
-namespace M44\Troops;
+namespace M44\Units;
 
-class Armor extends AbstractTroop
+class Armor extends AbstractUnit
 {
   public function __construct($row)
   {

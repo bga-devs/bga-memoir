@@ -7,12 +7,12 @@ use M44\Helpers\Utils;
 use M44\Board;
 
 /**
- * Troops
+ * Units
  */
-class Troops extends \M44\Helpers\Pieces
+class Units extends \M44\Helpers\Pieces
 {
-  protected static $table = 'troops';
-  protected static $prefix = 'troop_';
+  protected static $table = 'units';
+  protected static $prefix = 'unit_';
   protected static $customFields = [
     'x',
     'y',
@@ -42,7 +42,7 @@ class Troops extends \M44\Helpers\Pieces
 
   public function getInstance($type, $badge, $row = null)
   {
-    $className = '\M44\Troops\\' . TROOP_CLASSES[$type];
+    $className = '\M44\Units\\' . TROOP_CLASSES[$type];
     return new $className($row);
   }
 
@@ -113,20 +113,20 @@ class Troops extends \M44\Helpers\Pieces
       ->delete()
       ->run();
     $board = $scenario['board'];
-    $troops = [];
+    $units = [];
     foreach ($board['hexagons'] as $hex) {
       if (isset($hex['unit'])) {
         $data = self::getTypeAndNation($hex['unit']);
-        $troop = self::getInstance($data['type'], $data['badge']);
-        $data['figures'] = $troop->getMaxUnits();
+        $unit = self::getInstance($data['type'], $data['badge']);
+        $data['figures'] = $unit->getMaxUnits();
         $data['location'] = 'board';
         $data['x'] = $hex['col'];
         $data['y'] = $hex['row'];
-        $troops[] = $data;
+        $units[] = $data;
       }
     }
 
-    self::create($troops);
+    self::create($units);
   }
 
   ////////////////////////

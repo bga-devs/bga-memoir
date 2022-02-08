@@ -54,10 +54,10 @@ CREATE TABLE IF NOT EXISTS `terrains` (
   PRIMARY KEY (`tile_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `troops` (
-  `troop_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `troop_location` varchar(32) NOT NULL,
-  `troop_state` int(10) DEFAULT 0,
+CREATE TABLE IF NOT EXISTS `units` (
+  `unit_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `unit_location` varchar(32) NOT NULL,
+  `unit_state` int(10) DEFAULT 0,
   `x` int(10) NULL,
   `y` int(10) NULL,
   `type` VARCHAR(255) NOT NULL,
@@ -68,5 +68,5 @@ CREATE TABLE IF NOT EXISTS `troops` (
   `moves` int(1) DEFAULT 0,
   `fights` int(1) DEFAULT 0,
   `extra_datas` JSON NULL,
-  PRIMARY KEY (`troop_id`)
+  PRIMARY KEY (`unit_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
