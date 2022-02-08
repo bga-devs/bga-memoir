@@ -9,6 +9,10 @@ use M44\Managers\Players;
 use M44\Managers\Terrains;
 use M44\Managers\Units;
 
+const LINE_INTERSECTION = 0;
+const LINE_TANGENT = 1;
+const LINE_CORNER = 2;
+
 class Board extends \APP_DbObject
 {
   public static $dimensions = [
@@ -112,7 +116,7 @@ class Board extends \APP_DbObject
     return self::getReachableCellsAtDistance($unit, $m);
   }
 
-  public static function getReachableCellsAtDistance($unit, $d)
+  public static function getReachableCellsAtDistance($unit, $d, $unitaryCost = false)
   {
     $queue = new \SplPriorityQueue();
     $queue->setExtractFlags(\SplPriorityQueue::EXTR_BOTH);
@@ -145,7 +149,7 @@ class Board extends \APP_DbObject
           continue;
         }
 
-        $dist = $cell['d'] + self::getDeplacementCost($unit, $cell, $nextCell, $d);
+        $dist = $cell['d'] + ($unitaryCost ? 1 : self::getDeplacementCost($unit, $cell, $nextCell, $d));
         if ($dist <= $d) {
           $queue->insert(
             [
@@ -190,6 +194,100 @@ class Board extends \APP_DbObject
     }
 
     return 1;
+  }
+
+  //////////////////////////////////////////
+  //    _  _____ _____  _    ____ _  __
+  //    / \|_   _|_   _|/ \  / ___| |/ /
+  //   / _ \ | |   | | / _ \| |   | ' /
+  //  / ___ \| |   | |/ ___ \ |___| . \
+  // /_/   \_\_|   |_/_/   \_\____|_|\_\
+  //////////////////////////////////////////
+
+  public static function getTargetableCells($unit)
+  {
+    // Compute cells at distance
+    $m = 10; //count($unit->getAttackPower());
+    $cells = self::getReachableCellsAtDistance($unit, $m, true);
+
+    // Keep only the ones where an enemy stands
+    Utils::filter($cells, function ($cell) use ($unit) {
+      $units = self::$grid[$cell['x']][$cell['y']]['units'];
+      Utils::filter($units, function ($unit2) use ($unit) {
+        return $unit2->isOpponent($unit);
+      });
+      return !empty($units);
+    });
+
+    foreach ($cells as &$cell) {
+      $cell['path'] = self::getCellsInLine($unit->getPos(), $cell);
+    }
+
+    return $cells;
+  }
+
+  public static function isInLineOfSight($source, $target)
+  {
+  }
+
+  public static function getCellsInLine($source, $target)
+  {
+    $cells = [];
+    // From the coordinates of the two centers, compute a normal vector
+    $sourceCenter = [2 * $source['x'], 4 * $source['y']];
+    $targetCenter = [2 * $target['x'], 4 * $target['y']];
+    $normalVector = [$targetCenter[1] - $sourceCenter[1], -($targetCenter[0] - $sourceCenter[0])];
+
+    // Go through each cells in the "rectangle" bounded by $source and $target
+    for ($x = min($source['x'], $target['x']); $x <= max($source['x'], $target['x']); $x++) {
+      for ($y = min($source['y'], $target['y']); $y <= max($source['y'], $target['y']); $y++) {
+        $cell = ['x' => $x, 'y' => $y];
+        if (!self::isValidCell($cell)) {
+          continue;
+        }
+
+        // Compute the center and corners of that cell
+        $center = [2 * $x, 4 * $y];
+        $corners = [
+          [$center[0], $center[1] - 2],
+          [$center[0] + 1, $center[1] - 1],
+          [$center[0] + 1, $center[1] + 1],
+          [$center[0], $center[1] + 2],
+          [$center[0] - 1, $center[1] + 1],
+          [$center[0] - 1, $center[1] - 1],
+        ];
+
+        // Each corner is then sorted in the corresponding category
+        $pos = [];
+        $neg = [];
+        $zeros = [];
+        foreach ($corners as $i => $corner) {
+          $v = [$corner[0] - $sourceCenter[0], $corner[1] - $sourceCenter[1]];
+          $dotProduct = $v[0] * $normalVector[0] + $v[1] * $normalVector[1];
+          if ($dotProduct > 0) {
+            $pos[] = $i;
+          } elseif ($dotProduct < 0) {
+            $neg[] = $i;
+          } else {
+            $zeros[] = $i;
+          }
+        }
+
+        // Deduce if there is an intersection or not
+        if (count($pos) > 0 && count($neg) > 0) {
+          $cell['type'] = LINE_INTERSECTION;
+        } elseif (count($zeros) == 1) {
+          $cell['type'] = LINE_CORNER;
+        } elseif (count($zeros) == 2) {
+          $cell['type'] = LINE_TANGENT;
+        } else {
+          continue; // NO INTERSECTION
+        }
+        $cells[] = $cell;
+      }
+    }
+
+    return $cells;
   }
 
   /////////////////////////////////////////////

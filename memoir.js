@@ -66,8 +66,10 @@ define([
 
     clearPossible() {
       this.inherited(arguments);
-      dojo.query('.moving').removeClass('moving');
-      dojo.query('.forMove').removeClass('forMove');
+      ['moving', 'forMove', 'attacking', 'forAttack'].forEach((className) => {
+        let cells = [...$('m44-board').getElementsByClassName(className)];
+        cells.forEach((cell) => cell.classList.remove(className));
+      });
     },
 
     updatePlayerOrdering() {},

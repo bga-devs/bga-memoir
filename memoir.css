@@ -712,10 +712,12 @@ html {
       height: 100%; }
       #m44-board .hex-cell-container .hex-cell.selectable {
         cursor: pointer; }
-        #m44-board .hex-cell-container .hex-cell.selectable.forMove {
+        #m44-board .hex-cell-container .hex-cell.selectable.forMove, #m44-board .hex-cell-container .hex-cell.selectable.forAttack {
           background-image: url("img/hex_background_highlights.png");
           background-size: 500% 100%;
           background-position: 0% 0%; }
+        #m44-board .hex-cell-container .hex-cell.selectable.forAttack {
+          background-position-x: 75%; }
   #m44-board .board-divider {
     margin-left: -1px;
     z-index: 2;
@@ -768,7 +770,7 @@ html {
     cursor: pointer; }
   .m44-unit.unselectable {
     cursor: default; }
-  .m44-unit.activated, .m44-unit.moving {
+  .m44-unit.activated, .m44-unit.moving, .m44-unit.attacking {
     background-image: url("img/hex_border_highlights.png");
     background-size: 400% 200%; }
   .m44-unit.activated {
@@ -777,6 +779,8 @@ html {
       background-position: 100% 0%; }
   .m44-unit.moving {
     background-position: 33.333% 0%; }
+  .m44-unit.attacking {
+    background-position: 0% 100%; }
   .m44-unit.onTheMove::before {
     content: '';
     display: block;

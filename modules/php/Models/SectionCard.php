@@ -65,4 +65,17 @@ class SectionCard extends Card
       }),
     ];
   }
+
+
+  public function getArgsAttackUnits()
+  {
+    $player = $this->getPlayer();
+    $units = Units::getActivatedByCard($this);
+
+    return [
+      'units' => $units->map(function ($unit) {
+        return $unit->getTargetableUnits();
+      }),
+    ];
+  }
 }

@@ -75,12 +75,12 @@ $machinestates = [
   ],
 
   ST_ATTACK => [
-    'name' => 'attackUnit',
+    'name' => 'attackUnits',
     'description' => clienttranslate('${actplayer} may battle'),
     'descriptionmyturn' => clienttranslate('${you} may battle with one of your unit'),
     'type' => 'activeplayer',
     'args' => 'argsAttackUnit',
-    'possibleactions' => ['actAttackUnit'],
+    'possibleactions' => ['actAttackUnit', 'actAttackUnitsDone'],
     'transitions' => ['ambush' => ST_PRE_AMBUSH, 'attack' => ST_ATTACK_THROW], // attack if not close assault
   ],
 

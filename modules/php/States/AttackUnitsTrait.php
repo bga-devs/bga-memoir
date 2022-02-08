@@ -15,7 +15,13 @@ trait AttackUnitsTrait
   {
     $player = $player ?? Players::getActive();
     $card = $player->getCardInPlay();
-    return [];
-    return $card->getArgsMoveUnits();
+    return $card->getArgsAttackUnits();
+  }
+
+
+  public function actAttackUnitsDone()
+  {
+    self::checkAction('actAttackUnitsDone');
+    $this->gamestate->nextState('attackUnits'); // TODO
   }
 }

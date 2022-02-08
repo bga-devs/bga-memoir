@@ -114,5 +114,51 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       debug('Notif: unit is moving', n);
       this.slide('unit-' + n.args.unitId, `cell-${n.args.x}-${n.args.y}`, { duration: 1100 });
     },
+
+    //////////////////////////////////////////
+    //    _  _____ _____  _    ____ _  __
+    //    / \|_   _|_   _|/ \  / ___| |/ /
+    //   / _ \ | |   | | / _ \| |   | ' /
+    //  / ___ \| |   | |/ ___ \ |___| . \
+    // /_/   \_\_|   |_/_/   \_\____|_|\_\
+    //////////////////////////////////////////
+
+    onEnteringStateAttackUnits(args) {
+      Object.keys(args.units).forEach((unitId) => {
+        if (args.units[unitId].length == 0) {
+          $('unit-' + unitId).classList.add('unselectableForAttacking');
+          return;
+        }
+
+        this.onClick('unit-' + unitId, () => {
+          this.clientState('attackUnitsChooseTarget', _('Select the target'), {
+            unitId,
+            cells: args.units[unitId],
+          });
+        });
+      });
+
+      this.addPrimaryActionButton('btnAttackUnitsDone', _('Done'), () => this.takeAction('actAttackUnitsDone'));
+    },
+
+    onEnteringStateAttackUnitsChooseTarget(args) {
+      this.addCancelStateBtn();
+      $('unit-' + args.unitId).classList.add('attacking');
+      args.cells.forEach((cell) => {
+        let oCell = $(`cell-${cell.x}-${cell.y}`);
+        this.onClick(oCell, () => {
+          this.clientState('debugPath', _('test'), { cell });
+        }); //this.takeAction('actMoveUnit', { unitId: args.unitId, x: cell.x, y: cell.y }));
+        oCell.classList.add('forAttack');
+      });
+    },
+
+    onEnteringStateDebugPath(args) {
+      this.addCancelStateBtn();
+      args.cell.path.forEach((cell) => {
+        let oCell = $(`cell-${cell.x}-${cell.y}`);
+        oCell.classList.add('forAttack', 'selectable');
+      });
+    },
   });
 });

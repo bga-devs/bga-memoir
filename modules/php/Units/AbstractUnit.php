@@ -119,18 +119,6 @@ class AbstractUnit extends \M44\Helpers\DB_Manager implements \JsonSerializable
     }
   }
 
-  public function setFights($value)
-  {
-    $this->fights = $value;
-    self::DB()->update(['fights' => $this->fights], $this->id);
-  }
-
-  public function incFights($value)
-  {
-    $this->fights += $value;
-    self::DB()->update(['fights' => $this->fights], $this->id);
-  }
-
   public function getExtraDatas($variable)
   {
     return $this->extraDatas[$variable] ?? null;
@@ -140,6 +128,19 @@ class AbstractUnit extends \M44\Helpers\DB_Manager implements \JsonSerializable
   {
     $this->extraDatas[$variable] = $value;
     self::DB()->update(['extra_datas' => \addslashes(\json_encode($this->extraDatas))], $this->id);
+  }
+
+  public function getNation()
+  {
+    return $this->nation;
+  }
+
+  public function isOpponent($unit)
+  {
+    $allies = ['fr', 'gb', 'us', 'ru', 'ch'];
+    $a = in_array($this->nation, $allies);
+    $b = in_array($unit->getNation(), $allies);
+    return ($a && !$b) || (!$a && $b);
   }
 
   /////////////////////////////////
@@ -184,6 +185,37 @@ class AbstractUnit extends \M44\Helpers\DB_Manager implements \JsonSerializable
 
   public function moveTo($cell)
   {
+    $this->x = $cell['x'];
+    $this->y = $cell['y'];
     self::DB()->update(['x' => $cell['x'], 'y' => $cell['y']], $this->id);
+  }
+
+  //////////////////////////////////////////
+  //    _  _____ _____  _    ____ _  __
+  //    / \|_   _|_   _|/ \  / ___| |/ /
+  //   / _ \ | |   | | / _ \| |   | ' /
+  //  / ___ \| |   | |/ ___ \ |___| . \
+  // /_/   \_\_|   |_/_/   \_\____|_|\_\
+  //////////////////////////////////////////
+  public function getAttackPower()
+  {
+    return $this->attackPower;
+  }
+
+  public function setFights($value)
+  {
+    $this->fights = $value;
+    self::DB()->update(['fights' => $this->fights], $this->id);
+  }
+
+  public function incFights($value)
+  {
+    $this->fights += $value;
+    self::DB()->update(['fights' => $this->fights], $this->id);
+  }
+
+  public function getTargetableUnits()
+  {
+    return Board::getTargetableCells($this);
   }
 }

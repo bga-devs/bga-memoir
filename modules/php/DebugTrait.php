@@ -6,6 +6,7 @@ use M44\Core\Preferences;
 use M44\Helpers\Utils;
 use M44\Managers\Cards;
 use M44\Managers\Players;
+use M44\Board;
 
 trait DebugTrait
 {
@@ -36,5 +37,10 @@ trait DebugTrait
   function vt()
   {
     $this->actOrderUnits([10, 11], []);
+  }
+
+  function tp()
+  {
+    var_dump(Board::getCellsInLine(['x' => 8, 'y' => 4], ['x' => 21, 'y' => 1]));
   }
 }

@@ -70,6 +70,14 @@ class action_memoir extends APP_GameAction
   }
 
 
+  public function actAttackUnitsDone()
+  {
+    self::setAjaxMode();
+    $this->game->actAttackUnitsDone();
+    self::ajaxResponse();
+  }
+
+
   public function getNumberList($name, $mandatory = true)
   {
     $t = $this->getArg($name, AT_numberlist, $mandatory);
