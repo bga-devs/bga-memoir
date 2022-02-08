@@ -170,8 +170,6 @@ html {
     position: relative;
     height: 0;
     padding-bottom: 115.7%; }
-    #m44-board .hex-grid-item * {
-      visibility: visible; }
     #m44-board .hex-grid-item .hex-grid-content {
       position: absolute;
       top: 0;
@@ -704,18 +702,20 @@ html {
       transform-origin: bottom center; }
   #m44-board:hover .hex-label-container {
     opacity: 0.2; }
-  #m44-board .hex-cell-container .hex-cell {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%; }
-    #m44-board .hex-cell-container .hex-cell.selectable {
-      cursor: pointer; }
-      #m44-board .hex-cell-container .hex-cell.selectable.forMove {
-        background-image: url("img/hex_background_highlights.png");
-        background-size: 500% 100%;
-        background-position: 0% 0%; }
+  #m44-board .hex-cell-container {
+    clip-path: polygon(49% 0%, 51% 0%, 100% 24%, 100% 75%, 51% 100%, 49% 100%, 0% 76%, 0% 24%); }
+    #m44-board .hex-cell-container .hex-cell {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%; }
+      #m44-board .hex-cell-container .hex-cell.selectable {
+        cursor: pointer; }
+        #m44-board .hex-cell-container .hex-cell.selectable.forMove {
+          background-image: url("img/hex_background_highlights.png");
+          background-size: 500% 100%;
+          background-position: 0% 0%; }
   #m44-board .board-divider {
     margin-left: -1px;
     z-index: 2;
@@ -770,8 +770,11 @@ html {
     cursor: default; }
   .m44-unit.activated, .m44-unit.moving {
     background-image: url("img/hex_border_highlights.png");
-    background-size: 400% 200%;
-    background-position: 100% 0%; }
+    background-size: 400% 200%; }
+  .m44-unit.activated {
+    background-position: 66.666% 0%; }
+    .m44-unit.activated.unselectableForMoving {
+      background-position: 100% 0%; }
   .m44-unit.moving {
     background-position: 33.333% 0%; }
   .m44-unit.onTheMove::before {

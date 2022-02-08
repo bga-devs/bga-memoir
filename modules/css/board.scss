@@ -60,9 +60,9 @@
     position: relative;
     height: 0;
     padding-bottom: 115.7%;
-    * {
-      visibility: visible;
-    }
+    //* {
+    //  visibility: visible;
+    //}
 
     .hex-grid-content {
       position: absolute;
@@ -147,6 +147,8 @@
   }
 
   .hex-cell-container {
+    clip-path: polygon(49% 0%, 51% 0%, 100% 24%, 100% 75%, 51% 100%, 49% 100%, 0% 76%, 0% 24%);
+
     .hex-cell {
       position: absolute;
       top: 0;

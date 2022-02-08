@@ -34,6 +34,21 @@ abstract class Utils extends \APP_DbObject
     return true;
   }
 
+  public static function array_usearch($array, $test)
+  {
+    $found = false;
+    $iterator = new \ArrayIterator($array);
+
+    while ($found === false && $iterator->valid()) {
+      if ($test($iterator->current())) {
+        $found = $iterator->key();
+      }
+      $iterator->next();
+    }
+
+    return $found;
+  }
+
   public static function privatise($data, $pId = null)
   {
     $key = $pId ?? 'active';

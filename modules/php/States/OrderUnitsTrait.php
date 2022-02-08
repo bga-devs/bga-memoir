@@ -41,6 +41,8 @@ trait OrderUnitsTrait
       throw new \feException('You selected a unit that cannot be selected');
     }
 
+    // TODO : add sanity check for sections !
+
     // Flag the units as activated by the corresponding card
     $card = $player->getCardInPlay();
     foreach ($unitIds as $unitId) {

@@ -119,18 +119,6 @@ class AbstractUnit extends \M44\Helpers\DB_Manager implements \JsonSerializable
     }
   }
 
-  public function setMoves($value)
-  {
-    $this->moves = $value;
-    self::DB()->update(['moves' => $this->moves], $this->id);
-  }
-
-  public function incMoves($value)
-  {
-    $this->moves += $value;
-    self::DB()->update(['moves' => $this->moves], $this->id);
-  }
-
   public function setFights($value)
   {
     $this->fights = $value;
@@ -177,8 +165,25 @@ class AbstractUnit extends \M44\Helpers\DB_Manager implements \JsonSerializable
     return $this->moves;
   }
 
+  public function setMoves($value)
+  {
+    $this->moves = $value;
+    self::DB()->update(['moves' => $this->moves], $this->id);
+  }
+
+  public function incMoves($value)
+  {
+    $this->moves += $value;
+    self::DB()->update(['moves' => $this->moves], $this->id);
+  }
+
   public function getPossibleMoves()
   {
     return Board::getReachableCells($this);
+  }
+
+  public function moveTo($cell)
+  {
+    self::DB()->update(['x' => $cell['x'], 'y' => $cell['y']], $this->id);
   }
 }

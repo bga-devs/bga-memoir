@@ -69,15 +69,16 @@ $machinestates = [
     'descriptionmyturn' => clienttranslate('${you} may move activated units'),
     'type' => 'activeplayer',
     'args' => 'argsMoveUnits',
-    'possibleactions' => ['actMoveUnits'],
-    'transitions' => ['moveUnits' => ST_MOVE_UNITS],
+    'action' => 'stMoveUnits',
+    'possibleactions' => ['actMoveUnit', 'actMoveUnitsDone'],
+    'transitions' => ['moveUnits' => ST_MOVE_UNITS, 'attackUnits' => ST_ATTACK],
   ],
 
   ST_ATTACK => [
     'name' => 'attackUnit',
-    'description' => clienttranslate('${actplayer} must select an unit and its target'),
-    'descriptionmyturn' => clienttranslate('${you} must select an unit and its target'),
-    'type' => 'multipleactiveplayer',
+    'description' => clienttranslate('${actplayer} may battle'),
+    'descriptionmyturn' => clienttranslate('${you} may battle with one of your unit'),
+    'type' => 'activeplayer',
     'args' => 'argsAttackUnit',
     'possibleactions' => ['actAttackUnit'],
     'transitions' => ['ambush' => ST_PRE_AMBUSH, 'attack' => ST_ATTACK_THROW], // attack if not close assault

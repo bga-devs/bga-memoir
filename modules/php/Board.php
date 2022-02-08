@@ -72,6 +72,18 @@ class Board extends \APP_DbObject
     }
   }
 
+  public function refreshUnits()
+  {
+    foreach (self::$grid as $x => $col) {
+      foreach ($col as $y => $cell) {
+        self::$grid[$x][$y]['units'] = [];
+      }
+    }
+    foreach (Units::getAllOrdered() as $unit) {
+      self::$grid[$unit->getX()][$unit->getY()]['units'][] = $unit;
+    }
+  }
+
   public function getUiData()
   {
     $scenario = self::getScenario();
@@ -96,7 +108,7 @@ class Board extends \APP_DbObject
   public static function getReachableCells($unit)
   {
     // Compute remaining moves for the unit
-    $m = $unit->getMovementRadius() - $unit->getMoves() + 2;
+    $m = $unit->getMovementRadius() - $unit->getMoves();
     return self::getReachableCellsAtDistance($unit, $m);
   }
 

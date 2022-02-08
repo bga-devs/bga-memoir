@@ -54,24 +54,30 @@
     cursor: default;
   }
 
-  &.activated, &.moving {
+  &.activated,
+  &.moving {
     background-image: url('img/hex_border_highlights.png');
     background-size: 400% 200%;
-    background-position: 100% 0%;
   }
 
+  &.activated {
+    background-position: 66.666% 0%;
+    &.unselectableForMoving {
+      background-position: 100% 0%;
+    }
+  }
   &.moving {
     background-position: 33.333% 0%;
   }
 
   &.onTheMove::before {
-    content:'';
+    content: '';
     display: block;
     position: absolute;
-    top:0;
-    left:0;
-    bottom:0;
-    right:0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
     background-image: url('img/hex_border_highlights.png');
     background-size: 400% 200%;
     background-position: 0% 0%;

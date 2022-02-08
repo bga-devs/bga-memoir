@@ -468,6 +468,10 @@ define(['dojo', 'dojo/_base/declare', 'ebg/core/gamegui'], (dojo, declare) => {
         dojo.place(mobile, 'game_play_area');
         this.placeOnObject(mobile, mobileElt);
         dojo.addClass(mobileElt, 'phantom');
+        dojo.style(mobile, {
+          width: mobileElt.offsetWidth + 'px',
+          height: mobileElt.offsetHeight + 'px',
+        });
         config.from = mobileElt;
       }
 
@@ -548,7 +552,6 @@ define(['dojo', 'dojo/_base/declare', 'ebg/core/gamegui'], (dojo, declare) => {
     positionObjectDirectly(mobileObj, x, y) {
       // do not remove this "dead" code some-how it makes difference
       dojo.style(mobileObj, 'left'); // bug? re-compute style
-      // console.log("place " + x + "," + y);
       dojo.style(mobileObj, {
         left: x + 'px',
         top: y + 'px',

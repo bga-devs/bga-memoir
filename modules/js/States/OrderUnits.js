@@ -84,6 +84,11 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
     onEnteringStateMoveUnits(args) {
       Object.keys(args.units).forEach((unitId) => {
+        if (args.units[unitId].length == 0) {
+          $('unit-' + unitId).classList.add('unselectableForMoving');
+          return;
+        }
+
         this.onClick('unit-' + unitId, () => {
           this.clientState('moveUnitsChooseTarget', _('Select the destination hex'), {
             unitId,
@@ -100,9 +105,14 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       $('unit-' + args.unitId).classList.add('moving');
       args.cells.forEach((cell) => {
         let oCell = $(`cell-${cell.x}-${cell.y}`);
-        this.onClick(oCell, () => debug(cell));
+        this.onClick(oCell, () => this.takeAction('actMoveUnit', { unitId: args.unitId, x: cell.x, y: cell.y }));
         oCell.classList.add('forMove');
       });
+    },
+
+    notif_moveUnit(n) {
+      debug('Notif: unit is moving', n);
+      this.slide('unit-' + n.args.unitId, `cell-${n.args.x}-${n.args.y}`, { duration: 1100 });
     },
   });
 });

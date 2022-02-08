@@ -43,6 +43,15 @@ class Notifications
 
   // public static function orderUnits($player, $units, $unitsOnTheMove){
 
+  public static function moveUnit($player, $unitId, $x, $y)
+  {
+    self::notifyAll('moveUnit', '', [
+      'player' => $player,
+      'unitId' => $unitId,
+      'x' => $x,
+      'y' => $y,
+    ]);
+  }
 
   /*********************
    **** UPDATE ARGS ****

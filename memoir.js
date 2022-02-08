@@ -32,7 +32,10 @@ define([
   return declare('bgagame.memoir', [customgame.game, memoir.board, memoir.players, memoir.orderUnits], {
     constructor() {
       this._activeStates = ['playCard', 'orderUnits', 'moveUnits'];
-      this._notifications = [['playCard', 1000]];
+      this._notifications = [
+        ['playCard', 1000],
+        ['moveUnit', 1200],
+      ];
 
       // Fix mobile viewport (remove CSS zoom)
       this.default_viewport = 'width=700';

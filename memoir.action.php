@@ -52,6 +52,24 @@ class action_memoir extends APP_GameAction
     self::ajaxResponse();
   }
 
+  public function actMoveUnit()
+  {
+    self::setAjaxMode();
+    $unitId = self::getArg('unitId', AT_posint, false);
+    $x = self::getArg('x', AT_posint, false);
+    $y = self::getArg('y', AT_posint, false);
+    $this->game->actMoveUnit($unitId, $x, $y);
+    self::ajaxResponse();
+  }
+
+  public function actMoveUnitsDone()
+  {
+    self::setAjaxMode();
+    $this->game->actMoveUnitsDone();
+    self::ajaxResponse();
+  }
+
+
   public function getNumberList($name, $mandatory = true)
   {
     $t = $this->getArg($name, AT_numberlist, $mandatory);
