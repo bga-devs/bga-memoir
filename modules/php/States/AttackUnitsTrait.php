@@ -24,6 +24,19 @@ trait AttackUnitsTrait
     $this->gamestate->nextState('attackUnits'); // TODO
   }
 
+  public function stAttackUnits()
+  {
+    $args = $this->argsAttackUnit();
+    $c = 0;
+    foreach ($args['units'] as $targets) {
+      $c += count($targets);
+    }
+    if ($c == 0) {
+      // No unit can be targetted, end of turn
+      $this->gamestate->nextState('draw');
+    }
+  }
+
   public function actAttackUnit($unitId, $x, $y)
   {
     // Sanity checks
@@ -42,6 +55,6 @@ trait AttackUnitsTrait
     }
 
     // TODO
-    die("test");
+    die('test');
   }
 }

@@ -18,6 +18,8 @@ const ST_ATTACK_RESOLVE = 12;
 const ST_END_ROUND = 13;
 const ST_AMBUSH_ATTACK = 14;
 const ST_AMBUSH_RESOLVE = 15;
+const ST_DRAW = 16;
+const ST_DRAW_CHOICE = 17;
 
 const ST_OVERLORD_PLAY_CARD = 40;
 const ST_OVERLORD_SELECT_UNIT = 41;
@@ -27,7 +29,6 @@ const ST_OVERLORD_ATTACK = 43;
 const ST_CHANGE_PLAYER = 95;
 
 const ST_END_GAME = 99;
-
 
 const AXIS = 'AXIS';
 const ALLIES = 'ALLIES';
@@ -97,7 +98,6 @@ const CARD_CLASSES = [
  * Game options
  */
 const OPTION_SCENARIO = 101;
-
 
 /*
  * Stats
