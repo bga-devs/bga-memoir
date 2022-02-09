@@ -50,10 +50,27 @@ html {
     background: url("img/game_top.png");
     background-repeat: repeat-x;
     position: relative;
-    z-index: 2; }
+    z-index: 2;
+    display: flex;
+    --memoirCardScale: 0.2; }
     #m44-container #m44-top-part #top-player {
       height: 52px;
-      overflow: hidden; }
+      overflow: hidden;
+      display: flex; }
+      #m44-container #m44-top-part #top-player .player-board {
+        height: 52px !important;
+        width: 244px !important;
+        border-radius: 0px; }
+    #m44-container #m44-top-part #top-player-hand {
+      display: flex;
+      column-gap: 5px; }
+      #m44-container #m44-top-part #top-player-hand .section-card,
+      #m44-container #m44-top-part #top-player-hand .tactic-card {
+        max-height: 52px; }
+        #m44-container #m44-top-part #top-player-hand .section-card.inplay,
+        #m44-container #m44-top-part #top-player-hand .tactic-card.inplay {
+          max-height: none;
+          --memoirCardScale: 0.3; }
   #m44-container #m44-central-part {
     max-height: 600px;
     display: flex;
@@ -99,9 +116,9 @@ html {
         right: 40px; }
       #m44-container #m44-central-part #m44-board-wrapper #m44-labels-settings {
         right: 80px; }
-      #m44-container #m44-central-part #m44-board-wrapper[data-labels="0"] #m44-labels-settings svg:first-of-type {
+      #m44-container #m44-central-part #m44-board-wrapper[data-labels='0'] #m44-labels-settings svg:first-of-type {
         display: none; }
-      #m44-container #m44-central-part #m44-board-wrapper[data-labels="1"] #m44-labels-settings svg:last-of-type {
+      #m44-container #m44-central-part #m44-board-wrapper[data-labels='1'] #m44-labels-settings svg:last-of-type {
         display: none; }
     #m44-container #m44-central-part #right-side {
       float: none;
@@ -124,12 +141,12 @@ html {
     --memoirCardScale: 0.4; }
     #m44-container #m44-bottom-part #bottom-player {
       margin-top: 25px; }
-    #m44-container #m44-bottom-part #hand {
+    #m44-container #m44-bottom-part #bottom-player-hand {
       display: flex;
       column-gap: 5px; }
-    #m44-container #m44-bottom-part #inplay .tactic-card,
-    #m44-container #m44-bottom-part #inplay .section-card {
-      margin-top: -20px; }
+      #m44-container #m44-bottom-part #bottom-player-hand .tactic-card.inplay,
+      #m44-container #m44-bottom-part #bottom-player-hand .section-card.inplay {
+        margin-top: -20px; }
 
 #left-side {
   margin-right: 1px !important; }
@@ -1224,6 +1241,9 @@ html {
 .section-card[data-type='16'] .card-resizable {
   background-position-x: 25%;
   background-position-y: 150%; }
+.section-card[data-type='-1'] .card-resizable {
+  background-image: url("img/card_back.jpg") !important;
+  background-size: 100% 100%; }
 
 .tactic-card .card-resizable {
   background-size: 500% 400%; }

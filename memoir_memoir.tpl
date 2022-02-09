@@ -2,8 +2,9 @@
 <div id="m44-container">
   <div class="m44-hrule"></div>
   <div id="m44-top-part">
-    <div id="scenario-informations"></div>
     <div id="top-player"></div>
+    <div id="top-player-hand"></div>
+    <div id="scenario-informations"></div>
   </div>
 
   <div id="m44-central-part">
@@ -31,8 +32,7 @@
 
   <div id="m44-bottom-part">
     <div id="bottom-player"></div>
-    <div id="hand"></div>
-    <div id="inplay"></div>
+    <div id="bottom-player-hand"></div>
   </div>
 </div>
 {OVERALL_GAME_FOOTER}

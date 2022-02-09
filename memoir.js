@@ -31,7 +31,7 @@ define([
 ], function (dojo, declare) {
   return declare('bgagame.memoir', [customgame.game, memoir.board, memoir.players, memoir.orderUnits], {
     constructor() {
-      this._activeStates = ['playCard', 'orderUnits', 'moveUnits'];
+      this._activeStates = ['playCard', 'orderUnits', 'moveUnits', 'attackUnits'];
       this._notifications = [
         ['playCard', 1000],
         ['moveUnit', 1200],
@@ -39,6 +39,8 @@ define([
 
       // Fix mobile viewport (remove CSS zoom)
       this.default_viewport = 'width=700';
+
+      this._backCardIdCounter = -1; // Used to generate unique id for backCards
     },
 
     /**

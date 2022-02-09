@@ -66,7 +66,6 @@ class SectionCard extends Card
     ];
   }
 
-
   public function getArgsAttackUnits()
   {
     $player = $this->getPlayer();

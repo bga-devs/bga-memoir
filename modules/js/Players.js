@@ -8,17 +8,24 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       // Basic UI tweaking
       let pId = this.isSpectator ? Object.values(this.gamedatas.players)[0] : this.player_id;
       this.forEachPlayer((player) => {
-        dojo.place('overall_player_board_' + player.id, player.id == pId ? 'bottom-player' : 'top-player');
-      });
-      dojo.place('right-side', 'm44-central-part');
+        let pos = player.id == pId ? 'bottom' : 'top';
+        dojo.place('overall_player_board_' + player.id, pos + '-player');
 
-      // TODO : handle other players
-      this.forEachPlayer((player) => {
-        player.cards.forEach((card) => this.addCard(card, 'hand'));
+        if (player.id == this.player_id) {
+          player.cards.forEach((card) => this.addCard(card, pos + '-player-hand'));
+        } else {
+          // Add fakeCard
+          let inPlay = player.inplay ? 1 : 0;
+          for (let i = 0; i < player.cardsCount - inPlay; i++) {
+            this.addCardBack(pos + '-player-hand');
+          }
+        }
+
         if (player.inplay) {
-          this.addCard(player.inplay, 'inplay');
+          this.addCard(player.inplay, pos + '-player-hand');
         }
       });
+      dojo.place('right-side', 'm44-central-part');
     },
 
     addCard(card, container) {
@@ -26,11 +33,28 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       this.addCustomTooltip('card-' + card.id, this.tplMemoirCard(card, true));
     },
 
+    addCardBack(container) {
+      let card = {
+        id: this._backCardIdCounter--,
+        name: '',
+        text: [''],
+        subtitle: '',
+        location: '',
+        value: 0,
+        type: -1,
+      };
+
+      this.place('tplMemoirCard', card, container);
+    },
+
     tplMemoirCard(card, tooltip = false) {
       let isSection = card.type < 20;
       this.formatDesc(card);
       card.asset = card.type + parseInt(card.value);
       let className = isSection ? 'section-card' : 'tactic-card';
+      if (card.location.substr(0, 6) == 'inplay') {
+        className += ' inplay';
+      }
 
       return (
         `
@@ -72,7 +96,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     notif_playCard(n) {
       debug('Notif: playing a card', n);
       if (this.player_id == n.args.player_id) {
-        this.slide('card-' + n.args.card.id, 'inplay');
+        $('card-' + n.args.card.id).classList.add('inplay');
+//        this.slide('card-' + n.args.card.id, 'inplay');
       } else {
         // TODO
         // this.addCard()

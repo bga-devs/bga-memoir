@@ -19,10 +19,34 @@ html {
     background-repeat: repeat-x;
     position: relative;
     z-index: 2;
+    display: flex;
+
+    --memoirCardScale: 0.2;
 
     #top-player {
       height: 52px;
       overflow: hidden;
+      display: flex;
+      .player-board {
+        height: 52px !important;
+        width: 244px !important;
+        border-radius: 0px;
+      }
+    }
+
+    #top-player-hand {
+      display: flex;
+      column-gap: 5px;
+
+      .section-card,
+      .tactic-card {
+        max-height: 52px;
+
+        &.inplay {
+          max-height: none;
+          --memoirCardScale: 0.3;
+        }
+      }
     }
   }
 
@@ -83,10 +107,10 @@ html {
         right: 80px;
       }
 
-      &[data-labels="0"] #m44-labels-settings svg:first-of-type {
+      &[data-labels='0'] #m44-labels-settings svg:first-of-type {
         display: none;
       }
-      &[data-labels="1"] #m44-labels-settings svg:last-of-type {
+      &[data-labels='1'] #m44-labels-settings svg:last-of-type {
         display: none;
       }
     }
@@ -119,14 +143,12 @@ html {
       margin-top: 25px;
     }
 
-    #hand {
+    #bottom-player-hand {
       display: flex;
       column-gap: 5px;
-    }
 
-    #inplay {
-      .tactic-card,
-      .section-card {
+      .tactic-card.inplay,
+      .section-card.inplay {
         margin-top: -20px;
       }
     }
