@@ -98,6 +98,16 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       this._boardScale = 1; // TODO localStorage
       dojo.connect($('m44-board-zoom-in'), 'click', () => this.incBoardScale(0.1));
       dojo.connect($('m44-board-zoom-out'), 'click', () => this.incBoardScale(-0.1));
+
+      this._labelsVisibility = this.getConfig('m44Labels', 1);
+      $('m44-board-wrapper').dataset.labels = this._labelsVisibility;
+      dojo.connect($('m44-labels-settings'), 'click', () => this.toggleLabelsVisibility());
+    },
+
+    toggleLabelsVisibility() {
+      this._labelsVisibility = 1 - this._labelsVisibility;
+      $('m44-board-wrapper').dataset.labels = this._labelsVisibility;
+      localStorage.setItem('m44Labels', this._labelsVisibility);
     },
 
     incBoardScale(delta) {

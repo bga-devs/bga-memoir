@@ -667,7 +667,7 @@ define(['dojo', 'dojo/_base/declare', 'ebg/core/gamegui'], (dojo, declare) => {
 
     /* Helper to work with local storage */
     getConfig(value, v) {
-      return localStorage.getItem(value) == null || isNaN(localStorage.getItem(value))
+      return localStorage.getItem(value) === null || isNaN(localStorage.getItem(value))
         ? v
         : localStorage.getItem(value);
     },

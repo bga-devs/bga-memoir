@@ -77,7 +77,8 @@ html {
         padding: 20px;
         box-sizing: border-box; }
       #m44-container #m44-central-part #m44-board-wrapper #m44-board-zoom-in,
-      #m44-container #m44-central-part #m44-board-wrapper #m44-board-zoom-out {
+      #m44-container #m44-central-part #m44-board-wrapper #m44-board-zoom-out,
+      #m44-container #m44-central-part #m44-board-wrapper #m44-labels-settings {
         position: absolute;
         z-index: 2;
         top: 0;
@@ -85,15 +86,23 @@ html {
         width: 40px;
         height: 40px; }
         #m44-container #m44-central-part #m44-board-wrapper #m44-board-zoom-in svg,
-        #m44-container #m44-central-part #m44-board-wrapper #m44-board-zoom-out svg {
+        #m44-container #m44-central-part #m44-board-wrapper #m44-board-zoom-out svg,
+        #m44-container #m44-central-part #m44-board-wrapper #m44-labels-settings svg {
           width: 100%;
           height: 100%;
           cursor: pointer; }
         #m44-container #m44-central-part #m44-board-wrapper #m44-board-zoom-in:hover svg,
-        #m44-container #m44-central-part #m44-board-wrapper #m44-board-zoom-out:hover svg {
+        #m44-container #m44-central-part #m44-board-wrapper #m44-board-zoom-out:hover svg,
+        #m44-container #m44-central-part #m44-board-wrapper #m44-labels-settings:hover svg {
           color: white; }
       #m44-container #m44-central-part #m44-board-wrapper #m44-board-zoom-in {
         right: 40px; }
+      #m44-container #m44-central-part #m44-board-wrapper #m44-labels-settings {
+        right: 80px; }
+      #m44-container #m44-central-part #m44-board-wrapper[data-labels="0"] #m44-labels-settings svg:first-of-type {
+        display: none; }
+      #m44-container #m44-central-part #m44-board-wrapper[data-labels="1"] #m44-labels-settings svg:last-of-type {
+        display: none; }
     #m44-container #m44-central-part #right-side {
       float: none;
       margin-left: 0px;
@@ -146,6 +155,8 @@ html {
       z-index: 1; }
     #m44-board .m44-grid#m44-board-labels {
       z-index: 2; }
+      [data-labels='0'] #m44-board .m44-grid#m44-board-labels {
+        display: none; }
     #m44-board .m44-grid#m44-board-units {
       z-index: 3; }
   #m44-board[data-type='standard'] {
@@ -742,7 +753,7 @@ html {
       border-left: 2px solid black; }
     #m44-board #lineOfSight.vertical.horizontal {
       border: none; }
-  #m44-board.displayLineOfSight #lineOfSight {
+  #m44-board.displayLineOfSight:hover #lineOfSight {
     display: block; }
 
 .m44-unit {

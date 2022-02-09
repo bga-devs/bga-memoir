@@ -56,7 +56,8 @@ html {
       }
 
       #m44-board-zoom-in,
-      #m44-board-zoom-out {
+      #m44-board-zoom-out,
+      #m44-labels-settings {
         position: absolute;
         z-index: 2;
         top: 0;
@@ -76,6 +77,17 @@ html {
 
       #m44-board-zoom-in {
         right: 40px;
+      }
+
+      #m44-labels-settings {
+        right: 80px;
+      }
+
+      &[data-labels="0"] #m44-labels-settings svg:first-of-type {
+        display: none;
+      }
+      &[data-labels="1"] #m44-labels-settings svg:last-of-type {
+        display: none;
       }
     }
 
