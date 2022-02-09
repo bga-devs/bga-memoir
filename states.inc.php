@@ -77,11 +77,12 @@ $machinestates = [
   ST_ATTACK => [
     'name' => 'attackUnits',
     'description' => clienttranslate('${actplayer} may battle'),
-    'descriptionmyturn' => clienttranslate('${you} may battle with one of your unit'),
+    'descriptionmyturn' => clienttranslate('${you} may select the unit to battle with'),
     'type' => 'activeplayer',
+    'action' => 'stAttackUnits',
     'args' => 'argsAttackUnit',
     'possibleactions' => ['actAttackUnit', 'actAttackUnitsDone'],
-    'transitions' => ['ambush' => ST_PRE_AMBUSH, 'attack' => ST_ATTACK_THROW], // attack if not close assault
+    'transitions' => ['ambush' => ST_PRE_AMBUSH, 'attack' => ST_ATTACK_THROW, 'draw' => ST_DRAW], // attack if not close assault
   ],
 
   ST_PRE_AMBUSH => [
@@ -137,7 +138,7 @@ $machinestates = [
     'descriptionmyturn' => '',
     'type' => 'game',
     'action' => 'stAttackThrow',
-    'transitions' => ['next' => ST_ATTACK_RESOLVE, 'endRound' => ST_END_ROUND, 'attack' => ST_ATTACK],
+    'transitions' => ['next' => ST_ATTACK_RESOLVE, 'draw' => ST_DRAW, 'attack' => ST_ATTACK],
   ],
 
   ST_ATTACK_RESOLVE => [
@@ -147,7 +148,25 @@ $machinestates = [
     'type' => 'multipleactiveplayer',
     'args' => 'argsAttackResolve',
     'possibleactions' => ['actRetreat'],
-    'transitions' => ['endRound' => ST_END_ROUND, 'attack' => ST_ATTACK],
+    'transitions' => ['draw' => ST_DRAW, 'attack' => ST_ATTACK],
+  ],
+
+  ST_DRAW => [
+    'name' => 'drawCard',
+    'description' => '',
+    'type' => 'game',
+    'action' => 'stDrawCard',
+    'transitions' => ['endRound' => ST_END_ROUND, 'choice' => ST_DRAW_CHOICE],
+  ],
+
+  ST_DRAW_CHOICE => [
+    'name' => 'drawChoice',
+    'description' => clienttranslate('${actplayer} must choose which card to keep'),
+    'descriptionmyturn' => clienttranslate('${you} must choose which card to keep'),
+    'type' => 'activeplayer',
+    'args' => 'argsDrawChoice',
+    'possibleactions' => ['actChooseCard'],
+    'transitions' => ['endRound' => ST_END_ROUND],
   ],
 
   ST_END_ROUND => [
@@ -155,7 +174,7 @@ $machinestates = [
     'description' => '',
     'descriptionmyturn' => '',
     'type' => 'game',
-    'action' => 'stEndRound', // draw cards
+    'action' => 'stEndRound',
     'transitions' => ['next' => ST_PREPARE_TURN],
   ],
 
