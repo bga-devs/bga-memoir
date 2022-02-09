@@ -70,6 +70,7 @@ define([
         let cells = [...$('m44-board').getElementsByClassName(className)];
         cells.forEach((cell) => cell.classList.remove(className));
       });
+      $('m44-board').classList.remove('displayLineOfSight');
     },
 
     updatePlayerOrdering() {},

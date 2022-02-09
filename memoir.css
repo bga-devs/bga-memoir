@@ -726,6 +726,24 @@ html {
     background-size: 2px 16px; }
   #m44-board[data-type='overlord'] .board-divider:nth-of-type(2n + 1) {
     background-image: linear-gradient(to bottom, #c62525a3 60%, transparent 40%); }
+  #m44-board #lineOfSight {
+    display: none;
+    position: relative;
+    pointer-events: none;
+    z-index: 4;
+    background: linear-gradient(to top left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) calc(50% - 1px), black 50%, rgba(0, 0, 0, 0) calc(50% + 2px), rgba(0, 0, 0, 0) 100%); }
+    #m44-board #lineOfSight.antidiagonal {
+      background: linear-gradient(to top right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) calc(50% - 1px), black 50%, rgba(0, 0, 0, 0) calc(50% + 2px), rgba(0, 0, 0, 0) 100%); }
+    #m44-board #lineOfSight.horizontal {
+      background: none;
+      border-top: 2px solid black; }
+    #m44-board #lineOfSight.vertical {
+      background: none;
+      border-left: 2px solid black; }
+    #m44-board #lineOfSight.vertical.horizontal {
+      border: none; }
+  #m44-board.displayLineOfSight #lineOfSight {
+    display: block; }
 
 .m44-unit {
   width: 100%;

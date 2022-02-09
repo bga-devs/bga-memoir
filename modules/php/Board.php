@@ -10,8 +10,9 @@ use M44\Managers\Terrains;
 use M44\Managers\Units;
 
 const LINE_INTERSECTION = 0;
-const LINE_TANGENT = 1;
-const LINE_CORNER = 2;
+const LINE_TANGENT_LEFT = 1;
+const LINE_TANGENT_RIGHT = 2;
+const LINE_CORNER = 3;
 
 class Board extends \APP_DbObject
 {
@@ -234,27 +235,34 @@ class Board extends \APP_DbObject
   {
     $cells = [];
     // From the coordinates of the two centers, compute a normal vector
-    $sourceCenter = [2 * $source['x'], 4 * $source['y']];
-    $targetCenter = [2 * $target['x'], 4 * $target['y']];
-    $normalVector = [$targetCenter[1] - $sourceCenter[1], -($targetCenter[0] - $sourceCenter[0])];
+    $sourceCenter = [$source['x'], -3 * $source['y']];
+    $targetCenter = [$target['x'], -3 * $target['y']];
+    $directorVector = [$targetCenter[0] - $sourceCenter[0], $targetCenter[1] - $sourceCenter[1]];
+    $normalVector = [$directorVector[1], -$directorVector[0]];
 
     // Go through each cells in the "rectangle" bounded by $source and $target
-    for ($x = min($source['x'], $target['x']); $x <= max($source['x'], $target['x']); $x++) {
-      for ($y = min($source['y'], $target['y']); $y <= max($source['y'], $target['y']); $y++) {
+    $minX = min($source['x'], $target['x']);
+    $maxX = max($source['x'], $target['x']);
+    $offsetX = $minX == $maxX? 1 : 0;
+    $minY = min($source['y'], $target['y']);
+    $maxY = max($source['y'], $target['y']);
+    $offsetY = $minY == $maxY? 1 : 0;
+    for ($x = $minX - $offsetX; $x <= $maxX + $offsetX; $x++) {
+      for ($y = $minY - $offsetY; $y <= $maxY + $offsetY; $y++) {
         $cell = ['x' => $x, 'y' => $y];
         if (!self::isValidCell($cell)) {
           continue;
         }
 
         // Compute the center and corners of that cell
-        $center = [2 * $x, 4 * $y];
+        $center = [$x, -3 * $y];
         $corners = [
-          [$center[0], $center[1] - 2],
-          [$center[0] + 1, $center[1] - 1],
-          [$center[0] + 1, $center[1] + 1],
           [$center[0], $center[1] + 2],
-          [$center[0] - 1, $center[1] + 1],
+          [$center[0] + 1, $center[1] + 1],
+          [$center[0] + 1, $center[1] - 1],
+          [$center[0], $center[1] - 2],
           [$center[0] - 1, $center[1] - 1],
+          [$center[0] - 1, $center[1] + 1],
         ];
 
         // Each corner is then sorted in the corresponding category
@@ -279,7 +287,7 @@ class Board extends \APP_DbObject
         } elseif (count($zeros) == 1) {
           $cell['type'] = LINE_CORNER;
         } elseif (count($zeros) == 2) {
-          $cell['type'] = LINE_TANGENT;
+          $cell['type'] = empty($pos)? LINE_TANGENT_LEFT : LINE_TANGENT_RIGHT;
         } else {
           continue; // NO INTERSECTION
         }

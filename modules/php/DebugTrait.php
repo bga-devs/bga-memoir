@@ -41,6 +41,6 @@ trait DebugTrait
 
   function tp()
   {
-    var_dump(Board::getCellsInLine(['x' => 8, 'y' => 4], ['x' => 21, 'y' => 1]));
+    var_dump(Board::getCellsInLine(['x' => 7, 'y' => 3], ['x' => 7, 'y' => 7]));
   }
 }

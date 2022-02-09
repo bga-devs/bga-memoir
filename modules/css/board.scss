@@ -159,7 +159,8 @@
       &.selectable {
         cursor: pointer;
 
-        &.forMove, &.forAttack {
+        &.forMove,
+        &.forAttack {
           background-image: url('img/hex_background_highlights.png');
           background-size: 500% 100%;
           background-position: 0% 0%;
@@ -182,5 +183,44 @@
     &:nth-of-type(2n + 1) {
       background-image: linear-gradient(to bottom, #c62525a3 60%, transparent 40%);
     }
+  }
+
+  #lineOfSight {
+    display: none;
+    position: relative;
+    pointer-events: none;
+    z-index: 4;
+    background: linear-gradient(
+      to top left,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0) calc(50% - 1px),
+      rgb(0, 0, 0) 50%,
+      rgba(0, 0, 0, 0) calc(50% + 2px),
+      rgba(0, 0, 0, 0) 100%
+    );
+    &.antidiagonal {
+      background: linear-gradient(
+        to top right,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0) calc(50% - 1px),
+        rgb(0, 0, 0) 50%,
+        rgba(0, 0, 0, 0) calc(50% + 2px),
+        rgba(0, 0, 0, 0) 100%
+      );
+    }
+    &.horizontal {
+      background: none;
+      border-top: 2px solid black;
+    }
+    &.vertical {
+      background: none;
+      border-left: 2px solid black;
+    }
+    &.vertical.horizontal {
+      border: none;
+    }
+  }
+  &.displayLineOfSight #lineOfSight {
+    display: block;
   }
 }

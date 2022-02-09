@@ -92,6 +92,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         o.style.gridColumn = x + ' / span 1';
       });
 
+      // Add line of sight
+      dojo.place('<div id="lineOfSight"></div>', 'm44-board-units');
+
       this._boardScale = 1; // TODO localStorage
       dojo.connect($('m44-board-zoom-in'), 'click', () => this.incBoardScale(0.1));
       dojo.connect($('m44-board-zoom-out'), 'click', () => this.incBoardScale(-0.1));

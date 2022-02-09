@@ -151,6 +151,15 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         }); //this.takeAction('actMoveUnit', { unitId: args.unitId, x: cell.x, y: cell.y }));
         oCell.classList.add('forAttack');
       });
+
+      let source = $('unit-' + args.unitId).parentNode.parentNode;
+      dojo.query('#m44-board .hex-cell-container').forEach((cell) => {
+        this.connect(cell, 'mouseenter', () => {
+          this.updateLineOfSight(source, cell);
+        });
+      });
+      $('m44-board').classList.add('displayLineOfSight');
+      this.updateLineOfSight(source, source);
     },
 
     onEnteringStateDebugPath(args) {
@@ -159,6 +168,17 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         let oCell = $(`cell-${cell.x}-${cell.y}`);
         oCell.classList.add('forAttack', 'selectable');
       });
+    },
+
+    updateLineOfSight(source, target) {
+      let x1 = parseInt(source.style.gridColumnStart) + 1;
+      let y1 = parseInt(source.style.gridRowStart) + 2;
+      let x2 = parseInt(target.style.gridColumnStart) + 1;
+      let y2 = parseInt(target.style.gridRowStart) + 2;
+      $('lineOfSight').style.gridArea = y1 + ' / ' + x1 + ' / ' + y2 + ' / ' + x2;
+      $('lineOfSight').classList.toggle('antidiagonal', (x2 - x1) * (y2 - y1) > 0);
+      $('lineOfSight').classList.toggle('horizontal', y1 == y2);
+      $('lineOfSight').classList.toggle('vertical', x1 == x2);
     },
   });
 });
