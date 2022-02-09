@@ -18,10 +18,30 @@ trait AttackUnitsTrait
     return $card->getArgsAttackUnits();
   }
 
-
   public function actAttackUnitsDone()
   {
     self::checkAction('actAttackUnitsDone');
     $this->gamestate->nextState('attackUnits'); // TODO
+  }
+
+  public function actAttackUnit($unitId, $x, $y)
+  {
+    // Sanity checks
+    self::checkAction('actAttackUnit');
+    $player = Players::getCurrent();
+    $args = $this->argsAttackUnit($player);
+    if (!\array_key_exists($unitId, $args['units'])) {
+      throw new \BgaVisibleSystemException('You cannot attack with this unit. Should not happen');
+    }
+    $cells = $args['units'][$unitId];
+    $k = Utils::array_usearch($cells, function ($cell) use ($x, $y) {
+      return $cell['x'] == $x && $cell['y'] == $y;
+    });
+    if ($k === false) {
+      throw new \BgaVisibleSystemException('You cannot attack this hex with this unit. Should not happen');
+    }
+
+    // TODO
+    die("test");
   }
 }

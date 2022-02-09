@@ -218,4 +218,9 @@ class AbstractUnit extends \M44\Helpers\DB_Manager implements \JsonSerializable
   {
     return Board::getTargetableCells($this);
   }
+
+  public function mustSeeToAttack()
+  {
+    return $this->mustSeeToAttack;
+  }
 }

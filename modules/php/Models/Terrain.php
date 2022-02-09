@@ -86,4 +86,14 @@ class Terrain implements \JsonSerializable
   {
     return $this->mustStop;
   }
+
+  public function isBlockingLineOfSight()
+  {
+    return $this->blockLineOfSight;
+  }
+
+  public function getDefense($unit)
+  {
+    return $this->defense[$unit->getType()] ?? 0;
+  }
 }

@@ -104,6 +104,11 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       dojo.connect($('m44-labels-settings'), 'click', () => this.toggleLabelsVisibility());
     },
 
+    removeClassNameOfCells(className){
+      let cells = [...$('m44-board').getElementsByClassName(className)];
+      cells.forEach((cell) => cell.classList.remove(className));
+    },
+
     toggleLabelsVisibility() {
       this._labelsVisibility = 1 - this._labelsVisibility;
       $('m44-board-wrapper').dataset.labels = this._labelsVisibility;

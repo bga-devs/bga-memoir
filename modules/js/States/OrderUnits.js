@@ -124,6 +124,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     //////////////////////////////////////////
 
     onEnteringStateAttackUnits(args) {
+      this.removeClassNameOfCells('unselectableForMoving');
       Object.keys(args.units).forEach((unitId) => {
         if (args.units[unitId].length == 0) {
           $('unit-' + unitId).classList.add('unselectableForAttacking');
@@ -146,12 +147,16 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       $('unit-' + args.unitId).classList.add('attacking');
       args.cells.forEach((cell) => {
         let oCell = $(`cell-${cell.x}-${cell.y}`);
-        this.onClick(oCell, () => {
-          this.clientState('debugPath', _('test'), { cell });
-        }); //this.takeAction('actMoveUnit', { unitId: args.unitId, x: cell.x, y: cell.y }));
         oCell.classList.add('forAttack');
+        this.onClick(oCell, () => this.takeAction('actAttackUnit', { unitId: args.unitId, x: cell.x, y: cell.y }));
+
+        // Dice icons
+        for (let i = 0; i < cell.dice; i++) {
+          dojo.place('<i class="dice-mini"></i>', oCell);
+        }
       });
 
+      // Line of sight visualization
       let source = $('unit-' + args.unitId).parentNode.parentNode;
       dojo.query('#m44-board .hex-cell-container').forEach((cell) => {
         this.connect(cell, 'mouseenter', () => {
@@ -160,14 +165,6 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       });
       $('m44-board').classList.add('displayLineOfSight');
       this.updateLineOfSight(source, source);
-    },
-
-    onEnteringStateDebugPath(args) {
-      this.addCancelStateBtn();
-      args.cell.path.forEach((cell) => {
-        let oCell = $(`cell-${cell.x}-${cell.y}`);
-        oCell.classList.add('forAttack', 'selectable');
-      });
     },
 
     updateLineOfSight(source, target) {

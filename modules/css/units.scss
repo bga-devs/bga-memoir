@@ -63,7 +63,7 @@
 
   &.activated {
     background-position: 66.666% 0%;
-    &.unselectableForMoving {
+    &.unselectableForMoving, &.unselectableForAttacking {
       background-position: 100% 0%;
     }
   }

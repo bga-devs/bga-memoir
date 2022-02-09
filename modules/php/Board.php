@@ -208,7 +208,8 @@ class Board extends \APP_DbObject
   public static function getTargetableCells($unit)
   {
     // Compute cells at distance
-    $m = 10; //count($unit->getAttackPower());
+    $power = $unit->getAttackPower();
+    $m = count($power);
     $cells = self::getReachableCellsAtDistance($unit, $m, true);
 
     // Keep only the ones where an enemy stands
@@ -220,17 +221,93 @@ class Board extends \APP_DbObject
       return !empty($units);
     });
 
-    foreach ($cells as &$cell) {
-      $cell['path'] = self::getCellsInLine($unit->getPos(), $cell);
+    // Keep only the cells in sight if unit need to see to shoot
+    if ($unit->mustSeeToAttack()) {
+      Utils::filter($cells, function ($cell) use ($unit) {
+        return self::isInLineOfSight($unit, $cell);
+      });
     }
+
+    // Compute the opponents in contact with the unit
+    $inContact = array_values(\array_filter($cells, function($cell){
+      return $cell['d'] == 1;
+    }));
+    if(!empty($inContact)){
+      $cells = $inContact; // If at least one in contact => must fight one of them
+    }
+
+    // Compute shooting powers for the remaining cells
+    foreach ($cells as &$cell) {
+      $cell['dice'] = $power[$cell['d'] - 1];
+      $reduction = self::getDiceReduction($unit, $cell);
+      $cell['dice'] -= $reduction;
+    }
+    // Keep only the cells with at least one attack dice
+    Utils::filter($cells, function ($cell) {
+      return $cell['dice'] > 0;
+    });
 
     return $cells;
   }
 
-  public static function isInLineOfSight($source, $target)
+  /**
+   * Compute whether the unit can see the target cell or not
+   */
+  public static function isInLineOfSight($unit, $target)
   {
+    $source = $unit->getPos();
+    $path = self::getCellsInLine($source, $target);
+    $blockedLeft = false;
+    $blockedRight = false;
+    foreach ($path as $cell) {
+      // Starting and ending points are never blocking
+      if (self::areSameCell($cell, $source) || self::areSameCell($cell, $target)) {
+        continue;
+      }
+
+      // If the cell is not blocking the line of sight, skip to the next one
+      if (!self::isBlockingLineOfSight($cell)) {
+        continue;
+      }
+
+      // First case : intersection through the hex => direct block
+      if (in_array($cell['type'], [LINE_INTERSECTION, LINE_CORNER])) {
+        return false;
+      }
+      // Second case : tangent intersection => store whether it blocks left or right side
+      elseif ($cell['type'] == LINE_TANGENT_LEFT) {
+        $blockedLeft = true;
+      } elseif ($cell['type'] == LINE_TANGENT_RIGHT) {
+        $blockedRight = true;
+      }
+    }
+
+    return !$blockedLeft || !$blockedRight;
   }
 
+  /**
+   * Return whether a given cell is blocking line of sight considering what is on the cell (terrains, units, ...)
+   */
+  public static function isBlockingLineOfSight($cell)
+  {
+    $t = self::$grid[$cell['x']][$cell['y']];
+    if (!empty($t['units'])) {
+      return true;
+    }
+
+    foreach ($t['terrains'] as $t) {
+      if ($t->isBlockingLineOfSight()) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  /**
+   * Return the list of all the hexagons intersecting the line between the center of source and the center of target
+   *  => for each hex, indicate in the "type" field whether the intersection is on one corner, along an edge, or inside the hex
+   */
   public static function getCellsInLine($source, $target)
   {
     $cells = [];
@@ -243,10 +320,10 @@ class Board extends \APP_DbObject
     // Go through each cells in the "rectangle" bounded by $source and $target
     $minX = min($source['x'], $target['x']);
     $maxX = max($source['x'], $target['x']);
-    $offsetX = $minX == $maxX? 1 : 0;
+    $offsetX = $minX == $maxX ? 1 : 0;
     $minY = min($source['y'], $target['y']);
     $maxY = max($source['y'], $target['y']);
-    $offsetY = $minY == $maxY? 1 : 0;
+    $offsetY = $minY == $maxY ? 1 : 0;
     for ($x = $minX - $offsetX; $x <= $maxX + $offsetX; $x++) {
       for ($y = $minY - $offsetY; $y <= $maxY + $offsetY; $y++) {
         $cell = ['x' => $x, 'y' => $y];
@@ -287,7 +364,7 @@ class Board extends \APP_DbObject
         } elseif (count($zeros) == 1) {
           $cell['type'] = LINE_CORNER;
         } elseif (count($zeros) == 2) {
-          $cell['type'] = empty($pos)? LINE_TANGENT_LEFT : LINE_TANGENT_RIGHT;
+          $cell['type'] = empty($pos) ? LINE_TANGENT_LEFT : LINE_TANGENT_RIGHT;
         } else {
           continue; // NO INTERSECTION
         }
@@ -296,6 +373,20 @@ class Board extends \APP_DbObject
     }
 
     return $cells;
+  }
+
+  /**
+   * Return whether a given cell is blocking line of sight considering what is on the cell (terrains, units, ...)
+   */
+  public static function getDiceReduction($unit, $cell)
+  {
+    $t = self::$grid[$cell['x']][$cell['y']];
+    $m = 0;
+    foreach ($t['terrains'] as $t) {
+      $m = max($m, $t->getDefense($unit));
+    }
+
+    return $m;
   }
 
   /////////////////////////////////////////////
@@ -324,6 +415,11 @@ class Board extends \APP_DbObject
   protected function isValidCell($cell)
   {
     return isset(self::$grid[$cell['x']][$cell['y']]);
+  }
+
+  protected function areSameCell($cell1, $cell2)
+  {
+    return $cell1['x'] == $cell2['x'] && $cell1['y'] == $cell2['y'];
   }
 
   protected function getNeighbours($cell)

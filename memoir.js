@@ -67,10 +67,10 @@ define([
     clearPossible() {
       this.inherited(arguments);
       ['moving', 'forMove', 'attacking', 'forAttack'].forEach((className) => {
-        let cells = [...$('m44-board').getElementsByClassName(className)];
-        cells.forEach((cell) => cell.classList.remove(className));
+        this.removeClassNameOfCells(className);
       });
       $('m44-board').classList.remove('displayLineOfSight');
+      dojo.query('.dice-mini').forEach(dojo.destroy);
     },
 
     updatePlayerOrdering() {},

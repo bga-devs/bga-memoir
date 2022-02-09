@@ -173,6 +173,23 @@
           background-position-x: 75%;
         }
       }
+
+      .dice-mini {
+        position: absolute;
+        display: block;
+        width: 30%;
+        height: 30%;
+        background-image: url('img/dice_others.png');
+        background-size: 100% 200%;
+        background-position: 0% 100%;
+        bottom: 19%;
+        right: 0%;
+
+        &:nth-of-type(2) {
+          bottom: 12%;
+          right: 12%;
+        }
+      }
     }
   }
 

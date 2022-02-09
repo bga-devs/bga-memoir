@@ -52,6 +52,15 @@ class action_memoir extends APP_GameAction
     self::ajaxResponse();
   }
 
+
+  /////////////////////////////////
+  //  __  __  _____     _______
+  // |  \/  |/ _ \ \   / / ____|
+  // | |\/| | | | \ \ / /|  _|
+  // | |  | | |_| |\ V / | |___
+  // |_|  |_|\___/  \_/  |_____|
+  /////////////////////////////////
+
   public function actMoveUnit()
   {
     self::setAjaxMode();
@@ -70,10 +79,28 @@ class action_memoir extends APP_GameAction
   }
 
 
+  //////////////////////////////////////////
+  //    _  _____ _____  _    ____ _  __
+  //    / \|_   _|_   _|/ \  / ___| |/ /
+  //   / _ \ | |   | | / _ \| |   | ' /
+  //  / ___ \| |   | |/ ___ \ |___| . \
+  // /_/   \_\_|   |_/_/   \_\____|_|\_\
+  //////////////////////////////////////////
+
   public function actAttackUnitsDone()
   {
     self::setAjaxMode();
     $this->game->actAttackUnitsDone();
+    self::ajaxResponse();
+  }
+
+  public function actAttackUnit()
+  {
+    self::setAjaxMode();
+    $unitId = self::getArg('unitId', AT_posint, false);
+    $x = self::getArg('x', AT_posint, false);
+    $y = self::getArg('y', AT_posint, false);
+    $this->game->actAttackUnit($unitId, $x, $y);
     self::ajaxResponse();
   }
 
