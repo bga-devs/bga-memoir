@@ -21,7 +21,7 @@ trait AttackUnitsTrait
   public function actAttackUnitsDone()
   {
     self::checkAction('actAttackUnitsDone');
-    $this->gamestate->nextState('attackUnits'); // TODO
+    $this->gamestate->nextState('draw');
   }
 
   public function stAttackUnits()

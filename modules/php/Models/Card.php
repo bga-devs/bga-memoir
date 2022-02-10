@@ -15,6 +15,7 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
   protected $subtitle = '';
   protected $text = '';
   protected $deck = STANDARD_DECK;
+  protected $draw = ['draw' => 1, 'keep' => 1];
 
   /*
    * DYNAMIC INFORMATIONS
@@ -111,5 +112,10 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
       'n' => '',
       'desc' => '',
     ];
+  }
+
+  public function getDrawMethod()
+  {
+    return $this->draw;
   }
 }
