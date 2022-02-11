@@ -1,5 +1,5 @@
 html {
-  background: url('img/background.jpg');
+  background: url('img/ui/background.jpg');
   background-size: 75px;
 }
 
@@ -9,13 +9,13 @@ html {
 
   .m44-hrule {
     height: 11px;
-    background: url('img/h_rule.jpg');
+    background: url('img/ui/h_rule.jpg');
     background-repeat: repeat-x;
   }
 
   #m44-top-part {
     height: 71px;
-    background: url('img/game_top.png');
+    background: url('img/ui/game_top.png');
     background-repeat: repeat-x;
     position: relative;
     z-index: 2;
@@ -24,13 +24,18 @@ html {
     --memoirCardScale: 0.2;
 
     #top-player {
-      height: 52px;
-      overflow: hidden;
-      display: flex;
+      position: relative;
+
       .player-board {
-        height: 52px !important;
+        height: 42px !important;
         width: 244px !important;
         border-radius: 0px;
+        overflow: hidden;
+      }
+
+      #top-medals {
+        position: absolute;
+        bottom: -10px;
       }
     }
 
@@ -60,7 +65,7 @@ html {
     #deck-holder {
       width: 122px;
       flex-shrink: 0;
-      background: url('img/game_left.png');
+      background: url('img/ui/game_left.png');
       background-repeat: repeat-y;
     }
 
@@ -123,14 +128,14 @@ html {
       flex-shrink: 0;
       padding-left: 35px;
       overflow: auto;
-      background: url('img/game_right.png');
+      background: url('img/ui/game_right.png');
       background-repeat: repeat-y;
     }
   }
 
   #m44-bottom-part {
     height: 220px;
-    background: url('img/game_bottom.png');
+    background: url('img/ui/game_bottom.png');
     background-repeat: repeat-x;
     background-size: auto 100%;
     position: relative;
@@ -141,6 +146,16 @@ html {
 
     #bottom-player {
       margin-top: 25px;
+      position: relative;
+
+      .player-board {
+        border-radius: 0px;
+      }
+
+      #bottom-medals {
+        position: absolute;
+        top: -33px;
+      }
     }
 
     #bottom-player-hand {
@@ -151,6 +166,21 @@ html {
       .section-card.inplay {
         margin-top: -20px;
       }
+    }
+  }
+
+  #top-medals,
+  #bottom-medals {
+    z-index: 2;
+    display: flex;
+    column-gap: 3px;
+    padding-left: 3px;
+
+    .m44-medal-slot {
+      width: 35px;
+      height: 35px;
+      background-image: url('img/ui/medalspot.png');
+      background-size: 100% 100%;
     }
   }
 }

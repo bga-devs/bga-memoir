@@ -101,7 +101,7 @@ class memoir extends Table
       'prefs' => Preferences::getUiData($pId),
       'players' => Players::getUiData($pId),
       'board' => Board::getUiData(),
-      'teams' => Teams::getAll(),
+      'teams' => Teams::getAll()->toArray(),
     ];
   }
 

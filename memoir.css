@@ -35,7 +35,7 @@
   visibility: hidden; }
 
 html {
-  background: url("img/background.jpg");
+  background: url("img/ui/background.jpg");
   background-size: 75px; }
 
 #m44-container {
@@ -43,24 +43,26 @@ html {
   flex-flow: column; }
   #m44-container .m44-hrule {
     height: 11px;
-    background: url("img/h_rule.jpg");
+    background: url("img/ui/h_rule.jpg");
     background-repeat: repeat-x; }
   #m44-container #m44-top-part {
     height: 71px;
-    background: url("img/game_top.png");
+    background: url("img/ui/game_top.png");
     background-repeat: repeat-x;
     position: relative;
     z-index: 2;
     display: flex;
     --memoirCardScale: 0.2; }
     #m44-container #m44-top-part #top-player {
-      height: 52px;
-      overflow: hidden;
-      display: flex; }
+      position: relative; }
       #m44-container #m44-top-part #top-player .player-board {
-        height: 52px !important;
+        height: 42px !important;
         width: 244px !important;
-        border-radius: 0px; }
+        border-radius: 0px;
+        overflow: hidden; }
+      #m44-container #m44-top-part #top-player #top-medals {
+        position: absolute;
+        bottom: -10px; }
     #m44-container #m44-top-part #top-player-hand {
       display: flex;
       column-gap: 5px; }
@@ -79,7 +81,7 @@ html {
     #m44-container #m44-central-part #deck-holder {
       width: 122px;
       flex-shrink: 0;
-      background: url("img/game_left.png");
+      background: url("img/ui/game_left.png");
       background-repeat: repeat-y; }
     #m44-container #m44-central-part #m44-board-wrapper {
       flex-grow: 2;
@@ -128,11 +130,11 @@ html {
       flex-shrink: 0;
       padding-left: 35px;
       overflow: auto;
-      background: url("img/game_right.png");
+      background: url("img/ui/game_right.png");
       background-repeat: repeat-y; }
   #m44-container #m44-bottom-part {
     height: 220px;
-    background: url("img/game_bottom.png");
+    background: url("img/ui/game_bottom.png");
     background-repeat: repeat-x;
     background-size: auto 100%;
     position: relative;
@@ -140,13 +142,31 @@ html {
     display: flex;
     --memoirCardScale: 0.4; }
     #m44-container #m44-bottom-part #bottom-player {
-      margin-top: 25px; }
+      margin-top: 25px;
+      position: relative; }
+      #m44-container #m44-bottom-part #bottom-player .player-board {
+        border-radius: 0px; }
+      #m44-container #m44-bottom-part #bottom-player #bottom-medals {
+        position: absolute;
+        top: -33px; }
     #m44-container #m44-bottom-part #bottom-player-hand {
       display: flex;
       column-gap: 5px; }
       #m44-container #m44-bottom-part #bottom-player-hand .tactic-card.inplay,
       #m44-container #m44-bottom-part #bottom-player-hand .section-card.inplay {
         margin-top: -20px; }
+  #m44-container #top-medals,
+  #m44-container #bottom-medals {
+    z-index: 2;
+    display: flex;
+    column-gap: 3px;
+    padding-left: 3px; }
+    #m44-container #top-medals .m44-medal-slot,
+    #m44-container #bottom-medals .m44-medal-slot {
+      width: 35px;
+      height: 35px;
+      background-image: url("img/ui/medalspot.png");
+      background-size: 100% 100%; }
 
 #left-side {
   margin-right: 1px !important; }
@@ -347,7 +367,7 @@ html {
         background-position-y: 120%; }
     #m44-board .hex-grid-item .hex-grid-terrain {
       z-index: 2;
-      background-image: url("img/terrains.jpg");
+      background-image: url("img/board_terrains.jpg");
       background-size: 1000% 1100%;
       clip-path: polygon(50% 0.6%, 99.4% 25.6%, 99.4% 74.4%, 50% 99.4%, 0.6% 74.4%, 0.6% 25.6%); }
       #m44-board .hex-grid-item .hex-grid-terrain[data-type='0'] {
@@ -634,7 +654,7 @@ html {
         background-position-y: 90%; }
     #m44-board .hex-grid-item .hex-grid-obstacle {
       z-index: 3;
-      background-image: url("img/obstacles.png");
+      background-image: url("img/board_obstacles.png");
       background-size: 600% 500%; }
       #m44-board .hex-grid-item .hex-grid-obstacle[data-type='0'] {
         background-position-x: 0%;

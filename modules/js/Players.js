@@ -26,6 +26,14 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         }
       });
       dojo.place('right-side', 'm44-central-part');
+
+      let bottomTeam = this.gamedatas.players[pId].team;
+      this.gamedatas.teams.forEach((team) => {
+        let pos = bottomTeam == team.side ? 'bottom' : 'top';
+        for (let i = 0; i < team.victory; i++) {
+          dojo.place('<div class="m44-medal-slot"></div>', pos + '-medals');
+        }
+      });
     },
 
     addCard(card, container) {
@@ -97,7 +105,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       debug('Notif: playing a card', n);
       if (this.player_id == n.args.player_id) {
         $('card-' + n.args.card.id).classList.add('inplay');
-//        this.slide('card-' + n.args.card.id, 'inplay');
+        //        this.slide('card-' + n.args.card.id, 'inplay');
       } else {
         // TODO
         // this.addCard()
