@@ -36,7 +36,7 @@ trait DebugTrait
 
   function vt()
   {
-    $this->actOrderUnits([10, 11], []);
+    $this->actChooseCard([52]);
   }
 
   function tp()

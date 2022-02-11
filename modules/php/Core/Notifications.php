@@ -53,9 +53,13 @@ class Notifications
     ]);
   }
 
-  public static function drawCards($player, $cards)
+  public static function drawCards($player, $cards, $message = true)
   {
-    self::notifyAll('drawCards', clienttranslate('${player_name} draws ${nb} cards'), [
+    $msg = '';
+    if ($message) {
+      $msg = clienttranslate('${player_name} draws ${nb} cards');
+    }
+    self::notifyAll('drawCards', $msg, [
       'player' => $player,
       'nb' => count($cards),
     ]);
@@ -67,7 +71,7 @@ class Notifications
     if ($used) {
       $msg = clienttranslate('${player_name} discards used cards');
     } else {
-      clienttranslate('${player_name} discards ${nb} cards');
+      $msg = clienttranslate('${player_name} discards ${nb} cards');
     }
 
     self::notifyAll('discard', $msg, [

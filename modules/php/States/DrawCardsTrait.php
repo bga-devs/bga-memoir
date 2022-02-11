@@ -38,11 +38,41 @@ trait DrawCardsTrait
 
   public function argsDrawChoice()
   {
-    return [];
+    $player = Players::getActive();
+    $cards = Cards::getInLocation(['choice', $player->getId()])->getIds();
+    return [
+      'keep' => $player->getCardInPlay()->getDrawMethod()['keep'],
+      '_private' => [
+        'active' => [
+          'cards' => $cards,
+        ],
+      ],
+    ];
   }
 
-  public function actChooseCard($cardId)
+  public function actChooseCard($cardIds)
   {
-    // keep this card, remove the others
+    // keep the cards, remove the others
+    self::checkAction('actChooseCard');
+    $player = Players::getCurrent();
+    $args = $this->argsDrawChoice();
+
+    if (count($cardIds) != $args['keep']) {
+      throw new \BgaVisibleSystemException('Number of cards to keep not consistent with rules. Should not happen');
+    }
+
+    if (count(array_diff($cardIds, $args['_private']['active']['cards'])) != 0) {
+      throw new \BgaVisibleSystemException('Those cards cannot be selected. Should not happen');
+    }
+
+    Cards::move($cardIds, ['hand', $player->getId()]);
+    $cards = Cards::getMany($cardIds);
+    Notifications::drawCards($player, $cards);
+
+    $othCards = Cards::getInLocation(['choice', $player->getId()])->getIds();
+    $cards = Cards::move($othCards, 'discard');
+    Notifications::discard($player, $othCards, false);
+
+    $this->gamestate->nextState('endRound');
   }
 }
