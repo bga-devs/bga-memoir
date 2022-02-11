@@ -38,6 +38,7 @@ trait PrepareTurnTrait
 
     // update all tables with temp data
     Units::reset();
+    Globals::setUnitMoved(-1);
     $this->gamestate->nextState('next');
   }
 }

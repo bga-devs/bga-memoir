@@ -13,6 +13,7 @@ class Globals extends \M44\Helpers\DB_Manager
     'scenario' => 'obj',
     'turn' => 'int',
     'sideTurn' => 'str', // Store which side is currently playing
+    'unitMoved' => 'int',
   ];
 
   protected static $table = 'global_variables';
@@ -139,5 +140,6 @@ class Globals extends \M44\Helpers\DB_Manager
    */
   public static function setupNewGame($players, $options)
   {
+    Globals::setUnitMoved(-1);
   }
 }

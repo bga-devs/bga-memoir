@@ -35,6 +35,14 @@ trait MoveUnitsTrait
       throw new \BgaVisibleSystemException('You cannot move this unit to this hex. Should not happen');
     }
 
+    if (Globals::getUnitMoved() != $unitId && Globals::getUnitMoved() != -1) {
+      // force all moves of previous unit
+      $prevUnit = Units::get(Globals::getUnitMoved());
+      $prevUnit->setMoves($prevUnit->getMovementRadius());
+    }
+
+    Globals::setUnitMoved($unitId);
+
     // Move the unit
     $cell = $cells[$k];
     $unit = Units::get($unitId);
