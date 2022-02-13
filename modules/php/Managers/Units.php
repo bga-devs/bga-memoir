@@ -22,6 +22,7 @@ class Units extends \M44\Helpers\Pieces
     'badge',
     'activation_card',
     'moves',
+    'moveDone',
     'fights',
     'extra_datas',
   ];
@@ -131,7 +132,7 @@ class Units extends \M44\Helpers\Pieces
 
   public function reset()
   {
-    self::DB()->update(['activation_card' => null, 'moves' => null, 'fights' => null]);
+    self::DB()->update(['activation_card' => null, 'moves' => null, 'fights' => null, 'moveDone' => false]);
   }
 
   ////////////////////////

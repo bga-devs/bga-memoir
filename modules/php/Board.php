@@ -114,6 +114,9 @@ class Board extends \APP_DbObject
   {
     // Compute remaining moves for the unit
     $m = $unit->getMovementRadius() - $unit->getMoves();
+    if ($unit->getMoveDone() == true) {
+      $m = 0;
+    }
     return self::getReachableCellsAtDistance($unit, $m);
   }
 
@@ -229,10 +232,12 @@ class Board extends \APP_DbObject
     }
 
     // Compute the opponents in contact with the unit
-    $inContact = array_values(\array_filter($cells, function($cell){
-      return $cell['d'] == 1;
-    }));
-    if(!empty($inContact)){
+    $inContact = array_values(
+      \array_filter($cells, function ($cell) {
+        return $cell['d'] == 1;
+      })
+    );
+    if (!empty($inContact)) {
       $cells = $inContact; // If at least one in contact => must fight one of them
     }
 

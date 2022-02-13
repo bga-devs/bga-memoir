@@ -28,6 +28,7 @@ class AbstractUnit extends \M44\Helpers\DB_Manager implements \JsonSerializable
   protected $activationCard = null;
   protected $moves = 0;
   protected $fights = 0;
+  protected $moveDone = false;
 
   public function __construct($row)
   {
@@ -42,6 +43,7 @@ class AbstractUnit extends \M44\Helpers\DB_Manager implements \JsonSerializable
       $this->moves = $row['moves'];
       $this->fights = $row['fights'];
       $this->activationCard = $row['activation_card'];
+      $this->moveDone = $row['moveDone'];
       $this->datas = \json_decode($row['extra_datas'], true);
     }
   }
@@ -170,6 +172,17 @@ class AbstractUnit extends \M44\Helpers\DB_Manager implements \JsonSerializable
   {
     $this->moves = $value;
     self::DB()->update(['moves' => $this->moves], $this->id);
+  }
+
+  public function setMoveDone()
+  {
+    $this->moveDone = true;
+    self::DB()->update(['moveDone' => $this->moveDone], $this->id);
+  }
+
+  public function getMoveDone()
+  {
+    return $this->moveDone;
   }
 
   public function incMoves($value)

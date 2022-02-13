@@ -38,7 +38,8 @@ trait MoveUnitsTrait
     if (Globals::getUnitMoved() != $unitId && Globals::getUnitMoved() != -1) {
       // force all moves of previous unit
       $prevUnit = Units::get(Globals::getUnitMoved());
-      $prevUnit->setMoves($prevUnit->getMovementRadius());
+      // $prevUnit->setMoves($prevUnit->getMovementRadius());
+      $prevUnit->setMoveDone();
     }
 
     Globals::setUnitMoved($unitId);
