@@ -14,6 +14,7 @@ class Globals extends \M44\Helpers\DB_Manager
     'turn' => 'int',
     'sideTurn' => 'str', // Store which side is currently playing
     'unitMoved' => 'int',
+    'activePlayer' => 'int',
   ];
 
   protected static $table = 'global_variables';

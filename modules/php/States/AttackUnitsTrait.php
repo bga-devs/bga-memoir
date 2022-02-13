@@ -54,7 +54,20 @@ trait AttackUnitsTrait
       throw new \BgaVisibleSystemException('You cannot attack this hex with this unit. Should not happen');
     }
 
-    // TODO
-    die('test');
+    $target =
+      $cells[
+        Utils::array_usearch($cells, function ($cell) use ($x, $y) {
+          if ($cell['x'] == $x && $cell['y'] == $y) {
+            return $cell;
+          }
+        })
+      ];
+
+    // if distance = 1, then ask for ambush
+    if ($target['d'] == 1) {
+      $this->gamestate->nextState('ambush');
+    } else {
+      $this->gamestate->nextState('attack');
+    }
   }
 }
