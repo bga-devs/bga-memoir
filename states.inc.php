@@ -124,7 +124,7 @@ $machinestates = [
   ],
 
   ST_POST_AMBUSH => [
-    'name' => 'preAmbush',
+    'name' => 'postAmbush',
     'description' => '',
     'descriptionmyturn' => '',
     'type' => 'game',
@@ -137,7 +137,7 @@ $machinestates = [
     'description' => '',
     'descriptionmyturn' => '',
     'type' => 'game',
-    'action' => 'stAttackThrow',
+    'action' => 'stAttackThrow', // TODO: possible that attack not possible anymore
     'transitions' => ['next' => ST_ATTACK_RESOLVE, 'draw' => ST_DRAW, 'attack' => ST_ATTACK],
   ],
 

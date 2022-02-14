@@ -49,6 +49,7 @@ class memoir extends Table
   use M44\States\MoveUnitsTrait;
   use M44\States\AttackUnitsTrait;
   use M44\States\DrawCardsTrait;
+  use M44\States\AmbushTrait;
 
   public static $instance = null;
   function __construct()
