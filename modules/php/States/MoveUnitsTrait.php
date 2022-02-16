@@ -15,7 +15,9 @@ trait MoveUnitsTrait
   {
     $player = $player ?? Players::getActive();
     $card = $player->getCardInPlay();
-    return $card->getArgsMoveUnits();
+    $args = $card->getArgsMoveUnits();
+    $args['lastUnitMoved'] = Globals::getUnitMoved();
+    return $args;
   }
 
   public function actMoveUnit($unitId, $x, $y)
@@ -35,15 +37,6 @@ trait MoveUnitsTrait
       throw new \BgaVisibleSystemException('You cannot move this unit to this hex. Should not happen');
     }
 
-    if (Globals::getUnitMoved() != $unitId && Globals::getUnitMoved() != -1) {
-      // force all moves of previous unit
-      $prevUnit = Units::get(Globals::getUnitMoved());
-      // $prevUnit->setMoves($prevUnit->getMovementRadius());
-      $prevUnit->setMoveDone();
-    }
-
-    Globals::setUnitMoved($unitId);
-
     // Move the unit
     $cell = $cells[$k];
     $unit = Units::get($unitId);
@@ -51,8 +44,8 @@ trait MoveUnitsTrait
     $unit->moveTo($cell);
     Board::refreshUnits();
     Notifications::moveUnit($player, $unitId, $x, $y);
+    Globals::setUnitMoved($unitId);
 
-    // TODO : notification
     $this->gamestate->nextState('moveUnits');
   }
 

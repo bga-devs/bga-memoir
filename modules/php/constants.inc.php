@@ -103,6 +103,18 @@ const OPTION_SCENARIO = 101;
  * Stats
  */
 
+
+
+/*
+ * Dice
+ */
+const DICE_INFANTRY = 0;
+const DICE_ARMOR = 1;
+const DICE_GRENADE = 2;
+const DICE_FLAG = 3;
+const DICE_STAR = 4;
+
+
 /*
  * Units
  */

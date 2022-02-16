@@ -53,7 +53,7 @@ class Board extends \APP_DbObject
       foreach ($col as $y => $cell) {
         self::$grid[$x][$y] = [
           'terrains' => [],
-          'units' => [],
+          'unit' => null,
           'labels' => [],
         ];
       }
@@ -66,7 +66,7 @@ class Board extends \APP_DbObject
 
     // Add the units
     foreach (Units::getAllOrdered() as $unit) {
-      self::$grid[$unit->getX()][$unit->getY()]['units'][] = $unit;
+      self::$grid[$unit->getX()][$unit->getY()]['unit'] = $unit;
     }
 
     // Add the labels
@@ -81,11 +81,11 @@ class Board extends \APP_DbObject
   {
     foreach (self::$grid as $x => $col) {
       foreach ($col as $y => $cell) {
-        self::$grid[$x][$y]['units'] = [];
+        self::$grid[$x][$y]['unit'] = null;
       }
     }
     foreach (Units::getAllOrdered() as $unit) {
-      self::$grid[$unit->getX()][$unit->getY()]['units'][] = $unit;
+      self::$grid[$unit->getX()][$unit->getY()]['unit'] = $unit;
     }
   }
 
@@ -102,6 +102,15 @@ class Board extends \APP_DbObject
     ];
   }
 
+  public function getUnitInCell($x, $y = null)
+  {
+    if ($y === null) {
+      $y = $x['y'];
+      $x = $x['x'];
+    }
+    return self::$grid[$x][$y]['unit'];
+  }
+
   /////////////////////////////////
   //  __  __  _____     _______
   // |  \/  |/ _ \ \   / / ____|
@@ -112,11 +121,14 @@ class Board extends \APP_DbObject
 
   public static function getReachableCells($unit)
   {
+    // Already moved before ?
+    $uId = Globals::getUnitMoved();
+    if ($unit->getMoves() > 0 && $uId != -1 && $uId != $unit->getId()) {
+      return [];
+    }
+
     // Compute remaining moves for the unit
     $m = $unit->getMovementRadius() - $unit->getMoves();
-    if ($unit->getMoveDone() == true) {
-      $m = 0;
-    }
     return self::getReachableCellsAtDistance($unit, $m);
   }
 
@@ -176,7 +188,7 @@ class Board extends \APP_DbObject
     $targetCell = self::$grid[$target['x']][$target['y']];
 
     // If there is a unit => can't go there
-    if (!empty($targetCell['units'])) {
+    if (!is_null($targetCell['unit'])) {
       return \INFINITY;
     }
 
@@ -217,11 +229,8 @@ class Board extends \APP_DbObject
 
     // Keep only the ones where an enemy stands
     Utils::filter($cells, function ($cell) use ($unit) {
-      $units = self::$grid[$cell['x']][$cell['y']]['units'];
-      Utils::filter($units, function ($unit2) use ($unit) {
-        return $unit2->isOpponent($unit);
-      });
-      return !empty($units);
+      $oppUnit = self::getUnitInCell($cell);
+      return !is_null($oppUnit) && $oppUnit->isOpponent($unit);
     });
 
     // Keep only the cells in sight if unit need to see to shoot
@@ -296,7 +305,7 @@ class Board extends \APP_DbObject
   public static function isBlockingLineOfSight($cell)
   {
     $t = self::$grid[$cell['x']][$cell['y']];
-    if (!empty($t['units'])) {
+    if (!is_null($t['unit'])) {
       return true;
     }
 

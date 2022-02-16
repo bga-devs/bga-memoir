@@ -95,6 +95,21 @@ $scenarios[18] = [
         'tags' => [
           0 => [
             'name' => 'medal1',
+            'group' => [
+              0 => 'F9',
+              1 => 'f8',
+              2 => 'g8',
+              3 => 'h8',
+              4 => 'i8',
+              5 => 'k8',
+              6 => 'j8',
+              7 => 'L9',
+            ],
+            'medal' => [
+              'permanent' => false,
+              'counts_for' => 1,
+              'nbr_hex' => 1,
+            ],
           ],
         ],
       ],
@@ -195,6 +210,7 @@ $scenarios[18] = [
         'col' => 20,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'IMPASSABLE_BLOCKING_HILL',
         ],
       ],
       20 => [
@@ -238,6 +254,7 @@ $scenarios[18] = [
         'col' => 19,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'IMPASSABLE_BLOCKING_HILL',
         ],
       ],
       26 => [
@@ -305,6 +322,7 @@ $scenarios[18] = [
         'col' => 18,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'IMPASSABLE_BLOCKING_HILL',
         ],
       ],
       34 => [
@@ -312,6 +330,7 @@ $scenarios[18] = [
         'col' => 20,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'IMPASSABLE_BLOCKING_HILL',
         ],
       ],
       35 => [
@@ -326,6 +345,7 @@ $scenarios[18] = [
         'col' => 19,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'IMPASSABLE_BLOCKING_HILL',
         ],
       ],
       37 => [
@@ -378,6 +398,7 @@ $scenarios[18] = [
         'col' => 20,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'IMPASSABLE_BLOCKING_HILL',
         ],
       ],
       44 => [
@@ -392,6 +413,12 @@ $scenarios[18] = [
         'tags' => [
           0 => [
             'name' => 'medal2',
+            'group' => [],
+            'medal' => [
+              'permanent' => false,
+              'counts_for' => 1,
+              'nbr_hex' => 1,
+            ],
           ],
         ],
       ],
@@ -435,6 +462,12 @@ $scenarios[18] = [
         'tags' => [
           0 => [
             'name' => 'medal2',
+            'group' => [],
+            'medal' => [
+              'permanent' => false,
+              'counts_for' => 1,
+              'nbr_hex' => 1,
+            ],
           ],
         ],
       ],
@@ -506,35 +539,27 @@ $scenarios[18] = [
         ],
       ],
       4 => [
-        'row' => 4,
-        'col' => 20,
-        'text' => [
-          0 => clienttranslate('Hill'),
-          1 => clienttranslate('Impassable'),
-        ],
-      ],
-      5 => [
         'row' => 5,
         'col' => 13,
         'text' => [
           0 => clienttranslate('300'),
         ],
       ],
-      6 => [
+      5 => [
         'row' => 6,
         'col' => 2,
         'text' => [
           0 => clienttranslate('Bonlieu'),
         ],
       ],
-      7 => [
+      6 => [
         'row' => 6,
         'col' => 22,
         'text' => [
           0 => clienttranslate('Grane'),
         ],
       ],
-      8 => [
+      7 => [
         'row' => 7,
         'col' => 9,
         'text' => [

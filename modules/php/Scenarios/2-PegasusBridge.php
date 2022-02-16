@@ -504,7 +504,7 @@ $scenarios[2] = [
       'name' => clienttranslate('Pegasus Bridge'),
       'historical' => clienttranslate('The late hours of June 5, 1944... Led by Major John Howard, the men of Oxford and Buckinghamshire Light Infantry* step aboard six Horsa gliders on a secret airfield in Dorset. Their mission: to launch the first airborne assault of D-Day and capture two bridges, one astride the Caen Canal, the other over the Orne river, in Normandy.
 
-A few minutes past midnight, now June 6, 1944, the gliders clip through the treetops and land in a small patch of rough field, between a pond and the Caen Canal, only yards away from their objective! Major Howard and his units pour out of the planes, achieving complete surprise and rushing the stunned German forces. Despite furious opposition from a heavily sandbagged machine gun nest at the end of now famous "Pegasus" bridge, they capture their objective within moments. To the east, the Orne bridge is secured equally rapidly, giving British units the first victory of D-Day!
+A few minutes past midnight, now June 6, 1944, the gliders clip through the treetops and land in a small patch of rough field, between a pond and the Caen Canal, only yards away from their objective! Major Howard and his troops pour out of the planes, achieving complete surprise and rushing the stunned German forces. Despite furious opposition from a heavily sandbagged machine gun nest at the end of now famous "Pegasus" bridge, they capture their objective within moments. To the east, the Orne bridge is secured equally rapidly, giving British troops the first victory of D-Day!
 
 The stage is set, the battle lines are drawn, and you are in command. The rest is history.
 

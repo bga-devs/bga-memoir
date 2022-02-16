@@ -41,6 +41,6 @@ trait DebugTrait
 
   function tp()
   {
-    var_dump(Board::getCellsInLine(['x' => 7, 'y' => 3], ['x' => 7, 'y' => 7]));
+    $this->rollDice(Players::getCurrent(), 3, ['x' => 20, 'y' => 4]);
   }
 }

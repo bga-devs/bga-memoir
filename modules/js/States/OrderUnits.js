@@ -82,32 +82,44 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     // |_|  |_|\___/  \_/  |_____|
     /////////////////////////////////
 
-    onEnteringStateMoveUnits(args) {
+    onEnteringStateMoveUnits(args, excludeUnit = null) {
+      // When a unit is clicked => prompt for the cell to move
+      let callback = (unitId) => {
+        this.clientState('moveUnitsChooseTarget', _('Select the destination hex or another unit you want to move'), {
+          unitId,
+          cells: args.units[unitId],
+        });
+      };
+
       Object.keys(args.units).forEach((unitId) => {
+        if (excludeUnit == unitId) return;
         if (args.units[unitId].length == 0) {
           $('unit-' + unitId).classList.add('unselectableForMoving');
           return;
         }
 
-        this.onClick('unit-' + unitId, () => {
-          this.clientState('moveUnitsChooseTarget', _('Select the destination hex'), {
-            unitId,
-            cells: args.units[unitId],
-          });
-        });
+        this.onClick('unit-' + unitId, () => callback(unitId));
       });
 
       this.addPrimaryActionButton('btnMoveUnitsDone', _('Done'), () => this.takeAction('actMoveUnitsDone'));
+
+      // Auto select if a unit was partially moved
+      let unitId = args.lastUnitMoved;
+      if (excludeUnit == null && unitId != -1 && args.units[unitId] && args.units[unitId].length > 0) {
+        callback(unitId);
+      }
     },
 
     onEnteringStateMoveUnitsChooseTarget(args) {
-      this.addCancelStateBtn();
       $('unit-' + args.unitId).classList.add('moving');
       args.cells.forEach((cell) => {
         let oCell = $(`cell-${cell.x}-${cell.y}`);
         this.onClick(oCell, () => this.takeAction('actMoveUnit', { unitId: args.unitId, x: cell.x, y: cell.y }));
         oCell.classList.add('forMove');
       });
+
+      // Makes other units selectable
+      this.onEnteringStateMoveUnits(this.last_server_state.args, args.unitId);
     },
 
     notif_moveUnit(n) {
@@ -123,20 +135,24 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     // /_/   \_\_|   |_/_/   \_\____|_|\_\
     //////////////////////////////////////////
 
-    onEnteringStateAttackUnits(args) {
+    onEnteringStateAttackUnits(args, excludeUnit = null) {
       this.removeClassNameOfCells('unselectableForMoving');
+
+      // When a unit is clicked => prompt for the target
+      let callback = (unitId) => {
+        this.clientState('attackUnitsChooseTarget', _('Select the target or another unit you want to battle with'), {
+          unitId,
+          cells: args.units[unitId],
+        });
+      };
       Object.keys(args.units).forEach((unitId) => {
+        if (unitId == excludeUnit) return;
         if (args.units[unitId].length == 0) {
           $('unit-' + unitId).classList.add('unselectableForAttacking');
           return;
         }
 
-        this.onClick('unit-' + unitId, () => {
-          this.clientState('attackUnitsChooseTarget', _('Select the target'), {
-            unitId,
-            cells: args.units[unitId],
-          });
-        });
+        this.onClick('unit-' + unitId, () => callback(unitId));
       });
 
       this.addPrimaryActionButton('btnAttackUnitsDone', _('Done'), () => this.takeAction('actAttackUnitsDone'));
@@ -155,6 +171,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           dojo.place('<i class="dice-mini"></i>', oCell);
         }
       });
+
+      // Makes other units selectable
+      this.onEnteringStateAttackUnits(this.last_server_state.args, args.unitId);
 
       // Line of sight visualization
       let source = $('unit-' + args.unitId).parentNode.parentNode;

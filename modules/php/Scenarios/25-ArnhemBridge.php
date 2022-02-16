@@ -266,7 +266,8 @@ $scenarios[25] = [
         ],
         'rect_terrain' => [
           'name' => 'bridge',
-          'orientation' => 2,
+          'orientation' => 1,
+          'behavior' => 'BRIDGE_SECTION',
         ],
       ],
       29 => [
@@ -325,7 +326,8 @@ $scenarios[25] = [
         'col' => 14,
         'rect_terrain' => [
           'name' => 'bridge',
-          'orientation' => 2,
+          'orientation' => 1,
+          'behavior' => 'BRIDGE_SECTION',
         ],
       ],
       35 => [
@@ -347,7 +349,8 @@ $scenarios[25] = [
         'col' => 13,
         'rect_terrain' => [
           'name' => 'bridge',
-          'orientation' => 2,
+          'orientation' => 1,
+          'behavior' => 'BRIDGE_SECTION',
         ],
       ],
       38 => [
@@ -473,21 +476,13 @@ $scenarios[25] = [
         ],
       ],
       2 => [
-        'row' => 4,
-        'col' => 14,
-        'text' => [
-          0 => clienttranslate('Arnhem'),
-          1 => clienttranslate('Bridge'),
-        ],
-      ],
-      3 => [
         'row' => 5,
         'col' => 9,
         'text' => [
           0 => clienttranslate('ARNHEM'),
         ],
       ],
-      4 => [
+      3 => [
         'row' => 6,
         'col' => 12,
         'text' => [
@@ -502,7 +497,7 @@ $scenarios[25] = [
       'name' => clienttranslate('Arnhem Bridge'),
       'historical' => clienttranslate('The largest Airborne drop ever designed, Operation Market Garden was Field Marshall Bernard Montgomery\'s plan to end the war on the Western Front early. If successful, it would threaten the flanks of German defenses along the Siegfried line and behind the Rhine River, helping an Allied crossing and precipitating the fall of Berlin. The operation famously ended up being "a bridge too far", handing Montgomery his only high-profile defeat.
 
-The airborne plan on 17th September was for the 1st British Airborne Division to secure Arnhem bridge and the high ground to the north. At the Bridge, 2nd Battalion Lieutenant Colonel Frost commanded a force of about 500 men that took up a strong position at the northern end of the bridge. The Germans soon discovered that the airborne units were a formidable enemy, and more than infantry assaults were needed to blast Frost\'s men out of their houses. A charge by the 9th SS Reconnaissance Battalion across the bridge was destroyed; likewise were attacks from the north. Despite being short of ammunition and with no food or water, the airborne force held the northern part of the bridge, denying the Germans a crossing place, until the night of 20/21 September. The last British resistance near the bridge ceased on September 23rd.
+The airborne plan on 17th September was for the 1st British Airborne Division to secure Arnhem bridge and the high ground to the north. At the Bridge, 2nd Battalion Lieutenant Colonel Frost commanded a force of about 500 men that took up a strong position at the northern end of the bridge. The Germans soon discovered that the airborne troops were a formidable enemy, and more than infantry assaults were needed to blast Frost\'s men out of their houses. A charge by the 9th SS Reconnaissance Battalion across the bridge was destroyed; likewise were attacks from the north. Despite being short of ammunition and with no food or water, the airborne force held the northern part of the bridge, denying the Germans a crossing place, until the night of 20/21 September. The last British resistance near the bridge ceased on September 23rd.
 
 The stage is set, the battle lines are drawn, and you are in command. The rest is history.'),
       'description' => clienttranslate('Axis Player: Take 6 command cards.

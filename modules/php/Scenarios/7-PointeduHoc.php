@@ -179,6 +179,7 @@ $scenarios[7] = [
         'col' => 0,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'CLIFF',
         ],
       ],
       15 => [
@@ -186,6 +187,7 @@ $scenarios[7] = [
         'col' => 2,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'CLIFF',
         ],
       ],
       16 => [
@@ -193,6 +195,7 @@ $scenarios[7] = [
         'col' => 4,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'CLIFF',
         ],
       ],
       17 => [
@@ -200,6 +203,7 @@ $scenarios[7] = [
         'col' => 6,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'CLIFF',
         ],
       ],
       18 => [
@@ -207,6 +211,7 @@ $scenarios[7] = [
         'col' => 8,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'CLIFF',
         ],
       ],
       19 => [
@@ -214,6 +219,7 @@ $scenarios[7] = [
         'col' => 10,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'CLIFF',
         ],
       ],
       20 => [
@@ -221,6 +227,7 @@ $scenarios[7] = [
         'col' => 12,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'CLIFF',
         ],
       ],
       21 => [
@@ -228,6 +235,7 @@ $scenarios[7] = [
         'col' => 14,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'CLIFF',
         ],
       ],
       22 => [
@@ -235,6 +243,7 @@ $scenarios[7] = [
         'col' => 16,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'CLIFF',
         ],
       ],
       23 => [
@@ -242,6 +251,7 @@ $scenarios[7] = [
         'col' => 18,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'CLIFF',
         ],
       ],
       24 => [
@@ -249,6 +259,7 @@ $scenarios[7] = [
         'col' => 20,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'HILL',
         ],
       ],
       25 => [
@@ -256,6 +267,7 @@ $scenarios[7] = [
         'col' => 22,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'CLIFF',
         ],
       ],
       26 => [
@@ -263,6 +275,7 @@ $scenarios[7] = [
         'col' => 24,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'CLIFF',
         ],
       ],
       27 => [
@@ -270,6 +283,7 @@ $scenarios[7] = [
         'col' => 19,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'CLIFF',
         ],
       ],
       28 => [
@@ -277,6 +291,7 @@ $scenarios[7] = [
         'col' => 21,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'CLIFF',
         ],
       ],
       29 => [
@@ -291,6 +306,7 @@ $scenarios[7] = [
         'col' => 20,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'CLIFF',
         ],
         'rect_terrain' => [
           'name' => 'bunker',
@@ -367,6 +383,11 @@ $scenarios[7] = [
       ],
       1 => [
         'row' => 5,
+        'col' => 1,
+        'text' => [],
+      ],
+      2 => [
+        'row' => 5,
         'col' => 13,
         'text' => [
           0 => clienttranslate(''),
@@ -377,7 +398,7 @@ $scenarios[7] = [
   'text' => [
     'en' => [
       'name' => clienttranslate('Pointe-du-Hoc'),
-      'historical' => clienttranslate('Planners felt that the German batteries on Pointe-du-Hoc would be one of the most daunting threats to Allied forces landing on Omaha in the morning of D-Day. Set atop 100 foot cliffs west of the beach, the guns\' range were such that they\'d be able to score direct hits on any units landing on the beach below. The 2nd Rangers, under the command of Lieutenant Colonel James E. Rudder, were tasked with silencing them.
+      'historical' => clienttranslate('Planners felt that the German batteries on Pointe-du-Hoc would be one of the most daunting threats to Allied forces landing on Omaha in the morning of D-Day. Set atop 100 foot cliffs west of the beach, the guns\' range were such that they\'d be able to score direct hits on any troops landing on the beach below. The 2nd Rangers, under the command of Lieutenant Colonel James E. Rudder, were tasked with silencing them.
 
 Following a difficult approach and despite intense firing from the German garrison, the first of about 200 Rangers leading the assault were on top of the cliffs within minutes. They were surprised to find that the guns had been withdrawn off the point three days before. Finding only dummies made from timber in the gun casemates, Ranger patrols infiltrated south looking for the missing guns.
 

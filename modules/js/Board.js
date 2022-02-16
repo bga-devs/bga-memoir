@@ -70,12 +70,10 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           let cell = this.place('tplBoardCell', { x: col, y }, 'm44-board-units');
           cell.style.gridArea = cellC.style.gridArea;
 
-          let units = board.grid[col][row].units;
-          if (units.length > 0) {
-            units.forEach((unit) => {
-              unit.orientation = bottomTeam != (ALLIES_NATIONS.includes(unit.nation) ? 'ALLIES' : 'AXIS') ? 1 : 0;
-              this.place('tplUnit', unit, `cell-${col}-${y}`);
-            });
+          let unit = board.grid[col][row].unit;
+          if (unit) {
+            unit.orientation = bottomTeam != (ALLIES_NATIONS.includes(unit.nation) ? 'ALLIES' : 'AXIS') ? 1 : 0;
+            this.place('tplUnit', unit, `cell-${col}-${y}`);
           }
         }
       }
@@ -92,8 +90,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         o.style.gridColumn = x + ' / span 1';
       });
 
-      // Add line of sight
+      // Add line of sight and dice container
       dojo.place('<div id="lineOfSight"></div>', 'm44-board-units');
+      dojo.place('<div id="diceContainer"></div>', 'm44-board-units');
 
       this._boardScale = 1; // TODO localStorage
       dojo.connect($('m44-board-zoom-in'), 'click', () => this.incBoardScale(0.1));
@@ -104,7 +103,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       dojo.connect($('m44-labels-settings'), 'click', () => this.toggleLabelsVisibility());
     },
 
-    removeClassNameOfCells(className){
+    removeClassNameOfCells(className) {
       let cells = [...$('m44-board').getElementsByClassName(className)];
       cells.forEach((cell) => cell.classList.remove(className));
     },
@@ -284,19 +283,35 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     //   | |_| | | (_|  __/
     //   |____/|_|\___\___|
     /////////////////////////////
-    rollDice(cell, results) {
-      let o = $(`cell-${cell.x}-${cell.y}`);
-      results.forEach((result) => {
-        let die = this.place('tplDice', { result, animated: true }, o);
-        die.style.transform = 'translateX(100%)';
+    rollDice(results, cell) {
+      if (this.isFastMode()) return;
+
+      let o = $('diceContainer');
+      o.style.gridArea = $(`cell-container-${cell.x}-${cell.y}`).style.gridArea;
+      o.style.display = 'grid';
+      dojo.empty(o);
+      o.offsetHeight;
+
+      results.forEach((result, i) => {
+        this.wait(i * 100).then(() => {
+          let die = this.place('tplDice', { result, animated: true }, o);
+          this.fadeOutAndDestroy(die, 800, 2000);
+        });
       });
     },
 
     tplDice(dice) {
-      return `<div class="m44-dice-wrapper ${dice.animated ? 'animated' : ''}" data-result="${dice.result}">
-        <div class="m44-dice-shadow"></div>
-        <div class="m44-dice"></div>
+      return `<div class='m44-dice-resizable'>
+        <div class="m44-dice-wrapper ${dice.animated ? 'animated' : ''}" data-result="${dice.result}">
+          <div class="m44-dice-shadow"></div>
+          <div class="m44-dice"></div>
+        </div>
       </div>`;
+    },
+
+    notif_rollDice(n) {
+      debug('Notif: rolling dice', n);
+      this.rollDice(n.args.results, n.args.cell);
     },
   });
 });

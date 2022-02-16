@@ -33,6 +33,43 @@ class Notifications
     self::notify($pId, 'message', $txt, $args);
   }
 
+  public static function rollDice($player, $nDice, $results, $cell)
+  {
+    $faces = [
+      DICE_INFANTRY => clienttranslate('Infantry'),
+      DICE_ARMOR => clienttranslate('Armor'),
+      DICE_GRENADE => clienttranslate('Grenade'),
+      DICE_FLAG => clienttranslate('Flag'),
+      DICE_STAR => clienttranslate('Star'),
+    ];
+    $diceLogs = [];
+    $diceArgs = [];
+    foreach ($results as $i => $r) {
+      $name = 'dice_' . $i;
+      $diceLogs[] = '${' . $name . '}';
+      $diceArgs[$name] = [
+        'log' => '${dice_face}',
+        'args' => [
+          'i18n' => ['dice_face'],
+          'dice_face' => $faces[$r],
+          'dice_result' => $r,
+        ],
+      ];
+      $diceArgs['i18n'][] = $name;
+    }
+
+    self::notifyAll('rollDice', clienttranslate('${player_name} rolls ${dice_result}'), [
+      'i18n' => ['dice_result'],
+      'player' => $player,
+      'cell' => $cell,
+      'results' => $results,
+      'dice_result' => [
+        'log' => join(' ', $diceLogs),
+        'args' => $diceArgs,
+      ],
+    ]);
+  }
+
   public static function playCard($player, $card)
   {
     self::notifyAll('playCard', clienttranslate('${player_name} plays ${card_name}'), [

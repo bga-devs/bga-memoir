@@ -35,6 +35,7 @@ define([
       this._notifications = [
         ['playCard', 1000],
         ['moveUnit', 1200],
+        ['rollDice', 3300],
       ];
 
       // Fix mobile viewport (remove CSS zoom)
@@ -76,5 +77,24 @@ define([
     },
 
     updatePlayerOrdering() {},
+
+    /* This enable to inject translatable styled things to logs or action bar */
+    /* @Override */
+    format_string_recursive(log, args) {
+      try {
+        if (log && args && !args.processed) {
+          args.processed = true;
+
+          // Representation of the value of a dice
+          if (args.dice_result !== undefined) {
+            args.dice_face = `<span class='m44-dice-result' data-result='${args.dice_result}'></span>`;
+          }
+        }
+      } catch (e) {
+        console.error(log, args, 'Exception thrown', e.stack);
+      }
+
+      return this.inherited(arguments);
+    },
   });
 });

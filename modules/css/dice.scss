@@ -1,50 +1,80 @@
-.m44-dice-wrapper {
-  width: 64px;
-  height: 64px;
-  position: relative;
-  transform: scale(calc(0.8 * var(--memoirBoardScale)));
-  transform-origin: center center;
+.m44-dice-resizable {
+  width: calc(64px * 0.8 * var(--memoirBoardScale));
+  height: calc(64px * 0.8 * var(--memoirBoardScale));
 
-  .m44-dice {
-    position: absolute;
-    top: 0;
-    left: 0;
+  .m44-dice-wrapper {
     width: 64px;
     height: 64px;
-    background-image: url('img/dice_animations.png');
-    background-size: 800% 2000%;
-  }
+    position: relative;
+    transform: scale(calc(0.8 * var(--memoirBoardScale)));
+    transform-origin: top left;
 
-  .m44-dice-shadow {
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    width: 64px;
-    height: 64px;
-    background-image: url('img/dice_others.png');
-    background-size: 100% 200%;
-  }
-
-  &.animated {
-    .m44-dice-shadow {
-      animation: slideDiceShadow 1s;
-      animation-fill-mode: forwards;
+    .m44-dice {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 64px;
+      height: 64px;
+      background-image: url('img/dice_animations.png');
+      background-size: 800% 2000%;
     }
-  }
 
-  @for $j from 0 to 5 {
-    &[data-result='#{$j}'] {
-      .m44-dice {
-        background-position-x: 100%;
-        background-position-y: ($j * 4 + 3) * 100% / 19;
-      }
+    .m44-dice-shadow {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      width: 64px;
+      height: 64px;
+      background-image: url('img/dice_others.png');
+      background-size: 100% 700%;
+    }
 
-      &.animated .m44-dice {
-        animation: rollDice_#{$j} 1s, rollDiceTrajectory 1s;
+    &.animated {
+      .m44-dice-shadow {
+        animation: slideDiceShadow 1s;
         animation-fill-mode: forwards;
       }
     }
+
+    @for $j from 0 to 5 {
+      &[data-result='#{$j}'] {
+        .m44-dice {
+          background-position-x: 100%;
+          background-position-y: ($j * 4 + 3) * 100% / 19;
+        }
+
+        &.animated .m44-dice {
+          animation: rollDice_#{$j} 1s, rollDiceTrajectory 1s;
+          animation-fill-mode: forwards;
+        }
+      }
+    }
   }
+}
+
+span.m44-dice-result {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+  margin: -2px 1px 1px;
+  background-image: url('img/dice_others.png');
+  background-size: 100% 700%;
+  background-position: 0% 100%;
+
+  @for $j from 0 to 5 {
+    &[data-result='#{$j}'] {
+      background-position-y: ($j + 1) * 100% / 6;
+    }
+  }
+}
+
+#diceContainer {
+  transform: translateX(50%);
+  display: grid;
+  grid-template-columns: calc(64px * 0.8 * var(--memoirBoardScale)) calc(64px * 0.8 * var(--memoirBoardScale));
+  display: none;
+  pointer-events: none;
 }
 
 // Background image animation

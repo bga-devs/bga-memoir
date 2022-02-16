@@ -483,7 +483,7 @@ $scenarios[23806] = [
     'en' => [
       'name' => clienttranslate('[Battle of the Bulge] German counter-attack at Chaumont [FFM44]'),
       'subtitle' => clienttranslate('	Combat Command B stopped on the way to Bastogne.		'),
-      'historical' => clienttranslate('As General Patton ordered to the commander of IIIrd US Army Corps to run to Bastogne, the 4th Armored Division had to advance with its two Combat Command to the besieged city. Combat Command B was stopped in front of Chaumont because of an ambush. It needed several hours of fighting, on the 23rd of December, to obliged the enemy to withdraw to Hompré. But the Germans made quickly a counter-attack with Panther tanks and Sturmgeschutz. They destroyed 11US tanks and the village of Chaumont was recaptured by the enemy. Chaumont and Grandru were definitively liberated by US units only on the 25th of December. 
+      'historical' => clienttranslate('As General Patton ordered to the commander of IIIrd US Army Corps to run to Bastogne, the 4th Armored Division had to advance with its two Combat Command to the besieged city. Combat Command B was stopped in front of Chaumont because of an ambush. It needed several hours of fighting, on the 23rd of December, to obliged the enemy to withdraw to Hompré. But the Germans made quickly a counter-attack with Panther tanks and Sturmgeschutz. They destroyed 11US tanks and the village of Chaumont was recaptured by the enemy. Chaumont and Grandru were definitively liberated by US troops only on the 25th of December. 
 The stage is set, the battle lines are drawn, and you are in command. The rest is history.'),
       'description' => clienttranslate('Axis player [Germany] : 5 command cards.
 Allied player [United States] : 5 command cards, you move first.'),
@@ -492,7 +492,7 @@ The hex of Chaumont is a Temporary Medal Objective worth 1 medal for the Axis pl
 The hex of Grandru is a Temporary Medal Objective worth 1 medal for the Allied player.'),
       'rules' => clienttranslate('- Special Weapon Asset rules (SWAs 1) are in effect for units equipped with antitank weapons (SWAs 2).
 - The Axis player lays out the minefields (Terrains 29).
-- Use "Mobile Artillery" rules (Units 14) for the US artillery unit.
+- Use "Mobile Artillery" rules (Troops 14) for the US artillery unit.
 - Use "Winter Weather" rules (Actions 26).'),
       'bibliography' => clienttranslate('39-45 Magazine n°365 - Article on Bastogne.'),
     ],

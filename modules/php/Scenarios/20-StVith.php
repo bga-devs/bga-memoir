@@ -396,6 +396,7 @@ $scenarios[20] = [
         'col' => 6,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'IMPASSABLE_BLOCKING_HILL',
         ],
       ],
       43 => [
@@ -403,6 +404,7 @@ $scenarios[20] = [
         'col' => 8,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'IMPASSABLE_BLOCKING_HILL',
         ],
       ],
       44 => [
@@ -410,6 +412,7 @@ $scenarios[20] = [
         'col' => 10,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'IMPASSABLE_BLOCKING_HILL',
         ],
       ],
       45 => [
@@ -417,6 +420,7 @@ $scenarios[20] = [
         'col' => 12,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'IMPASSABLE_BLOCKING_HILL',
         ],
       ],
       46 => [
@@ -424,6 +428,7 @@ $scenarios[20] = [
         'col' => 14,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'IMPASSABLE_BLOCKING_HILL',
         ],
       ],
       47 => [
@@ -431,6 +436,7 @@ $scenarios[20] = [
         'col' => 16,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'IMPASSABLE_BLOCKING_HILL',
         ],
       ],
       48 => [
@@ -508,27 +514,6 @@ $scenarios[20] = [
         ],
       ],
       1 => [
-        'row' => 6,
-        'col' => 6,
-        'text' => [
-          0 => clienttranslate('Impassable'),
-        ],
-      ],
-      2 => [
-        'row' => 6,
-        'col' => 10,
-        'text' => [
-          0 => clienttranslate('Impassable'),
-        ],
-      ],
-      3 => [
-        'row' => 6,
-        'col' => 14,
-        'text' => [
-          0 => clienttranslate('Impassable'),
-        ],
-      ],
-      4 => [
         'row' => 7,
         'col' => 11,
         'text' => [

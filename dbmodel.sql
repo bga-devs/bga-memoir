@@ -66,7 +66,6 @@ CREATE TABLE IF NOT EXISTS `units` (
   `badge` varchar(255),
   `activation_card` int(10) DEFAULT 0,
   `moves` int(1) DEFAULT 0,
-  `moveDone` bool DEFAULT false,
   `fights` int(1) DEFAULT 0,
   `extra_datas` JSON NULL,
   PRIMARY KEY (`unit_id`)

@@ -49,6 +49,12 @@ $scenarios[11] = [
         'tags' => [
           0 => [
             'name' => 'medal1',
+            'group' => [],
+            'medal' => [
+              'permanent' => false,
+              'counts_for' => 1,
+              'nbr_hex' => 1,
+            ],
           ],
         ],
       ],
@@ -64,6 +70,12 @@ $scenarios[11] = [
         'tags' => [
           0 => [
             'name' => 'medal1',
+            'group' => [],
+            'medal' => [
+              'permanent' => false,
+              'counts_for' => 1,
+              'nbr_hex' => 1,
+            ],
           ],
         ],
       ],
@@ -79,6 +91,12 @@ $scenarios[11] = [
         'tags' => [
           0 => [
             'name' => 'medal1',
+            'group' => [],
+            'medal' => [
+              'permanent' => false,
+              'counts_for' => 1,
+              'nbr_hex' => 1,
+            ],
           ],
         ],
       ],
@@ -91,6 +109,12 @@ $scenarios[11] = [
         'tags' => [
           0 => [
             'name' => 'medal1',
+            'group' => [],
+            'medal' => [
+              'permanent' => false,
+              'counts_for' => 1,
+              'nbr_hex' => 1,
+            ],
           ],
         ],
       ],
@@ -120,6 +144,12 @@ $scenarios[11] = [
         'tags' => [
           0 => [
             'name' => 'medal1',
+            'group' => [],
+            'medal' => [
+              'permanent' => false,
+              'counts_for' => 1,
+              'nbr_hex' => 1,
+            ],
           ],
         ],
       ],
@@ -128,6 +158,7 @@ $scenarios[11] = [
         'col' => 16,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'HILL',
         ],
       ],
       8 => [
@@ -135,6 +166,7 @@ $scenarios[11] = [
         'col' => 3,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'STEEP_HILL',
         ],
         'rect_terrain' => [
           'name' => 'bunker',
@@ -149,6 +181,7 @@ $scenarios[11] = [
         'col' => 5,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'STEEP_HILL',
         ],
       ],
       10 => [
@@ -164,6 +197,7 @@ $scenarios[11] = [
         'col' => 9,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'STEEP_HILL',
         ],
         'rect_terrain' => [
           'name' => 'bunker',
@@ -178,6 +212,7 @@ $scenarios[11] = [
         'col' => 11,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'STEEP_HILL',
         ],
       ],
       13 => [
@@ -185,6 +220,7 @@ $scenarios[11] = [
         'col' => 13,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'STEEP_HILL',
         ],
       ],
       14 => [
@@ -192,6 +228,7 @@ $scenarios[11] = [
         'col' => 17,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'STEEP_HILL',
         ],
         'rect_terrain' => [
           'name' => 'bunker',
@@ -206,6 +243,7 @@ $scenarios[11] = [
         'col' => 19,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'STEEP_HILL',
         ],
       ],
       16 => [
@@ -213,6 +251,7 @@ $scenarios[11] = [
         'col' => 21,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'STEEP_HILL',
         ],
         'obstacle' => [
           'name' => 'sand',
@@ -227,6 +266,7 @@ $scenarios[11] = [
         'col' => 0,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'STEEP_HILL',
         ],
         'obstacle' => [
           'name' => 'sand',
@@ -273,6 +313,7 @@ $scenarios[11] = [
         'col' => 24,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'STEEP_HILL',
         ],
         'rect_terrain' => [
           'name' => 'bunker',
@@ -332,7 +373,8 @@ $scenarios[11] = [
         'col' => 19,
         'obstacle' => [
           'name' => 'sand',
-          'orientation' => 2,
+          'orientation' => 1,
+          'behavior' => 'SEAWALL',
         ],
       ],
       30 => [
@@ -340,7 +382,8 @@ $scenarios[11] = [
         'col' => 21,
         'obstacle' => [
           'name' => 'sand',
-          'orientation' => 2,
+          'orientation' => 1,
+          'behavior' => 'SEAWALL',
         ],
       ],
       31 => [
@@ -575,7 +618,7 @@ $scenarios[11] = [
       'subtitle' => clienttranslate('Omaha Beach'),
       'historical' => clienttranslate('"Never had there been a dawn like this." - Cornelius Ryan, The Longest Day
 
-The US assault waves on Omaha Beach were led by the 116th Regimental Combat Team, destined for Dog sector on the left; and the 16th Regimental Combat Team hitting Easy and Fox sectors. The first wave also included two battalions of tanks from the 741st and 743rd. A persistent swell and strong undertow kept pushing the incoming units toward the wrong sections of the beach. Heavily-fortified German positions delivered a withering roll of fire the moment any LCA crash-landed in. Exhausted and sea-sick survivors reaching the water\'s edge would find no protection, save for a 200-yard dash to the seawall. Many simply collapsed, or tried to find cover behind the numerous beach obstructions. Yet in the face of intense small arms and artillery fire, a handful of young soldiers rallied and began to act. The first infiltrations were made between the E-1 and E-3 exits. Advances against other strong points were also successful and while it was not apparent at the time, German defenses were starting to crumble.
+The US assault waves on Omaha Beach were led by the 116th Regimental Combat Team, destined for Dog sector on the left; and the 16th Regimental Combat Team hitting Easy and Fox sectors. The first wave also included two battalions of tanks from the 741st and 743rd. A persistent swell and strong undertow kept pushing the incoming troops toward the wrong sections of the beach. Heavily-fortified German positions delivered a withering roll of fire the moment any LCA crash-landed in. Exhausted and sea-sick survivors reaching the water\'s edge would find no protection, save for a 200-yard dash to the seawall. Many simply collapsed, or tried to find cover behind the numerous beach obstructions. Yet in the face of intense small arms and artillery fire, a handful of young soldiers rallied and began to act. The first infiltrations were made between the E-1 and E-3 exits. Advances against other strong points were also successful and while it was not apparent at the time, German defenses were starting to crumble.
 
 The stage is set, the battle lines are drawn, and you are in command. The rest is history.'),
       'description' => clienttranslate('Axis Player: Take 5 command cards

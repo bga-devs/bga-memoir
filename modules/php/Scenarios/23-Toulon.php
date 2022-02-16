@@ -33,6 +33,23 @@ $scenarios[23] = [
         'standard' => [],
       ],
     ],
+    'options' => [],
+    'victory' => [
+      'condition' => [
+        0 => [
+          'group_sudden_death' => [
+            'side' => 'ALLIES',
+            'number' => 3,
+            'group' => [
+              0 => 'G9',
+              1 => 'G7',
+              2 => 'h8',
+              3 => 'i8',
+            ],
+          ],
+        ],
+      ],
+    ],
   ],
   'board' => [
     'type' => 'STANDARD',

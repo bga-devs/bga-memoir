@@ -35,6 +35,12 @@ $scenarios[16] = [
       ],
     ],
     'expert_mode' => 0,
+    'options' => [
+      'hill317' => [
+        0 => 'L5',
+        1 => 'k4',
+      ],
+    ],
   ],
   'board' => [
     'type' => 'STANDARD',
@@ -45,6 +51,7 @@ $scenarios[16] = [
         'col' => 0,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'STEEP_HILL',
         ],
         'unit' => [
           'name' => 'tankger',
@@ -55,6 +62,7 @@ $scenarios[16] = [
         'col' => 2,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'STEEP_HILL',
         ],
         'unit' => [
           'name' => 'infger',
@@ -176,6 +184,7 @@ $scenarios[16] = [
         'col' => 13,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'STEEP_HILL',
         ],
       ],
       17 => [
@@ -212,6 +221,7 @@ $scenarios[16] = [
         'col' => 12,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'STEEP_HILL',
         ],
       ],
       22 => [
@@ -284,6 +294,7 @@ $scenarios[16] = [
         'col' => 10,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'STEEP_HILL',
         ],
       ],
       31 => [
@@ -322,6 +333,7 @@ $scenarios[16] = [
         'col' => 22,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'STEEP_HILL',
         ],
         'obstacle' => [
           'name' => 'sand',
@@ -353,6 +365,7 @@ $scenarios[16] = [
         'col' => 9,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'STEEP_HILL',
         ],
       ],
       38 => [
@@ -360,6 +373,7 @@ $scenarios[16] = [
         'col' => 21,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'STEEP_HILL',
         ],
       ],
       39 => [
@@ -480,6 +494,12 @@ $scenarios[16] = [
         'tags' => [
           0 => [
             'name' => 'medal2',
+            'group' => [],
+            'medal' => [
+              'permanent' => false,
+              'counts_for' => 1,
+              'nbr_hex' => 1,
+            ],
           ],
         ],
       ],
@@ -533,14 +553,6 @@ $scenarios[16] = [
         'text' => [
           0 => clienttranslate('Le Mesnil-'),
           1 => clienttranslate('Adelee'),
-        ],
-      ],
-      7 => [
-        'row' => 8,
-        'col' => 22,
-        'text' => [
-          0 => clienttranslate('St.'),
-          1 => clienttranslate('Hilaire'),
         ],
       ],
     ],

@@ -35,6 +35,14 @@ $scenarios[3] = [
       ],
     ],
     'expert_mode' => 0,
+    'options' => [
+      'airdrop' => [
+        'side' => 'ALLIES',
+        'range' => 4,
+        'nbr_units' => 4,
+        'center' => 'G5',
+      ],
+    ],
   ],
   'board' => [
     'type' => 'STANDARD',
@@ -359,7 +367,7 @@ $scenarios[3] = [
   'text' => [
     'en' => [
       'name' => clienttranslate('Sainte-Mère-Eglise'),
-      'historical' => clienttranslate('Establishment of a defensive base at Ste. Mère-Église was one of the key objectives of the US 82nd Airborne Division. In contrast with other regiments, the 505th Parachute Infantry, landing northwest of Ste. Mère-Église, had one of the most accurate drops. Rapidly regrouping and tipped by a French native to the presence of German units in town, the parauniters planned to surround Ste. Mère-Église and move in with knives, bayonets and grenades. 
+      'historical' => clienttranslate('Establishment of a defensive base at Ste. Mère-Église was one of the key objectives of the US 82nd Airborne Division. In contrast with other regiments, the 505th Parachute Infantry, landing northwest of Ste. Mère-Église, had one of the most accurate drops. Rapidly regrouping and tipped by a French native to the presence of German troops in town, the paratroopers planned to surround Ste. Mère-Église and move in with knives, bayonets and grenades. 
 In the meantime, to the north, Lt. Turner Turnbull deployed his force on high ground near Neuville-au-Plain, engaging and fighting the enemy to a draw. This bought some crucial time for the battalions around Ste. Mère-Église, giving them a chance to meet the German southern thrust and annihilate several enemy units. This led to an overestimation by German command of American strength in this sector, and as a result, the Germans withdrew. 
 
 The stage is set, the battle lines are drawn, and you are in command. The rest is history.'),
