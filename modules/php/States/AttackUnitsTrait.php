@@ -89,6 +89,14 @@ trait AttackUnitsTrait
    */
   public function actResolveAttack($unit, $oppUnit, $nDice)
   {
+    $player = Players::getActive();
+    $results = $this->rollDice($player, $nDice, $oppUnit->getPos());
+    $hits = $oppUnit->getHits();
+
+    if($hits > 0){
+      // TODO $oppUnit->
+      Notifications::takeDamage($player, $oppUnit, $hits);
+    }
     var_dump($unit->getId(), $oppUnit->getId(), $nDice);
     die("test");
   }

@@ -131,7 +131,7 @@ class Units extends \M44\Helpers\Pieces
 
   public function reset()
   {
-    self::DB()->update(['activation_card' => null, 'moves' => null, 'fights' => null]);
+    self::DB()->update(['activation_card' => null, 'moves' => null, 'fights' => null])->run();
   }
 
   ////////////////////////

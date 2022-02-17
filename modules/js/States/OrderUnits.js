@@ -115,7 +115,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       args.cells.forEach((cell) => {
         let oCell = $(`cell-${cell.x}-${cell.y}`);
         this.onClick(oCell, () => this.takeAction('actMoveUnit', { unitId: args.unitId, x: cell.x, y: cell.y }));
-        oCell.classList.add('forMove');
+        oCell.classList.add(cell.canAttack? 'forMoveAndAttack' : 'forMove');
       });
 
       // Makes other units selectable

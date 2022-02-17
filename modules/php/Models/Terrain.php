@@ -12,7 +12,9 @@ class Terrain implements \JsonSerializable
   /*
    * STATIC INFORMATIONS
    */
+  protected $number = null;
   protected $type = null;
+  protected $tile = null;
   protected $name = '';
 
   protected $impassable = false;
@@ -20,7 +22,7 @@ class Terrain implements \JsonSerializable
   protected $enteringCannotBattle = false;
   protected $ignore1Flag = false;
   protected $blockLineOfSight = false;
-  protected $defense = [];
+  protected $defense = 0;
 
   protected $water = false;
   protected $road = false;
@@ -39,10 +41,13 @@ class Terrain implements \JsonSerializable
   {
     if ($row != null) {
       $this->id = $row['id'];
+      $this->type = $row['type'];
+      $this->tile = $row['tile'];
       $this->x = $row['x'];
       $this->y = $row['y'];
       $this->orientation = $row['orientation'];
       $this->datas = \json_decode($row['extra_datas'], true);
+      // TODO : use extra datas to update some property of the terrain, and mark the terrain as 'non standard' in this case
     }
   }
 
@@ -54,7 +59,8 @@ class Terrain implements \JsonSerializable
       'y' => $this->y,
       'orientation' => $this->orientation,
 
-      'type' => $this->type,
+      'number' => $this->number,
+      'tile' => $this->tile,
       'name' => $this->name,
     ];
   }
@@ -77,19 +83,33 @@ class Terrain implements \JsonSerializable
     return $this->name;
   }
 
-  public function getImpassable()
+  public function getType()
   {
-    return $this->impassable;
+    return $this->type;
   }
 
-  public function mustStopWhenEntering()
+  public function isImpassable($unit)
   {
-    return $this->mustStop;
+    return is_bool($this->impassable) ? $this->impassable : $this->impassable[$unit->getType()] ?? false;
   }
 
-  public function isBlockingLineOfSight()
+  public function mustStopWhenEntering($unit)
   {
-    return $this->blockLineOfSight;
+    return is_bool($this->mustStop) ? $this->mustStop : $this->mustStop[$unit->getType()] ?? false;
+  }
+
+  public function cannotAttackWhenEntering($unit)
+  {
+    return is_bool($this->enteringCannotBattle)
+      ? $this->enteringCannotBattle
+      : $this->enteringCannotBattle[$unit->getType()] ?? false;
+  }
+
+  public function isBlockingLineOfSight($unit)
+  {
+    return is_bool($this->blockLineOfSight)
+      ? $this->blockLineOfSight
+      : $this->blockLineOfSight[$unit->getType()] ?? false;
   }
 
   public function getDefense($unit)

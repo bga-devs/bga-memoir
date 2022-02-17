@@ -90,7 +90,7 @@
       background-size: 600% 600%;
 
       @for $i from 0 through 36 {
-        &[data-type='#{$i}'] {
+        &[data-tile='#{$i}'] {
           background-position-x: ($i % 6) * 100% / 5;
           background-position-y: (($i - ($i % 6)) / 6) * 100% / 5;
         }
@@ -104,7 +104,7 @@
       clip-path: polygon(50% 0.6%, 99.4% 25.6%, 99.4% 74.4%, 50% 99.4%, 0.6% 74.4%, 0.6% 25.6%);
 
       @for $i from 0 through 93 {
-        &[data-type='#{$i}'] {
+        &[data-tile='#{$i}'] {
           background-position-x: ($i % 10) * 100% / 9;
           background-position-y: (($i - ($i % 10)) / 10) * 100% / 10;
         }
@@ -117,7 +117,7 @@
       background-size: 600% 500%;
 
       @for $i from 0 through 24 {
-        &[data-type='#{$i}'] {
+        &[data-tile='#{$i}'] {
           background-position-x: ($i % 6) * 100% / 5;
           background-position-y: (($i - ($i % 6)) / 6) * 100% / 4;
         }
@@ -164,10 +164,14 @@
         cursor: pointer;
 
         &.forMove,
+        &.forMoveAndAttack,
         &.forAttack {
           background-image: url('img/hex_background_highlights.png');
           background-size: 500% 100%;
           background-position: 0% 0%;
+        }
+        &.forMove {
+          background-position-x: 25%;
         }
         &.forAttack {
           background-position-x: 75%;

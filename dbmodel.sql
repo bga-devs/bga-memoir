@@ -49,6 +49,7 @@ CREATE TABLE IF NOT EXISTS `terrains` (
   `tile_location` varchar(32) NOT NULL,
   `tile_state` int(10) DEFAULT 0,
   `type` VARCHAR(255) NOT NULL,
+  `tile` VARCHAR(255) NOT NULL,
   `orientation` int(10) NOT NULL,
   `extra_datas` JSON NULL,
   PRIMARY KEY (`tile_id`)

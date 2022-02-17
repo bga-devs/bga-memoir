@@ -89,6 +89,14 @@ class Board extends \APP_DbObject
     }
   }
 
+  /////////////////////////////////////////
+  //    ____      _   _
+  //  / ___| ___| |_| |_ ___ _ __ ___
+  // | |  _ / _ \ __| __/ _ \ '__/ __|
+  // | |_| |  __/ |_| ||  __/ |  \__ \
+  //  \____|\___|\__|\__\___|_|  |___/
+  /////////////////////////////////////////
+
   public function getUiData()
   {
     $scenario = self::getScenario();
@@ -109,6 +117,15 @@ class Board extends \APP_DbObject
       $x = $x['x'];
     }
     return self::$grid[$x][$y]['unit'];
+  }
+
+  public function getTerrainsInCell($x, $y = null)
+  {
+    if ($y === null) {
+      $y = $x['y'];
+      $x = $x['x'];
+    }
+    return self::$grid[$x][$y]['terrains'];
   }
 
   /////////////////////////////////
@@ -132,51 +149,24 @@ class Board extends \APP_DbObject
     return self::getReachableCellsAtDistance($unit, $m);
   }
 
-  public static function getReachableCellsAtDistance($unit, $d, $unitaryCost = false)
+  /**
+   * getReachableCellsAtDistance: find all the cells reachable for movements
+   *   - $unit : a Unit object, used to compute starting pos and movement costs
+   *   - $d : max distance we are looking for
+   */
+  public static function getReachableCellsAtDistance($unit, $d)
   {
-    $queue = new \SplPriorityQueue();
-    $queue->setExtractFlags(\SplPriorityQueue::EXTR_BOTH);
-    $queue->insert(
-      [
-        'cell' => $unit->getPos(),
-      ],
-      0
-    );
-    $gridMarkers = self::createGrid(false);
-    $cells = [];
+    $startingCell = $unit->getPos();
+    $cells = self::getCellsAtDistance($startingCell, $d, function ($source, $target, $d) use ($unit) {
+      return self::getDeplacementCost($unit, $source, $target, $d);
+    });
 
-    while (!$queue->isEmpty()) {
-      // Extract the top node and adds it to the result
-      $node = $queue->extract();
-      $cell = $node['data']['cell'];
-      $cell['d'] = -$node['priority'];
-      if ($gridMarkers[$cell['x']][$cell['y']] !== false) {
-        continue;
-      }
-      $gridMarkers[$cell['x']][$cell['y']] = $cell;
-      if ($cell['d'] > 0) {
-        $cells[] = $cell;
-      }
-
-      // Look at neighbours
-      $neighbours = self::getNeighbours($cell);
-      foreach ($neighbours as $nextCell) {
-        if ($gridMarkers[$nextCell['x']][$nextCell['y']] !== false) {
-          continue;
-        }
-
-        $dist = $cell['d'] + ($unitaryCost ? 1 : self::getDeplacementCost($unit, $cell, $nextCell, $d));
-        if ($dist <= $d) {
-          $queue->insert(
-            [
-              'cell' => $nextCell,
-            ],
-            -$dist
-          );
-        }
+    // Compute for each cell whether the unit might be able to attack after the move
+    foreach($cells as &$cell){
+      if(!empty(self::getTargetableCells($unit, $cell, $cell['d']))){
+        $cell['canAttack'] = true;
       }
     }
-    //echo '<pre>'; var_dump($gridMarkers); echo '</pre>';
 
     return $cells;
   }
@@ -194,8 +184,7 @@ class Board extends \APP_DbObject
 
     // If there is an impassable terrain => can't go there
     foreach ($targetCell['terrains'] as $terrain) {
-      $impassable = $terrain->getImpassable();
-      if ($impassable === true || (is_array($impassable) && in_array($unit->getType(), $impassable))) {
+      if ($terrain->isImpassable($unit)) {
         return \INFINITY;
       }
     }
@@ -203,7 +192,7 @@ class Board extends \APP_DbObject
     // If I'm coming from a 'must stop' terrain, can't go there unless dist = 0
     if ($source['d'] > 0) {
       foreach ($sourceCell['terrains'] as $terrain) {
-        if ($terrain->mustStopWhenEntering()) {
+        if ($terrain->mustStopWhenEntering($unit)) {
           return \INFINITY;
         }
       }
@@ -220,12 +209,36 @@ class Board extends \APP_DbObject
   // /_/   \_\_|   |_/_/   \_\____|_|\_\
   //////////////////////////////////////////
 
-  public static function getTargetableCells($unit)
+  /**
+   * getTargetableCells: compute the cells targetable by a unit
+   *  - $unit : Unit obj
+   *  - $cell : position of the unit, useful for computing moves that results in a position where unit can attack
+   *  - $moves : number of moves done by unit, useful in that case again
+   */
+  public static function getTargetableCells($unit, $cell = null, $moves = null)
   {
-    // Compute cells at distance
+    // Check whether the unit moved too much to attack
+    $m = $moves ?? $unit->getMoves();
+    if ($m > $unit->getMovementAndAttackRadius()) {
+      return [];
+    }
+
+    // Check whether unit moved into a cell that prevent attack
+    $pos = $cell ?? $unit->getPos();
+    if ($m > 0) {
+      foreach (self::getTerrainsInCell($pos) as $terrain) {
+        if ($terrain->cannotAttackWhenEntering($unit)) {
+          return [];
+        }
+      }
+    }
+
+    // Compute cells at fire range
     $power = $unit->getAttackPower();
-    $m = count($power);
-    $cells = self::getReachableCellsAtDistance($unit, $m, true);
+    $range = count($power);
+    $cells = self::getCellsAtDistance($pos, $range, function ($source, $target, $d) {
+      return 1;
+    });
 
     // Keep only the ones where an enemy stands
     Utils::filter($cells, function ($cell) use ($unit) {
@@ -280,7 +293,7 @@ class Board extends \APP_DbObject
       }
 
       // If the cell is not blocking the line of sight, skip to the next one
-      if (!self::isBlockingLineOfSight($cell)) {
+      if (!self::isBlockingLineOfSight($unit, $cell)) {
         continue;
       }
 
@@ -302,15 +315,15 @@ class Board extends \APP_DbObject
   /**
    * Return whether a given cell is blocking line of sight considering what is on the cell (terrains, units, ...)
    */
-  public static function isBlockingLineOfSight($cell)
+  public static function isBlockingLineOfSight($unit, $cell)
   {
     $t = self::$grid[$cell['x']][$cell['y']];
-    if (!is_null($t['unit'])) {
+    if (!is_null($t['unit']) && $t['unit']->getId() != $unit->getId()) {
       return true;
     }
 
     foreach ($t['terrains'] as $t) {
-      if ($t->isBlockingLineOfSight()) {
+      if ($t->isBlockingLineOfSight($unit)) {
         return true;
       }
     }
@@ -457,6 +470,60 @@ class Board extends \APP_DbObject
         $cells[] = $newCell;
       }
     }
+    return $cells;
+  }
+
+  /**
+   * getReachableCellsAtDistance: perform a Disjktra shortest path finding :
+   *   - $cell : starting pos
+   *   - $d : max distance we are looking for
+   *   - $costCallback : function used to compute cost
+   */
+  protected static function getCellsAtDistance($startingCell, $d, $costCallback)
+  {
+    $queue = new \SplPriorityQueue();
+    $queue->setExtractFlags(\SplPriorityQueue::EXTR_BOTH);
+    $queue->insert(
+      [
+        'cell' => $startingCell,
+      ],
+      0
+    );
+    $gridMarkers = self::createGrid(false);
+    $cells = [];
+
+    while (!$queue->isEmpty()) {
+      // Extract the top node and adds it to the result
+      $node = $queue->extract();
+      $cell = $node['data']['cell'];
+      $cell['d'] = -$node['priority'];
+      if ($gridMarkers[$cell['x']][$cell['y']] !== false) {
+        continue;
+      }
+      $gridMarkers[$cell['x']][$cell['y']] = $cell;
+      if ($cell['d'] > 0) {
+        $cells[] = $cell;
+      }
+
+      // Look at neighbours
+      $neighbours = self::getNeighbours($cell);
+      foreach ($neighbours as $nextCell) {
+        if ($gridMarkers[$nextCell['x']][$nextCell['y']] !== false) {
+          continue;
+        }
+
+        $dist = $cell['d'] + $costCallback($cell, $nextCell, $d);
+        if ($dist <= $d) {
+          $queue->insert(
+            [
+              'cell' => $nextCell,
+            ],
+            -$dist
+          );
+        }
+      }
+    }
+
     return $cells;
   }
 }

@@ -11,5 +11,7 @@ class PincerMove extends \M44\Models\SectionCard
     $this->subtitle = clienttranslate('Issue an order to 2 units on the Left Flank and 2 units on the Right Flank');
     $this->text = [clienttranslate('Order 2 Units on each flank')];
     $this->sections = [2, 0, 2];
+    $this->nUnits = 2;
+    $this->orderUnitsTitles = [clienttranslate('on the Left Flank and on the Right Flank')];
   }
 }

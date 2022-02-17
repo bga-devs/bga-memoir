@@ -48,12 +48,12 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           let realY = rotate ? dim.y - y - 1 : y;
 
           // Background and terrains
-          let type = this.getBackgroundType(face, dim, x, y);
-          let cellC = this.place('tplBoardBackgroundCell', { x: col, y, type, rotate }, 'm44-board-terrains');
+          let tile = this.getBackgroundTile(face, dim, x, y);
+          let cellC = this.place('tplBoardBackgroundCell', { x: col, y, tile, rotate }, 'm44-board-terrains');
           cellC.style.gridRow = 3 * realY + 1 + ' / span 4';
           cellC.style.gridColumn = realX + 1 + ' / span 2';
           board.grid[col][row].terrains.forEach((terrain) => {
-            let tplName = TERRAINS.includes(terrain.type) ? 'tplTerrainTile' : 'tplObstacleTile';
+            let tplName = TERRAINS.includes(terrain.tile) ? 'tplTerrainTile' : 'tplObstacleTile';
             terrain.rotate = rotate;
             this.place(tplName, terrain, cellC);
           });
@@ -120,31 +120,31 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       //TODO localStorage.setItem('agricolaCardScale', scale);
     },
 
-    getBackgroundType(face, dim, x, y) {
-      let type = 0;
+    getBackgroundTile(face, dim, x, y) {
+      let tile = 0;
       if (face == 'winter') {
         type = getRandomInt(30, 35);
       } else if (face == 'desert') {
-        type = getRandomInt(19, 24);
+        tile = getRandomInt(19, 24);
       } else if (face == 'country') {
-        type = getRandomInt(9, 12);
+        tile = getRandomInt(9, 12);
       } else if (face == 'beach') {
         let b = dim.y - y;
-        if (b < 2) type = 27 + (x % 2);
-        else if (b < 3) type = 25 + (x % 2);
-        else if (b < 4) type = 6 + (x % 2);
-        else if (b < 5) type = 4 + (x % 2);
-        else if (b < 6) type = 2 + (x % 2);
-        else if (b < 7) type = 0 + (x % 2);
-        else type = getRandomInt(9, 12);
+        if (b < 2) tile = 27 + (x % 2);
+        else if (b < 3) tile = 25 + (x % 2);
+        else if (b < 4) tile = 6 + (x % 2);
+        else if (b < 5) tile = 4 + (x % 2);
+        else if (b < 6) tile = 2 + (x % 2);
+        else if (b < 7) tile = 0 + (x % 2);
+        else tile = getRandomInt(9, 12);
       }
-      return type;
+      return tile;
     },
 
     tplBoardBackgroundCell(cell) {
       let rotation = cell.rotate ? 6 : 0;
       return `<li class="hex-grid-item" id="cell-background-${cell.x}-${cell.y}">
-      <div class="hex-grid-content hex-grid-background" data-type="${cell.type}" data-rotation="${rotation}"></div>
+      <div class="hex-grid-content hex-grid-background" data-tile="${cell.tile}" data-rotation="${rotation}"></div>
     </li>`;
     },
 
@@ -155,27 +155,27 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     },
 
     tplTerrainTile(terrain) {
-      let type = TERRAINS.findIndex((t) => t == terrain.type);
+      let tile = TERRAINS.findIndex((t) => t == terrain.tile);
       let rotation = terrain.rotate ? 6 : 0;
       if (terrain.orientation != 1) {
         let nbrRotation = 3;
-        if (TERRAINS_ROTATIONS[6].includes(terrain.type)) nbrRotation = -6;
-        if (TERRAINS_ROTATIONS[2].includes(terrain.type)) nbrRotation = 2;
+        if (TERRAINS_ROTATIONS[6].includes(terrain.tile)) nbrRotation = -6;
+        if (TERRAINS_ROTATIONS[2].includes(terrain.tile)) nbrRotation = 2;
         rotation += ((terrain.orientation - 1) * 12) / nbrRotation + 12;
       }
       rotation = rotation % 12;
-      return `<div class="hex-grid-content hex-grid-terrain" data-type="${type}" data-rotation="${rotation}"></div>`;
+      return `<div class="hex-grid-content hex-grid-terrain" data-tile="${tile}" data-rotation="${rotation}"></div>`;
     },
 
     tplObstacleTile(obstacle) {
-      let type = OBSTACLES.findIndex((t) => t == obstacle.type);
+      let tile = OBSTACLES.findIndex((t) => t == obstacle.tile);
       let rotation = obstacle.rotate ? 6 : 0;
       if (obstacle.orientation != 1) {
-        let angle = OBSTACLES_ROTATION[obstacle.type] / -30;
+        let angle = OBSTACLES_ROTATION[obstacle.tile] / -30;
         rotation += (obstacle.orientation - 1) * angle + 12;
       }
       rotation = rotation % 12;
-      return `<div class="hex-grid-content hex-grid-obstacle" data-type="${type}" data-rotation="${rotation}"></div>`;
+      return `<div class="hex-grid-content hex-grid-obstacle" data-tile="${tile}" data-rotation="${rotation}"></div>`;
     },
 
     tplBoardDivider() {

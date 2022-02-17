@@ -254,115 +254,115 @@ html {
       z-index: 1;
       background-image: url("img/board_backgrounds.jpg");
       background-size: 600% 600%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='0'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='0'] {
         background-position-x: 0%;
         background-position-y: 0%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='1'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='1'] {
         background-position-x: 20%;
         background-position-y: 0%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='2'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='2'] {
         background-position-x: 40%;
         background-position-y: 0%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='3'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='3'] {
         background-position-x: 60%;
         background-position-y: 0%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='4'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='4'] {
         background-position-x: 80%;
         background-position-y: 0%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='5'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='5'] {
         background-position-x: 100%;
         background-position-y: 0%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='6'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='6'] {
         background-position-x: 0%;
         background-position-y: 20%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='7'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='7'] {
         background-position-x: 20%;
         background-position-y: 20%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='8'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='8'] {
         background-position-x: 40%;
         background-position-y: 20%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='9'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='9'] {
         background-position-x: 60%;
         background-position-y: 20%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='10'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='10'] {
         background-position-x: 80%;
         background-position-y: 20%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='11'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='11'] {
         background-position-x: 100%;
         background-position-y: 20%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='12'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='12'] {
         background-position-x: 0%;
         background-position-y: 40%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='13'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='13'] {
         background-position-x: 20%;
         background-position-y: 40%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='14'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='14'] {
         background-position-x: 40%;
         background-position-y: 40%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='15'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='15'] {
         background-position-x: 60%;
         background-position-y: 40%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='16'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='16'] {
         background-position-x: 80%;
         background-position-y: 40%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='17'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='17'] {
         background-position-x: 100%;
         background-position-y: 40%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='18'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='18'] {
         background-position-x: 0%;
         background-position-y: 60%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='19'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='19'] {
         background-position-x: 20%;
         background-position-y: 60%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='20'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='20'] {
         background-position-x: 40%;
         background-position-y: 60%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='21'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='21'] {
         background-position-x: 60%;
         background-position-y: 60%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='22'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='22'] {
         background-position-x: 80%;
         background-position-y: 60%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='23'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='23'] {
         background-position-x: 100%;
         background-position-y: 60%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='24'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='24'] {
         background-position-x: 0%;
         background-position-y: 80%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='25'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='25'] {
         background-position-x: 20%;
         background-position-y: 80%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='26'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='26'] {
         background-position-x: 40%;
         background-position-y: 80%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='27'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='27'] {
         background-position-x: 60%;
         background-position-y: 80%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='28'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='28'] {
         background-position-x: 80%;
         background-position-y: 80%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='29'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='29'] {
         background-position-x: 100%;
         background-position-y: 80%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='30'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='30'] {
         background-position-x: 0%;
         background-position-y: 100%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='31'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='31'] {
         background-position-x: 20%;
         background-position-y: 100%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='32'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='32'] {
         background-position-x: 40%;
         background-position-y: 100%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='33'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='33'] {
         background-position-x: 60%;
         background-position-y: 100%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='34'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='34'] {
         background-position-x: 80%;
         background-position-y: 100%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='35'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='35'] {
         background-position-x: 100%;
         background-position-y: 100%; }
-      #m44-board .hex-grid-item .hex-grid-background[data-type='36'] {
+      #m44-board .hex-grid-item .hex-grid-background[data-tile='36'] {
         background-position-x: 0%;
         background-position-y: 120%; }
     #m44-board .hex-grid-item .hex-grid-terrain {
@@ -370,365 +370,365 @@ html {
       background-image: url("img/board_terrains.jpg");
       background-size: 1000% 1100%;
       clip-path: polygon(50% 0.6%, 99.4% 25.6%, 99.4% 74.4%, 50% 99.4%, 0.6% 74.4%, 0.6% 25.6%); }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='0'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='0'] {
         background-position-x: 0%;
         background-position-y: 0%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='1'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='1'] {
         background-position-x: 11.1111111111%;
         background-position-y: 0%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='2'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='2'] {
         background-position-x: 22.2222222222%;
         background-position-y: 0%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='3'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='3'] {
         background-position-x: 33.3333333333%;
         background-position-y: 0%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='4'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='4'] {
         background-position-x: 44.4444444444%;
         background-position-y: 0%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='5'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='5'] {
         background-position-x: 55.5555555556%;
         background-position-y: 0%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='6'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='6'] {
         background-position-x: 66.6666666667%;
         background-position-y: 0%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='7'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='7'] {
         background-position-x: 77.7777777778%;
         background-position-y: 0%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='8'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='8'] {
         background-position-x: 88.8888888889%;
         background-position-y: 0%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='9'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='9'] {
         background-position-x: 100%;
         background-position-y: 0%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='10'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='10'] {
         background-position-x: 0%;
         background-position-y: 10%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='11'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='11'] {
         background-position-x: 11.1111111111%;
         background-position-y: 10%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='12'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='12'] {
         background-position-x: 22.2222222222%;
         background-position-y: 10%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='13'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='13'] {
         background-position-x: 33.3333333333%;
         background-position-y: 10%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='14'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='14'] {
         background-position-x: 44.4444444444%;
         background-position-y: 10%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='15'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='15'] {
         background-position-x: 55.5555555556%;
         background-position-y: 10%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='16'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='16'] {
         background-position-x: 66.6666666667%;
         background-position-y: 10%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='17'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='17'] {
         background-position-x: 77.7777777778%;
         background-position-y: 10%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='18'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='18'] {
         background-position-x: 88.8888888889%;
         background-position-y: 10%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='19'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='19'] {
         background-position-x: 100%;
         background-position-y: 10%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='20'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='20'] {
         background-position-x: 0%;
         background-position-y: 20%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='21'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='21'] {
         background-position-x: 11.1111111111%;
         background-position-y: 20%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='22'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='22'] {
         background-position-x: 22.2222222222%;
         background-position-y: 20%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='23'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='23'] {
         background-position-x: 33.3333333333%;
         background-position-y: 20%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='24'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='24'] {
         background-position-x: 44.4444444444%;
         background-position-y: 20%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='25'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='25'] {
         background-position-x: 55.5555555556%;
         background-position-y: 20%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='26'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='26'] {
         background-position-x: 66.6666666667%;
         background-position-y: 20%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='27'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='27'] {
         background-position-x: 77.7777777778%;
         background-position-y: 20%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='28'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='28'] {
         background-position-x: 88.8888888889%;
         background-position-y: 20%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='29'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='29'] {
         background-position-x: 100%;
         background-position-y: 20%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='30'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='30'] {
         background-position-x: 0%;
         background-position-y: 30%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='31'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='31'] {
         background-position-x: 11.1111111111%;
         background-position-y: 30%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='32'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='32'] {
         background-position-x: 22.2222222222%;
         background-position-y: 30%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='33'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='33'] {
         background-position-x: 33.3333333333%;
         background-position-y: 30%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='34'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='34'] {
         background-position-x: 44.4444444444%;
         background-position-y: 30%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='35'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='35'] {
         background-position-x: 55.5555555556%;
         background-position-y: 30%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='36'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='36'] {
         background-position-x: 66.6666666667%;
         background-position-y: 30%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='37'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='37'] {
         background-position-x: 77.7777777778%;
         background-position-y: 30%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='38'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='38'] {
         background-position-x: 88.8888888889%;
         background-position-y: 30%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='39'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='39'] {
         background-position-x: 100%;
         background-position-y: 30%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='40'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='40'] {
         background-position-x: 0%;
         background-position-y: 40%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='41'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='41'] {
         background-position-x: 11.1111111111%;
         background-position-y: 40%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='42'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='42'] {
         background-position-x: 22.2222222222%;
         background-position-y: 40%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='43'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='43'] {
         background-position-x: 33.3333333333%;
         background-position-y: 40%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='44'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='44'] {
         background-position-x: 44.4444444444%;
         background-position-y: 40%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='45'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='45'] {
         background-position-x: 55.5555555556%;
         background-position-y: 40%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='46'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='46'] {
         background-position-x: 66.6666666667%;
         background-position-y: 40%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='47'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='47'] {
         background-position-x: 77.7777777778%;
         background-position-y: 40%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='48'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='48'] {
         background-position-x: 88.8888888889%;
         background-position-y: 40%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='49'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='49'] {
         background-position-x: 100%;
         background-position-y: 40%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='50'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='50'] {
         background-position-x: 0%;
         background-position-y: 50%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='51'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='51'] {
         background-position-x: 11.1111111111%;
         background-position-y: 50%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='52'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='52'] {
         background-position-x: 22.2222222222%;
         background-position-y: 50%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='53'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='53'] {
         background-position-x: 33.3333333333%;
         background-position-y: 50%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='54'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='54'] {
         background-position-x: 44.4444444444%;
         background-position-y: 50%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='55'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='55'] {
         background-position-x: 55.5555555556%;
         background-position-y: 50%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='56'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='56'] {
         background-position-x: 66.6666666667%;
         background-position-y: 50%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='57'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='57'] {
         background-position-x: 77.7777777778%;
         background-position-y: 50%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='58'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='58'] {
         background-position-x: 88.8888888889%;
         background-position-y: 50%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='59'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='59'] {
         background-position-x: 100%;
         background-position-y: 50%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='60'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='60'] {
         background-position-x: 0%;
         background-position-y: 60%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='61'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='61'] {
         background-position-x: 11.1111111111%;
         background-position-y: 60%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='62'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='62'] {
         background-position-x: 22.2222222222%;
         background-position-y: 60%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='63'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='63'] {
         background-position-x: 33.3333333333%;
         background-position-y: 60%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='64'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='64'] {
         background-position-x: 44.4444444444%;
         background-position-y: 60%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='65'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='65'] {
         background-position-x: 55.5555555556%;
         background-position-y: 60%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='66'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='66'] {
         background-position-x: 66.6666666667%;
         background-position-y: 60%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='67'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='67'] {
         background-position-x: 77.7777777778%;
         background-position-y: 60%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='68'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='68'] {
         background-position-x: 88.8888888889%;
         background-position-y: 60%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='69'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='69'] {
         background-position-x: 100%;
         background-position-y: 60%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='70'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='70'] {
         background-position-x: 0%;
         background-position-y: 70%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='71'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='71'] {
         background-position-x: 11.1111111111%;
         background-position-y: 70%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='72'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='72'] {
         background-position-x: 22.2222222222%;
         background-position-y: 70%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='73'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='73'] {
         background-position-x: 33.3333333333%;
         background-position-y: 70%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='74'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='74'] {
         background-position-x: 44.4444444444%;
         background-position-y: 70%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='75'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='75'] {
         background-position-x: 55.5555555556%;
         background-position-y: 70%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='76'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='76'] {
         background-position-x: 66.6666666667%;
         background-position-y: 70%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='77'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='77'] {
         background-position-x: 77.7777777778%;
         background-position-y: 70%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='78'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='78'] {
         background-position-x: 88.8888888889%;
         background-position-y: 70%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='79'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='79'] {
         background-position-x: 100%;
         background-position-y: 70%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='80'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='80'] {
         background-position-x: 0%;
         background-position-y: 80%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='81'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='81'] {
         background-position-x: 11.1111111111%;
         background-position-y: 80%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='82'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='82'] {
         background-position-x: 22.2222222222%;
         background-position-y: 80%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='83'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='83'] {
         background-position-x: 33.3333333333%;
         background-position-y: 80%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='84'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='84'] {
         background-position-x: 44.4444444444%;
         background-position-y: 80%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='85'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='85'] {
         background-position-x: 55.5555555556%;
         background-position-y: 80%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='86'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='86'] {
         background-position-x: 66.6666666667%;
         background-position-y: 80%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='87'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='87'] {
         background-position-x: 77.7777777778%;
         background-position-y: 80%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='88'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='88'] {
         background-position-x: 88.8888888889%;
         background-position-y: 80%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='89'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='89'] {
         background-position-x: 100%;
         background-position-y: 80%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='90'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='90'] {
         background-position-x: 0%;
         background-position-y: 90%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='91'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='91'] {
         background-position-x: 11.1111111111%;
         background-position-y: 90%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='92'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='92'] {
         background-position-x: 22.2222222222%;
         background-position-y: 90%; }
-      #m44-board .hex-grid-item .hex-grid-terrain[data-type='93'] {
+      #m44-board .hex-grid-item .hex-grid-terrain[data-tile='93'] {
         background-position-x: 33.3333333333%;
         background-position-y: 90%; }
     #m44-board .hex-grid-item .hex-grid-obstacle {
       z-index: 3;
       background-image: url("img/board_obstacles.png");
       background-size: 600% 500%; }
-      #m44-board .hex-grid-item .hex-grid-obstacle[data-type='0'] {
+      #m44-board .hex-grid-item .hex-grid-obstacle[data-tile='0'] {
         background-position-x: 0%;
         background-position-y: 0%; }
-      #m44-board .hex-grid-item .hex-grid-obstacle[data-type='1'] {
+      #m44-board .hex-grid-item .hex-grid-obstacle[data-tile='1'] {
         background-position-x: 20%;
         background-position-y: 0%; }
-      #m44-board .hex-grid-item .hex-grid-obstacle[data-type='2'] {
+      #m44-board .hex-grid-item .hex-grid-obstacle[data-tile='2'] {
         background-position-x: 40%;
         background-position-y: 0%; }
-      #m44-board .hex-grid-item .hex-grid-obstacle[data-type='3'] {
+      #m44-board .hex-grid-item .hex-grid-obstacle[data-tile='3'] {
         background-position-x: 60%;
         background-position-y: 0%; }
-      #m44-board .hex-grid-item .hex-grid-obstacle[data-type='4'] {
+      #m44-board .hex-grid-item .hex-grid-obstacle[data-tile='4'] {
         background-position-x: 80%;
         background-position-y: 0%; }
-      #m44-board .hex-grid-item .hex-grid-obstacle[data-type='5'] {
+      #m44-board .hex-grid-item .hex-grid-obstacle[data-tile='5'] {
         background-position-x: 100%;
         background-position-y: 0%; }
-      #m44-board .hex-grid-item .hex-grid-obstacle[data-type='6'] {
+      #m44-board .hex-grid-item .hex-grid-obstacle[data-tile='6'] {
         background-position-x: 0%;
         background-position-y: 25%; }
-      #m44-board .hex-grid-item .hex-grid-obstacle[data-type='7'] {
+      #m44-board .hex-grid-item .hex-grid-obstacle[data-tile='7'] {
         background-position-x: 20%;
         background-position-y: 25%; }
-      #m44-board .hex-grid-item .hex-grid-obstacle[data-type='8'] {
+      #m44-board .hex-grid-item .hex-grid-obstacle[data-tile='8'] {
         background-position-x: 40%;
         background-position-y: 25%; }
-      #m44-board .hex-grid-item .hex-grid-obstacle[data-type='9'] {
+      #m44-board .hex-grid-item .hex-grid-obstacle[data-tile='9'] {
         background-position-x: 60%;
         background-position-y: 25%; }
-      #m44-board .hex-grid-item .hex-grid-obstacle[data-type='10'] {
+      #m44-board .hex-grid-item .hex-grid-obstacle[data-tile='10'] {
         background-position-x: 80%;
         background-position-y: 25%; }
-      #m44-board .hex-grid-item .hex-grid-obstacle[data-type='11'] {
+      #m44-board .hex-grid-item .hex-grid-obstacle[data-tile='11'] {
         background-position-x: 100%;
         background-position-y: 25%; }
-      #m44-board .hex-grid-item .hex-grid-obstacle[data-type='12'] {
+      #m44-board .hex-grid-item .hex-grid-obstacle[data-tile='12'] {
         background-position-x: 0%;
         background-position-y: 50%; }
-      #m44-board .hex-grid-item .hex-grid-obstacle[data-type='13'] {
+      #m44-board .hex-grid-item .hex-grid-obstacle[data-tile='13'] {
         background-position-x: 20%;
         background-position-y: 50%; }
-      #m44-board .hex-grid-item .hex-grid-obstacle[data-type='14'] {
+      #m44-board .hex-grid-item .hex-grid-obstacle[data-tile='14'] {
         background-position-x: 40%;
         background-position-y: 50%; }
-      #m44-board .hex-grid-item .hex-grid-obstacle[data-type='15'] {
+      #m44-board .hex-grid-item .hex-grid-obstacle[data-tile='15'] {
         background-position-x: 60%;
         background-position-y: 50%; }
-      #m44-board .hex-grid-item .hex-grid-obstacle[data-type='16'] {
+      #m44-board .hex-grid-item .hex-grid-obstacle[data-tile='16'] {
         background-position-x: 80%;
         background-position-y: 50%; }
-      #m44-board .hex-grid-item .hex-grid-obstacle[data-type='17'] {
+      #m44-board .hex-grid-item .hex-grid-obstacle[data-tile='17'] {
         background-position-x: 100%;
         background-position-y: 50%; }
-      #m44-board .hex-grid-item .hex-grid-obstacle[data-type='18'] {
+      #m44-board .hex-grid-item .hex-grid-obstacle[data-tile='18'] {
         background-position-x: 0%;
         background-position-y: 75%; }
-      #m44-board .hex-grid-item .hex-grid-obstacle[data-type='19'] {
+      #m44-board .hex-grid-item .hex-grid-obstacle[data-tile='19'] {
         background-position-x: 20%;
         background-position-y: 75%; }
-      #m44-board .hex-grid-item .hex-grid-obstacle[data-type='20'] {
+      #m44-board .hex-grid-item .hex-grid-obstacle[data-tile='20'] {
         background-position-x: 40%;
         background-position-y: 75%; }
-      #m44-board .hex-grid-item .hex-grid-obstacle[data-type='21'] {
+      #m44-board .hex-grid-item .hex-grid-obstacle[data-tile='21'] {
         background-position-x: 60%;
         background-position-y: 75%; }
-      #m44-board .hex-grid-item .hex-grid-obstacle[data-type='22'] {
+      #m44-board .hex-grid-item .hex-grid-obstacle[data-tile='22'] {
         background-position-x: 80%;
         background-position-y: 75%; }
-      #m44-board .hex-grid-item .hex-grid-obstacle[data-type='23'] {
+      #m44-board .hex-grid-item .hex-grid-obstacle[data-tile='23'] {
         background-position-x: 100%;
         background-position-y: 75%; }
-      #m44-board .hex-grid-item .hex-grid-obstacle[data-type='24'] {
+      #m44-board .hex-grid-item .hex-grid-obstacle[data-tile='24'] {
         background-position-x: 0%;
         background-position-y: 100%; }
   #m44-board .hex-label-container {
@@ -760,10 +760,12 @@ html {
       height: 100%; }
       #m44-board .hex-cell-container .hex-cell.selectable {
         cursor: pointer; }
-        #m44-board .hex-cell-container .hex-cell.selectable.forMove, #m44-board .hex-cell-container .hex-cell.selectable.forAttack {
+        #m44-board .hex-cell-container .hex-cell.selectable.forMove, #m44-board .hex-cell-container .hex-cell.selectable.forMoveAndAttack, #m44-board .hex-cell-container .hex-cell.selectable.forAttack {
           background-image: url("img/hex_background_highlights.png");
           background-size: 500% 100%;
           background-position: 0% 0%; }
+        #m44-board .hex-cell-container .hex-cell.selectable.forMove {
+          background-position-x: 25%; }
         #m44-board .hex-cell-container .hex-cell.selectable.forAttack {
           background-position-x: 75%; }
       #m44-board .hex-cell-container .hex-cell .dice-mini {

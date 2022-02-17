@@ -216,10 +216,6 @@ class AbstractUnit extends \M44\Helpers\DB_Manager implements \JsonSerializable
 
   public function getTargetableUnits()
   {
-    if ($this->moves > $this->movementAndAttackRadius) {
-      return [];
-    }
-
     return Board::getTargetableCells($this);
   }
 
