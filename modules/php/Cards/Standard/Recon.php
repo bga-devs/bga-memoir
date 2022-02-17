@@ -24,6 +24,6 @@ class Recon extends \M44\Models\SectionCard
       clienttranslate('on the Right Flank'),
     ];
 
-    $this->draw = ['draw' => 2, 'keep' => 1];
+    $this->draw = ['nDraw' => 2, 'nKeep' => 1];
   }
 }

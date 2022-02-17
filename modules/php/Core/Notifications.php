@@ -100,6 +100,17 @@ class Notifications
     self::notify($player, 'pDrawCards', '', ['cards' => $cards->toArray()]);
   }
 
+  public static function drawCardsAndKeep($player, $cards, $nbKeep)
+  {
+    $msg = clienttranslate('${player_name} draws ${nb} cards and will keep ${nbKeep}');
+    self::notifyAll('drawCardsAndKeep', $msg, [
+      'player' => $player,
+      'nb' => $cards->count(),
+      'nbKeep' => $nbKeep,
+    ]);
+    self::notify($player, 'pDrawCards', '', ['cards' => $cards->toArray()]);
+  }
+
   public static function discardCard($player, $card)
   {
     self::notifyAll('discardCard', clienttranslate('${player_name} discards ${card_name}'), [
@@ -108,7 +119,15 @@ class Notifications
     ]);
   }
 
-/*
+  public static function discardDrawCards($player, $cards)
+  {
+    self::notifyAll('discardCard', clienttranslate('${player_name} discards ${nb} card(s)'), [
+      'player' => $player,
+      'nb' => count($cards),
+    ]);
+  }
+
+  /*
   public static function discard($player, $cards, $used = true)
   {
     if ($used) {

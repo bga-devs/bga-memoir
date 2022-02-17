@@ -25,15 +25,13 @@ trait DrawCardsTrait
       $cards = Cards::pickForLocation($method['nDraw'], 'deck', ['hand', $player->getId()]);
       Notifications::drawCards($player, $cards);
       $this->gamestate->nextState('endRound');
-    }
-    else {
+    } else {
       $cards = Cards::pickForLocation($method['nDraw'], 'deck', ['choice', $player->getId()]);
       Notifications::drawCardsAndKeep($player, $cards, $method['nKeep']);
       Globals::setNToKeep($method['nKeep']);
       $this->gamestate->nextState('choice');
     }
   }
-
 
   /*****
    * Card choice (eg for Recon)
@@ -43,7 +41,7 @@ trait DrawCardsTrait
     $player = Players::getActive();
     $cards = Cards::getInLocation(['choice', $player->getId()])->getIds();
     return [
-      'keep' => $player->getCardInPlay()->getDrawMethod()['keep'],
+      'keep' => Globals::getNToKeep(),
       '_private' => [
         'active' => [
           'cards' => $cards,
@@ -73,7 +71,7 @@ trait DrawCardsTrait
 
     $othCards = Cards::getInLocation(['choice', $player->getId()])->getIds();
     $cards = Cards::move($othCards, 'discard');
-    Notifications::discard($player, $othCards, false);
+    Notifications::discardDrawCards($player, $othCards);
 
     $this->gamestate->nextState('endRound');
   }

@@ -15,7 +15,6 @@ class Globals extends \M44\Helpers\DB_Manager
     'sideTurn' => 'str', // Store which side is currently playing
     'unitMoved' => 'int', // Store last unit moved => probably useless if we add log
     'activePlayer' => 'int', // ???
-
     'nToKeep' => 'int', // Number of cards to keep in the draw phase
   ];
 
