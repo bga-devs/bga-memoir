@@ -223,4 +223,34 @@ class AbstractUnit extends \M44\Helpers\DB_Manager implements \JsonSerializable
   {
     return $this->mustSeeToAttack;
   }
+
+  public function getHits($dice)
+  {
+    $map = [\INFANTRY => \DICE_INFANTRY, \ARMOR => \DICE_ARMOR];
+    $hits = $dice[$map[$this->type]] ?? 0;
+
+    $hits += $dice[\DICE_GRENADE] ?? 0;
+
+    return $hits;
+  }
+
+  public function decFigures($value)
+  {
+    $this->nUnits -= $value;
+    self::DB()->update(['figures' => $this->nUnits], $this->id);
+  }
+
+  /*
+   * return true if unit is dead
+   */
+  public function takeDamage($hits)
+  {
+    if ($hits > $this->nUnits) {
+      $this->decFigures($this->nUnits);
+      return true;
+    } else {
+      $this->decFigures($hits);
+      return false;
+    }
+  }
 }

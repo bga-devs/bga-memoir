@@ -127,6 +127,14 @@ class Notifications
     ]);
   }
 
+  public static function scoreMedal($player, $nb)
+  {
+    self::notifyAll('scoreMedal', clienttranslate('${player_name} scores ${nb} medal(s)'), [
+      'player' => $player,
+      'nb' => $nb,
+    ]);
+  }
+
   /*
   public static function discard($player, $cards, $used = true)
   {
