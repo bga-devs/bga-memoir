@@ -5,6 +5,7 @@ use M44\Core\Notifications;
 use M44\Managers\Players;
 use M44\Helpers\Utils;
 use M44\Board;
+use M44\Scenario;
 
 /**
  * Units
@@ -28,12 +29,13 @@ class Units extends \M44\Helpers\Pieces
   protected static $autoreshuffle = false;
   protected static function cast($row)
   {
-    $mode = Board::getMode();
+    $mode = Scenario::getMode();
+    $flipped = in_array($row['nation'], self::$nations[Scenario::getTopSide()]);
     $sections = self::$sections[$mode];
     $row['sections'] = [];
     for ($i = 0; $i < 3; $i++) {
       if ($sections[$i] <= $row['x'] && $row['x'] <= $sections[$i + 1]) {
-        $row['sections'][] = $i;
+        $row['sections'][] = $flipped ? 2 - $i : $i;
       }
     }
 
@@ -51,6 +53,10 @@ class Units extends \M44\Helpers\Pieces
   //////////// GETTERS /////////////
   //////////////////////////////////
   //////////////////////////////////
+  protected static $nations = [
+    ALLIES => ['fr', 'gb', 'us', 'ru', 'ch'],
+    AXIS => ['ger', 'jp', 'it'],
+  ];
 
   /**
    * getUiData : return all terrain tiles
@@ -68,18 +74,14 @@ class Units extends \M44\Helpers\Pieces
 
   public static function addSectionClause(&$q, $section)
   {
-    $mode = Board::getMode();
+    $mode = Scenario::getMode();
     $sections = self::$sections[$mode];
     $q = $q->where('x', '>=', $sections[$section])->where('x', '<=', $sections[$section + 1]);
   }
 
   public static function addTeamClause(&$q, $side)
   {
-    $nations = [
-      ALLIES => ['fr', 'gb', 'us', 'ru', 'ch'],
-      AXIS => ['ger', 'jp', 'it'],
-    ];
-    $q = $q->whereIn('nation', $nations[$side]);
+    $q = $q->whereIn('nation', self::$nations[$side]);
   }
 
   public static function getInSection($side, $section)
@@ -131,7 +133,9 @@ class Units extends \M44\Helpers\Pieces
 
   public function reset()
   {
-    self::DB()->update(['activation_card' => null, 'moves' => null, 'fights' => null])->run();
+    self::DB()
+      ->update(['activation_card' => null, 'moves' => null, 'fights' => null])
+      ->run();
   }
 
   ////////////////////////

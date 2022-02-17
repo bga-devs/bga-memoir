@@ -5,6 +5,7 @@ use M44\Core\Notifications;
 use M44\Managers\Players;
 use M44\Helpers\Utils;
 use M44\Board;
+use M44\Scenario;
 
 /**
  * Cards: id, value, color
@@ -25,7 +26,7 @@ class Cards extends \M44\Helpers\Pieces
 
   public function getInstance($type, $row = null)
   {
-    $mode = Board::getMode();
+    $mode = Scenario::getMode();
     $dirs = [
       STANDARD_DECK => 'Standard',
       BREAKTHROUGH_DECK => 'Breakthrough',

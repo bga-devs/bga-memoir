@@ -38,7 +38,7 @@ use M44\Managers\Cards;
 use M44\Managers\Players;
 use M44\Managers\Teams;
 use M44\Board;
-use M44\ScenarioLoader;
+use M44\Scenario;
 
 class memoir extends Table
 {
@@ -88,8 +88,8 @@ class memoir extends Table
   public function stDummyState()
   {
     $scenario = (int) self::getGameStateValue('scenario');
-    ScenarioLoader::load($scenario);
-    ScenarioLoader::setupScenario();
+    Scenario::load($scenario);
+    Scenario::setup();
   }
 
   /*

@@ -8,13 +8,14 @@ use M44\Managers\Cards;
 use M44\Managers\Players;
 use M44\Managers\Terrains;
 use M44\Managers\Units;
+use M44\Scenario;
 
 const LINE_INTERSECTION = 0;
 const LINE_TANGENT_LEFT = 1;
 const LINE_TANGENT_RIGHT = 2;
 const LINE_CORNER = 3;
 
-class Board extends \APP_DbObject
+class Board
 {
   public static $dimensions = [
     STANDARD_DECK => ['x' => 13, 'y' => 9],
@@ -23,26 +24,10 @@ class Board extends \APP_DbObject
   ];
 
   protected static $grid = [];
-  protected static $scenario = null;
-  public function getScenario()
-  {
-    if (self::$scenario == null) {
-      $scenario = self::getUniqueValueFromDB("SELECT value FROM global_variables WHERE name = 'scenario' LIMIT 1");
-      self::$scenario = is_null($scenario) ? null : json_decode($scenario, true);
-    }
-    return self::$scenario;
-  }
-
-  public function getMode()
-  {
-    $scenario = self::getScenario();
-    return is_null($scenario) ? null : $scenario['board']['type'];
-  }
-
   public function init()
   {
     // Try to fetch scenario from DB
-    $scenario = self::getScenario();
+    $scenario = Scenario::get();
     if (is_null($scenario)) {
       return;
     }
@@ -99,7 +84,7 @@ class Board extends \APP_DbObject
 
   public function getUiData()
   {
-    $scenario = self::getScenario();
+    $scenario = Scenario::get();
     if (is_null($scenario)) {
       return null;
     }
@@ -426,7 +411,7 @@ class Board extends \APP_DbObject
 
   public static function createGrid($defaultValue = null)
   {
-    $mode = self::getMode();
+    $mode = Scenario::getMode();
     $dim = self::$dimensions[$mode];
     $g = [];
     for ($y = 0; $y < $dim['y']; $y++) {

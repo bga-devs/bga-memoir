@@ -8,6 +8,7 @@ use M44\Managers\Cards;
 use M44\Managers\Players;
 use M44\Managers\Teams;
 use M44\Managers\Units;
+use M44\Scenario;
 
 /*
  * Player: all utility functions concerning a player
@@ -71,6 +72,9 @@ class Player extends \M44\Helpers\DB_Model
 
   public function getUnitsInSection($section)
   {
+    if (Scenario::getTopSide() == $this->team) {
+      $section = 2 - $section;
+    }
     return Units::getInSection($this->team, $section);
   }
 

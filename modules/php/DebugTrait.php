@@ -10,28 +10,10 @@ use M44\Board;
 
 trait DebugTrait
 {
-  function test()
-  {
-    ScenarioLoader::load('test');
-    ScenarioLoader::setupScenario();
-  }
-
-  function test2()
-  {
-    ScenarioLoader::load('SwordBeach');
-    ScenarioLoader::setupScenario();
-  }
-
-  function test3()
-  {
-    ScenarioLoader::load('test2');
-    ScenarioLoader::setupScenario();
-  }
-
   function load($scenario)
   {
-    ScenarioLoader::load($scenario);
-    ScenarioLoader::setupScenario();
+    Scenario::load($scenario);
+    Scenario::setup();
   }
 
   function vt()
