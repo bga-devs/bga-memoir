@@ -59,6 +59,7 @@ $machinestates = [
     'descriptionmyturn' => clienttranslate('${you} must order ${n} unit(s) ${desc}'),
     'type' => 'activeplayer',
     'args' => 'argsOrderUnits',
+    'action' => 'stOrderUnits',
     'possibleactions' => ['actOrderUnits'],
     'transitions' => ['moveUnits' => ST_MOVE_UNITS],
   ],

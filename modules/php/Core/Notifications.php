@@ -78,7 +78,28 @@ class Notifications
     ]);
   }
 
-  // public static function orderUnits($player, $units, $unitsOnTheMove){
+  public static function orderUnits($player, $units, $unitsOnTheMove)
+  {
+    if ($unitsOnTheMove->empty()) {
+      self::notifyAll('activateUnits', \clienttranslate('${player_name} issues orders to ${unit_desc}'), [
+        'player' => $player,
+        'unit_desc' => self::computeUnitsDesc($units),
+        'unitIds' => $units->getIds(),
+      ]);
+    } else {
+      self::notifyAll(
+        'activateUnits',
+        \clienttranslate('${player_name} issues orders to ${unit_desc} and orders ${unit2_desc} on the move'),
+        [
+          'player' => $player,
+          'unit_desc' => self::computeUnitsDesc($units),
+          'unitIds' => $units->getIds(),
+          'unit2_desc' => self::computeUnitsDesc($unitsOnTheMove),
+          'unitOnTheMoveIds' => $unitsOnTheMove->getIds(),
+        ]
+      );
+    }
+  }
 
   public static function moveUnit($player, $unitId, $x, $y)
   {
@@ -144,6 +165,11 @@ class Notifications
   }
 */
 
+  public static function clearUnitsStatus()
+  {
+    self::notifyAll('clearUnitsStatus', '', []);
+  }
+
   /*********************
    **** UPDATE ARGS ****
    *********************/
@@ -172,6 +198,41 @@ class Notifications
     //     $args['task'] = $args['task']->jsonSerialize($args['task']->getPId() == $args['player_id']);
     //   }
     // }
+  }
+
+  protected static function computeUnitsDesc($units)
+  {
+    $type = [
+      \INFANTRY => 0,
+      \ARMOR => 0,
+      \ARTILLERY => 0,
+    ];
+    $names = [
+      \INFANTRY => \clienttranslate('Infantry(s)'),
+      \ARMOR => \clienttranslate('Armor(s)'),
+      \ARTILLERY => \clienttranslate('Artillery(s)'),
+    ];
+
+    foreach ($units as $unit) {
+      $type[$unit->getType()]++;
+    }
+
+    $logs = [];
+    $args = [];
+    foreach ($type as $t => $n) {
+      if ($n > 0) {
+        $name = 'unit_' . $t . '_name';
+        $logs[] = '${unit_' . $t . '_number} ${' . $name . '}';
+        $args["unit_${t}_number"] = $n;
+        $args[$name] = $names[$t];
+        $args['i18n'][] = $name;
+      }
+    }
+
+    return [
+      'log' => join(',', $logs),
+      'args' => $args,
+    ];
   }
 }
 

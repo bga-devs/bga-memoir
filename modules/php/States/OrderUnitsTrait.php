@@ -16,11 +16,19 @@ trait OrderUnitsTrait
     return $card->getArgsOrderUnits();
   }
 
+  function stOrderUnits($player = null)
+  {
+    $player = $player ?? Players::getActive();
+    $args = $this->argsOrderUnits($player);
+    if ($args['n'] == \INFINITY) {
+      $this->actOrderUnits($args['units']->getIds(), [], true);
+    }
+  }
 
   function actOrderUnits($unitIds, $onTheMoveIds, $auto = false)
   {
     // Sanity checks
-    if(!$auto){
+    if (!$auto) {
       $this->checkAction('actOrderUnits');
     }
     $player = Players::getCurrent();
@@ -53,8 +61,7 @@ trait OrderUnitsTrait
     }
 
     // Notify
-    //Notifications::orderUnits($player, Unit::get($unitIds), Units::get($onTheMoveIds));
-
+    Notifications::orderUnits($player, Units::get($unitIds), Units::get($onTheMoveIds));
     $this->gamestate->nextState('moveUnits');
   }
 }

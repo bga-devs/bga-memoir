@@ -116,6 +116,12 @@ html {
           border: 1px solid black;
           text-align: center;
           line-height: 30px; }
+      #m44-container #m44-central-part #deck-holder #discard {
+        position: relative; }
+        #m44-container #m44-central-part #deck-holder #discard .section-card,
+        #m44-container #m44-central-part #deck-holder #discard .tactic-card {
+          position: absolute;
+          top: 0; }
     #m44-container #m44-central-part #m44-board-wrapper {
       flex-grow: 2;
       position: relative;

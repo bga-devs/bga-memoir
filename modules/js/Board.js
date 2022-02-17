@@ -190,12 +190,12 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     },
 
     //////////////////////////////////////////
-    //    _____
-    //   |_   _| __ ___   ___  _ __  ___
-    //     | || '__/ _ \ / _ \| '_ \/ __|
-    //     | || | | (_) | (_) | |_) \__ \
-    //     |_||_|  \___/ \___/| .__/|___/
-    //                        |_|
+    //    _   _       _ _
+    //   | | | |_ __ (_) |_ ___
+    //   | | | | '_ \| | __/ __|
+    //   | |_| | | | | | |_\__ \
+    //    \___/|_| |_|_|\__|___/
+    //
     //////////////////////////////////////////
 
     tplUnit(unit) {
@@ -274,6 +274,20 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         }
       });
       return minFilling;
+    },
+
+    notif_activateUnits(n) {
+      debug('Notif: activating units');
+      n.args.unitIds.forEach((unitId) => $('unit-' + unitId).classList.add('activated'));
+      if (n.args.unitOnTheMoveIds) {
+        n.args.unitOnTheMoveIds.forEach((unitId) => $('unit-' + unitId).classList.add('activated onTheMove'));
+      }
+    },
+
+    notif_clearUnitsStatus(n) {
+      debug('Notif: clearing units status');
+      this.removeClassNameOfCells('activated');
+      this.removeClassNameOfCells('onTheMove');
     },
 
     ////////////////////////////

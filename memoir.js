@@ -37,8 +37,10 @@ define([
         ['discardCard', 1200],
         ['drawCards', 1000],
         ['pDrawCards', 1000],
+        ['activateUnits', 2],
         ['moveUnit', 1000],
         ['rollDice', 3300],
+        ['clearUnitsStatus', 2],
       ];
 
       // Fix mobile viewport (remove CSS zoom)
