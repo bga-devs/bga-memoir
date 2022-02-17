@@ -83,7 +83,13 @@ $machinestates = [
     'action' => 'stAttackUnits',
     'args' => 'argsAttackUnit',
     'possibleactions' => ['actAttackUnit', 'actAttackUnitsDone'],
-    'transitions' => ['ambush' => ST_PRE_AMBUSH, 'attack' => ST_ATTACK_THROW, 'draw' => ST_DRAW], // attack if not close assault
+    'transitions' => [
+      'ambush' => ST_PRE_AMBUSH,
+      'attack' => ST_ATTACK_THROW,
+      'draw' => ST_DRAW,
+      'retreat' => ST_RETREAT_CHANGE,
+      'breakthrough' => ST_BREAKTHROUGH,
+    ], // attack if not close assault
   ],
 
   ST_PRE_AMBUSH => [
@@ -149,7 +155,12 @@ $machinestates = [
     'type' => 'multipleactiveplayer',
     'args' => 'argsAttackResolve',
     'possibleactions' => ['actRetreat'],
-    'transitions' => ['draw' => ST_DRAW, 'attack' => ST_ATTACK],
+    'transitions' => [
+      'draw' => ST_DRAW,
+      'attack' => ST_ATTACK,
+      'retreat' => ST_RETREAT,
+      'breakthrough' => ST_BREAKTHROUGH,
+    ],
   ],
 
   ST_DRAW => [

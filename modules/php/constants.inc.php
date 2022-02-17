@@ -20,6 +20,9 @@ const ST_AMBUSH_ATTACK = 14;
 const ST_AMBUSH_RESOLVE = 15;
 const ST_DRAW = 16;
 const ST_DRAW_CHOICE = 17;
+const ST_RETREAT_CHANGE = 18;
+const ST_RETREAT = 19;
+const ST_BREAKTHROUGH = 20;
 
 const ST_OVERLORD_PLAY_CARD = 40;
 const ST_OVERLORD_SELECT_UNIT = 41;
@@ -103,8 +106,6 @@ const OPTION_SCENARIO = 101;
  * Stats
  */
 
-
-
 /*
  * Dice
  */
@@ -113,7 +114,6 @@ const DICE_ARMOR = 1;
 const DICE_GRENADE = 2;
 const DICE_FLAG = 3;
 const DICE_STAR = 4;
-
 
 /*
  * Units

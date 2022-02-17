@@ -31,6 +31,11 @@ class Teams extends \M44\Helpers\DB_Manager
     return self::getSide(Globals::getSideTurn());
   }
 
+  public function incMedals($value, $side)
+  {
+    return self::DB()->inc(['medals' => $value], $side);
+  }
+
   /**
    * Load a scenario
    */
