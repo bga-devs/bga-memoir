@@ -437,6 +437,7 @@ define(['dojo', 'dojo/_base/declare', 'ebg/core/gamegui'], (dojo, declare) => {
           beforeBrother: null,
 
           phantom: true,
+          preserveSize: false,
         },
         options,
       );
@@ -468,10 +469,15 @@ define(['dojo', 'dojo/_base/declare', 'ebg/core/gamegui'], (dojo, declare) => {
         dojo.place(mobile, 'game_play_area');
         this.placeOnObject(mobile, mobileElt);
         dojo.addClass(mobileElt, 'phantom');
-        dojo.style(mobile, {
-          width: mobileElt.offsetWidth + 'px',
-          height: mobileElt.offsetHeight + 'px',
-        });
+        if (config.preserveSize) {
+          dojo.style(mobile, {
+            width: mobileElt.offsetWidth + 'px',
+            height: mobileElt.offsetHeight + 'px',
+            //          transform: 'scale(1)',
+            //          transition: 'transform ' + config.duration + 'ms',
+          });
+        }
+        mobile.offsetHeight;
         config.from = mobileElt;
       }
 
@@ -514,6 +520,15 @@ define(['dojo', 'dojo/_base/declare', 'ebg/core/gamegui'], (dojo, declare) => {
           resolve();
         });
         animation.play();
+
+        /*
+        if (config.phantomEnd) {
+          let s = targetId.offsetWidth / mobileElt.offsetWidth;
+          if(s != 1){
+            dojo.style(mobile, 'transform', 'scale(' + s + ')');
+          }
+        }
+        */
       });
     },
 

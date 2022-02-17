@@ -162,8 +162,8 @@ class Board extends \APP_DbObject
     });
 
     // Compute for each cell whether the unit might be able to attack after the move
-    foreach($cells as &$cell){
-      if(!empty(self::getTargetableCells($unit, $cell, $cell['d']))){
+    foreach ($cells as &$cell) {
+      if (!empty(self::getTargetableCells($unit, $cell, $cell['d']))) {
         $cell['canAttack'] = true;
       }
     }
@@ -218,7 +218,7 @@ class Board extends \APP_DbObject
   public static function getTargetableCells($unit, $cell = null, $moves = null)
   {
     // Check whether the unit moved too much to attack
-    $m = $moves ?? $unit->getMoves();
+    $m = $unit->getMoves() + ($moves ?? 0);
     if ($m > $unit->getMovementAndAttackRadius()) {
       return [];
     }

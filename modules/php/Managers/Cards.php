@@ -70,6 +70,12 @@ class Cards extends \M44\Helpers\Pieces
     return self::get($cardId);
   }
 
+  public static function discard($cardId)
+  {
+    $cardId = is_int($cardId)? $cardId : $cardId->getId();
+    self::move($cardId, 'discard');
+  }
+
   /**
    * Load a scenario
    */

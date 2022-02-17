@@ -90,19 +90,25 @@ class Notifications
     ]);
   }
 
-  public static function drawCards($player, $cards, $message = true)
+  public static function drawCards($player, $cards, $silent = false)
   {
-    $msg = '';
-    if ($message) {
-      $msg = clienttranslate('${player_name} draws ${nb} cards');
-    }
+    $msg = $silent ? '' : clienttranslate('${player_name} draws ${nb} card(s)');
     self::notifyAll('drawCards', $msg, [
       'player' => $player,
-      'nb' => count($cards),
+      'nb' => $cards->count(),
     ]);
-    self::notify($player, 'drawCards', '', ['cards' => $cards]);
+    self::notify($player, 'pDrawCards', '', ['cards' => $cards->toArray()]);
   }
 
+  public static function discardCard($player, $card)
+  {
+    self::notifyAll('discardCard', clienttranslate('${player_name} discards ${card_name}'), [
+      'player' => $player,
+      'card' => $card,
+    ]);
+  }
+
+/*
   public static function discard($player, $cards, $used = true)
   {
     if ($used) {
@@ -117,6 +123,7 @@ class Notifications
       'cards' => $cards,
     ]);
   }
+*/
 
   /*********************
    **** UPDATE ARGS ****

@@ -52,7 +52,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         type: -1,
       };
 
-      this.place('tplMemoirCard', card, container);
+      return this.place('tplMemoirCard', card, container);
     },
 
     tplMemoirCard(card, tooltip = false) {
@@ -65,8 +65,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       }
 
       return (
-        `
-        <div id='card-${card.id + (tooltip ? '-tooltip' : '')}' class='${className}' data-type='${card.asset}'>
+        `<div id='card-${card.id + (tooltip ? '-tooltip' : '')}' class='${className}' data-type='${card.asset}'>
           <div class='card-resizable'>
             <div class='card-title'>${_(card.name)}</div> ` +
         (isSection ? `<div class='card-subtitle'>${_(card.subtitle)}</div>` : '') +
@@ -75,8 +74,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
               <div class='card-text'>${card.desc}</div>
             </div>
           </div>
-        </div>
-      `
+        </div>`
       );
     },
 
@@ -107,9 +105,37 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         $('card-' + n.args.card.id).classList.add('inplay');
         //        this.slide('card-' + n.args.card.id, 'inplay');
       } else {
-        // TODO
-        // this.addCard()
+        let target = $('top-player-hand').querySelector('[data-type="-1"]:last-of-type');
+        this.addCard(n.args.card, 'top-player-hand');
+        this.flipAndReplace(target, $('card-' + n.args.card.id));
       }
+    },
+
+    notif_discardCard(n) {
+      debug('Notif: discarding a card', n);
+      if (!$('card-' + n.args.card.id)) {
+        this.addCard(n.args.card, 'top-player-hand');
+      }
+      this.slide('card-' + n.args.card.id, 'discard', { duration: 1100 });
+    },
+
+    notif_drawCards(n) {
+      debug('Notif: a player is drawing card(s)', n);
+      if (this.player_id == n.args.player_id) return;
+      for (let i = 0; i < n.args.nb; i++) {
+        let card = this.addCardBack('deck');
+        this.slide(card, 'top-player-hand');
+      }
+      this._deckCounter.incValue(-n.args.nb);
+    },
+
+    notif_pDrawCards(n) {
+      debug('Notif: you are drawing card(s)', n);
+      n.args.cards.forEach((card) => {
+        this.addCard(card, 'deck');
+        this.slide('card-' + card.id, 'bottom-player-hand');
+      });
+      this._deckCounter.incValue(-n.args.cards.length);
     },
   });
 });

@@ -67,6 +67,39 @@ html {
       flex-shrink: 0;
       background: url('img/ui/game_left.png');
       background-repeat: repeat-y;
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+      padding-left: 4px;
+      box-sizing: border-box;
+      row-gap: 10px;
+
+      #deck,
+      #discard {
+        width: 80px;
+        height: 128px;
+        --memoirCardScale: 0.2548;
+      }
+
+      #deck {
+        background-image: url('img/card_back.jpg');
+        background-size: 100% 100%;
+        border-radius: 7px;
+        position: relative;
+
+        #deck-count {
+          width: 30px;
+          height: 30px;
+          position: absolute;
+          left: 25px;
+          top: 49px;
+          background: #ffffffed;
+          border-radius: 50%;
+          border: 1px solid black;
+          text-align: center;
+          line-height: 30px;
+        }
+      }
     }
 
     #m44-board-wrapper {

@@ -34,7 +34,10 @@ define([
       this._activeStates = ['playCard', 'orderUnits', 'moveUnits', 'attackUnits'];
       this._notifications = [
         ['playCard', 1000],
-        ['moveUnit', 1200],
+        ['discardCard', 1200],
+        ['drawCards', 1000],
+        ['pDrawCards', 1000],
+        ['moveUnit', 1000],
         ['rollDice', 3300],
       ];
 
@@ -64,6 +67,12 @@ define([
         let bottomTeam = this.gamedatas.players[pId].team;
         let rotate = this.gamedatas.players[pId].no == 1;
         this.setupBoard(gamedatas.board, rotate, bottomTeam);
+      }
+
+      // Handle deck and discard
+      this._deckCounter = this.createCounter('deck-count', gamedatas.deckCount);
+      if (gamedatas.discard) {
+        this.addCard(gamedatas.discard, 'discard');
       }
     },
 

@@ -43,8 +43,18 @@
   visibility: hidden;
 }
 
+.notransition {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+}
+
+
+
 @import 'modules/css/layout';
 @import 'modules/css/board';
 @import 'modules/css/units';
 @import 'modules/css/cards';
 @import 'modules/css/dice';
+@import 'modules/css/flip';

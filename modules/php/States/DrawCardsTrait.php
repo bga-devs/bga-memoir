@@ -12,30 +12,32 @@ use M44\Board;
 
 trait DrawCardsTrait
 {
-  public function stDrawCard()
+  public function stDrawCard($player = null)
   {
-    $choice = false;
+    // Discard played card
     $player = $player ?? Players::getActive();
     $card = $player->getCardInPlay();
     $method = $card->getDrawMethod();
-    if ($method['keep'] != $method['draw']) {
-      $choice = true;
-    }
+    Cards::discard($card);
+    Notifications::discardCard($player, $card);
 
-    if (!$choice) {
-      $cards = Cards::pickForLocation($method['draw'], 'deck', ['hand', $player->getId()]);
-    } else {
-      $cards = Cards::pickForLocation($method['draw'], 'deck', ['choice', $player->getId()]);
-    }
-    Notifications::drawCards($player, $cards);
-    // transition to choice if more than 1
-    if (!$choice) {
+    if ($method['nKeep'] == $method['nDraw']) {
+      $cards = Cards::pickForLocation($method['nDraw'], 'deck', ['hand', $player->getId()]);
+      Notifications::drawCards($player, $cards);
       $this->gamestate->nextState('endRound');
-    } else {
+    }
+    else {
+      $cards = Cards::pickForLocation($method['nDraw'], 'deck', ['choice', $player->getId()]);
+      Notifications::drawCardsAndKeep($player, $cards, $method['nKeep']);
+      Globals::setNToKeep($method['nKeep']);
       $this->gamestate->nextState('choice');
     }
   }
 
+
+  /*****
+   * Card choice (eg for Recon)
+   */
   public function argsDrawChoice()
   {
     $player = Players::getActive();

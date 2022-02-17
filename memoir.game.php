@@ -103,6 +103,8 @@ class memoir extends Table
       'players' => Players::getUiData($pId),
       'board' => Board::getUiData(),
       'teams' => Teams::getAll()->toArray(),
+      'deckCount' => Cards::countInLocation('deck'),
+      'discard' => Cards::getTopOf('discard'),
     ];
   }
 

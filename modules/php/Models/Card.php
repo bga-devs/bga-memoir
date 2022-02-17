@@ -15,7 +15,7 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
   protected $subtitle = '';
   protected $text = '';
   protected $deck = STANDARD_DECK;
-  protected $draw = ['draw' => 1, 'keep' => 1];
+  protected $draw = ['nDraw' => 1, 'nKeep' => 1]; // Number of card to draw / to keep
 
   /*
    * DYNAMIC INFORMATIONS

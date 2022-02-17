@@ -34,6 +34,12 @@
 .phantom {
   visibility: hidden; }
 
+.notransition {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important; }
+
 html {
   background: url("img/ui/background.jpg");
   background-size: 75px; }
@@ -82,7 +88,34 @@ html {
       width: 122px;
       flex-shrink: 0;
       background: url("img/ui/game_left.png");
-      background-repeat: repeat-y; }
+      background-repeat: repeat-y;
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+      padding-left: 4px;
+      box-sizing: border-box;
+      row-gap: 10px; }
+      #m44-container #m44-central-part #deck-holder #deck,
+      #m44-container #m44-central-part #deck-holder #discard {
+        width: 80px;
+        height: 128px;
+        --memoirCardScale: 0.2548; }
+      #m44-container #m44-central-part #deck-holder #deck {
+        background-image: url("img/card_back.jpg");
+        background-size: 100% 100%;
+        border-radius: 7px;
+        position: relative; }
+        #m44-container #m44-central-part #deck-holder #deck #deck-count {
+          width: 30px;
+          height: 30px;
+          position: absolute;
+          left: 25px;
+          top: 49px;
+          background: #ffffffed;
+          border-radius: 50%;
+          border: 1px solid black;
+          text-align: center;
+          line-height: 30px; }
     #m44-container #m44-central-part #m44-board-wrapper {
       flex-grow: 2;
       position: relative;
@@ -2382,5 +2415,30 @@ span.m44-dice-result {
     transform: translateX(1.8333250644%) translateY(-5.9971272003%); }
   100.00% {
     transform: translateX(0%) translateY(0%); } }
+.flip-container {
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  perspective: 1000px; }
+  .flip-container .flip-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+    transform: rotateY(0deg); }
+    .flip-container .flip-inner .flip-front,
+    .flip-container .flip-inner .flip-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      /* Safari */
+      backface-visibility: hidden;
+      transform: rotateY(0deg); }
+    .flip-container .flip-inner .flip-back {
+      transform: rotateY(180deg); }
+  .flip-container.flipped .flip-inner {
+    transform: rotateY(180deg); }
 
 /*# sourceMappingURL=memoir.css.map */
