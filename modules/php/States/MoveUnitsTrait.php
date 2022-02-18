@@ -11,11 +11,12 @@ use M44\Board;
 
 trait MoveUnitsTrait
 {
-  public function argsMoveUnits($player = null)
+  public function argsMoveUnits($player = null, $clearPaths = false)
   {
     $player = $player ?? Players::getActive();
     $card = $player->getCardInPlay();
     $args = $card->getArgsMoveUnits();
+    Utils::clearPaths($args['units'], $clearPaths);
     $args['lastUnitMoved'] = Globals::getUnitMoved();
     return $args;
   }
@@ -25,7 +26,7 @@ trait MoveUnitsTrait
     // Sanity checks
     self::checkAction('actMoveUnit');
     $player = Players::getCurrent();
-    $args = $this->argsMoveUnits($player);
+    $args = $this->argsMoveUnits($player, false);
     if (!\array_key_exists($unitId, $args['units'])) {
       throw new \BgaVisibleSystemException('You cannot move this unit. Should not happen');
     }
@@ -39,12 +40,16 @@ trait MoveUnitsTrait
 
     // Move the unit
     $cell = $cells[$k];
+    $path = $cell['paths'][0]; // Take the first path
     $unit = Units::get($unitId);
+    foreach ($path as $c) {
+      $unit->moveTo($c);
+      Notifications::moveUnit($player, $unitId, $c['x'], $c['y']);
+      // TODO listen here for mine and frozen river
+    }
     $unit->incMoves($cell['d']);
-    $unit->moveTo($cell);
-    Board::refreshUnits();
-    Notifications::moveUnit($player, $unitId, $x, $y);
     Globals::setUnitMoved($unitId);
+    Board::refreshUnits();
 
     $this->gamestate->nextState('moveUnits');
   }

@@ -142,7 +142,7 @@ class Board
   public static function getReachableCellsAtDistance($unit, $d)
   {
     $startingCell = $unit->getPos();
-    $cells = self::getCellsAtDistance($startingCell, $d, function ($source, $target, $d) use ($unit) {
+    list($cells, $markers) = self::getCellsAtDistance($startingCell, $d, function ($source, $target, $d) use ($unit) {
       return self::getDeplacementCost($unit, $source, $target, $d);
     });
 
@@ -221,7 +221,7 @@ class Board
     // Compute cells at fire range
     $power = $unit->getAttackPower();
     $range = count($power);
-    $cells = self::getCellsAtDistance($pos, $range, function ($source, $target, $d) {
+    list($cells, $markers) = self::getCellsAtDistance($pos, $range, function ($source, $target, $d) {
       return 1;
     });
 
@@ -402,6 +402,51 @@ class Board
   }
 
   /////////////////////////////////////////////
+  //  ____      _                  _
+  // |  _ \ ___| |_ _ __ ___  __ _| |_
+  // | |_) / _ \ __| '__/ _ \/ _` | __|
+  // |  _ <  __/ |_| | |  __/ (_| | |_
+  // |_| \_\___|\__|_|  \___|\__,_|\__|
+  /////////////////////////////////////////////
+  public static function getReachableCellsForRetreat($unit, $flags, $nIgnore)
+  {
+    // Compute all cells reachable at distance $d in the good vertical direction
+    $d = $flags;
+    $deltaY = $unit->getCampDirection();
+    list($cells, $markers) = self::getCellsAtDistance($unit, $d, function ($source, $target, $d) use ($deltaY) {
+      // Check direction
+      if ($source['y'] + $deltaY != $target['y']) {
+        return \INFINITY;
+      }
+
+      $targetCell = self::$grid[$target['x']][$target['y']];
+      // If there is a unit => can't retreat there
+      if (!is_null($targetCell['unit'])) {
+        return \INFINITY;
+      }
+
+      // If there is an impassable terrain => can't retreat there
+      foreach ($targetCell['terrains'] as $terrain) {
+        if ($terrain->isImpassable($unit)) {
+          return \INFINITY;
+        }
+      }
+
+      // Ignore all other terrains restriction
+      return 1;
+    });
+
+    // TODO : filtering is still not good, must take into account hits
+
+    // Keep only cells at distance in [$flags - $nIgnore; $flags]
+    Utils::filter($cells, function ($cell) use ($flags, $nIgnore) {
+      return $cell['d'] <= $flags && $flags - $nIgnore <= $cell['d'];
+    });
+
+    return $cells;
+  }
+
+  /////////////////////////////////////////////
   //  ____      _     _   _   _ _   _ _
   //  / ___|_ __(_) __| | | | | | |_(_) |___
   // | |  _| '__| |/ _` | | | | | __| | / __|
@@ -471,37 +516,44 @@ class Board
     $queue->insert(
       [
         'cell' => $startingCell,
+        'paths' => [[]],
       ],
       0
     );
-    $gridMarkers = self::createGrid(false);
-    $cells = [];
+    $markers = self::createGrid(false);
 
     while (!$queue->isEmpty()) {
       // Extract the top node and adds it to the result
       $node = $queue->extract();
       $cell = $node['data']['cell'];
       $cell['d'] = -$node['priority'];
-      if ($gridMarkers[$cell['x']][$cell['y']] !== false) {
+      $pos = ['x' => $cell['x'], 'y' => $cell['y']];
+      $mark = $markers[$pos['x']][$pos['y']];
+      if ($mark !== false) {
+        if ($mark['d'] == $cell['d']) {
+          $markers[$pos['x']][$pos['y']]['paths'] = array_merge($mark['paths'], $node['data']['paths']);
+        }
         continue;
       }
-      $gridMarkers[$cell['x']][$cell['y']] = $cell;
-      if ($cell['d'] > 0) {
-        $cells[] = $cell;
-      }
+      $cell['paths'] = $node['data']['paths'];
+      $markers[$pos['x']][$pos['y']] = $cell;
 
       // Look at neighbours
-      $neighbours = self::getNeighbours($cell);
+      $neighbours = self::getNeighbours($pos);
       foreach ($neighbours as $nextCell) {
-        if ($gridMarkers[$nextCell['x']][$nextCell['y']] !== false) {
+        $dist = $cell['d'] + $costCallback($cell, $nextCell, $d);
+        $t = $markers[$nextCell['x']][$nextCell['y']];
+        if ($t !== false) {
           continue;
         }
 
-        $dist = $cell['d'] + $costCallback($cell, $nextCell, $d);
         if ($dist <= $d) {
           $queue->insert(
             [
               'cell' => $nextCell,
+              'paths' => array_map(function ($path) use ($nextCell) {
+                return array_merge($path, [$nextCell]);
+              }, $markers[$pos['x']][$pos['y']]['paths']),
             ],
             -$dist
           );
@@ -509,6 +561,16 @@ class Board
       }
     }
 
-    return $cells;
+    // Extract the reachable cells
+    $cells = [];
+    foreach ($markers as $col) {
+      foreach ($col as $cell) {
+        if ($cell !== false && $cell['d'] > 0) {
+          $cells[] = $cell;
+        }
+      }
+    }
+
+    return [$cells, $markers];
   }
 }

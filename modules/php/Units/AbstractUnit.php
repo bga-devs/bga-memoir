@@ -2,7 +2,9 @@
 namespace M44\Units;
 
 use M44\Board;
+use M44\Scenario;
 use M44\Managers\Players;
+use M44\Managers\Units;
 
 class AbstractUnit extends \M44\Helpers\DB_Manager implements \JsonSerializable
 {
@@ -141,6 +143,12 @@ class AbstractUnit extends \M44\Helpers\DB_Manager implements \JsonSerializable
     $a = in_array($this->nation, $allies);
     $b = in_array($unit->getNation(), $allies);
     return ($a && !$b) || (!$a && $b);
+  }
+
+  public function getCampDirection()
+  {
+    // Useful for retreat
+    return in_array($this->nation, Units::$nations[Scenario::getTopSide()]) ? -1 : 1;
   }
 
   /////////////////////////////////

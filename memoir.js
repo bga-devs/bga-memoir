@@ -38,7 +38,7 @@ define([
         ['drawCards', 1000],
         ['pDrawCards', 1000],
         ['activateUnits', 2],
-        ['moveUnit', 1000],
+        ['moveUnit', 600],
         ['rollDice', 3300],
         ['clearUnitsStatus', 2],
       ];

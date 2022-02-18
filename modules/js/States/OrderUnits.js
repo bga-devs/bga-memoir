@@ -124,7 +124,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
     notif_moveUnit(n) {
       debug('Notif: unit is moving', n);
-      this.slide('unit-' + n.args.unitId, `cell-${n.args.x}-${n.args.y}`, { duration: 900, preserveSize: true });
+      this.slide('unit-' + n.args.unitId, `cell-${n.args.x}-${n.args.y}`, { duration: 580, preserveSize: true });
     },
 
     //////////////////////////////////////////

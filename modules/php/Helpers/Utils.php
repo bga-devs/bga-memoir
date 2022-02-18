@@ -58,4 +58,21 @@ abstract class Utils extends \APP_DbObject
       ],
     ];
   }
+
+
+  /**
+   * This function is just used to remove some informations UI-useless information before sending to front in args
+   */
+  public static function clearPaths(&$units, $clearPaths = true)
+  {
+    if (!$clearPaths) {
+      return;
+    }
+
+    foreach ($units as &$cells) {
+      foreach ($cells as &$cell) {
+        unset($cell['paths']);
+      }
+    }
+  }
 }

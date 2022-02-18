@@ -27,7 +27,9 @@ trait AttackUnitsTrait
   {
     $player = $player ?? Players::getActive();
     $card = $player->getCardInPlay();
-    return $card->getArgsAttackUnits();
+    $args = $card->getArgsAttackUnits();
+    Utils::clearPaths($args['units']);
+    return $args;
   }
 
   /**
@@ -105,6 +107,7 @@ trait AttackUnitsTrait
       Notifications::takeDamage($player, $oppUnit, $hits);
       if ($eliminated) {
         //TODO : Manage scenario specific
+        // TODO : store type of unit
         Teams::incMedals(1, $player->getSide());
         Notifications::scoreMedal($player, 1);
         if ($canBreakthrough) {
