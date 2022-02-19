@@ -408,12 +408,12 @@ class Board
   // |  _ <  __/ |_| | |  __/ (_| | |_
   // |_| \_\___|\__|_|  \___|\__,_|\__|
   /////////////////////////////////////////////
-  public static function getReachableCellsForRetreat($unit, $flags, $nIgnore)
+  public static function getReachableCellsForRetreat($unit, $minFlags, $maxFlags)
   {
     // Compute all cells reachable at distance $d in the good vertical direction
-    $d = $flags;
+    $d = $maxFlags;
     $deltaY = $unit->getCampDirection();
-    list($cells, $markers) = self::getCellsAtDistance($unit, $d, function ($source, $target, $d) use ($deltaY) {
+    list($cells, $markers) = self::getCellsAtDistance($unit->getPos(), $d, function ($source, $target, $d) use ($unit, $deltaY) {
       // Check direction
       if ($source['y'] + $deltaY != $target['y']) {
         return \INFINITY;
@@ -439,8 +439,8 @@ class Board
     // TODO : filtering is still not good, must take into account hits
 
     // Keep only cells at distance in [$flags - $nIgnore; $flags]
-    Utils::filter($cells, function ($cell) use ($flags, $nIgnore) {
-      return $cell['d'] <= $flags && $flags - $nIgnore <= $cell['d'];
+    Utils::filter($cells, function ($cell) use ($minFlags, $maxFlags) {
+      return $cell['d'] <= $maxFlags && $minFlags <= $cell['d'];
     });
 
     return $cells;

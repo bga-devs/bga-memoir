@@ -21,8 +21,13 @@ trait DebugTrait
     $this->actChooseCard([24]);
   }
 
-  function tp()
+  function tp($pId, $unitId, $min, $max)
   {
-    $this->rollDice(Players::getCurrent(), 3, ['x' => 20, 'y' => 4]);
+    Globals::setRetreat([
+      'unit' => $unitId,
+      'min' => $min,
+      'max' => $max,
+    ]);
+    $this->changeActivePlayerAndJumpTo((int) $pId, \ST_RETREAT);
   }
 }

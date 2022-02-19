@@ -163,6 +163,19 @@ $machinestates = [
     ],
   ],
 
+
+  ST_RETREAT => [
+    'name' => 'retreat',
+    'description' => clienttranslate('${actplayer} must retreat attacked unit'),
+    'descriptionmyturn' => clienttranslate('${you} must retreat attacked unit'),
+    'descriptionskippable' => clienttranslate('${actplayer} may retreat attacked unit'),
+    'descriptionmyturnskippable' => clienttranslate('${you} may retreat attacked unit'),
+    'type' => 'activeplayer',
+    'args' => 'argsRetreatUnit',
+    'action' => 'stRetreatUnit',
+    'possibleactions' => ['actRetreatUnit', 'actRetreatUnitsDone'],
+  ],
+
   ST_DRAW => [
     'name' => 'drawCard',
     'description' => '',
@@ -237,6 +250,17 @@ $machinestates = [
     'args' => 'argsOverlordAttackUnit',
     'possibleactions' => ['actAttackUnit'],
     'transitions' => ['ambush' => ST_PRE_AMBUSH, 'attack' => ST_ATTACK_THROW], // attack if not close assault
+  ],
+
+
+
+  // Generic state to change player
+  ST_CHANGE_ACTIVE_PLAYER => [
+    'name' => 'changeActivePlayer',
+    'description' => '',
+    'descriptionmyturn' => '',
+    'type' => 'game',
+    'action' => 'stChangeActivePlayer',
   ],
 
   // Final state.

@@ -50,6 +50,7 @@ class memoir extends Table
   use M44\States\AttackUnitsTrait;
   use M44\States\DrawCardsTrait;
   use M44\States\AmbushTrait;
+  use M44\States\RetreatUnitTrait;
 
   public static $instance = null;
   function __construct()
@@ -119,6 +120,38 @@ class memoir extends Table
   function actChangePreference($pref, $value)
   {
     Preferences::set($this->getCurrentPId(), $pref, $value);
+  }
+
+  /**
+   * Generic state to handle change of active player in the middle of a transition
+   */
+  function stChangeActivePlayer()
+  {
+    $t = Globals::getChangeActivePlayer();
+    $this->gamestate->changeActivePlayer($t['pId']);
+    $this->gamestate->jumpToState($t['st']);
+  }
+
+  function changeActivePlayerAndJumpTo($pId, $state)
+  {
+    Globals::setChangeActivePlayer([
+      'pId' => is_int($pId) ? $pId : $pId->getId(),
+      'st' => $state,
+    ]);
+    $this->gamestate->jumpToState(ST_CHANGE_ACTIVE_PLAYER);
+  }
+
+  function nextState($transition, $pId = null)
+  {
+    $pId = is_null($pId) ||  is_int($pId) ? $pId : $pId->getId();
+    if ($pId === null || $pId == $this->getActivePlayerId) {
+      $this->gamestate->nextState($transition);
+    } else {
+      $states = $this->gamestate->states;
+      $state = $states[$this->gamestate->state_id()];
+      $st = $state['transitions'][$transition];
+      $this->changeActivePlayerAndJumpTo($pId, $st);
+    }
   }
 
   /////////////////////////////////////////////////////////////

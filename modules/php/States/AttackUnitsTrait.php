@@ -121,7 +121,6 @@ trait AttackUnitsTrait
       Globals::setRetreat([
         'unit' => $oppUnit->getId(),
         'nb' => $results[\DICE_FLAG],
-        'canBreakthrough' => $canBreakthrough,
       ]);
       $this->gamestate->nextState('retreat');
       return;

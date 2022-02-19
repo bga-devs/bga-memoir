@@ -10,6 +10,7 @@ class Globals extends \M44\Helpers\DB_Manager
 {
   protected static $initialized = false;
   protected static $variables = [
+    'changeActivePlayer' => 'obj', // Used for the generic "changeActivePlayer" state
     'scenario' => 'obj',
     'turn' => 'int',
     'sideTurn' => 'str', // Store which side is currently playing
