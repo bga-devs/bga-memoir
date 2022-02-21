@@ -146,15 +146,15 @@ $machinestates = [
     'descriptionmyturn' => '',
     'type' => 'game',
     'action' => 'stAttackThrow', // TODO: possible that attack not possible anymore
-    'transitions' => ['next' => ST_ATTACK_RESOLVE, 'draw' => ST_DRAW, 'attack' => ST_ATTACK],
+    'transitions' => ['retreat' => ST_ATTACK_RETREAT, 'nextAttack' => ST_ATTACK],
   ],
 
-  ST_ATTACK_RESOLVE => [
+  ST_ATTACK_RETREAT => [
     'name' => 'attackResolve',
     'description' => clienttranslate('${actplayer} must retreat the unit'),
     'descriptionmyturn' => clienttranslate('${you} must retreat the unit'),
     'type' => 'activeplayer',
-    'args' => 'argsAttackResolve',
+    'args' => 'argsRetreatUnit',
     'possibleactions' => ['actRetreat'],
     'transitions' => [
       'armorOverrun' => ST_ARMOR_OVERRUN_MOVE,

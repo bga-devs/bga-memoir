@@ -83,21 +83,21 @@ trait AttackUnitsTrait
       'unitId' => $unitId,
       'x' => $x,
       'y' => $y,
+      'oppUnit' => $oppUnit->getId(),
       'nDice' => $nDice,
       'distance' => $target['d'],
       'ambush' => false,
+      'retreat' => 0,
     ]);
 
     // opponent players
-    // Players::getSideTeam
-    //
-    if (in_array($oppUnit->getNation(), Units::$nations[AXIS])) {
-      $oppPlayer = Players::getSide(AXIS);
-    } else {
-      $oppPlayer = Players::getSide(\ALLIES);
-    }
+    // if (in_array($oppUnit->getNation(), Units::$nations[AXIS])) {
+    //   $oppPlayer = Players::getSide(AXIS);
+    // } else {
+    //   $oppPlayer = Players::getSide(\ALLIES);
+    // }
 
-    $this->nextState('ambush', $oppPlayer);
+    $this->nextState('ambush', $oppUnit->getPlayer());
     return;
     // // if distance = 1, then ask for ambush
     // if ($target['d'] == 1) {
@@ -110,17 +110,83 @@ trait AttackUnitsTrait
   /**
    * Resolve an attack
    */
-  public function actResolveAttack($unit, $oppUnit, $nDice, $distance)
+  // public function actResolveAttack($unit, $oppUnit, $nDice, $distance)
+  // {
+  //   $player = Players::getActive();
+  //   $results = array_count_values($this->rollDice($player, $nDice, $oppUnit->getPos()));
+  //   $hits = $oppUnit->getHits($results);
+  //   $eliminated = false;
+  //   $canBreakthrough = false;
+  //
+  //   if ($distance == 1 && ($unit->getType() == \ARMOR || $unit->getType() == \INFANTRY)) {
+  //     $canBreakthrough = true;
+  //   }
+  //
+  //   if ($hits > 0) {
+  //     $eliminated = $oppUnit->takeDamage($hits);
+  //     Notifications::takeDamage($player, $oppUnit, $hits);
+  //     if ($eliminated) {
+  //       //TODO : Manage scenario specific
+  //       // TODO : store type of unit
+  //       Teams::incMedals(1, $player->getSide());
+  //       Notifications::scoreMedal($player, 1);
+  //       if ($canBreakthrough) {
+  //         $this->gamestate->nextState('breakthrough');
+  //         return;
+  //       }
+  //     }
+  //   }
+  //
+  //   if (isset($results[DICE_FLAG]) && !$eliminated) {
+  //     Globals::setRetreat([
+  //       'unit' => $oppUnit->getId(),
+  //       'nb' => $results[\DICE_FLAG],
+  //     ]);
+  //     $this->gamestate->nextState('retreat');
+  //     return;
+  //   }
+  //
+  //   // TOOD: check if remaining units to fight and transition accordingly
+  //   die('test');
+  // }
+
+  public function stAttackThrow()
   {
     $player = Players::getActive();
-    $results = array_count_values($this->rollDice($player, $nDice, $oppUnit->getPos()));
+    $currentAttack = Globals::getCurrentAttack();
+    $oppUnit = Units::get($currentAttack['oppUnit']);
+    $currentUnit = Units::get($currentAttack['unitId']);
+
+    // check if initial distance = 1 & new distance != then cannot attack
+    if (
+      $currentAttack['distance'] == 1
+      // && $currentAttack['ambush']
+    ) {
+      // check new distance
+      $argsAttack = $this->argsAttackUnit();
+      $k = Utils::array_usearch($argsAttack['units'][$currentAttack['unitId']], function ($cell) use ($currentAttack) {
+        return $cell['x'] == $currentAttack['x'] && $cell['y'] == $currentAttack['y'];
+      });
+
+      if ($k === false) {
+        Notifications::message(
+          clienttranslate('${player_name} unit has retreated due to Ambush. Attack cannot take place'),
+          ['player' => $player]
+        );
+        $this->nextState('nextAttack');
+        return;
+      }
+    }
+
+    // launch dice
+    $results = array_count_values($this->rollDice($player, $currentAttack['nDice'], $oppUnit->getPos()));
     $hits = $oppUnit->getHits($results);
     $eliminated = false;
-    $canBreakthrough = false;
-
-    if ($distance == 1 && ($unit->getType() == \ARMOR || $unit->getType() == \INFANTRY)) {
-      $canBreakthrough = true;
-    }
+    // $canBreakthrough = false;
+    //
+    // if ($distance == 1 && ($unit->getType() == \ARMOR || $unit->getType() == \INFANTRY)) {
+    //   $canBreakthrough = true;
+    // }
 
     if ($hits > 0) {
       $eliminated = $oppUnit->takeDamage($hits);
@@ -130,24 +196,19 @@ trait AttackUnitsTrait
         // TODO : store type of unit
         Teams::incMedals(1, $player->getSide());
         Notifications::scoreMedal($player, 1);
-        if ($canBreakthrough) {
-          $this->gamestate->nextState('breakthrough');
-          return;
-        }
       }
     }
 
     if (isset($results[DICE_FLAG]) && !$eliminated) {
-      Globals::setRetreat([
-        'unit' => $oppUnit->getId(),
-        'nb' => $results[\DICE_FLAG],
-      ]);
-      $this->gamestate->nextState('retreat');
+      $currentAttack['retreat'] = $results[\DICE_FLAG];
+      Globals::setCurrentAttack($currentAttack);
+      $this->nextState('retreat', $oppUnit->getPlayer());
       return;
     }
 
-    // TOOD: check if remaining units to fight and transition accordingly
-    die('test');
+    // TODO: manage specific cards (behind ennemy lines...)
+
+    $this->nextState('nextAttack');
   }
 
   public function rollDice($player, $nDice, $cell = null)
@@ -158,6 +219,9 @@ trait AttackUnitsTrait
       $k = array_rand($dice);
       $results[] = $dice[$k];
     }
+
+    // debug
+    $results = [DICE_FLAG, DICE_STAR, DICE_FLAG];
 
     Notifications::rollDice($player, $nDice, $results, $cell);
     return $results;

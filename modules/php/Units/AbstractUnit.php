@@ -121,6 +121,15 @@ class AbstractUnit extends \M44\Helpers\DB_Manager implements \JsonSerializable
     }
   }
 
+  public function getPlayer()
+  {
+    if (in_array($this->nation, Units::$nations[AXIS])) {
+      return Players::getSide(AXIS);
+    } else {
+      return Players::getSide(\ALLIES);
+    }
+  }
+
   public function getExtraDatas($variable)
   {
     return $this->extraDatas[$variable] ?? null;
@@ -260,5 +269,10 @@ class AbstractUnit extends \M44\Helpers\DB_Manager implements \JsonSerializable
       $this->decFigures($hits);
       return false;
     }
+  }
+
+  public function isEliminated()
+  {
+    return $this->figures == 0;
   }
 }

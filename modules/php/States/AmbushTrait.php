@@ -34,6 +34,7 @@ trait AmbushTrait
 
   function actAmbush()
   {
+    // ambush = true
   }
 
   function actPassAmbush($silent = false)

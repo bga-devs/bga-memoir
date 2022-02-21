@@ -178,6 +178,14 @@ class Notifications
     self::notifyAll('clearUnitsStatus', '', []);
   }
 
+  public static function takeDamage($player, $oppUnit, $hits)
+  {
+    self::notifyAll('takeDamage', clienttranslate('${player_name}\'s unit take ${hits} damage'), [
+      'player' => $player,
+      'hits' => $hits,
+    ]);
+  }
+
   /*********************
    **** UPDATE ARGS ****
    *********************/
