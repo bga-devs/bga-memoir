@@ -61,7 +61,7 @@ trait OrderUnitsTrait
     }
 
     // Notify
-    Notifications::orderUnits($player, Units::get($unitIds), Units::get($onTheMoveIds));
+    Notifications::orderUnits($player, Units::getMany($unitIds), Units::getMany($onTheMoveIds));
     $this->gamestate->nextState('moveUnits');
   }
 }
