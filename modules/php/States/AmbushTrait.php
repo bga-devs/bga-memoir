@@ -40,6 +40,8 @@ trait AmbushTrait
   function actPassAmbush($silent = false)
   {
     if (!$silent) {
+      // Sanity checks
+      self::checkAction('actPassAmbush');
       Notifications::message(clienttranslate('${player_name} does not react to the attack'), [
         'player' => Players::getActive(),
       ]);

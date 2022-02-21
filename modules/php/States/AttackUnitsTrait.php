@@ -158,10 +158,7 @@ trait AttackUnitsTrait
     $currentUnit = Units::get($currentAttack['unitId']);
 
     // check if initial distance = 1 & new distance != then cannot attack
-    if (
-      $currentAttack['distance'] == 1
-      // && $currentAttack['ambush']
-    ) {
+    if ($currentAttack['distance'] == 1 && $currentAttack['ambush']) {
       // check new distance
       $argsAttack = $this->argsAttackUnit();
       $k = Utils::array_usearch($argsAttack['units'][$currentAttack['unitId']], function ($cell) use ($currentAttack) {
@@ -189,14 +186,15 @@ trait AttackUnitsTrait
     // }
 
     if ($hits > 0) {
-      $eliminated = $oppUnit->takeDamage($hits);
-      Notifications::takeDamage($player, $oppUnit, $hits);
-      if ($eliminated) {
-        //TODO : Manage scenario specific
-        // TODO : store type of unit
-        Teams::incMedals(1, $player->getSide());
-        Notifications::scoreMedal($player, 1);
-      }
+      $eliminated = $this->damageUnit($oppUnit, $hits, $player);
+      // $eliminated = $oppUnit->takeDamage($hits);
+      // Notifications::takeDamage($player, $oppUnit, $hits);
+      // if ($eliminated) {
+      //   //TODO : Manage scenario specific
+      //   // TODO : store type of unit
+      //   Teams::incMedals(1, $player->getSide());
+      //   Notifications::scoreMedal($player, 1);
+      // }
     }
 
     if (isset($results[DICE_FLAG]) && !$eliminated) {
@@ -209,6 +207,19 @@ trait AttackUnitsTrait
     // TODO: manage specific cards (behind ennemy lines...)
 
     $this->nextState('nextAttack');
+  }
+
+  public function damageUnit($unit, $hits, $player)
+  {
+    $eliminated = $unit->takeDamage($hits);
+    Notifications::takeDamage($player, $unit, $hits);
+    if ($eliminated) {
+      //TODO : Manage scenario specific
+      // TODO : store type of unit
+      Teams::incMedals(1, $player->getSide());
+      Notifications::scoreMedal($player, 1);
+    }
+    return $eliminated;
   }
 
   public function rollDice($player, $nDice, $cell = null)

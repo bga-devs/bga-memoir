@@ -150,14 +150,16 @@ $machinestates = [
   ],
 
   ST_ATTACK_RETREAT => [
-    'name' => 'attackResolve',
+    'name' => 'attackRetreat',
     'description' => clienttranslate('${actplayer} must retreat the unit'),
     'descriptionmyturn' => clienttranslate('${you} must retreat the unit'),
     'type' => 'activeplayer',
     'args' => 'argsRetreatUnit',
-    'possibleactions' => ['actRetreat'],
+    'action' => 'stRetreatUnit',
+    'possibleactions' => ['actRetreat', 'actRetreatDone'],
     'transitions' => [
       'armorOverrun' => ST_ARMOR_OVERRUN_MOVE,
+      'retreat' => ST_ATTACK_RETREAT,
     ],
   ],
 

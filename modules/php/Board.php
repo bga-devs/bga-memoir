@@ -413,7 +413,10 @@ class Board
     // Compute all cells reachable at distance $d in the good vertical direction
     $d = $maxFlags;
     $deltaY = $unit->getCampDirection();
-    list($cells, $markers) = self::getCellsAtDistance($unit->getPos(), $d, function ($source, $target, $d) use ($unit, $deltaY) {
+    list($cells, $markers) = self::getCellsAtDistance($unit->getPos(), $d, function ($source, $target, $d) use (
+      $unit,
+      $deltaY
+    ) {
       // Check direction
       if ($source['y'] + $deltaY != $target['y']) {
         return \INFINITY;
@@ -437,7 +440,8 @@ class Board
     });
 
     // TODO : filtering is still not good, must take into account hits
-
+    // TODO: manage frozen river?
+    // throw new \feException(print_r($cells));
     // Keep only cells at distance in [$flags - $nIgnore; $flags]
     Utils::filter($cells, function ($cell) use ($minFlags, $maxFlags) {
       return $cell['d'] <= $maxFlags && $minFlags <= $cell['d'];
@@ -447,7 +451,7 @@ class Board
   }
 
   /////////////////////////////////////////////
-  //  ____      _     _   _   _ _   _ _
+  //   ____      _     _   _   _ _   _ _
   //  / ___|_ __(_) __| | | | | | |_(_) |___
   // | |  _| '__| |/ _` | | | | | __| | / __|
   // | |_| | |  | | (_| | | |_| | |_| | \__ \
