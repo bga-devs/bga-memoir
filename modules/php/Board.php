@@ -51,7 +51,9 @@ class Board
 
     // Add the units
     foreach (Units::getAllOrdered() as $unit) {
-      self::$grid[$unit->getX()][$unit->getY()]['unit'] = $unit;
+      if ($unit->getNUnits() > 0) {
+        self::$grid[$unit->getX()][$unit->getY()]['unit'] = $unit;
+      }
     }
 
     // Add the labels
@@ -70,7 +72,9 @@ class Board
       }
     }
     foreach (Units::getAllOrdered() as $unit) {
-      self::$grid[$unit->getX()][$unit->getY()]['unit'] = $unit;
+      if ($unit->getNUnits() > 0) {
+        self::$grid[$unit->getX()][$unit->getY()]['unit'] = $unit;
+      }
     }
   }
 

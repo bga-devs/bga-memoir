@@ -173,21 +173,21 @@ $machinestates = [
     'possibleactions' => ['actArmorMove', 'actNextAttack'],
     'transitions' => [
       'attack' => ST_ARMOR_OVERRUN_ATTACK,
-      'next' => ST_ATTACK,
+      'next' => ST_TAKING_GROUND,
     ],
   ],
 
   ST_ARMOR_OVERRUN_ATTACK => [
     'name' => 'armorOverrunAttack',
-    'description' => clienttranslate('${actplayer} may attack an unit'),
-    'descriptionmyturn' => clienttranslate('${you} may attack an unit'),
+    'description' => clienttranslate('${actplayer} must attack an unit'),
+    'descriptionmyturn' => clienttranslate('${you} must attack an unit'),
     'type' => 'activeplayer',
     'args' => 'argsArmorOverrunAttack',
     'action' => 'stArmorOverrunAttack',
     'possibleactions' => ['actAttack', 'actNextAttack'],
     'transitions' => [
       'rereat' => ST_ARMOR_OVERRUN_RETREAT,
-      'next' => ST_ATTACK,
+      'next' => ST_TAKING_GROUND,
     ],
   ],
 

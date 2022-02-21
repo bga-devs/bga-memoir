@@ -89,6 +89,12 @@ class AbstractUnit extends \M44\Helpers\DB_Manager implements \JsonSerializable
       'y' => $this->y,
     ];
   }
+
+  public function getNUnits()
+  {
+    return $this->nUnits;
+  }
+
   public function getMaxUnits()
   {
     return $this->maxUnits;
@@ -262,8 +268,9 @@ class AbstractUnit extends \M44\Helpers\DB_Manager implements \JsonSerializable
    */
   public function takeDamage($hits)
   {
-    if ($hits > $this->nUnits) {
+    if ($hits >= $this->nUnits) {
       $this->decFigures($this->nUnits);
+      // $this->moveTo(['x' => -1, 'y' => -1]);
       return true;
     } else {
       $this->decFigures($hits);
