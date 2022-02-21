@@ -270,7 +270,7 @@ class AbstractUnit extends \M44\Helpers\DB_Manager implements \JsonSerializable
   {
     if ($hits >= $this->nUnits) {
       $this->decFigures($this->nUnits);
-      // $this->moveTo(['x' => -1, 'y' => -1]);
+      Board::refreshUnits();
       return true;
     } else {
       $this->decFigures($hits);

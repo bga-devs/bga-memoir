@@ -50,7 +50,7 @@ trait RetreatUnitTrait
     if ($currentAttack['retreat'] > $max) {
       $damage = $currentAttack['retreat'] - $max;
       $unit = Units::get($currentAttack['oppUnit']);
-      $this->damageUnit(Units::get($currentAttack['oppUnit']), $damage, $unit->getPlayer());
+      $this->damageUnit($unit, $damage);
       $currentAttack['retreat'] -= $damage;
       Globals::setCurrentAttack($currentAttack);
 

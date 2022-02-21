@@ -186,7 +186,7 @@ trait AttackUnitsTrait
     // }
 
     if ($hits > 0) {
-      $eliminated = $this->damageUnit($oppUnit, $hits, $player);
+      $eliminated = $this->damageUnit($oppUnit, $hits);
       // $eliminated = $oppUnit->takeDamage($hits);
       // Notifications::takeDamage($player, $oppUnit, $hits);
       // if ($eliminated) {
@@ -209,15 +209,16 @@ trait AttackUnitsTrait
     $this->nextState('nextAttack');
   }
 
-  public function damageUnit($unit, $hits, $player)
+  public function damageUnit($unit, $hits)
   {
     $eliminated = $unit->takeDamage($hits);
+    $player = $unit->getPlayer();
     Notifications::takeDamage($player, $unit, $hits);
     if ($eliminated) {
       //TODO : Manage scenario specific
       // TODO : store type of unit
-      Teams::incMedals(1, $player->getSide());
-      Notifications::scoreMedal($player, 1);
+      Teams::incMedals(1, Players::get(Globals::getActivePlayer())->getTeam());
+      Notifications::scoreMedal(Players::get(Globals::getActivePlayer()), 1);
     }
     return $eliminated;
   }
@@ -232,7 +233,7 @@ trait AttackUnitsTrait
     }
 
     // debug
-    $results = [DICE_FLAG, DICE_STAR, DICE_FLAG];
+    $results = [DICE_INFANTRY, DICE_INFANTRY, DICE_INFANTRY, DICE_FLAG];
 
     Notifications::rollDice($player, $nDice, $results, $cell);
     return $results;

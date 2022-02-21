@@ -13,6 +13,7 @@ trait OverrunTrait
 {
   public function argsArmorOverrunMove()
   {
+    $currentAttack = Globals::getCurrentAttack();
   }
 
   public function stArmorOverrun()

@@ -23,7 +23,7 @@ class Teams extends \M44\Helpers\DB_Manager
   {
     return self::DB()
       ->where('side', $side)
-      ->getSingle();
+      ->getSingle()['side'];
   }
 
   public function getSideTurn()
