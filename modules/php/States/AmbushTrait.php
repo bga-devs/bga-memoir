@@ -12,14 +12,37 @@ trait AmbushTrait
 {
   function argsOpponentAmbush()
   {
-    return [];
+    $player = Players::getActive();
+    $cards = $player->getCards();
+    $cards = $cards
+      ->filter(function ($card) {
+        return $card->getType() == CARD_AMBUSH;
+      })
+      ->getIds();
+    return ['_private' => ['active' => ['cards' => $cards]]];
+  }
+
+  function stAmbush()
+  {
+    // check if ambush viable else pass
+    $currentAttack = Globals::getCurrentAttack();
+
+    if ($currentAttack['distance'] != 1) {
+      $this->actPassAmbush(true);
+    }
   }
 
   function actAmbush()
   {
   }
 
-  function actPassAmbush()
+  function actPassAmbush($silent = false)
   {
+    if (!$silent) {
+      Notifications::message(clienttranslate('${player_name} does not react to the attack'), [
+        'player' => Players::getActive(),
+      ]);
+    }
+    $this->nextState('pass', Globals::getActivePlayer());
   }
 }

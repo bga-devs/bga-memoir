@@ -67,6 +67,11 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
     return $this->location;
   }
 
+  public function getType()
+  {
+    return $this->type;
+  }
+
   public function getState()
   {
     return $this->state;

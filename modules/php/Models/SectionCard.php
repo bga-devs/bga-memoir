@@ -77,4 +77,10 @@ class SectionCard extends Card
       }),
     ];
   }
+
+  public function updateDiceRoll($nDice)
+  {
+    // TODO: add cards (addition or replace)
+    return $nDice;
+  }
 }

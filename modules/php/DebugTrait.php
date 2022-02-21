@@ -18,7 +18,7 @@ trait DebugTrait
 
   function vt()
   {
-    $this->actChooseCard([24]);
+    $this->actChooseCard([22]);
   }
 
   function tp($pId, $unitId, $min, $max)

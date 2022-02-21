@@ -84,22 +84,22 @@ $machinestates = [
     'args' => 'argsAttackUnit',
     'possibleactions' => ['actAttackUnit', 'actAttackUnitsDone'],
     'transitions' => [
-      'ambush' => ST_PRE_AMBUSH,
-      'attack' => ST_ATTACK_THROW,
+      'ambush' => ST_OPPONENT_AMBUSH,
+      // 'attack' => ST_ATTACK_THROW,
       'draw' => ST_DRAW,
-      'retreat' => ST_RETREAT_CHANGE,
-      'breakthrough' => ST_BREAKTHROUGH,
+      // 'retreat' => ST_RETREAT_CHANGE,
+      // 'breakthrough' => ST_BREAKTHROUGH,
     ], // attack if not close assault
   ],
 
-  ST_PRE_AMBUSH => [
-    'name' => 'preAmbush',
-    'description' => '',
-    'descriptionmyturn' => '',
-    'type' => 'game',
-    'action' => 'stChangePlayer',
-    'transitions' => ['next' => ST_OPPONENT_AMBUSH],
-  ],
+  // ST_PRE_AMBUSH => [
+  //   'name' => 'preAmbush',
+  //   'description' => '',
+  //   'descriptionmyturn' => '',
+  //   'type' => 'game',
+  //   'action' => 'stChangePlayer',
+  //   'transitions' => ['next' => ST_OPPONENT_AMBUSH],
+  // ],
 
   ST_OPPONENT_AMBUSH => [
     'name' => 'opponentAmbush',
@@ -107,37 +107,38 @@ $machinestates = [
     'descriptionmyturn' => clienttranslate('${you} can react to the attack'),
     'type' => 'activeplayer',
     'args' => 'argsOpponentAmbush',
+    'action' => 'stAmbush',
     'possibleactions' => ['actAmbush', 'actPassAmbush'],
-    'transitions' => ['pass' => ST_POST_AMBUSH, 'ambush' => ST_AMBUSH_ATTACK],
+    'transitions' => ['pass' => ST_ATTACK_THROW, 'resolve' => ST_AMBUSH_RESOLVE],
   ],
 
-  ST_AMBUSH_ATTACK => [
-    'name' => 'ambushAttack',
-    'description' => '',
-    'descriptionmyturn' => '',
-    'type' => 'game',
-    'action' => 'stAttackThrow',
-    'transitions' => ['next' => ST_AMBUSH_RESOLVE, 'endAmbush' => ST_POST_AMBUSH],
-  ],
+  // ST_AMBUSH_ATTACK => [
+  //   'name' => 'ambushAttack',
+  //   'description' => '',
+  //   'descriptionmyturn' => '',
+  //   'type' => 'game',
+  //   'action' => 'stAttackThrow',
+  //   'transitions' => ['next' => ST_AMBUSH_RESOLVE, 'endAmbush' => ST_POST_AMBUSH],
+  // ],
 
   ST_AMBUSH_RESOLVE => [
-    'name' => 'attackResolve',
-    'description' => clienttranslate('${actplayer} must retreat the unit'),
-    'descriptionmyturn' => clienttranslate('${you} must retreat the unit'),
+    'name' => 'ambushResolve',
+    'description' => clienttranslate('${actplayer} must retreat the unit (Ambush effect)'),
+    'descriptionmyturn' => clienttranslate('${you} must retreat the unit (Ambush effect)'),
     'type' => 'activeplayer',
-    'args' => 'argsAttackResolve',
+    'args' => 'argsAmbushResolve',
     'possibleactions' => ['actRetreat'],
-    'transitions' => ['endRound' => ST_POST_AMBUSH],
+    'transitions' => ['attack' => ST_ATTACK_THROW],
   ],
 
-  ST_POST_AMBUSH => [
-    'name' => 'postAmbush',
-    'description' => '',
-    'descriptionmyturn' => '',
-    'type' => 'game',
-    'action' => 'stChangePlayer',
-    'transitions' => ['next' => ST_ATTACK_THROW],
-  ],
+  // ST_POST_AMBUSH => [
+  //   'name' => 'postAmbush',
+  //   'description' => '',
+  //   'descriptionmyturn' => '',
+  //   'type' => 'game',
+  //   'action' => 'stChangePlayer',
+  //   'transitions' => ['next' => ST_ATTACK_THROW],
+  // ],
 
   ST_ATTACK_THROW => [
     'name' => 'attackThrow',
@@ -152,28 +153,63 @@ $machinestates = [
     'name' => 'attackResolve',
     'description' => clienttranslate('${actplayer} must retreat the unit'),
     'descriptionmyturn' => clienttranslate('${you} must retreat the unit'),
-    'type' => 'multipleactiveplayer',
+    'type' => 'activeplayer',
     'args' => 'argsAttackResolve',
     'possibleactions' => ['actRetreat'],
     'transitions' => [
-      'draw' => ST_DRAW,
-      'attack' => ST_ATTACK,
-      'retreat' => ST_RETREAT,
-      'breakthrough' => ST_BREAKTHROUGH,
+      'armorOverrun' => ST_ARMOR_OVERRUN_MOVE,
     ],
   ],
 
-
-  ST_RETREAT => [
-    'name' => 'retreat',
-    'description' => clienttranslate('${actplayer} must retreat attacked unit'),
-    'descriptionmyturn' => clienttranslate('${you} must retreat attacked unit'),
-    'descriptionskippable' => clienttranslate('${actplayer} may retreat attacked unit'),
-    'descriptionmyturnskippable' => clienttranslate('${you} may retreat attacked unit'),
+  ST_ARMOR_OVERRUN_MOVE => [
+    'name' => 'armorOverrunMove',
+    'description' => clienttranslate('${actplayer} may make an Armor overrun and attack'),
+    'descriptionmyturn' => clienttranslate('${you} may make an Armor overrun and attack'),
     'type' => 'activeplayer',
-    'args' => 'argsRetreatUnit',
-    'action' => 'stRetreatUnit',
-    'possibleactions' => ['actRetreatUnit', 'actRetreatUnitsDone'],
+    'args' => 'argsArmorOverrunMove',
+    'action' => 'stArmorOverrun',
+    'possibleactions' => ['actArmorMove', 'actNextAttack'],
+    'transitions' => [
+      'attack' => ST_ARMOR_OVERRUN_ATTACK,
+      'next' => ST_ATTACK,
+    ],
+  ],
+
+  ST_ARMOR_OVERRUN_ATTACK => [
+    'name' => 'armorOverrunAttack',
+    'description' => clienttranslate('${actplayer} may attack an unit'),
+    'descriptionmyturn' => clienttranslate('${you} may attack an unit'),
+    'type' => 'activeplayer',
+    'args' => 'argsArmorOverrunAttack',
+    'action' => 'stArmorOverrunAttack',
+    'possibleactions' => ['actAttack', 'actNextAttack'],
+    'transitions' => [
+      'rereat' => ST_ARMOR_OVERRUN_RETREAT,
+      'next' => ST_ATTACK,
+    ],
+  ],
+
+  ST_ARMOR_OVERRUN_RETREAT => [
+    'name' => 'armorOverrunRetreat',
+    'description' => clienttranslate('${actplayer} must retreat the unit (Armor overrun effect)'),
+    'descriptionmyturn' => clienttranslate('${you} must retreat the unit (Armor overrun effect)'),
+    'type' => 'activeplayer',
+    'args' => 'argsOverrunRetreat',
+    'possibleactions' => ['actRetreat'],
+    'transitions' => ['takeGround' => ST_TAKING_GROUND],
+  ],
+
+  ST_TAKING_GROUND => [
+    'name' => 'takingGround',
+    'description' => clienttranslate('${actplayer} may take the ground'),
+    'descriptionmyturn' => clienttranslate('${you} may take the ground'),
+    'type' => 'activeplayer',
+    'args' => 'argsTakeGround',
+    'action' => 'stTakeGround',
+    'possibleactions' => ['actTakeGround', 'actNextAttack'],
+    'transitions' => [
+      'next' => ST_ATTACK,
+    ],
   ],
 
   ST_DRAW => [
@@ -249,10 +285,8 @@ $machinestates = [
     'type' => 'multipleactiveplayer',
     'args' => 'argsOverlordAttackUnit',
     'possibleactions' => ['actAttackUnit'],
-    'transitions' => ['ambush' => ST_PRE_AMBUSH, 'attack' => ST_ATTACK_THROW], // attack if not close assault
+    'transitions' => ['ambush' => ST_OPPONENT_AMBUSH, 'attack' => ST_ATTACK_THROW], // attack if not close assault
   ],
-
-
 
   // Generic state to change player
   ST_CHANGE_ACTIVE_PLAYER => [

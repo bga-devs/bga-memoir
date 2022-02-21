@@ -55,6 +55,7 @@ trait AttackUnitsTrait
     // Sanity checks
     self::checkAction('actAttackUnit');
     $player = Players::getCurrent();
+    $card = $player->getCardInPlay();
     $args = $this->argsAttackUnit($player);
     if (!\array_key_exists($unitId, $args['units'])) {
       throw new \BgaVisibleSystemException('You cannot attack with this unit. Should not happen');
@@ -75,16 +76,35 @@ trait AttackUnitsTrait
     // Prepare attack
     $unit = Units::get($unitId);
     $unit->incFights(1);
-    $nDice = $target['dice'];
-    // TODO: add dice linked to played card
+    $nDice = $card->updateDiceRoll($target['dice']);
 
-    // if distance = 1, then ask for ambush
-    if ($target['d'] == 1) {
-      // TODO Globals::setPendingAttack(['unitId' => $unitId, 'x' => $x, 'y' => $y]);
-      $this->gamestate->nextState('ambush');
+    // log attack information
+    Globals::setCurrentAttack([
+      'unitId' => $unitId,
+      'x' => $x,
+      'y' => $y,
+      'nDice' => $nDice,
+      'distance' => $target['d'],
+      'ambush' => false,
+    ]);
+
+    // opponent players
+    // Players::getSideTeam
+    //
+    if (in_array($oppUnit->getNation(), Units::$nations[AXIS])) {
+      $oppPlayer = Players::getSide(AXIS);
     } else {
-      $this->actResolveAttack($unit, $oppUnit, $nDice, $target['d']);
+      $oppPlayer = Players::getSide(\ALLIES);
     }
+
+    $this->nextState('ambush', $oppPlayer);
+    return;
+    // // if distance = 1, then ask for ambush
+    // if ($target['d'] == 1) {
+    //   $this->gamestate->nextState('ambush');
+    // } else {
+    //   $this->actResolveAttack($unit, $oppUnit, $nDice, $target['d']);
+    // }
   }
 
   /**

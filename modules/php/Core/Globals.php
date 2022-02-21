@@ -17,7 +17,8 @@ class Globals extends \M44\Helpers\DB_Manager
     'unitMoved' => 'int', // Store last unit moved => probably useless if we add log
     'activePlayer' => 'int', // ???
     'nToKeep' => 'int', // Number of cards to keep in the draw phase
-    'retreat' => 'obj', // ['unit' => id, 'nb' => number of retreats hex]
+    'retreat' => 'obj', // ['unit' => id, 'nb' => number of retreats hsex]
+    'currentAttack' => 'obj', // Store all information of the current attack
   ];
 
   protected static $table = 'global_variables';
