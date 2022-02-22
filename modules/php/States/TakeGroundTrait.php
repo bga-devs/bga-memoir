@@ -9,7 +9,7 @@ use M44\Managers\Units;
 use M44\Helpers\Utils;
 use M44\Board;
 
-trait OverrunTrait
+trait TakeGroundTrait
 {
   /////////////////////////////////
   //  __  __  _____     _______
@@ -18,17 +18,25 @@ trait OverrunTrait
   // | |  | | |_| |\ V / | |___
   // |_|  |_|\___/  \_/  |_____|
   /////////////////////////////////
-  public function argsArmorOverrunMove()
+  public function argsTakeGround()
   {
     $currentAttack = Globals::getCurrentAttack();
     return ['unit' => $currentAttack['unitId'], 'x' => $currentAttack['x'], 'y' => $currentAttack['y']];
   }
 
-  public function stArmorOverrun()
+  public function stTakeGround()
   {
     $currentAttack = Globals::getCurrentAttack();
+    $stateName = $this->gamestate->state()['name'];
+
+    if ($stateName == 'armorOverrunMove') {
+      $unitType = ARMOR;
+    } else {
+      $unitType = \INFANTRY;
+    }
+
     if (
-      Units::get($currentAttack['unitId'])->getType() != \ARMOR ||
+      Units::get($currentAttack['unitId'])->getType() != $unitType ||
       $currentAttack['distance'] != 1 ||
       Board::getUnitInCell($currentAttack['x'], $currentAttack['y']) != null
     ) {
@@ -36,11 +44,11 @@ trait OverrunTrait
     }
   }
 
-  public function actArmorMove()
+  public function actTakeGround()
   {
     // Sanity checks
-    self::checkAction('actArmorMove');
-    $args = $this->argsArmorOverrunMove();
+    self::checkAction('actTakeGround');
+    $args = $this->argsTakeGround();
     $player = Players::getCurrent();
 
     $unit = Units::get($args['unit']);

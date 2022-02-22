@@ -41,7 +41,7 @@ trait AttackUnitsTrait
    */
   public function stAttackUnits()
   {
-    throw new \feException(print_r(\debug_print_backtrace()));
+    // throw new \feException(print_r(\debug_print_backtrace()));
     $args = $this->argsAttackUnit();
     $nTargets = 0;
     foreach ($args['units'] as $targets) {

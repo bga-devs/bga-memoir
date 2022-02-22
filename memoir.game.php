@@ -51,7 +51,7 @@ class memoir extends Table
   use M44\States\DrawCardsTrait;
   use M44\States\AmbushTrait;
   use M44\States\RetreatUnitTrait;
-  use M44\States\OverrunTrait;
+  use M44\States\TakeGroundTrait;
 
   public static $instance = null;
   function __construct()

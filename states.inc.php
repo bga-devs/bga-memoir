@@ -138,9 +138,9 @@ $machinestates = [
     'description' => clienttranslate('${actplayer} may take ground and attack (Armor overrun)'),
     'descriptionmyturn' => clienttranslate('${you} may take ground and attack (Armor overrun)'),
     'type' => 'activeplayer',
-    'args' => 'argsArmorOverrunMove',
-    'action' => 'stArmorOverrun',
-    'possibleactions' => ['actArmorMove', 'actNextAttack'],
+    'args' => 'argsTakeGround',
+    'action' => 'stTakeGround',
+    'possibleactions' => ['actTakeGround', 'actNextAttack'],
     'transitions' => [
       'attack' => ST_ARMOR_OVERRUN_ATTACK,
       'next' => ST_TAKING_GROUND,
@@ -211,6 +211,7 @@ $machinestates = [
     'possibleactions' => ['actTakeGround', 'actNextAttack'],
     'transitions' => [
       'next' => ST_ATTACK,
+      'attack' => ST_ATTACK,
     ],
   ],
 
