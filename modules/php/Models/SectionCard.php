@@ -12,6 +12,7 @@ class SectionCard extends Card
   protected $nUnits = null;
   protected $nUnitsOnTheMove = null;
   protected $orderUnitsTitles = [];
+  protected $nbFights = 1;
 
   public function getSubtitle()
   {
@@ -73,6 +74,9 @@ class SectionCard extends Card
 
     return [
       'units' => $units->map(function ($unit) {
+        if ($unit->getFights() >= $this->nbFights) {
+          return [];
+        }
         return $unit->getTargetableUnits();
       }),
     ];
