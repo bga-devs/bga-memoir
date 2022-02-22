@@ -69,7 +69,7 @@ trait TakeGroundTrait
       $msg = clienttranslate('${player_name} does not attack');
     }
 
-    Notifications::messsage($msg, [
+    Notifications::message($msg, [
       'player' => Players::getCurrent(),
     ]);
     $this->nextState('next');
@@ -85,7 +85,7 @@ trait TakeGroundTrait
 
   public function stArmorOverrunAttack()
   {
-    $args = $this->argsArmorOverrunAttack();
+    $args = $this->argsAttackUnit();
     $currentAttack = Globals::getCurrentAttack();
 
     if (count($args['units'][$currentAttack['unitId']]) == 0) {

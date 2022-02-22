@@ -26,13 +26,17 @@ trait AttackUnitsTrait
   public function argsAttackUnit($player = null)
   {
     $player = $player ?? Players::getActive();
+    $ignoreFight = $this->gamestate->state()['name'] == 'armorOverrunAttack';
+
     $card = $player->getCardInPlay();
-    $args = $card->getArgsAttackUnits();
+    $args = $card->getArgsAttackUnits($ignoreFight);
     Utils::clearPaths($args['units']);
-    if ($this->gamestate->state()['name'] == 'armorOverrunAttack') {
+
+    if ($ignoreFight) {
       $currentAttack = Globals::getCurrentAttack();
       return ['units' => [$currentAttack['unitId'] => $args['units'][$currentAttack['unitId']] ?? []]];
     }
+
     return $args;
   }
 

@@ -67,14 +67,25 @@ class SectionCard extends Card
     ];
   }
 
-  public function getArgsAttackUnits()
+  // ignoreFight => ignore number of fights (case of overrun)
+  public function getArgsAttackUnits($ignoreFight = false)
   {
     $player = $this->getPlayer();
     $units = Units::getActivatedByCard($this);
 
+    // check if there is a unit already fighting
+    $forceUnit = $units->filter(function ($unit) {
+      return $unit->getFights() != 0 && $unit->getFights() < $this->nbFights;
+    });
+
+    if (count($forceUnit) != 0) {
+      $id = $forceUnit->getIds()[0];
+      return ['units' => [$id => $units[$id]->getTargetableUnits()]];
+    }
+
     return [
-      'units' => $units->map(function ($unit) {
-        if ($unit->getFights() >= $this->nbFights) {
+      'units' => $units->map(function ($unit) use ($ignoreFight) {
+        if (!$ignoreFight && $unit->getFights() >= $this->nbFights) {
           return [];
         }
         return $unit->getTargetableUnits();
