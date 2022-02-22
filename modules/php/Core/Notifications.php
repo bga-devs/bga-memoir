@@ -111,6 +111,16 @@ class Notifications
     ]);
   }
 
+  public static function takeGround($player, $unitId, $x, $y)
+  {
+    self::notifyAll('moveUnit', clienttranslate('${player_name} takes ground after successfull attack'), [
+      'player' => $player,
+      'unitId' => $unitId,
+      'x' => $x,
+      'y' => $y,
+    ]);
+  }
+
   public static function drawCards($player, $cards, $silent = false)
   {
     $msg = $silent ? '' : clienttranslate('${player_name} draws ${nb} card(s)');
@@ -180,7 +190,7 @@ class Notifications
 
   public static function takeDamage($player, $oppUnit, $hits)
   {
-    self::notifyAll('takeDamage', clienttranslate('${player_name}\'s unit take ${hits} damage'), [
+    self::notifyAll('takeDamage', clienttranslate('${player_name}\'s unit takes ${hits} damage'), [
       'player' => $player,
       'hits' => $hits,
     ]);

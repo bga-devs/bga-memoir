@@ -29,6 +29,10 @@ trait AttackUnitsTrait
     $card = $player->getCardInPlay();
     $args = $card->getArgsAttackUnits();
     Utils::clearPaths($args['units']);
+    if ($this->gamestate->state()['name'] == 'armorOverrunAttack') {
+      $currentAttack = Globals::getCurrentAttack();
+      return ['units' => [$currentAttack['unitId'] => $args['units'][$currentAttack['unitId']] ?? []]];
+    }
     return $args;
   }
 
@@ -37,6 +41,7 @@ trait AttackUnitsTrait
    */
   public function stAttackUnits()
   {
+    throw new \feException(print_r(\debug_print_backtrace()));
     $args = $this->argsAttackUnit();
     $nTargets = 0;
     foreach ($args['units'] as $targets) {
@@ -54,6 +59,7 @@ trait AttackUnitsTrait
   {
     // Sanity checks
     self::checkAction('actAttackUnit');
+
     $player = Players::getCurrent();
     $card = $player->getCardInPlay();
     $args = $this->argsAttackUnit($player);
@@ -75,7 +81,9 @@ trait AttackUnitsTrait
 
     // Prepare attack
     $unit = Units::get($unitId);
-    $unit->incFights(1);
+    if ($this->gamestate->state()['name'] == 'attackUnits') {
+      $unit->incFights(1);
+    }
     $nDice = $card->updateDiceRoll($target['dice']);
 
     // log attack information
@@ -86,8 +94,8 @@ trait AttackUnitsTrait
       'oppUnit' => $oppUnit->getId(),
       'nDice' => $nDice,
       'distance' => $target['d'],
-      'ambush' => false,
       'retreat' => 0,
+      'ambush' => false,
     ]);
 
     // opponent players
@@ -110,45 +118,6 @@ trait AttackUnitsTrait
   /**
    * Resolve an attack
    */
-  // public function actResolveAttack($unit, $oppUnit, $nDice, $distance)
-  // {
-  //   $player = Players::getActive();
-  //   $results = array_count_values($this->rollDice($player, $nDice, $oppUnit->getPos()));
-  //   $hits = $oppUnit->getHits($results);
-  //   $eliminated = false;
-  //   $canBreakthrough = false;
-  //
-  //   if ($distance == 1 && ($unit->getType() == \ARMOR || $unit->getType() == \INFANTRY)) {
-  //     $canBreakthrough = true;
-  //   }
-  //
-  //   if ($hits > 0) {
-  //     $eliminated = $oppUnit->takeDamage($hits);
-  //     Notifications::takeDamage($player, $oppUnit, $hits);
-  //     if ($eliminated) {
-  //       //TODO : Manage scenario specific
-  //       // TODO : store type of unit
-  //       Teams::incMedals(1, $player->getSide());
-  //       Notifications::scoreMedal($player, 1);
-  //       if ($canBreakthrough) {
-  //         $this->gamestate->nextState('breakthrough');
-  //         return;
-  //       }
-  //     }
-  //   }
-  //
-  //   if (isset($results[DICE_FLAG]) && !$eliminated) {
-  //     Globals::setRetreat([
-  //       'unit' => $oppUnit->getId(),
-  //       'nb' => $results[\DICE_FLAG],
-  //     ]);
-  //     $this->gamestate->nextState('retreat');
-  //     return;
-  //   }
-  //
-  //   // TOOD: check if remaining units to fight and transition accordingly
-  //   die('test');
-  // }
 
   public function stAttackThrow()
   {
@@ -179,11 +148,6 @@ trait AttackUnitsTrait
     $results = array_count_values($this->rollDice($player, $currentAttack['nDice'], $oppUnit->getPos()));
     $hits = $oppUnit->getHits($results);
     $eliminated = false;
-    // $canBreakthrough = false;
-    //
-    // if ($distance == 1 && ($unit->getType() == \ARMOR || $unit->getType() == \INFANTRY)) {
-    //   $canBreakthrough = true;
-    // }
 
     if ($hits > 0) {
       $eliminated = $this->damageUnit($oppUnit, $hits);
@@ -200,13 +164,13 @@ trait AttackUnitsTrait
     if (isset($results[DICE_FLAG]) && !$eliminated) {
       $currentAttack['retreat'] = $results[\DICE_FLAG];
       Globals::setCurrentAttack($currentAttack);
-      $this->nextState('retreat', $oppUnit->getPlayer());
-      return;
     }
 
     // TODO: manage specific cards (behind ennemy lines...)
 
-    $this->nextState('nextAttack');
+    $this->nextState('retreat', $oppUnit->getPlayer());
+    return;
+    // $this->nextState('nextAttack');
   }
 
   public function damageUnit($unit, $hits)
@@ -233,7 +197,7 @@ trait AttackUnitsTrait
     }
 
     // debug
-    $results = [DICE_INFANTRY, DICE_INFANTRY, DICE_INFANTRY, DICE_FLAG];
+    $results = [DICE_INFANTRY, DICE_INFANTRY, DICE_FLAG, DICE_FLAG];
 
     Notifications::rollDice($player, $nDice, $results, $cell);
     return $results;
