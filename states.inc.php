@@ -121,12 +121,14 @@ $machinestates = [
 
   ST_ATTACK_RETREAT => [
     'name' => 'attackRetreat',
-    'description' => clienttranslate('${actplayer} must retreat the unit'),
-    'descriptionmyturn' => clienttranslate('${you} must retreat the unit'),
+    'description' => clienttranslate('${actplayer} must retreat the unit ${min} cell(s) ${desc}'),
+    'descriptionmyturn' => clienttranslate('${you} must retreat the unit ${min} cell(s) ${desc}'),
+    'descriptionskippable' => clienttranslate('${actplayer} may retreat the unit up to ${max} cell(s)'),
+    'descriptionmyturnskippable' => clienttranslate('${you} may retreat the unit up to ${max} cell(s)'),
     'type' => 'activeplayer',
     'args' => 'argsRetreatUnit',
     'action' => 'stRetreatUnit',
-    'possibleactions' => ['actRetreat', 'actRetreatDone'],
+    'possibleactions' => ['actRetreatUnit', 'actRetreatUnitDone'],
     'transitions' => [
       'armorOverrun' => ST_ARMOR_OVERRUN_MOVE,
       'retreat' => ST_ATTACK_RETREAT,

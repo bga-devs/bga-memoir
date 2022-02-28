@@ -56,7 +56,8 @@
 
   &.activated,
   &.moving,
-  &.attacking {
+  &.attacking,
+  &.retreating {
     background-image: url('img/hex_border_highlights.png');
     background-size: 400% 200%;
   }
@@ -72,6 +73,9 @@
   }
   &.attacking {
     background-position: 0% 100%;
+  }
+  &.retreating {
+    background-position: 66.666% 100%;
   }
 
   &.onTheMove::before {

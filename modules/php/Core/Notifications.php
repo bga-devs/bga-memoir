@@ -192,6 +192,8 @@ class Notifications
   {
     self::notifyAll('takeDamage', clienttranslate('${player_name}\'s unit takes ${hits} damage'), [
       'player' => $player,
+      'unitId' => $oppUnit->getId(),
+      'cell' => $oppUnit->getPos(),
       'hits' => $hits,
     ]);
   }

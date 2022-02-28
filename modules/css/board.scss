@@ -165,7 +165,8 @@
 
         &.forMove,
         &.forMoveAndAttack,
-        &.forAttack {
+        &.forAttack,
+        &.forRetreat {
           background-image: url('img/hex_background_highlights.png');
           background-size: 500% 100%;
           background-position: 0% 0%;
@@ -175,6 +176,9 @@
         }
         &.forAttack {
           background-position-x: 75%;
+        }
+        &.forRetreat {
+          background-position-x: 50%;
         }
       }
 

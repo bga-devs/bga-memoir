@@ -799,7 +799,7 @@ html {
       height: 100%; }
       #m44-board .hex-cell-container .hex-cell.selectable {
         cursor: pointer; }
-        #m44-board .hex-cell-container .hex-cell.selectable.forMove, #m44-board .hex-cell-container .hex-cell.selectable.forMoveAndAttack, #m44-board .hex-cell-container .hex-cell.selectable.forAttack {
+        #m44-board .hex-cell-container .hex-cell.selectable.forMove, #m44-board .hex-cell-container .hex-cell.selectable.forMoveAndAttack, #m44-board .hex-cell-container .hex-cell.selectable.forAttack, #m44-board .hex-cell-container .hex-cell.selectable.forRetreat {
           background-image: url("img/hex_background_highlights.png");
           background-size: 500% 100%;
           background-position: 0% 0%; }
@@ -807,6 +807,8 @@ html {
           background-position-x: 25%; }
         #m44-board .hex-cell-container .hex-cell.selectable.forAttack {
           background-position-x: 75%; }
+        #m44-board .hex-cell-container .hex-cell.selectable.forRetreat {
+          background-position-x: 50%; }
       #m44-board .hex-cell-container .hex-cell .dice-mini {
         position: absolute;
         display: block;
@@ -890,7 +892,7 @@ html {
     cursor: pointer; }
   .m44-unit.unselectable {
     cursor: default; }
-  .m44-unit.activated, .m44-unit.moving, .m44-unit.attacking {
+  .m44-unit.activated, .m44-unit.moving, .m44-unit.attacking, .m44-unit.retreating {
     background-image: url("img/hex_border_highlights.png");
     background-size: 400% 200%; }
   .m44-unit.activated {
@@ -901,6 +903,8 @@ html {
     background-position: 33.333% 0%; }
   .m44-unit.attacking {
     background-position: 0% 100%; }
+  .m44-unit.retreating {
+    background-position: 66.666% 100%; }
   .m44-unit.onTheMove::before {
     content: '';
     display: block;
@@ -2446,5 +2450,67 @@ span.m44-dice-result {
       transform: rotateY(180deg); }
   .flip-container.flipped .flip-inner {
     transform: rotateY(180deg); }
+
+.m44-explosion {
+  width: 100%;
+  height: 100%;
+  background-image: url("img/explosion.png");
+  background-size: 400% 300%;
+  animation: explode 1s; }
+
+#explosionContainer {
+  display: none;
+  pointer-events: none;
+  z-index: 10; }
+
+@keyframes explode {
+  0.0001%,
+    9.0909090909% {
+    background-position-x: 0%;
+    background-position-y: 0%; }
+  9.0910090909%,
+    18.1818181818% {
+    background-position-x: 33.3333333333%;
+    background-position-y: 0%; }
+  18.1819181818%,
+    27.2727272727% {
+    background-position-x: 66.6666666667%;
+    background-position-y: 0%; }
+  27.2728272727%,
+    36.3636363636% {
+    background-position-x: 100%;
+    background-position-y: 0%; }
+  36.3637363636%,
+    45.4545454545% {
+    background-position-x: 0%;
+    background-position-y: 50%; }
+  45.4546454545%,
+    54.5454545455% {
+    background-position-x: 33.3333333333%;
+    background-position-y: 50%; }
+  54.5455545455%,
+    63.6363636364% {
+    background-position-x: 66.6666666667%;
+    background-position-y: 50%; }
+  63.6364636364%,
+    72.7272727273% {
+    background-position-x: 100%;
+    background-position-y: 50%; }
+  72.7273727273%,
+    81.8181818182% {
+    background-position-x: 0%;
+    background-position-y: 100%; }
+  81.8182818182%,
+    90.9090909091% {
+    background-position-x: 33.3333333333%;
+    background-position-y: 100%; }
+  90.9091909091%,
+    100% {
+    background-position-x: 66.6666666667%;
+    background-position-y: 100%; }
+  100.0001%,
+    109.0909090909% {
+    background-position-x: 100%;
+    background-position-y: 100%; } }
 
 /*# sourceMappingURL=memoir.css.map */

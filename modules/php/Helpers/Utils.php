@@ -49,6 +49,25 @@ abstract class Utils extends \APP_DbObject
     return $found;
   }
 
+  public static function searchCell($cells, $x, $y = null)
+  {
+    return self::array_usearch($cells, function ($cell) use ($x, $y) {
+      return $cell['x'] == $x && $cell['y'] == $y;
+    });
+  }
+
+  public static function filterCells(&$cells, $fCells)
+  {
+    self::filter($cells, function ($cell) use ($fCells) {
+      foreach ($fCells as $node) {
+        if ($node['x'] == $cell['x'] && $node['y'] == $cell['y']) {
+          return true;
+        }
+      }
+      return false;
+    });
+  }
+
   public static function privatise($data, $pId = null)
   {
     $key = $pId ?? 'active';
@@ -58,7 +77,6 @@ abstract class Utils extends \APP_DbObject
       ],
     ];
   }
-
 
   /**
    * This function is just used to remove some informations UI-useless information before sending to front in args

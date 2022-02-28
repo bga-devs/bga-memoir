@@ -20,7 +20,7 @@ trait OrderUnitsTrait
   {
     $player = $player ?? Players::getActive();
     $args = $this->argsOrderUnits($player);
-    if ($args['n'] == \INFINITY) {
+    if ($args['units']->count() <= $args['n']) {
       $this->actOrderUnits($args['units']->getIds(), [], true);
     }
   }

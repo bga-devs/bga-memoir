@@ -12,23 +12,25 @@ use M44\Board;
 trait RetreatUnitTrait
 {
   /**
+   * Initialize a retreat
+   */
+  public function initRetreat($attack, $dice)
+  {
+    // TODO : compute the min/max flags
+    Globals::setRetreat([
+      'unitId' => $attack['oppUnit']->getId(),
+      'min' => $dice[\DICE_FLAG],
+      'max' => $dice[\DICE_FLAG],
+    ]);
+  }
+
+  /**
    * Fetch retreat relevant informations
    */
   public function getRetreatInfo()
   {
-    $data = Globals::getCurrentAttack();
-    return [Units::get($data['oppUnit']), $data['retreat'], $data['retreat']];
-  }
-
-  /**
-   * Compute the units that can attack
-   */
-  public function argsRetreatUnit()
-  {
-    $player = Players::getActive();
-    list($unit, $minFlags, $maxFlags) = $this->getRetreatInfo();
-    $cells = Board::getReachableCellsForRetreat($unit, $minFlags, $maxFlags);
-    return ['cells' => $cells, 'unit' => $unit->getId()];
+    $data = Globals::getRetreat();
+    return [Units::get($data['unitId']), $data['min'], $data['max']];
   }
 
   /**
@@ -36,77 +38,94 @@ trait RetreatUnitTrait
    */
   public function stRetreatUnit()
   {
+    // Take the hits if any
     $args = $this->argsRetreatUnit();
-    $currentAttack = Globals::getCurrentAttack();
-    $max = 0;
-    foreach ($args['cells'] as $cell) {
-      if ($cell['d'] > $max) {
-        $max = $cell['d'];
-      }
+    if ($args['hits'] > 0) {
+      $this->damageUnit($unit, $args['hits']);
+      $retreatInfo = Globals::getRetreat();
+      $retreatInfo['min'] -= $args['hits'];
+      Globals::setRetreat($retreatInfo);
+      $this->nextState('retreat');
     }
-    // TODO: manage cards & nations
-
-    // if possibilities is less than flagNumber, take damage
-    if ($currentAttack['retreat'] > $max) {
-      $damage = $currentAttack['retreat'] - $max;
-      $unit = Units::get($currentAttack['oppUnit']);
-      $this->damageUnit($unit, $damage);
-      $currentAttack['retreat'] -= $damage;
-      Globals::setCurrentAttack($currentAttack);
-
-      if ($damage == $currentAttack['retreat']) {
-        $currentAttack['retreat'] = 0;
-        Globals::setCurrentAttack($currentAttack);
-        $this->nextState('armorOverrun', Globals::getActivePlayer());
-        return;
-      }
+    // If no more cells, auto-done
+    elseif (empty($args['cells'])) {
+      $this->actRetreatUnitDone(true);
     }
-
-    if ($max == 0) {
-      $this->nextState('armorOverrun', Globals::getActivePlayer());
+    // If only one cell, retreat to that
+    elseif (count($args['cells']) == 1) {
+      $cell = reset($args['cells']);
+      $this->actRetreatUnit($cell['x'], $cell['y']);
     }
   }
 
-  public function actRetreat($x, $y)
+  /**
+   * Compute the units that can attack
+   */
+  public function argsRetreatUnit($clearPaths = false)
+  {
+    $player = Players::getActive();
+    list($unit, $minFlags, $maxFlags) = $this->getRetreatInfo();
+    $args = array_merge(Board::getArgsRetreat($unit, $minFlags, $maxFlags), [
+      'unitId' => $unit->getId(),
+      'min' => $minFlags,
+      'max' => $maxFlags,
+      'desc' => $minFlags == $maxFlags ? '' : \clienttranslate('(up to ${max} cells)'),
+      'i18n' => ['desc'],
+      'titleSuffix' => $minFlags == 0 ? 'skippable' : false,
+    ]);
+    Utils::clearPaths($args['units'], $clearPaths); // Remove paths, useless for UI
+    return $args;
+  }
+
+  public function actRetreatUnit($x, $y, $auto = false)
   {
     // Sanity checks
-    self::checkAction('actRetreat');
+    if (!$auto) {
+      self::checkAction('actRetreatUnit');
+    }
     $args = $this->argsRetreatUnit();
     $player = Players::getCurrent();
-    $currentAttack = Globals::getCurrentAttack();
     $cells = $args['cells'];
-
-    $k = Utils::array_usearch($cells, function ($cell) use ($x, $y) {
-      return $cell['paths'][0][0]['x'] == $x && $cell['paths'][0][0]['y'] == $y;
-    });
-
+    $k = Utils::searchCell($cells, $x, $y);
     if ($k === false) {
       throw new \BgaVisibleSystemException('You cannot move this unit to this hex. Should not happen');
     }
 
     // Move the unit
     $cell = $cells[$k];
+    $dist = $cell['d'];
     $path = $cell['paths'][0]; // Take the first path
-    $unit = Units::get($currentAttack['oppUnit']);
-    $unit->moveTo($path[0]);
-    Notifications::moveUnit($player, $currentAttack['oppUnit'], $path[0]['x'], $path[0]['y']);
-
-    // TODO listen here for mine and frozen river
-    $currentAttack['retreat']--;
-    Globals::setCurrentAttack($currentAttack);
+    $unitId = $args['unitId'];
+    $unit = Units::get($unitId);
+    foreach ($path as $c) {
+      $unit->moveTo($c);
+      Notifications::moveUnit($player, $unitId, $c['x'], $c['y']);
+      // TODO listen here for frozen river
+    }
     Board::refreshUnits();
+
+    // Update min/max depending on the number of retreat done already
+    $unit->incRetreats($dist);
+    $r = Globals::getRetreat();
+    $r['min'] -= $dist;
+    $r['max'] -= $dist;
+    Globals::setRetreat($r);
 
     $this->nextState('retreat');
   }
 
-  public function actRetreatDone()
+  public function actRetreatUnitDone($auto = false)
   {
     // Sanity checks
-    self::checkAction('actRetreatDone');
-    // check that retreat = 0
-    if (Globals::getCurrentAttack()['retreat'] != 0) {
-      throw new \BgaUserException(clienttranslate('You did not retreat far enough'));
+    if (!$auto) {
+      self::checkAction('actRetreatDone');
     }
+    // check that retreat = 0
+    list($unit, $minFlags, $maxFlags) = $this->getRetreatInfo();
+    if ($minFlags > 0) {
+      throw new \BgaUserException(clienttranslate('You did not retreat far enough. Should not happen.'));
+    }
+
     $this->nextState('armorOverrun', Globals::getActivePlayer());
   }
 }

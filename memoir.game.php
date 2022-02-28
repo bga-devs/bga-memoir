@@ -123,6 +123,12 @@ class memoir extends Table
     Preferences::set($this->getCurrentPId(), $pref, $value);
   }
 
+  function test()
+  {
+    $f = file_get_contents(APP_GAMEMODULE_PATH . 'module/table/gamestate.game.php');
+    var_dump($f);
+  }
+
   /**
    * Generic state to handle change of active player in the middle of a transition
    */

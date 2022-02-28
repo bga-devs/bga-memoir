@@ -12,12 +12,19 @@ use M44\Board;
 trait AttackUnitsTrait
 {
   /**
-   * Attack phase is over, go to 'draw' phase
+   * Automatically skip state if no more unit can attack
    */
-  public function actAttackUnitsDone()
+  public function stAttackUnits()
   {
-    self::checkAction('actAttackUnitsDone');
-    $this->gamestate->nextState('draw');
+    // throw new \feException(print_r(\debug_print_backtrace()));
+    $args = $this->argsAttackUnit();
+    $nTargets = 0;
+    foreach ($args['units'] as $targets) {
+      $nTargets += count($targets);
+    }
+    if ($nTargets == 0) {
+      $this->actAttackUnitsDone();
+    }
   }
 
   /**
@@ -41,19 +48,12 @@ trait AttackUnitsTrait
   }
 
   /**
-   * Automatically skip state if no more unit can attack
+   * Attack phase is over, go to 'draw' phase
    */
-  public function stAttackUnits()
+  public function actAttackUnitsDone()
   {
-    // throw new \feException(print_r(\debug_print_backtrace()));
-    $args = $this->argsAttackUnit();
-    $nTargets = 0;
-    foreach ($args['units'] as $targets) {
-      $nTargets += count($targets);
-    }
-    if ($nTargets == 0) {
-      $this->actAttackUnitsDone();
-    }
+    self::checkAction('actAttackUnitsDone');
+    $this->gamestate->nextState('draw');
   }
 
   /**
@@ -95,50 +95,48 @@ trait AttackUnitsTrait
       'unitId' => $unitId,
       'x' => $x,
       'y' => $y,
-      'oppUnit' => $oppUnit->getId(),
+      'oppUnitId' => $oppUnit->getId(),
       'nDice' => $nDice,
       'distance' => $target['d'],
-      'retreat' => 0,
       'ambush' => false,
     ]);
 
-    // opponent players
-    // if (in_array($oppUnit->getNation(), Units::$nations[AXIS])) {
-    //   $oppPlayer = Players::getSide(AXIS);
-    // } else {
-    //   $oppPlayer = Players::getSide(\ALLIES);
-    // }
-
     $this->nextState('ambush', $oppUnit->getPlayer());
-    return;
-    // // if distance = 1, then ask for ambush
-    // if ($target['d'] == 1) {
-    //   $this->gamestate->nextState('ambush');
-    // } else {
-    //   $this->actResolveAttack($unit, $oppUnit, $nDice, $target['d']);
-    // }
+  }
+
+  /**
+   * Get current Attack
+   */
+  public function getCurrentAttack()
+  {
+    $currentAttack = Globals::getCurrentAttack();
+    $currentAttack['unit'] = Units::get($currentAttack['unitId']);
+    $currentAttack['oppUnit'] = Units::get($currentAttack['oppUnitId']);
+    return $currentAttack;
+  }
+
+  /**
+   * Resolve the pending attack
+   */
+  public function stAttackThrow()
+  {
+    $attack = $this->getCurrentAttack();
+    $this->resolveAttack($attack);
   }
 
   /**
    * Resolve an attack
    */
-
-  public function stAttackThrow()
+  public function resolveAttack($attack)
   {
-    $player = Players::getActive();
-    $currentAttack = Globals::getCurrentAttack();
-    $oppUnit = Units::get($currentAttack['oppUnit']);
-    $currentUnit = Units::get($currentAttack['unitId']);
+    $unit = $attack['unit'];
+    $oppUnit = $attack['oppUnit'];
+    $player = $unit->getPlayer();
 
-    // check if initial distance = 1 & new distance != then cannot attack
-    if ($currentAttack['distance'] == 1 && $currentAttack['ambush']) {
-      // check new distance
-      $argsAttack = $this->argsAttackUnit();
-      $k = Utils::array_usearch($argsAttack['units'][$currentAttack['unitId']], function ($cell) use ($currentAttack) {
-        return $cell['x'] == $currentAttack['x'] && $cell['y'] == $currentAttack['y'];
-      });
-
-      if ($k === false) {
+    // Check if ambush was played and successfull
+    if ($attack['ambush']) {
+      // Check retreat
+      if ($unit->getRetreat() > 0) {
         Notifications::message(
           clienttranslate('${player_name} unit has retreated due to Ambush. Attack cannot take place'),
           ['player' => $player]
@@ -148,37 +146,31 @@ trait AttackUnitsTrait
       }
     }
 
-    // launch dice
-    $results = array_count_values($this->rollDice($player, $currentAttack['nDice'], $oppUnit->getPos()));
-    $hits = $oppUnit->getHits($results);
-    $eliminated = false;
+    // Launch dice
+    $results = array_count_values($this->rollDice($player, $attack['nDice'], $oppUnit->getPos()));
 
-    if ($hits > 0) {
-      $eliminated = $this->damageUnit($oppUnit, $hits);
-      // $eliminated = $oppUnit->takeDamage($hits);
-      // Notifications::takeDamage($player, $oppUnit, $hits);
-      // if ($eliminated) {
-      //   //TODO : Manage scenario specific
-      //   // TODO : store type of unit
-      //   Teams::incMedals(1, $player->getSide());
-      //   Notifications::scoreMedal($player, 1);
-      // }
-    }
+    // Handle hits : TODO handle cards and attacking unit
+    $hits = $oppUnit->getHits($results);
+    $eliminated = $this->damageUnit($oppUnit, $hits);
 
     if (isset($results[DICE_FLAG]) && !$eliminated) {
-      $currentAttack['retreat'] = $results[\DICE_FLAG];
-      Globals::setCurrentAttack($currentAttack);
+      $this->initRetreat($attack, $results);
     }
 
     // TODO: manage specific cards (behind ennemy lines...)
 
     $this->nextState('retreat', $oppUnit->getPlayer());
-    return;
-    // $this->nextState('nextAttack');
   }
 
+  /**
+   * Damage a unit and return whether it's eliminated or not
+   */
   public function damageUnit($unit, $hits)
   {
+    if ($hits == 0) {
+      return false;
+    }
+
     $eliminated = $unit->takeDamage($hits);
     $player = $unit->getPlayer();
     Notifications::takeDamage($player, $unit, $hits);
@@ -188,9 +180,13 @@ trait AttackUnitsTrait
       Teams::incMedals(1, Players::get(Globals::getActivePlayer())->getTeam());
       Notifications::scoreMedal(Players::get(Globals::getActivePlayer()), 1);
     }
+
     return $eliminated;
   }
 
+  /**
+   * Roll dice : roll a given number of dices next to a given cell
+   */
   public function rollDice($player, $nDice, $cell = null)
   {
     $dice = [\DICE_INFANTRY, \DICE_INFANTRY, \DICE_ARMOR, \DICE_FLAG, \DICE_STAR, \DICE_GRENADE];

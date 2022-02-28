@@ -41,8 +41,9 @@ class AbstractUnit extends \M44\Helpers\DB_Manager implements \JsonSerializable
       $this->nation = $row['nation'];
       $this->nUnits = $row['figures'];
       $this->badge = $row['badge'];
-      $this->moves = $row['moves'];
-      $this->fights = $row['fights'];
+      $this->moves = (int) $row['moves'];
+      $this->fights = (int) $row['fights'];
+      $this->retreats = (int) $row['retreats'];
       $this->activationCard = $row['activation_card'];
       $this->datas = \json_decode($row['extra_datas'], true);
     }
@@ -197,8 +198,7 @@ class AbstractUnit extends \M44\Helpers\DB_Manager implements \JsonSerializable
 
   public function incMoves($value)
   {
-    $this->moves += $value;
-    self::DB()->update(['moves' => $this->moves], $this->id);
+    $this->setMoves($this->moves + $value);
   }
 
   public function getPossibleMoves()
@@ -211,6 +211,29 @@ class AbstractUnit extends \M44\Helpers\DB_Manager implements \JsonSerializable
     $this->x = $cell['x'];
     $this->y = $cell['y'];
     self::DB()->update(['x' => $cell['x'], 'y' => $cell['y']], $this->id);
+  }
+
+  ///////////////////////////////////////////////
+  //  ____  _____ _____ ____  _____    _  _____
+  // |  _ \| ____|_   _|  _ \| ____|  / \|_   _|
+  // | |_) |  _|   | | | |_) |  _|   / _ \ | |
+  // |  _ <| |___  | | |  _ <| |___ / ___ \| |
+  // |_| \_\_____| |_| |_| \_\_____/_/   \_\_|
+  ///////////////////////////////////////////////
+  public function getRetreats()
+  {
+    return $this->retreats;
+  }
+
+  public function setRetreats($value)
+  {
+    $this->retreats = $value;
+    self::DB()->update(['retreats' => $this->retreats], $this->id);
+  }
+
+  public function incRetreats($value)
+  {
+    $this->setRetreats($this->retreats + $value);
   }
 
   //////////////////////////////////////////

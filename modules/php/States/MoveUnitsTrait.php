@@ -31,9 +31,7 @@ trait MoveUnitsTrait
       throw new \BgaVisibleSystemException('You cannot move this unit. Should not happen');
     }
     $cells = $args['units'][$unitId];
-    $k = Utils::array_usearch($cells, function ($cell) use ($x, $y) {
-      return $cell['x'] == $x && $cell['y'] == $y;
-    });
+    $k = Utils::searchCell($cells, $x, $y);
     if ($k === false) {
       throw new \BgaVisibleSystemException('You cannot move this unit to this hex. Should not happen');
     }

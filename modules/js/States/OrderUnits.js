@@ -115,7 +115,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       args.cells.forEach((cell) => {
         let oCell = $(`cell-${cell.x}-${cell.y}`);
         this.onClick(oCell, () => this.takeAction('actMoveUnit', { unitId: args.unitId, x: cell.x, y: cell.y }));
-        oCell.classList.add(cell.canAttack? 'forMoveAndAttack' : 'forMove');
+        oCell.classList.add(cell.canAttack ? 'forMoveAndAttack' : 'forMove');
       });
 
       // Makes other units selectable
@@ -195,6 +195,28 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       $('lineOfSight').classList.toggle('antidiagonal', (x2 - x1) * (y2 - y1) > 0);
       $('lineOfSight').classList.toggle('horizontal', y1 == y2);
       $('lineOfSight').classList.toggle('vertical', x1 == x2);
+    },
+
+    ///////////////////////////////////////////////////
+    //    ____  _____ _____ ____  _____    _  _____
+    //   |  _ \| ____|_   _|  _ \| ____|  / \|_   _|
+    //   | |_) |  _|   | | | |_) |  _|   / _ \ | |
+    //   |  _ <| |___  | | |  _ <| |___ / ___ \| |
+    //   |_| \_\_____| |_| |_| \_\_____/_/   \_\_|
+    ///////////////////////////////////////////////////
+    onEnteringStateAttackRetreat(args) {
+      $('unit-' + args.unitId).classList.add('retreating');
+      if (!this.isCurrentPlayerActive()) return;
+
+      args.cells.forEach((cell) => {
+        let oCell = $(`cell-${cell.x}-${cell.y}`);
+        oCell.classList.add('forRetreat');
+        this.onClick(oCell, () => this.takeAction('actRetreatUnit', { x: cell.x, y: cell.y }));
+      });
+
+      if (args.titleSuffix == 'skippable') {
+        this.addPrimaryActionButton('btnRetreatUnitDone', _('Retreat Done'), () => this.takeAction('actRetreatUnitDone'));
+      }
     },
   });
 });
