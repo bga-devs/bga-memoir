@@ -70,6 +70,14 @@ class Notifications
     ]);
   }
 
+  public static function ambush($player, $card)
+  {
+    self::notifyAll('playCard', clienttranslate('${player_name} plays ${card_name} in reaction to Close assault'), [
+      'player' => $player,
+      'card' => $card,
+    ]);
+  }
+
   public static function playCard($player, $card)
   {
     self::notifyAll('playCard', clienttranslate('${player_name} plays ${card_name}'), [

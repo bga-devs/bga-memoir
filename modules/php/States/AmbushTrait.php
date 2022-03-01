@@ -32,9 +32,23 @@ trait AmbushTrait
     }
   }
 
-  function actAmbush()
+  function actAmbush($cardId)
   {
-    // ambush = true
+    // Sanity check
+    $this->checkAction('actAmbush');
+    $player = Players::getCurrent();
+    $args = $this->argsOpponentAmbush();
+    if (!in_array($cardId, $args['_private']['active']['cards'])) {
+      throw new \BgaVisibleSystemException('You cannot play this card. Should not happen.');
+    }
+
+    // inPlay card
+    $card = Cards::play($player, $cardId);
+    Notifications::ambush($player, $card);
+
+    $currentAttack = Globals::getCurrentAttack();
+    $currentAttack['ambush'] = true;
+    Globals::setCurrentAttack($currentAttack);
   }
 
   function actPassAmbush($silent = false)
