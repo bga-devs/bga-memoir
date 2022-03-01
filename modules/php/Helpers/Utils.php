@@ -83,7 +83,7 @@ abstract class Utils extends \APP_DbObject
    */
   public static function clearPaths(&$units, $clearPaths = true)
   {
-    if (!$clearPaths) {
+    if (!$clearPaths || empty($units)) {
       return;
     }
 

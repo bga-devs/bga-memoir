@@ -18,7 +18,6 @@ trait RetreatUnitTrait
   {
     // TODO : compute the min/max flags
     Globals::setRetreat([
-      'unitId' => $attack['oppUnit']->getId(),
       'min' => $dice[\DICE_FLAG],
       'max' => $dice[\DICE_FLAG],
     ]);
@@ -30,7 +29,8 @@ trait RetreatUnitTrait
   public function getRetreatInfo()
   {
     $data = Globals::getRetreat();
-    return [Units::get($data['unitId']), $data['min'], $data['max']];
+    $attack = $this->getCurrentAttack();
+    return [$attack['oppUnit'], $data['min'], $data['max']];
   }
 
   /**
@@ -41,6 +41,7 @@ trait RetreatUnitTrait
     // Take the hits if any
     $args = $this->argsRetreatUnit();
     if ($args['hits'] > 0) {
+      $unit = Units::get($args['unitId']);
       $this->damageUnit($unit, $args['hits']);
       $retreatInfo = Globals::getRetreat();
       $retreatInfo['min'] -= $args['hits'];
@@ -121,11 +122,12 @@ trait RetreatUnitTrait
       self::checkAction('actRetreatDone');
     }
     // check that retreat = 0
-    list($unit, $minFlags, $maxFlags) = $this->getRetreatInfo();
+    list(, $minFlags) = $this->getRetreatInfo();
     if ($minFlags > 0) {
       throw new \BgaUserException(clienttranslate('You did not retreat far enough. Should not happen.'));
     }
 
-    $this->nextState('armorOverrun', Globals::getActivePlayer());
+    $attack = $this->getCurrentAttack();
+    $this->nextState('takeGround', $attack['pId']);
   }
 }

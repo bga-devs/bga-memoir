@@ -336,19 +336,21 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     //   |____/ \__,_|_| |_| |_|\__,_|\__, |\___||___/
     //                                |___/
     ///////////////////////////////////////////////////
-    createExplosion(cell) {
-      if (this.isFastMode()) return;
+    notif_takeDamage(n) {
+      debug('Notif: a unit is taking damage', n);
+      if (this.isFastMode()) {
+        $('unit-' + n.args.unitId).dataset.figures -= n.args.hits;
+        return;
+      }
+
       let o = $('explosionContainer');
-      o.style.gridArea = $(`cell-container-${cell.x}-${cell.y}`).style.gridArea;
+      o.style.gridArea = $(`cell-container-${n.args.cell.x}-${n.args.cell.y}`).style.gridArea;
       o.style.display = 'flex';
       dojo.place('<div class="m44-explosion"></div>', o);
-      this.wait(1000).then(() => dojo.empty(o));
-    },
-
-    notif_takeDamage(n){
-      debug("Notif: a unit is taking damage", n);
-      this.createExplosion(n.args.cell);
-      $('unit-' + n.args.unitId).dataset.figures -= n.args.hits;
+      this.wait(1000).then(() => {
+        dojo.empty(o);
+        $('unit-' + n.args.unitId).dataset.figures -= n.args.hits;
+      });
     },
   });
 });

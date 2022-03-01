@@ -25,9 +25,9 @@ trait AmbushTrait
   function stAmbush()
   {
     // check if ambush viable else pass
-    $currentAttack = Globals::getCurrentAttack();
+    $attack = $this->getCurrentAttack();
 
-    if ($currentAttack['distance'] != 1) {
+    if ($attack['distance'] != 1) {
       $this->actPassAmbush(true);
     }
   }
@@ -46,6 +46,8 @@ trait AmbushTrait
         'player' => Players::getActive(),
       ]);
     }
-    $this->nextState('pass', Globals::getActivePlayer());
+
+    $attack = $this->getCurrentAttack();
+    $this->nextState('pass', $attack['pId']);
   }
 }

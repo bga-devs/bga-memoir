@@ -188,9 +188,12 @@ class Notifications
     self::notifyAll('clearUnitsStatus', '', []);
   }
 
-  public static function takeDamage($player, $oppUnit, $hits)
+  public static function takeDamage($player, $oppUnit, $hits, $cantRetreat)
   {
-    self::notifyAll('takeDamage', clienttranslate('${player_name}\'s unit takes ${hits} damage'), [
+    $msg = $cantRetreat
+      ? clienttranslate('${player_name}\'s unit takes ${hits} damage because retreat is blocked')
+      : clienttranslate('${player_name}\'s unit takes ${hits} damage');
+    self::notifyAll('takeDamage', $msg, [
       'player' => $player,
       'unitId' => $oppUnit->getId(),
       'cell' => $oppUnit->getPos(),

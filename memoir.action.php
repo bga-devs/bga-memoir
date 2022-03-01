@@ -126,6 +126,41 @@ class action_memoir extends APP_GameAction
     self::ajaxResponse();
   }
 
+  ////////////////////////////////////////////////////////////////
+  //  _____     _           ____                           _
+  // |_   _|_ _| | _____   / ___|_ __ ___  _   _ _ __   __| |
+  //   | |/ _` | |/ / _ \ | |  _| '__/ _ \| | | | '_ \ / _` |
+  //   | | (_| |   <  __/ | |_| | | | (_) | |_| | | | | (_| |
+  //   |_|\__,_|_|\_\___|  \____|_|  \___/ \__,_|_| |_|\__,_|
+  ///////////////////////////////////////////////////////////////
+  public function actTakeGround()
+  {
+    self::setAjaxMode();
+    $this->game->actTakeGround();
+    self::ajaxResponse();
+  }
+
+  public function actPassTakeGround()
+  {
+    self::setAjaxMode();
+    $this->game->actPassTakeGround();
+    self::ajaxResponse();
+  }
+
+  ////////////////////////////////////////////////
+  //     _              _               _
+  //    / \   _ __ ___ | |__  _   _ ___| |__
+  //   / _ \ | '_ ` _ \| '_ \| | | / __| '_ \
+  //  / ___ \| | | | | | |_) | |_| \__ \ | | |
+  // /_/   \_\_| |_| |_|_.__/ \__,_|___/_| |_|
+  ////////////////////////////////////////////////
+
+  public function actPassAmbush()
+  {
+    self::setAjaxMode();
+    $this->game->actPassAmbush();
+    self::ajaxResponse();
+  }
 
   /////////////////////////////////
   //  _   _ _____ ___ _     ____

@@ -215,8 +215,39 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       });
 
       if (args.titleSuffix == 'skippable') {
-        this.addPrimaryActionButton('btnRetreatUnitDone', _('Retreat Done'), () => this.takeAction('actRetreatUnitDone'));
+        this.addPrimaryActionButton('btnRetreatUnitDone', _('Retreat Done'), () =>
+          this.takeAction('actRetreatUnitDone'),
+        );
       }
+    },
+
+    ////////////////////////////////////////////////////////////////
+    //  _____     _           ____                           _
+    // |_   _|_ _| | _____   / ___|_ __ ___  _   _ _ __   __| |
+    //   | |/ _` | |/ / _ \ | |  _| '__/ _ \| | | | '_ \ / _` |
+    //   | | (_| |   <  __/ | |_| | | | (_) | |_| | | | | (_| |
+    //   |_|\__,_|_|\_\___|  \____|_|  \___/ \__,_|_| |_|\__,_|
+    ///////////////////////////////////////////////////////////////
+    onEnteringStateTakeGround(args) {
+      $('unit-' + args.unitId).classList.add('attacking');
+      if (!this.isCurrentPlayerActive()) return;
+
+      this.addDangerActionButton('btnPassTakeGround', _('Pass'), () => this.takeAction('actPassTakeGround'));
+      this.addPrimaryActionButton('btnTakeGround', _('Take Ground'), () => this.takeAction('actTakeGround'));
+      let oCell = $(`cell-${args.cell.x}-${args.cell.y}`);
+      oCell.classList.add('forAttack');
+      this.onClick(oCell, () => this.takeAction('actTakeGround'));
+    },
+
+    ////////////////////////////////////////////////
+    //     _              _               _
+    //    / \   _ __ ___ | |__  _   _ ___| |__
+    //   / _ \ | '_ ` _ \| '_ \| | | / __| '_ \
+    //  / ___ \| | | | | | |_) | |_| \__ \ | | |
+    // /_/   \_\_| |_| |_|_.__/ \__,_|___/_| |_|
+    ////////////////////////////////////////////////
+    onEnteringStateOpponentAmbush(args) {
+      this.addDangerActionButton('btnPassAmbush', 'Pass', () => this.takeAction('actPassAmbush'));
     },
   });
 });

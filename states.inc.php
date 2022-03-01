@@ -34,6 +34,13 @@ $machinestates = [
     'transitions' => ['done' => ST_M44],
   ],
 
+  ///////////////////////////////////////////////////////
+  //   ____            _        _____ _
+  //  | __ )  __ _ ___(_) ___  |  ___| | _____      __
+  //  |  _ \ / _` / __| |/ __| | |_  | |/ _ \ \ /\ / /
+  //  | |_) | (_| \__ \ | (__  |  _| | | (_) \ V  V /
+  //  |____/ \__,_|___/_|\___| |_|   |_|\___/ \_/\_/
+  ///////////////////////////////////////////////////////
   ST_PREPARE_TURN => [
     'name' => 'prepareTurn',
     'description' => '',
@@ -55,8 +62,8 @@ $machinestates = [
 
   ST_ORDER_UNITS => [
     'name' => 'orderUnits',
-    'description' => clienttranslate('${actplayer} must order ${n} unit(s) ${desc}'),
-    'descriptionmyturn' => clienttranslate('${you} must order ${n} unit(s) ${desc}'),
+    'description' => clienttranslate('${actplayer} must order ${nTitle} unit(s) ${desc}'),
+    'descriptionmyturn' => clienttranslate('${you} must order ${nTitle} unit(s) ${desc}'),
     'type' => 'activeplayer',
     'args' => 'argsOrderUnits',
     'action' => 'stOrderUnits',
@@ -89,27 +96,6 @@ $machinestates = [
     ],
   ],
 
-  ST_OPPONENT_AMBUSH => [
-    'name' => 'opponentAmbush',
-    'description' => clienttranslate('${actplayer} can react to the attack'),
-    'descriptionmyturn' => clienttranslate('${you} can react to the attack'),
-    'type' => 'activeplayer',
-    'args' => 'argsOpponentAmbush',
-    'action' => 'stAmbush',
-    'possibleactions' => ['actAmbush', 'actPassAmbush'],
-    'transitions' => ['pass' => ST_ATTACK_THROW, 'resolve' => ST_AMBUSH_RESOLVE],
-  ],
-
-  ST_AMBUSH_RESOLVE => [
-    'name' => 'ambushResolve',
-    'description' => clienttranslate('${actplayer} must retreat the unit (Ambush effect)'),
-    'descriptionmyturn' => clienttranslate('${you} must retreat the unit (Ambush effect)'),
-    'type' => 'activeplayer',
-    'args' => 'argsAmbushResolve',
-    'possibleactions' => ['actRetreat'],
-    'transitions' => ['attack' => ST_ATTACK_THROW],
-  ],
-
   ST_ATTACK_THROW => [
     'name' => 'attackThrow',
     'description' => '',
@@ -130,90 +116,9 @@ $machinestates = [
     'action' => 'stRetreatUnit',
     'possibleactions' => ['actRetreatUnit', 'actRetreatUnitDone'],
     'transitions' => [
-      'armorOverrun' => ST_ARMOR_OVERRUN_MOVE,
       'retreat' => ST_ATTACK_RETREAT,
-    ],
-  ],
-
-  ST_ARMOR_OVERRUN_MOVE => [
-    'name' => 'armorOverrunMove',
-    'description' => clienttranslate('${actplayer} may take ground and attack (Armor overrun)'),
-    'descriptionmyturn' => clienttranslate('${you} may take ground and attack (Armor overrun)'),
-    'type' => 'activeplayer',
-    'args' => 'argsTakeGround',
-    'action' => 'stTakeGround',
-    'possibleactions' => ['actTakeGround', 'actNextAttack'],
-    'transitions' => [
-      'attack' => ST_ARMOR_OVERRUN_ATTACK,
-      'next' => ST_TAKING_GROUND,
-    ],
-  ],
-
-  ST_ARMOR_OVERRUN_ATTACK => [
-    'name' => 'armorOverrunAttack',
-    'description' => clienttranslate('${actplayer} may attack an unit'),
-    'descriptionmyturn' => clienttranslate('${you} may attack an unit'),
-    'type' => 'activeplayer',
-    'args' => 'argsAttackUnit',
-    'action' => 'stArmorOverrunAttack',
-    'possibleactions' => ['actAttackUnit', 'actNextAttack'],
-    'transitions' => [
-      'ambush' => ST_ARMOR_OPPONENT_AMBUSH,
-      'next' => ST_ATTACK, // if player doesn't attack, no new taking ground
-    ],
-  ],
-
-  ST_ARMOR_OPPONENT_AMBUSH => [
-    'name' => 'armorOpponentAmbush',
-    'description' => clienttranslate('${actplayer} can react to the attack'),
-    'descriptionmyturn' => clienttranslate('${you} can react to the attack'),
-    'type' => 'activeplayer',
-    'args' => 'argsOpponentAmbush',
-    'action' => 'stAmbush',
-    'possibleactions' => ['actAmbush', 'actPassAmbush'],
-    'transitions' => ['pass' => ST_ARMOR_THROW, 'resolve' => ST_ARMOR_AMBUSH_RESOLVE],
-  ],
-
-  ST_ARMOR_AMBUSH_RESOLVE => [
-    'name' => 'armorAmbushResolve',
-    'description' => clienttranslate('${actplayer} must retreat the unit (Ambush effect)'),
-    'descriptionmyturn' => clienttranslate('${you} must retreat the unit (Ambush effect)'),
-    'type' => 'activeplayer',
-    'args' => 'argsAmbushResolve',
-    'possibleactions' => ['actRetreat'],
-    'transitions' => ['attack' => ST_ATTACK_THROW],
-  ],
-
-  ST_ARMOR_THROW => [
-    'name' => 'armorAttackThrow',
-    'description' => '',
-    'descriptionmyturn' => '',
-    'type' => 'game',
-    'action' => 'stAttackThrow',
-    'transitions' => ['retreat' => ST_ARMOR_OVERRUN_RETREAT, 'nextAttack' => ST_ATTACK],
-  ],
-
-  ST_ARMOR_OVERRUN_RETREAT => [
-    'name' => 'armorOverrunRetreat',
-    'description' => clienttranslate('${actplayer} must retreat the unit (Armor overrun effect)'),
-    'descriptionmyturn' => clienttranslate('${you} must retreat the unit (Armor overrun effect)'),
-    'type' => 'activeplayer',
-    'args' => 'argsOverrunRetreat',
-    'possibleactions' => ['actRetreat'],
-    'transitions' => ['takeGround' => ST_TAKING_GROUND],
-  ],
-
-  ST_TAKING_GROUND => [
-    'name' => 'takingGround',
-    'description' => clienttranslate('${actplayer} may take the ground'),
-    'descriptionmyturn' => clienttranslate('${you} may take the ground'),
-    'type' => 'activeplayer',
-    'args' => 'argsTakeGround',
-    'action' => 'stTakeGround',
-    'possibleactions' => ['actTakeGround', 'actNextAttack'],
-    'transitions' => [
-      'next' => ST_ATTACK,
-      'attack' => ST_ATTACK,
+      'nextAttack' => ST_ATTACK,
+      'takeGround' => ST_TAKING_GROUND,
     ],
   ],
 
@@ -242,6 +147,69 @@ $machinestates = [
     'type' => 'game',
     'action' => 'stEndRound',
     'transitions' => ['next' => ST_PREPARE_TURN],
+  ],
+
+  ////////////////////////////////////////////////////////////////
+  //  _____     _           ____                           _
+  // |_   _|_ _| | _____   / ___|_ __ ___  _   _ _ __   __| |
+  //   | |/ _` | |/ / _ \ | |  _| '__/ _ \| | | | '_ \ / _` |
+  //   | | (_| |   <  __/ | |_| | | | (_) | |_| | | | | (_| |
+  //   |_|\__,_|_|\_\___|  \____|_|  \___/ \__,_|_| |_|\__,_|
+  ///////////////////////////////////////////////////////////////
+  ST_TAKING_GROUND => [
+    'name' => 'takeGround',
+    'description' => clienttranslate('${actplayer} may take the ground'),
+    'descriptionmyturn' => clienttranslate('${you} may take the ground'),
+    'type' => 'activeplayer',
+    'args' => 'argsTakeGround',
+    'action' => 'stTakeGround',
+    'possibleactions' => ['actTakeGround', 'actPassTakeGround'],
+    'transitions' => [
+      'next' => ST_ATTACK,
+      'overrun' => ST_ARMOR_OVERRUN,
+    ],
+  ],
+
+  ST_ARMOR_OVERRUN => [
+    'name' => 'armorOverrun',
+    'description' => clienttranslate('${actplayer} may attack an unit (Armor overrun)'),
+    'descriptionmyturn' => clienttranslate('${you} may attack an unit (Armor overrun)'),
+    'type' => 'activeplayer',
+    'args' => 'argsArmorOverrun',
+    'action' => 'stArmorOverrun',
+    'possibleactions' => ['actAttackUnit', 'actNextAttack'],
+    'transitions' => [
+      'ambush' => ST_OPPONENT_AMBUSH,
+      'next' => ST_ATTACK, // if player doesn't attack, no new taking ground
+    ],
+  ],
+
+  ////////////////////////////////////////////////
+  //     _              _               _
+  //    / \   _ __ ___ | |__  _   _ ___| |__
+  //   / _ \ | '_ ` _ \| '_ \| | | / __| '_ \
+  //  / ___ \| | | | | | |_) | |_| \__ \ | | |
+  // /_/   \_\_| |_| |_|_.__/ \__,_|___/_| |_|
+  ////////////////////////////////////////////////
+  ST_OPPONENT_AMBUSH => [
+    'name' => 'opponentAmbush',
+    'description' => clienttranslate('${actplayer} can react to the attack'),
+    'descriptionmyturn' => clienttranslate('${you} can react to the attack'),
+    'type' => 'activeplayer',
+    'args' => 'argsOpponentAmbush',
+    'action' => 'stAmbush',
+    'possibleactions' => ['actAmbush', 'actPassAmbush'],
+    'transitions' => ['pass' => ST_ATTACK_THROW, 'resolve' => ST_AMBUSH_RESOLVE],
+  ],
+
+  ST_AMBUSH_RESOLVE => [
+    'name' => 'ambushResolve',
+    'description' => clienttranslate('${actplayer} must retreat the unit (Ambush effect)'),
+    'descriptionmyturn' => clienttranslate('${you} must retreat the unit (Ambush effect)'),
+    'type' => 'activeplayer',
+    'args' => 'argsAmbushResolve',
+    'possibleactions' => ['actRetreat'],
+    'transitions' => ['attack' => ST_ATTACK_THROW],
   ],
 
   /////////////////////////////////////////////

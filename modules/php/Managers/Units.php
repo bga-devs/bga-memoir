@@ -25,11 +25,13 @@ class Units extends \M44\Helpers\Pieces
     'moves',
     'fights',
     'retreats',
+    'grounds',
     'extra_datas',
   ];
   protected static $autoreshuffle = false;
   protected static function cast($row)
   {
+    $row['unit_id'] = $row['id'];
     $mode = Scenario::getMode();
     $flipped = in_array($row['nation'], self::$nations[Scenario::getTopSide()]);
     $sections = self::$sections[$mode];

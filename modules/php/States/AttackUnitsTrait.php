@@ -16,7 +16,6 @@ trait AttackUnitsTrait
    */
   public function stAttackUnits()
   {
-    // throw new \feException(print_r(\debug_print_backtrace()));
     $args = $this->argsAttackUnit();
     $nTargets = 0;
     foreach ($args['units'] as $targets) {
@@ -33,17 +32,9 @@ trait AttackUnitsTrait
   public function argsAttackUnit($player = null)
   {
     $player = $player ?? Players::getActive();
-    $ignoreFight = $this->gamestate->state()['name'] == 'armorOverrunAttack';
-
     $card = $player->getCardInPlay();
-    $args = $card->getArgsAttackUnits($ignoreFight);
+    $args = $card->getArgsAttackUnits();
     Utils::clearPaths($args['units']);
-
-    if ($ignoreFight) {
-      $currentAttack = Globals::getCurrentAttack();
-      return ['units' => [$currentAttack['unitId'] => $args['units'][$currentAttack['unitId']] ?? []]];
-    }
-
     return $args;
   }
 
@@ -66,14 +57,12 @@ trait AttackUnitsTrait
 
     $player = Players::getCurrent();
     $card = $player->getCardInPlay();
-    $args = $this->argsAttackUnit($player);
+    $args = $this->gamestate->state()['args'];
     if (!\array_key_exists($unitId, $args['units'])) {
       throw new \BgaVisibleSystemException('You cannot attack with this unit. Should not happen');
     }
     $cells = $args['units'][$unitId];
-    $k = Utils::array_usearch($cells, function ($cell) use ($x, $y) {
-      return $cell['x'] == $x && $cell['y'] == $y;
-    });
+    $k = Utils::searchCell($cells, $x, $y);
     if ($k === false) {
       throw new \BgaVisibleSystemException('You cannot attack this hex with this unit. Should not happen');
     }
@@ -85,13 +74,13 @@ trait AttackUnitsTrait
 
     // Prepare attack
     $unit = Units::get($unitId);
-    if ($this->gamestate->state()['name'] == 'attackUnits') {
-      $unit->incFights(1);
-    }
+    $unit->incFights(1);
     $nDice = $card->updateDiceRoll($target['dice']);
 
     // log attack information
-    Globals::setCurrentAttack([
+    $stack = Globals::getAttackStack();
+    $stack[] = [
+      'pId' => $player->getId(),
       'unitId' => $unitId,
       'x' => $x,
       'y' => $y,
@@ -99,7 +88,8 @@ trait AttackUnitsTrait
       'nDice' => $nDice,
       'distance' => $target['d'],
       'ambush' => false,
-    ]);
+    ];
+    Globals::setAttackStack($stack);
 
     $this->nextState('ambush', $oppUnit->getPlayer());
   }
@@ -109,10 +99,28 @@ trait AttackUnitsTrait
    */
   public function getCurrentAttack()
   {
-    $currentAttack = Globals::getCurrentAttack();
+    $stack = Globals::getAttackStack();
+    $currentAttack = $stack[count($stack) - 1];
     $currentAttack['unit'] = Units::get($currentAttack['unitId']);
     $currentAttack['oppUnit'] = Units::get($currentAttack['oppUnitId']);
     return $currentAttack;
+  }
+
+  /**
+   * Close current attack and jump depending on what's left in the stack
+   */
+  public function closeCurrentAttack()
+  {
+    $stack = Globals::getAttackStack();
+    $currentAttack = array_pop($stack);
+    Globals::setAttackStack($stack);
+    if (empty($stack)) {
+      // No more pending attack, jump to next attack
+      $this->changeActivePlayerAndJumpTo($currentAttack['pId'], \ST_ATTACK);
+    } else {
+      // TODO
+      throw new \BgaVisibleSystemException('Resuming stacked attack is not implemented yet');
+    }
   }
 
   /**
@@ -121,15 +129,7 @@ trait AttackUnitsTrait
   public function stAttackThrow()
   {
     $attack = $this->getCurrentAttack();
-    $this->resolveAttack($attack);
-  }
-
-  /**
-   * Resolve an attack
-   */
-  public function resolveAttack($attack)
-  {
-    $unit = $attack['unit'];
+    $unit = $attack['unit']; // TODO : handle cards that attacks without activating units
     $oppUnit = $attack['oppUnit'];
     $player = $unit->getPlayer();
 
@@ -141,7 +141,7 @@ trait AttackUnitsTrait
           clienttranslate('${player_name} unit has retreated due to Ambush. Attack cannot take place'),
           ['player' => $player]
         );
-        $this->nextState('nextAttack');
+        $this->closeCurrentAttack();
         return;
       }
     }
@@ -149,23 +149,23 @@ trait AttackUnitsTrait
     // Launch dice
     $results = array_count_values($this->rollDice($player, $attack['nDice'], $oppUnit->getPos()));
 
-    // Handle hits : TODO handle cards and attacking unit
+    // Handle hits : TODO handle cards and attacking unit modifiers for dices
     $hits = $oppUnit->getHits($results);
     $eliminated = $this->damageUnit($oppUnit, $hits);
 
+    // Handle retreat
     if (isset($results[DICE_FLAG]) && !$eliminated) {
       $this->initRetreat($attack, $results);
+      $this->nextState('retreat', $oppUnit->getPlayer());
+    } else {
+      $this->closeCurrentAttack();
     }
-
-    // TODO: manage specific cards (behind ennemy lines...)
-
-    $this->nextState('retreat', $oppUnit->getPlayer());
   }
 
   /**
    * Damage a unit and return whether it's eliminated or not
    */
-  public function damageUnit($unit, $hits)
+  public function damageUnit($unit, $hits, $cantRetreat = false)
   {
     if ($hits == 0) {
       return false;
@@ -173,7 +173,7 @@ trait AttackUnitsTrait
 
     $eliminated = $unit->takeDamage($hits);
     $player = $unit->getPlayer();
-    Notifications::takeDamage($player, $unit, $hits);
+    Notifications::takeDamage($player, $unit, $hits, $cantRetreat);
     if ($eliminated) {
       //TODO : Manage scenario specific
       // TODO : store type of unit
@@ -197,7 +197,7 @@ trait AttackUnitsTrait
     }
 
     // debug
-    $results = [DICE_INFANTRY, DICE_INFANTRY, DICE_FLAG, DICE_FLAG];
+    $results = [DICE_INFANTRY, DICE_INFANTRY, DICE_FLAG];
 
     Notifications::rollDice($player, $nDice, $results, $cell);
     return $results;

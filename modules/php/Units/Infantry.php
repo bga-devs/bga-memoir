@@ -13,5 +13,6 @@ class Infantry extends AbstractUnit
     $this->movementAndAttackRadius = 1;
     $this->attackPower = [3, 2, 1];
     $this->mustSeeToAttack = true;
+    $this->maxGrounds = 1;
   }
 }

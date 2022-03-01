@@ -48,6 +48,7 @@ class SectionCard extends Card
     return [
       'i18n' => ['desc'],
       'n' => $this->nUnits,
+      'nTitle' => $this->nUnits,
       'nOnTheMove' => $this->nUnitsOnTheMove,
       'desc' => $this->orderUnitsTitles[$this->value] ?? '',
       'sections' => $this->getSections(),
@@ -68,11 +69,12 @@ class SectionCard extends Card
   }
 
   // ignoreFight => ignore number of fights (case of overrun)
-  public function getArgsAttackUnits($ignoreFight = false)
+  public function getArgsAttackUnits()
   {
     $player = $this->getPlayer();
     $units = Units::getActivatedByCard($this);
 
+    /*
     // check if there is a unit already fighting
     $forceUnit = $units->filter(function ($unit) {
       return $unit->getFights() != 0 && $unit->getFights() < $this->nbFights;
@@ -82,14 +84,30 @@ class SectionCard extends Card
       $id = $forceUnit->getIds()[0];
       return ['units' => [$id => $units[$id]->getTargetableUnits()]];
     }
+*/
 
     return [
-      'units' => $units->map(function ($unit) use ($ignoreFight) {
-        if (!$ignoreFight && $unit->getFights() >= $this->nbFights) {
+      'units' => $units->map(function ($unit) {
+        if ($unit->getFights() >= $this->nbFights) {
           return [];
         }
         return $unit->getTargetableUnits();
       }),
+    ];
+  }
+
+  public function getArgsArmorOverrun($unitId)
+  {
+    $unit = Units::get($unitId);
+    if ($unit->getType() != ARMOR || $unit->getFights() > 1) {
+      // TODO : this would break if a card allow an armor to fight twice
+      return ['unit' => []];
+    }
+
+    return [
+      'units' => [
+        $unit->getId() => $unit->getTargetableUnits(),
+      ],
     ];
   }
 

@@ -11,65 +11,54 @@ use M44\Board;
 
 trait TakeGroundTrait
 {
-  /////////////////////////////////
-  //  __  __  _____     _______
-  // |  \/  |/ _ \ \   / / ____|
-  // | |\/| | | | \ \ / /|  _|
-  // | |  | | |_| |\ V / | |___
-  // |_|  |_|\___/  \_/  |_____|
-  /////////////////////////////////
-  public function argsTakeGround()
-  {
-    $currentAttack = Globals::getCurrentAttack();
-    return ['unit' => $currentAttack['unitId'], 'x' => $currentAttack['x'], 'y' => $currentAttack['y']];
-  }
-
   public function stTakeGround()
   {
-    $currentAttack = Globals::getCurrentAttack();
-    $stateName = $this->gamestate->state()['name'];
-
-    if ($stateName == 'armorOverrunMove') {
-      $unitType = ARMOR;
-    } else {
-      $unitType = \INFANTRY;
-    }
+    $attack = $this->getCurrentAttack();
+    $unit = $attack['unit'];
 
     if (
-      Units::get($currentAttack['unitId'])->getType() != $unitType ||
-      $currentAttack['distance'] != 1 ||
-      Board::getUnitInCell($currentAttack['x'], $currentAttack['y']) != null
+      $attack['distance'] != 1 ||
+      $unit->getGrounds() >= $unit->getMaxGrounds() ||
+      Board::getUnitInCell($attack['x'], $attack['y']) != null
     ) {
-      $this->nextState('next');
+      $this->closeCurrentAttack();
     }
+  }
+
+  public function argsTakeGround()
+  {
+    $attack = $this->getCurrentAttack();
+    return [
+      'unitId' => $attack['unitId'],
+      'cell' => [
+        'x' => $attack['x'],
+        'y' => $attack['y'],
+      ],
+    ];
   }
 
   public function actTakeGround()
   {
     // Sanity checks
     self::checkAction('actTakeGround');
-    $args = $this->argsTakeGround();
+
     $player = Players::getCurrent();
+    $attack = $this->getCurrentAttack();
+    // Move unit
+    $unit = $attack['unit'];
+    $unit->moveTo($attack);
+    Board::refreshUnits();
+    $unit->incGrounds(1);
+    Notifications::takeGround($player, $attack['unitId'], $attack['x'], $attack['y']);
 
-    $unit = Units::get($args['unit']);
-    $unit->moveTo($args);
-    Notifications::takeGround($player, $unit->getId(), $args['x'], $args['y']);
-
-    $this->nextState('attack');
+    $this->nextState('overrun');
   }
 
-  public function actNextAttack()
+  public function actPassTakeGround()
   {
     // Sanity checks
-    self::checkAction('actNextAttack');
-    $msg = '';
-    if ($this->gamestate->state()['name'] == 'armorOverrunMove') {
-      $msg = clienttranslate('${player_name} does not do an armor overrun');
-    } elseif ($this->gamestate->state()['name'] == 'armorOverrunAttack') {
-      $msg = clienttranslate('${player_name} does not attack');
-    }
-
-    Notifications::message($msg, [
+    self::checkAction('actPassTakeGround');
+    Notifications::message(\clienttranslate('${player_name} does not take ground'), [
       'player' => Players::getCurrent(),
     ]);
     $this->nextState('next');
@@ -83,21 +72,21 @@ trait TakeGroundTrait
   // /_/   \_\_|   |_/_/   \_\____|_|\_\
   //////////////////////////////////////////
 
-  public function stArmorOverrunAttack()
+  public function stArmorOverrun()
   {
-    $args = $this->argsAttackUnit();
-    $currentAttack = Globals::getCurrentAttack();
-
-    if (count($args['units'][$currentAttack['unitId']]) == 0) {
-      $this->nextState('next');
+    $args = $this->argsArmorOverrun();
+    if (empty($args['units'])) {
+      $this->closeCurrentAttack();
     }
   }
 
-  // public function argsArmorOverrunAttack()
-  // {
-  //   $currentAttack = Globals::getCurrentAttack();
-  //   $args = $this->argsAttackUnit();
-  //
-  //   return ['units' => [$currentAttack['unitId'] => $args['units'][$currentAttack['unitId']] ?? []]];
-  // }
+  public function argsArmorOverrun()
+  {
+    $player = Players::getActive();
+    $card = $player->getCardInPlay();
+    $attack = $this->getCurrentAttack();
+    $args = $card->getArgsArmorOverrun($attack['unitId']);
+    Utils::clearPaths($args['units']);
+    return $args;
+  }
 }

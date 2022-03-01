@@ -130,7 +130,7 @@ define(['dojo', 'dojo/_base/declare', 'ebg/core/gamegui'], (dojo, declare) => {
     onEnteringState(stateName, args) {
       debug('Entering state: ' + stateName, args);
       if (this.isFastMode()) return;
-      if (args.args.titleSuffix) this.changePageTitle(args.args.titleSuffix);
+      if (args.args && args.args.titleSuffix) this.changePageTitle(args.args.titleSuffix);
       if (this._activeStates.includes(stateName) && !this.isCurrentPlayerActive()) return;
 
       // Call appropriate method

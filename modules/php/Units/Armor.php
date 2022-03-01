@@ -13,5 +13,6 @@ class Armor extends AbstractUnit
     $this->movementAndAttackRadius = 3;
     $this->attackPower = [3, 3, 3];
     $this->mustSeeToAttack = true;
+    $this->maxGrounds = 2;
   }
 }
