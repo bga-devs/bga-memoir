@@ -68,6 +68,7 @@ CREATE TABLE IF NOT EXISTS `units` (
   `activation_card` int(10) DEFAULT 0,
   `moves` int(1) DEFAULT 0,
   `fights` int(1) DEFAULT 0,
+  `retreats` int(1) DEFAULT 0,
   `extra_datas` JSON NULL,
   PRIMARY KEY (`unit_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

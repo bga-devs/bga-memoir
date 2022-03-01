@@ -52,7 +52,6 @@ class action_memoir extends APP_GameAction
     self::ajaxResponse();
   }
 
-
   /////////////////////////////////
   //  __  __  _____     _______
   // |  \/  |/ _ \ \   / / ____|
@@ -77,7 +76,6 @@ class action_memoir extends APP_GameAction
     $this->game->actMoveUnitsDone();
     self::ajaxResponse();
   }
-
 
   //////////////////////////////////////////
   //    _  _____ _____  _    ____ _  __
@@ -104,6 +102,38 @@ class action_memoir extends APP_GameAction
     self::ajaxResponse();
   }
 
+  ///////////////////////////////////////////////////
+  //    ____  _____ _____ ____  _____    _  _____
+  //   |  _ \| ____|_   _|  _ \| ____|  / \|_   _|
+  //   | |_) |  _|   | | | |_) |  _|   / _ \ | |
+  //   |  _ <| |___  | | |  _ <| |___ / ___ \| |
+  //   |_| \_\_____| |_| |_| \_\_____/_/   \_\_|
+  ///////////////////////////////////////////////////
+
+  public function actRetreatUnit()
+  {
+    self::setAjaxMode();
+    $x = self::getArg('x', AT_posint, false);
+    $y = self::getArg('y', AT_posint, false);
+    $this->game->actRetreatUnit($x, $y);
+    self::ajaxResponse();
+  }
+
+  public function actRetreatUnitDone()
+  {
+    self::setAjaxMode();
+    $this->game->actRetreatUnitDone();
+    self::ajaxResponse();
+  }
+
+
+  /////////////////////////////////
+  //  _   _ _____ ___ _     ____
+  // | | | |_   _|_ _| |   / ___|
+  // | | | | | |  | || |   \___ \
+  // | |_| | | |  | || |___ ___) |
+  //  \___/  |_| |___|_____|____/
+  /////////////////////////////////
 
   public function getNumberList($name, $mandatory = true)
   {

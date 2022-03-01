@@ -412,10 +412,59 @@ class Board
   // |  _ <  __/ |_| | |  __/ (_| | |_
   // |_| \_\___|\__|_|  \___|\__,_|\__|
   /////////////////////////////////////////////
-  public static function getReachableCellsForRetreat($unit, $minFlags, $maxFlags)
+
+  /**
+   * getArgsRetreat: compute the number of hits taken + reachable cells for retreat given min/max number of flags
+   */
+  public static function getArgsRetreat($unit, $minFlags, $maxFlags)
+  {
+    // Get all cells accessible at distance at most $maxFlags
+    list($cells, $markers) = self::getReachableCellsForRetreat($unit, $maxFlags);
+    // Find the maximum number of retreat possible and deduce the number of hits
+    for ($hits = 0; $minFlags - $hits > 0; $hits++) {
+      $fCells = $cells;
+      Utils::filter($fCells, function ($cell) use ($minFlags, $maxFlags, $hits) {
+        return $cell['d'] <= $maxFlags && $minFlags - $hits <= $cell['d'];
+      });
+
+      if (!empty($fCells)) {
+        break;
+      }
+    }
+
+    if ($minFlags == $hits) {
+      // No possible retreat => take hits
+      return [
+        'hits' => $hits,
+        'cells' => [],
+      ];
+    } else {
+      // Keep only cells on a path to these filtered cells
+      $closure = [];
+      foreach ($cells as $cell) {
+        foreach ($cell['paths'] as $path) {
+          foreach ($path as $node) {
+            if (!in_array($node, $closure)) {
+              $closure[] = $node;
+            }
+          }
+        }
+      }
+      Utils::filterCells($cells, $closure);
+
+      return [
+        'hits' => $hits,
+        'cells' => $cells,
+      ];
+    }
+  }
+
+  /**
+   * getReachableCellsForRetreat: given a distance $d, compute all reeachable cells for $unit at distance <= $d
+   */
+  public static function getReachableCellsForRetreat($unit, $d)
   {
     // Compute all cells reachable at distance $d in the good vertical direction
-    $d = $maxFlags;
     $deltaY = $unit->getCampDirection();
     list($cells, $markers) = self::getCellsAtDistance($unit->getPos(), $d, function ($source, $target, $d) use (
       $unit,
@@ -443,15 +492,7 @@ class Board
       return 1;
     });
 
-    // TODO : filtering is still not good, must take into account hits
-    // TODO: manage frozen river?
-    // throw new \feException(print_r($cells));
-    // Keep only cells at distance in [$flags - $nIgnore; $flags]
-    Utils::filter($cells, function ($cell) use ($minFlags, $maxFlags) {
-      return $cell['d'] <= $maxFlags && $minFlags <= $cell['d'];
-    });
-
-    return $cells;
+    return [$cells, $markers];
   }
 
   /////////////////////////////////////////////

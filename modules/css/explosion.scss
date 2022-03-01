@@ -1,0 +1,24 @@
+.m44-explosion {
+  width: 100%;
+  height: 100%;
+  background-image:url('img/explosion.png');
+  background-size:400% 300%;
+  animation: explode 1s;
+}
+
+#explosionContainer {
+  display: none;
+  pointer-events: none;
+  z-index: 10;
+}
+
+// Background image animation
+@keyframes explode {
+  @for $i from 0 to 12 {
+    #{$i * 100% / 11 + 0.0001},
+    #{($i+1) * 100% / 11} {
+      background-position-x: ($i % 4) * 100% / 3;
+      background-position-y: (($i - ($i % 4)) / 4) * 100% / 2;
+    }
+  }
+}

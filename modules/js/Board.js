@@ -93,6 +93,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       // Add line of sight and dice container
       dojo.place('<div id="lineOfSight"></div>', 'm44-board-units');
       dojo.place('<div id="diceContainer"></div>', 'm44-board-units');
+      dojo.place('<div id="explosionContainer"></div>', 'm44-board-units');
 
       this._boardScale = 1; // TODO localStorage
       dojo.connect($('m44-board-zoom-in'), 'click', () => this.incBoardScale(0.1));
@@ -304,7 +305,6 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       o.style.gridArea = $(`cell-container-${cell.x}-${cell.y}`).style.gridArea;
       o.style.display = 'grid';
       dojo.empty(o);
-      o.offsetHeight;
 
       results.forEach((result, i) => {
         this.wait(i * 100).then(() => {
@@ -326,6 +326,29 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     notif_rollDice(n) {
       debug('Notif: rolling dice', n);
       this.rollDice(n.args.results, n.args.cell);
+    },
+
+    ///////////////////////////////////////////////////
+    //    ____
+    //   |  _ \  __ _ _ __ ___   __ _  __ _  ___  ___
+    //   | | | |/ _` | '_ ` _ \ / _` |/ _` |/ _ \/ __|
+    //   | |_| | (_| | | | | | | (_| | (_| |  __/\__ \
+    //   |____/ \__,_|_| |_| |_|\__,_|\__, |\___||___/
+    //                                |___/
+    ///////////////////////////////////////////////////
+    createExplosion(cell) {
+      if (this.isFastMode()) return;
+      let o = $('explosionContainer');
+      o.style.gridArea = $(`cell-container-${cell.x}-${cell.y}`).style.gridArea;
+      o.style.display = 'flex';
+      dojo.place('<div class="m44-explosion"></div>', o);
+      this.wait(1000).then(() => dojo.empty(o));
+    },
+
+    notif_takeDamage(n){
+      debug("Notif: a unit is taking damage", n);
+      this.createExplosion(n.args.cell);
+      $('unit-' + n.args.unitId).dataset.figures -= n.args.hits;
     },
   });
 });

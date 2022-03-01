@@ -41,6 +41,7 @@ define([
         ['moveUnit', 600],
         ['rollDice', 3300],
         ['clearUnitsStatus', 2],
+        ['takeDamage', 1000],
       ];
 
       // Fix mobile viewport (remove CSS zoom)
@@ -80,7 +81,7 @@ define([
 
     clearPossible() {
       this.inherited(arguments);
-      ['moving', 'forMove', 'attacking', 'forAttack'].forEach((className) => {
+      ['moving', 'forMove', 'attacking', 'forAttack', 'retreating', 'forRetreat'].forEach((className) => {
         this.removeClassNameOfCells(className);
       });
       $('m44-board').classList.remove('displayLineOfSight');

@@ -24,6 +24,7 @@ class Units extends \M44\Helpers\Pieces
     'activation_card',
     'moves',
     'fights',
+    'retreats',
     'extra_datas',
   ];
   protected static $autoreshuffle = false;
@@ -134,7 +135,7 @@ class Units extends \M44\Helpers\Pieces
   public function reset()
   {
     self::DB()
-      ->update(['activation_card' => null, 'moves' => null, 'fights' => null])
+      ->update(['activation_card' => null, 'moves' => 0, 'fights' => 0, 'retreats' => 0])
       ->run();
   }
 
