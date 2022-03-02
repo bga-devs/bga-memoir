@@ -9,6 +9,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     //////////////////////////////////////
 
     onEnteringStateOrderUnits(args) {
+      this.removeClassNameOfCells('unselectableForAttacking');
       this.makeUnitsSelectable(
         args.units,
         this.onClickUnitToOrder.bind(this),
