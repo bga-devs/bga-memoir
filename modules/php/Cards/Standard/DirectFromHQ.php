@@ -10,4 +10,19 @@ class DirectFromHQ extends \M44\Models\Card
     $this->name = clienttranslate('Direct From HQ');
     $this->text = [clienttranslate('Issue an order to 4 units of your choice.')];
   }
+
+  public function getArgsOrderUnits()
+  {
+    $player = $this->getPlayer();
+    $units = $player->getUnits();
+
+    return [
+      'n' => 4,
+      'nTitle' => 4,
+      'nOnTheMove' => 0,
+      'desc' => '',
+      'sections' => [\INFINITY, \INFINITY, INFINITY],
+      'units' => $units,
+    ];
+  }
 }

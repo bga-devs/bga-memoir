@@ -56,6 +56,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       if (this._selectedUnitsOnTheMove.includes(unitId)) return true;
       // If there is still "on the move" units left, the unit can be selected
       if (!ignoreOnTheMove && this._selectedUnitsOnTheMove.length < this.getArgs().nOnTheMove) return true;
+      // Have we reached max number of selected unit ?
+      if (this._selectedUnits.length == this.getArgs().n) return false;
       // Try to find a section with still enough room
       let sections = this.getArgs().sections;
       for (let i = 0; i < 3; i++) {
