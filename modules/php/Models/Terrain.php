@@ -99,6 +99,11 @@ class Terrain implements \JsonSerializable
     return is_bool($this->mustStop) ? $this->mustStop : $this->mustStop[$unit->getType()] ?? false;
   }
 
+  public function canIgnoreOneFlag($unit)
+  {
+    return is_bool($this->ignore1Flag) ? $this->ignore1Flag : $this->ignore1Flag[$unit->getType()] ?? false;
+  }
+
   public function cannotAttackWhenEntering($unit)
   {
     return is_bool($this->enteringCannotBattle)

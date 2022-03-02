@@ -189,7 +189,7 @@ class Board
     }
 
     // If I'm coming from a 'must stop' terrain, can't go there unless dist = 0
-    if ($source['d'] > 0) {
+    if ($source['d'] > 0 || $unit->getMoves() > 0) {
       foreach ($sourceCell['terrains'] as $terrain) {
         if ($terrain->mustStopWhenEntering($unit)) {
           return \INFINITY;
@@ -216,6 +216,17 @@ class Board
     foreach ($targetCell['terrains'] as $terrain) {
       $terrain->onUnitEntering($unit);
     }
+  }
+
+  public static function mustStopWhenEntering($unit, $cell)
+  {
+    $t = self::$grid[$cell['x']][$cell['y']];
+    foreach ($t['terrains'] as $terrain) {
+      if ($terrain->mustStopWhenEntering($unit)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   //////////////////////////////////////////
@@ -433,7 +444,7 @@ class Board
   }
 
   /**
-   * Return whether a given cell is blocking line of sight considering what is on the cell (terrains, units, ...)
+   * Return dice number modifier for a given unit and cell for either offense or defense
    */
   public static function getDiceModifier($unit, $cell, $forDefense = true)
   {
@@ -458,6 +469,22 @@ class Board
   /////////////////////////////////////////////
 
   /**
+   * Compute whether the terrain under a unit allow to reduce 1 flag or not
+   */
+  public static function canIgnoreOneFlag($unit)
+  {
+    $cell = $unit->getPos();
+    $t = self::$grid[$cell['x']][$cell['y']];
+    foreach ($t['terrains'] as $t) {
+      if ($t->canIgnoreOneFlag($unit)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  /**
    * getArgsRetreat: compute the number of hits taken + reachable cells for retreat given min/max number of flags
    */
   public static function getArgsRetreat($unit, $minFlags, $maxFlags)
@@ -465,6 +492,7 @@ class Board
     // Get all cells accessible at distance at most $maxFlags
     list($cells, $markers) = self::getReachableCellsForRetreat($unit, $maxFlags);
     // Find the maximum number of retreat possible and deduce the number of hits
+    $fCells = $cells;
     for ($hits = 0; $minFlags - $hits > 0; $hits++) {
       $fCells = $cells;
       Utils::filter($fCells, function ($cell) use ($minFlags, $maxFlags, $hits) {
@@ -476,7 +504,7 @@ class Board
       }
     }
 
-    if ($minFlags == $hits) {
+    if ($minFlags == $hits && $hits > 0) {
       // No possible retreat => take hits
       return [
         'hits' => $hits,
@@ -485,7 +513,7 @@ class Board
     } else {
       // Keep only cells on a path to these filtered cells
       $closure = [];
-      foreach ($cells as $cell) {
+      foreach ($fCells as $cell) {
         foreach ($cell['paths'] as $path) {
           foreach ($path as $node) {
             if (!in_array($node, $closure)) {

@@ -16,9 +16,12 @@ trait RetreatUnitTrait
    */
   public function initRetreat($attack, $dice)
   {
+    $oppUnit = Units::get($attack['oppUnitId']);
+    $canIgnore1Flag = Board::canIgnoreOneFlag($oppUnit);
     // TODO : compute the min/max flags
+
     Globals::setRetreat([
-      'min' => $dice[\DICE_FLAG],
+      'min' => $dice[\DICE_FLAG] - $canIgnore1Flag ? 1 : 0,
       'max' => $dice[\DICE_FLAG],
     ]);
   }
@@ -53,9 +56,9 @@ trait RetreatUnitTrait
       $this->actRetreatUnitDone(true);
     }
     // If only one cell, retreat to that
-    elseif (count($args['cells']) == 1) {
+    elseif (count($args['cells']) == 1 && $args['min'] > 0) {
       $cell = reset($args['cells']);
-      $this->actRetreatUnit($cell['x'], $cell['y']);
+      $this->actRetreatUnit($cell['x'], $cell['y'], true);
     }
   }
 
@@ -117,7 +120,7 @@ trait RetreatUnitTrait
   {
     // Sanity checks
     if (!$auto) {
-      self::checkAction('actRetreatDone');
+      self::checkAction('actRetreatUnitDone');
     }
     // check that retreat = 0
     list(, $minFlags) = $this->getRetreatInfo();

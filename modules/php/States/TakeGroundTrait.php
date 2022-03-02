@@ -16,10 +16,16 @@ trait TakeGroundTrait
     $attack = $this->getCurrentAttack();
     $unit = $attack['unit'];
 
+    // To take ground, we must have the following:
+    //   - attack at distance 1
+    //   - attacked cell is now empty (opp unit retreated or eliminated)
+    //   - unit has not taken too many grounds already (1 for infantry, 2 for armors)
+    //   - unit has not entered a mustStopWhenEntering terrain during the move phase
     if (
       $attack['distance'] != 1 ||
       $unit->getGrounds() >= $unit->getMaxGrounds() ||
-      Board::getUnitInCell($attack['x'], $attack['y']) != null
+      Board::getUnitInCell($attack['x'], $attack['y']) != null ||
+      ($unit->getMoves() > 0 && Board::mustStopWhenEntering($unit, $unit->getPos()))
     ) {
       $this->closeCurrentAttack();
     }

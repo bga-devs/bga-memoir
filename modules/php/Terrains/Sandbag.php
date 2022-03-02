@@ -12,7 +12,8 @@ class Sandbag extends \M44\Models\Obstacle
   {
     $this->name = clienttranslate('SandBags');
     $this->number = 10;
-
+    $this->defense = [\INFANTRY => -1, ARMOR => -1];
+    $this->ignore1Flag = true;
     parent::__construct($row);
   }
 
