@@ -31,9 +31,7 @@ class MoveOut extends \M44\Models\Card
         'i18n' => ['desc'],
         'n' => 1,
         'nTitle' => 1,
-        'nOnTheMove' => 0,
         'desc' => \clienttranslate('(because no infantry units)'),
-        'sections' => [\INFINITY, \INFINITY, INFINITY],
         'units' => $units,
       ];
     } else {
@@ -41,9 +39,7 @@ class MoveOut extends \M44\Models\Card
         'i18n' => ['desc'],
         'n' => 4,
         'nTitle' => 4,
-        'nOnTheMove' => 0,
         'desc' => \clienttranslate('(infantry units only)'),
-        'sections' => [\INFINITY, \INFINITY, INFINITY],
         'units' => $infantry,
       ];
     }

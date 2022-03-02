@@ -15,4 +15,40 @@ class ArmorAssault extends \M44\Models\Card
       clienttranslate('If you do not command any armor units, issue an order to 1 unit of your choice.'),
     ];
   }
+
+  public function getArgsOrderUnits()
+  {
+    $player = $this->getPlayer();
+    $units = $player->getUnits();
+
+    // Keep only armor
+    $armors = $units->filter(function ($unit) {
+      return $unit->getType() == \ARMOR;
+    });
+
+    if ($armors->empty()) {
+      // No armor => 1 unit of your choice
+      return [
+        'i18n' => ['desc'],
+        'n' => 1,
+        'nTitle' => 1,
+        'desc' => \clienttranslate('(because no armor units)'),
+        'units' => $units,
+      ];
+    } else {
+      return [
+        'i18n' => ['desc'],
+        'n' => 4,
+        'nTitle' => 4,
+        'desc' => \clienttranslate('(armor units only)'),
+        'units' => $armors,
+      ];
+    }
+  }
+
+  public function getDiceModifier($unit, $cell)
+  {
+    // Bonus dice is only for close combat
+    return $cell['d'] == 1 ? 1 : 0;
+  }
 }

@@ -32,9 +32,7 @@ class CloseAssault extends \M44\Models\Card
     return [
       'n' => \INFINITY,
       'nTitle' => '',
-      'nOnTheMove' => 0,
       'desc' => '',
-      'sections' => [\INFINITY, \INFINITY, INFINITY],
       'units' => $units,
     ];
   }
