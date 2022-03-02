@@ -1,6 +1,7 @@
 <?php
 namespace M44\Models;
 use M44\Managers\Players;
+use M44\Managers\Units;
 
 class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
 {
@@ -16,6 +17,7 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
   protected $text = '';
   protected $deck = STANDARD_DECK;
   protected $draw = ['nDraw' => 1, 'nKeep' => 1]; // Number of card to draw / to keep
+  protected $nbFights = 1;
 
   /*
    * DYNAMIC INFORMATIONS
@@ -111,6 +113,24 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
     self::DB()->update(['extra_datas' => \addslashes(\json_encode($this->extraDatas))], $this->id);
   }
 
+  public function getDrawMethod()
+  {
+    return $this->draw;
+  }
+
+  public function getDiceModifier($unit, $cell)
+  {
+    return 0;
+  }
+
+  //////////////////////////////////////////////////////
+  //  _____ _                    _
+  // |  ___| | _____      __    / \   _ __ __ _ ___
+  // | |_  | |/ _ \ \ /\ / /   / _ \ | '__/ _` / __|
+  // |  _| | | (_) \ V  V /   / ___ \| | | (_| \__ \
+  // |_|   |_|\___/ \_/\_/   /_/   \_\_|  \__, |___/
+  //                                      |___/
+  //////////////////////////////////////////////////////
   public function getArgsOrderUnits()
   {
     return [
@@ -119,8 +139,57 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
     ];
   }
 
-  public function getDrawMethod()
+  public function getArgsMoveUnits()
   {
-    return $this->draw;
+    $player = $this->getPlayer();
+    $units = Units::getActivatedByCard($this);
+
+    return [
+      'units' => $units->map(function ($unit) {
+        return $unit->getPossibleMoves();
+      }),
+    ];
+  }
+
+  public function getArgsAttackUnits()
+  {
+    $player = $this->getPlayer();
+    $units = Units::getActivatedByCard($this);
+
+    /*
+    // check if there is a unit already fighting
+    $forceUnit = $units->filter(function ($unit) {
+      return $unit->getFights() != 0 && $unit->getFights() < $this->nbFights;
+    });
+
+    if (count($forceUnit) != 0) {
+      $id = $forceUnit->getIds()[0];
+      return ['units' => [$id => $units[$id]->getTargetableUnits()]];
+    }
+*/
+
+    return [
+      'units' => $units->map(function ($unit) {
+        if ($unit->getFights() >= $this->nbFights) {
+          return [];
+        }
+        return $unit->getTargetableUnits();
+      }),
+    ];
+  }
+
+  public function getArgsArmorOverrun($unitId)
+  {
+    $unit = Units::get($unitId);
+    if ($unit->getType() != ARMOR || $unit->getFights() > 1) {
+      // TODO : this would break if a card allow an armor to fight twice
+      return ['unit' => []];
+    }
+
+    return [
+      'units' => [
+        $unit->getId() => $unit->getTargetableUnits(),
+      ],
+    ];
   }
 }

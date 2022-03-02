@@ -76,6 +76,12 @@ class Player extends \M44\Helpers\DB_Model
     return Teams::getSide($this->team);
   }
 
+  public function getUnits()
+  {
+    return Units::getOfTeam($this->team);
+  }
+
+
   public function getUnitsInSection($section)
   {
     if (Scenario::getTopSide() == $this->team) {

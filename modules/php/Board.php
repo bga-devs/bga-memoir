@@ -127,6 +127,19 @@ class Board
     return self::$grid[$x][$y]['terrains'];
   }
 
+  // Useful for close assault card
+  public function isAdjacentToEnnemy($unit)
+  {
+    foreach (self::getNeighbours($unit->getPos()) as $cell) {
+      $t = self::$grid[$cell['x']][$cell['y']];
+      if ($t['unit'] !== null && $t['unit']->isOpponent($unit)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   /////////////////////////////////
   //  __  __  _____     _______
   // |  \/  |/ _ \ \   / / ____|
@@ -296,7 +309,8 @@ class Board
       $cell['dice'] = $power[$cell['d'] - 1];
       $offenseModifier = self::getDiceModifier($unit, $pos, false);
       $defenseModifier = self::getDiceModifier($unit, $cell, true);
-      $cell['dice'] += $offenseModifier + $defenseModifier;
+      $cardModifier = $unit->getActivationOCard()->getDiceModifier($unit, $cell);
+      $cell['dice'] += $offenseModifier + $defenseModifier + $cardModifier;
     }
     // Keep only the cells with at least one attack dice
     Utils::filter($cells, function ($cell) {

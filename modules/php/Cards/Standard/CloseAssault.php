@@ -1,5 +1,8 @@
 <?php
 namespace M44\Cards\Standard;
+use M44\Board;
+use M44\Helpers\Collection;
+use M44\Helpers\Utils;
 
 class CloseAssault extends \M44\Models\Card
 {
@@ -14,5 +17,54 @@ class CloseAssault extends \M44\Models\Card
         'Units ordered battle with 1 additional die. Units may not move before they battle, but, after a successful Close Assault, they may Take Ground and Armor units may make an Armor Overrun.'
       ),
     ];
+  }
+
+  public function getArgsOrderUnits()
+  {
+    $player = $this->getPlayer();
+    $units = new Collection();
+    foreach ($player->getUnits() as $unit) {
+      if (Board::isAdjacentToEnnemy($unit)) {
+        $units[$unit->getId()] = $unit;
+      }
+    }
+
+    return [
+      'n' => \INFINITY,
+      'nTitle' => '',
+      'nOnTheMove' => 0,
+      'desc' => '',
+      'sections' => [\INFINITY, \INFINITY, INFINITY],
+      'units' => $units,
+    ];
+  }
+
+  public function getArgsMoveUnits()
+  {
+    return [
+      'units' => [],
+    ];
+  }
+
+  public function getArgsAttackUnits()
+  {
+    $args = parent::getArgsAttackUnits();
+    foreach ($args['units'] as &$cells) {
+      Utils::filter($cells, function ($cell) {
+        if (isset($cell['type'])) {
+          return true;
+        } else {
+          return $cell['d'] == 1;
+        }
+      });
+    }
+
+    return $args;
+  }
+
+  public function getDiceModifier($unit, $cell)
+  {
+    // Bonus dice is only for first assault, not for armor overrun
+    return $unit->getFights() == 0 ? 1 : 0;
   }
 }

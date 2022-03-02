@@ -23,7 +23,7 @@ trait AttackUnitsTrait
       $nTargets += count($targets);
     }
     if ($nTargets == 0) {
-      $this->actAttackUnitsDone();
+      $this->actAttackUnitsDone(true);
     }
   }
 
@@ -42,9 +42,11 @@ trait AttackUnitsTrait
   /**
    * Attack phase is over, go to 'draw' phase
    */
-  public function actAttackUnitsDone()
+  public function actAttackUnitsDone($auto = false)
   {
-    self::checkAction('actAttackUnitsDone');
+    if (!$auto) {
+      self::checkAction('actAttackUnitsDone');
+    }
     $this->gamestate->nextState('draw');
   }
 
@@ -76,7 +78,6 @@ trait AttackUnitsTrait
     // Prepare attack
     $unit = Units::get($unitId);
     $unit->incFights(1);
-    $nDice = $card->updateDiceRoll($target['dice']);
 
     // log attack information
     $stack = Globals::getAttackStack();
@@ -86,7 +87,7 @@ trait AttackUnitsTrait
       'x' => $x,
       'y' => $y,
       'oppUnitId' => $oppUnit->getId(),
-      'nDice' => $nDice,
+      'nDice' => $target['dice'],
       'distance' => $target['d'],
       'ambush' => false,
     ];

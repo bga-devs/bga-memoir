@@ -87,6 +87,13 @@ class Units extends \M44\Helpers\Pieces
     $q = $q->whereIn('nation', self::$nations[$side]);
   }
 
+  public static function getOfTeam($side)
+  {
+    $query = self::getSelectQuery();
+    self::addTeamClause($query, $side);
+    return $query->get();
+  }
+
   public static function getInSection($side, $section)
   {
     $query = self::getSelectQuery();

@@ -5,6 +5,7 @@ use M44\Board;
 use M44\Scenario;
 use M44\Managers\Players;
 use M44\Managers\Units;
+use M44\Managers\Cards;
 
 class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
 {
@@ -123,6 +124,11 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     return in_array($this->nation, Units::$nations[Scenario::getTopSide()]) ? -1 : 1;
   }
 
+  public function getActivationOCard()
+  {
+    return is_null($this->activationCard) ? null : Cards::get($this->activationCard);
+  }
+
   //////////////////////////////////////
   //    ___  ____  ____  _____ ____
   //   / _ \|  _ \|  _ \| ____|  _ \
@@ -141,7 +147,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
   public function getActivationPlayer()
   {
     if ($this->getActivationCard() != null) {
-      return Cards::get($this->getActivationCard())->getPlayer();
+      return $this->getActivationOCard()->getPlayer();
     } else {
       return null;
     }
