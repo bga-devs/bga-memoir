@@ -41,9 +41,8 @@ trait MoveUnitsTrait
     $path = $cell['paths'][0]; // Take the first path
     $unit = Units::get($unitId);
     foreach ($path as $c) {
-      $unit->moveTo($c);
       Notifications::moveUnit($player, $unitId, $c['x'], $c['y']);
-      // TODO listen here for mine and frozen river
+      Board::moveUnit($unit, $c); // TODO : maybe we need to update moves of unit along the path for some terrains ?
     }
     $unit->incMoves($cell['d']);
     Globals::setUnitMoved($unitId);

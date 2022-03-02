@@ -6,6 +6,7 @@ use M44\Core\Notifications;
 use M44\Managers\Players;
 use M44\Managers\Teams;
 use M44\Managers\Units;
+use M44\Managers\Terrains;
 use M44\Helpers\Utils;
 use M44\Board;
 
@@ -201,5 +202,38 @@ trait AttackUnitsTrait
 
     Notifications::rollDice($player, $nDice, $results, $cell);
     return $results;
+  }
+
+  /**
+   * Remove Wire instead of attacking
+   */
+  public function actRemoveWire($unitId)
+  {
+    // Sanity checks
+    self::checkAction('actRemoveWire');
+
+    $player = Players::getCurrent();
+    $args = $this->gamestate->state()['args'];
+    if (!\array_key_exists($unitId, $args['units'])) {
+      throw new \BgaVisibleSystemException('You cannot remove wire with this unit. Should not happen');
+    }
+    $cells = $args['units'][$unitId];
+    $k = Utils::array_usearch($cells, function ($cell) {
+      return ($cell['action'] ?? null) == 'actRemoveWire';
+    });
+    if ($k === false) {
+      throw new \BgaVisibleSystemException('You cannot remove wire with this unit. Should not happen');
+    }
+    $info = $cells[$k];
+
+    // Inc attack counter by 1
+    $unit = Units::get($unitId);
+    $unit->incFights(1);
+    // Remove wire
+    $terrain = Terrains::get($info['terrainId']);
+    $terrain->removeFromBoard();
+    Notifications::message(\clienttranslate('${player_name} removes wire on their hex'), ['player' => $player]);
+
+    $this->nextState('attack');
   }
 }

@@ -161,14 +161,22 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     onEnteringStateAttackUnitsChooseTarget(args) {
       this.addCancelStateBtn();
       $('unit-' + args.unitId).classList.add('attacking');
-      args.cells.forEach((cell) => {
-        let oCell = $(`cell-${cell.x}-${cell.y}`);
-        oCell.classList.add('forAttack');
-        this.onClick(oCell, () => this.takeAction('actAttackUnit', { unitId: args.unitId, x: cell.x, y: cell.y }));
+      args.cells.forEach((mixed) => {
+        // Mixed can either be a cell or an action (eg removing wire)
+        if (mixed.type && mixed.type == 'action') {
+          this.addPrimaryActionButton('btn' + mixed.action, _(mixed.desc), () =>
+            this.takeAction(mixed.action, { unitId: args.unitId }),
+          );
+        } else {
+          let cell = mixed;
+          let oCell = $(`cell-${cell.x}-${cell.y}`);
+          oCell.classList.add('forAttack');
+          this.onClick(oCell, () => this.takeAction('actAttackUnit', { unitId: args.unitId, x: cell.x, y: cell.y }));
 
-        // Dice icons
-        for (let i = 0; i < cell.dice; i++) {
-          dojo.place('<i class="dice-mini"></i>', oCell);
+          // Dice icons
+          for (let i = 0; i < cell.dice; i++) {
+            dojo.place('<i class="dice-mini"></i>', oCell);
+          }
         }
       });
 

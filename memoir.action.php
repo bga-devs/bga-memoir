@@ -102,6 +102,14 @@ class action_memoir extends APP_GameAction
     self::ajaxResponse();
   }
 
+  public function actRemoveWire()
+  {
+    self::setAjaxMode();
+    $unitId = self::getArg('unitId', AT_posint, false);
+    $this->game->actRemoveWire($unitId);
+    self::ajaxResponse();
+  }
+
   ///////////////////////////////////////////////////
   //    ____  _____ _____ ____  _____    _  _____
   //   |  _ \| ____|_   _|  _ \| ____|  / \|_   _|

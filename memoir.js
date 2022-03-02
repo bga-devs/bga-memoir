@@ -42,6 +42,7 @@ define([
         ['rollDice', 3300],
         ['clearUnitsStatus', 2],
         ['takeDamage', 1000],
+        ['removeObstacle', 200],
       ];
 
       // Fix mobile viewport (remove CSS zoom)

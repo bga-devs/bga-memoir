@@ -176,7 +176,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         rotation += (obstacle.orientation - 1) * angle + 12;
       }
       rotation = rotation % 12;
-      return `<div class="hex-grid-content hex-grid-obstacle" data-tile="${tile}" data-rotation="${rotation}"></div>`;
+      return `<div id="obstacle-${obstacle.id}" class="hex-grid-content hex-grid-obstacle" data-tile="${tile}" data-rotation="${rotation}"></div>`;
     },
 
     tplBoardDivider() {
@@ -188,6 +188,11 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       <div class="hex-label-container" style="grid-area:${label.area}">
         <div class="hex-label">${label.label}</div>
       </div>`;
+    },
+
+    notif_removeObstacle(n) {
+      debug('Notif: removing obstacle', n);
+      $('obstacle-' + n.args.terrainId).remove();
     },
 
     //////////////////////////////////////////

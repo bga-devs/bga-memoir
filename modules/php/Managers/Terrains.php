@@ -53,6 +53,12 @@ class Terrains extends \M44\Helpers\Pieces
   //////////////////////////////////
   //////////////////////////////////
 
+  public static function remove($terrain)
+  {
+    $terrainId = is_int($terrain) ? $terrain : $terrain->getId();
+    self::DB()->delete($terrainId);
+  }
+
   /**
    * Load a scenario
    */

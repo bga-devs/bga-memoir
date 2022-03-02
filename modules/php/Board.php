@@ -78,6 +78,16 @@ class Board
     }
   }
 
+  public function removeTerrain($terrain)
+  {
+    $x = $terrain->getX();
+    $y = $terrain->getY();
+    Utils::filter(self::$grid[$x][$y]['terrains'], function ($t) use ($terrain) {
+      return $t->getId() != $terrain->getId();
+    });
+    Terrains::remove($terrain);
+  }
+
   /////////////////////////////////////////
   //    ____      _   _
   //  / ___| ___| |_| |_ ___ _ __ ___
@@ -190,6 +200,24 @@ class Board
     return 1;
   }
 
+  public static function moveUnit($unit, $cell)
+  {
+    $pos = $unit->getPos();
+    $unit->moveTo($cell);
+    self::$grid[$pos['x']][$pos['y']]['unit'] = null;
+    self::$grid[$cell['x']][$cell['y']]['unit'] = $unit;
+
+    // Check listener
+    $sourceCell = self::$grid[$pos['x']][$pos['y']];
+    $targetCell = self::$grid[$cell['x']][$cell['y']];
+    foreach ($sourceCell['terrains'] as $terrain) {
+      $terrain->onUnitLeaving($unit);
+    }
+    foreach ($targetCell['terrains'] as $terrain) {
+      $terrain->onUnitEntering($unit);
+    }
+  }
+
   //////////////////////////////////////////
   //    _  _____ _____  _    ____ _  __
   //    / \|_   _|_   _|/ \  / ___| |/ /
@@ -255,13 +283,26 @@ class Board
     // Compute shooting powers for the remaining cells
     foreach ($cells as &$cell) {
       $cell['dice'] = $power[$cell['d'] - 1];
-      $reduction = self::getDiceReduction($unit, $cell);
-      $cell['dice'] -= $reduction;
+      $offenseModifier = self::getDiceModifier($unit, $pos, false);
+      $defenseModifier = self::getDiceModifier($unit, $cell, true);
+      $cell['dice'] += $offenseModifier + $defenseModifier;
     }
     // Keep only the cells with at least one attack dice
     Utils::filter($cells, function ($cell) {
       return $cell['dice'] > 0;
     });
+
+    // Add special actions that can replace attacks
+    if (is_null($moves)) {
+      foreach (self::getTerrainsInCell($pos) as $terrain) {
+        $actions = $terrain->getPossibleAttackActions($unit);
+        foreach ($actions as $action) {
+          $action['type'] = 'action';
+          $action['terrainId'] = $terrain->getId();
+          $cells[] = $action;
+        }
+      }
+    }
 
     return $cells;
   }
@@ -394,15 +435,18 @@ class Board
   /**
    * Return whether a given cell is blocking line of sight considering what is on the cell (terrains, units, ...)
    */
-  public static function getDiceReduction($unit, $cell)
+  public static function getDiceModifier($unit, $cell, $forDefense = true)
   {
     $t = self::$grid[$cell['x']][$cell['y']];
-    $m = 0;
+    $m = null;
     foreach ($t['terrains'] as $t) {
-      $m = max($m, $t->getDefense($unit));
+      $r = $forDefense ? $t->getDefense($unit) : $t->getOffense($unit);
+      if (!is_null($r)) {
+        $m = is_null($m) ? $r : min($m, $r);
+      }
     }
 
-    return $m;
+    return $m ?? 0;
   }
 
   /////////////////////////////////////////////

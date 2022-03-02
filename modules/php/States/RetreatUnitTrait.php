@@ -99,11 +99,9 @@ trait RetreatUnitTrait
     $unitId = $args['unitId'];
     $unit = Units::get($unitId);
     foreach ($path as $c) {
-      $unit->moveTo($c);
       Notifications::moveUnit($player, $unitId, $c['x'], $c['y']);
-      // TODO listen here for frozen river
+      Board::moveUnit($unit, $c);
     }
-    Board::refreshUnits();
 
     // Update min/max depending on the number of retreat done already
     $unit->incRetreats($dist);

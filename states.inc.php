@@ -89,9 +89,10 @@ $machinestates = [
     'type' => 'activeplayer',
     'action' => 'stAttackUnits',
     'args' => 'argsAttackUnit',
-    'possibleactions' => ['actAttackUnit', 'actAttackUnitsDone'],
+    'possibleactions' => ['actAttackUnit', 'actAttackUnitsDone', 'actRemoveWire'],
     'transitions' => [
       'ambush' => ST_OPPONENT_AMBUSH,
+      'attack' => ST_ATTACK,
       'draw' => ST_DRAW,
     ],
   ],

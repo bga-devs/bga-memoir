@@ -22,7 +22,8 @@ class Terrain implements \JsonSerializable
   protected $enteringCannotBattle = false;
   protected $ignore1Flag = false;
   protected $blockLineOfSight = false;
-  protected $defense = 0;
+  protected $defense = null;
+  protected $offense = null;
 
   protected $water = false;
   protected $road = false;
@@ -114,6 +115,24 @@ class Terrain implements \JsonSerializable
 
   public function getDefense($unit)
   {
-    return $this->defense[$unit->getType()] ?? 0;
+    return is_array($this->defense) ? $this->defense[$unit->getType()] ?? null : $this->defense;
+  }
+
+  public function getOffense($unit)
+  {
+    return is_array($this->offense) ? $this->offense[$unit->getType()] ?? null : $this->offense;
+  }
+
+  public function onUnitLeaving($unit)
+  {
+  }
+
+  public function onUnitEntering($unit)
+  {
+  }
+
+  public function getPossibleAttackActions($unit)
+  {
+    return [];
   }
 }

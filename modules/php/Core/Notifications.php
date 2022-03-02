@@ -209,6 +209,13 @@ class Notifications
     ]);
   }
 
+  public static function removeObstacle($terrain)
+  {
+    self::notifyAll('removeObstacle', '', [
+      'terrainId' => $terrain->getId(),
+    ]);
+  }
+
   /*********************
    **** UPDATE ARGS ****
    *********************/

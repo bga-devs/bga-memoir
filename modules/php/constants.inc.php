@@ -132,6 +132,9 @@ const TERRAIN_CLASSES = [
   'river' => 'River',
 
   'bridge' => 'Bridge',
+
+  'sand' => 'Sandbag',
+  'wire' => 'Wire',
 ];
 
 const TROOP_CLASSES = [
