@@ -23,7 +23,7 @@ trait AttackUnitsTrait
       $nTargets += count($targets);
     }
     if ($nTargets == 0) {
-      $this->actAttackUnitsDone();
+      $this->actAttackUnitsDone(true);
     }
   }
 
@@ -42,9 +42,11 @@ trait AttackUnitsTrait
   /**
    * Attack phase is over, go to 'draw' phase
    */
-  public function actAttackUnitsDone()
+  public function actAttackUnitsDone($auto = false)
   {
-    self::checkAction('actAttackUnitsDone');
+    if (!$auto) {
+      self::checkAction('actAttackUnitsDone');
+    }
     $this->gamestate->nextState('draw');
   }
 
@@ -178,7 +180,7 @@ trait AttackUnitsTrait
     if ($eliminated) {
       //TODO : Manage scenario specific
       // TODO : store type of unit
-      Teams::incMedals(1, Players::get(Globals::getActivePlayer())->getTeam());
+      // Teams::incMedals(1, Players::get(Globals::getActivePlayer())->getTeam());
       Notifications::scoreMedal(Players::get(Globals::getActivePlayer()), 1);
     }
 
@@ -198,7 +200,7 @@ trait AttackUnitsTrait
     }
 
     // debug
-    $results = [DICE_INFANTRY, DICE_INFANTRY, DICE_FLAG];
+    // $results = [DICE_INFANTRY, DICE_INFANTRY, DICE_FLAG, DICE_FLAG];
 
     Notifications::rollDice($player, $nDice, $results, $cell);
     return $results;

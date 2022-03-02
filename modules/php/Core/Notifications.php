@@ -199,8 +199,8 @@ class Notifications
   public static function takeDamage($player, $oppUnit, $hits, $cantRetreat)
   {
     $msg = $cantRetreat
-      ? clienttranslate('${player_name}\'s unit takes ${hits} damage because retreat is blocked')
-      : clienttranslate('${player_name}\'s unit takes ${hits} damage');
+      ? clienttranslate('${player_name}\'s unit takes ${hits} damage(s) because retreat is blocked')
+      : clienttranslate('${player_name}\'s unit takes ${hits} damage(s)');
     self::notifyAll('takeDamage', $msg, [
       'player' => $player,
       'unitId' => $oppUnit->getId(),
