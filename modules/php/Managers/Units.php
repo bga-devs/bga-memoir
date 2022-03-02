@@ -82,6 +82,11 @@ class Units extends \M44\Helpers\Pieces
     $q = $q->where('x', '>=', $sections[$section])->where('x', '<=', $sections[$section + 1]);
   }
 
+  public static function addAliveClause(&$q)
+  {
+    $q = $q->where('figures', '>', 0);
+  }
+
   public static function addTeamClause(&$q, $side)
   {
     $q = $q->whereIn('nation', self::$nations[$side]);
@@ -99,6 +104,7 @@ class Units extends \M44\Helpers\Pieces
     $query = self::getSelectQuery();
     self::addTeamClause($query, $side);
     self::addSectionClause($query, $section);
+    self::addAliveClause($query);
     return $query->get();
   }
 
