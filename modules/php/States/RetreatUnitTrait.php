@@ -45,7 +45,7 @@ trait RetreatUnitTrait
     $args = $this->argsRetreatUnit();
     if ($args['hits'] > 0) {
       $unit = Units::get($args['unitId']);
-      $this->damageUnit($unit, $args['hits']);
+      $this->damageUnit($unit, $args['hits'], true);
       $retreatInfo = Globals::getRetreat();
       $retreatInfo['min'] -= $args['hits'];
       Globals::setRetreat($retreatInfo);

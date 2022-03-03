@@ -20,6 +20,8 @@ const ST_DRAW = 20;
 const ST_DRAW_CHOICE = 21;
 const ST_END_ROUND = 22;
 
+const ST_DIG_IN = 30;
+
 const ST_OVERLORD_PLAY_CARD = 40;
 const ST_OVERLORD_SELECT_UNIT = 41;
 const ST_OVERLORD_MOVE_UNIT = 42;

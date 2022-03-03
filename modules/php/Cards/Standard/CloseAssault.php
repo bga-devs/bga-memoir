@@ -22,12 +22,9 @@ class CloseAssault extends \M44\Models\Card
   public function getArgsOrderUnits()
   {
     $player = $this->getPlayer();
-    $units = new Collection();
-    foreach ($player->getUnits() as $unit) {
-      if (Board::isAdjacentToEnnemy($unit)) {
-        $units[$unit->getId()] = $unit;
-      }
-    }
+    $units = $player->getUnits()->filter(function ($unit) {
+      return in_array($unit->getType(), [INFANTRY, ARMOR]) && Board::isAdjacentToEnnemy($unit);
+    });
 
     return [
       'n' => \INFINITY,

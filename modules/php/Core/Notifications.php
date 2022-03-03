@@ -216,6 +216,14 @@ class Notifications
     ]);
   }
 
+  public static function addObstacle($player, $terrain, $msg)
+  {
+    self::notifyAll('addObstacle', $msg, [
+      'player' => $player,
+      'terrain' => $terrain,
+    ]);
+  }
+
   /*********************
    **** UPDATE ARGS ****
    *********************/

@@ -5,6 +5,7 @@ use M44\Core\Notifications;
 use M44\Managers\Players;
 use M44\Helpers\Utils;
 use M44\Models\Terrain;
+use M44\Board;
 
 /**
  * Terrains
@@ -58,6 +59,15 @@ class Terrains extends \M44\Helpers\Pieces
     $terrainId = is_int($terrain) ? $terrain : $terrain->getId();
     self::DB()->delete($terrainId);
   }
+
+  public function add($terrain)
+  {
+    $terrain['location'] = $terrain['x'] . '_' . $terrain['y'];
+    $o = self::singleCreate($terrain);
+    Board::addTerrain($o);
+    return $o;
+  }
+
 
   /**
    * Load a scenario

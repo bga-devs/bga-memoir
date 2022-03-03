@@ -68,7 +68,7 @@ $machinestates = [
     'args' => 'argsOrderUnits',
     'action' => 'stOrderUnits',
     'possibleactions' => ['actOrderUnits'],
-    'transitions' => ['moveUnits' => ST_MOVE_UNITS],
+    'transitions' => ['moveUnits' => ST_MOVE_UNITS, 'digIn' => ST_DIG_IN],
   ],
 
   ST_MOVE_UNITS => [
@@ -211,6 +211,23 @@ $machinestates = [
     'args' => 'argsAmbushResolve',
     'possibleactions' => ['actRetreat'],
     'transitions' => ['attack' => ST_ATTACK_THROW],
+  ],
+
+  ///////////////////////////////////
+  //  _____          _   _
+  // |_   _|_ _  ___| |_(_) ___
+  //   | |/ _` |/ __| __| |/ __|
+  //   | | (_| | (__| |_| | (__
+  //   |_|\__,_|\___|\__|_|\___|
+  //
+  ///////////////////////////////////
+  ST_DIG_IN => [
+    'name' => 'digIn',
+    'description' => '',
+    'type' => 'game',
+    'action' => 'stDigIn',
+    'descriptionmyturn' => '',
+    'transitions' => ['next' => ST_DRAW],
   ],
 
   /////////////////////////////////////////////

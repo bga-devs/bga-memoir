@@ -21,6 +21,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
   return declare('memoir.board', null, {
     setupBoard(board, rotate, bottomTeam) {
+      this._isRotated = rotate;
+
       // Get dimensions based on type
       let type = board.type.toLowerCase();
       $('m44-board').dataset.type = type;
@@ -188,6 +190,14 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       <div class="hex-label-container" style="grid-area:${label.area}">
         <div class="hex-label">${label.label}</div>
       </div>`;
+    },
+
+    notif_addObstacle(n) {
+      debug('Notif: adding obstacle', n);
+      let terrain = n.args.terrain;
+      let cellC = $(`cell-background-${terrain.x}-${terrain.y}`);
+      terrain.rotate = this._isRotated;
+      this.place('tplObstacleTile', terrain, cellC);
     },
 
     notif_removeObstacle(n) {

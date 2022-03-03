@@ -88,6 +88,11 @@ class Board
     Terrains::remove($terrain);
   }
 
+  public function addTerrain($terrain)
+  {
+    self::$grid[$terrain->getX()][$terrain->getY()]['terrains'][] = $terrain;
+  }
+
   /////////////////////////////////////////
   //    ____      _   _
   //  / ___| ___| |_| |_ ___ _ __ ___
@@ -138,6 +143,20 @@ class Board
     }
 
     return false;
+  }
+
+  // Useful for DigIn card
+  public function canPlaceSandbag($unit)
+  {
+    $cell = $unit->getPos();
+    $t = self::$grid[$cell['x']][$cell['y']];
+    foreach ($t['terrains'] as $terrain) {
+      if (!$terrain->canSandbagBePlaced($unit)) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   /////////////////////////////////

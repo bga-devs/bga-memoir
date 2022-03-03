@@ -43,6 +43,7 @@ define([
         ['clearUnitsStatus', 2],
         ['takeDamage', 1000],
         ['removeObstacle', 200],
+        ['addObstacle', 200],
       ];
 
       // Fix mobile viewport (remove CSS zoom)

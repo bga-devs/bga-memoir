@@ -24,6 +24,7 @@ class Terrain implements \JsonSerializable
   protected $blockLineOfSight = false;
   protected $defense = null;
   protected $offense = null;
+  protected $canSandbagBePlaced = true;
 
   protected $water = false;
   protected $road = false;
@@ -92,6 +93,15 @@ class Terrain implements \JsonSerializable
   public function isImpassable($unit)
   {
     return is_bool($this->impassable) ? $this->impassable : $this->impassable[$unit->getType()] ?? false;
+  }
+
+  public function canSandbagBePlaced($unit)
+  {
+    if ($this->isImpassable($unit)) {
+      return false;
+    } else {
+      return $this->canSandbagBePlaced;
+    }
   }
 
   public function mustStopWhenEntering($unit)

@@ -59,6 +59,16 @@ class Cards extends \M44\Helpers\Pieces
     return self::getInLocation(['inplay', $pId])->first();
   }
 
+  /**
+   * getByType
+   */
+  public static function getByType($type)
+  {
+    return self::getSelectQuery()
+      ->where('type', $type)
+      ->get();
+  }
+
   //////////////////////////////////
   //////////////////////////////////
   ///////////// SETTERS ////////////
@@ -73,7 +83,7 @@ class Cards extends \M44\Helpers\Pieces
 
   public static function discard($cardId)
   {
-    $cardId = is_int($cardId)? $cardId : $cardId->getId();
+    $cardId = is_int($cardId) ? $cardId : $cardId->getId();
     self::move($cardId, 'discard');
   }
 

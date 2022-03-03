@@ -36,7 +36,7 @@ trait OrderUnitsTrait
     if (count($unitIds) > $args['n']) {
       throw new \BgaVisibleSystemException('More units than authorized. Should not happen');
     }
-    if (count($onTheMoveIds) > $args['nOnTheMove']) {
+    if (count($onTheMoveIds) > ($args['nOnTheMove'] ?? 0)) {
       throw new \BgaVisibleSystemException('More on the move units than authorized. Should not happen');
     }
 
@@ -64,6 +64,9 @@ trait OrderUnitsTrait
     if (!empty($unitIds) || !empty($onTheMoveIds)) {
       Notifications::orderUnits($player, Units::getMany($unitIds), Units::getMany($onTheMoveIds));
     }
-    $this->gamestate->nextState('moveUnits');
+
+    // Get next state from the card
+    $nextState = $card->nextStateAfterOrder($unitIds, $onTheMoveIds);
+    $this->gamestate->nextState($nextState);
   }
 }

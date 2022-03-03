@@ -139,6 +139,11 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
     ];
   }
 
+  public function nextStateAfterOrder($unitIds, $onTheMoveIds)
+  {
+    return 'moveUnits';
+  }
+
   public function getArgsMoveUnits()
   {
     $player = $this->getPlayer();
