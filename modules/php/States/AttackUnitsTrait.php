@@ -138,7 +138,7 @@ trait AttackUnitsTrait
     // Check if ambush was played and successfull
     if ($attack['ambush']) {
       // Check retreat
-      if ($unit->getRetreat() > 0) {
+      if ($unit->getRetreats() > 0) {
         Notifications::message(
           clienttranslate('${player_name} unit has retreated due to Ambush. Attack cannot take place'),
           ['player' => $player]
@@ -151,7 +151,6 @@ trait AttackUnitsTrait
     // Launch dice
     $results = array_count_values($this->rollDice($player, $attack['nDice'], $oppUnit->getPos()));
 
-    // Handle hits : TODO handle cards and attacking unit modifiers for dices
     $hits = $oppUnit->getHits($results);
     $eliminated = $this->damageUnit($oppUnit, $hits);
 
@@ -199,7 +198,7 @@ trait AttackUnitsTrait
     }
 
     // debug
-    // $results = [DICE_INFANTRY, DICE_INFANTRY, DICE_FLAG, DICE_FLAG];
+    // $results = [DICE_INFANTRY, \DICE_INFANTRY];
 
     Notifications::rollDice($player, $nDice, $results, $cell);
     return $results;

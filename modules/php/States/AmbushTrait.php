@@ -7,6 +7,7 @@ use M44\Managers\Teams;
 use M44\Managers\Cards;
 use M44\Managers\Units;
 use M44\Core\Notifications;
+use M44\Helpers\Utils;
 
 trait AmbushTrait
 {
@@ -46,9 +47,45 @@ trait AmbushTrait
     $card = Cards::play($player, $cardId);
     Notifications::ambush($player, $card);
 
-    $currentAttack = Globals::getCurrentAttack();
-    $currentAttack['ambush'] = true;
-    Globals::setCurrentAttack($currentAttack);
+    $stack = Globals::getAttackStack();
+    $stack[count($stack) - 1]['ambush'] = true;
+    Globals::setAttackStack($stack);
+
+    $currentAttack = $this->getCurrentAttack();
+    $unit = $currentAttack['oppUnit'];
+    $ambushedUnit = $currentAttack['unit'];
+
+    // get diceNumber + modifiers
+    $cells = $unit->getTargetableUnits();
+    $k = Utils::searchCell($cells, $ambushedUnit->getX(), $ambushedUnit->getY());
+    if ($k === false) {
+      throw new \BgaVisibleSystemException('Issue in ambush. Should not happen');
+    }
+    $target = $cells[$k];
+
+    // Launch dice
+    $results = array_count_values($this->rollDice($player, $target['dice'], $ambushedUnit->getPos()));
+
+    $hits = $ambushedUnit->getHits($results);
+    $eliminated = $this->damageUnit($ambushedUnit, $hits);
+
+    $attack = [
+      'pId' => $player->getId(),
+      'unitId' => $unit->getId(),
+      'x' => $unit->getX(),
+      'y' => $unit->getY(),
+      'oppUnitId' => $ambushedUnit->getId(),
+      'nDice' => $target['dice'],
+      'distance' => $target['d'],
+    ];
+
+    // Handle retreat
+    if (isset($results[DICE_FLAG]) && !$eliminated) {
+      $this->initRetreat($attack, $results);
+      $this->nextState('retreat', $ambushedUnit->getPlayer());
+    } else {
+      $this->nextState('pass', $ambushedUnit->getPlayer());
+    }
   }
 
   function actPassAmbush($silent = false)

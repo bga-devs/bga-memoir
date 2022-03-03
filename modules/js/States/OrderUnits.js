@@ -262,5 +262,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     onEnteringStateOpponentAmbush(args) {
       this.addDangerActionButton('btnPassAmbush', 'Pass', () => this.takeAction('actPassAmbush'));
     },
+
+    onEnteringStateAmbushResolve(args) {
+      this.onEnteringStateAttackRetreat(args);
+    },
   });
 });
