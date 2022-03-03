@@ -29,34 +29,35 @@
     }
     &#m44-board-units {
       z-index: 3;
+      pointer-events: none;
     }
   }
 
   &[data-type='standard'] {
     width: calc(var(--memoirBoardScale) * 900px);
-    height: calc(var(--memoirBoardScale) * 539.933px);
+    height: calc(var(--memoirBoardScale) * 595.2px);
 
     .m44-grid {
-      grid-template-columns: repeat(27, 1fr);
-      grid-template-rows: repeat(28, 1fr);
+      grid-template-columns: repeat(28, 1fr);
+      grid-template-rows: repeat(32, 1fr);
     }
   }
   &[data-type='overlord'] {
     width: calc(var(--memoirBoardScale) * 1500px);
-    height: calc(var(--memoirBoardScale) * 467.133px);
+    height: calc(var(--memoirBoardScale) * 519.6152px);
 
     .m44-grid {
-      grid-template-columns: repeat(52, 1fr);
-      grid-template-rows: repeat(28, 1fr);
+      grid-template-columns: repeat(54, 1fr);
+      grid-template-rows: repeat(32, 1fr);
     }
   }
   &[data-type='brkthru'] {
     width: calc(var(--memoirBoardScale) * 800px);
-    height: calc(var(--memoirBoardScale) * 891.8px);
+    height: calc(var(--memoirBoardScale) * 924.9px);
 
     .m44-grid {
-      grid-template-columns: repeat(27, 1fr);
-      grid-template-rows: repeat(52, 1fr);
+      grid-template-columns: repeat(28, 1fr);
+      grid-template-rows: repeat(56, 1fr);
     }
   }
 
@@ -67,6 +68,19 @@
     //* {
     //  visibility: visible;
     //}
+
+    &.coordinate-marker {
+      padding-bottom: 0;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Oswald';
+      color: #ffffff;
+      font-size: calc(var(--memoirBoardScale) * 21px);
+      text-shadow: -1px -1px 0 #00000090, 1px -1px 0 #00000090, -1px 1px 0 #00000090, 1px 1px 0 #00000090;
+      opacity: 0.3;
+    }
 
     .hex-grid-content {
       position: absolute;

@@ -37,6 +37,36 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
       let face = board.face.toLowerCase();
 
+      // Create coordinates marker
+      for (let y = 0; y < dim.y; y++) {
+        let realY = !rotate ? dim.y - y - 1 : y;
+
+        // Left
+        let cellC = this.place('tplBoardCoordinateMarker', { mark: y + 1 }, 'm44-board-terrains');
+        cellC.style.gridRow = 3 * realY + 4 + ' / span 2';
+        cellC.style.gridColumn = '1 / span 1';
+        //        cellC.style.gridColumn = realX + 1 + ' / span ' + (y % 2 == 0 ? 1 : 2);
+
+        // Right
+        cellC = this.place('tplBoardCoordinateMarker', { mark: y + 1 }, 'm44-board-terrains');
+        cellC.style.gridRow = 3 * realY + 4 + ' / span 2';
+        cellC.style.gridColumn = 2 * dim.x + 2 + ' / span 1';
+      }
+      for (let x = 0; x < 2 * dim.x - 1; x++) {
+        let realX = rotate ? 2 * (dim.x - 1) - x : x;
+
+        // Top
+        let cellC = this.place(
+          'tplBoardCoordinateMarker',
+          { mark: String.fromCharCode(65 + (x % 2 == 1 ? 32 : 0) + parseInt(x / 2)) },
+          'm44-board-terrains',
+        );
+        cellC.style.gridRow = (x % 2 == 0 ? 1 : 3 * dim.y + 4) + ' / span 2';
+        //        cellC.style.gridRow = 1 + ' / span 2';
+        //        cellC.style.gridRow = (x % 2 == 0 ? 1 : 2) + ' / span 2';
+        cellC.style.gridColumn = realX + 2 + ' / span 2';
+      }
+
       // Create cells
       for (let y = 0; y < dim.y; y++) {
         let size = dim.x - (y % 2 == 0 ? 0 : 1);
@@ -52,8 +82,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           // Background and terrains
           let tile = this.getBackgroundTile(face, dim, x, y);
           let cellC = this.place('tplBoardBackgroundCell', { x: col, y, tile, rotate }, 'm44-board-terrains');
-          cellC.style.gridRow = 3 * realY + 1 + ' / span 4';
-          cellC.style.gridColumn = realX + 1 + ' / span 2';
+          cellC.style.gridRow = 3 * realY + 3 + ' / span 4';
+          cellC.style.gridColumn = realX + 2 + ' / span 2';
           board.grid[col][row].terrains.forEach((terrain) => {
             let tplName = TERRAINS.includes(terrain.tile) ? 'tplTerrainTile' : 'tplObstacleTile';
             terrain.rotate = rotate;
@@ -88,8 +118,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       };
       dividers[type].forEach((x) => {
         let o = this.place('tplBoardDivider', {}, 'm44-board-terrains');
-        o.style.gridRow = '1 / span ' + 3 * (dim.y + 1);
-        o.style.gridColumn = x + ' / span 1';
+        o.style.gridRow = '3 / span ' + (3 * dim.y + 1);
+        o.style.gridColumn = x + 1 + ' / span 1';
       });
 
       // Add line of sight and dice container
@@ -142,6 +172,10 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         else tile = getRandomInt(9, 12);
       }
       return tile;
+    },
+
+    tplBoardCoordinateMarker(cell) {
+      return `<li class="hex-grid-item coordinate-marker">${cell.mark}</li>`;
     },
 
     tplBoardBackgroundCell(cell) {

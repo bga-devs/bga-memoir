@@ -132,7 +132,6 @@ html {
         overflow: auto;
         position: relative;
         z-index: 1;
-        padding: 20px;
         box-sizing: border-box; }
       #m44-container #m44-central-part #m44-board-wrapper #m44-board-zoom-in,
       #m44-container #m44-central-part #m44-board-wrapper #m44-board-zoom-out,
@@ -234,29 +233,41 @@ html {
       [data-labels='0'] #m44-board .m44-grid#m44-board-labels {
         display: none; }
     #m44-board .m44-grid#m44-board-units {
-      z-index: 3; }
+      z-index: 3;
+      pointer-events: none; }
   #m44-board[data-type='standard'] {
     width: calc(var(--memoirBoardScale) * 900px);
-    height: calc(var(--memoirBoardScale) * 539.933px); }
+    height: calc(var(--memoirBoardScale) * 595.2px); }
     #m44-board[data-type='standard'] .m44-grid {
-      grid-template-columns: repeat(27, 1fr);
-      grid-template-rows: repeat(28, 1fr); }
+      grid-template-columns: repeat(28, 1fr);
+      grid-template-rows: repeat(32, 1fr); }
   #m44-board[data-type='overlord'] {
     width: calc(var(--memoirBoardScale) * 1500px);
-    height: calc(var(--memoirBoardScale) * 467.133px); }
+    height: calc(var(--memoirBoardScale) * 519.6152px); }
     #m44-board[data-type='overlord'] .m44-grid {
-      grid-template-columns: repeat(52, 1fr);
-      grid-template-rows: repeat(28, 1fr); }
+      grid-template-columns: repeat(54, 1fr);
+      grid-template-rows: repeat(32, 1fr); }
   #m44-board[data-type='brkthru'] {
     width: calc(var(--memoirBoardScale) * 800px);
-    height: calc(var(--memoirBoardScale) * 891.8px); }
+    height: calc(var(--memoirBoardScale) * 924.9px); }
     #m44-board[data-type='brkthru'] .m44-grid {
-      grid-template-columns: repeat(27, 1fr);
-      grid-template-rows: repeat(52, 1fr); }
+      grid-template-columns: repeat(28, 1fr);
+      grid-template-rows: repeat(56, 1fr); }
   #m44-board .hex-grid-item {
     position: relative;
     height: 0;
     padding-bottom: 115.7%; }
+    #m44-board .hex-grid-item.coordinate-marker {
+      padding-bottom: 0;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Oswald';
+      color: #ffffff;
+      font-size: calc(var(--memoirBoardScale) * 21px);
+      text-shadow: -1px -1px 0 #00000090, 1px -1px 0 #00000090, -1px 1px 0 #00000090, 1px 1px 0 #00000090;
+      opacity: 0.3; }
     #m44-board .hex-grid-item .hex-grid-content {
       position: absolute;
       top: 0;
