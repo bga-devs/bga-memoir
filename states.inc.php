@@ -200,7 +200,7 @@ $machinestates = [
     'args' => 'argsOpponentAmbush',
     'action' => 'stAmbush',
     'possibleactions' => ['actAmbush', 'actPassAmbush'],
-    'transitions' => ['pass' => ST_ATTACK_THROW, 'resolve' => ST_AMBUSH_RESOLVE],
+    'transitions' => ['pass' => ST_ATTACK_THROW, 'retreat' => ST_AMBUSH_RESOLVE],
   ],
 
   ST_AMBUSH_RESOLVE => [
@@ -208,9 +208,12 @@ $machinestates = [
     'description' => clienttranslate('${actplayer} must retreat the unit (Ambush effect)'),
     'descriptionmyturn' => clienttranslate('${you} must retreat the unit (Ambush effect)'),
     'type' => 'activeplayer',
-    'args' => 'argsAmbushResolve',
-    'possibleactions' => ['actRetreat'],
-    'transitions' => ['attack' => ST_ATTACK_THROW],
+    // 'args' => 'argsAmbushResolve',
+    // 'possibleactions' => ['actRetreat'],
+    'args' => 'argsRetreatUnit',
+    'action' => 'stRetreatUnit',
+    'possibleactions' => ['actRetreatUnit', 'actRetreatUnitDone'],
+    'transitions' => ['takeGround' => ST_ATTACK_THROW, 'retreat' => ST_AMBUSH_RESOLVE], // to default go to attack resolution
   ],
 
   ///////////////////////////////////

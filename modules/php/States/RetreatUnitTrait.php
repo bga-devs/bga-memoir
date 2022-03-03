@@ -23,6 +23,7 @@ trait RetreatUnitTrait
     Globals::setRetreat([
       'min' => $dice[\DICE_FLAG] - $canIgnore1Flag ? 1 : 0,
       'max' => $dice[\DICE_FLAG],
+      'unit' => $attack['oppUnitId'],
     ]);
   }
 
@@ -32,8 +33,8 @@ trait RetreatUnitTrait
   public function getRetreatInfo()
   {
     $data = Globals::getRetreat();
-    $attack = $this->getCurrentAttack();
-    return [$attack['oppUnit'], $data['min'], $data['max']];
+    // $attack = $this->getCurrentAttack();
+    return [Units::get($data['unit']), $data['min'], $data['max']];
   }
 
   /**
