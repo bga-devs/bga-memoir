@@ -94,6 +94,7 @@ $machinestates = [
       'ambush' => ST_OPPONENT_AMBUSH,
       'attack' => ST_ATTACK,
       'draw' => ST_DRAW,
+      'moveAgain' => ST_PRE_MOVE_AGAIN,
     ],
   ],
 
@@ -231,6 +232,27 @@ $machinestates = [
     'action' => 'stDigIn',
     'descriptionmyturn' => '',
     'transitions' => ['next' => ST_DRAW],
+  ],
+
+  // Behind ennemy lines
+  ST_PRE_MOVE_AGAIN => [
+    'name' => 'preMoveAgain',
+    'description' => '',
+    'type' => 'game',
+    'action' => 'stMoveAgain',
+    'descriptionmyturn' => '',
+    'transitions' => ['next' => ST_MOVE_AGAIN],
+  ],
+
+  ST_MOVE_AGAIN => [
+    'name' => 'moveUnits',
+    'description' => clienttranslate('${actplayer} may move activated units again (behind ennemy lines effect)'),
+    'descriptionmyturn' => clienttranslate('${you} may move activated units again (behind ennemy lines effect)'),
+    'type' => 'activeplayer',
+    'args' => 'argsMoveUnits',
+    'action' => 'stMoveUnits',
+    'possibleactions' => ['actMoveUnit', 'actMoveUnitsDone'],
+    'transitions' => ['moveUnits' => ST_MOVE_AGAIN, 'attackUnits' => ST_DRAW],
   ],
 
   /////////////////////////////////////////////

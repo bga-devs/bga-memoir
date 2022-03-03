@@ -233,8 +233,7 @@ html {
       [data-labels='0'] #m44-board .m44-grid#m44-board-labels {
         display: none; }
     #m44-board .m44-grid#m44-board-units {
-      z-index: 3;
-      pointer-events: none; }
+      z-index: 3; }
   #m44-board[data-type='standard'] {
     width: calc(var(--memoirBoardScale) * 900px);
     height: calc(var(--memoirBoardScale) * 595.2px); }

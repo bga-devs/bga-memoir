@@ -47,7 +47,10 @@ trait AttackUnitsTrait
     if (!$auto) {
       self::checkAction('actAttackUnitsDone');
     }
-    $this->gamestate->nextState('draw');
+    $player = Players::getActive();
+    $card = $player->getCardInPlay();
+    $nextState = $card->nextStateAfterAttacks();
+    $this->gamestate->nextState($nextState);
   }
 
   /**

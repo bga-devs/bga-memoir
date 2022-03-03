@@ -88,9 +88,14 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     /////////////////////////////////
 
     onEnteringStateMoveUnits(args, excludeUnit = null) {
+      let nonEmptyUnits = [];
       // When a unit is clicked => prompt for the cell to move
       let callback = (unitId) => {
-        this.clientState('moveUnitsChooseTarget', _('Select the destination hex or another unit you want to move'), {
+        let msg =
+          nonEmptyUnits.length > 1
+            ? _('Select the destination hex or another unit you want to move')
+            : _('Select the destination hex');
+        this.clientState('moveUnitsChooseTarget', msg, {
           unitId,
           cells: args.units[unitId],
         });
@@ -103,8 +108,12 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           return;
         }
 
+        nonEmptyUnits.push(unitId);
         this.onClick('unit-' + unitId, () => callback(unitId));
       });
+      if (nonEmptyUnits.length == 1) {
+        callback(nonEmptyUnits[0]);
+      }
 
       this.addPrimaryActionButton('btnMoveUnitsDone', _('Moves Done'), () => this.takeAction('actMoveUnitsDone'));
 
@@ -142,10 +151,15 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
     onEnteringStateAttackUnits(args, excludeUnit = null) {
       this.removeClassNameOfCells('unselectableForMoving');
+      let nonEmptyUnits = [];
 
       // When a unit is clicked => prompt for the target
       let callback = (unitId) => {
-        this.clientState('attackUnitsChooseTarget', _('Select the target or another unit you want to battle with'), {
+        let msg =
+          nonEmptyUnits.length > 1
+            ? _('Select the target or another unit you want to battle with')
+            : _('Select the target');
+        this.clientState('attackUnitsChooseTarget', msg, {
           unitId,
           cells: args.units[unitId],
         });
@@ -157,8 +171,12 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           return;
         }
 
+        nonEmptyUnits.push(unitId);
         this.onClick('unit-' + unitId, () => callback(unitId));
       });
+      if (nonEmptyUnits.length == 1) {
+        callback(nonEmptyUnits[0]);
+      }
 
       this.addPrimaryActionButton('btnAttackUnitsDone', _('Attacks Done'), () => this.takeAction('actAttackUnitsDone'));
     },

@@ -17,4 +17,11 @@ trait TacticCardTrait
     $card->stDigIn();
     $this->nextState('next');
   }
+
+  public function stMoveAgain()
+  {
+    $card = Cards::getByType(\CARD_BEHIND_LINES)->first();
+    $card->stMoveAgain();
+    $this->nextState('next');
+  }
 }

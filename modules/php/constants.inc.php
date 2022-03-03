@@ -21,6 +21,9 @@ const ST_DRAW_CHOICE = 21;
 const ST_END_ROUND = 22;
 
 const ST_DIG_IN = 30;
+const ST_PRE_MOVE_AGAIN = 31; // Behind ennemy lines
+const ST_MOVE_AGAIN = 32; // Behind ennemy lines
+
 
 const ST_OVERLORD_PLAY_CARD = 40;
 const ST_OVERLORD_SELECT_UNIT = 41;

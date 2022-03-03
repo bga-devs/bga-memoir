@@ -183,6 +183,12 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
     ];
   }
 
+  public function nextStateAfterAttacks()
+  {
+    return 'draw';
+  }
+
+
   public function getArgsArmorOverrun($unitId)
   {
     $unit = Units::get($unitId);

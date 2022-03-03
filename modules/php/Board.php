@@ -176,7 +176,11 @@ class Board
     }
 
     // Compute remaining moves for the unit
-    $m = $unit->getMovementRadius() - $unit->getMoves();
+    $maxDistance = $unit->getMovementRadius();
+    if ($unit->getActivationOCard()->getType() == \CARD_BEHIND_LINES) {
+      $maxDistance = 3; // Units activated by "BehindEnemyLines" can moves up to 3 hexes
+    }
+    $m = $maxDistance - $unit->getMoves();
     return self::getReachableCellsAtDistance($unit, $m);
   }
 
@@ -218,6 +222,11 @@ class Board
       if ($terrain->isImpassable($unit)) {
         return \INFINITY;
       }
+    }
+
+    // Units activated by "BehindEnemyLines" card have no terrain restriction
+    if ($unit->getActivationOCard()->getType() == \CARD_BEHIND_LINES) {
+      return 1;
     }
 
     // If I'm coming from a 'must stop' terrain, can't go there unless dist = 0
@@ -279,7 +288,7 @@ class Board
   {
     // Check whether the unit moved too much to attack
     $m = $unit->getMoves() + ($moves ?? 0);
-    if ($m > $unit->getMovementAndAttackRadius()) {
+    if ($m > $unit->getMovementAndAttackRadius() && $unit->getActivationOCard()->getType() != \CARD_BEHIND_LINES) {
       return [];
     }
 
