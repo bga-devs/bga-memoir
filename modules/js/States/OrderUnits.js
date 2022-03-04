@@ -88,6 +88,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     /////////////////////////////////
 
     onEnteringStateMoveUnits(args, excludeUnit = null) {
+      debug(args);
       let nonEmptyUnits = [];
       // When a unit is clicked => prompt for the cell to move
       let callback = (unitId) => {
@@ -111,7 +112,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         nonEmptyUnits.push(unitId);
         this.onClick('unit-' + unitId, () => callback(unitId));
       });
-      if (nonEmptyUnits.length == 1) {
+
+      if (excludeUnit == null && nonEmptyUnits.length == 1) {
         callback(nonEmptyUnits[0]);
       }
 
@@ -174,7 +176,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         nonEmptyUnits.push(unitId);
         this.onClick('unit-' + unitId, () => callback(unitId));
       });
-      if (nonEmptyUnits.length == 1) {
+      if (excludeUnit == null && nonEmptyUnits.length == 1) {
         callback(nonEmptyUnits[0]);
       }
 

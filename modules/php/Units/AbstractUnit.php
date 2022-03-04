@@ -161,8 +161,16 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
   // |_|  |_|\___/  \_/  |_____|
   /////////////////////////////////
 
-  public function getPossibleMoves()
+  public function getPossibleMoves($maxMove = null, $maxMoveAttack = null)
   {
+    if ($maxMove != null) {
+      $this->movementRadius = $maxMove;
+    }
+
+    if ($maxMoveAttack != null) {
+      $this->movementAndAttackRadius = $maxMoveAttack;
+    }
+
     return Board::getReachableCells($this);
   }
 

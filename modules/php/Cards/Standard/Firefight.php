@@ -40,9 +40,9 @@ class Firefight extends \M44\Models\Card
     ];
   }
 
-  public function getArgsAttackUnits()
+  public function getArgsAttackUnits($overrideNbFights = null)
   {
-    $args = parent::getArgsAttackUnits();
+    $args = parent::getArgsAttackUnits($overrideNbFights);
     foreach ($args['units'] as $unitId => &$cells) {
       if (Board::isAdjacentToEnnemy(Units::get($unitId))) {
         $cells = [];

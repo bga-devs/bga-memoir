@@ -161,26 +161,31 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
     ];
   }
 
-  public function getArgsAttackUnits()
+  /**
+   *
+   * @param $overrideNbFights = [UNIT_TYPE => maxFights]]
+   *
+   **/
+  public function getArgsAttackUnits($overrideNbFights = null)
   {
     $player = $this->getPlayer();
     $units = Units::getActivatedByCard($this);
 
-    /*
     // check if there is a unit already fighting
-    $forceUnit = $units->filter(function ($unit) {
-      return $unit->getFights() != 0 && $unit->getFights() < $this->nbFights;
+    $forceUnit = $units->filter(function ($unit) use ($overrideNbFights) {
+      $maxFights = $overrideNbFights[$unit->getType()] ?? $this->nbFights;
+      return $unit->getFights() != 0 && $unit->getFights() < $maxFights;
     });
 
     if (count($forceUnit) != 0) {
       $id = $forceUnit->getIds()[0];
       return ['units' => [$id => $units[$id]->getTargetableUnits()]];
     }
-*/
 
     return [
-      'units' => $units->map(function ($unit) {
-        if ($unit->getFights() >= $this->nbFights) {
+      'units' => $units->map(function ($unit) use ($overrideNbFights) {
+        $maxFights = $overrideNbFights[$unit->getType()] ?? $this->nbFights;
+        if ($unit->getFights() >= $maxFights) {
           return [];
         }
         return $unit->getTargetableUnits();
@@ -192,7 +197,6 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
   {
     return 'draw';
   }
-
 
   public function getArgsArmorOverrun($unitId)
   {
