@@ -18,7 +18,8 @@ trait DebugTrait
 
   function vt()
   {
-    $this->actChooseCard([35]);
+    // $this->actChooseCard([35]);
+    throw new \feException(print_r(Cards::getInPlayOfAll()));
   }
 
   function tp($pId, $unitId, $min, $max)

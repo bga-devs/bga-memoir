@@ -178,6 +178,13 @@ class action_memoir extends APP_GameAction
     self::ajaxResponse();
   }
 
+  public function actAmbush()
+  {
+    self::setAjaxMode();
+    $this->game->actAmbush();
+    self::ajaxResponse();
+  }
+
   /////////////////////////////////
   //  _   _ _____ ___ _     ____
   // | | | |_   _|_ _| |   / ___|

@@ -33,15 +33,16 @@ trait AmbushTrait
     }
   }
 
-  function actAmbush($cardId)
+  function actAmbush()
   {
     // Sanity check
     $this->checkAction('actAmbush');
     $player = Players::getCurrent();
     $args = $this->argsOpponentAmbush();
-    if (!in_array($cardId, $args['_private']['active']['cards'])) {
+    if (count($args['_private']['active']['cards']) == 0) {
       throw new \BgaVisibleSystemException('You cannot play this card. Should not happen.');
     }
+    $cardId = array_pop($args['_private']['active']['cards']);
 
     // inPlay card
     $card = Cards::play($player, $cardId);

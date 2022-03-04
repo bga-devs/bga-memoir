@@ -60,6 +60,11 @@ class Cards extends \M44\Helpers\Pieces
     return self::getInLocation(['inplay', $pId])->first();
   }
 
+  public static function getInPlayOfAll()
+  {
+    return self::getInLocation('inplay%');
+  }
+
   /**
    * getByType
    */

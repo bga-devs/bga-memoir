@@ -278,7 +278,11 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     // /_/   \_\_| |_| |_|_.__/ \__,_|___/_| |_|
     ////////////////////////////////////////////////
     onEnteringStateOpponentAmbush(args) {
-      this.addDangerActionButton('btnPassAmbush', 'Pass', () => this.takeAction('actPassAmbush'));
+      if (args['_private']['cards'].length != 0) {
+        this.addActionButton('btnPlayAmbush', _('Ambush player'), () => this.takeAction('actAmbush'));
+      }
+
+      this.addDangerActionButton('btnPassAmbush', _('Pass'), () => this.takeAction('actPassAmbush'));
     },
 
     onEnteringStateAmbushResolve(args) {

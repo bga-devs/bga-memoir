@@ -17,12 +17,30 @@ trait DrawCardsTrait
     // Discard played card
     $player = $player ?? Players::getActive();
     $card = $player->getCardInPlay();
+
+    // Ambush card management
+    $cards = Cards::getInPlayOfAll();
+    foreach ($cards as $otherCard) {
+      if ($otherCard->getPlayer() == $player) {
+        continue;
+      }
+
+      $owner = $otherCard->getPlayer();
+      $oMethod = $otherCard->getDrawMethod();
+      Cards::discard($otherCard);
+      Notifications::discardCard($owner, $otherCard);
+
+      $nc = Cards::pickForLocation($oMethod['nDraw'], 'deck', ['hand', $owner->getId()]);
+      Notifications::drawCards($owner, $nc);
+    }
+
     $method = $card->getDrawMethod();
+
     Cards::discard($card);
     Notifications::discardCard($player, $card);
 
     // TODO : handle the mode where we don't reshuffle (deck exhaustion)
-    if($card->getType() == \CARD_FINEST_HOUR){
+    if ($card->getType() == \CARD_FINEST_HOUR) {
       $n = Cards::reshuffle();
       Notifications::reshuffle($n);
     }
