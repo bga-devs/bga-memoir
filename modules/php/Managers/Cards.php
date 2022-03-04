@@ -17,6 +17,7 @@ class Cards extends \M44\Helpers\Pieces
   protected static $prefix = 'card_';
   protected static $customFields = ['type', 'value', 'extra_datas'];
   protected static $autoreshuffle = false;
+  protected static $autoreshuffleCustom = ['deck' => 'discard'];
   protected static function cast($row)
   {
     $locations = explode('_', $row['location']);
@@ -85,6 +86,12 @@ class Cards extends \M44\Helpers\Pieces
   {
     $cardId = is_int($cardId) ? $cardId : $cardId->getId();
     self::move($cardId, 'discard');
+  }
+
+  public static function reshuffle()
+  {
+    self::reformDeckFromDiscard('deck');
+    return self::countInLocation('deck');
   }
 
   /**

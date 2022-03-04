@@ -307,6 +307,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     getMinFillingOfSections() {
       let fillings = [[0, 0, 0]];
       this._selectedUnits.forEach((unitId) => {
+        if (!this._selectableUnits[unitId].sections) return;
         let t = [];
         this._selectableUnits[unitId].sections.forEach((section) => {
           fillings.forEach((filling) => {
@@ -374,7 +375,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
     notif_rollDice(n) {
       debug('Notif: rolling dice', n);
-      this.rollDice(n.args.results, n.args.cell);
+      let cell = n.args.cell ? n.args.cell : { x: 0, y: 0 };
+      this.rollDice(n.args.results, cell);
     },
 
     ///////////////////////////////////////////////////

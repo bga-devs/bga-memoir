@@ -21,6 +21,12 @@ trait DrawCardsTrait
     Cards::discard($card);
     Notifications::discardCard($player, $card);
 
+    // TODO : handle the mode where we don't reshuffle (deck exhaustion)
+    if($card->getType() == \CARD_FINEST_HOUR){
+      $n = Cards::reshuffle();
+      Notifications::reshuffle($n);
+    }
+
     if ($method['nKeep'] == $method['nDraw']) {
       $cards = Cards::pickForLocation($method['nDraw'], 'deck', ['hand', $player->getId()]);
       Notifications::drawCards($player, $cards);

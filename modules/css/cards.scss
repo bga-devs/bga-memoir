@@ -5,7 +5,8 @@
 .section-card,
 .tactic-card {
   &.moving {
-    --memoirCardScale: 0.4;
+    --memoirCardScale: 0.2548;
+//    --memoirCardScale: 0.4;
   }
 
   width: calc(var(--memoirCardScale) * 314px);

@@ -44,6 +44,7 @@ define([
         ['takeDamage', 1000],
         ['removeObstacle', 200],
         ['addObstacle', 200],
+        ['reshuffle', 1000],
       ];
 
       // Fix mobile viewport (remove CSS zoom)

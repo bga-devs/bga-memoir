@@ -57,13 +57,13 @@ $machinestates = [
     'type' => 'activeplayer',
     'args' => 'argsPlayCard',
     'possibleactions' => ['actPlayCard'],
-    'transitions' => ['selectUnits' => ST_ORDER_UNITS],
+    'transitions' => ['selectUnits' => ST_ORDER_UNITS, 'finestHour' => ST_FINEST_HOUR_ROLL],
   ],
 
   ST_ORDER_UNITS => [
     'name' => 'orderUnits',
-    'description' => clienttranslate('${actplayer} must order ${nTitle} unit(s) ${desc}'),
-    'descriptionmyturn' => clienttranslate('${you} must order ${nTitle} unit(s) ${desc}'),
+    'description' => clienttranslate('${actplayer} may order ${nTitle} unit(s) ${desc}'),
+    'descriptionmyturn' => clienttranslate('${you} may order ${nTitle} unit(s) ${desc}'),
     'type' => 'activeplayer',
     'args' => 'argsOrderUnits',
     'action' => 'stOrderUnits',
@@ -254,6 +254,29 @@ $machinestates = [
     'possibleactions' => ['actMoveUnit', 'actMoveUnitsDone'],
     'transitions' => ['moveUnits' => ST_MOVE_AGAIN, 'attackUnits' => ST_DRAW],
   ],
+
+
+  // Finest Hour
+  ST_FINEST_HOUR_ROLL => [
+    'name' => 'finestHourRoll',
+    'description' => '',
+    'type' => 'game',
+    'action' => 'stFinestHourRoll',
+    'descriptionmyturn' => '',
+    'transitions' => ['selectUnits' => ST_FINEST_HOUR_ORDER],
+  ],
+
+  ST_FINEST_HOUR_ORDER => [
+    'name' => 'orderUnitsFinestHour',
+    'description' => clienttranslate('${actplayer} may order ${unitDesc}'),
+    'descriptionmyturn' => clienttranslate('${you} may order ${unitDesc}'),
+    'type' => 'activeplayer',
+    'args' => 'argsOrderUnitsFinestHour',
+    'action' => 'stOrderUnitsFinestHour',
+    'possibleactions' => ['actOrderUnitsFinestHour'],
+    'transitions' => ['moveUnits' => ST_MOVE_UNITS],
+  ],
+
 
   /////////////////////////////////////////////
   //   ___                 _               _

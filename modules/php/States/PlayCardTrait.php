@@ -15,7 +15,7 @@ trait PlayCardTrait
     $cardIds = $player
       ->getCards()
       ->filter(function ($card) {
-        return true; // TODO : remove ambush and I think that's all ?
+        return $card->getType() != \CARD_AMBUSH;
       })
       ->getIds();
 
@@ -38,7 +38,7 @@ trait PlayCardTrait
     // Play the card
     $card = Cards::play($player, $cardId);
     Notifications::playCard($player, $card);
-    $nextState = 'selectUnits'; // TODO : $card->getNextState(...);
+    $nextState = $card->nextStateAfterPlay();
     $this->gamestate->nextState($nextState);
   }
 }

@@ -99,7 +99,14 @@ html {
       #m44-container #m44-central-part #deck-holder #discard {
         width: 80px;
         height: 128px;
-        --memoirCardScale: 0.2548; }
+        --memoirCardScale: 0.2548;
+        position: relative; }
+        #m44-container #m44-central-part #deck-holder #deck .section-card,
+        #m44-container #m44-central-part #deck-holder #deck .tactic-card,
+        #m44-container #m44-central-part #deck-holder #discard .section-card,
+        #m44-container #m44-central-part #deck-holder #discard .tactic-card {
+          position: absolute;
+          top: 0; }
       #m44-container #m44-central-part #deck-holder #deck {
         background-image: url("img/card_back.jpg");
         background-size: 100% 100%;
@@ -116,12 +123,6 @@ html {
           border: 1px solid black;
           text-align: center;
           line-height: 30px; }
-      #m44-container #m44-central-part #deck-holder #discard {
-        position: relative; }
-        #m44-container #m44-central-part #deck-holder #discard .section-card,
-        #m44-container #m44-central-part #deck-holder #discard .tactic-card {
-          position: absolute;
-          top: 0; }
     #m44-container #m44-central-part #m44-board-wrapper {
       flex-grow: 2;
       position: relative;
@@ -1190,7 +1191,7 @@ html {
   overflow: hidden; }
   .section-card.moving,
   .tactic-card.moving {
-    --memoirCardScale: 0.4; }
+    --memoirCardScale: 0.2548; }
   .section-card .card-resizable,
   .tactic-card .card-resizable {
     width: 314px;

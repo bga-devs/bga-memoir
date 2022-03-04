@@ -24,4 +24,29 @@ trait TacticCardTrait
     $card->stMoveAgain();
     $this->nextState('next');
   }
+
+  public function stFinestHourRoll()
+  {
+    $player = Players::getActive();
+    $card = $player->getCardInPlay();
+    $card->stFinestHourRoll();
+  }
+
+  public function stOrderUnitsFinestHour()
+  {
+  }
+  public function argsOrderUnitsFinestHour()
+  {
+    $player = Players::getActive();
+    $card = $player->getCardInPlay();
+    return $card->argsOrderUnitsFinestHour();
+  }
+
+  public function actOrderUnitsFinestHour($unitIds)
+  {
+    self::checkAction('actOrderUnitsFinestHour');
+    $player = Players::getCurrent();
+    $card = $player->getCardInPlay();
+    return $card->actOrderUnitsFinestHour($unitIds);
+  }
 }

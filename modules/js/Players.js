@@ -119,6 +119,16 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       this.slide('card-' + n.args.card.id, 'discard', { duration: 1100 });
     },
 
+    notif_reshuffle(n) {
+      debug('Notif: reshuffling the deck', n);
+      $('discard').childNodes.forEach((card) => {
+        this.slide(card, 'deck', {
+          destroy: true,
+        });
+      });
+      this._deckCounter.toValue(n.args.nDeck);
+    },
+
     notif_drawCards(n) {
       debug('Notif: a player is drawing card(s)', n);
       if (this.player_id == n.args.player_id) return;

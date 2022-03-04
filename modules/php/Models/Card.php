@@ -131,6 +131,11 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
   // |_|   |_|\___/ \_/\_/   /_/   \_\_|  \__, |___/
   //                                      |___/
   //////////////////////////////////////////////////////
+  public function nextStateAfterPlay()
+  {
+    return 'selectUnits';
+  }
+
   public function getArgsOrderUnits()
   {
     return [

@@ -86,9 +86,9 @@ class Notifications
     ]);
   }
 
-  public static function orderUnits($player, $units, $unitsOnTheMove)
+  public static function orderUnits($player, $units, $unitsOnTheMove = null)
   {
-    if ($unitsOnTheMove->empty()) {
+    if (is_null($unitsOnTheMove) || $unitsOnTheMove->empty()) {
       self::notifyAll('activateUnits', \clienttranslate('${player_name} issues orders to ${unit_desc}'), [
         'player' => $player,
         'unit_desc' => self::computeUnitsDesc($units),
@@ -221,6 +221,13 @@ class Notifications
     self::notifyAll('addObstacle', $msg, [
       'player' => $player,
       'terrain' => $terrain,
+    ]);
+  }
+
+  public static function reshuffle($nDeck)
+  {
+    self::notifyAll('reshuffle', '', [
+      'nDeck' => $nDeck,
     ]);
   }
 

@@ -284,5 +284,48 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     onEnteringStateAmbushResolve(args) {
       this.onEnteringStateAttackRetreat(args);
     },
+
+    ////////////////////////////////////////////////////////////
+    //  _____ _                 _     _   _
+    // |  ___(_)_ __   ___  ___| |_  | | | | ___  _   _ _ __
+    // | |_  | | '_ \ / _ \/ __| __| | |_| |/ _ \| | | | '__|
+    // |  _| | | | | |  __/\__ \ |_  |  _  | (_) | |_| | |
+    // |_|   |_|_| |_|\___||___/\__| |_| |_|\___/ \__,_|_|
+    //////////////////////////////////////////////////////////
+
+    onEnteringStateOrderUnitsFinestHour(args) {
+      this.removeClassNameOfCells('unselectableForAttacking');
+      this.makeUnitsSelectable(
+        args.units,
+        this.onClickUnitToOrderFinestHour.bind(this),
+        this.isUnitSelectableFinestHour.bind(this),
+        'activated',
+      );
+
+      this.addPrimaryActionButton('btnConfirmOrder', _('Confirm orders'), () => {
+        this.takeAction('actOrderUnitsFinestHour', {
+          unitIds: this._selectedUnits.join(';'),
+        });
+      });
+    },
+
+    onClickUnitToOrderFinestHour(unitId, pos, selected) {
+      return true;
+    },
+
+    isUnitSelectableFinestHour(unitId, pos, selected, minFilling, ignoreOnTheMove = false) {
+      // A selected unit can always be unselected
+      if (selected) return true;
+      // Compute selected units by type
+      let t = [0, 0, 0];
+      this._selectedUnits.forEach((unitId) => t[this.getArgs().units[unitId] - 1]++);
+      // Compute remaining jokers
+      let dice = this.getArgs().results;
+      let remainingJokers =
+        dice[2] - t[2] - (t[0] <= dice[0] ? 0 : t[0] - dice[0]) - (t[1] <= dice[1] ? 0 : t[1] - dice[1]);
+      // Ok if enough remaining unit of this type of enough jokers left
+      let type = this.getArgs().units[unitId] - 1;
+      return t[type] < dice[type] || remainingJokers > 0;
+    },
   });
 });

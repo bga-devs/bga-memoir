@@ -52,6 +52,14 @@ class action_memoir extends APP_GameAction
     self::ajaxResponse();
   }
 
+  public function actOrderUnitsFinestHour()
+  {
+    self::setAjaxMode();
+    $unitIds = $this->getNumberList('unitIds');
+    $this->game->actOrderUnitsFinestHour($unitIds);
+    self::ajaxResponse();
+  }
+
   /////////////////////////////////
   //  __  __  _____     _______
   // |  \/  |/ _ \ \   / / ____|
