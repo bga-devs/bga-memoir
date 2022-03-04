@@ -36,6 +36,8 @@ trait AttackUnitsTrait
     $card = $player->getCardInPlay();
     $args = $card->getArgsAttackUnits();
     Utils::clearPaths($args['units']);
+    $args['lastUnitAttacker'] = Globals::getUnitAttacker();
+
     return $args;
   }
 
@@ -119,6 +121,8 @@ trait AttackUnitsTrait
     $stack = Globals::getAttackStack();
     $currentAttack = array_pop($stack);
     Globals::setAttackStack($stack);
+    Globals::setUnitAttacker($currentAttack['unitId']);
+
     if (empty($stack)) {
       // No more pending attack, jump to next attack
       $this->changeActivePlayerAndJumpTo($currentAttack['pId'], \ST_ATTACK);

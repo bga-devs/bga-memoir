@@ -286,6 +286,12 @@ class Board
    */
   public static function getTargetableCells($unit, $cell = null, $moves = null)
   {
+    // Already attacked before ?
+    $uId = Globals::getUnitAttacker();
+    if ($unit->getFights() > 0 && $uId != -1 && $uId != $unit->getId()) {
+      return [];
+    }
+
     // Check whether the unit moved too much to attack
     $m = $unit->getMoves() + ($moves ?? 0);
     if ($m > $unit->getMovementAndAttackRadius() && $unit->getActivationOCard()->getType() != \CARD_BEHIND_LINES) {

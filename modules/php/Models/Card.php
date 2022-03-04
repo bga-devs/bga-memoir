@@ -171,17 +171,6 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
     $player = $this->getPlayer();
     $units = Units::getActivatedByCard($this);
 
-    // check if there is a unit already fighting
-    $forceUnit = $units->filter(function ($unit) use ($overrideNbFights) {
-      $maxFights = $overrideNbFights[$unit->getType()] ?? $this->nbFights;
-      return $unit->getFights() != 0 && $unit->getFights() < $maxFights;
-    });
-
-    if (count($forceUnit) != 0) {
-      $id = $forceUnit->getIds()[0];
-      return ['units' => [$id => $units[$id]->getTargetableUnits()]];
-    }
-
     return [
       'units' => $units->map(function ($unit) use ($overrideNbFights) {
         $maxFights = $overrideNbFights[$unit->getType()] ?? $this->nbFights;

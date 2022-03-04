@@ -14,7 +14,8 @@ class Globals extends \M44\Helpers\DB_Manager
     'scenario' => 'obj',
     'turn' => 'int',
     'sideTurn' => 'str', // Store which side is currently playing
-    'unitMoved' => 'int', // Store last unit moved => probably useless if we add log
+    'unitMoved' => 'int', // Store last unit moved
+    'unitAttacker' => 'int', // Store last unit that attacked
     'activePlayer' => 'int', // ???
     'nToKeep' => 'int', // Number of cards to keep in the draw phase
     'retreat' => 'obj', // ['unit' => id, 'min' => min number of retreats hexes, 'max' => max number of retreat hexes]
@@ -146,5 +147,6 @@ class Globals extends \M44\Helpers\DB_Manager
   public static function setupNewGame($players, $options)
   {
     Globals::setUnitMoved(-1);
+    Globals::setUnitAttacker(-1);
   }
 }

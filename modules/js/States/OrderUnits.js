@@ -181,6 +181,12 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       }
 
       this.addPrimaryActionButton('btnAttackUnitsDone', _('Attacks Done'), () => this.takeAction('actAttackUnitsDone'));
+
+      // Auto select if a unit was partially moved
+      let unitId = args.lastUnitAttacker;
+      if (excludeUnit == null && unitId != -1 && args.units[unitId] && args.units[unitId].length > 0) {
+        callback(unitId);
+      }
     },
 
     onEnteringStateAttackUnitsChooseTarget(args) {
