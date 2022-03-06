@@ -12,15 +12,18 @@ trait PlayCardTrait
   {
     $singleActive = is_null($player);
     $player = $player ?? Players::getActive();
-    $cardIds = $player
-      ->getCards()
-      ->filter(function ($card) {
-        return $card->getType() != \CARD_AMBUSH;
-      })
-      ->getIds();
+    $cards = $player->getCards()->filter(function ($card) {
+      return $card->getType() != \CARD_AMBUSH;
+    });
+
+    // get section restriction (if applicable)
+    $cards = $cards->map(function ($card) {
+      return $card->getAdditionalPlayConstraints();
+    });
 
     $args = [
-      'cardIds' => $cardIds,
+      'cardIds' => $cards->getIds(),
+      'cardsConstraints' => $cards,
     ];
     return $singleActive ? Utils::privatise($args) : $args;
   }

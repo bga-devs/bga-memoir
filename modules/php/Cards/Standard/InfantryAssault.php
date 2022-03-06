@@ -16,4 +16,53 @@ class InfantryAssault extends \M44\Models\Card
       clienttranslate('If you do not command any infantry units, issue an order to 1 unit of your choice.'),
     ];
   }
+
+  public function getArgsOrderUnits()
+  {
+    $player = $this->getPlayer();
+    $units = $player->getUnits();
+
+    // Keep only armor
+    $infantry = $units->filter(function ($unit) {
+      return $unit->getType() == \INFANTRY;
+    });
+
+    if ($infantry->empty()) {
+      // No infantry => 1 unit of your choice
+      return [
+        'i18n' => ['desc'],
+        'n' => 1,
+        'nTitle' => 1,
+        'desc' => \clienttranslate('(because no infantry units)'),
+        'units' => $units,
+      ];
+    } else {
+      return [
+        'i18n' => ['desc'],
+        'n' => \INFINITY,
+        'nTitle' => \INFINITY,
+        'desc' => \clienttranslate('(infantry units only)'),
+        'units' => $infantry,
+      ];
+    }
+  }
+
+  public function getAdditionalPlayConstraints()
+  {
+    $args = $this->getArgsOrderUnits();
+    $sections = [];
+    if ($args['n'] == \INFINITY) {
+      foreach ($args['units'] as $unit) {
+        foreach ($unit->getSection() as $section) {
+          $sections[] = $section;
+        }
+      }
+    }
+    $sections = array_values(\array_unique($sections));
+    if (count($sections) == 0) {
+      return null;
+    } else {
+      return $sections;
+    }
+  }
 }

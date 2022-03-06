@@ -161,6 +161,11 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
     ];
   }
 
+  public function getAdditionalPlayConstraints()
+  {
+    return null;
+  }
+
   /**
    *
    * @param $overrideNbFights = [UNIT_TYPE => maxFights]]
