@@ -199,13 +199,24 @@ html {
     z-index: 2;
     display: flex;
     column-gap: 3px;
-    padding-left: 3px; }
-    #m44-container #top-medals .m44-medal-slot,
-    #m44-container #bottom-medals .m44-medal-slot {
-      width: 35px;
+    padding-left: 3px;
+    height: 35px; }
+    #m44-container #top-medals .medals-slots-container,
+    #m44-container #bottom-medals .medals-slots-container {
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      left: 0;
       height: 35px;
-      background-image: url("img/ui/medalspot.png");
-      background-size: 100% 100%; }
+      display: flex;
+      column-gap: 3px;
+      padding-left: 3px; }
+      #m44-container #top-medals .medals-slots-container .m44-medal-slot,
+      #m44-container #bottom-medals .medals-slots-container .m44-medal-slot {
+        width: 35px;
+        height: 35px;
+        background-image: url("img/ui/medalspot.png");
+        background-size: 100% 100%; }
 
 #left-side {
   margin-right: 1px !important; }
@@ -902,6 +913,8 @@ html {
     display: none; }
   .m44-unit[data-figures='4'] .m44-unit-meeple:nth-of-type(4) ~ .m44-unit-meeple {
     display: none; }
+  .m44-unit[data-figures='0'] .m44-unit-meeple {
+    display: none; }
   .m44-unit.selectable {
     cursor: pointer; }
   .m44-unit.unselectable {
@@ -1489,6 +1502,50 @@ html {
         color: white;
         font-family: 'Gunplay';
         font-size: 15px; }
+
+.m44-medal {
+  width: 35px;
+  height: 35px;
+  background-image: url("img/medals.png");
+  background-size: 200% 400%; }
+  .m44-medal[data-sprite='0'] {
+    background-position-x: 0%;
+    background-position-y: 0%; }
+  .m44-medal[data-sprite='1'] {
+    background-position-x: 50%;
+    background-position-y: 0%; }
+  .m44-medal[data-sprite='2'] {
+    background-position-x: 0%;
+    background-position-y: 33.3333333333%; }
+  .m44-medal[data-sprite='3'] {
+    background-position-x: 50%;
+    background-position-y: 33.3333333333%; }
+  .m44-medal[data-sprite='4'] {
+    background-position-x: 0%;
+    background-position-y: 66.6666666667%; }
+  .m44-medal[data-sprite='5'] {
+    background-position-x: 50%;
+    background-position-y: 66.6666666667%; }
+  .m44-medal[data-sprite='6'] {
+    background-position-x: 0%;
+    background-position-y: 100%; }
+  .m44-medal[data-sprite='7'] {
+    background-position-x: 50%;
+    background-position-y: 100%; }
+  .m44-medal[data-sprite='8'] {
+    background-position-x: 0%;
+    background-position-y: 133.3333333333%; }
+  .m44-medal .m44-unit {
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    .m44-medal .m44-unit .m44-unit-meeple {
+      background-image: url("img/units.png");
+      background-repeat: no-repeat;
+      transform: scale(1.3); }
+
+.hex-cell .m44-medal {
+  position: absolute; }
 
 .m44-dice-resizable {
   width: calc(64px * 0.8 * var(--memoirBoardScale));

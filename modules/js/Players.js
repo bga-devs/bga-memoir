@@ -26,15 +26,71 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         }
       });
       dojo.place('right-side', 'm44-central-part');
+      this._bottomTeam = this.gamedatas.players[pId].team;
+    },
 
-      let bottomTeam = this.gamedatas.players[pId].team;
+    setupTeams() {
       this.gamedatas.teams.forEach((team) => {
-        let pos = bottomTeam == team.side ? 'bottom' : 'top';
+        let pos = this._bottomTeam == team.team ? 'bottom' : 'top';
         for (let i = 0; i < team.victory; i++) {
-          dojo.place('<div class="m44-medal-slot"></div>', pos + '-medals');
+          dojo.place('<div class="m44-medal-slot"></div>', pos + '-medals-slots');
         }
+
+        Object.values(team.medals).forEach((medal) => this.addMedal(medal));
       });
     },
+
+    ////////////////////////////////////
+    //  __  __          _       _
+    // |  \/  | ___  __| | __ _| |___
+    // | |\/| |/ _ \/ _` |/ _` | / __|
+    // | |  | |  __/ (_| | (_| | \__ \
+    // |_|  |_|\___|\__,_|\__,_|_|___/
+    ////////////////////////////////////
+    addMedal(medal, container = null) {
+      if (container == null) {
+        let pos = this._bottomTeam == medal.team ? 'bottom' : 'top';
+        container = pos + '-medals';
+      }
+
+      this.place('tplMedal', medal, container);
+    },
+
+    tplMedal(medal) {
+      const MEDAL_ELIMINATION = 1;
+      const SPRITES = ['medal1', 'medal2', 'medal4', 'medal5', 'medal6', 'medal7', 'medal8', 'medal9'];
+
+      let sprite = SPRITES.findIndex((t) => t == medal.sprite);
+      let content = '';
+      if (medal.type == MEDAL_ELIMINATION) {
+        let unit = medal.extra_datas;
+        content = `<div class="m44-unit" data-type="${unit.type}" data-nation="${unit.nation}" data-orientation="0">
+                  <div class="m44-unit-meeple"></div>
+          </div>`;
+      }
+      return `<div id='medal-${medal.id}' class='m44-medal' data-type='${medal.type}' data-sprite='${sprite}'>
+          ${content}
+        </div>`;
+    },
+
+    notif_scoreMedal(n) {
+      debug('Notif: a team gained a medal', n);
+      n.args.medals.forEach((medal) => {
+        let cell = n.args.cell;
+        this.addMedal(medal, `cell-${cell.x}-${cell.y}`);
+
+        let pos = this._bottomTeam == medal.team ? 'bottom' : 'top';
+        this.slide('medal-' + medal.id, pos + '-medals');
+      });
+    },
+
+    /////////////////////////////////
+    //   ____              _
+    //  / ___|__ _ _ __ __| |___
+    // | |   / _` | '__/ _` / __|
+    // | |__| (_| | | | (_| \__ \
+    //  \____\__,_|_|  \__,_|___/
+    /////////////////////////////////
 
     addCard(card, container) {
       this.place('tplMemoirCard', card, container);

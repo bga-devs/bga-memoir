@@ -93,6 +93,14 @@ class Board
     self::$grid[$terrain->getX()][$terrain->getY()]['terrains'][] = $terrain;
   }
 
+  public function removeUnit($unit)
+  {
+    self::$grid[$unit->getX()][$unit->getY()]['unit'] = null;
+    foreach (self::$grid[$unit->getX()][$unit->getY()]['terrains'] as $terrain) {
+      $terrain->onUnitEliminated($unit);
+    }
+  }
+
   /////////////////////////////////////////
   //    ____      _   _
   //  / ___| ___| |_| |_ ___ _ __ ___

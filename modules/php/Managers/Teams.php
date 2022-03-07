@@ -1,6 +1,7 @@
 <?php
 namespace M44\Managers;
 use M44\Core\Globals;
+use M44\Models\Team;
 
 /**
  * Teams
@@ -8,10 +9,10 @@ use M44\Core\Globals;
 class Teams extends \M44\Helpers\DB_Manager
 {
   protected static $table = 'teams';
-  protected static $primary = 'side';
+  protected static $primary = 'team';
   protected static function cast($row)
   {
-    return $row;
+    return new Team($row);
   }
 
   public function getAll()
@@ -19,21 +20,23 @@ class Teams extends \M44\Helpers\DB_Manager
     return self::DB()->get();
   }
 
-  public function getSide($side)
+  public function get($team)
   {
     return self::DB()
-      ->where('side', $side)
+      ->where('team', $team)
       ->getSingle();
   }
 
-  public function getSideTurn()
+  public function getTeamTurn()
   {
-    return self::getSide(Globals::getSideTurn());
+    return self::get(Globals::getTeamTurn());
   }
 
-  public function incMedals($value, $side)
+  public function changeTeamTurn()
   {
-    return self::DB()->inc(['medals' => $value], $side);
+    $currentTeam = Globals::getTeamTurn();
+    $newTeam = $currentTeam == ALLIES ? AXIS : ALLIES;
+    Globals::setTeamTurn($newTeam);
   }
 
   /**
@@ -45,26 +48,31 @@ class Teams extends \M44\Helpers\DB_Manager
       ->delete()
       ->run();
 
+    // Get team composition
+    $composition = Players::getTeamsComposition();
+    $players = Players::getAll();
+
     // Create teams
     $info = $scenario['game_info'];
-    self::DB()->insert([
-      'side' => $info['side_player1'],
-      'country' => $info['country_player1'] ?? '',
-      'cards' => $info['cards_player1'],
-      'medals' => 0,
-      'victory' => $info['victory_player1'],
-    ]);
-    self::DB()->insert([
-      'side' => $info['side_player2'],
-      'country' => $info['country_player2'] ?? '',
-      'cards' => $info['cards_player2'],
-      'medals' => 0,
-      'victory' => $info['victory_player2'],
-    ]);
+    for ($i = 1; $i <= 2; $i++) {
+      $teamId = $rematch ? (2 - $i) : ($i - 1);
 
-    // Assign teams to players
-    $players = Players::getAll()->toArray();
-    $players[0]->setTeam($rematch ? $info['side_player2'] : $info['side_player1']);
-    $players[1]->setTeam($rematch ? $info['side_player1'] : $info['side_player2']);
+      self::DB()->insert([
+        'team' => $info['side_player' . $i],
+        'country' => $info['country_player' . $i] ?? '',
+        'cards' => $info['cards_player' . $i],
+        'victory' => $info['victory_player' . $i],
+        'left_pId' => $composition[$teamId][0],
+        'central_pId' => $composition[$teamId][1],
+        'right_pId' => $composition[$teamId][2],
+        'commander_pId' => $composition[$teamId][3],
+      ]);
+
+      foreach ($composition[$teamId] as $pId) {
+        if ($pId !== null) {
+          $players[$pId]->setTeam($info['side_player' . $i]);
+        }
+      }
+    }
   }
 }

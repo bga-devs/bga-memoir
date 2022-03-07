@@ -46,6 +46,9 @@
       display: none;
     }
   }
+  &[data-figures='0'] .m44-unit-meeple {
+    display: none;
+  }
 
   &.selectable {
     cursor: pointer;

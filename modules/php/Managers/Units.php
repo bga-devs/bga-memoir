@@ -33,7 +33,7 @@ class Units extends \M44\Helpers\Pieces
   {
     $row['unit_id'] = $row['id'];
     $mode = Scenario::getMode();
-    $flipped = in_array($row['nation'], self::$nations[Scenario::getTopSide()]);
+    $flipped = in_array($row['nation'], self::$nations[Scenario::getTopTeam()]);
     $sections = self::$sections[$mode];
     $row['sections'] = [];
     for ($i = 0; $i < 3; $i++) {

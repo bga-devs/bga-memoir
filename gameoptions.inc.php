@@ -17,9 +17,54 @@
  *
  */
 
+namespace M44;
+
 $game_options = [
   101 => [
-    'name' => totranslate('Scenario'),
+    'name' => totranslate('Mode'),
+    'values' => [
+      1 => [
+        'name' => clienttranslate('Standard'),
+        'description' => clienttranslate('Standard 1v1 mode'),
+      ],
+      2 => [
+        'name' => clienttranslate('Breakthrough'),
+        'tmdisplay' => clienttranslate('BKT'),
+        'description' => clienttranslate('Breakthrough scenario'),
+      ],
+      3 => [
+        'name' => clienttranslate('Overlord'),
+        'tmpdisplay' => clienttranslate('Overlord'),
+        'description' => clienttranslate('Overlord scenario'),
+      ],
+    ],
+    'startcondition' => [
+      1 => [
+        [
+          'type' => 'maxplayers',
+          'value' => 2,
+          'message' => clienttranslate('Only Overlord mode can be played in teams'),
+        ],
+      ],
+      2 => [
+        [
+          'type' => 'maxplayers',
+          'value' => 2,
+          'message' => clienttranslate('Only Overlord mode can be played in teams'),
+        ],
+      ],
+    ],
+  ],
+
+  102 => [
+    'name' => clienttranslate('Scenario'),
+    'displaycondition' => [
+      0 => [
+        'type' => 'otheroption',
+        'id' => 101,
+        'value' => 1,
+      ],
+    ],
     'values' => [
       2 => [
         'name' => clienttranslate('[2] Pegasus Bridge'),
@@ -50,11 +95,6 @@ $game_options = [
         'name' => clienttranslate('[11] First Assault Wave'),
         'tmdisplay' => '[11]',
         'description' => clienttranslate('First Assault Wave'),
-      ],
-      13 => [
-        'name' => clienttranslate('[13] Omaha Beach Overlord'),
-        'tmdisplay' => '[13]',
-        'description' => clienttranslate('Omaha Beach Overlord'),
       ],
       15 => [
         'name' => clienttranslate('[15] Operation Cobra'),
@@ -106,15 +146,44 @@ $game_options = [
         'tmdisplay' => '[29]',
         'description' => clienttranslate('Saverne Gap'),
       ],
+      23806 => [
+        'name' => clienttranslate('[23806] [Battle of the Bulge] German counter-attack at Chaumont [FFM44]'),
+        'tmdisplay' => '[23806]',
+        'description' => clienttranslate('[Battle of the Bulge] German counter-attack at Chaumont [FFM44]'),
+      ],
+    ],
+  ],
+  103 => [
+    'name' => clienttranslate('Scenario'),
+    'displaycondition' => [
+      0 => [
+        'type' => 'otheroption',
+        'id' => 101,
+        'value' => 2,
+      ],
+    ],
+    'values' => [
       18261 => [
         'name' => clienttranslate('[18261] [Ukraine] Soviet raid on Grigorevka'),
         'tmdisplay' => '[18261]',
         'description' => clienttranslate('[Ukraine] Soviet raid on Grigorevka'),
       ],
-      23806 => [
-        'name' => clienttranslate('[23806] [Battle of the Bulge] German counter-attack at Chaumont [FFM44]'),
-        'tmdisplay' => '[23806]',
-        'description' => clienttranslate('[Battle of the Bulge] German counter-attack at Chaumont [FFM44]'),
+    ],
+  ],
+  104 => [
+    'name' => clienttranslate('Scenario'),
+    'displaycondition' => [
+      0 => [
+        'type' => 'otheroption',
+        'id' => 101,
+        'value' => 3,
+      ],
+    ],
+    'values' => [
+      13 => [
+        'name' => clienttranslate('[13] Omaha Beach Overlord'),
+        'tmdisplay' => '[13]',
+        'description' => clienttranslate('Omaha Beach Overlord'),
       ],
     ],
   ],
