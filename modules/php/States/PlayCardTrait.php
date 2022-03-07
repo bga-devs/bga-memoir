@@ -28,18 +28,30 @@ trait PlayCardTrait
     return $singleActive ? Utils::privatise($args) : $args;
   }
 
-  function actPlayCard($cardId)
+  function actPlayCard($cardId, $sectionId = null)
   {
     // Sanity check
     $this->checkAction('actPlayCard');
     $player = Players::getCurrent();
     $args = $this->argsPlayCard($player);
+
     if (!in_array($cardId, $args['cardIds'])) {
-      throw new BgaVisibleSystemException('Non playable card. Should not happen.');
+      throw new \BgaVisibleSystemException('Non playable card. Should not happen.');
+    }
+
+    if (
+      $args['cardsConstraints'][$cardId] != null &&
+      (!in_array($sectionId, $args['cardsConstraints'][$cardId]) || $sectionId == null)
+    ) {
+      throw new \BgaVisibleSystemException('Invalid section. Should not happen');
+    }
+
+    if ($args['cardsConstraints'][$cardId] == null && $sectionId != null) {
+      throw new \BgaVisibleSystemException('Invalid section. Should not happen');
     }
 
     // Play the card
-    $card = Cards::play($player, $cardId);
+    $card = Cards::play($player, $cardId, $sectionId);
     Notifications::playCard($player, $card);
     $nextState = $card->nextStateAfterPlay();
     $this->gamestate->nextState($nextState);

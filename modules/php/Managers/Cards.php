@@ -81,9 +81,10 @@ class Cards extends \M44\Helpers\Pieces
   //////////////////////////////////
   //////////////////////////////////
 
-  public static function play($player, $cardId)
+  public static function play($player, $cardId, $sectionId)
   {
     self::move($cardId, ['inplay', $player->getId()]);
+    self::get($cardId)->setExtraDatas('section', $sectionId);
     return self::get($cardId);
   }
 

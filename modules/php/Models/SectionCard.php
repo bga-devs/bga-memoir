@@ -38,9 +38,16 @@ class SectionCard extends Card
   {
     $player = $this->getPlayer();
     $units = new Collection();
-    foreach ($this->getSections() as $i => $n) {
+    $sectionId = $this->getExtraDatas('section');
+    if ($sectionId != null) {
       if ($n > 0 || $this->nUnitsOnTheMove > 0) {
-        $units = $units->merge($player->getUnitsInSection($i)->getPositions());
+        $units = $units->merge($player->getUnitsInSection($sectionId)->getPositions());
+      }
+    } else {
+      foreach ($this->getSections() as $i => $n) {
+        if ($n > 0 || $this->nUnitsOnTheMove > 0) {
+          $units = $units->merge($player->getUnitsInSection($i)->getPositions());
+        }
       }
     }
 
