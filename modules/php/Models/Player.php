@@ -43,8 +43,7 @@ class Player extends \M44\Helpers\DB_Model
     $current = $this->id == $currentPlayerId;
     $data = array_merge($data, [
       'cards' => $current ? $this->getCards()->toArray() : [],
-      'cardsChoice' => $current ? $this->getCardsChoice()->toArray() : [],
-      'cardsCount' => $this->getCards()->count(),
+      'cardsCount' => $this->getCards()->count() + $this->getCardsChoice()->count(),
       'inplay' => $this->getCardInPlay(),
     ]);
 

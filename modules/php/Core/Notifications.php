@@ -158,12 +158,18 @@ class Notifications
     ]);
   }
 
-  public static function discardDrawCards($player, $cards)
+  public static function discardCards($player, $cards)
   {
-    self::notifyAll('discardCard', clienttranslate('${player_name} discards ${nb} card(s)'), [
-      'player' => $player,
-      'nb' => count($cards),
-    ]);
+    if ($cards->count() == 1) {
+      self::discardCard($player, $cards->first());
+    } else {
+      die('No handled in front');
+      self::notifyAll('discardCards', clienttranslate('${player_name} discards ${nb} card(s)'), [
+        'player' => $player,
+        'nb' => count($cards),
+        'cards' => $cards,
+      ]);
+    }
   }
 
   public static function scoreMedal($teamId, $medals, $cell = null)

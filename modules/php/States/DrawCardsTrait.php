@@ -63,7 +63,7 @@ trait DrawCardsTrait
   public function argsDrawChoice()
   {
     $player = Players::getActive();
-    $cards = Cards::getInLocation(['choice', $player->getId()])->getIds();
+    $cards = Cards::getInLocation(['choice', $player->getId()]);
     return [
       'keep' => Globals::getNToKeep(),
       '_private' => [
@@ -74,7 +74,12 @@ trait DrawCardsTrait
     ];
   }
 
-  public function actChooseCard($cardIds)
+  public function actChooseCard($cardId)
+  {
+    $this->actChooseCards([$cardId]);
+  }
+
+  public function actChooseCards($cardIds)
   {
     // keep the cards, remove the others
     self::checkAction('actChooseCard');
@@ -85,17 +90,18 @@ trait DrawCardsTrait
       throw new \BgaVisibleSystemException('Number of cards to keep not consistent with rules. Should not happen');
     }
 
-    if (count(array_diff($cardIds, $args['_private']['active']['cards'])) != 0) {
+    if (count(array_diff($cardIds, $args['_private']['active']['cards']->getIds())) != 0) {
       throw new \BgaVisibleSystemException('Those cards cannot be selected. Should not happen');
     }
 
+    // Move selected cards to hand
     Cards::move($cardIds, ['hand', $player->getId()]);
-    $cards = Cards::getMany($cardIds);
-    Notifications::drawCards($player, $cards);
-
-    $othCards = Cards::getInLocation(['choice', $player->getId()])->getIds();
-    $cards = Cards::move($othCards, 'discard');
-    Notifications::discardDrawCards($player, $othCards);
+    // Discard other cards
+    $otherCards = $player->getCardsChoice();
+    foreach ($otherCards as $card) {
+      Cards::discard($card);
+    }
+    Notifications::discardCards($player, $otherCards);
 
     $this->gamestate->nextState('endRound');
   }

@@ -31,10 +31,11 @@ define([
 ], function (dojo, declare) {
   return declare('bgagame.memoir', [customgame.game, memoir.board, memoir.players, memoir.orderUnits], {
     constructor() {
-      this._activeStates = ['playCard', 'orderUnits', 'moveUnits', 'attackUnits', 'opponentAmbush'];
+      this._activeStates = ['playCard', 'orderUnits', 'moveUnits', 'attackUnits', 'opponentAmbush', 'drawChoice'];
       this._notifications = [
         ['playCard', 1000],
         ['discardCard', 1200],
+        ['discardCards', 1200],
         ['drawCards', 1000],
         ['pDrawCards', 1000],
         ['activateUnits', 2],
@@ -90,6 +91,7 @@ define([
         this.removeClassNameOfCells(className);
       });
       $('m44-board').classList.remove('displayLineOfSight');
+      dojo.query('.choice').removeClass('choice');
       dojo.query('.dice-mini').forEach(dojo.destroy);
     },
 

@@ -202,7 +202,9 @@ html {
       column-gap: 5px;
 
       .tactic-card.inplay,
-      .section-card.inplay {
+      .section-card.inplay,
+      .tactic-card.choice,
+      .section-card.choice {
         margin-top: -20px;
       }
     }

@@ -175,6 +175,10 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       this.slide('card-' + n.args.card.id, 'discard', { duration: 1100 });
     },
 
+    notif_discardCards(n) {
+      // TODO
+    },
+
     notif_reshuffle(n) {
       debug('Notif: reshuffling the deck', n);
       $('discard').childNodes.forEach((card) => {
@@ -202,6 +206,19 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         this.slide('card-' + card.id, 'bottom-player-hand');
       });
       this._deckCounter.incValue(-n.args.cards.length);
+    },
+
+    // Recon
+    onEnteringStateDrawChoice(args) {
+      // TODO : handle the case for nKeep > 1
+      Object.values(args._private.cards).forEach((card) => {
+        if (!$('card-' + card.id)) {
+          this.addCard(card, 'bottom-player-hand');
+        }
+
+        $('card-' + card.id).classList.add('choice');
+        this.onClick(`card-${card.id}`, () => this.takeAction('actChooseCard', { cardId: card.id }));
+      });
     },
   });
 });

@@ -192,7 +192,9 @@ html {
       display: flex;
       column-gap: 5px; }
       #m44-container #m44-bottom-part #bottom-player-hand .tactic-card.inplay,
-      #m44-container #m44-bottom-part #bottom-player-hand .section-card.inplay {
+      #m44-container #m44-bottom-part #bottom-player-hand .section-card.inplay,
+      #m44-container #m44-bottom-part #bottom-player-hand .tactic-card.choice,
+      #m44-container #m44-bottom-part #bottom-player-hand .section-card.choice {
         margin-top: -20px; }
   #m44-container #top-medals,
   #m44-container #bottom-medals {

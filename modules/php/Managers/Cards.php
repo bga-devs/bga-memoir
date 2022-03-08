@@ -91,7 +91,7 @@ class Cards extends \M44\Helpers\Pieces
   public static function discard($cardId)
   {
     $cardId = is_int($cardId) ? $cardId : $cardId->getId();
-    self::move($cardId, 'discard');
+    self::insertOnTop($cardId, 'discard');
   }
 
   public static function reshuffle()

@@ -61,6 +61,14 @@ class action_memoir extends APP_GameAction
     self::ajaxResponse();
   }
 
+  public function actChooseCard()
+  {
+    self::setAjaxMode();
+    $cardId = self::getArg('cardId', AT_posint, false);
+    $this->game->actChooseCard($cardId);
+    self::ajaxResponse();
+  }
+
   /////////////////////////////////
   //  __  __  _____     _______
   // |  \/  |/ _ \ \   / / ____|
