@@ -249,7 +249,7 @@ trait AttackUnitsTrait
     }
 
     // debug
-    $results = [DICE_FLAG, \DICE_INFANTRY, DICE_GRENADE, \DICE_INFANTRY];
+    // $results = [DICE_FLAG, \DICE_FLAG, DICE_GRENADE, \DICE_FLAG];
 
     Notifications::rollDice($player, $nDice, $results, $cell);
     return $results;

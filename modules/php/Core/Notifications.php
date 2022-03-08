@@ -223,6 +223,15 @@ class Notifications
     ]);
   }
 
+  public static function heal($player, $nb, $unit)
+  {
+    self::notifyAll('heal', clienttranslate('${player_name} heals ${nb} damage(s)'), [
+      'player' => $player,
+      'unit' => $unit,
+      'nb' => $nb,
+    ]);
+  }
+
   public static function removeObstacle($terrain)
   {
     self::notifyAll('removeObstacle', '', [

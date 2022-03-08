@@ -139,6 +139,11 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     return $this->sections;
   }
 
+  public function isWounded()
+  {
+    return $this->maxUnits != $this->nUnits;
+  }
+
   //////////////////////////////////////
   //    ___  ____  ____  _____ ____
   //   / _ \|  _ \|  _ \| ____|  _ \
@@ -242,6 +247,18 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
       $this->incNUnits(-$hits);
       return false;
     }
+  }
+
+  public function heal($heal)
+  {
+    $toHeal = $this->maxUnits - $this->nUnits;
+    if ($heal < $toHeal) {
+      $this->incNUnits($heal);
+      $toHeal = $heal;
+    } else {
+      $this->incNUnits($toHeal);
+    }
+    return $heal;
   }
 
   public function isEliminated()

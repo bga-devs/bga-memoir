@@ -62,6 +62,7 @@ $machinestates = [
       'finestHour' => ST_FINEST_HOUR_ROLL,
       'airpower' => ST_AIRPOWER_TARGET,
       'barrage' => ST_BARRAGE_TARGET,
+      'medics' => ST_MEDICS_TARGET,
     ],
   ],
 
@@ -302,6 +303,17 @@ $machinestates = [
     'args' => 'argsTargetBarrage',
     'possibleactions' => ['actTargetBarrage'],
     'transitions' => ['attack' => ST_ATTACK_THROW],
+  ],
+
+  ST_MEDICS_TARGET => [
+    'name' => 'targetMedics',
+    'description' => clienttranslate('${actplayer} may heal 1 unit'),
+    'descriptionmyturn' => clienttranslate('${you} may heal 1 unit'),
+    'type' => 'activeplayer',
+    'args' => 'argsTargetMedics',
+    'action' => 'stTargetMedics',
+    'possibleactions' => ['actTargetMedics'],
+    'transitions' => ['move' => ST_MOVE_UNITS, 'draw' => ST_DRAW],
   ],
 
   /////////////////////////////////////////////

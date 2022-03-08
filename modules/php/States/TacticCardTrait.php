@@ -81,4 +81,27 @@ trait TacticCardTrait
     $card = $player->getCardInPlay();
     return $card->actTargetBarrage($unitId);
   }
+
+  /************ MEDICS **************/
+  public function argsTargetMedics()
+  {
+    $player = Players::getActive();
+    $card = $player->getCardInPlay();
+    return $card->argsTargetMedics();
+  }
+
+  public function stTargetMedics()
+  {
+    $player = Players::getActive();
+    $card = $player->getCardInPlay();
+    return $card->stTargetMedics();
+  }
+
+  public function actTargetMedics($unitId)
+  {
+    self::checkAction('actTargetMedics');
+    $player = Players::getActive();
+    $card = $player->getCardInPlay();
+    return $card->actTargetMedics($unitId);
+  }
 }
