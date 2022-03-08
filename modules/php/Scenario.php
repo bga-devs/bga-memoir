@@ -25,6 +25,13 @@ class Scenario extends \APP_DbObject
     return self::$scenario;
   }
 
+  public function getId()
+  {
+    $scenario = self::get();
+    return is_null($scenario) ? null : $scenario['meta_data']['scenario_id'];
+  }
+
+
   public function getMode()
   {
     $scenario = self::get();
