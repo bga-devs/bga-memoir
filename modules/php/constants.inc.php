@@ -102,7 +102,14 @@ const CARD_CLASSES = [
 /*
  * Game options
  */
-const OPTION_SCENARIO = 101;
+ const OPTION_MODE = 101;
+ const OPTION_MODE_STANDARD = 1;
+ const OPTION_MODE_BREAKTHROUGH = 2;
+ const OPTION_MODE_OVERLORD = 3;
+
+ const OPTION_SCENARIO_STANDARD = 102;
+ const OPTION_SCENARIO_BREAKTHROUGH = 103;
+ const OPTION_SCENARIO_OVERLORD = 104;
 
 /*
  * Stats
@@ -123,6 +130,12 @@ const DICE_STAR = 4;
 const INFANTRY = 1;
 const ARMOR = 2;
 const ARTILLERY = 3;
+
+/*
+ * Medals
+ */
+const MEDAL_ELIMINATION = 1;
+
 
 /*
  * Terrains

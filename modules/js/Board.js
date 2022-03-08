@@ -389,8 +389,16 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     ///////////////////////////////////////////////////
     notif_takeDamage(n) {
       debug('Notif: a unit is taking damage', n);
+      let unit = $('unit-' + n.args.unitId);
+      let callback = () => {
+        unit.dataset.figures -= n.args.hits;
+        if (unit.dataset.figures <= 0) {
+          unit.remove();
+        }
+      };
+
       if (this.isFastMode()) {
-        $('unit-' + n.args.unitId).dataset.figures -= n.args.hits;
+        callback();
         return;
       }
 
@@ -400,7 +408,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       dojo.place('<div class="m44-explosion"></div>', o);
       this.wait(1000).then(() => {
         dojo.empty(o);
-        $('unit-' + n.args.unitId).dataset.figures -= n.args.hits;
+        callback();
       });
     },
   });

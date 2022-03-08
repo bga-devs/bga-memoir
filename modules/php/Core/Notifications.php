@@ -166,11 +166,19 @@ class Notifications
     ]);
   }
 
-  public static function scoreMedal($player, $nb)
+  public static function scoreMedal($teamId, $medals, $cell = null)
   {
-    self::notifyAll('scoreMedal', clienttranslate('${player_name} scores ${nb} medal(s)'), [
-      'player' => $player,
-      'nb' => $nb,
+    $teamNames = [
+      ALLIES => \clienttranslate('Allies'),
+      AXIS => \clienttranslate('Axis'),
+    ];
+
+    self::notifyAll('scoreMedal', clienttranslate('${team_name} scores ${nb} medal(s)'), [
+      'i18n' => ['team_name'],
+      'team_name' => $teamNames[$teamId],
+      'nb' => $medals->count(),
+      'medals' => $medals->toArray(),
+      'cell' => $cell,
     ]);
   }
 

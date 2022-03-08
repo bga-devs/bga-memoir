@@ -13,17 +13,15 @@ trait PrepareTurnTrait
   function stEndRound()
   {
     // Change team
-    $currentSide = Globals::getSideTurn();
-    $newSide = $currentSide == ALLIES ? AXIS : ALLIES;
-    Globals::setSideTurn($newSide);
+    Teams::changeTeamTurn();
 
     // Update all tables with temp data
     Units::reset();
     Globals::setUnitMoved(-1);
+    Globals::setUnitAttacker(-1);
     Notifications::clearUnitsStatus();
-    $this->gamestate->nextState('next');
+    $this->nextState('next');
   }
-
 
   function stPrepareTurn()
   {
@@ -31,29 +29,13 @@ trait PrepareTurnTrait
 
     // TODO : Overlord => branch here to distribute cards instead
     if (true) {
-      $player = Players::getSide();
-      Players::changeActive($player);
-      Globals::setActivePlayer($player->getId());
-      $this->gamestate->nextState('playCard');
+      $team = Teams::getTeamTurn();
+      $player = $team->getMembers()->first();
+      $this->nextState('playCard', $player->getId());
     } else {
       // Activate commander in chief only
       // TODO
       $this->gamestate->nextState('distributeCard');
     }
-  }
-
-  function stChangePlayer()
-  {
-    $currentPlayer = Players::getActive()->getId();
-    $nextPlayer = Players::getNextId($currentPlayer);
-    $activePlayer = Globals::getActivePlayer();
-
-    // TODO: manage overlord
-    if ($activePlayer == $currentPlayer) {
-      $this->gamestate->changeActivePlayer($nextPlayer);
-    } else {
-      $this->gamestate->changeActivePlayer($activePlayer);
-    }
-    $this->gamestate->nextState('next');
   }
 }

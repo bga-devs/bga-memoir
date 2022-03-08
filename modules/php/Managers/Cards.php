@@ -117,7 +117,7 @@ class Cards extends \M44\Helpers\Pieces
     if (true || $mode == STANDARD_DECK) {
       foreach (Players::getAll() as $pId => $player) {
         $team = $player->getTeam();
-        self::pickForLocation($team['cards'], 'deck', ['hand', $pId]);
+        self::pickForLocation($team->getNCards(), 'deck', ['hand', $pId]);
       }
     }
   }

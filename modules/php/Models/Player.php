@@ -26,7 +26,7 @@ class Player extends \M44\Helpers\DB_Model
     'eliminated' => 'player_eliminated',
     'score' => 'player_score',
     'zombie' => 'player_zombie',
-    'team' => 'team_side',
+    'team' => 'player_team',
   ];
 
   /*
@@ -73,7 +73,7 @@ class Player extends \M44\Helpers\DB_Model
 
   public function getTeam()
   {
-    return Teams::getSide($this->team);
+    return Teams::get($this->team);
   }
 
   public function getUnits()
@@ -84,7 +84,7 @@ class Player extends \M44\Helpers\DB_Model
 
   public function getUnitsInSection($section)
   {
-    if (Scenario::getTopSide() == $this->team) {
+    if (Scenario::getTopTeam() == $this->team) {
       $section = 2 - $section;
     }
     return Units::getInSection($this->team, $section);

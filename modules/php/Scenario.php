@@ -10,6 +10,7 @@ use M44\Managers\Players;
 use M44\Managers\Terrains;
 use M44\Managers\Units;
 use M44\Managers\Teams;
+use M44\Managers\Medals;
 
 class Scenario extends \APP_DbObject
 {
@@ -30,7 +31,7 @@ class Scenario extends \APP_DbObject
     return is_null($scenario) ? null : $scenario['board']['type'];
   }
 
-  public function getTopSide()
+  public function getTopTeam()
   {
     $scenario = self::get();
     return is_null($scenario) ? null : $scenario['game_info']['side_player1'];
@@ -79,10 +80,13 @@ class Scenario extends \APP_DbObject
     // Create Units
     Units::loadScenario($scenario);
 
+    // Initialize medals
+    Medals::loadScenario($scenario);
+
     // Activate player
     $infos = $scenario['game_info'];
-    $startingSide = $infos['side_' . \strtolower($infos['starting'])];
-    Globals::setSideTurn($startingSide);
+    $startingTeam = $infos['side_' . \strtolower($infos['starting'])];
+    Globals::setTeamTurn($startingTeam);
     Globals::setTurn(0);
     Game::get()->gamestate->jumpToState(\ST_PREPARE_TURN);
   }

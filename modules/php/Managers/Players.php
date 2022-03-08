@@ -146,24 +146,24 @@ class Players extends \M44\Helpers\DB_Manager
   }
 
   /**
-   * Get the player of one side
-   */
-  public function getSide($side = null)
-  {
-    $side = $side ?? Globals::getSideTurn();
-    return self::DB()
-      ->where('team_side', $side)
-      ->getSingle();
-  }
-
-  /**
    * Get the players of one side in case of teams
    */
-  public function getSideTeam($side = null)
+  public function getOfTeam($team = null)
   {
-    $side = $side ?? Globals::getSideTurn();
+    $team = $team ?? Globals::getTeamTurn();
     return self::DB()
-      ->where('team_side', $side)
+      ->where('player_team', $team)
       ->get();
+  }
+
+  public function getTeamsComposition()
+  {
+    if (Globals::isOverlord()) {
+      // TODO : handle Overlord here
+      return [];
+    } else {
+      $pIds = array_keys(Game::get()->loadPlayersBasicInfos());
+      return [[$pIds[0], $pIds[0], $pIds[0], null], [$pIds[1], $pIds[1], $pIds[1], null]];
+    }
   }
 }

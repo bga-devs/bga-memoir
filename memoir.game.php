@@ -61,7 +61,6 @@ class memoir extends Table
     self::$instance = $this;
     self::initGameStateLabels([
       'logging' => 10,
-      'scenario' => OPTION_SCENARIO,
     ]);
     Board::init();
   }
@@ -90,7 +89,7 @@ class memoir extends Table
 
   public function stDummyState()
   {
-    $scenario = (int) self::getGameStateValue('scenario');
+    $scenario = Globals::getScenarioId();
     Scenario::load($scenario);
     Scenario::setup();
   }
@@ -155,10 +154,14 @@ class memoir extends Table
     if ($pId === null || $pId == $this->getActivePlayerId()) {
       $this->gamestate->nextState($transition);
     } else {
-      $states = $this->gamestate->states;
-      $state = $states[$this->gamestate->state_id()];
-      $st = $state['transitions'][$transition];
-      $this->changeActivePlayerAndJumpTo($pId, $st);
+      $state = $this->gamestate->state();
+      if ($state['type'] == 'game') {
+        $this->gamestate->changeActivePlayer($pId);
+        $this->gamestate->nextState($transition);
+      } else {
+        $st = $state['transitions'][$transition];
+        $this->changeActivePlayerAndJumpTo($pId, $st);
+      }
     }
   }
 

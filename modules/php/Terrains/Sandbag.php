@@ -21,4 +21,9 @@ class Sandbag extends \M44\Models\Obstacle
   {
     $this->removeFromBoard();
   }
+
+  public function onUnitEliminated($unit)
+  {
+    $this->removeFromBoard();
+  }
 }

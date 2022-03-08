@@ -6,6 +6,7 @@ use M44\Scenario;
 use M44\Managers\Players;
 use M44\Managers\Units;
 use M44\Managers\Cards;
+use M44\Managers\Teams;
 
 class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
 {
@@ -34,6 +35,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     'attackPower',
     'mustSeeToAttack',
     'maxGrounds',
+    'medalsWorth'
   ];
 
   protected $id = null;
@@ -57,6 +59,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
   protected $attackPower = [];
   protected $mustSeeToAttack = true;
   protected $maxGrounds = 0;
+  protected $medalsWorth = 1;
 
   public function __construct($row)
   {
@@ -101,13 +104,15 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     ];
   }
 
+  public function getTeam()
+  {
+    $teamId = in_array($this->nation, Units::$nations[AXIS])? AXIS : ALLIES;
+    return Teams::get($teamId);
+  }
   public function getPlayer()
   {
-    if (in_array($this->nation, Units::$nations[AXIS])) {
-      return Players::getSide(AXIS);
-    } else {
-      return Players::getSide(\ALLIES);
-    }
+    $section = $this->sections[0];
+    return $this->getTeam()->getPlayerInCharge($section);
   }
 
   public function isOpponent($unit)
@@ -121,7 +126,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
   public function getCampDirection()
   {
     // Useful for retreat
-    return in_array($this->nation, Units::$nations[Scenario::getTopSide()]) ? -1 : 1;
+    return in_array($this->nation, Units::$nations[Scenario::getTopTeam()]) ? -1 : 1;
   }
 
   public function getActivationOCard()

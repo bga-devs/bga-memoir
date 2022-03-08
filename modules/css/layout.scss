@@ -214,12 +214,24 @@ html {
     display: flex;
     column-gap: 3px;
     padding-left: 3px;
+    height: 35px;
 
-    .m44-medal-slot {
-      width: 35px;
+    .medals-slots-container {
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      left: 0;
       height: 35px;
-      background-image: url('img/ui/medalspot.png');
-      background-size: 100% 100%;
+      display: flex;
+      column-gap: 3px;
+      padding-left: 3px;
+
+      .m44-medal-slot {
+        width: 35px;
+        height: 35px;
+        background-image: url('img/ui/medalspot.png');
+        background-size: 100% 100%;
+      }
     }
   }
 }

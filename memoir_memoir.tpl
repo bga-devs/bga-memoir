@@ -3,7 +3,9 @@
   <div class="m44-hrule"></div>
   <div id="m44-top-part">
     <div id="top-player">
-      <div id="top-medals"></div>
+      <div id="top-medals">
+        <div id="top-medals-slots" class='medals-slots-container'></div>
+      </div>
     </div>
     <div id="top-player-hand"></div>
     <div id="scenario-informations"></div>
@@ -37,7 +39,9 @@
 
   <div id="m44-bottom-part">
     <div id="bottom-player">
-      <div id="bottom-medals"></div>
+      <div id="bottom-medals">
+        <div id="bottom-medals-slots" class='medals-slots-container'></div>
+      </div>
     </div>
     <div id="bottom-player-hand"></div>
   </div>

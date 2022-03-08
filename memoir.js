@@ -45,6 +45,7 @@ define([
         ['removeObstacle', 200],
         ['addObstacle', 200],
         ['reshuffle', 1000],
+        ['scoreMedal', 1000],
       ];
 
       // Fix mobile viewport (remove CSS zoom)
@@ -66,6 +67,7 @@ define([
       this.inherited(arguments);
 
       this.setupPlayers();
+      this.setupTeams();
 
       // Load board
       if (gamedatas.board) {

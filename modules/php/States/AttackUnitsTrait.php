@@ -183,10 +183,10 @@ trait AttackUnitsTrait
     $player = $unit->getPlayer();
     Notifications::takeDamage($player, $unit, $hits, $cantRetreat);
     if ($eliminated) {
-      //TODO : Manage scenario specific
-      // TODO : store type of unit
-      // Teams::incMedals(1, Players::get(Globals::getActivePlayer())->getTeam());
-      Notifications::scoreMedal(Players::get(Globals::getActivePlayer()), 1);
+      Board::removeUnit($unit);
+      $player = Players::get($this->getCurrentAttack()['pId']);
+      $team = $player->getTeam();
+      $team->addEliminationMedals($unit);
     }
 
     return $eliminated;
@@ -205,7 +205,7 @@ trait AttackUnitsTrait
     }
 
     // debug
-    // $results = [DICE_INFANTRY, \DICE_INFANTRY];
+    $results = [DICE_INFANTRY, \DICE_INFANTRY, DICE_INFANTRY, DICE_INFANTRY];
 
     Notifications::rollDice($player, $nDice, $results, $cell);
     return $results;

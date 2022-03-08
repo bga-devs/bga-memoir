@@ -11,15 +11,20 @@ class Globals extends \M44\Helpers\DB_Manager
   protected static $initialized = false;
   protected static $variables = [
     'changeActivePlayer' => 'obj', // Used for the generic "changeActivePlayer" state
-    'scenario' => 'obj',
+    'mode' => 'int',
+    'scenarioId' => 'int', // Used to store the scenario id
+    'scenario' => 'obj', // Used to store the scenario
+
     'turn' => 'int',
-    'sideTurn' => 'str', // Store which side is currently playing
+    'teamTurn' => 'str', // Store which team is currently playing
+
     'unitMoved' => 'int', // Store last unit moved
     'unitAttacker' => 'int', // Store last unit that attacked
-    'activePlayer' => 'int', // ???
+
     'nToKeep' => 'int', // Number of cards to keep in the draw phase
-    'retreat' => 'obj', // ['unit' => id, 'min' => min number of retreats hexes, 'max' => max number of retreat hexes]
+
     'attackStack' => 'obj', // Store all information of the ongoing attacks
+    'retreat' => 'obj', // ['unit' => id, 'min' => min number of retreats hexes, 'max' => max number of retreat hexes]
   ];
 
   protected static $table = 'global_variables';
@@ -146,7 +151,24 @@ class Globals extends \M44\Helpers\DB_Manager
    */
   public static function setupNewGame($players, $options)
   {
+    Globals::setMode($options[OPTION_MODE]);
+    Globals::setScenarioId($options[OPTION_MODE + $options[OPTION_MODE]]);
     Globals::setUnitMoved(-1);
     Globals::setUnitAttacker(-1);
+  }
+
+  public static function isStandard()
+  {
+    return Globals::getMode() == OPTION_MODE_STANDARD;
+  }
+
+  public static function isBreakthrough()
+  {
+    return Globals::getMode() == OPTION_MODE_BREAKTHROUGH;
+  }
+
+  public static function isOverlord()
+  {
+    return Globals::getMode() == OPTION_MODE_OVERLORD;
   }
 }
