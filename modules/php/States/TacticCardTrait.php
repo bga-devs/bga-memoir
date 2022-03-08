@@ -66,17 +66,19 @@ trait TacticCardTrait
     return $card->actTargetAirPower($unitIds);
   }
 
-  public function argsAttackwithoutOrder()
+  /************ BARRAGE **************/
+  public function argsTargetBarrage()
   {
     $player = Players::getActive();
     $card = $player->getCardInPlay();
-    return $card->argsAttackwithoutOrder();
+    return $card->argsTargetBarrage();
   }
 
-  public function stAttackWithoutOrder()
+  public function actTargetBarrage($unitId)
   {
+    self::checkAction('actTargetBarrage');
     $player = Players::getActive();
     $card = $player->getCardInPlay();
-    return $card->stAttackWithoutOrder();
+    return $card->actTargetBarrage($unitId);
   }
 }

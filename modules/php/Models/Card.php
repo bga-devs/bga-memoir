@@ -229,42 +229,4 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
       ],
     ];
   }
-
-  // public function argsAttackwithoutOrder()
-  // {
-  //   $units = $this->getExtraDatas('unitsToAttack');
-  //
-  //   return ['units' => $units];
-  // }
-  //
-  // public function stAttackWithoutOrder()
-  // {
-  //   $args = $this->argsAttackwithoutOrder();
-  //
-  //   foreach ($args['units'] as $unitId => $unit) {
-  //     $done = $unit['done'] ?? false;
-  //     if ($done) {
-  //         continue;
-  //     }
-  //     $this->actAttackWithoutOrder($unit);
-  //     return ;
-  // }
-  //
-  //   $todo = 0;
-  //   $unitTo = null;
-  //   foreach ($args['units'] as $unitId => $unit) {
-  //     $done = $unit['done'] ?? false;
-  //     if (!$done) {
-  //       return;
-  //     } else {
-  //       $todo++;
-  //       $unitTo = $unit;
-  //     }
-  //   }
-  //   if ($todo == 1) {
-  //     //action
-  //   } elseif ($todo == 0) {
-  //     Game::get()->nextState('next');
-  //   }
-  // }
 }

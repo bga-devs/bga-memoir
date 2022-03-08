@@ -146,6 +146,10 @@ class Terrain implements \JsonSerializable
   {
   }
 
+  public function onUnitEliminated($unit)
+  {
+  }
+
   public function getPossibleAttackActions($unit)
   {
     return [];

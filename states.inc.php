@@ -61,6 +61,7 @@ $machinestates = [
       'selectUnits' => ST_ORDER_UNITS,
       'finestHour' => ST_FINEST_HOUR_ROLL,
       'airpower' => ST_AIRPOWER_TARGET,
+      'barrage' => ST_BARRAGE_TARGET,
     ],
   ],
 
@@ -290,6 +291,16 @@ $machinestates = [
     'type' => 'activeplayer',
     'args' => 'argsTargetAirPower',
     'possibleactions' => ['actTargetAirPower'],
+    'transitions' => ['attack' => ST_ATTACK_THROW],
+  ],
+
+  ST_BARRAGE_TARGET => [
+    'name' => 'targetBarrage',
+    'description' => clienttranslate('${actplayer} may target 1 ennemy unit'),
+    'descriptionmyturn' => clienttranslate('${you} may target 1 ennemy unit'),
+    'type' => 'activeplayer',
+    'args' => 'argsTargetBarrage',
+    'possibleactions' => ['actTargetBarrage'],
     'transitions' => ['attack' => ST_ATTACK_THROW],
   ],
 

@@ -26,6 +26,7 @@ const ST_MOVE_AGAIN = 32; // Behind ennemy lines
 const ST_FINEST_HOUR_ROLL = 33; // Finest Hour
 const ST_FINEST_HOUR_ORDER = 34; // Finest Hour
 const ST_AIRPOWER_TARGET = 35; // Air power targeting
+const ST_BARRAGE_TARGET = 36;
 
 const ST_OVERLORD_PLAY_CARD = 40;
 const ST_OVERLORD_SELECT_UNIT = 41;
