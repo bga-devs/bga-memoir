@@ -37,7 +37,6 @@ class Scenario extends \APP_DbObject
     return is_null($scenario) ? null : $scenario['game_info']['side_player1'];
   }
 
-
   /**
    * Load a scenario from a file and store it into a global
    */
@@ -81,7 +80,7 @@ class Scenario extends \APP_DbObject
     Units::loadScenario($scenario);
 
     // Initialize medals
-    Medals::loadScenario($scenario);
+    Medals::loadScenario($scenario, $rematch);
 
     // Activate player
     $infos = $scenario['game_info'];
