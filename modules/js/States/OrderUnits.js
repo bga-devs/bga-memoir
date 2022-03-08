@@ -88,7 +88,6 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     /////////////////////////////////
 
     onEnteringStateMoveUnits(args, excludeUnit = null) {
-      debug(args);
       let nonEmptyUnits = [];
       // When a unit is clicked => prompt for the cell to move
       let callback = (unitId) => {

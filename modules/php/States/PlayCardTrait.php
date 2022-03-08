@@ -12,18 +12,18 @@ trait PlayCardTrait
   {
     $singleActive = is_null($player);
     $player = $player ?? Players::getActive();
-    $cards = $player->getCards()->filter(function ($card) {
-      return $card->getType() != \CARD_AMBUSH;
-    });
-
-    // get section restriction (if applicable)
-    $cards = $cards->map(function ($card) {
-      return $card->getAdditionalPlayConstraints();
-    });
+    $cards = $player
+      ->getCards()
+      ->filter(function ($card) {
+        return $card->getType() != \CARD_AMBUSH;
+      })
+      ->map(function ($card) {
+        // get section restriction (if applicable)
+        return $card->getAdditionalPlayConstraints();
+      });
 
     $args = [
-      'cardIds' => $cards->getIds(),
-      'cardsConstraints' => $cards,
+      'cards' => $cards,
     ];
     return $singleActive ? Utils::privatise($args) : $args;
   }
@@ -35,18 +35,18 @@ trait PlayCardTrait
     $player = Players::getCurrent();
     $args = $this->argsPlayCard($player);
 
-    if (!in_array($cardId, $args['cardIds'])) {
+    if (!in_array($cardId, $args['cards']->getIds())) {
       throw new \BgaVisibleSystemException('Non playable card. Should not happen.');
     }
 
     if (
-      $args['cardsConstraints'][$cardId] != null &&
-      (!in_array($sectionId, $args['cardsConstraints'][$cardId]) || $sectionId == null)
+      $args['cards'][$cardId] != null &&
+      (!in_array($sectionId, $args['cards'][$cardId]) || $sectionId == null)
     ) {
       throw new \BgaVisibleSystemException('Invalid section. Should not happen');
     }
 
-    if ($args['cardsConstraints'][$cardId] == null && $sectionId != null) {
+    if ($args['cards'][$cardId] == null && $sectionId != null) {
       throw new \BgaVisibleSystemException('Invalid section. Should not happen');
     }
 
