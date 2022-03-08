@@ -150,8 +150,31 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     },
 
     onEnteringStatePlayCard(args) {
-      args._private.cardIds.forEach((cardId) => {
-        this.onClick('card-' + cardId, () => this.takeAction('actPlayCard', { cardId }));
+      let cards = args._private.cards;
+      Object.keys(cards).forEach((cardId) => {
+        this.onClick(`card-${cardId}`, () => {
+          if (cards[cardId]) {
+            this.clientState('playCardSelectSection', _('Choose target section'), { cardId, sections: cards[cardId] });
+          } else {
+            this.takeAction('actPlayCard', { cardId });
+          }
+        });
+      });
+    },
+
+    onEnteringStatePlayCardSelectSection(args) {
+      let cardId = args.cardId;
+      $(`card-${cardId}`).classList.add('choice');
+      this.addCancelStateBtn();
+      let sections = {
+        0: _('Left'),
+        1: _('Central'),
+        2: _('Right'),
+      };
+      args.sections.forEach((section) => {
+        this.addPrimaryActionButton(`btnSection-${section}`, sections[section], () =>
+          this.takeAction('actPlayCard', { cardId, section }),
+        );
       });
     },
 

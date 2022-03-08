@@ -96,6 +96,7 @@ class Units extends \M44\Helpers\Pieces
   {
     $query = self::getSelectQuery();
     self::addTeamClause($query, $side);
+    self::addAliveClause($query);
     return $query->get();
   }
 

@@ -19,10 +19,33 @@ class InfantryAssault extends \M44\Models\Card
     ];
   }
 
+  public function getAdditionalPlayConstraints()
+  {
+    $player = $this->getPlayer();
+    $sections = [];
+    $infSections = [];
+    $units = $player->getUnits();
+    foreach ($units as $unit) {
+      foreach ($unit->getSection() as $section) {
+        if (!in_array($section, $sections)) {
+          $sections[] = $section;
+        }
+        if ($unit->getType() == INFANTRY && !in_array($section, $infSections)) {
+          $infSections[] = $section;
+        }
+      }
+    }
+    sort($sections);
+    sort($infSections);
+
+    return empty($infSections) ? $sections : $infSections;
+  }
+
   public function getArgsOrderUnits()
   {
     $player = $this->getPlayer();
-    $units = $player->getUnits();
+    $section = (int) $this->extraDatas['section'];
+    $units = $player->getUnitsInSection($section);
 
     // Keep only armor
     $infantry = $units->filter(function ($unit) {
@@ -49,24 +72,6 @@ class InfantryAssault extends \M44\Models\Card
     }
   }
 
-  public function getAdditionalPlayConstraints()
-  {
-    $args = $this->getArgsOrderUnits();
-    $sections = [];
-    if ($args['n'] == \INFINITY) {
-      foreach ($args['units'] as $unit) {
-        foreach ($unit->getSection() as $section) {
-          $sections[] = $section;
-        }
-      }
-    }
-    $sections = array_values(\array_unique($sections));
-    if (count($sections) == 0) {
-      return null;
-    } else {
-      return $sections;
-    }
-  }
 
   public function getArgsMoveUnits()
   {
