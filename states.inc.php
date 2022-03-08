@@ -57,7 +57,11 @@ $machinestates = [
     'type' => 'activeplayer',
     'args' => 'argsPlayCard',
     'possibleactions' => ['actPlayCard'],
-    'transitions' => ['selectUnits' => ST_ORDER_UNITS, 'finestHour' => ST_FINEST_HOUR_ROLL],
+    'transitions' => [
+      'selectUnits' => ST_ORDER_UNITS,
+      'finestHour' => ST_FINEST_HOUR_ROLL,
+      'airpower' => ST_AIRPOWER_TARGET,
+    ],
   ],
 
   ST_ORDER_UNITS => [
@@ -104,7 +108,7 @@ $machinestates = [
     'descriptionmyturn' => '',
     'type' => 'game',
     'action' => 'stAttackThrow', // TODO: possible that attack not possible anymore
-    'transitions' => ['retreat' => ST_ATTACK_RETREAT, 'nextAttack' => ST_ATTACK],
+    'transitions' => ['retreat' => ST_ATTACK_RETREAT, 'nextAttack' => ST_ATTACK_THROW],
   ],
 
   ST_ATTACK_RETREAT => [
@@ -119,7 +123,7 @@ $machinestates = [
     'possibleactions' => ['actRetreatUnit', 'actRetreatUnitDone'],
     'transitions' => [
       'retreat' => ST_ATTACK_RETREAT,
-      'nextAttack' => ST_ATTACK,
+      'nextAttack' => ST_ATTACK_THROW,
       'takeGround' => ST_TAKING_GROUND,
     ],
   ],
@@ -168,6 +172,7 @@ $machinestates = [
     'possibleactions' => ['actTakeGround', 'actPassTakeGround'],
     'transitions' => [
       'next' => ST_ATTACK,
+      'nextAttack' => ST_ATTACK_THROW,
       'overrun' => ST_ARMOR_OVERRUN,
     ],
   ],
@@ -183,6 +188,7 @@ $machinestates = [
     'transitions' => [
       'ambush' => ST_OPPONENT_AMBUSH,
       'next' => ST_ATTACK, // if player doesn't attack, no new taking ground
+      'nextAttack' => ST_ATTACK,
     ],
   ],
 
@@ -255,7 +261,6 @@ $machinestates = [
     'transitions' => ['moveUnits' => ST_MOVE_AGAIN, 'attackUnits' => ST_DRAW],
   ],
 
-
   // Finest Hour
   ST_FINEST_HOUR_ROLL => [
     'name' => 'finestHourRoll',
@@ -277,6 +282,16 @@ $machinestates = [
     'transitions' => ['moveUnits' => ST_MOVE_UNITS],
   ],
 
+  // Air power
+  ST_AIRPOWER_TARGET => [
+    'name' => 'targetAirPower',
+    'description' => clienttranslate('${actplayer} may target 4 or fewer ennemy units'),
+    'descriptionmyturn' => clienttranslate('${you} may target 4 or fewer ennemy units'),
+    'type' => 'activeplayer',
+    'args' => 'argsTargetAirPower',
+    'possibleactions' => ['actTargetAirPower'],
+    'transitions' => ['attack' => ST_ATTACK_THROW],
+  ],
 
   /////////////////////////////////////////////
   //   ___                 _               _

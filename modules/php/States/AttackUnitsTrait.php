@@ -108,8 +108,9 @@ trait AttackUnitsTrait
   {
     $stack = Globals::getAttackStack();
     $currentAttack = $stack[count($stack) - 1];
-    $currentAttack['unit'] = Units::get($currentAttack['unitId']);
+    $currentAttack['unit'] = $currentAttack['unitId'] == -1 ? null : Units::get($currentAttack['unitId']);
     $currentAttack['oppUnit'] = Units::get($currentAttack['oppUnitId']);
+    $currentAttack['card'] = Players::get($currentAttack['pId'])->getCardInPlay();
     return $currentAttack;
   }
 
@@ -127,8 +128,10 @@ trait AttackUnitsTrait
       // No more pending attack, jump to next attack
       $this->changeActivePlayerAndJumpTo($currentAttack['pId'], \ST_ATTACK);
     } else {
-      // TODO
-      throw new \BgaVisibleSystemException('Resuming stacked attack is not implemented yet');
+      $newAttack = array_pop($stack);
+      $this->nextState('nextAttack', $newAttack['pId']);
+
+      // throw new \BgaVisibleSystemException('Resuming stacked attack is not implemented yet');
     }
   }
 
@@ -140,7 +143,12 @@ trait AttackUnitsTrait
     $attack = $this->getCurrentAttack();
     $unit = $attack['unit']; // TODO : handle cards that attacks without activating units
     $oppUnit = $attack['oppUnit'];
-    $player = $unit->getPlayer();
+    if ($unit != null) {
+      $player = $unit->getPlayer();
+    } else {
+      $player = Players::getActive();
+    }
+    $card = $player->getCardInPlay();
 
     // Check if ambush was played and successfull
     if ($attack['ambush']) {
@@ -158,7 +166,8 @@ trait AttackUnitsTrait
     // Launch dice
     $results = array_count_values($this->rollDice($player, $attack['nDice'], $oppUnit->getPos()));
 
-    $hits = $oppUnit->getHits($results);
+    // $hits = $oppUnit->getHits($results);
+    $hits = $this->calculateHits($unit, $oppUnit, $card, $results);
     $eliminated = $this->damageUnit($oppUnit, $hits);
 
     // Handle retreat
@@ -168,6 +177,41 @@ trait AttackUnitsTrait
     } else {
       $this->closeCurrentAttack();
     }
+  }
+
+  /**
+   * Calculate hits based on the units and cards
+   *
+   **/
+  public function calculateHits($attacker, $target, $card, $results)
+  {
+    $hits = 0;
+
+    foreach ($results as $type => $nb) {
+      $hit = 0;
+
+      // check hits of targeted unit
+      $hit = $target->getHits($type, $nb);
+
+      // check hits of attacker
+      if ($attacker != null) {
+        $hitAttacker = $attacker->getHitsOnTarget($type, $nb);
+        if ($hitAttacker != -1) {
+          $hit = $hitAttacker;
+        }
+      }
+
+      if ($card != null) {
+        // check hits of card
+        $hitCards = $card->getHits($type, $nb);
+        if ($hitCards != -1) {
+          $hit = $hitCards;
+        }
+      }
+
+      $hits += $hit;
+    }
+    return $hits;
   }
 
   /**
@@ -205,7 +249,7 @@ trait AttackUnitsTrait
     }
 
     // debug
-    $results = [DICE_INFANTRY, \DICE_INFANTRY, DICE_INFANTRY, DICE_INFANTRY];
+    $results = [DICE_GRENADE, \DICE_INFANTRY, DICE_STAR, DICE_ARMOR];
 
     Notifications::rollDice($player, $nDice, $results, $cell);
     return $results;

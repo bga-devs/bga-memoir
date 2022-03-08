@@ -25,6 +25,7 @@ const ST_PRE_MOVE_AGAIN = 31; // Behind ennemy lines
 const ST_MOVE_AGAIN = 32; // Behind ennemy lines
 const ST_FINEST_HOUR_ROLL = 33; // Finest Hour
 const ST_FINEST_HOUR_ORDER = 34; // Finest Hour
+const ST_AIRPOWER_TARGET = 35; // Air power targeting
 
 const ST_OVERLORD_PLAY_CARD = 40;
 const ST_OVERLORD_SELECT_UNIT = 41;
@@ -102,14 +103,14 @@ const CARD_CLASSES = [
 /*
  * Game options
  */
- const OPTION_MODE = 101;
- const OPTION_MODE_STANDARD = 1;
- const OPTION_MODE_BREAKTHROUGH = 2;
- const OPTION_MODE_OVERLORD = 3;
+const OPTION_MODE = 101;
+const OPTION_MODE_STANDARD = 1;
+const OPTION_MODE_BREAKTHROUGH = 2;
+const OPTION_MODE_OVERLORD = 3;
 
- const OPTION_SCENARIO_STANDARD = 102;
- const OPTION_SCENARIO_BREAKTHROUGH = 103;
- const OPTION_SCENARIO_OVERLORD = 104;
+const OPTION_SCENARIO_STANDARD = 102;
+const OPTION_SCENARIO_BREAKTHROUGH = 103;
+const OPTION_SCENARIO_OVERLORD = 104;
 
 /*
  * Stats
@@ -135,7 +136,6 @@ const ARTILLERY = 3;
  * Medals
  */
 const MEDAL_ELIMINATION = 1;
-
 
 /*
  * Terrains

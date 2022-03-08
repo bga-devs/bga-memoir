@@ -35,7 +35,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     'attackPower',
     'mustSeeToAttack',
     'maxGrounds',
-    'medalsWorth'
+    'medalsWorth',
   ];
 
   protected $id = null;
@@ -106,7 +106,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
 
   public function getTeam()
   {
-    $teamId = in_array($this->nation, Units::$nations[AXIS])? AXIS : ALLIES;
+    $teamId = in_array($this->nation, Units::$nations[AXIS]) ? AXIS : ALLIES;
     return Teams::get($teamId);
   }
   public function getPlayer()
@@ -209,14 +209,24 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     return Board::getTargetableCells($this);
   }
 
-  public function getHits($dice)
+  public function getHits($type, $nb)
   {
     $map = [\INFANTRY => \DICE_INFANTRY, \ARMOR => \DICE_ARMOR];
-    $hits = $dice[$map[$this->type]] ?? 0;
+    if (isset($map[$this->type]) && $type == $map[$this->type]) {
+      return $nb;
+    }
 
-    $hits += $dice[\DICE_GRENADE] ?? 0;
+    if ($type == \DICE_GRENADE) {
+      return $nb;
+    }
 
-    return $hits;
+    return 0;
+  }
+
+  // used to get additional hits from special power of unit (sniper, etc.)
+  public function getHitsOnTarget($type, $nb)
+  {
+    return -1;
   }
 
   /*

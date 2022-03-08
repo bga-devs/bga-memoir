@@ -19,7 +19,8 @@ trait DebugTrait
   function vt()
   {
     // $this->actChooseCard([35]);
-    throw new \feException(print_r(Cards::getInPlayOfAll()));
+    // throw new \feException(print_r(Cards::getInPlayOfAll()));
+    $this->actTargetAirPower([5, 4]);
   }
 
   function tp($pId, $unitId, $min, $max)

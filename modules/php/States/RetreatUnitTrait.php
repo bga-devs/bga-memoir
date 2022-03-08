@@ -18,10 +18,15 @@ trait RetreatUnitTrait
   {
     $oppUnit = Units::get($attack['oppUnitId']);
     $canIgnore1Flag = Board::canIgnoreOneFlag($oppUnit);
+    $currentAttack = $this->getCurrentAttack();
+
+    if ($currentAttack['card']->cannotIgnoreFlags()) {
+      $canIgnore1Flag = false;
+    }
     // TODO : compute the min/max flags
 
     Globals::setRetreat([
-      'min' => $dice[\DICE_FLAG] - $canIgnore1Flag ? 1 : 0,
+      'min' => $dice[\DICE_FLAG] - ($canIgnore1Flag ? 1 : 0),
       'max' => $dice[\DICE_FLAG],
       'unit' => $attack['oppUnitId'],
     ]);
@@ -130,6 +135,11 @@ trait RetreatUnitTrait
     }
 
     $attack = $this->getCurrentAttack();
-    $this->nextState('takeGround', $attack['pId']);
+    if ($attack['unit'] == null) {
+      // Attack triggered by a card without order
+      $this->closeCurrentAttack();
+    } else {
+      $this->nextState('takeGround', $attack['pId']);
+    }
   }
 }

@@ -67,7 +67,8 @@ trait AmbushTrait
     // Launch dice
     $results = array_count_values($this->rollDice($player, $target['dice'], $ambushedUnit->getPos()));
 
-    $hits = $ambushedUnit->getHits($results);
+    // $hits = $ambushedUnit->getHits($results);
+    $hits = $this->calculateHits($unit, $ambushedUnit, null, $results);
     $eliminated = $this->damageUnit($ambushedUnit, $hits);
 
     $attack = [

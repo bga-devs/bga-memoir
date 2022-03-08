@@ -49,4 +49,34 @@ trait TacticCardTrait
     $card = $player->getCardInPlay();
     return $card->actOrderUnitsFinestHour($unitIds);
   }
+
+  /************ AIR POWER **************/
+  public function argsTargetAirPower()
+  {
+    $player = Players::getActive();
+    $card = $player->getCardInPlay();
+    return $card->argsTargetAirPower();
+  }
+
+  public function actTargetAirPower($unitIds)
+  {
+    self::checkAction('actTargetAirPower');
+    $player = Players::getActive();
+    $card = $player->getCardInPlay();
+    return $card->actTargetAirPower($unitIds);
+  }
+
+  public function argsAttackwithoutOrder()
+  {
+    $player = Players::getActive();
+    $card = $player->getCardInPlay();
+    return $card->argsAttackwithoutOrder();
+  }
+
+  public function stAttackWithoutOrder()
+  {
+    $player = Players::getActive();
+    $card = $player->getCardInPlay();
+    return $card->stAttackWithoutOrder();
+  }
 }

@@ -2,6 +2,7 @@
 namespace M44\Models;
 use M44\Managers\Players;
 use M44\Managers\Units;
+use M44\Core\Game;
 
 class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
 {
@@ -18,6 +19,14 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
   protected $deck = STANDARD_DECK;
   protected $draw = ['nDraw' => 1, 'nKeep' => 1]; // Number of card to draw / to keep
   protected $nbFights = 1;
+  protected $cannotIgnoreFlags = false;
+  protected $hitMap = [
+    \DICE_FLAG => false,
+    \DICE_STAR => false,
+    \DICE_ARMOR => false,
+    \DICE_GRENADE => false,
+    \DICE_INFANTRY => false,
+  ];
 
   /*
    * DYNAMIC INFORMATIONS
@@ -87,6 +96,11 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
     return $this->subtitle;
   }
 
+  public function cannotIgnoreFlags()
+  {
+    return $this->cannotIgnoreFlags;
+  }
+
   public function jsonSerialize()
   {
     return [
@@ -121,6 +135,15 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
   public function getDiceModifier($unit, $cell)
   {
     return 0;
+  }
+
+  public function getHits($type, $nb)
+  {
+    if ($this->hitMap[$type]) {
+      return $nb;
+    }
+
+    return -1;
   }
 
   //////////////////////////////////////////////////////
@@ -206,4 +229,42 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
       ],
     ];
   }
+
+  // public function argsAttackwithoutOrder()
+  // {
+  //   $units = $this->getExtraDatas('unitsToAttack');
+  //
+  //   return ['units' => $units];
+  // }
+  //
+  // public function stAttackWithoutOrder()
+  // {
+  //   $args = $this->argsAttackwithoutOrder();
+  //
+  //   foreach ($args['units'] as $unitId => $unit) {
+  //     $done = $unit['done'] ?? false;
+  //     if ($done) {
+  //         continue;
+  //     }
+  //     $this->actAttackWithoutOrder($unit);
+  //     return ;
+  // }
+  //
+  //   $todo = 0;
+  //   $unitTo = null;
+  //   foreach ($args['units'] as $unitId => $unit) {
+  //     $done = $unit['done'] ?? false;
+  //     if (!$done) {
+  //       return;
+  //     } else {
+  //       $todo++;
+  //       $unitTo = $unit;
+  //     }
+  //   }
+  //   if ($todo == 1) {
+  //     //action
+  //   } elseif ($todo == 0) {
+  //     Game::get()->nextState('next');
+  //   }
+  // }
 }
