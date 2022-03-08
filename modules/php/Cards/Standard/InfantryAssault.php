@@ -1,6 +1,8 @@
 <?php
 namespace M44\Cards\Standard;
 
+use M44\Managers\Units;
+
 class InfantryAssault extends \M44\Models\Card
 {
   public function __construct($row)
@@ -64,5 +66,21 @@ class InfantryAssault extends \M44\Models\Card
     } else {
       return $sections;
     }
+  }
+
+  public function getArgsMoveUnits()
+  {
+    $player = $this->getPlayer();
+    $units = Units::getActivatedByCard($this);
+
+    return [
+      'units' => $units->map(function ($unit) {
+        if ($unit->getType() == \INFANTRY) {
+          return $unit->getPossibleMoves(3, 2);
+        } else {
+          return $unit->getPossibleMoves();
+        }
+      }),
+    ];
   }
 }
