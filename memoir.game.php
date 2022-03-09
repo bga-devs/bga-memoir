@@ -125,7 +125,8 @@ class memoir extends Table
 
   function test()
   {
-    $f = file_get_contents(APP_GAMEMODULE_PATH . 'module/table/gamestate.game.php');
+//    var_dump( dirname(__FILE__));
+//    $f = file_get_contents(APP_GAMEMODULE_PATH . 'module/table/gamestate.game.php');
     var_dump($f);
   }
 

@@ -172,21 +172,26 @@ class Notifications
     }
   }
 
-  public static function scoreMedal($teamId, $medals, $cell = null)
+  public static function scoreMedals($teamId, $medals, $cell = null)
   {
-    $teamNames = [
-      ALLIES => \clienttranslate('Allies'),
-      AXIS => \clienttranslate('Axis'),
-    ];
-
-    self::notifyAll('scoreMedal', clienttranslate('${team_name} scores ${nb} medal(s)'), [
-      'i18n' => ['team_name'],
-      'team_name' => $teamNames[$teamId],
+    self::notifyAll('scoreMedals', clienttranslate('${team_name} scores ${nb} medal(s)'), [
+      'teamId' => $teamId,
       'nb' => $medals->count(),
       'medals' => $medals->toArray(),
       'cell' => $cell,
     ]);
   }
+
+  public static function removeMedals($teamId, $medalIds, $medal)
+  {
+    self::notifyAll('removeMedals', clienttranslate('${team_name} loses ${nb} medal(s)'), [
+      'teamId' => $teamId,
+      'nb' => count($medalIds),
+      'medalIds' => $medalIds,
+      'boardMedalId' => $medal['id'],
+    ]);
+  }
+
 
   /*
   public static function discard($player, $cards, $used = true)
@@ -271,6 +276,15 @@ class Notifications
     if (isset($args['card'])) {
       $args['card_name'] = $args['card']->getName();
       $args['i18n'][] = 'card_name';
+    }
+
+    if(isset($args['teamId'])){
+      $teamNames = [
+        ALLIES => \clienttranslate('Allies'),
+        AXIS => \clienttranslate('Axis'),
+      ];
+      $args['team_name'] = $teamNames[$args['teamId']];
+      $args['i18n'][] = 'team_name';
     }
 
     // if (isset($args['task'])) {

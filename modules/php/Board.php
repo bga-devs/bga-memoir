@@ -7,6 +7,7 @@ use M44\Helpers\Utils;
 use M44\Managers\Cards;
 use M44\Managers\Players;
 use M44\Managers\Terrains;
+use M44\Managers\Medals;
 use M44\Managers\Units;
 use M44\Scenario;
 
@@ -40,6 +41,7 @@ class Board
           'terrains' => [],
           'unit' => null,
           'labels' => [],
+          'medals' => [],
         ];
       }
     }
@@ -61,6 +63,11 @@ class Board
       foreach ($labels['text'] as $label) {
         self::$grid[$labels['col']][$labels['row']]['labels'][] = $label;
       }
+    }
+
+    // Add the medals
+    foreach (Medals::getOnBoard() as $medal) {
+      self::$grid[$medal['x']][$medal['y']]['medals'][] = $medal;
     }
   }
 
@@ -96,9 +103,14 @@ class Board
   public function removeUnit($unit)
   {
     self::$grid[$unit->getX()][$unit->getY()]['unit'] = null;
+
+    // Check for listeners
     foreach (self::$grid[$unit->getX()][$unit->getY()]['terrains'] as $terrain) {
       $terrain->onUnitEliminated($unit);
     }
+
+    // Check for potential lost medals
+    Medals::checkBoardMedals();
   }
 
   /////////////////////////////////////////
@@ -294,6 +306,8 @@ class Board
     foreach ($targetCell['terrains'] as $terrain) {
       $terrain->onUnitEntering($unit);
     }
+
+    Medals::checkBoardMedals();
   }
 
   public static function mustStopWhenEntering($unit, $cell)

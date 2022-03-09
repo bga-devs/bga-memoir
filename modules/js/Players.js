@@ -1,4 +1,7 @@
 define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
+  const MEDAL_ELIMINATION = 1;
+  const MEDAL_POSITION = 2;
+
   return declare('memoir.players', null, {
     getPlayerColor(pId) {
       return this.gamedatas.players[pId].color;
@@ -57,14 +60,12 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     },
 
     tplMedal(medal) {
-      const MEDAL_ELIMINATION = 1;
       const SPRITES = ['medal1', 'medal2', 'medal4', 'medal5', 'medal6', 'medal7', 'medal8', 'medal9'];
 
       let sprite = SPRITES.findIndex((t) => t == medal.sprite);
       let content = '';
       if (medal.type == MEDAL_ELIMINATION) {
-        let unit = medal.extra_datas;
-        content = `<div class="m44-unit" data-type="${unit.type}" data-nation="${unit.nation}" data-orientation="0">
+        content = `<div class="m44-unit" data-type="${medal.unit_type}" data-nation="${medal.unit_nation}" data-orientation="0">
                   <div class="m44-unit-meeple"></div>
           </div>`;
       }
@@ -73,14 +74,30 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         </div>`;
     },
 
-    notif_scoreMedal(n) {
+    notif_scoreMedals(n) {
       debug('Notif: a team gained a medal', n);
       n.args.medals.forEach((medal) => {
-        let cell = n.args.cell;
-        this.addMedal(medal, `cell-${cell.x}-${cell.y}`);
+        let container = null;
+        if (n.args.cell) {
+          container = `cell-${n.args.cell.x}-${n.args.cell.y}`;
+        } else if (medal.type == MEDAL_POSITION) {
+          container = `board-medal-${medal.foreign_id}`;
+        } else {
+          console.error('No container for medal, should not happen');
+        }
+        this.addMedal(medal, container);
 
         let pos = this._bottomTeam == medal.team ? 'bottom' : 'top';
         this.slide('medal-' + medal.id, pos + '-medals');
+      });
+    },
+
+    notif_removeMedals(n) {
+      debug('Notif: a team losed a medal', n);
+      n.args.medalIds.forEach((medalId) => {
+        this.slide('medal-' + medalId, 'board-medal-' + n.args.boardMedalId, {
+          destroy: true,
+        });
       });
     },
 

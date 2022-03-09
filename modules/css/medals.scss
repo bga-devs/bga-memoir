@@ -27,3 +27,24 @@
 .hex-cell .m44-medal {
   position: absolute;
 }
+
+.hex-grid-item .board-medal {
+  width: 42.8%;
+  height: 37%;
+  position: absolute;
+  right: 4%;
+  top: 16%;
+  z-index: 3;
+
+  background-image: url('img/medals.png');
+  background-size: 200% 400%;
+
+  // TODO : handle multiple board medals
+  
+  @for $i from 0 through 8 {
+    &[data-sprite='#{$i}'] {
+      background-position-x: ($i % 2) * 100% / 2;
+      background-position-y: (($i - ($i % 2)) / 2) * 100% / 3;
+    }
+  }
+}

@@ -81,7 +81,21 @@ CREATE TABLE IF NOT EXISTS `medals` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `team` varchar(32) NOT NULL,
   `type` int(10) DEFAULT 0,
+  `foreign_id` int(10) DEFAULT 0,
   `sprite` varchar(32) NOT NULL,
-  `extra_datas` JSON NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `board_medals` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `team` varchar(32) NULL,
+  `x` int(10) NOT NULL,
+  `y` int(10) NOT NULL,
+  `sprite` varchar(32) NOT NULL,
+  `type` int(10) DEFAULT 0,
+  `permanent` int(2) DEFAULT 0,
+  `counts_for` int(10) DEFAULT 0,
+  `nbr_hex` int(10) DEFAULT 0,
+  `group` JSON NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

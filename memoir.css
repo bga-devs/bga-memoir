@@ -1549,6 +1549,43 @@ html {
 .hex-cell .m44-medal {
   position: absolute; }
 
+.hex-grid-item .board-medal {
+  width: 42.8%;
+  height: 37%;
+  position: absolute;
+  right: 4%;
+  top: 16%;
+  z-index: 3;
+  background-image: url("img/medals.png");
+  background-size: 200% 400%; }
+  .hex-grid-item .board-medal[data-sprite='0'] {
+    background-position-x: 0%;
+    background-position-y: 0%; }
+  .hex-grid-item .board-medal[data-sprite='1'] {
+    background-position-x: 50%;
+    background-position-y: 0%; }
+  .hex-grid-item .board-medal[data-sprite='2'] {
+    background-position-x: 0%;
+    background-position-y: 33.3333333333%; }
+  .hex-grid-item .board-medal[data-sprite='3'] {
+    background-position-x: 50%;
+    background-position-y: 33.3333333333%; }
+  .hex-grid-item .board-medal[data-sprite='4'] {
+    background-position-x: 0%;
+    background-position-y: 66.6666666667%; }
+  .hex-grid-item .board-medal[data-sprite='5'] {
+    background-position-x: 50%;
+    background-position-y: 66.6666666667%; }
+  .hex-grid-item .board-medal[data-sprite='6'] {
+    background-position-x: 0%;
+    background-position-y: 100%; }
+  .hex-grid-item .board-medal[data-sprite='7'] {
+    background-position-x: 50%;
+    background-position-y: 100%; }
+  .hex-grid-item .board-medal[data-sprite='8'] {
+    background-position-x: 0%;
+    background-position-y: 133.3333333333%; }
+
 .m44-dice-resizable {
   width: calc(64px * 0.8 * var(--memoirBoardScale));
   height: calc(64px * 0.8 * var(--memoirBoardScale)); }

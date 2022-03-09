@@ -47,7 +47,8 @@ define([
         ['removeObstacle', 200],
         ['addObstacle', 200],
         ['reshuffle', 1000],
-        ['scoreMedal', 1000],
+        ['scoreMedals', 1000],
+        ['removeMedals', 1000],
       ];
 
       // Fix mobile viewport (remove CSS zoom)

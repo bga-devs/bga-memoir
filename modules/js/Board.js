@@ -107,6 +107,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
             unit.orientation = bottomTeam != (ALLIES_NATIONS.includes(unit.nation) ? 'ALLIES' : 'AXIS') ? 1 : 0;
             this.place('tplUnit', unit, `cell-${col}-${y}`);
           }
+
+          // Medals
+          board.grid[col][row].medals.forEach((medal) => this.place('tplBoardMedal', medal, cellC));
         }
       }
 
@@ -224,6 +227,14 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       <div class="hex-label-container" style="grid-area:${label.area}">
         <div class="hex-label">${label.label}</div>
       </div>`;
+    },
+
+    tplBoardMedal(medal) {
+      const SPRITES = ['medal1', 'medal2', 'medal4', 'medal5', 'medal6', 'medal7', 'medal8', 'medal9'];
+      let sprite = SPRITES.findIndex((t) => t == medal.sprite);
+
+      return `
+      <div id='board-medal-${medal.id}' class="board-medal" data-team="${medal.team}" data-sprite="${sprite}"></div>`;
     },
 
     notif_addObstacle(n) {

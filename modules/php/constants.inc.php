@@ -138,6 +138,7 @@ const ARTILLERY = 3;
  * Medals
  */
 const MEDAL_ELIMINATION = 1;
+const MEDAL_POSITION = 2;
 
 /*
  * Terrains

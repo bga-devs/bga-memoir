@@ -74,6 +74,6 @@ class Team extends \M44\Helpers\DB_Model
     }
 
     $medals = Medals::addEliminationMedals($this->id, $medalsObtained, $unit);
-    Notifications::scoreMedal($this->id, $medals, $unit->getPos());
+    Notifications::scoreMedals($this->id, $medals, $unit->getPos());
   }
 }
