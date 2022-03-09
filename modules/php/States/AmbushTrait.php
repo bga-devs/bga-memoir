@@ -8,6 +8,7 @@ use M44\Managers\Cards;
 use M44\Managers\Units;
 use M44\Core\Notifications;
 use M44\Helpers\Utils;
+use M44\Dice;
 
 trait AmbushTrait
 {
@@ -65,7 +66,7 @@ trait AmbushTrait
     $target = $cells[$k];
 
     // Launch dice
-    $results = array_count_values($this->rollDice($player, $target['dice'], $ambushedUnit->getPos()));
+    $results = Dice::roll($player, $target['dice'], $ambushedUnit->getPos());
 
     // $hits = $ambushedUnit->getHits($results);
     $hits = $this->calculateHits($unit, $ambushedUnit, null, $results);

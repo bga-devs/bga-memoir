@@ -251,13 +251,9 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
 
   public function heal($heal)
   {
-    $toHeal = $this->maxUnits - $this->nUnits;
-    if ($heal < $toHeal) {
-      $this->incNUnits($heal);
-      $toHeal = $heal;
-    } else {
-      $this->incNUnits($toHeal);
-    }
+    $maxHeal = $this->maxUnits - $this->nUnits;
+    $heal = $heal <= $maxHeal ? $heal : $maxHeal;
+    $this->incNUnits($heal);
     return $heal;
   }
 

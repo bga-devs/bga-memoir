@@ -3,6 +3,7 @@ namespace M44\Cards\Standard;
 use M44\Core\Game;
 use M44\Core\Notifications;
 use M44\Managers\Units;
+use M44\Dice;
 
 class FinestHour extends \M44\Models\Card
 {
@@ -28,17 +29,16 @@ class FinestHour extends \M44\Models\Card
 
   public function stFinestHourRoll()
   {
-    $game = Game::get();
     $player = $this->getPlayer();
     $n = $player->getCards()->count() + 1;
-    $results = $game->rollDice($player, $n);
+    $results = Dice::roll($player, $n);
     $this->setExtraDatas('dice', $results);
-    $game->nextState('selectUnits');
+    Game::get()->nextState('selectUnits');
   }
 
   public function getResults()
   {
-    $results = array_count_values($this->getExtraDatas('dice'));
+    $results = $this->getExtraDatas('dice');
     return [$results[\DICE_INFANTRY] ?? 0, $results[DICE_ARMOR] ?? 0, $results[\DICE_STAR] ?? 0];
   }
 

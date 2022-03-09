@@ -328,7 +328,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     },
 
     notif_activateUnits(n) {
-      debug('Notif: activating units');
+      debug('Notif: activating units', n);
       n.args.unitIds.forEach((unitId) => $('unit-' + unitId).classList.add('activated'));
       if (n.args.unitOnTheMoveIds) {
         n.args.unitOnTheMoveIds.forEach((unitId) => $('unit-' + unitId).classList.add('activated onTheMove'));

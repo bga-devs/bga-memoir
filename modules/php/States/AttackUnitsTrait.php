@@ -9,6 +9,7 @@ use M44\Managers\Units;
 use M44\Managers\Terrains;
 use M44\Helpers\Utils;
 use M44\Board;
+use M44\Dice;
 
 trait AttackUnitsTrait
 {
@@ -164,7 +165,7 @@ trait AttackUnitsTrait
     }
 
     // Launch dice
-    $results = array_count_values($this->rollDice($player, $attack['nDice'], $oppUnit->getPos()));
+    $results = Dice::roll($player, $attack['nDice'], $oppUnit->getPos());
 
     // $hits = $oppUnit->getHits($results);
     $hits = $this->calculateHits($unit, $oppUnit, $card, $results);
@@ -236,24 +237,6 @@ trait AttackUnitsTrait
     return $eliminated;
   }
 
-  /**
-   * Roll dice : roll a given number of dices next to a given cell
-   */
-  public function rollDice($player, $nDice, $cell = null)
-  {
-    $dice = [\DICE_INFANTRY, \DICE_INFANTRY, \DICE_ARMOR, \DICE_FLAG, \DICE_STAR, \DICE_GRENADE];
-    $results = [];
-    for ($i = 0; $i < $nDice; $i++) {
-      $k = array_rand($dice);
-      $results[] = $dice[$k];
-    }
-
-    // debug
-    // $results = [DICE_FLAG, \DICE_FLAG, DICE_GRENADE, \DICE_FLAG];
-
-    Notifications::rollDice($player, $nDice, $results, $cell);
-    return $results;
-  }
 
   /**
    * Remove Wire instead of attacking

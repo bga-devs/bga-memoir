@@ -338,5 +338,25 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       let type = this.getArgs().units[unitId] - 1;
       return t[type] < dice[type] || remainingJokers > 0;
     },
+
+    ///////////////////////////////////
+    //  __  __          _ _
+    // |  \/  | ___  __| (_) ___ ___
+    // | |\/| |/ _ \/ _` | |/ __/ __|
+    // | |  | |  __/ (_| | | (__\__ \
+    // |_|  |_|\___|\__,_|_|\___|___/
+    ///////////////////////////////////
+
+    onEnteringStateTargetMedics(args) {
+      args.unitIds.forEach((unitId) =>
+        this.onClick(`unit-${unitId}`, () => this.takeAction('actTargetMedics', { unitId })),
+      );
+    },
+
+    notif_healUnit(n) {
+      debug('Notif: healing a unit', n);
+      let unit = $(`unit-${n.args.unitId}`);
+      unit.dataset.figures = parseInt(unit.dataset.figures) + n.args.nb;
+    },
   });
 });

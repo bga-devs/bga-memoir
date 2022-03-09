@@ -61,6 +61,14 @@ class action_memoir extends APP_GameAction
     self::ajaxResponse();
   }
 
+  public function actTargetMedics()
+  {
+    self::setAjaxMode();
+    $unitId = self::getArg('unitId', AT_posint, true);
+    $this->game->actTargetMedics($unitId);
+    self::ajaxResponse();
+  }
+
   public function actChooseCard()
   {
     self::setAjaxMode();

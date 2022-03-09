@@ -223,11 +223,11 @@ class Notifications
     ]);
   }
 
-  public static function heal($player, $nb, $unit)
+  public static function healUnit($player, $nb, $unit)
   {
-    self::notifyAll('heal', clienttranslate('${player_name} heals ${nb} damage(s)'), [
+    self::notifyAll('healUnit', clienttranslate('${player_name} heals ${nb} damage(s)'), [
       'player' => $player,
-      'unit' => $unit,
+      'unitId' => $unit->getId(),
       'nb' => $nb,
     ]);
   }
