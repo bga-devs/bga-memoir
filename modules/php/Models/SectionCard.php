@@ -23,28 +23,45 @@ class SectionCard extends Card
     return $this->texts[$this->value] ?? $this->text;
   }
 
-  public function getSections()
+  public function getSections($counter = false)
   {
     if ($this->nUnits != null && empty($this->sections)) {
       $sections = [0, 0, 0];
       $sections[$this->value] = $this->nUnits;
+      if ($counter) {
+        return \array_reverse($sections);
+      }
       return $sections;
     } else {
+      if ($counter) {
+        return \array_reverse($this->sections);
+      }
       return $this->sections;
     }
   }
 
-  public function getArgsOrderUnits()
+  public function getArgsOrderUnits($pId = false, $counter = false)
   {
-    $player = $this->getPlayer();
+    if ($pId == false) {
+      $player = $this->getPlayer();
+    } else {
+      // used for counter attack
+      $player = Players::get($pId);
+    }
+
     $units = new Collection();
     $sectionId = $this->getExtraDatas('section');
+
+    if ($counter) {
+      $sectionId = $this->mirrorSection($sectionId);
+    }
+
     if ($sectionId != null) {
       if ($n > 0 || $this->nUnitsOnTheMove > 0) {
         $units = $units->merge($player->getUnitsInSection($sectionId)->getPositions());
       }
     } else {
-      foreach ($this->getSections() as $i => $n) {
+      foreach ($this->getSections($counter) as $i => $n) {
         if ($n > 0 || $this->nUnitsOnTheMove > 0) {
           $units = $units->merge($player->getUnitsInSection($i)->getPositions());
         }
@@ -57,7 +74,7 @@ class SectionCard extends Card
       'nTitle' => $this->nUnits,
       'nOnTheMove' => $this->nUnitsOnTheMove,
       'desc' => $this->orderUnitsTitles[$this->value] ?? '',
-      'sections' => $this->getSections(),
+      'sections' => $this->getSections($counter),
       'units' => $units,
     ];
   }
