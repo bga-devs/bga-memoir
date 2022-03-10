@@ -14,7 +14,7 @@ trait PrepareTurnTrait
   function stEndRound()
   {
     // PEGASUS
-    if(Scenario::getId() == 2 && Globals::getTurn() <= 4 && Globals::getTeamTurn() == AXIS){
+    if (Scenario::getId() == 2 && Globals::getTurn() <= 4 && Globals::getTeamTurn() == AXIS) {
       // TODO : better handling of drawing for teams
       $player = Players::getActive();
       $cards = Cards::pickForLocation(1, 'deck', ['hand', $player->getId()]);
@@ -35,7 +35,6 @@ trait PrepareTurnTrait
   function stPrepareTurn()
   {
     Globals::incTurn();
-
     // TODO : Overlord => branch here to distribute cards instead
     if (true) {
       $team = Teams::getTeamTurn();

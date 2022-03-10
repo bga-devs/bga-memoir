@@ -25,6 +25,8 @@ class Globals extends \M44\Helpers\DB_Manager
 
     'attackStack' => 'obj', // Store all information of the ongoing attacks
     'retreat' => 'obj', // ['unit' => id, 'min' => min number of retreats hexes, 'max' => max number of retreat hexes]
+
+    'lastPlayedCards' => 'obj', // Store information of who played what (overlord) [player_id]
   ];
 
   protected static $table = 'global_variables';
@@ -155,6 +157,7 @@ class Globals extends \M44\Helpers\DB_Manager
     Globals::setScenarioId($options[OPTION_MODE + $options[OPTION_MODE]]);
     Globals::setUnitMoved(-1);
     Globals::setUnitAttacker(-1);
+    Globals::setLastPlayedCards([]);
   }
 
   public static function isStandard()

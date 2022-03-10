@@ -63,6 +63,7 @@ $machinestates = [
       'airpower' => ST_AIRPOWER_TARGET,
       'barrage' => ST_BARRAGE_TARGET,
       'medics' => ST_MEDICS_TARGET,
+      'counterAttack' => ST_COUNTER_ATTACK,
     ],
   ],
 
@@ -314,6 +315,23 @@ $machinestates = [
     'action' => 'stTargetMedics',
     'possibleactions' => ['actTargetMedics'],
     'transitions' => ['move' => ST_MOVE_UNITS, 'draw' => ST_DRAW],
+  ],
+
+  ST_COUNTER_ATTACK => [
+    'name' => 'counterAttack',
+    'description' => '',
+    'descriptionmyturn' => '',
+    'type' => 'activeplayer',
+    'action' => 'stCounterAttack',
+    'transitions' => [
+      'selectUnits' => ST_ORDER_UNITS,
+      'finestHour' => ST_FINEST_HOUR_ROLL,
+      'airpower' => ST_AIRPOWER_TARGET,
+      'barrage' => ST_BARRAGE_TARGET,
+      'medics' => ST_MEDICS_TARGET,
+      'draw' => ST_DRAW,
+      'counterAttack' => ST_COUNTER_ATTACK,
+    ],
   ],
 
   /////////////////////////////////////////////

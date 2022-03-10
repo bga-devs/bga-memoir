@@ -104,4 +104,12 @@ trait TacticCardTrait
     $card = $player->getCardInPlay();
     return $card->actTargetMedics($unitId);
   }
+
+  /************ COUNTER ATTACK **********/
+  public function stCounterAttack()
+  {
+    $player = Players::getActive();
+    $card = $player->getCardInPlay();
+    return $card->stCounterAttack();
+  }
 }

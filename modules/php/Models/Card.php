@@ -229,4 +229,11 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
       ],
     ];
   }
+
+  public function mirrorSection($sectionId)
+  {
+    $map = [0 => 2, 1 => 1, 2 => 0];
+    // TODO: overlord?
+    return $map[$sectionId] ?? null;
+  }
 }

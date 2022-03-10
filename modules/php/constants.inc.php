@@ -28,6 +28,7 @@ const ST_FINEST_HOUR_ORDER = 34; // Finest Hour
 const ST_AIRPOWER_TARGET = 35; // Air power targeting
 const ST_BARRAGE_TARGET = 36;
 const ST_MEDICS_TARGET = 37;
+const ST_COUNTER_ATTACK = 38;
 
 const ST_OVERLORD_PLAY_CARD = 40;
 const ST_OVERLORD_SELECT_UNIT = 41;
