@@ -3,6 +3,8 @@ namespace M44\Managers;
 use M44\Core\Globals;
 use M44\Core\Stats;
 use M44\Models\Team;
+use M44\Core\Notifications;
+use M44\Core\Game;
 
 /**
  * Teams
@@ -76,5 +78,29 @@ class Teams extends \M44\Helpers\DB_Manager
         }
       }
     }
+  }
+
+  public function checkVictory()
+  {
+    foreach (self::getAll() as $team) {
+      if ($team->getNVictory() <= $team->getMedals()->count()) {
+        foreach ($team->getMembers() as $member) {
+          // log victory
+          $method = 'setStatusRound' . Globals::getRound();
+          Stats::$method($member->getId(), 1);
+        }
+
+        foreach ($team->getOpponent()->getMembers() as $member) {
+          // log defeat
+          $method = 'setStatusRound' . Globals::getRound();
+          Stats::$method($member->getId(), 0);
+        }
+
+        Notifications::winRound($team, Globals::getRound());
+        Game::get()->gamestate->jumpToState(ST_NEW_ROUND);
+        return true;
+      }
+    }
+    return false;
   }
 }

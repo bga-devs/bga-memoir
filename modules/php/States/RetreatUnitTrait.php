@@ -55,6 +55,9 @@ trait RetreatUnitTrait
       $retreatInfo = Globals::getRetreat();
       $retreatInfo['min'] -= $args['hits'];
       Globals::setRetreat($retreatInfo);
+      if (Teams::checkVictory()) {
+        return;
+      }
       $this->nextState('retreat');
     }
     // If no more cells, auto-done

@@ -8,6 +8,7 @@ use M44\Managers\Cards;
 use M44\Managers\Players;
 use M44\Managers\Terrains;
 use M44\Managers\Medals;
+use M44\Managers\Teams;
 use M44\Managers\Units;
 use M44\Scenario;
 
@@ -111,6 +112,10 @@ class Board
 
     // Check for potential lost medals
     Medals::checkBoardMedals();
+
+    if (Teams::checkVictory()) {
+      return;
+    }
   }
 
   /////////////////////////////////////////
@@ -279,6 +284,9 @@ class Board
     }
 
     Medals::checkBoardMedals();
+    if (Teams::checkVictory()) {
+      return;
+    }
   }
 
   public static function mustStopWhenEntering($unit, $cell)

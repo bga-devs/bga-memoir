@@ -177,6 +177,12 @@ class Medals extends \M44\Helpers\DB_Manager
   public function removePositionMedals($boardMedal)
   {
     $ids = self::DB()
+      ->where('type', MEDAL_POSITION)
+      ->where('foreign_id', $boardMedal['id'])
+      ->get()
+      ->getIds();
+
+    self::DB()
       ->delete()
       ->where('type', MEDAL_POSITION)
       ->where('foreign_id', $boardMedal['id'])

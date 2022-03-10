@@ -172,7 +172,9 @@ trait AttackUnitsTrait
     // $hits = $oppUnit->getHits($results);
     $hits = $this->calculateHits($unit, $oppUnit, $card, $results);
     $eliminated = $this->damageUnit($oppUnit, $hits);
-
+    if (Teams::checkVictory()) {
+      return;
+    }
     // Handle retreat
     if (isset($results[DICE_FLAG]) && !$eliminated) {
       $this->initRetreat($attack, $results);
