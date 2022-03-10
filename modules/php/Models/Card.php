@@ -57,7 +57,7 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
    */
   public function getId()
   {
-    return $this->id;
+    return $this->isCounterAttack? $this->counterAttackCardId : $this->id;
   }
   public function getPId()
   {
@@ -228,6 +228,23 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
         $unit->getId() => $unit->getTargetableUnits(),
       ],
     ];
+  }
+
+  ////////////////////////////////////////////////////////////////////////
+  //   ____                  _             _   _   _             _
+  //  / ___|___  _   _ _ __ | |_ ___ _ __ / \ | |_| |_ __ _  ___| | __
+  // | |   / _ \| | | | '_ \| __/ _ \ '__/ _ \| __| __/ _` |/ __| |/ /
+  // | |__| (_) | |_| | | | | ||  __/ | / ___ \ |_| || (_| | (__|   <
+  //  \____\___/ \__,_|_| |_|\__\___|_|/_/   \_\__|\__\__,_|\___|_|\_\
+  ////////////////////////////////////////////////////////////////////////
+
+  protected $isCounterAttack = false;
+  protected $counterAttackCardId = null;
+  public function setCounterAttack($pId, $cardId)
+  {
+    $this->pId = $pId;
+    $this->isCounterAttack = true;
+    $this->counterAttackCardId = $cardId;
   }
 
   public function mirrorSection($sectionId)

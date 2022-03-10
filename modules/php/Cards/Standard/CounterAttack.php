@@ -25,17 +25,23 @@ class CounterAttack extends \M44\Models\Card
     ];
   }
 
+  public function getOpponentPId()
+  {
+    return Players::getNextId($this->pId);
+  }
+
   public function getCopiedCard()
   {
-    $last = Globals::getLastPlayedCards();
-    $player = $this->getPlayer();
-    foreach ($last as $pId => $cardId) {
-      if ($pId != $player->getId()) {
-        return Cards::get($cardId);
-      }
+    $lastCards = Globals::getLastPlayedCards();
+    $oppId = $this->getOpponentPId();
+    $cardId = $lastCards[$oppId] ?? null;
+    if (!is_null($cardId)) {
+      $card = Cards::get($cardId);
+      $card->setCounterAttack($this->pId, $this->id);
+      return $card;
+    } else {
+      return null;
     }
-
-    return null;
   }
 
   public function nextStateAfterPlay()
@@ -47,12 +53,8 @@ class CounterAttack extends \M44\Models\Card
   {
     $player = $this->getPlayer();
     $copiedCard = $this->getCopiedCard();
-    if ($copiedCard == null) {
-      Game::get()->nextState('draw');
-      return;
-    }
-    // trigger next play
-    Game::get()->nextState($copiedCard->nextStateAfterPlay());
+    $transition = is_null($copiedCard) ? 'draw' : $copiedCard->nextStateAfterPlay();
+    Game::get()->nextState($transition);
   }
 
   public function cannotIgnoreFlags()
@@ -62,11 +64,8 @@ class CounterAttack extends \M44\Models\Card
 
   public function getDrawMethod()
   {
-    $copied = $this->getCopiedCard();
-    if ($copied == null) {
-      return parent::getDrawMethod();
-    }
-    return $copied->getDrawMethod();
+    $copiedCard = $this->getCopiedCard();
+    return is_null($copiedCard) ? parent::getDrawMethod() : $copiedCard->getDrawMethod();
   }
 
   public function getDiceModifier($unit, $cell)
@@ -81,9 +80,12 @@ class CounterAttack extends \M44\Models\Card
 
   public function getArgsOrderUnits()
   {
-    $args = $this->getCopiedCard()->getArgsOrderUnits($this->pId, true);
-    // TODO: infantry assault?
-    return $args;
+    return $this->getCopiedCard()->getArgsOrderUnits($this->pId);
+  }
+
+  public function getAdditionalPlayConstraints()
+  {
+    return $this->getCopiedCard()->getAdditionalPlayConstraints();
   }
 
   public function nextStateAfterOrder($unitIds, $onTheMoveIds)
@@ -96,16 +98,6 @@ class CounterAttack extends \M44\Models\Card
     return $this->getCopiedCard()->getArgsMoveUnits();
   }
 
-  // public function getAdditionalPlayConstraints()
-  // {
-  //   return $this->getCopiedCard()->getAdditionalPlayConstraints();
-  // }
-
-  /**
-   *
-   * @param $overrideNbFights = [UNIT_TYPE => maxFights]]
-   *
-   **/
   public function getArgsAttackUnits($overrideNbFights = null)
   {
     return $this->getCopiedCard()->getArgsAttackUnits($overrideNbFights);
@@ -131,9 +123,17 @@ class CounterAttack extends \M44\Models\Card
   //   return $this->getCopiedCard()->setExtraDatas($variable, $value);
   // }
 
-  // section Cards
-  public function getSections()
+  public function __call($method, $args)
   {
-    return array_reverse($this->getCopiedCard()->getSections());
+    $card = $this->getCopiedCard();
+    if (is_null($card)) {
+      throw new \feException("Trying to call $method on CounterAttack without any copied card, Should not happen");
+    }
+
+    if (!\method_exists($card, $method)) {
+      throw new \feException("Trying to call unexistant $method on copied card of CounterAttack, Should not happen");
+    }
+
+    return $card->$method(...$args);
   }
 }

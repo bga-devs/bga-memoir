@@ -221,6 +221,7 @@ trait AttackUnitsTrait
   public function damageUnit($unit, $hits, $cantRetreat = false)
   {
     if ($hits == 0) {
+      Notifications::miss($unit);
       return false;
     }
 

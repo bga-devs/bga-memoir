@@ -192,7 +192,6 @@ class Notifications
     ]);
   }
 
-
   /*
   public static function discard($player, $cards, $used = true)
   {
@@ -225,6 +224,13 @@ class Notifications
       'unitId' => $oppUnit->getId(),
       'cell' => $oppUnit->getPos(),
       'hits' => $hits,
+    ]);
+  }
+
+  public static function miss($oppUnit)
+  {
+    self::notifyAll('miss', '', [
+      'unitId' => $oppUnit->getId(),
     ]);
   }
 
@@ -278,7 +284,7 @@ class Notifications
       $args['i18n'][] = 'card_name';
     }
 
-    if(isset($args['teamId'])){
+    if (isset($args['teamId'])) {
       $teamNames = [
         ALLIES => \clienttranslate('Allies'),
         AXIS => \clienttranslate('Axis'),

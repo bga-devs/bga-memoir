@@ -21,6 +21,10 @@ class InfantryAssault extends \M44\Models\Card
 
   public function getAdditionalPlayConstraints()
   {
+    if ($this->isCounterAttack) {
+      return null; // The card is already associated to a section
+    }
+
     $player = $this->getPlayer();
     $sections = [];
     $infSections = [];
@@ -45,6 +49,9 @@ class InfantryAssault extends \M44\Models\Card
   {
     $player = $this->getPlayer();
     $section = (int) $this->extraDatas['section'];
+    if($this->isCounterAttack){
+      $section = $this->mirrorSection($section);
+    }
     $units = $player->getUnitsInSection($section);
 
     // Keep only armor
@@ -71,7 +78,6 @@ class InfantryAssault extends \M44\Models\Card
       ];
     }
   }
-
 
   public function getArgsMoveUnits()
   {

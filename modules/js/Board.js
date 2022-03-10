@@ -436,5 +436,11 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         callback();
       });
     },
+
+    notif_miss(n) {
+      debug('Notif: a unit was missed', n);
+      let unit = $('unit-' + n.args.unitId);
+      unit.classList.remove('airPowerTarget');
+    },
   });
 });
