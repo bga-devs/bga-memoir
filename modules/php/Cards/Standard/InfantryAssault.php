@@ -21,7 +21,7 @@ class InfantryAssault extends \M44\Models\Card
 
   public function getAdditionalPlayConstraints()
   {
-    if ($this->isCounterAttack) {
+    if ($this->isCounterAttackMirror) {
       return null; // The card is already associated to a section
     }
 
@@ -49,7 +49,7 @@ class InfantryAssault extends \M44\Models\Card
   {
     $player = $this->getPlayer();
     $section = (int) $this->extraDatas['section'];
-    if($this->isCounterAttack){
+    if($this->isCounterAttackMirror){
       $section = $this->mirrorSection($section);
     }
     $units = $player->getUnitsInSection($section);

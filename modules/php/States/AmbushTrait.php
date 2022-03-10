@@ -46,7 +46,7 @@ trait AmbushTrait
     $cardId = array_pop($args['_private']['active']['cards']);
 
     // inPlay card
-    $card = Cards::play($player, $cardId);
+    $card = Cards::play($player, $cardId, null);
     Notifications::ambush($player, $card);
 
     $stack = Globals::getAttackStack();

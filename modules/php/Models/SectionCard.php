@@ -32,7 +32,7 @@ class SectionCard extends Card
       $sections = $this->sections;
     }
 
-    return $this->isCounterAttack ? array_reverse($sections) : $sections;
+    return $this->isCounterAttackMirror ? array_reverse($sections) : $sections;
   }
 
   public function getArgsOrderUnits($pId = false)
@@ -46,7 +46,7 @@ class SectionCard extends Card
 
     $units = new Collection();
     $sectionId = $this->getExtraDatas('section');
-    if ($this->isCounterAttack) {
+    if ($this->isCounterAttackMirror) {
       $sectionId = $this->mirrorSection($sectionId);
     }
 

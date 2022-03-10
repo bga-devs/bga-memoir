@@ -30,31 +30,36 @@ class CounterAttack extends \M44\Models\Card
     return Players::getNextId($this->pId);
   }
 
-  public function getCopiedCard()
-  {
-    $lastCards = Globals::getLastPlayedCards();
-    $oppId = $this->getOpponentPId();
-    $cardId = $lastCards[$oppId] ?? null;
-    if (!is_null($cardId)) {
-      $card = Cards::get($cardId);
-      $card->setCounterAttack($this->pId, $this->id);
-      return $card;
-    } else {
-      return null;
-    }
-  }
-
   public function nextStateAfterPlay()
   {
-    return 'counterAttack';
+    $card = $this->getCopiedCard();
+    return is_null($card)? 'counterAttack' : $card->nextStateAfterPlay();
   }
 
   public function stCounterAttack()
   {
-    $player = $this->getPlayer();
+    // Compute and store the copied card
+    $lastCards = Globals::getLastPlayedCards();
+    $oppId = $this->getOpponentPId();
+    $cardId = $lastCards[$oppId] ?? null;
+    $this->setExtraDatas('cardId', $cardId);
+
+    // Transition to next state depending on copied card
     $copiedCard = $this->getCopiedCard();
     $transition = is_null($copiedCard) ? 'draw' : $copiedCard->nextStateAfterPlay();
     Game::get()->nextState($transition);
+  }
+
+  public function getCopiedCard()
+  {
+    $cardId = $this->getExtraDatas('cardId');
+    if (!is_null($cardId)) {
+      $card = Cards::get($cardId);
+      $card->setCounterAttack($this->pId, $this->getId(), $this->isCounterAttackMirror);
+      return $card;
+    } else {
+      return null;
+    }
   }
 
   public function cannotIgnoreFlags()
@@ -83,11 +88,6 @@ class CounterAttack extends \M44\Models\Card
     return $this->getCopiedCard()->getArgsOrderUnits($this->pId);
   }
 
-  public function getAdditionalPlayConstraints()
-  {
-    return $this->getCopiedCard()->getAdditionalPlayConstraints();
-  }
-
   public function nextStateAfterOrder($unitIds, $onTheMoveIds)
   {
     return $this->getCopiedCard()->nextStateAfterOrder($unitIds, $onTheMoveIds);
@@ -112,16 +112,6 @@ class CounterAttack extends \M44\Models\Card
   {
     return $this->getCopiedCard()->getArgsArmorOverrun($unitId);
   }
-
-  public function getExtraDatas($variable)
-  {
-    return $this->getCopiedCard()->extraDatas[$variable] ?? null;
-  }
-
-  // public function setExtraDatas($variable, $value)
-  // {
-  //   return $this->getCopiedCard()->setExtraDatas($variable, $value);
-  // }
 
   public function __call($method, $args)
   {
