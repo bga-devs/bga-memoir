@@ -31,7 +31,7 @@ define([
 ], function (dojo, declare) {
   return declare('bgagame.memoir', [customgame.game, memoir.board, memoir.players, memoir.orderUnits], {
     constructor() {
-      this._activeStates = ['playCard', 'orderUnits', 'moveUnits', 'attackUnits', 'opponentAmbush', 'drawChoice', 'targetMedics'];
+      this._activeStates = ['playCard', 'orderUnits', 'moveUnits', 'attackUnits', 'opponentAmbush', 'drawChoice', 'targetMedics', 'targetAirPower'];
       this._notifications = [
         ['playCard', 1000],
         ['discardCard', 1200],

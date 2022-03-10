@@ -69,6 +69,14 @@ class action_memoir extends APP_GameAction
     self::ajaxResponse();
   }
 
+  public function actTargetAirPower()
+  {
+    self::setAjaxMode();
+    $unitIds = $this->getNumberList('unitIds');
+    $this->game->actTargetAirPower($unitIds);
+    self::ajaxResponse();
+  }
+
   public function actChooseCard()
   {
     self::setAjaxMode();

@@ -33,51 +33,43 @@ class AirPower extends \M44\Models\Card
 
   public function argsTargetAirPower()
   {
-    $player = $this->getPlayer();
-    $otherTeam = $player->getTeam()->getId() == ALLIES ? AXIS : ALLIES;
-    $oUnits = Units::getOfTeam($otherTeam);
-    $nDice = $otherTeam == ALLIES ? 1 : 2;
-    $units = [];
-
-    foreach ($oUnits as $oUnit) {
-      $unit = [];
-      $unit['x'] = $oUnit->getX();
-      $unit['y'] = $oUnit->getY();
-      $unit['dice'] = $nDice;
-      $units[$oUnit->getId()] = $unit;
-    }
-
+    $units = $this->getPlayer()
+      ->getTeam()
+      ->getOpponent()
+      ->getUnits()
+      ->map(function ($unit) {
+        return $unit->getPos();
+      });
     return ['units' => $units];
   }
 
   public function actTargetAirPower($unitIds)
   {
-    $player = $this->getPlayer();
-    // check that Ids are ennemy
+    // Sanity checks
     $args = $this->argsTargetAirPower();
-
-    if (count(array_diff($unitIds, array_keys($args['units']))) > 0) {
+    if (count(array_diff($unitIds, $args['units']->getIds())) > 0) {
       throw new \feException('Those units cannot be attacked. Should not happen');
     }
-
-    // check adjacent of Units
-    if (!Board::areAdjacent($unitIds)) {
-      throw new \BgaUserException(clienttranslate('You must select adjacent ennemy units'));
-    }
-
     if (count($unitIds) > 4) {
-      throw new \BgaUserException(clienttranslate('You must maximum 4 units'));
+      throw new \BgaUserException(clienttranslate('You must choose maximum 4 units'));
+    }
+    // check adjacent of Units
+    if (!$this->areUnitsContiguous($unitIds)) {
+      throw new \BgaUserException(clienttranslate('You must select a contiguous sequence of adjacent ennemy units'));
     }
 
+    // Create all the corresponding attacks
+    $player = $this->getPlayer();
+    $nDice = $player->getTeam()->getId() == ALLIES ? 2 : 1;
     $stack = Globals::getAttackStack();
-    foreach ($unitIds as $unitId) {
+    foreach (array_reverse($unitIds) as $unitId) {
       $stack[] = [
         'pId' => $player->getId(),
         'unitId' => -1,
         'x' => $args['units'][$unitId]['x'],
         'y' => $args['units'][$unitId]['y'],
         'oppUnitId' => $unitId,
-        'nDice' => $args['units'][$unitId]['dice'],
+        'nDice' => $nDice,
         'distance' => 0,
         'ambush' => false,
       ];
@@ -87,5 +79,22 @@ class AirPower extends \M44\Models\Card
     // set extra data
     // $this->setExtraDatas('unitsToAttack', $unitsToAttack);
     Game::get()->nextState('attack');
+  }
+
+  public function areUnitsContiguous($unitIds)
+  {
+    $previousUnit = null;
+    foreach (Units::getMany($unitIds) as $unit) {
+      if ($previousUnit != null) {
+        $pos1 = $unit->getPos();
+        $pos2 = $previousUnit->getPos();
+        if (abs($pos1['x'] - $pos2['x']) + abs($pos1['y'] - $pos2['y']) > 2) {
+          return false;
+        }
+      }
+      $previousUnit = $unit;
+    }
+
+    return true;
   }
 }

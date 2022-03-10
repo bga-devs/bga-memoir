@@ -165,35 +165,6 @@ class Board
     return false;
   }
 
-  // used for air power
-  public function areAdjacent($unitIds)
-  {
-    if (count($unitIds) == 1) {
-      return true;
-    }
-    $previousUnit = -1;
-
-    foreach ($unitIds as $unitId) {
-      $unit = Units::get($unitId);
-      $found = false;
-      if ($previousUnit != -1) {
-        foreach (self::getNeighbours($unit->getPos()) as $cell) {
-          $t = self::$grid[$cell['x']][$cell['y']];
-          if ($t['unit'] !== null && $previousUnit == $t['unit']->getId()) {
-            $found = true;
-          }
-        }
-
-        if (!$found) {
-          return false;
-        }
-      }
-      $previousUnit = $unitId;
-    }
-
-    return true;
-  }
-
   // Useful for DigIn card
   public function canPlaceSandbag($unit)
   {

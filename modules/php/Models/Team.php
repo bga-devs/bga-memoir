@@ -48,6 +48,17 @@ class Team extends \M44\Helpers\DB_Model
     return Players::getOfTeam($this->id);
   }
 
+  public function getOpponent()
+  {
+    $otherTeam = $this->id == ALLIES ? AXIS : ALLIES;
+    return Teams::get($otherTeam);
+  }
+
+  public function getUnits()
+  {
+    return Units::getOfTeam($this->id);
+  }
+
   public function getPlayerInCharge($section)
   {
     $names = [
@@ -63,7 +74,7 @@ class Team extends \M44\Helpers\DB_Model
   {
     $nMedals = $this->getMedals()->count();
     $medalsObtained = $unit->getMedalsWorth();
-    if($nMedals + $medalsObtained > $this->nVictory){
+    if ($nMedals + $medalsObtained > $this->nVictory) {
       // Can't get more medals that winning condition
       $medalsObtained = $this->nVictory - $nMedals;
     }

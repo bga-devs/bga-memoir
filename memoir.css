@@ -921,7 +921,7 @@ html {
     cursor: pointer; }
   .m44-unit.unselectable {
     cursor: default; }
-  .m44-unit.activated, .m44-unit.moving, .m44-unit.attacking, .m44-unit.retreating {
+  .m44-unit.activated, .m44-unit.moving, .m44-unit.attacking, .m44-unit.retreating, .m44-unit.airPowerTarget {
     background-image: url("img/hex_border_highlights.png");
     background-size: 400% 200%; }
   .m44-unit.activated {
@@ -934,6 +934,22 @@ html {
     background-position: 0% 100%; }
   .m44-unit.retreating {
     background-position: 66.666% 100%; }
+  .m44-unit.airPowerTarget {
+    background-position: 100% 100%; }
+    .m44-unit.airPowerTarget::before {
+      content: attr(data-air-power-order);
+      position: absolute;
+      z-index: 2;
+      left: 33%;
+      top: 35%;
+      width: 34.7%;
+      height: 30%;
+      background: #ffffffc4;
+      border-radius: 50%;
+      border: 1px solid black;
+      display: flex;
+      justify-content: center;
+      align-items: center; }
   .m44-unit.onTheMove::before {
     content: '';
     display: block;

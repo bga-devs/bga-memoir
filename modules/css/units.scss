@@ -60,14 +60,16 @@
   &.activated,
   &.moving,
   &.attacking,
-  &.retreating {
+  &.retreating,
+  &.airPowerTarget {
     background-image: url('img/hex_border_highlights.png');
     background-size: 400% 200%;
   }
 
   &.activated {
     background-position: 66.666% 0%;
-    &.unselectableForMoving, &.unselectableForAttacking {
+    &.unselectableForMoving,
+    &.unselectableForAttacking {
       background-position: 100% 0%;
     }
   }
@@ -79,6 +81,24 @@
   }
   &.retreating {
     background-position: 66.666% 100%;
+  }
+  &.airPowerTarget {
+    background-position: 100% 100%;
+    &::before {
+      content: attr(data-air-power-order);
+      position: absolute;
+      z-index: 2;
+      left: 33%;
+      top: 35%;
+      width: 34.7%;
+      height: 30%;
+      background: #ffffffc4;
+      border-radius: 50%;
+      border: 1px solid black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 
   &.onTheMove::before {

@@ -306,12 +306,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
     onEnteringStateOrderUnitsFinestHour(args) {
       this.removeClassNameOfCells('unselectableForAttacking');
-      this.makeUnitsSelectable(
-        args.units,
-        this.onClickUnitToOrderFinestHour.bind(this),
-        this.isUnitSelectableFinestHour.bind(this),
-        'activated',
-      );
+      this.makeUnitsSelectable(args.units, () => true, this.isUnitSelectableFinestHour.bind(this), 'activated');
 
       this.addPrimaryActionButton('btnConfirmOrder', _('Confirm orders'), () => {
         this.takeAction('actOrderUnitsFinestHour', {
@@ -320,11 +315,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       });
     },
 
-    onClickUnitToOrderFinestHour(unitId, pos, selected) {
-      return true;
-    },
-
-    isUnitSelectableFinestHour(unitId, pos, selected, minFilling, ignoreOnTheMove = false) {
+    isUnitSelectableFinestHour(unitId, pos, selected, minFilling) {
       // A selected unit can always be unselected
       if (selected) return true;
       // Compute selected units by type
@@ -357,6 +348,54 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       debug('Notif: healing a unit', n);
       let unit = $(`unit-${n.args.unitId}`);
       unit.dataset.figures = parseInt(unit.dataset.figures) + n.args.nb;
+    },
+
+    /////////////////////////////////////////////////
+    //     _    _      ____
+    //    / \  (_)_ __|  _ \ _____      _____ _ __
+    //   / _ \ | | '__| |_) / _ \ \ /\ / / _ \ '__|
+    //  / ___ \| | |  |  __/ (_) \ V  V /  __/ |
+    // /_/   \_\_|_|  |_|   \___/ \_/\_/ \___|_|
+    //
+    /////////////////////////////////////////////////
+
+    onEnteringStateTargetAirPower(args) {
+      this.makeUnitsSelectable(
+        args.units,
+        this.onClickUnitTargetAirPower.bind(this),
+        this.isUnitSelectableAirPower.bind(this),
+        'airPowerTarget',
+      );
+
+      this.addPrimaryActionButton('btnConfirmTargetAirPower', _('Confirm target(s)'), () =>
+        this.takeAction('actTargetAirPower', { unitIds: this._selectedUnits.join(';') }),
+      );
+    },
+
+    onClickUnitTargetAirPower(unitId, pos, selected) {
+      // Add a number on them
+      if (!selected) {
+        $(`unit-${unitId}`).dataset.airPowerOrder = this._selectedUnits.length + 1;
+      }
+
+      dojo.destroy('btnClearSelectedUnits');
+      if (this._selectedUnits.length - (selected ? 1 : 0) > 0) {
+        this.addSecondaryActionButton('btnClearSelectedUnits', _('Clear'), () => this.clearSelectedUnits());
+      }
+      return true;
+    },
+
+    isUnitSelectableAirPower(unitId, pos, selected, minFilling) {
+      // If no selected unit yet, can select any unit
+      if (this._selectedUnits.length == 0) return true;
+      let lastUnitId = this._selectedUnits[this._selectedUnits.length - 1];
+      // A selected unit can only be unselected if it's the last one
+      if (selected) return unitId == lastUnitId;
+      // No more than 4 units
+      if (this._selectedUnits.length == 4) return false;
+      // Otherwise, it must be adjacent to the last selected unit
+      let lastUnitPos = this.getArgs()['units'][lastUnitId];
+      return Math.abs(pos.x - lastUnitPos.x) + Math.abs(pos.y - lastUnitPos.y) <= 2;
     },
   });
 });

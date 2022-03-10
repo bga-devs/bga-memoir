@@ -281,6 +281,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     makeUnitsSelectable(units, callback, checkCallback, className = 'selected') {
       this._selectedUnits = [];
       this._selectableUnits = units;
+      this._checkCallbackForSelectingUnit = checkCallback;
 
       Object.keys(units).forEach((unitId) => {
         this.onClick('unit-' + unitId, () => {
@@ -310,6 +311,18 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           });
         });
       });
+
+      this.clearSelectedUnits = () => {
+        this._selectedUnits.forEach((unitId) => {
+          $('unit-' + unitId).classList.remove(className);
+        });
+        this._selectedUnits = [];
+
+        Object.keys(this._selectableUnits).forEach((unitId) => {
+          let selectable = this._checkCallbackForSelectingUnit(unitId, this._selectableUnits[unitId], false, []);
+          $('unit-' + unitId).classList.toggle('unselectable', !selectable);
+        });
+      };
     },
 
     /**
@@ -401,6 +414,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     notif_takeDamage(n) {
       debug('Notif: a unit is taking damage', n);
       let unit = $('unit-' + n.args.unitId);
+      unit.classList.remove('airPowerTarget');
       let callback = () => {
         unit.dataset.figures -= n.args.hits;
         if (unit.dataset.figures <= 0) {
