@@ -22,6 +22,10 @@ trait RoundTrait
 
     $rematch = $round == 2;
     Scenario::setup($rematch);
+    Globals::setUnitMoved(-1);
+    Globals::setUnitAttacker(-1);
+    Globals::setLastPlayedCards([]);
+    Globals::setAttackStack([]);
     $this->gamestate->jumpToState(\ST_PREPARE_TURN);
   }
 }
