@@ -30,40 +30,30 @@ class Barrage extends \M44\Models\Card
 
   public function argsTargetBarrage()
   {
-    $player = $this->getPlayer();
-    $otherTeam = $player->getTeam()->getId() == ALLIES ? AXIS : ALLIES;
-    $oUnits = Units::getOfTeam($otherTeam);
-    $units = [];
+    $units = $this->getPlayer()
+      ->getTeam()
+      ->getOpponent()
+      ->getUnits();
 
-    foreach ($oUnits as $oUnit) {
-      $unit = [];
-      $unit['x'] = $oUnit->getX();
-      $unit['y'] = $oUnit->getY();
-      $unit['dice'] = 4;
-      $units[$oUnit->getId()] = $unit;
-    }
-
-    return ['units' => $units];
+    return ['unitIds' => $units->getIds()];
   }
 
   public function actTargetBarrage($unitId)
   {
-    $player = $this->getPlayer();
-    // check that Ids are ennemy
     $args = $this->argsTargetBarrage();
-
-    if (!in_array($unitId, array_keys($args['units']))) {
+    if (!in_array($unitId, $args['unitIds'])) {
       throw new \feException('This unit cannot be attacked. Should not happen');
     }
-
+    $unit = Units::get($unitId);
     $stack = Globals::getAttackStack();
+
     $stack[] = [
-      'pId' => $player->getId(),
+      'pId' => $this->pId,
       'unitId' => -1,
-      'x' => $args['units'][$unitId]['x'],
-      'y' => $args['units'][$unitId]['y'],
+      'x' => $unit->getX(),
+      'y' => $unit->getY(),
       'oppUnitId' => $unitId,
-      'nDice' => $args['units'][$unitId]['dice'],
+      'nDice' => 4,
       'distance' => 0,
       'ambush' => false,
     ];

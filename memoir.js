@@ -40,6 +40,7 @@ define([
         'drawChoice',
         'targetMedics',
         'targetAirPower',
+        'targetBarrage',
       ];
       this._notifications = [
         ['playCard', 1000],
