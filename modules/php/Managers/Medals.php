@@ -83,7 +83,7 @@ class Medals extends \M44\Helpers\DB_Manager
             'team' => $team,
             'sprite' => $tag['name'],
             'type' => 0,
-            'permanent' => $permanent? 1 : 0,
+            'permanent' => $permanent ? 1 : 0,
             'counts_for' => $tag['medal']['counts_for'] ?? 1,
             'nbr_hex' => $tag['medal']['nbr_hex'] ?? 1,
             'group' => \json_encode($hexes),

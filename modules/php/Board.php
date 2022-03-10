@@ -285,8 +285,9 @@ class Board
 
     Medals::checkBoardMedals();
     if (Teams::checkVictory()) {
-      return;
+      return true;
     }
+    return false;
   }
 
   public static function mustStopWhenEntering($unit, $cell)

@@ -42,7 +42,10 @@ trait MoveUnitsTrait
     $unit = Units::get($unitId);
     foreach ($path as $c) {
       Notifications::moveUnit($player, $unitId, $c['x'], $c['y']);
-      Board::moveUnit($unit, $c); // TODO : maybe we need to update moves of unit along the path for some terrains ?
+      $won = Board::moveUnit($unit, $c); // TODO : maybe we need to update moves of unit along the path for some terrains ?
+      if ($won) {
+        return;
+      }
     }
     $unit->incMoves($cell['d']);
     Globals::setUnitMoved($unitId);
