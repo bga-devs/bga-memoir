@@ -115,12 +115,18 @@ class Cards extends \M44\Helpers\Pieces
 
     // Create deck
     self::initDeck(self::$decks[$mode] ?? self::$decks[STANDARD_DECK]);
+  }
+
+  public function initHands()
+  {
+    $scenario = Scenario::get();
 
     // Draw cards TODO
     if (true || $mode == STANDARD_DECK) {
       foreach (Players::getAll() as $pId => $player) {
         $team = $player->getTeam();
-        self::pickForLocation($team->getNCards(), 'deck', ['hand', $pId]);
+        $cards = self::pickForLocation($team->getNCards(), 'deck', ['hand', $pId]);
+        Notifications::drawCards(Players::get($pId), $cards);
       }
     }
   }

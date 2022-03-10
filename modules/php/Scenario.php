@@ -31,7 +31,6 @@ class Scenario extends \APP_DbObject
     return is_null($scenario) ? null : $scenario['meta_data']['scenario_id'];
   }
 
-
   public function getMode()
   {
     $scenario = self::get();
@@ -64,7 +63,7 @@ class Scenario extends \APP_DbObject
   /**
    * Setup the scenario stored into the global
    */
-  function setup($rematch = false)
+  function setup($rematch = false, $forceRefresh = false)
   {
     $scenario = self::get();
     if (is_null($scenario)) {
@@ -89,7 +88,16 @@ class Scenario extends \APP_DbObject
     // Initialize medals
     Medals::loadScenario($scenario, $rematch);
 
-    // TODO : send notifications
+    // Notify
+    if ($rematch || $forceRefresh) {
+      $datas = Game::get()->getAllDatas();
+      unset($datas['prefs']);
+      unset($datas['discard']);
+      Notifications::refreshInterface($datas);
+    }
+
+    // Init hands
+    Cards::initHands();
 
     // Activate player
     $infos = $scenario['game_info'];

@@ -198,21 +198,21 @@ html {
         margin-top: -20px; }
   #m44-container #top-medals,
   #m44-container #bottom-medals {
-    z-index: 2;
-    display: flex;
-    column-gap: 3px;
-    padding-left: 3px;
-    height: 35px; }
+    z-index: 2; }
+    #m44-container #top-medals .medals-slots-container,
+    #m44-container #top-medals .medals-container,
+    #m44-container #bottom-medals .medals-slots-container,
+    #m44-container #bottom-medals .medals-container {
+      height: 35px;
+      display: flex;
+      column-gap: 3px;
+      padding-left: 3px; }
     #m44-container #top-medals .medals-slots-container,
     #m44-container #bottom-medals .medals-slots-container {
       position: absolute;
       z-index: -1;
       top: 0;
-      left: 0;
-      height: 35px;
-      display: flex;
-      column-gap: 3px;
-      padding-left: 3px; }
+      left: 0; }
       #m44-container #top-medals .medals-slots-container .m44-medal-slot,
       #m44-container #bottom-medals .medals-slots-container .m44-medal-slot {
         width: 35px;

@@ -21,6 +21,7 @@ class Team extends \M44\Helpers\DB_Model
   protected $primary = 'team';
   protected $attributes = [
     'id' => 'team',
+    'position' => ['position', 'int'],
     'country' => 'country',
     'nCards' => ['cards', 'int'],
     'nVictory' => ['victory', 'int'],
@@ -34,6 +35,7 @@ class Team extends \M44\Helpers\DB_Model
   {
     return [
       'team' => $this->id,
+      'position' => $this->position,
       'medals' => $this->getMedals(),
       'victory' => $this->nVictory,
     ];

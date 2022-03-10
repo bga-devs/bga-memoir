@@ -60,6 +60,7 @@ define([
         ['reshuffle', 1000],
         ['scoreMedals', 1000],
         ['removeMedals', 1000],
+        ['refreshInterface', 100],
       ];
 
       // Fix mobile viewport (remove CSS zoom)
@@ -85,10 +86,7 @@ define([
 
       // Load board
       if (gamedatas.board) {
-        let pId = this.isSpectator ? Object.values(this.gamedatas.players)[0] : this.player_id;
-        let bottomTeam = this.gamedatas.players[pId].team;
-        let rotate = this.gamedatas.players[pId].no == 1;
-        this.setupBoard(gamedatas.board, rotate, bottomTeam);
+        this.setupBoard();
       }
 
       // Handle deck and discard
@@ -96,6 +94,35 @@ define([
       if (gamedatas.discard) {
         this.addCard(gamedatas.discard, 'discard');
       }
+    },
+
+    clearInterface() {
+      dojo.empty('m44-board-terrains');
+      dojo.empty('m44-board-units');
+      dojo.empty('m44-board-labels');
+
+      dojo.empty('top-medals-slots');
+      dojo.empty('top-medals-container');
+      dojo.empty('bottom-medals-slots');
+      dojo.empty('bottom-medals-container');
+
+      dojo.empty('top-player-hand');
+      dojo.empty('bottom-player-hand');
+
+      dojo.empty('discard');
+    },
+
+    notif_refreshInterface(n) {
+      debug('Refreshing the interface', n);
+      this.clearInterface();
+
+      // Update gamedatas
+      this.gamedatas.players = n.args.players;
+      this.gamedatas.board = n.args.board;
+      this.gamedatas.teams = n.args.teams;
+      this._deckCounter.setValue(n.args.deckCount);
+
+      this.setupBoard();
     },
 
     clearPossible() {

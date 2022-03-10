@@ -30,8 +30,8 @@ trait DrawCardsTrait
       Cards::discard($otherCard);
       Notifications::discardCard($owner, $otherCard);
 
-      $nc = Cards::pickForLocation($oMethod['nDraw'], 'deck', ['hand', $owner->getId()]);
-      Notifications::drawCards($owner, $nc);
+      $newCards = Cards::pickForLocation($oMethod['nDraw'], 'deck', ['hand', $owner->getId()]);
+      Notifications::drawCards($owner, $newCards);
     }
 
     $method = $card->getDrawMethod();

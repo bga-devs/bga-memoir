@@ -66,6 +66,7 @@ CREATE TABLE IF NOT EXISTS `units` (
 
 CREATE TABLE IF NOT EXISTS `teams` (
   `team` varchar(255) NOT NULL,
+  `position` int(10) NOT NULL,
   `country` varchar(255) NOT NULL,
   `cards` int(10) NOT NULL,
   `victory` int(10) NOT NULL,
