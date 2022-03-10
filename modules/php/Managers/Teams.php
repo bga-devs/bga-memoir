@@ -89,12 +89,16 @@ class Teams extends \M44\Helpers\DB_Manager
           // log victory
           $method = 'setStatusRound' . Globals::getRound();
           Stats::$method($member->getId(), 1);
+          $method = 'setTeamRound' . Globals::getRound();
+          Stats::$method($member->getId(), $team->getId() == ALLIES ? 0 : 1);
         }
 
         foreach ($team->getOpponent()->getMembers() as $member) {
           // log defeat
           $method = 'setStatusRound' . Globals::getRound();
           Stats::$method($member->getId(), 0);
+          $method = 'setTeamRound' . Globals::getRound();
+          Stats::$method($member->getId(), $team->getId() == ALLIES ? 0 : 1);
         }
 
         Notifications::winRound($team, Globals::getRound());
