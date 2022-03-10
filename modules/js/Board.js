@@ -20,7 +20,11 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
   const ALLIES_NATIONS = ['gb', 'us', 'ru'];
 
   return declare('memoir.board', null, {
-    setupBoard(board, rotate, bottomTeam) {
+    setupBoard() {
+      let board = this.gamedatas.board;
+      let pId = this.isSpectator ? Object.values(this.gamedatas.players)[0] : this.player_id;
+      let bottomTeam = this.gamedatas.players[pId].team;
+      let rotate = this.gamedatas.teams.find(team => team.team == bottomTeam).position == 1;
       this._isRotated = rotate;
 
       // Get dimensions based on type

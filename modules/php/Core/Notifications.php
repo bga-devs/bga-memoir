@@ -33,6 +33,11 @@ class Notifications
     self::notify($pId, 'message', $txt, $args);
   }
 
+  public static function refreshInterface($data)
+  {
+    self::notifyAll('refreshInterface', '', $data);
+  }
+
   public static function rollDice($player, $nDice, $results, $cell)
   {
     $faces = [

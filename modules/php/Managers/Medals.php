@@ -70,7 +70,7 @@ class Medals extends \M44\Helpers\DB_Manager
       foreach ($tags as $tag) {
         if (strpos($tag['name'], 'medal') === 0) {
           $team = in_array($tag['name'], ['medal1', 'medal4', 'medal6']) ? ALLIES : AXIS;
-
+          $permanent = $tag['medal']['permanent'] ?? false;
           $hexes = [['x' => $hex['col'], 'y' => $hex['row']]];
           if (isset($tag['group'])) {
             // TODO : handle group fields
@@ -83,7 +83,7 @@ class Medals extends \M44\Helpers\DB_Manager
             'team' => $team,
             'sprite' => $tag['name'],
             'type' => 0,
-            'permanent' => $tag['medal']['permanent'] ?? false,
+            'permanent' => $permanent? 1 : 0,
             'counts_for' => $tag['medal']['counts_for'] ?? 1,
             'nbr_hex' => $tag['medal']['nbr_hex'] ?? 1,
             'group' => \json_encode($hexes),

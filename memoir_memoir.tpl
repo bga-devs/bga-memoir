@@ -5,6 +5,7 @@
     <div id="top-player">
       <div id="top-medals">
         <div id="top-medals-slots" class='medals-slots-container'></div>
+        <div id="top-medals-container" class='medals-container'></div>
       </div>
     </div>
     <div id="top-player-hand"></div>
@@ -41,6 +42,7 @@
     <div id="bottom-player">
       <div id="bottom-medals">
         <div id="bottom-medals-slots" class='medals-slots-container'></div>
+        <div id="bottom-medals-container" class='medals-container'></div>
       </div>
     </div>
     <div id="bottom-player-hand"></div>

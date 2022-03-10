@@ -53,7 +53,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     addMedal(medal, container = null) {
       if (container == null) {
         let pos = this._bottomTeam == medal.team ? 'bottom' : 'top';
-        container = pos + '-medals';
+        container = pos + '-medals-container';
       }
 
       this.place('tplMedal', medal, container);
@@ -88,7 +88,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         this.addMedal(medal, container);
 
         let pos = this._bottomTeam == medal.team ? 'bottom' : 'top';
-        this.slide('medal-' + medal.id, pos + '-medals');
+        this.slide('medal-' + medal.id, pos + '-medals-container');
       });
     },
 

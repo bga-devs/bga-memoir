@@ -61,6 +61,7 @@ class Teams extends \M44\Helpers\DB_Manager
 
       self::DB()->insert([
         'team' => $team,
+        'position' => $i,
         'country' => $info['country_player' . $i] ?? '',
         'cards' => $info['cards_player' . $i],
         'victory' => $info['victory_player' . $i],
