@@ -20,6 +20,21 @@
 namespace M44;
 
 $game_options = [
+  100 => [
+    'name' => totranslate('Duration'),
+    'values' => [
+      1 => [
+        'name' => clienttranslate('2 ways'),
+        'description' => clienttranslate('The scenario will be played twice, switching the sides'),
+      ],
+      2 => [
+        'name' => clienttranslate('1 way'),
+        'tmdisplay' => clienttranslate('[1 way]'),
+        'description' => clienttranslate('The scenario will only be played once'),
+      ],
+    ],
+  ],
+
   101 => [
     'name' => totranslate('Mode'),
     'values' => [

@@ -28,6 +28,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
   ];
   protected $staticAttributes = [
     'type',
+    'statName',
     'name',
     'maxUnits',
     'movementRadius',
@@ -52,6 +53,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
   protected $grounds = 0;
 
   protected $type = null;
+  protected $statName = null;
   protected $name = null;
   protected $maxUnits = null;
   protected $movementRadius = null;
@@ -239,14 +241,9 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
    */
   public function takeDamage($hits)
   {
-    if ($hits >= $this->nUnits) {
-      $this->setNUnits(0);
-      Board::refreshUnits();
-      return true;
-    } else {
-      $this->incNUnits(-$hits);
-      return false;
-    }
+    $hits = ($hits >= $this->nUnits)? $this->nUnits : $hits;
+    $this->incNUnits(-$hits);
+    return $hits;
   }
 
   public function heal($heal)
@@ -259,6 +256,6 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
 
   public function isEliminated()
   {
-    return $this->figures == 0;
+    return $this->nUnits == 0;
   }
 }

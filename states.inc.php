@@ -21,18 +21,29 @@ $machinestates = [
     'description' => '',
     'type' => 'manager',
     'action' => 'stGameSetup',
-    'transitions' => ['' => ST_M44],
+    'transitions' => ['' => ST_LOAD_SCENARIO],
   ],
 
-  ST_M44 => [
-    'name' => 'playerTurn',
-    'description' => clienttranslate('${actplayer} must play a card or pass'),
-    'descriptionmyturn' => clienttranslate('${you} must play a card or pass'),
-    'type' => 'activeplayer',
-    'action' => 'stDummyState',
-    'possibleactions' => ['actPlayCard', 'actPpass'],
-    'transitions' => ['done' => ST_M44],
+  ST_LOAD_SCENARIO => [
+    'name' => 'loadScenario',
+    'description' => '',
+    'descriptionmyturn' => '',
+    'type' => 'game',
+    'action' => 'stLoadScenario',
+    'possibleactions' => [],
+    'transitions' => ['' => ST_NEW_ROUND],
   ],
+
+  ST_NEW_ROUND => [
+    'name' => 'newRound',
+    'description' => '',
+    'descriptionmyturn' => '',
+    'type' => 'game',
+    'action' => 'stNewRound',
+    'possibleactions' => [],
+    'transitions' => ['' => ST_NEW_ROUND],
+  ],
+
 
   ///////////////////////////////////////////////////////
   //   ____            _        _____ _
@@ -136,7 +147,7 @@ $machinestates = [
     'description' => '',
     'type' => 'game',
     'action' => 'stDrawCard',
-    'transitions' => ['endRound' => ST_END_ROUND, 'choice' => ST_DRAW_CHOICE],
+    'transitions' => ['endRound' => ST_END_TURN, 'choice' => ST_DRAW_CHOICE],
   ],
 
   ST_DRAW_CHOICE => [
@@ -146,15 +157,15 @@ $machinestates = [
     'type' => 'activeplayer',
     'args' => 'argsDrawChoice',
     'possibleactions' => ['actChooseCard'],
-    'transitions' => ['endRound' => ST_END_ROUND],
+    'transitions' => ['endRound' => ST_END_TURN],
   ],
 
-  ST_END_ROUND => [
-    'name' => 'endRound',
+  ST_END_TURN => [
+    'name' => 'endTurn',
     'description' => '',
     'descriptionmyturn' => '',
     'type' => 'game',
-    'action' => 'stEndRound',
+    'action' => 'stEndTurn',
     'transitions' => ['next' => ST_PREPARE_TURN],
   ],
 

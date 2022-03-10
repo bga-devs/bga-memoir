@@ -1,6 +1,7 @@
 <?php
 namespace M44\Models;
 use M44\Core\Globals;
+use M44\Core\Stats;
 use M44\Core\Notifications;
 use M44\Helpers\Utils;
 use M44\Managers\Cards;
@@ -82,6 +83,12 @@ class Team extends \M44\Helpers\DB_Model
     if ($medalsObtained == 0) {
       // No medal to add, abort
       return;
+    }
+
+    // Increase stats
+    $statName = 'incMedalRound' . Globals::getRound();
+    foreach ($this->getMembers() as $player) {
+      Stats::$statName($player, 1);
     }
 
     $medals = Medals::addEliminationMedals($this->id, $medalsObtained, $unit);

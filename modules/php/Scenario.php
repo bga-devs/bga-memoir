@@ -89,11 +89,12 @@ class Scenario extends \APP_DbObject
     // Initialize medals
     Medals::loadScenario($scenario, $rematch);
 
+    // TODO : send notifications
+
     // Activate player
     $infos = $scenario['game_info'];
     $startingTeam = $infos['side_' . \strtolower($infos['starting'])];
     Globals::setTeamTurn($startingTeam);
     Globals::setTurn(0);
-    Game::get()->gamestate->jumpToState(\ST_PREPARE_TURN);
   }
 }

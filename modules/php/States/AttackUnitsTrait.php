@@ -2,6 +2,7 @@
 namespace M44\States;
 
 use M44\Core\Globals;
+use M44\Core\Stats;
 use M44\Core\Notifications;
 use M44\Managers\Players;
 use M44\Managers\Teams;
@@ -111,7 +112,8 @@ trait AttackUnitsTrait
     $currentAttack = $stack[count($stack) - 1];
     $currentAttack['unit'] = $currentAttack['unitId'] == -1 ? null : Units::get($currentAttack['unitId']);
     $currentAttack['oppUnit'] = Units::get($currentAttack['oppUnitId']);
-    $currentAttack['card'] = Players::get($currentAttack['pId'])->getCardInPlay();
+    $currentAttack['player'] = Players::get($currentAttack['pId']);
+    $currentAttack['card'] = $currentAttack['player']->getCardInPlay();
     return $currentAttack;
   }
 
@@ -225,19 +227,30 @@ trait AttackUnitsTrait
       return false;
     }
 
-    $eliminated = $unit->takeDamage($hits);
+    // Take the hits
+    $realHits = $unit->takeDamage($hits);
+    // Increase the stats
+    $attacker = $this->getCurrentAttack()['player'];
+    $statName = 'inc' . $unit->getStatName() . 'FigRound' . Globals::getRound();
+    Stats::$statName($attacker, $realHits);
+
+    // Notify
     $player = $unit->getPlayer();
     Notifications::takeDamage($player, $unit, $hits, $cantRetreat);
-    if ($eliminated) {
+
+    // Check for elimination
+    if ($unit->isEliminated()) {
       Board::removeUnit($unit);
-      $player = Players::get($this->getCurrentAttack()['pId']);
-      $team = $player->getTeam();
+      $team = $attacker->getTeam();
       $team->addEliminationMedals($unit);
+
+      // Increse the stat
+      $statName = 'inc' . $unit->getStatName() . 'UnitRound' . Globals::getRound();
+      Stats::$statName($attacker, 1);
     }
 
-    return $eliminated;
+    return $unit->isEliminated();
   }
-
 
   /**
    * Remove Wire instead of attacking

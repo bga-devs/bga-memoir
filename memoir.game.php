@@ -34,6 +34,7 @@ require_once APP_GAMEMODULE_PATH . 'module/table/table.game.php';
 
 use M44\Core\Globals;
 use M44\Core\Preferences;
+use M44\Core\Stats;
 use M44\Managers\Cards;
 use M44\Managers\Players;
 use M44\Managers\Teams;
@@ -43,7 +44,8 @@ use M44\Scenario;
 class memoir extends Table
 {
   use M44\DebugTrait;
-  use M44\States\PrepareTurnTrait;
+  use M44\States\RoundTrait;
+  use M44\States\TurnTrait;
   use M44\States\PlayCardTrait;
   use M44\States\OrderUnitsTrait;
   use M44\States\MoveUnitsTrait;
@@ -63,6 +65,7 @@ class memoir extends Table
       'logging' => 10,
     ]);
     Board::init();
+    Stats::checkExistence();
   }
 
   public static function get()
@@ -87,11 +90,11 @@ class memoir extends Table
     $this->activeNextPlayer();
   }
 
-  public function stDummyState()
+  public function stLoadScenario()
   {
     $scenario = Globals::getScenarioId();
     Scenario::load($scenario);
-    Scenario::setup();
+    $this->gamestate->nextState();
   }
 
   /*

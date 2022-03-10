@@ -1,6 +1,7 @@
 <?php
 namespace M44;
 use M44\Core\Notifications;
+use M44\Core\Stats;
 
 class Dice
 {
@@ -19,8 +20,24 @@ class Dice
     // debug
     // $results = [DICE_FLAG, \DICE_FLAG, DICE_GRENADE, \DICE_FLAG];
 
-    // TODO keep track of stats to avoid player whining about life
     Notifications::rollDice($player, $nDice, $results, $cell);
-    return $aggregate ? array_count_values($results) : $results;
+
+    $aggregated = array_count_values($results);
+
+    // Increase corresponding stats
+    Stats::incDiceCount($player, $nDice);
+    $statNames = [
+      \DICE_INFANTRY => 'DiceInf',
+      \DICE_ARMOR => 'DiceArmor',
+      \DICE_FLAG => 'DiceFlag',
+      \DICE_STAR => 'DiceStar',
+      \DICE_GRENADE => 'DiceGrenade',
+    ];
+    foreach ($aggregated as $face => $amount) {
+      $statName = 'inc' . $statNames[$face];
+      Stats::$statName($player, $amount);
+    }
+
+    return $aggregate ? $aggregated : $results;
   }
 }

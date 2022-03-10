@@ -35,15 +35,9 @@ class SectionCard extends Card
     return $this->isCounterAttackMirror ? array_reverse($sections) : $sections;
   }
 
-  public function getArgsOrderUnits($pId = false)
+  public function getArgsOrderUnits()
   {
-    if ($pId == false) {
-      $player = $this->getPlayer();
-    } else {
-      // used for counter attack
-      $player = Players::get($pId);
-    }
-
+    $player = $this->getPlayer();
     $units = new Collection();
     $sectionId = $this->getExtraDatas('section');
     if ($this->isCounterAttackMirror) {

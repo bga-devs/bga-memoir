@@ -7,6 +7,7 @@ class Infantry extends AbstractUnit
   {
     parent::__construct($row);
     $this->type = INFANTRY;
+    $this->statName = 'Inf';
     $this->name = clienttranslate('Infantry');
     $this->maxUnits = 4;
     $this->movementRadius = 2;

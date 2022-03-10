@@ -84,10 +84,12 @@ class AirPower extends \M44\Models\Card
   public function areUnitsContiguous($unitIds)
   {
     $previousUnit = null;
-    foreach (Units::getMany($unitIds) as $unit) {
+    foreach ($unitIds as $unitId) {
+      $unit = Units::get($unitId);
       if ($previousUnit != null) {
         $pos1 = $unit->getPos();
         $pos2 = $previousUnit->getPos();
+        var_dump($pos1, $pos2);
         if (abs($pos1['x'] - $pos2['x']) + abs($pos1['y'] - $pos2['y']) > 2) {
           return false;
         }

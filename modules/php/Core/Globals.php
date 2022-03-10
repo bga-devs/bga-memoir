@@ -11,10 +11,14 @@ class Globals extends \M44\Helpers\DB_Manager
   protected static $initialized = false;
   protected static $variables = [
     'changeActivePlayer' => 'obj', // Used for the generic "changeActivePlayer" state
-    'mode' => 'int',
+
+    // Game options
+    'duration' => 'int', // 1 way, 2 ways
+    'mode' => 'int', // Standard, Breakthrough, Overlord
     'scenarioId' => 'int', // Used to store the scenario id
     'scenario' => 'obj', // Used to store the scenario
 
+    'round' => 'int',
     'turn' => 'int',
     'teamTurn' => 'str', // Store which team is currently playing
 
@@ -153,6 +157,7 @@ class Globals extends \M44\Helpers\DB_Manager
    */
   public static function setupNewGame($players, $options)
   {
+    Globals::setDuration($options[OPTION_DURATION]);
     Globals::setMode($options[OPTION_MODE]);
     Globals::setScenarioId($options[OPTION_MODE + $options[OPTION_MODE]]);
     Globals::setUnitMoved(-1);
@@ -173,5 +178,10 @@ class Globals extends \M44\Helpers\DB_Manager
   public static function isOverlord()
   {
     return Globals::getMode() == OPTION_MODE_OVERLORD;
+  }
+
+  public static function isTwoWaysGame()
+  {
+    return Globals::getDuration() == \OPTION_DURATION_TWO_WAYS;
   }
 }

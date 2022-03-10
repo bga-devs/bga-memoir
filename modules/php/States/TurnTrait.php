@@ -9,9 +9,9 @@ use M44\Managers\Units;
 use M44\Core\Notifications;
 use M44\Scenario;
 
-trait PrepareTurnTrait
+trait TurnTrait
 {
-  function stEndRound()
+  function stEndTurn()
   {
     // PEGASUS
     if (Scenario::getId() == 2 && Globals::getTurn() <= 4 && Globals::getTeamTurn() == AXIS) {

@@ -1,6 +1,7 @@
 <?php
 namespace M44\Managers;
 use M44\Core\Globals;
+use M44\Core\Stats;
 use M44\Models\Team;
 
 /**
@@ -55,10 +56,11 @@ class Teams extends \M44\Helpers\DB_Manager
     // Create teams
     $info = $scenario['game_info'];
     for ($i = 1; $i <= 2; $i++) {
-      $teamId = $rematch ? (2 - $i) : ($i - 1);
+      $teamId = $rematch ? 2 - $i : $i - 1;
+      $team = $info['side_player' . $i];
 
       self::DB()->insert([
-        'team' => $info['side_player' . $i],
+        'team' => $team,
         'country' => $info['country_player' . $i] ?? '',
         'cards' => $info['cards_player' . $i],
         'victory' => $info['victory_player' . $i],
@@ -70,7 +72,7 @@ class Teams extends \M44\Helpers\DB_Manager
 
       foreach ($composition[$teamId] as $pId) {
         if ($pId !== null) {
-          $players[$pId]->setTeam($info['side_player' . $i]);
+          $players[$pId]->setTeam($team);
         }
       }
     }
