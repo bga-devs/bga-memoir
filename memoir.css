@@ -833,6 +833,10 @@ html {
           background-position-x: 75%; }
         #m44-board .hex-cell-container .hex-cell.selectable.forRetreat {
           background-position-x: 50%; }
+      #m44-board .hex-cell-container .hex-cell.attacked {
+        background-image: url("img/hex_background_highlights.png");
+        background-size: 500% 100%;
+        background-position: 75% 0%; }
       #m44-board .hex-cell-container .hex-cell .dice-mini {
         position: absolute;
         display: block;
@@ -921,7 +925,7 @@ html {
     cursor: pointer; }
   .m44-unit.unselectable {
     cursor: default; }
-  .m44-unit.activated, .m44-unit.moving, .m44-unit.attacking, .m44-unit.retreating, .m44-unit.airPowerTarget {
+  .m44-unit.activated, .m44-unit.moving, .m44-unit.attacking, .m44-unit.retreating, .m44-unit.airPowerTarget, .m44-unit.attacked {
     background-image: url("img/hex_border_highlights.png");
     background-size: 400% 200%; }
   .m44-unit.activated {
@@ -934,9 +938,11 @@ html {
     background-position: 0% 100%; }
   .m44-unit.retreating {
     background-position: 66.666% 100%; }
-  .m44-unit.airPowerTarget {
+  .m44-unit.attacked {
     background-position: 100% 100%; }
-    .m44-unit.airPowerTarget::before {
+  .m44-unit.airPowerTarget  {
+    background-position: 100% 100%; }
+    .m44-unit.airPowerTarget ::before {
       content: attr(data-air-power-order);
       position: absolute;
       z-index: 2;

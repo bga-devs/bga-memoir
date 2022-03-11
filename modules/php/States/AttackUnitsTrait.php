@@ -8,6 +8,7 @@ use M44\Managers\Players;
 use M44\Managers\Teams;
 use M44\Managers\Units;
 use M44\Managers\Terrains;
+use M44\Managers\Cards;
 use M44\Helpers\Utils;
 use M44\Board;
 use M44\Dice;
@@ -107,14 +108,16 @@ trait AttackUnitsTrait
   /**
    * Get current Attack
    */
-  public function getCurrentAttack()
+  public function getCurrentAttack($fetchAdditionalInfos = true)
   {
     $stack = Globals::getAttackStack();
     $currentAttack = $stack[count($stack) - 1];
-    $currentAttack['unit'] = $currentAttack['unitId'] == -1 ? null : Units::get($currentAttack['unitId']);
-    $currentAttack['oppUnit'] = Units::get($currentAttack['oppUnitId']);
-    $currentAttack['player'] = Players::get($currentAttack['pId']);
-    $currentAttack['card'] = Cards::get($currentAttack['cardId']);
+    if($fetchAdditionalInfos){
+      $currentAttack['unit'] = $currentAttack['unitId'] == -1 ? null : Units::get($currentAttack['unitId']);
+      $currentAttack['oppUnit'] = Units::get($currentAttack['oppUnitId']);
+      $currentAttack['player'] = Players::get($currentAttack['pId']);
+      $currentAttack['card'] = Cards::get($currentAttack['cardId']);
+    }
     return $currentAttack;
   }
 

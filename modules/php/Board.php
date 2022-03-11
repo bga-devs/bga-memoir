@@ -180,6 +180,11 @@ class Board
     return self::cellHasProperty($cell, 'mustBeAdjacentToEnter', $unit);
   }
 
+  public static function mustStopWhenLeaving($unit, $cell)
+  {
+    return self::cellHasProperty($cell, 'mustStopWhenLeaving', $unit);
+  }
+
   // Useful for DigIn card
   public function canPlaceSandbag($unit)
   {
@@ -269,6 +274,12 @@ class Board
         return \INFINITY;
       }
     }
+
+    // If I'm coming from a 'must stop when leaving' terrain, consume all the moves
+    if (self::mustStopWhenLeaving($unit, $source)) {
+      return $d - $source['d'];
+    }
+
 
     return 1;
   }

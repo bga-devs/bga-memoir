@@ -21,7 +21,10 @@ trait AmbushTrait
         return $card->getType() == CARD_AMBUSH;
       })
       ->getIds();
-    return ['_private' => ['active' => ['cards' => $cards]]];
+    return [
+      'currentAttack' => $this->getCurrentAttack(false),
+      '_private' => ['active' => ['cards' => $cards]],
+    ];
   }
 
   function stAmbush()

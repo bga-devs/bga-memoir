@@ -61,7 +61,8 @@
   &.moving,
   &.attacking,
   &.retreating,
-  &.airPowerTarget {
+  &.airPowerTarget,
+  &.attacked {
     background-image: url('img/hex_border_highlights.png');
     background-size: 400% 200%;
   }
@@ -82,7 +83,10 @@
   &.retreating {
     background-position: 66.666% 100%;
   }
-  &.airPowerTarget {
+  &.attacked {
+    background-position: 100% 100%;
+  }
+  &.airPowerTarget {
     background-position: 100% 100%;
     &::before {
       content: attr(data-air-power-order);
@@ -135,7 +139,7 @@ $units: (
     ),
     $ARMOR: (
       'ger' 50% 1 1003.92% 92.5163% 33.3333% (23% -2%, 52% 14%, 4% 19%, 33% 33%),
-    )
+    ),
   ),
   $TOP: (
     $INFANTRY: (
@@ -144,10 +148,9 @@ $units: (
     ),
     $ARMOR: (
       'ger' 45% 1 1137.78% 54.9251% 62.9808% (23% -2%, 52% 14%, 4% 19%, 33% 33%),
-    )
+    ),
   ),
 );
-
 
 @each $orientation, $unitsData in $units {
   @each $type, $map in $unitsData {

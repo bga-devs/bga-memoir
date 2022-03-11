@@ -53,7 +53,7 @@ trait TakeGroundTrait
     // Move unit
     $unit = $attack['unit'];
     Notifications::takeGround($player, $attack['unitId'], $attack['x'], $attack['y']);
-    $interrupted = Board::moveUnit($unit, $c);
+    $interrupted = Board::moveUnit($unit, $attack);
     if ($interrupted) {
       return; // Victory or unit is dead
     }

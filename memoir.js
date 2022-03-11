@@ -112,6 +112,25 @@ define([
       dojo.empty('discard');
     },
 
+    onEnteringState(stateName, args) {
+      this.inherited(arguments);
+
+      // Highlight current attack
+      if (args.args && args.args.currentAttack) {
+        let attack = args.args.currentAttack;
+        if (attack.unitId) {
+          $(`unit-${attack.unitId}`).classList.add('attacking');
+        }
+
+        if (attack.oppUnitId) {
+          $(`unit-${attack.oppUnitId}`).classList.add('attacked');
+        } else {
+          // TODO : useless ?
+          $(`cell-${attack.x}-${attack.y}`).classList.add('attacked');
+        }
+      }
+    },
+
     notif_refreshInterface(n) {
       debug('Refreshing the interface', n);
       this.clearInterface();
@@ -128,7 +147,16 @@ define([
 
     clearPossible() {
       this.inherited(arguments);
-      ['moving', 'forMove', 'forMoveAndAttack', 'attacking', 'forAttack', 'retreating', 'forRetreat'].forEach((className) => {
+      [
+        'moving',
+        'forMove',
+        'forMoveAndAttack',
+        'attacking',
+        'forAttack',
+        'retreating',
+        'forRetreat',
+        'attacked',
+      ].forEach((className) => {
         this.removeClassNameOfCells(className);
       });
       $('m44-board').classList.remove('displayLineOfSight');

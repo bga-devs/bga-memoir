@@ -77,6 +77,7 @@ class Terrain extends \M44\Helpers\DB_Model
       return parent::__call($method, $args);
     }
 
+    $unit = $args[0];
     $defaultValue = in_array($method, ['offense', 'defense'])? null : false;
     return isset($this->$method)
       ? (is_array($this->$method)

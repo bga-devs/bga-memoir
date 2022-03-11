@@ -195,6 +195,12 @@
         }
       }
 
+      &.attacked {
+        background-image: url('img/hex_background_highlights.png');
+        background-size: 500% 100%;
+        background-position: 75% 0%;
+      }
+
       .dice-mini {
         position: absolute;
         display: block;
