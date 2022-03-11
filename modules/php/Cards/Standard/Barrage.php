@@ -49,6 +49,7 @@ class Barrage extends \M44\Models\Card
 
     $stack[] = [
       'pId' => $this->pId,
+      'cardId' => $this->getId(),
       'unitId' => -1,
       'x' => $unit->getX(),
       'y' => $unit->getY(),

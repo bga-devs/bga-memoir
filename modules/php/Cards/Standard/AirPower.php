@@ -66,6 +66,7 @@ class AirPower extends \M44\Models\Card
       $stack[] = [
         'pId' => $player->getId(),
         'unitId' => -1,
+        'cardId' => $this->getId(),
         'x' => $args['units'][$unitId]['x'],
         'y' => $args['units'][$unitId]['y'],
         'oppUnitId' => $unitId,

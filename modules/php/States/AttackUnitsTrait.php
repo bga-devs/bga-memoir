@@ -91,6 +91,7 @@ trait AttackUnitsTrait
     $stack[] = [
       'pId' => $player->getId(),
       'unitId' => $unitId,
+      'cardId' => $unit->getActivationCard(),
       'x' => $x,
       'y' => $y,
       'oppUnitId' => $oppUnit->getId(),
@@ -113,7 +114,7 @@ trait AttackUnitsTrait
     $currentAttack['unit'] = $currentAttack['unitId'] == -1 ? null : Units::get($currentAttack['unitId']);
     $currentAttack['oppUnit'] = Units::get($currentAttack['oppUnitId']);
     $currentAttack['player'] = Players::get($currentAttack['pId']);
-    $currentAttack['card'] = $currentAttack['player']->getCardInPlay();
+    $currentAttack['card'] = Cards::get($currentAttack['cardId']);
     return $currentAttack;
   }
 

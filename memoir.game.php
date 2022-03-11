@@ -127,13 +127,6 @@ class memoir extends Table
     Preferences::set($this->getCurrentPId(), $pref, $value);
   }
 
-  function test()
-  {
-    //    var_dump( dirname(__FILE__));
-    //    $f = file_get_contents(APP_GAMEMODULE_PATH . 'module/table/gamestate.game.php');
-    var_dump($f);
-  }
-
   function startGame($c)
   {
     Scenario::setup($c == 1, true);
