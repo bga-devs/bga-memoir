@@ -90,7 +90,7 @@ class Team extends \M44\Helpers\DB_Model
     // Increase stats
     $statName = 'incMedalRound' . Globals::getRound();
     foreach ($this->getMembers() as $player) {
-      Stats::$statName($player, 1);
+      Stats::$statName($player, $medalsObtained);
     }
 
     $medals = Medals::addEliminationMedals($this->id, $medalsObtained, $unit);

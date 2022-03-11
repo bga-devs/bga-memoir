@@ -112,7 +112,10 @@ trait RetreatUnitTrait
     $unit = Units::get($unitId);
     foreach ($path as $c) {
       Notifications::moveUnit($player, $unitId, $c['x'], $c['y']);
-      Board::moveUnit($unit, $c);
+      $interrupted = Board::moveUnit($unit, $c, true);
+      if($interrupted){
+        return; // Victory or unit is dead
+      }
     }
 
     // Update min/max depending on the number of retreat done already

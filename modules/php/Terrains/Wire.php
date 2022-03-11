@@ -18,9 +18,11 @@ class Wire extends \M44\Models\Obstacle
     parent::__construct($row);
   }
 
-  public function onUnitEntering($unit)
+  public function onUnitEntering($unit, $isRetreat)
   {
-    // TODO : armor remove them
+    if($unit->getType() == ARMOR && !$isRetreat){
+      // TODO : armor remove them but must stop
+    }
   }
 
   public function getPossibleAttackActions($unit)

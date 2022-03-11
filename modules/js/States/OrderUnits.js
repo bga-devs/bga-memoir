@@ -189,7 +189,6 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     },
 
     onEnteringStateAttackUnitsChooseTarget(args) {
-      this.addCancelStateBtn();
       $('unit-' + args.unitId).classList.add('attacking');
       args.cells.forEach((mixed) => {
         // Mixed can either be a cell or an action (eg removing wire)

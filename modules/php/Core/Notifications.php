@@ -272,7 +272,10 @@ class Notifications
 
   public static function winRound($team, $round)
   {
-    self::notifyAll('message', clienttranslate('${team} wins ${nb} round'), ['team' => $team->getId(), 'nb' => $round]);
+    self::notifyAll('message', clienttranslate('${team_name} wins ${nb} round'), [
+      'teamId' => $team->getId(),
+      'nb' => $round,
+    ]);
   }
 
   /*********************

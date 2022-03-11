@@ -24,7 +24,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       let board = this.gamedatas.board;
       let pId = this.isSpectator ? Object.values(this.gamedatas.players)[0] : this.player_id;
       let bottomTeam = this.gamedatas.players[pId].team;
-      let rotate = this.gamedatas.teams.find(team => team.team == bottomTeam).position == 1;
+      let rotate = this.gamedatas.teams.find((team) => team.team == bottomTeam).position == 1;
       this._isRotated = rotate;
 
       // Get dimensions based on type
@@ -346,6 +346,14 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         });
         fillings = t;
       });
+      // Keep only compatible fillings
+      let sections = this.getArgs().sections;
+      if (sections) {
+        fillings = fillings.filter(
+          (filling) => filling[0] <= sections[0] && filling[1] <= sections[1] && filling[2] <= sections[2],
+        );
+      }
+
       let minFilling = [10, 10, 10];
       fillings.forEach((filling) => {
         for (let i = 0; i < 3; i++) {
@@ -385,16 +393,23 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       dojo.empty(o);
 
       results.forEach((result, i) => {
+        let die = this.place('tplDice', { result, status : 'preAnimation' }, o);
         this.wait(i * 100).then(() => {
-          let die = this.place('tplDice', { result, animated: true }, o);
-          this.fadeOutAndDestroy(die, 800, 2000);
+          die.querySelector('.m44-dice-wrapper').classList.add('animated');
+          dojo.fadeOut({
+            node: die,
+            duration: 800,
+            delay: 2000,
+          }).play();
         });
       });
+
+      this.wait(results.length * 100 + 3000).then(() => dojo.empty(o));
     },
 
     tplDice(dice) {
       return `<div class='m44-dice-resizable'>
-        <div class="m44-dice-wrapper ${dice.animated ? 'animated' : ''}" data-result="${dice.result}">
+        <div class="m44-dice-wrapper ${dice.status}" data-result="${dice.result}">
           <div class="m44-dice-shadow"></div>
           <div class="m44-dice"></div>
         </div>

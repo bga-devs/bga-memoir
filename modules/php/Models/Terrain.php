@@ -138,11 +138,11 @@ class Terrain implements \JsonSerializable
     return is_array($this->offense) ? $this->offense[$unit->getType()] ?? null : $this->offense;
   }
 
-  public function onUnitLeaving($unit)
+  public function onUnitLeaving($unit, $isRetreat)
   {
   }
 
-  public function onUnitEntering($unit)
+  public function onUnitEntering($unit, $isRetreat)
   {
   }
 

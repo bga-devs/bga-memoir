@@ -38,6 +38,7 @@ const ST_OVERLORD_ATTACK = 43;
 
 const ST_CHANGE_ACTIVE_PLAYER = 95;
 
+const ST_END_OF_GAME = 98;
 const ST_END_GAME = 99;
 
 const AXIS = 'AXIS';

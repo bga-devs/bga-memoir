@@ -2,6 +2,7 @@
 namespace M44\States;
 
 use M44\Core\Globals;
+use M44\Core\Stats;
 use M44\Managers\Players;
 use M44\Managers\Teams;
 use M44\Managers\Cards;
@@ -16,8 +17,8 @@ trait RoundTrait
     $round = Globals::incRound();
     $maxRound = Globals::isTwoWaysGame() ? 2 : 1;
     if ($round > $maxRound) {
-      die('todo : launch EOG');
-      // TODO : end of game
+      $this->gamestate->jumpToState(\ST_END_OF_GAME);
+      return;
     }
 
     $rematch = $round == 2;
@@ -27,5 +28,26 @@ trait RoundTrait
     Globals::setLastPlayedCards([]);
     Globals::setAttackStack([]);
     $this->gamestate->jumpToState(\ST_PREPARE_TURN);
+  }
+
+  public function stEndOfGame()
+  {
+    $nRounds = Globals::isTwoWaysGame()? 2 : 1;
+
+    foreach (Players::getAll() as $player) {
+      $nWins = 0;
+      $nFigs = 0;
+      for($i = 1; $i <= $nRounds; $i++){
+        $nWins += $player->getStat('statusRound' . $i);
+        foreach(['inf', 'armor', 'artillery'] as $type){
+          $nFigs += $player->getStat($type . 'FigRound' . $i);
+        }
+      }
+
+      $player->setScore($nWins);
+      $player->setScoreAux($nFigs);
+    }
+
+    $this->gamestate->nextState('');
   }
 }

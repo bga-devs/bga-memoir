@@ -98,7 +98,7 @@ class Teams extends \M44\Helpers\DB_Manager
           $method = 'setStatusRound' . Globals::getRound();
           Stats::$method($member->getId(), 0);
           $method = 'setTeamRound' . Globals::getRound();
-          Stats::$method($member->getId(), $team->getId() == ALLIES ? 0 : 1);
+          Stats::$method($member->getId(), $team->getId() == ALLIES ? 1 : 0);
         }
 
         Notifications::winRound($team, Globals::getRound());

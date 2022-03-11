@@ -3,6 +3,7 @@ namespace M44\Models;
 use M44\Core\Globals;
 use M44\Core\Notifications;
 use M44\Core\Preferences;
+use M44\Core\Stats;
 use M44\Helpers\Utils;
 use M44\Managers\Cards;
 use M44\Managers\Players;
@@ -19,12 +20,13 @@ class Player extends \M44\Helpers\DB_Model
   protected $table = 'player';
   protected $primary = 'player_id';
   protected $attributes = [
-    'id' => 'player_id',
-    'no' => 'player_no',
+    'id' => ['player_id', 'int'],
+    'no' => ['player_no', 'int'],
     'name' => 'player_name',
     'color' => 'player_color',
     'eliminated' => 'player_eliminated',
-    'score' => 'player_score',
+    'score' => ['player_score', 'int'],
+    'scoreAux' => ['player_score_aux', 'int'],
     'zombie' => 'player_zombie',
     'team' => 'player_team',
   ];
@@ -35,6 +37,12 @@ class Player extends \M44\Helpers\DB_Model
   public function getPref($prefId)
   {
     return Preferences::get($this->id, $prefId);
+  }
+
+  public function getStat($name)
+  {
+    $name = 'get' . \ucfirst($name);
+    return Stats::$name($this->id);
   }
 
   public function jsonSerialize($currentPlayerId = null)
@@ -79,7 +87,6 @@ class Player extends \M44\Helpers\DB_Model
   {
     return Units::getOfTeam($this->team);
   }
-
 
   public function getUnitsInSection($section)
   {

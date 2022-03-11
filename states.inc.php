@@ -44,7 +44,6 @@ $machinestates = [
     'transitions' => ['' => ST_NEW_ROUND],
   ],
 
-
   ///////////////////////////////////////////////////////
   //   ____            _        _____ _
   //  | __ )  __ _ ___(_) ___  |  ___| | _____      __
@@ -401,6 +400,17 @@ $machinestates = [
     'descriptionmyturn' => '',
     'type' => 'game',
     'action' => 'stChangeActivePlayer',
+  ],
+
+  // Final state.
+  // Please do not modify (and do not overload action/args methods).
+  ST_END_OF_GAME => [
+    'name' => 'endOfGame',
+    'descriptionmyturn' => '',
+    'description' => '',
+    'type' => 'game',
+    'action' => 'stEndOfGame',
+    'transitions' => ['' => ST_END_GAME],
   ],
 
   // Final state.

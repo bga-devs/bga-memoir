@@ -49,6 +49,23 @@
         }
       }
     }
+
+    &.preAnimation {
+      .m44-dice {
+        background-position: 0% 0%;
+        transform: translateX(200%) translateY(-200%);
+      }
+
+      .m44-dice-shadow {
+        opacity: 0;
+      }
+    }
+
+    &.preAnimation.animated {
+      .m44-dice-shadow {
+        opacity: 1;
+      }
+    }
   }
 }
 

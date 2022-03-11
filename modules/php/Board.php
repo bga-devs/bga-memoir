@@ -72,20 +72,6 @@ class Board
     }
   }
 
-  public function refreshUnits()
-  {
-    foreach (self::$grid as $x => $col) {
-      foreach ($col as $y => $cell) {
-        self::$grid[$x][$y]['unit'] = null;
-      }
-    }
-    foreach (Units::getAllOrdered() as $unit) {
-      if ($unit->getNUnits() > 0) {
-        self::$grid[$unit->getX()][$unit->getY()]['unit'] = $unit;
-      }
-    }
-  }
-
   public function removeTerrain($terrain)
   {
     $x = $terrain->getX();
@@ -266,7 +252,7 @@ class Board
     return 1;
   }
 
-  public static function moveUnit($unit, $cell)
+  public static function moveUnit($unit, $cell, $isRetreat = false)
   {
     $pos = $unit->getPos();
     $unit->moveTo($cell);
@@ -277,10 +263,10 @@ class Board
     $sourceCell = self::$grid[$pos['x']][$pos['y']];
     $targetCell = self::$grid[$cell['x']][$cell['y']];
     foreach ($sourceCell['terrains'] as $terrain) {
-      $terrain->onUnitLeaving($unit);
+      $terrain->onUnitLeaving($unit, $isRetreat);
     }
     foreach ($targetCell['terrains'] as $terrain) {
-      $terrain->onUnitEntering($unit);
+      $terrain->onUnitEntering($unit, $isRetreat);
     }
 
     Medals::checkBoardMedals();
@@ -354,8 +340,8 @@ class Board
 
     // Keep only the cells in sight if unit need to see to shoot
     if ($unit->mustSeeToAttack()) {
-      Utils::filter($cells, function ($cell) use ($unit) {
-        return self::isInLineOfSight($unit, $cell);
+      Utils::filter($cells, function ($cell) use ($unit, $pos) {
+        return self::isInLineOfSight($unit, $cell, $pos);
       });
     }
 
@@ -403,9 +389,9 @@ class Board
   /**
    * Compute whether the unit can see the target cell or not
    */
-  public static function isInLineOfSight($unit, $target)
+  public static function isInLineOfSight($unit, $target, $source = null)
   {
-    $source = $unit->getPos();
+    $source = $source ?? $unit->getPos();
     $path = self::getCellsInLine($source, $target);
     $blockedLeft = false;
     $blockedRight = false;

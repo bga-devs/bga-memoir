@@ -17,7 +17,7 @@ class Sandbag extends \M44\Models\Obstacle
     parent::__construct($row);
   }
 
-  public function onUnitLeaving($unit)
+  public function onUnitLeaving($unit, $isRetreat)
   {
     $this->removeFromBoard();
   }

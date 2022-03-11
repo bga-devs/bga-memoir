@@ -122,12 +122,13 @@ define([
       this.gamedatas.teams = n.args.teams;
       this._deckCounter.setValue(n.args.deckCount);
 
+      this.setupTeams();
       this.setupBoard();
     },
 
     clearPossible() {
       this.inherited(arguments);
-      ['moving', 'forMove', 'attacking', 'forAttack', 'retreating', 'forRetreat'].forEach((className) => {
+      ['moving', 'forMove', 'forMoveAndAttack', 'attacking', 'forAttack', 'retreating', 'forRetreat'].forEach((className) => {
         this.removeClassNameOfCells(className);
       });
       $('m44-board').classList.remove('displayLineOfSight');

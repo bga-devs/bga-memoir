@@ -1660,6 +1660,13 @@ html {
     .m44-dice-resizable .m44-dice-wrapper[data-result='4'].animated .m44-dice {
       animation: rollDice_4 1s, rollDiceTrajectory 1s;
       animation-fill-mode: forwards; }
+    .m44-dice-resizable .m44-dice-wrapper.preAnimation .m44-dice {
+      background-position: 0% 0%;
+      transform: translateX(200%) translateY(-200%); }
+    .m44-dice-resizable .m44-dice-wrapper.preAnimation .m44-dice-shadow {
+      opacity: 0; }
+    .m44-dice-resizable .m44-dice-wrapper.preAnimation.animated .m44-dice-shadow {
+      opacity: 1; }
 
 span.m44-dice-result {
   display: inline-block;

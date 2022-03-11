@@ -52,11 +52,12 @@ trait TakeGroundTrait
     $attack = $this->getCurrentAttack();
     // Move unit
     $unit = $attack['unit'];
-    $unit->moveTo($attack);
-    Board::refreshUnits();
-    $unit->incGrounds(1);
     Notifications::takeGround($player, $attack['unitId'], $attack['x'], $attack['y']);
-
+    $interrupted = Board::moveUnit($unit, $c);
+    if ($interrupted) {
+      return; // Victory or unit is dead
+    }
+    $unit->incGrounds(1);
     $this->nextState('overrun');
   }
 
