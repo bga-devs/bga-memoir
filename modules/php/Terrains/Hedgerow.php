@@ -1,18 +1,19 @@
 <?php
 namespace M44\Terrains;
 
-class Forest extends \M44\Models\Terrain
+class Hedgerow extends \M44\Models\Terrain
 {
   public static function isTileOfType($hex)
   {
-    return in_array($hex['name'], ['woods', 'wforest']);
+    return in_array($hex['name'], ['hedgerow']);
   }
 
   public function __construct($row)
   {
-    $this->name = clienttranslate('Forests');
-    $this->number = 3;
+    $this->name = clienttranslate('Hedgerows');
+    $this->number = 4;
 
+    $this->mustBeAdjacentToEnter = true;
     $this->mustStopWhenEntering = true;
     $this->enteringCannotBattle = true;
     $this->isBlockingLineOfSight = true;

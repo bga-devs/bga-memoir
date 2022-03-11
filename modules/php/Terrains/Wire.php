@@ -12,7 +12,7 @@ class Wire extends \M44\Models\Obstacle
   {
     $this->name = clienttranslate('Wire');
     $this->number = 15;
-    $this->mustStop = true;
+    $this->mustStopWhenEntering = true;
     $this->offense = [INFANTRY => -1];
 
     parent::__construct($row);

@@ -18,6 +18,7 @@ class Terrains extends \M44\Helpers\Pieces
   protected static $autoreshuffle = false;
   protected static function cast($row)
   {
+    $row['tile_id'] = $row['id'];
     $locations = explode('_', $row['location']);
     $row['x'] = $locations[0];
     $row['y'] = $locations[1];

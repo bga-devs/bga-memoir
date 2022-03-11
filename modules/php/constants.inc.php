@@ -159,6 +159,7 @@ const DESERT_FACE = 'DESERT'; // TODO : check from editor
 const TERRAIN_CLASSES = [
   'forest' => 'Forest',
   'river' => 'River',
+  'hedgerow' => 'Hedgerow',
 
   'bridge' => 'Bridge',
 

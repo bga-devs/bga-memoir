@@ -156,18 +156,34 @@ class Board
     return false;
   }
 
+  /**
+   * Do a generic OR on a given property of all terrains on the cell
+   */
+  public static function cellHasProperty($cell, $property, $unit)
+  {
+    $t = self::$grid[$cell['x']][$cell['y']];
+    foreach ($t['terrains'] as $terrain) {
+      if ($terrain->$property($unit)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public static function mustStopWhenEntering($unit, $cell)
+  {
+    return self::cellHasProperty($cell, 'mustStopWhenEntering', $unit);
+  }
+
+  public static function mustBeAdjacentToEnter($unit, $cell)
+  {
+    return self::cellHasProperty($cell, 'mustBeAdjacentToEnter', $unit);
+  }
+
   // Useful for DigIn card
   public function canPlaceSandbag($unit)
   {
-    $cell = $unit->getPos();
-    $t = self::$grid[$cell['x']][$cell['y']];
-    foreach ($t['terrains'] as $terrain) {
-      if (!$terrain->canSandbagBePlaced($unit)) {
-        return false;
-      }
-    }
-
-    return true;
+    return self::cellHasProperty($unit->getPos(), 'isBlockingSandbag', $unit);
   }
 
   /////////////////////////////////
@@ -242,10 +258,15 @@ class Board
 
     // If I'm coming from a 'must stop' terrain, can't go there unless dist = 0
     if ($source['d'] > 0 || $unit->getMoves() > 0) {
-      foreach ($sourceCell['terrains'] as $terrain) {
-        if ($terrain->mustStopWhenEntering($unit)) {
-          return \INFINITY;
-        }
+      if (self::mustStopWhenEntering($unit, $source)) {
+        return \INFINITY;
+      }
+    }
+
+    // If I'm going to a 'must be adjacent' terrain, can't go there unless dist = 0
+    if ($source['d'] > 0 || $unit->getMoves() > 0) {
+      if (self::mustBeAdjacentToEnter($unit, $target)) {
+        return \INFINITY;
       }
     }
 
@@ -272,17 +293,6 @@ class Board
     Medals::checkBoardMedals();
     if (Teams::checkVictory()) {
       return true;
-    }
-    return false;
-  }
-
-  public static function mustStopWhenEntering($unit, $cell)
-  {
-    $t = self::$grid[$cell['x']][$cell['y']];
-    foreach ($t['terrains'] as $terrain) {
-      if ($terrain->mustStopWhenEntering($unit)) {
-        return true;
-      }
     }
     return false;
   }
@@ -319,7 +329,7 @@ class Board
     $pos = $cell ?? $unit->getPos();
     if ($m > 0) {
       foreach (self::getTerrainsInCell($pos) as $terrain) {
-        if ($terrain->cannotAttackWhenEntering($unit)) {
+        if ($terrain->enteringCannotBattle($unit)) {
           return [];
         }
       }
@@ -519,7 +529,7 @@ class Board
     $t = self::$grid[$cell['x']][$cell['y']];
     $m = null;
     foreach ($t['terrains'] as $t) {
-      $r = $forDefense ? $t->getDefense($unit) : $t->getOffense($unit);
+      $r = $forDefense ? $t->defense($unit) : $t->offense($unit);
       if (!is_null($r)) {
         $m = is_null($m) ? $r : min($m, $r);
       }
