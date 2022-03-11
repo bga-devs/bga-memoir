@@ -13,7 +13,7 @@ trait DebugTrait
   function load($scenario)
   {
     Scenario::load($scenario);
-    Scenario::setup();
+    Scenario::setup(false, true);
   }
 
   function vt()

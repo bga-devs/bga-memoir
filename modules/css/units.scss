@@ -133,14 +133,21 @@ $units: (
       'us' 50% 1.4063 1066.67% 0.107759% 0.265252% (24% 3%, 52% 14%, 2% 24%, 33% 35%),
       'ru' 50% 1.1698 966.038% 0.108932% 35.3093% (24% 3%, 52% 14%, 2% 24%, 33% 35%),
     ),
+    $ARMOR: (
+      'ger' 50% 1 1003.92% 92.5163% 33.3333% (23% -2%, 52% 14%, 4% 19%, 33% 33%),
+    )
   ),
   $TOP: (
     $INFANTRY: (
       'ger' 43% 1.4773 1163.64% 10.4701% 0.26178% (22% -2%, 50% 11%, 3% 18%, 32% 28%),
       'us' 50% 1.25 1066.67% 69.5043% 34.949% (22% 2%, 49% 17%, 7% 23%, 32% 34%),
     ),
+    $ARMOR: (
+      'ger' 45% 1 1137.78% 54.9251% 62.9808% (23% -2%, 52% 14%, 4% 19%, 33% 33%),
+    )
   ),
 );
+
 
 @each $orientation, $unitsData in $units {
   @each $type, $map in $unitsData {
@@ -215,18 +222,6 @@ $units: (
   height: 90px;
   background-position: 97.6872% 62.0853%;
   background-size: 882.759%;
-}
-.gertank_bottom {
-  width: 102px;
-  height: 101px;
-  background-position: 92.5163% 33.3333%;
-  background-size: 1003.92%;
-}
-.gertank_top {
-  width: 90px;
-  height: 96px;
-  background-position: 54.9251% 62.9808%;
-  background-size: 1137.78%;
 }
 .jpgun_bottom {
   width: 110px;

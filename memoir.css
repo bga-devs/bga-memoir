@@ -1022,6 +1022,26 @@ html {
     left: 33%;
     top: 35%; }
 
+.m44-unit[data-orientation='0'][data-type='2'][data-nation='ger'] .m44-unit-meeple {
+  width: 50%;
+  height: 50%;
+  background-size: 1003.92%;
+  background-position: 92.5163% 33.3333%;
+  background-color: transparent;
+  border-radius: none; }
+  .m44-unit[data-orientation='0'][data-type='2'][data-nation='ger'] .m44-unit-meeple:nth-of-type(1) {
+    left: 23%;
+    top: -2%; }
+  .m44-unit[data-orientation='0'][data-type='2'][data-nation='ger'] .m44-unit-meeple:nth-of-type(2) {
+    left: 52%;
+    top: 14%; }
+  .m44-unit[data-orientation='0'][data-type='2'][data-nation='ger'] .m44-unit-meeple:nth-of-type(3) {
+    left: 4%;
+    top: 19%; }
+  .m44-unit[data-orientation='0'][data-type='2'][data-nation='ger'] .m44-unit-meeple:nth-of-type(4) {
+    left: 33%;
+    top: 33%; }
+
 .m44-unit[data-orientation='1'][data-type='1'][data-nation='ger'] .m44-unit-meeple {
   width: 43%;
   height: 63.5239%;
@@ -1061,6 +1081,26 @@ html {
   .m44-unit[data-orientation='1'][data-type='1'][data-nation='us'] .m44-unit-meeple:nth-of-type(4) {
     left: 32%;
     top: 34%; }
+
+.m44-unit[data-orientation='1'][data-type='2'][data-nation='ger'] .m44-unit-meeple {
+  width: 45%;
+  height: 45%;
+  background-size: 1137.78%;
+  background-position: 54.9251% 62.9808%;
+  background-color: transparent;
+  border-radius: none; }
+  .m44-unit[data-orientation='1'][data-type='2'][data-nation='ger'] .m44-unit-meeple:nth-of-type(1) {
+    left: 23%;
+    top: -2%; }
+  .m44-unit[data-orientation='1'][data-type='2'][data-nation='ger'] .m44-unit-meeple:nth-of-type(2) {
+    left: 52%;
+    top: 14%; }
+  .m44-unit[data-orientation='1'][data-type='2'][data-nation='ger'] .m44-unit-meeple:nth-of-type(3) {
+    left: 4%;
+    top: 19%; }
+  .m44-unit[data-orientation='1'][data-type='2'][data-nation='ger'] .m44-unit-meeple:nth-of-type(4) {
+    left: 33%;
+    top: 33%; }
 
 .gbgun_bottom {
   width: 126px;
@@ -1109,18 +1149,6 @@ html {
   height: 90px;
   background-position: 97.6872% 62.0853%;
   background-size: 882.759%; }
-
-.gertank_bottom {
-  width: 102px;
-  height: 101px;
-  background-position: 92.5163% 33.3333%;
-  background-size: 1003.92%; }
-
-.gertank_top {
-  width: 90px;
-  height: 96px;
-  background-position: 54.9251% 62.9808%;
-  background-size: 1137.78%; }
 
 .jpgun_bottom {
   width: 110px;

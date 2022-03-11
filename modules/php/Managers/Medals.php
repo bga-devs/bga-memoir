@@ -62,6 +62,9 @@ class Medals extends \M44\Helpers\DB_Manager
     self::DB()
       ->delete()
       ->run();
+    self::DB('board_medals')
+      ->delete()
+      ->run();
 
     $board = $scenario['board'];
     $boardMedals = [];
@@ -92,9 +95,11 @@ class Medals extends \M44\Helpers\DB_Manager
       }
     }
 
-    self::DB('board_medals')
-      ->multipleInsert(['x', 'y', 'team', 'sprite', 'type', 'permanent', 'counts_for', 'nbr_hex', 'group'])
-      ->values($boardMedals);
+    if (!empty($boardMedals)) {
+      self::DB('board_medals')
+        ->multipleInsert(['x', 'y', 'team', 'sprite', 'type', 'permanent', 'counts_for', 'nbr_hex', 'group'])
+        ->values($boardMedals);
+    }
   }
 
   /******************************
