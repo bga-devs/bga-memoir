@@ -73,7 +73,7 @@ trait AmbushTrait
 
     // $hits = $ambushedUnit->getHits($results);
     $hits = $this->calculateHits($unit, $ambushedUnit, null, $results);
-    $eliminated = $this->damageUnit($ambushedUnit, $hits);
+    $eliminated = $this->damageUnit($ambushedUnit, $hits, false, true);
 
     if (Teams::checkVictory()) {
       return;
