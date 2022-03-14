@@ -27,6 +27,15 @@ trait RoundTrait
     Globals::setUnitAttacker(-1);
     Globals::setLastPlayedCards([]);
     Globals::setAttackStack([]);
+
+    // Check for options
+    $options = Scenario::getOptions();
+    if(isset($options['airdrop'])){
+      $team = Teams::get($options['airdrop']['side']);
+      $this->nextState('airdrop', $team->getCommander());
+      return;
+    }
+
     $this->gamestate->jumpToState(\ST_PREPARE_TURN);
   }
 

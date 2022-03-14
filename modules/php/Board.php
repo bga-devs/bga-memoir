@@ -173,6 +173,11 @@ class Board
     return false;
   }
 
+  public static function isImpassable($unit, $cell)
+  {
+    return self::cellHasProperty($cell, 'isImpassable', $unit);
+  }
+
   public static function mustStopWhenEntering($unit, $cell)
   {
     return self::cellHasProperty($cell, 'mustStopWhenEntering', $unit);
@@ -258,10 +263,8 @@ class Board
     }
 
     // If there is an impassable terrain => can't go there
-    foreach ($targetCell['terrains'] as $terrain) {
-      if ($terrain->isImpassable($unit)) {
-        return \INFINITY;
-      }
+    if (self::isImpassable($unit, $target)) {
+      return \INFINITY;
     }
 
     // Units activated by "BehindEnemyLines" card have no terrain restriction
@@ -669,10 +672,8 @@ class Board
       }
 
       // If there is an impassable terrain => can't retreat there
-      foreach ($targetCell['terrains'] as $terrain) {
-        if ($terrain->isImpassable($unit)) {
-          return \INFINITY;
-        }
+      if (self::isImpassable($unit, $target)) {
+        return \INFINITY;
       }
 
       // Ignore all other terrains restriction
@@ -705,6 +706,18 @@ class Board
     return $g;
   }
 
+  public static function getListOfCells()
+  {
+    $grid = self::createGrid(0);
+    $cells = [];
+    foreach ($grid as $x => $col) {
+      foreach ($col as $y => $t) {
+        $cells[] = ['x' => $x, 'y' => $y];
+      }
+    }
+    return $cells;
+  }
+
   protected function isValidCell($cell)
   {
     return isset(self::$grid[$cell['x']][$cell['y']]);
@@ -715,7 +728,7 @@ class Board
     return $cell1['x'] == $cell2['x'] && $cell1['y'] == $cell2['y'];
   }
 
-  protected function getNeighbours($cell)
+  protected function getNeighbours($cell, $onlyValidOnes = true)
   {
     $directions = [
       ['x' => -2, 'y' => 0],
@@ -850,5 +863,20 @@ class Board
     }
 
     return $marks;
+  }
+
+  /**
+   * Simulate $n steps of random walk from cell $pos
+   */
+  public static function randomWalk($pos, $n)
+  {
+    for ($j = 0; $j < $n; $j++) {
+      $neighbours = self::getNeighbours($pos, false);
+      $neighbours[] = $pos;
+      $key = array_rand($neighbours);
+      $pos = $neighbours[$key];
+    }
+
+    return self::isValidCell($pos)? $pos : null;
   }
 }

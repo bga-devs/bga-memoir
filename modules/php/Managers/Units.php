@@ -155,6 +155,23 @@ class Units extends \M44\Helpers\Pieces
       ->run();
   }
 
+  public function addInCell($unit, $cell)
+  {
+    $data = self::getTypeAndNation($unit);
+    $unit = self::getInstance($data['type'], $data['badge']);
+    $data['location'] = 'board';
+    $data['x'] = $cell['x'];
+    $data['y'] = $cell['y'];
+    $data['figures'] = $unit->getMaxUnits();
+    return self::singleCreate($data);
+  }
+
+  public function remove($unitId)
+  {
+    $unitId = is_int($unitId)? $unitId : $unitId->getId();
+    self::DB()->delete($unitId);
+  }
+
   ////////////////////////
   //////// Utils /////////
   ////////////////////////

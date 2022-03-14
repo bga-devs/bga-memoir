@@ -833,7 +833,7 @@ html {
           background-position-x: 75%; }
         #m44-board .hex-cell-container .hex-cell.selectable.forRetreat {
           background-position-x: 50%; }
-      #m44-board .hex-cell-container .hex-cell.attacked {
+      #m44-board .hex-cell-container .hex-cell.attacked, #m44-board .hex-cell-container .hex-cell.forAirDrop:hover {
         background-image: url("img/hex_background_highlights.png");
         background-size: 500% 100%;
         background-position: 75% 0%; }

@@ -41,6 +41,7 @@ define([
         'targetMedics',
         'targetAirPower',
         'targetBarrage',
+        'airDrop',
       ];
       this._notifications = [
         ['playCard', 1000],
@@ -61,6 +62,7 @@ define([
         ['scoreMedals', 1000],
         ['removeMedals', 1000],
         ['refreshInterface', 100],
+        ['airDrop', 500],
       ];
 
       // Fix mobile viewport (remove CSS zoom)

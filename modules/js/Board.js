@@ -377,6 +377,13 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       this.removeClassNameOfCells('onTheMove');
     },
 
+    notif_airDrop(n) {
+      debug('Notif: air dropping a unit', n);
+      let unit = n.args.unit;
+      unit.orientation = this._bottomTeam != (ALLIES_NATIONS.includes(unit.nation) ? 'ALLIES' : 'AXIS') ? 1 : 0;
+      this.place('tplUnit', unit, `cell-${unit.x}-${unit.y}`);
+    },
+
     ////////////////////////////
     //    ____  _
     //   |  _ \(_) ___ ___
@@ -393,14 +400,16 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       dojo.empty(o);
 
       results.forEach((result, i) => {
-        let die = this.place('tplDice', { result, status : 'preAnimation' }, o);
+        let die = this.place('tplDice', { result, status: 'preAnimation' }, o);
         this.wait(i * 100).then(() => {
           die.querySelector('.m44-dice-wrapper').classList.add('animated');
-          dojo.fadeOut({
-            node: die,
-            duration: 800,
-            delay: 2000,
-          }).play();
+          dojo
+            .fadeOut({
+              node: die,
+              duration: 800,
+              delay: 2000,
+            })
+            .play();
         });
       });
 

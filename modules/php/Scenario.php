@@ -44,6 +44,12 @@ class Scenario extends \APP_DbObject
     return is_null($scenario) ? null : $scenario['game_info']['side_player1'];
   }
 
+  public function getOptions()
+  {
+    $scenario = self::get();
+    return is_null($scenario) ? null : $scenario['game_info']['options'] ?? [];
+  }
+
   /**
    * Load a scenario from a file and store it into a global
    */

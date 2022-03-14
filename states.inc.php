@@ -41,7 +41,19 @@ $machinestates = [
     'type' => 'game',
     'action' => 'stNewRound',
     'possibleactions' => [],
-    'transitions' => ['' => ST_NEW_ROUND],
+    'transitions' => ['' => ST_NEW_ROUND, 'airdrop' => ST_AIR_DROP],
+  ],
+
+  ST_AIR_DROP => [
+    'name' => 'airDrop',
+    'description' => clienttranslate('${actplayer} must choose where to air drop ${nb} units'),
+    'descriptionmyturn' => clienttranslate('${you} must choose where to air drop ${nb} units'),
+    'type' => 'activeplayer',
+    'args' => 'argsAirDrop',
+    'possibleactions' => ['actAirDrop'],
+    'transitions' => [
+      '' => ST_PREPARE_TURN,
+    ],
   ],
 
   ///////////////////////////////////////////////////////

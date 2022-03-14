@@ -163,7 +163,7 @@ class Players extends \M44\Helpers\DB_Manager
       return [];
     } else {
       $pIds = array_keys(Game::get()->loadPlayersBasicInfos());
-      return [[$pIds[0], $pIds[0], $pIds[0], null], [$pIds[1], $pIds[1], $pIds[1], null]];
+      return [[$pIds[0], $pIds[0], $pIds[0], $pIds[0]], [$pIds[1], $pIds[1], $pIds[1], $pIds[1]]];
     }
   }
 }

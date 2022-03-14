@@ -56,7 +56,8 @@ class memoir extends Table
   use M44\States\RetreatUnitTrait;
   use M44\States\TakeGroundTrait;
   use M44\States\TacticCardTrait;
-
+  use M44\States\AirDropTrait;
+  
   public static $instance = null;
   function __construct()
   {

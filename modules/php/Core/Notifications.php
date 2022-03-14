@@ -197,23 +197,6 @@ class Notifications
     ]);
   }
 
-  /*
-  public static function discard($player, $cards, $used = true)
-  {
-    if ($used) {
-      $msg = clienttranslate('${player_name} discards used cards');
-    } else {
-      $msg = clienttranslate('${player_name} discards ${nb} cards');
-    }
-
-    self::notifyAll('discard', $msg, [
-      'player' => $player,
-      'nb' => count($cards),
-      'cards' => $cards,
-    ]);
-  }
-*/
-
   public static function clearUnitsStatus()
   {
     self::notifyAll('clearUnitsStatus', '', []);
@@ -277,6 +260,15 @@ class Notifications
       'nb' => $round,
     ]);
   }
+
+  public static function airDrop($player, $unit)
+  {
+    self::notifyAll('airDrop', \clienttranslate('${player_name} successfully air drops a unit at XX'), [
+      'player' => $player,
+      'unit' => $unit,
+    ]);
+  }
+
 
   /*********************
    **** UPDATE ARGS ****

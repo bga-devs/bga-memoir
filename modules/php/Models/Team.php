@@ -73,6 +73,11 @@ class Team extends \M44\Helpers\DB_Model
     return Players::get($this->$name);
   }
 
+  public function getCommander()
+  {
+    return Players::get($this->commanderPId);
+  }
+
   public function addEliminationMedals($unit)
   {
     $nMedals = $this->getMedals()->count();

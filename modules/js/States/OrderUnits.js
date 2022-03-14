@@ -411,5 +411,22 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         this.onClick(`unit-${unitId}`, () => this.takeAction('actTargetBarrage', { unitId })),
       );
     },
+
+    ///////////////////////////////////////////
+    //     _    _      ____
+    //    / \  (_)_ __|  _ \ _ __ ___  _ __
+    //   / _ \ | | '__| | | | '__/ _ \| '_ \
+    //  / ___ \| | |  | |_| | | | (_) | |_) |
+    // /_/   \_\_|_|  |____/|_|  \___/| .__/
+    //                                |_|
+    ///////////////////////////////////////////
+
+    onEnteringStateAirDrop(args) {
+      args.cells.forEach((cell) => {
+        let oCell = $(`cell-${cell.x}-${cell.y}`);
+        oCell.classList.add('forAirDrop');
+        this.onClick(oCell, () => this.takeAction('actAirDrop', { x: cell.x, y: cell.y }));
+      });
+    },
   });
 });
