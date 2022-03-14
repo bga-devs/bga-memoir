@@ -112,7 +112,7 @@ trait AttackUnitsTrait
   {
     $stack = Globals::getAttackStack();
     $currentAttack = $stack[count($stack) - 1];
-    if($fetchAdditionalInfos){
+    if ($fetchAdditionalInfos) {
       $currentAttack['unit'] = $currentAttack['unitId'] == -1 ? null : Units::get($currentAttack['unitId']);
       $currentAttack['oppUnit'] = Units::get($currentAttack['oppUnitId']);
       $currentAttack['player'] = Players::get($currentAttack['pId']);
@@ -168,6 +168,14 @@ trait AttackUnitsTrait
         $this->closeCurrentAttack();
         return;
       }
+    }
+
+    if ($unit->isEliminated()) {
+      Notifications::message(clienttranslate('${player_name} unit has been destroyed. Attack cannot take place'), [
+        'player' => $player,
+      ]);
+      $this->closeCurrentAttack();
+      return;
     }
 
     // Launch dice
@@ -226,7 +234,7 @@ trait AttackUnitsTrait
   /**
    * Damage a unit and return whether it's eliminated or not
    */
-  public function damageUnit($unit, $hits, $cantRetreat = false)
+  public function damageUnit($unit, $hits, $cantRetreat = false, $ambush = false)
   {
     if ($hits == 0) {
       Notifications::miss($unit);
@@ -236,7 +244,12 @@ trait AttackUnitsTrait
     // Take the hits
     $realHits = $unit->takeDamage($hits);
     // Increase the stats
-    $attacker = $this->getCurrentAttack()['player'];
+    if (!$ambush) {
+      $attacker = $this->getCurrentAttack()['player'];
+    } else {
+      $attacker = $this->getCurrentAttack()['oppUnit']->getPlayer();
+    }
+
     $statName = 'inc' . $unit->getStatName() . 'FigRound' . Globals::getRound();
     Stats::$statName($attacker, $realHits);
 

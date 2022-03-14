@@ -53,9 +53,11 @@ trait MoveUnitsTrait
     $this->gamestate->nextState('moveUnits');
   }
 
-  public function actMoveUnitsDone()
+  public function actMoveUnitsDone($check = true)
   {
-    self::checkAction('actMoveUnitsDone');
+    if ($check) {
+      self::checkAction('actMoveUnitsDone');
+    }
     $this->gamestate->nextState('attackUnits');
   }
 

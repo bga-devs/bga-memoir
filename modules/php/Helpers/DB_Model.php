@@ -92,13 +92,13 @@ abstract class DB_Model extends \APP_DbObject implements \JsonSerializable
         if (is_array($field)) {
           if ($field[1] == 'int') {
             $value = (int) $value;
-            if($value == $this->$name){
+            if ($value == $this->$name) {
               return; // No modification, abort DB call
             }
           }
           if ($field[1] == 'bool') {
             $value = (bool) $value;
-            if($value == $this->$name){
+            if ($value == $this->$name) {
               return; // No modification, abort DB call
             }
           }
@@ -153,7 +153,7 @@ abstract class DB_Model extends \APP_DbObject implements \JsonSerializable
   /**
    * Private DB call
    */
-  private function DB()
+  public function DB()
   {
     if (is_null($this->table)) {
       throw new \feException('You must specify the table you want to do the query on');

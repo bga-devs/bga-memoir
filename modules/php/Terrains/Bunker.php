@@ -1,5 +1,6 @@
 <?php
 namespace M44\Terrains;
+use M44\Board;
 
 class Bunker extends \M44\Models\RectTerrain
 {
@@ -17,7 +18,7 @@ class Bunker extends \M44\Models\RectTerrain
     $this->canIgnoreOneFlag = true;
     $this->defense = [\INFANTRY => -1, ARMOR => -2];
     $this->cantRetreat = [\ARTILLERY];
-    // TODO : infantry may move in and battle
+    $this->isBunker = true;
 
     parent::__construct($row);
   }

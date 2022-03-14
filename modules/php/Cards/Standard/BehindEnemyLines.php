@@ -62,8 +62,16 @@ class BehindEnemyLines extends \M44\Models\Card
   public function stMoveAgain()
   {
     $units = Units::getActivatedByCard($this);
+    $oneActive = false;
     foreach ($units as $unit) {
       $unit->setMoves(0);
+      if (!$unit->isEliminated()) {
+        $oneActive = true;
+      }
+    }
+
+    if (!$oneActive) {
+      $this->actMoveUnitsDone(false);
     }
   }
 }
