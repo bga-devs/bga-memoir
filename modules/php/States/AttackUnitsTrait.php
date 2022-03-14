@@ -112,7 +112,7 @@ trait AttackUnitsTrait
   {
     $stack = Globals::getAttackStack();
     $currentAttack = $stack[count($stack) - 1];
-    if($fetchAdditionalInfos){
+    if ($fetchAdditionalInfos) {
       $currentAttack['unit'] = $currentAttack['unitId'] == -1 ? null : Units::get($currentAttack['unitId']);
       $currentAttack['oppUnit'] = Units::get($currentAttack['oppUnitId']);
       $currentAttack['player'] = Players::get($currentAttack['pId']);
@@ -168,6 +168,14 @@ trait AttackUnitsTrait
         $this->closeCurrentAttack();
         return;
       }
+    }
+
+    if ($unit->isEliminated()) {
+      Notifications::message(clienttranslate('${player_name} unit has been destroyed. Attack cannot take place'), [
+        'player' => $player,
+      ]);
+      $this->closeCurrentAttack();
+      return;
     }
 
     // Launch dice
