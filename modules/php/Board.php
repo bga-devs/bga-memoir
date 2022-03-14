@@ -26,6 +26,7 @@ class Board
   ];
 
   protected static $grid = [];
+  protected static $hillComponents = null;
   public function init()
   {
     // Try to fetch scenario from DB
@@ -70,6 +71,8 @@ class Board
     foreach (Medals::getOnBoard() as $medal) {
       self::$grid[$medal['x']][$medal['y']]['medals'][] = $medal;
     }
+
+    self::$hillComponents = null;
   }
 
   public function removeTerrain($terrain)
@@ -185,6 +188,11 @@ class Board
     return self::cellHasProperty($cell, 'mustStopWhenLeaving', $unit);
   }
 
+  public static function isHill($cell)
+  {
+    return self::cellHasProperty($cell, 'isHill', null);
+  }
+
   // Useful for DigIn card
   public function canPlaceSandbag($unit)
   {
@@ -279,7 +287,6 @@ class Board
     if (self::mustStopWhenLeaving($unit, $source)) {
       return $d - $source['d'];
     }
-
 
     return 1;
   }
@@ -423,7 +430,7 @@ class Board
       }
 
       // If the cell is not blocking the line of sight, skip to the next one
-      if (!self::isBlockingLineOfSight($unit, $cell)) {
+      if (!self::isBlockingLineOfSight($unit, $cell, $path)) {
         continue;
       }
 
@@ -445,7 +452,7 @@ class Board
   /**
    * Return whether a given cell is blocking line of sight considering what is on the cell (terrains, units, ...)
    */
-  public static function isBlockingLineOfSight($unit, $cell)
+  public static function isBlockingLineOfSight($unit, $cell, $path)
   {
     $t = self::$grid[$cell['x']][$cell['y']];
     if (!is_null($t['unit']) && $t['unit']->getId() != $unit->getId()) {
@@ -453,7 +460,7 @@ class Board
     }
 
     foreach ($t['terrains'] as $t) {
-      if ($t->isBlockingLineOfSight($unit)) {
+      if ($t->isBlockingLineOfSight($unit, $path)) {
         return true;
       }
     }
@@ -547,6 +554,25 @@ class Board
     }
 
     return $m ?? 0;
+  }
+
+  /**
+   * Compute the hills components
+   */
+  public static function getHillComponents()
+  {
+    if (self::$hillComponents == null) {
+      $hills = self::createGrid(false);
+      foreach ($hills as $x => $col) {
+        foreach ($col as $y => $node) {
+          $hills[$x][$y] = self::isHill(['x' => $x, 'y' => $y]);
+        }
+      }
+
+      self::$hillComponents = self::computeConnectedComponents($hills);
+    }
+
+    return self::$hillComponents;
   }
 
   /////////////////////////////////////////////
@@ -782,5 +808,47 @@ class Board
     }
 
     return [$cells, $markers];
+  }
+
+  /**
+   * computeConnectedComponents :
+   *  given a bool 2d array for the cells, compute the connected components by assigning each cell a number corresponding to the component
+   */
+  protected static function computeConnectedComponents($nodes)
+  {
+    $marks = self::createGrid(0);
+    $iComponent = 1;
+    foreach ($nodes as $x => $col) {
+      foreach ($col as $y => $node) {
+        if (!$node || $marks[$x][$y] != 0) {
+          continue;
+        }
+
+        // If it's a real node and not studied yet => run a DFS on it
+        $queue = new \SplQueue();
+        $queue->enqueue(['x' => $x, 'y' => $y]);
+
+        while (!$queue->isEmpty()) {
+          $cell = $queue->dequeue();
+          if ($marks[$cell['x']][$cell['y']] != 0) {
+            continue;
+          }
+
+          // Mark the component
+          $marks[$cell['x']][$cell['y']] = $iComponent;
+          // Look at neighbours
+          $neighbours = self::getNeighbours($cell);
+          foreach ($neighbours as $nextCell) {
+            if ($nodes[$nextCell['x']][$nextCell['y']]) {
+              $queue->enqueue($nextCell);
+            }
+          }
+        }
+
+        $iComponent++;
+      }
+    }
+
+    return $marks;
   }
 }

@@ -161,6 +161,7 @@ const TERRAIN_CLASSES = [
   'river' => 'River',
   'hedgerow' => 'Hedgerow',
   'village' => 'Village',
+  'hill' => 'Hill',
 
   'bridge' => 'Bridge',
 

@@ -44,6 +44,8 @@ class Terrain extends \M44\Helpers\DB_Model
     'mustStopWhenLeaving',
     'isBlockingSandbag',
 
+    'isHill',
+    
     'defense',
     'offense',
   ];

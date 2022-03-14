@@ -32,4 +32,10 @@ trait DebugTrait
     ]);
     $this->changeActivePlayerAndJumpTo((int) $pId, \ST_RETREAT);
   }
+
+  function test()
+  {
+    $hillComponents = Board::getHillComponents();
+    var_dump($hillComponents);
+  }
 }

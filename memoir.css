@@ -1048,6 +1048,40 @@ html {
     left: 33%;
     top: 33%; }
 
+.m44-unit[data-orientation='0'][data-type='2'][data-nation='us'] .m44-unit-meeple {
+  width: 50%;
+  height: 55.115%;
+  background-size: 1163.64%;
+  background-position: 45.2991% 63.1325%;
+  background-color: transparent;
+  border-radius: none; }
+  .m44-unit[data-orientation='0'][data-type='2'][data-nation='us'] .m44-unit-meeple:nth-of-type(1) {
+    left: 14%;
+    top: -5%; }
+  .m44-unit[data-orientation='0'][data-type='2'][data-nation='us'] .m44-unit-meeple:nth-of-type(2) {
+    left: 49%;
+    top: 11%; }
+  .m44-unit[data-orientation='0'][data-type='2'][data-nation='us'] .m44-unit-meeple:nth-of-type(3) {
+    left: 3%;
+    top: 38%; }
+  .m44-unit[data-orientation='0'][data-type='2'][data-nation='us'] .m44-unit-meeple:nth-of-type(4) {
+    left: 33%;
+    top: 33%; }
+
+.m44-unit[data-orientation='0'][data-type='3'][data-nation='ger'] .m44-unit-meeple {
+  width: 50%;
+  height: 58.18%;
+  background-size: 930.909%;
+  background-position: 20.4595% 0.260417%;
+  background-color: transparent;
+  border-radius: none; }
+  .m44-unit[data-orientation='0'][data-type='3'][data-nation='ger'] .m44-unit-meeple:nth-of-type(1) {
+    left: 23%;
+    top: -2%; }
+  .m44-unit[data-orientation='0'][data-type='3'][data-nation='ger'] .m44-unit-meeple:nth-of-type(2) {
+    left: 52%;
+    top: 14%; }
+
 .m44-unit[data-orientation='1'][data-type='1'][data-nation='ger'] .m44-unit-meeple {
   width: 43%;
   height: 63.5239%;
@@ -1108,6 +1142,40 @@ html {
     left: 33%;
     top: 33%; }
 
+.m44-unit[data-orientation='1'][data-type='2'][data-nation='us'] .m44-unit-meeple {
+  width: 50%;
+  height: 51.785%;
+  background-size: 1177.01%;
+  background-position: 13.0203% 85.0467%;
+  background-color: transparent;
+  border-radius: none; }
+  .m44-unit[data-orientation='1'][data-type='2'][data-nation='us'] .m44-unit-meeple:nth-of-type(1) {
+    left: 23%;
+    top: -2%; }
+  .m44-unit[data-orientation='1'][data-type='2'][data-nation='us'] .m44-unit-meeple:nth-of-type(2) {
+    left: 52%;
+    top: 14%; }
+  .m44-unit[data-orientation='1'][data-type='2'][data-nation='us'] .m44-unit-meeple:nth-of-type(3) {
+    left: 4%;
+    top: 19%; }
+  .m44-unit[data-orientation='1'][data-type='2'][data-nation='us'] .m44-unit-meeple:nth-of-type(4) {
+    left: 33%;
+    top: 33%; }
+
+.m44-unit[data-orientation='1'][data-type='3'][data-nation='ger'] .m44-unit-meeple {
+  width: 70%;
+  height: 54.313%;
+  background-size: 882.759%;
+  background-position: 97.6872% 62.0853%;
+  background-color: transparent;
+  border-radius: none; }
+  .m44-unit[data-orientation='1'][data-type='3'][data-nation='ger'] .m44-unit-meeple:nth-of-type(1) {
+    left: -4%;
+    top: 12%; }
+  .m44-unit[data-orientation='1'][data-type='3'][data-nation='ger'] .m44-unit-meeple:nth-of-type(2) {
+    left: 26%;
+    top: 44%; }
+
 .gbgun_bottom {
   width: 126px;
   height: 126px;
@@ -1143,18 +1211,6 @@ html {
   height: 90px;
   background-position: 85.1453% 62.0853%;
   background-size: 1077.89%; }
-
-.gergun_bottom {
-  width: 110px;
-  height: 128px;
-  background-position: 20.4595% 0.260417%;
-  background-size: 930.909%; }
-
-.gergun_top {
-  width: 116px;
-  height: 90px;
-  background-position: 97.6872% 62.0853%;
-  background-size: 882.759%; }
 
 .jpgun_bottom {
   width: 110px;
@@ -1233,18 +1289,6 @@ html {
   height: 86px;
   background-position: 0.110619% 85.446%;
   background-size: 853.333%; }
-
-.ustank_bottom {
-  width: 88px;
-  height: 97px;
-  background-position: 45.2991% 63.1325%;
-  background-size: 1163.64%; }
-
-.ustank_top {
-  width: 87px;
-  height: 84px;
-  background-position: 13.0203% 85.0467%;
-  background-size: 1177.01%; }
 
 :root {
   --memoirCardScale: 0.9; }

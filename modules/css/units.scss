@@ -86,7 +86,7 @@
   &.attacked {
     background-position: 100% 100%;
   }
-  &.airPowerTarget {
+  &.airPowerTarget  {
     background-position: 100% 100%;
     &::before {
       content: attr(data-air-power-order);
@@ -139,6 +139,10 @@ $units: (
     ),
     $ARMOR: (
       'ger' 50% 1 1003.92% 92.5163% 33.3333% (23% -2%, 52% 14%, 4% 19%, 33% 33%),
+      'us' 50% 1.1023 1163.64% 45.2991% 63.1325% (14% -5%, 49% 11%, 3% 38%, 33% 33%),
+    ),
+    $ARTILLERY: (
+      'ger' 50% 1.1636 930.909% 20.4595% 0.260417% (23% -2%, 52% 14%),
     ),
   ),
   $TOP: (
@@ -148,6 +152,10 @@ $units: (
     ),
     $ARMOR: (
       'ger' 45% 1 1137.78% 54.9251% 62.9808% (23% -2%, 52% 14%, 4% 19%, 33% 33%),
+      'us' 50% 1.0357 1177.01% 13.0203% 85.0467% (23% -2%, 52% 14%, 4% 19%, 33% 33%),
+    ),
+    $ARTILLERY: (
+      'ger' 70% 0.7759 882.759% 97.6872% 62.0853% (-4% 12%, 26% 44%),
     ),
   ),
 );
@@ -213,18 +221,6 @@ $units: (
   height: 90px;
   background-position: 85.1453% 62.0853%;
   background-size: 1077.89%;
-}
-.gergun_bottom {
-  width: 110px;
-  height: 128px;
-  background-position: 20.4595% 0.260417%;
-  background-size: 930.909%;
-}
-.gergun_top {
-  width: 116px;
-  height: 90px;
-  background-position: 97.6872% 62.0853%;
-  background-size: 882.759%;
 }
 .jpgun_bottom {
   width: 110px;
@@ -303,16 +299,4 @@ $units: (
   height: 86px;
   background-position: 0.110619% 85.446%;
   background-size: 853.333%;
-}
-.ustank_bottom {
-  width: 88px;
-  height: 97px;
-  background-position: 45.2991% 63.1325%;
-  background-size: 1163.64%;
-}
-.ustank_top {
-  width: 87px;
-  height: 84px;
-  background-position: 13.0203% 85.0467%;
-  background-size: 1177.01%;
 }

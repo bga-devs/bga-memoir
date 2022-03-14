@@ -75,7 +75,7 @@ class Medals extends \M44\Helpers\DB_Manager
           $team = in_array($tag['name'], ['medal1', 'medal4', 'medal6']) ? ALLIES : AXIS;
           $permanent = $tag['medal']['permanent'] ?? false;
           $hexes = [['x' => $hex['col'], 'y' => $hex['row']]];
-          if (isset($tag['group'])) {
+          if (isset($tag['group']) && !empty($tag['group'])) {
             // TODO : handle group fields
             die('todo: handle group hexes');
           }
