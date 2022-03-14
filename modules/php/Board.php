@@ -193,6 +193,11 @@ class Board
     return self::cellHasProperty($cell, 'mustStopWhenLeaving', $unit);
   }
 
+  public static function cantRetreat($unit, $cell)
+  {
+    return self::cellHasProperty($cell, 'cantRetreat', $unit);
+  }
+
   public static function isHill($cell)
   {
     return self::cellHasProperty($cell, 'isHill', null);
@@ -654,6 +659,11 @@ class Board
    */
   public static function getReachableCellsForRetreat($unit, $d)
   {
+    // If the terrain is preventing retreat, return empty list
+    if (self::cantRetreat($unit, $unit->getPos())) {
+      return [];
+    }
+
     // Compute all cells reachable at distance $d in the good vertical direction
     $deltaY = $unit->getCampDirection();
     list($cells, $markers) = self::getCellsAtDistance($unit->getPos(), $d, function ($source, $target, $d) use (
@@ -877,6 +887,6 @@ class Board
       $pos = $neighbours[$key];
     }
 
-    return self::isValidCell($pos)? $pos : null;
+    return self::isValidCell($pos) ? $pos : null;
   }
 }

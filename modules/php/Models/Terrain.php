@@ -29,7 +29,6 @@ class Terrain extends \M44\Helpers\DB_Model
   protected $type = null;
   protected $name = '';
 
-
   /*
    * TERRAIN PROPERTIES
    */
@@ -43,13 +42,13 @@ class Terrain extends \M44\Helpers\DB_Model
     'isBlockingLineOfSight',
     'mustStopWhenLeaving',
     'isBlockingSandbag',
+    'cantRetreat',
 
     'isHill',
-    
+
     'defense',
     'offense',
   ];
-
 
   public function __construct($row)
   {
@@ -80,10 +79,13 @@ class Terrain extends \M44\Helpers\DB_Model
     }
 
     $unit = $args[0];
-    $defaultValue = in_array($method, ['offense', 'defense'])? null : false;
+    $isBoolean = !in_array($method, ['offense', 'defense']);
+    $defaultValue = $isBoolean ? false : null;
     return isset($this->$method)
       ? (is_array($this->$method)
-        ? $this->$method[$unit->getType()] ?? $defaultValue
+        ? ($isBoolean
+          ? in_array($unit->getType(), $this->$method)
+          : $this->$method[$unit->getType()] ?? $defaultValue)
         : $this->$method)
       : $defaultValue;
   }
