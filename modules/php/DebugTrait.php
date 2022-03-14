@@ -20,7 +20,10 @@ trait DebugTrait
   {
     // $this->actChooseCard([35]);
     // throw new \feException(print_r(Cards::getInPlayOfAll()));
-    $this->actTargetAirPower([5, 4]);
+    // $this->actTargetAirPower([5, 4]);
+    foreach (Board::getTerrainsInCell(['x' => 5, 'y' => 3]) as $terrain) {
+      $terrain->setExtraDatas('truc', 'tot');
+    }
   }
 
   function tp($pId, $unitId, $min, $max)

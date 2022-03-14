@@ -141,6 +141,14 @@ class Units extends \M44\Helpers\Pieces
         $data['location'] = 'board';
         $data['x'] = $hex['col'];
         $data['y'] = $hex['row'];
+
+        foreach (Board::getTerrainsInCell($data) as $terrain) {
+          if ($terrain->isBunker($data)) {
+            // throw new \feException('titi');
+            $terrain->setExtraDatas('owner', $data['nation']);
+          }
+        }
+
         $units[] = $data;
       }
     }
@@ -168,7 +176,7 @@ class Units extends \M44\Helpers\Pieces
 
   public function remove($unitId)
   {
-    $unitId = is_int($unitId)? $unitId : $unitId->getId();
+    $unitId = is_int($unitId) ? $unitId : $unitId->getId();
     self::DB()->delete($unitId);
   }
 

@@ -11,7 +11,7 @@ class Terrain extends \M44\Helpers\DB_Model
     'x' => ['x', 'int'],
     'y' => ['y', 'int'],
     'orientation' => ['orientation', 'int'],
-    'datas' => ['extra_datas', 'obj'],
+    'extraDatas' => ['extra_datas', 'obj'],
   ];
 
   protected $id = null;
@@ -19,7 +19,7 @@ class Terrain extends \M44\Helpers\DB_Model
   protected $y = null;
   protected $tile = null;
   protected $orientation = null;
-  protected $datas = [];
+  protected $extraDatas = [];
 
   /*
    * STATIC INFORMATIONS
@@ -28,7 +28,6 @@ class Terrain extends \M44\Helpers\DB_Model
   protected $number = null;
   protected $type = null;
   protected $name = '';
-
 
   /*
    * TERRAIN PROPERTIES
@@ -45,11 +44,11 @@ class Terrain extends \M44\Helpers\DB_Model
     'isBlockingSandbag',
 
     'isHill',
-    
+    'isBunker',
+
     'defense',
     'offense',
   ];
-
 
   public function __construct($row)
   {
@@ -70,6 +69,7 @@ class Terrain extends \M44\Helpers\DB_Model
       'number' => $this->number,
       'tile' => $this->tile,
       'name' => $this->name,
+      'datas' => $this->extraDatas,
     ];
   }
 
@@ -80,7 +80,7 @@ class Terrain extends \M44\Helpers\DB_Model
     }
 
     $unit = $args[0];
-    $defaultValue = in_array($method, ['offense', 'defense'])? null : false;
+    $defaultValue = in_array($method, ['offense', 'defense']) ? null : false;
     return isset($this->$method)
       ? (is_array($this->$method)
         ? $this->$method[$unit->getType()] ?? $defaultValue
@@ -103,5 +103,16 @@ class Terrain extends \M44\Helpers\DB_Model
   public function getPossibleAttackActions($unit)
   {
     return [];
+  }
+
+  public function getExtraDatas($variable)
+  {
+    return $this->extraDatas[$variable] ?? null;
+  }
+
+  public function setExtraDatas($variable, $value)
+  {
+    $this->extraDatas[$variable] = $value;
+    self::DB()->update(['extra_datas' => \addslashes(\json_encode($this->extraDatas))], $this->id);
   }
 }
