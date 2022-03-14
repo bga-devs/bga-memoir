@@ -88,6 +88,7 @@ class Scenario extends \APP_DbObject
 
     // Create Terrains tiles
     Terrains::loadScenario($scenario);
+    Board::init();
 
     // Create Units
     Units::loadScenario($scenario);

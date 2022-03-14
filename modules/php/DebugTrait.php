@@ -22,7 +22,10 @@ trait DebugTrait
     // throw new \feException(print_r(Cards::getInPlayOfAll()));
     // $this->actTargetAirPower([5, 4]);
     foreach (Board::getTerrainsInCell(['x' => 5, 'y' => 3]) as $terrain) {
-      $terrain->setExtraDatas('truc', 'tot');
+      if ($terrain->isBunker(['x' => 5, 'y' => 3])) {
+        $terrain->setExtraDatas('zut', 'mahcin');
+        $terrain->setExtraDatas('truc', 'mm');
+      }
     }
   }
 

@@ -120,7 +120,7 @@ abstract class DB_Model extends \APP_DbObject implements \JsonSerializable
           $updateValue = json_encode($updateValue);
         }
         if ($value != null) {
-          $updateValue = \addslashes($value);
+          $updateValue = \addslashes($updateValue);
         }
 
         // $this->DB()->update([$this->attributes[$name] => \addslashes($value)], $this->getPrimaryFieldValue());
@@ -153,7 +153,7 @@ abstract class DB_Model extends \APP_DbObject implements \JsonSerializable
   /**
    * Private DB call
    */
-  public function DB()
+  private function DB()
   {
     if (is_null($this->table)) {
       throw new \feException('You must specify the table you want to do the query on');

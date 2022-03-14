@@ -144,7 +144,6 @@ class Units extends \M44\Helpers\Pieces
 
         foreach (Board::getTerrainsInCell($data) as $terrain) {
           if ($terrain->isBunker($data)) {
-            // throw new \feException('titi');
             $terrain->setExtraDatas('owner', $data['nation']);
           }
         }
