@@ -20,5 +20,6 @@ $scenariosMap = [
   4 => '4-SwordBeach',
   5 => '5-MontMouchet',
   7 => '7-PointeduHoc',
+	1096 => '1096-HillsExamplesOfLineOfSight',
   23806 => '23806-GermanCounterattackAtChaumont',
 ];

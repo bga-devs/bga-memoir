@@ -433,7 +433,7 @@ class Board
       }
 
       // If the cell is not blocking the line of sight, skip to the next one
-      if (!self::isBlockingLineOfSight($unit, $cell, $path)) {
+      if (!self::isBlockingLineOfSight($unit, $target, $cell, $path)) {
         continue;
       }
 
@@ -455,7 +455,7 @@ class Board
   /**
    * Return whether a given cell is blocking line of sight considering what is on the cell (terrains, units, ...)
    */
-  public static function isBlockingLineOfSight($unit, $cell, $path)
+  public static function isBlockingLineOfSight($unit, $target, $cell, $path)
   {
     $t = self::$grid[$cell['x']][$cell['y']];
     if (!is_null($t['unit']) && $t['unit']->getId() != $unit->getId()) {
@@ -463,7 +463,7 @@ class Board
     }
 
     foreach ($t['terrains'] as $t) {
-      if ($t->isBlockingLineOfSight($unit, $path)) {
+      if ($t->isBlockingLineOfSight($unit, $target, $path)) {
         return true;
       }
     }

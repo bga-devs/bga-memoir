@@ -18,10 +18,12 @@ class Hill extends \M44\Models\Terrain
     parent::__construct($row);
   }
 
-  public function isBlockingLineOfSight($unit, $path)
+  public function isBlockingLineOfSight($unit, $target, $path)
   {
-    $hillComponents = Board::getHillComponents();
-    return $hillComponents[$this->x][$this->y] != $hillComponents[$unit->getX()][$unit->getY()];
+    $c = Board::getHillComponents();
+    $s = $unit->getPos();
+    $t = $target;
+    return $c[$this->x][$this->y] != $c[$s['x']][$s['y']] || $c[$this->x][$this->y] != $c[$t['x']][$t['y']];
   }
 
   public function defense($unit)
