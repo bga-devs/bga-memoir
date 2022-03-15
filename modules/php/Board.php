@@ -203,6 +203,11 @@ class Board
     return self::cellHasProperty($cell, 'isHill', null);
   }
 
+  public static function isOcean($cell)
+  {
+    return self::cellHasProperty($cell, 'isOcean', null);
+  }
+
   // Useful for DigIn card
   public function canPlaceSandbag($unit)
   {
@@ -230,6 +235,7 @@ class Board
     if ($unit->getActivationOCard()->getType() == \CARD_BEHIND_LINES) {
       $maxDistance = 3; // Units activated by "BehindEnemyLines" can moves up to 3 hexes
     }
+
     $m = $maxDistance - $unit->getMoves();
     return self::getReachableCellsAtDistance($unit, $m);
   }
@@ -275,6 +281,13 @@ class Board
     // Units activated by "BehindEnemyLines" card have no terrain restriction
     if ($unit->getActivationOCard()->getType() == \CARD_BEHIND_LINES) {
       return 1;
+    }
+
+    // If I am coming from Ocean and have already moved, must stop
+    if ($source['d'] >= 1 || $unit->getMoves() >= 1) {
+      if (self::isOcean($source)) {
+        return \INFINITY;
+      }
     }
 
     // If I'm coming from a 'must stop' terrain, can't go there unless dist = 0
@@ -355,15 +368,19 @@ class Board
       return [];
     }
 
-    // Check whether unit moved into a cell that prevent attack
     $pos = $cell ?? $unit->getPos();
-    if ($m > 0) {
-      foreach (self::getTerrainsInCell($pos) as $terrain) {
-        if ($terrain->enteringCannotBattle($unit)) {
-          return [];
-        }
+    // if ($m > 0) {
+    foreach (self::getTerrainsInCell($pos) as $terrain) {
+      // Check whether unit moved into a cell that prevent attack
+      if ($terrain->enteringCannotBattle($unit) && $m > 0) {
+        return [];
+      }
+      // Check whether unit is in a cell that prevent attack
+      if ($terrain->cannotBattle($unit)) {
+        return [];
       }
     }
+    // }
 
     // Compute cells at fire range
     $power = $unit->getAttackPower();

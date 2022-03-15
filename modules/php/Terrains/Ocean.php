@@ -13,7 +13,9 @@ class Ocean extends \M44\Models\Terrain
     $this->name = clienttranslate('Oceans & Shorelines');
     $this->number = 7;
     // TODO
-    
+    // $this->mustStopWhenLeaving = true;
+    $this->cannotBattle = true;
+    $this->isOcean = true;
     parent::__construct($row);
   }
 }
