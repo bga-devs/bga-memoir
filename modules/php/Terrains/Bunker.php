@@ -17,7 +17,8 @@ class Bunker extends \M44\Models\RectTerrain
     $this->isBlockingLineOfSight = true;
     $this->canIgnoreOneFlag = true;
     $this->defense = [\INFANTRY => -1, ARMOR => -2];
-    $this->cantRetreat = [\ARTILLERY];
+    // $this->IsImpassableForRetreat = [\ARTILLERY];
+    $this->cantLeave = [\ARTILLERY];
     $this->isBunker = true;
 
     parent::__construct($row);
@@ -25,13 +26,6 @@ class Bunker extends \M44\Models\RectTerrain
 
   public function defense($unit)
   {
-    // $isOriginalOwner =
-    //   $unit
-    //     ->getPlayer()
-    //     ->getTeam()
-    //     ->getId() == $this->getExtraDatas('owner')
-    //     ? true
-    //     : false;
     if (!$this->isOriginalOwner($unit)) {
       return $this->defense[$unit->getType()] ?? 0;
     } else {

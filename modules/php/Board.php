@@ -193,9 +193,13 @@ class Board
     return self::cellHasProperty($cell, 'mustStopWhenLeaving', $unit);
   }
 
-  public static function cantRetreat($unit, $cell)
+  // public static function cantRetreat($unit, $cell)
+  // {
+  //   return self::cellHasProperty($cell, 'cantRetreat', $unit);
+
+  public static function cantLeave($unit, $cell)
   {
-    return self::cellHasProperty($cell, 'cantRetreat', $unit);
+    return self::cellHasProperty($cell, 'cantLeave', $unit);
   }
 
   public static function isHill($cell)
@@ -275,6 +279,11 @@ class Board
 
     // If there is an impassable terrain => can't go there
     if (self::isImpassable($unit, $target)) {
+      return \INFINITY;
+    }
+
+    // If my unit cannot leave the hex (bunker & artillery)
+    if (self::cantLeave($unit, $source)) {
       return \INFINITY;
     }
 
@@ -681,7 +690,7 @@ class Board
   public static function getReachableCellsForRetreat($unit, $d)
   {
     // If the terrain is preventing retreat, return empty list
-    if (self::cantRetreat($unit, $unit->getPos())) {
+    if (self::cantLeave($unit, $unit->getPos())) {
       return [];
     }
 

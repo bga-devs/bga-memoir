@@ -43,7 +43,7 @@ class Terrain extends \M44\Helpers\DB_Model
     'isBlockingLineOfSight',
     'mustStopWhenLeaving',
     'isBlockingSandbag',
-    'cantRetreat',
+    'cantLeave',
     'cannotBattle',
 
     'isHill',
