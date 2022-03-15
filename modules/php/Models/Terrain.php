@@ -12,6 +12,7 @@ class Terrain extends \M44\Helpers\DB_Model
     'y' => ['y', 'int'],
     'orientation' => ['orientation', 'int'],
     'extraDatas' => ['extra_datas', 'obj'],
+    'type' => ['type', 'str'],
   ];
 
   protected $id = null;
