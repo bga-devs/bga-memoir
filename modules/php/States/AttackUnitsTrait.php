@@ -187,6 +187,11 @@ trait AttackUnitsTrait
     if (Teams::checkVictory()) {
       return;
     }
+
+    foreach (Board::getTerrainsInCell($unit->getPos()) as $terrain) {
+      $terrain->onAfterAttack($unit);
+    }
+
     // Handle retreat
     if (isset($results[DICE_FLAG]) && !$eliminated) {
       $this->initRetreat($attack, $results);

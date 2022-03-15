@@ -31,6 +31,14 @@ class Wire extends \M44\Models\Obstacle
     }
   }
 
+  public function onAfterAttack($unit)
+  {
+    if ($unit->getType() == ARMOR) {
+      $this->removeFromBoard();
+      Notifications::message(\clienttranslate('Wire is removed by the Tank\'s attack'), []);
+    }
+  }
+
   public function getPossibleAttackActions($unit)
   {
     if ($unit->getType() == \INFANTRY) {

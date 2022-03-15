@@ -123,14 +123,7 @@ class Terrain extends \M44\Helpers\DB_Model
     return [];
   }
 
-  // public function getExtraDatas($variable)
-  // {
-  //   return $this->extraDatas[$variable] ?? null;
-  // }
-  //
-  // public function setExtraDatas($variable, $value)
-  // {
-  //   $this->extraDatas[$variable] = $value;
-  //   self::DB()->update(['extra_datas' => \addslashes(\json_encode($this->extraDatas))], $this->id);
-  // }
+  public function onAfterAttack($unit)
+  {
+  }
 }
