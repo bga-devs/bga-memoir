@@ -21,11 +21,13 @@ trait TakeGroundTrait
     //   - attacked cell is now empty (opp unit retreated or eliminated)
     //   - unit has not taken too many grounds already (1 for infantry, 2 for armors)
     //   - unit has not entered a mustStopWhenEntering terrain during the move phase
+    //   - unit can enter on the terrain
     if (
       $attack['distance'] != 1 ||
       $unit->getGrounds() >= $unit->getMaxGrounds() ||
       Board::getUnitInCell($attack['x'], $attack['y']) != null ||
-      ($unit->getMoves() > 0 && Board::mustStopWhenEntering($unit, $unit->getPos()))
+      ($unit->getMoves() > 0 && Board::mustStopWhenEntering($unit, $unit->getPos())) ||
+      Board::isImpassable($unit, ['x' => $attack['x'], 'y' => $attack['y']])
     ) {
       $this->closeCurrentAttack();
     }

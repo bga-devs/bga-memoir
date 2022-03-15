@@ -71,7 +71,7 @@ abstract class DB_Model extends \APP_DbObject implements \JsonSerializable
       }
 
       if ($match[1] == 'get') {
-        if (count($args) > 0 && is_array($this->attributes[$name]) && $this->attributes[$names][1] == 'obj') {
+        if (count($args) > 0 && is_array($this->attributes[$name]) && $this->attributes[$name][1] == 'obj') {
           // Handle json field
           return $this->$name[$args[0]];
         } else {
