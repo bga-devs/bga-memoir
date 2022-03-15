@@ -96,46 +96,6 @@
         }
       }
     }
-
-    .hex-grid-background {
-      z-index: 1;
-      background-image: url('img/board_backgrounds.jpg');
-      background-size: 600% 600%;
-
-      @for $i from 0 through 36 {
-        &[data-tile='#{$i}'] {
-          background-position-x: ($i % 6) * 100% / 5;
-          background-position-y: (($i - ($i % 6)) / 6) * 100% / 5;
-        }
-      }
-    }
-
-    .hex-grid-terrain {
-      z-index: 2;
-      background-image: url('img/board_terrains.jpg');
-      background-size: 1000% 1100%;
-      clip-path: polygon(50% 0.6%, 99.4% 25.6%, 99.4% 74.4%, 50% 99.4%, 0.6% 74.4%, 0.6% 25.6%);
-
-      @for $i from 0 through 93 {
-        &[data-tile='#{$i}'] {
-          background-position-x: ($i % 10) * 100% / 9;
-          background-position-y: (($i - ($i % 10)) / 10) * 100% / 10;
-        }
-      }
-    }
-
-    .hex-grid-obstacle {
-      z-index: 3;
-      background-image: url('img/board_obstacles.png');
-      background-size: 600% 500%;
-
-      @for $i from 0 through 24 {
-        &[data-tile='#{$i}'] {
-          background-position-x: ($i % 6) * 100% / 5;
-          background-position-y: (($i - ($i % 6)) / 6) * 100% / 4;
-        }
-      }
-    }
   }
 
   .hex-label-container {
@@ -275,5 +235,130 @@
   }
   &.displayLineOfSight:hover #lineOfSight {
     display: block;
+  }
+}
+
+// TILE ASSETS
+.hex-grid-background,
+.hex-grid-terrain.background-terrain {
+  z-index: 1;
+  background-image: url('img/board_backgrounds.jpg');
+  background-size: 600% 600%;
+
+  @for $i from 0 through 36 {
+    &[data-tile='#{$i}'] {
+      background-position-x: ($i % 6) * 100% / 5;
+      background-position-y: (($i - ($i % 6)) / 6) * 100% / 5;
+    }
+  }
+}
+
+.hex-grid-terrain {
+  z-index: 2;
+  background-image: url('img/board_terrains.jpg');
+  background-size: 1000% 1100%;
+  clip-path: polygon(50% 0.6%, 99.4% 25.6%, 99.4% 74.4%, 50% 99.4%, 0.6% 74.4%, 0.6% 25.6%);
+
+  @for $i from 0 through 93 {
+    &[data-tile='#{$i}'] {
+      background-position-x: ($i % 10) * 100% / 9;
+      background-position-y: (($i - ($i % 10)) / 10) * 100% / 10;
+    }
+  }
+}
+
+.hex-grid-obstacle {
+  z-index: 3;
+  background-image: url('img/board_obstacles.png');
+  background-size: 600% 500%;
+
+  @for $i from 0 through 24 {
+    &[data-tile='#{$i}'] {
+      background-position-x: ($i % 6) * 100% / 5;
+      background-position-y: (($i - ($i % 6)) / 6) * 100% / 4;
+    }
+  }
+}
+
+////////////////////////////////////////
+//  _____           _ _   _
+// |_   _|__   ___ | | |_(_)_ __
+//   | |/ _ \ / _ \| | __| | '_ \
+//   | | (_) | (_) | | |_| | |_) |
+//   |_|\___/ \___/|_|\__|_| .__/
+//                         |_|
+////////////////////////////////////////
+.board-tooltip {
+  position: absolute;
+  top: 0;
+  left: 0px;
+  width: 310px;
+  height: 100%;
+  background-color: #000;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+
+  .summary-card {
+    width: 303px;
+    height: 190px;
+    background: url('img/summary_cards.jpg');
+    background-size: 100% 300%;
+    border-radius: 14px;
+    position: relative;
+
+    .summary-number {
+      position: absolute;
+      top: 14px;
+      left: 26px;
+      color: white;
+      font-family: 'Gunplay';
+      font-size: 20px;
+      width: 25px;
+      text-align: center;
+    }
+    .summary-name {
+      position: absolute;
+      top: 14px;
+      left: 52px;
+      font-family: 'Gunplay';
+      text-transform: uppercase;
+      width: 188px;
+      text-align: center;
+      font-size: 20px;
+      color: #882f14;
+    }
+
+    .summary-tile {
+      position: absolute;
+      top: 40px;
+      left: 15px;
+      width: 100px;
+      bottom: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .hex-grid-content {
+        width: 90px;
+        height: 104px;
+      }
+    }
+
+    .summary-desc {
+      position: absolute;
+      left: 114px;
+      top: 42px;
+      width: 174px;
+      bottom: 16px;
+      list-style-position: initial;
+      padding-left: 20px;
+      font-size: 13px;
+
+      li {
+        list-style-type: disc;
+      }
+    }
   }
 }
