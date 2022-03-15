@@ -38,6 +38,7 @@ use M44\Core\Notifications;
 use M44\Core\Stats;
 use M44\Managers\Cards;
 use M44\Managers\Players;
+use M44\Managers\Terrains;
 use M44\Managers\Teams;
 use M44\Board;
 use M44\Scenario;
@@ -57,7 +58,7 @@ class memoir extends Table
   use M44\States\TakeGroundTrait;
   use M44\States\TacticCardTrait;
   use M44\States\AirDropTrait;
-  
+
   public static $instance = null;
   function __construct()
   {
@@ -112,6 +113,8 @@ class memoir extends Table
       'teams' => Teams::getAll()->toArray(),
       'deckCount' => Cards::countInLocation('deck'),
       'discard' => Cards::getTopOf('discard'),
+
+      'terrains' => Terrains::getStaticUiData(),
     ];
   }
 

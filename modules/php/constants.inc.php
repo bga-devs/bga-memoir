@@ -159,7 +159,10 @@ const COUNRY_FACE = 'COUNRY'; // TODO : check from editor
 const DESERT_FACE = 'DESERT'; // TODO : check from editor
 
 const TERRAIN_CLASSES = [
+  'beach' => 'Beach',
   'forest' => 'Forest',
+  'hedgehog' => 'Hedgehog',
+  'ocean' => 'Ocean',
   'river' => 'River',
   'hedgerow' => 'Hedgerow',
   'village' => 'Village',

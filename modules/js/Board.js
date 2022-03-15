@@ -21,6 +21,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
   return declare('memoir.board', null, {
     setupBoard() {
+      this._grid = [];
       let board = this.gamedatas.board;
       let pId = this.isSpectator ? Object.values(this.gamedatas.players)[0] : this.player_id;
       let bottomTeam = this.gamedatas.players[pId].team;
@@ -79,6 +80,13 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           let col = 2 * x + (y % 2 == 0 ? 0 : 1);
           let row = y;
 
+          // Create node in the internal grid
+          if (!this._grid[col]) this._grid[col] = [];
+          this._grid[col][row] = {
+            terrains: [],
+            unit: null,
+          };
+
           // Take into account rotation
           let realX = rotate ? 2 * size - col - (y % 2 == 0 ? 2 : 0) : col;
           let realY = rotate ? dim.y - y - 1 : y;
@@ -89,8 +97,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           cellC.style.gridRow = 3 * realY + 3 + ' / span 4';
           cellC.style.gridColumn = realX + 2 + ' / span 2';
           board.grid[col][row].terrains.forEach((terrain) => {
-            let tplName = TERRAINS.includes(terrain.tile) ? 'tplTerrainTile' : 'tplObstacleTile';
+            let tplName = OBSTACLES.includes(terrain.tile) ? 'tplObstacleTile' : 'tplTerrainTile';
             terrain.rotate = rotate;
+            this._grid[col][row].terrains.push(terrain);
             this.place(tplName, terrain, cellC);
           });
 
@@ -109,11 +118,16 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           let unit = board.grid[col][row].unit;
           if (unit) {
             unit.orientation = bottomTeam != (ALLIES_NATIONS.includes(unit.nation) ? 'ALLIES' : 'AXIS') ? 1 : 0;
+            this._grid[col][row].unit = unit;
             this.place('tplUnit', unit, `cell-${col}-${y}`);
           }
 
           // Medals
           board.grid[col][row].medals.forEach((medal) => this.place('tplBoardMedal', medal, cellC));
+
+          // Add tooltip listeners
+          cell.addEventListener('mouseenter', () => this.openBoardTooltip(col, row));
+          cell.addEventListener('mouseleave', () => this.closeBoardTooltip(col, row));
         }
       }
 
@@ -199,7 +213,14 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     },
 
     tplTerrainTile(terrain) {
+      let className = '';
       let tile = TERRAINS.findIndex((t) => t == terrain.tile);
+      if (terrain.tile.substr(0, 10) == 'background') {
+        // Special case of background terrains as beaches or flooded ground
+        tile = terrain.tile.substr(11);
+        className = 'background-terrain';
+      }
+
       let rotation = terrain.rotate ? 6 : 0;
       if (terrain.orientation != 1) {
         let nbrRotation = 3;
@@ -208,7 +229,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         rotation += ((terrain.orientation - 1) * 12) / nbrRotation + 12;
       }
       rotation = rotation % 12;
-      return `<div class="hex-grid-content hex-grid-terrain" data-tile="${tile}" data-rotation="${rotation}"></div>`;
+      return `<div class="hex-grid-content hex-grid-terrain ${className}" data-tile="${tile}" data-rotation="${rotation}"></div>`;
     },
 
     tplObstacleTile(obstacle) {
@@ -252,6 +273,97 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     notif_removeObstacle(n) {
       debug('Notif: removing obstacle', n);
       $('obstacle-' + n.args.terrainId).remove();
+    },
+
+    ////////////////////////////////////////
+    //  _____           _ _   _
+    // |_   _|__   ___ | | |_(_)_ __
+    //   | |/ _ \ / _ \| | __| | '_ \
+    //   | | (_) | (_) | | |_| | |_) |
+    //   |_|\___/ \___/|_|\__|_| .__/
+    //                         |_|
+    ////////////////////////////////////////
+    openBoardTooltip(col, row) {
+      let uid = col + '_' + row;
+      if (this._boardTooltips[uid]) {
+        // TODO
+      } else {
+        let cell = this._grid[col][row];
+        if (cell.terrains.length == 0 && cell.unit == null) {
+          return; // Nothing to show !
+        }
+
+        let tooltip = this.place('tplBoardTooltip', cell, 'deck-holder');
+        tooltip.innerWidth;
+        tooltip.classList.add('open');
+        this._boardTooltips[uid] = tooltip;
+      }
+    },
+
+    closeBoardTooltip(col, row) {
+      let uid = col + '_' + row;
+      if (!this._boardTooltips[uid]) return;
+
+      this._boardTooltips[uid].remove();
+      delete this._boardTooltips[uid];
+    },
+
+    tplBoardTooltip(cell) {
+      let terrainDivs = [];
+      cell.terrains.forEach((terrain) => {
+        terrainDivs.push(this.tplTerrainSummary(terrain));
+      });
+      let unitDiv = '';
+
+      return `<div class='board-tooltip'>${terrainDivs.join('')} ${unitDiv}</div>`;
+    },
+
+    tplTerrainSummary(terrain) {
+      let terrainData = Object.assign(this.gamedatas.terrains[terrain.number], terrain);
+      let tplName = OBSTACLES.includes(terrainData.tile) ? 'tplObstacleTile' : 'tplTerrainTile';
+      let tile = this[tplName](terrainData);
+      let desc = [];
+
+      if (terrainData.isImpassable) {
+        desc.push(_('Impassable'));
+      }
+      if (terrainData.mustBeAdjacentToEnter) {
+        desc.push(_('Must be adjacent to enter'));
+      }
+      if (terrainData.mustStopWhenEntering) {
+        desc.push(_('Must stop when entering'));
+      }
+      if (terrainData.enteringCannotBattle) {
+        desc.push(_('Entering cannot battle'));
+      }
+      if (terrainData.enteringCannotTakeGround) {
+        desc.push(_('Entering cannot take ground'));
+      }
+      if (terrainData.canIgnoreOneFlag) {
+        desc.push(_('Can ignore one flag'));
+      }
+      if (terrainData.isBlockingLineOfSight) {
+        desc.push(_('Block line of sight'));
+      } else {
+        desc.push(_('Do not block line of sight'));
+      }
+      if (terrainData.mustStopWhenLeaving) {
+        desc.push(_('Must stop when leaving'));
+      }
+      if (terrainData.cantRetreat) {
+        desc.push(_("Can't retreat"));
+      }
+
+      return `<div class='summary-card summary-terrain'>
+        <div class='summary-number'>${terrainData.number}</div>
+        <div class='summary-name'>${terrainData.name}</div>
+        <div class='summary-tile'>
+          ${tile}
+        </div>
+        <ul class='summary-desc'>
+          ${desc.map((t) => '<li>' + t + '</li>').join('')}
+        </ul>
+      </div>`;
     },
 
     //////////////////////////////////////////

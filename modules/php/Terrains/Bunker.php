@@ -33,7 +33,7 @@ class Bunker extends \M44\Models\RectTerrain
         ? true
         : false;
     if ($isOriginalOwner) {
-      return [\INFANTRY => -1, ARMOR => -2];
+      return $this->defense;
     } else {
       return null;
     }

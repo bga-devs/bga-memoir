@@ -42,11 +42,16 @@ class Terrains extends \M44\Helpers\Pieces
   //////////////////////////////////
 
   /**
-   * getUiData : return all terrain tiles
+   * getUiData : return all terrain tiles static datas
    */
-  public static function getUiData()
+  public static function getStaticUiData()
   {
-    return self::getAllOrdered()->ui();
+    $data = [];
+    foreach (TERRAIN_CLASSES as $type => $className) {
+      $terrain = self::getInstance($type);
+      $data[$terrain->getNumber()] = $terrain->getStaticUiData();
+    }
+    return $data;
   }
 
   //////////////////////////////////
@@ -69,7 +74,6 @@ class Terrains extends \M44\Helpers\Pieces
     return $o;
   }
 
-
   /**
    * Load a scenario
    */
@@ -79,7 +83,7 @@ class Terrains extends \M44\Helpers\Pieces
       ->delete()
       ->run();
     $board = $scenario['board'];
-    $terrains = [];
+    $terrains = self::getBackgroundSpecialTerrains($board);
     foreach ($board['hexagons'] as $hex) {
       $keys = ['terrain', 'rect_terrain', 'obstacle'];
       foreach ($keys as $key) {
@@ -108,5 +112,37 @@ class Terrains extends \M44\Helpers\Pieces
     }
 
     return '';
+  }
+
+  protected function getBackgroundSpecialTerrains($board)
+  {
+    $terrains = [];
+
+    // Handle beaches
+    if ($board['face'] == 'BEACH') {
+      foreach (Board::getListOfCells() as $cell) {
+        $map = [
+          4 => 2,
+          5 => 4,
+          6 => 6,
+          7 => 25,
+          8 => 27,
+        ];
+        $tile = $map[$cell['y']] ?? null;
+
+        if ($tile != null) {
+          $tile += ((int) $cell['x'] / 2) % 2;
+          $terrains[] = [
+            'location' => $cell['x'] . '_' . $cell['y'],
+            'tile' => 'background_' . $tile,
+            'type' => $tile > 10 ? 'ocean' : 'beach',
+            'orientation' => 1,
+          ];
+        }
+      }
+    }
+    // TODO : handle flooded grounds
+
+    return $terrains;
   }
 }

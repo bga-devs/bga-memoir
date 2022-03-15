@@ -61,17 +61,30 @@ class Terrain extends \M44\Helpers\DB_Model
 
   public function jsonSerialize()
   {
-    return [
+    $datas = [
       'id' => $this->id,
+      'number' => $this->number,
       'x' => $this->x,
       'y' => $this->y,
       'orientation' => $this->orientation,
-
-      'number' => $this->number,
       'tile' => $this->tile,
-      'name' => $this->name,
       // 'datas' => $this->extraDatas,
     ];
+
+    return $datas;
+  }
+
+  public function getStaticUiData()
+  {
+    $t = array_merge($this->staticAttributes, $this->properties);
+    $datas = [];
+    foreach ($t as $prop) {
+      if (isset($this->$prop)) {
+        $datas[$prop] = $this->$prop;
+      }
+    }
+
+    return $datas;
   }
 
   public function __call($method, $args)

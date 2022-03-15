@@ -69,6 +69,7 @@ define([
       this.default_viewport = 'width=700';
 
       this._backCardIdCounter = -1; // Used to generate unique id for backCards
+      this._boardTooltips = {}; // Used to store pending board tooltip element
     },
 
     /**
