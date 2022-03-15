@@ -1,5 +1,7 @@
 <?php
 namespace M44\Terrains;
+use M44\Core\Game;
+use M44\Core\Notifications;
 
 class Wire extends \M44\Models\Obstacle
 {
@@ -20,8 +22,12 @@ class Wire extends \M44\Models\Obstacle
 
   public function onUnitEntering($unit, $isRetreat)
   {
-    if($unit->getType() == ARMOR && !$isRetreat){
-      // TODO : armor remove them but must stop
+    if ($unit->getType() == ARMOR && !$isRetreat) {
+      $this->removeFromBoard();
+      Notifications::message(\clienttranslate('Wire is removed by the Tank'), []);
+      $unit->setMoves($unit->getMovementRadius());
+      Game::get()->nextState('moveUnits');
+      return true;
     }
   }
 

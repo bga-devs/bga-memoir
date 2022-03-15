@@ -303,6 +303,7 @@ class Board
   {
     $pos = $unit->getPos();
     $unit->moveTo($cell);
+    $interrupted = false;
     self::$grid[$pos['x']][$pos['y']]['unit'] = null;
     self::$grid[$cell['x']][$cell['y']]['unit'] = $unit;
 
@@ -313,14 +314,17 @@ class Board
       $terrain->onUnitLeaving($unit, $isRetreat);
     }
     foreach ($targetCell['terrains'] as $terrain) {
-      $terrain->onUnitEntering($unit, $isRetreat);
+      if ($terrain->onUnitEntering($unit, $isRetreat) == true) {
+        $interrupted = true;
+      }
+      // $terrain->onUnitEntering($unit, $isRetreat);
     }
 
     Medals::checkBoardMedals();
     if (Teams::checkVictory()) {
       return true;
     }
-    return false;
+    return $interrupted;
   }
 
   //////////////////////////////////////////
