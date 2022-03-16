@@ -261,25 +261,31 @@ class Board
       return self::getDeplacementCost($unit, $source, $target, $d);
     });
 
+    // Filter out paths if needed
+    foreach ($cells as &$cell) {
+      Utils::filter($cell['paths'], function ($path) use ($unit, $cell) {
+        return self::isValidPath($unit, $cell, $path);
+      });
+    }
+    // Filter out cells without paths
+    Utils::filter($cells, function ($cell) {
+      return !empty($cell['paths']);
+    });
+
     // Compute for each cell whether the unit might be able to attack after the move
-    foreach ($cells as $cellkey => &$cell) {
-      // movement more than 2 on beach
-      if ($cell['d'] + $unit->getMoves() > 2) {
-        foreach ($cell['paths'] as &$path) {
-          foreach ($path as &$indivCell) {
-            if (self::isBeach($indivCell) || (self::isBeach($unit->getPos()) && $unit->getMoves() > 0)) {
-              unset($cells[$cellkey]);
-            }
-          }
-        }
-      }
+    foreach ($cells as &$cell) {
       if (!empty(self::getTargetableCells($unit, $cell, $cell['d']))) {
         $cell['canAttack'] = true;
       }
     }
-    return array_values($cells);
+
+    return $cells;
   }
 
+  /**
+   * getDeplacementCost: return the cost for a unit to move from $source to an adjacent $target,
+   *    given the fact that the unit can move at most $d hexes
+   */
   public static function getDeplacementCost($unit, $source, $target, $d)
   {
     // Get corresponding cells
@@ -328,6 +334,27 @@ class Board
     return 1;
   }
 
+  /**
+   * isValidPath : check whether a path for movements is valid or not
+   */
+  public static function isValidPath($unit, $cell, $path)
+  {
+    $totalPath = array_merge([$unit->getPos()], $path);
+    foreach ($totalPath as $node) {
+      $t = self::$grid[$node['x']][$node['y']];
+      foreach ($t['terrains'] as $terrain) {
+        if (!$terrain->isValidPath($unit, $cell, $totalPath)) {
+          return false;
+        }
+      }
+    }
+
+    return true;
+  }
+
+  /**
+   * moveUnit : move a unit to another hex
+   */
   public static function moveUnit($unit, $cell, $isRetreat = false)
   {
     $pos = $unit->getPos();
@@ -719,11 +746,7 @@ class Board
       }
 
       // If there is an impassable terrain => can't retreat there
-      if (self::isImpassable($unit, $target)) {
-        return \INFINITY;
-      }
-
-      if (self::isImpassableForRetreat($unit, $target)) {
+      if (self::isImpassable($unit, $target) ||  self::isImpassableForRetreat($unit, $target)) {
         return \INFINITY;
       }
 

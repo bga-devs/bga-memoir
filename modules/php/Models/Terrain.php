@@ -129,4 +129,9 @@ class Terrain extends \M44\Helpers\DB_Model
   public function onAfterAttack($unit)
   {
   }
+
+  public function isValidPath($unit, $cell, $path)
+  {
+    return true;
+  }
 }
