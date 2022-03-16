@@ -31,6 +31,8 @@ class Globals extends \M44\Helpers\DB_Manager
     'retreat' => 'obj', // ['unit' => id, 'min' => min number of retreats hexes, 'max' => max number of retreat hexes]
 
     'lastPlayedCards' => 'obj', // Store information of who played what (overlord) [player_id]
+    'deckReshuffle' => 'bool',
+    'defaultWinner' => 'str',
   ];
 
   protected static $table = 'global_variables';
@@ -163,6 +165,7 @@ class Globals extends \M44\Helpers\DB_Manager
     Globals::setUnitMoved(-1);
     Globals::setUnitAttacker(-1);
     Globals::setLastPlayedCards([]);
+    Globals::setDeckReshuffle(true);
   }
 
   public static function isStandard()

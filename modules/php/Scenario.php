@@ -96,6 +96,13 @@ class Scenario extends \APP_DbObject
     // Initialize medals
     Medals::loadScenario($scenario, $rematch);
 
+    if (isset(self::getOptions()['deck_reshuffling'])) {
+      Globals::setDeckReshuffle(self::getOptions()['deck_reshuffling']);
+      if (self::getId() == 19) {
+        Globals::setDefaultWinner(AXIS);
+      }
+    }
+
     Board::init();
     // Notify
     if ($rematch || $forceRefresh) {
