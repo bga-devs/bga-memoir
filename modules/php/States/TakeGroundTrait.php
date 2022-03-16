@@ -22,12 +22,16 @@ trait TakeGroundTrait
     //   - unit has not taken too many grounds already (1 for infantry, 2 for armors)
     //   - unit has not entered a mustStopWhenEntering terrain during the move phase
     //   - unit can enter on the terrain
+    //   - unit is not trying to take ground from a beach on a cliff
     if (
       $attack['distance'] != 1 ||
       $unit->getGrounds() >= $unit->getMaxGrounds() ||
       Board::getUnitInCell($attack['x'], $attack['y']) != null ||
       ($unit->getMoves() > 0 && Board::mustStopWhenEntering($unit, $unit->getPos())) ||
-      Board::isImpassable($unit, ['x' => $attack['x'], 'y' => $attack['y']])
+      Board::isImpassable($unit, ['x' => $attack['x'], 'y' => $attack['y']]) ||
+      ($unit->getType() == \INFANTRY &&
+        Board::cellHasProperty(['x' => $attack['x'], 'y' => $attack['y']], 'isCliff', $unit) &&
+        Board::isBeach($unit->getPos()))
     ) {
       $this->closeCurrentAttack();
     }

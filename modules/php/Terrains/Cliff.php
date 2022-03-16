@@ -26,4 +26,22 @@ class Cliff extends \M44\Models\Terrain
     }
     return false;
   }
+
+  public function isBlockingLineOfSight($unit, $target, $path)
+  {
+    $c = Board::getHillComponents();
+    $s = $unit->getPos();
+    $t = $target;
+    return $c[$this->x][$this->y] != $c[$s['x']][$s['y']] || $c[$this->x][$this->y] != $c[$t['x']][$t['y']];
+  }
+
+  public function defense($unit)
+  {
+    if ($unit->getType() == \ARTILLERY) {
+      return 0;
+    } else {
+      $isHill = Board::isHill($unit->getPos());
+      return $isHill ? 0 : -1;
+    }
+  }
 }
