@@ -299,6 +299,7 @@ $scenarios[7] = [
         'col' => 0,
         'unit' => [
           'name' => 'inf2us',
+          'badge' => 'badge2',
         ],
       ],
       30 => [
@@ -321,6 +322,7 @@ $scenarios[7] = [
         'col' => 1,
         'unit' => [
           'name' => 'inf2us',
+          'badge' => 'badge2',
         ],
       ],
       32 => [
@@ -328,6 +330,7 @@ $scenarios[7] = [
         'col' => 3,
         'unit' => [
           'name' => 'inf2us',
+          'badge' => 'badge2',
         ],
       ],
       33 => [
@@ -335,6 +338,7 @@ $scenarios[7] = [
         'col' => 7,
         'unit' => [
           'name' => 'inf2us',
+          'badge' => 'badge2',
         ],
       ],
       34 => [
@@ -342,6 +346,7 @@ $scenarios[7] = [
         'col' => 9,
         'unit' => [
           'name' => 'inf2us',
+          'badge' => 'badge2',
         ],
       ],
       35 => [
@@ -349,6 +354,7 @@ $scenarios[7] = [
         'col' => 11,
         'unit' => [
           'name' => 'inf2us',
+          'badge' => 'badge2',
         ],
       ],
       36 => [
@@ -356,6 +362,7 @@ $scenarios[7] = [
         'col' => 13,
         'unit' => [
           'name' => 'inf2us',
+          'badge' => 'badge2',
         ],
       ],
       37 => [
@@ -363,6 +370,7 @@ $scenarios[7] = [
         'col' => 14,
         'unit' => [
           'name' => 'inf2us',
+          'badge' => 'badge2',
         ],
       ],
       38 => [
@@ -370,6 +378,7 @@ $scenarios[7] = [
         'col' => 16,
         'unit' => [
           'name' => 'inf2us',
+          'badge' => 'badge2',
         ],
       ],
     ],

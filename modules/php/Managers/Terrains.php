@@ -94,6 +94,7 @@ class Terrains extends \M44\Helpers\Pieces
             'tile' => $terrain['name'],
             'type' => self::getTypeOfTile($terrain),
             'orientation' => $terrain['orientation'] ?? 1,
+            'extra_datas' => isset($terrain['behavior']) ? ['behavior' => $terrain['behavior']] : null,
           ];
         }
       }
