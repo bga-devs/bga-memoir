@@ -23,11 +23,12 @@ trait RetreatUnitTrait
     if ($currentAttack['card']->cannotIgnoreFlags()) {
       $canIgnore1Flag = false;
     }
+    $attackedUnit = Units::get($attack['oppUnitId']);
     // TODO : compute the min/max flags
 
     Globals::setRetreat([
       'min' => $dice[\DICE_FLAG] - ($canIgnore1Flag ? 1 : 0),
-      'max' => $dice[\DICE_FLAG],
+      'max' => $dice[\DICE_FLAG] * $attackedUnit->getRetreatHex(),
       'unit' => $attack['oppUnitId'],
     ]);
   }
@@ -113,7 +114,7 @@ trait RetreatUnitTrait
     foreach ($path as $c) {
       Notifications::moveUnit($player, $unitId, $c['x'], $c['y']);
       $interrupted = Board::moveUnit($unit, $c, true);
-      if($interrupted){
+      if ($interrupted) {
         return; // Victory or unit is dead
       }
     }

@@ -47,7 +47,7 @@ class Units extends \M44\Helpers\Pieces
 
   public function getInstance($type, $badge, $row = null)
   {
-    $className = '\M44\Units\\' . TROOP_CLASSES[$type];
+    $className = '\M44\Units\\' . (TROOP_CLASSES[$type . $badge] ?? TROOP_CLASSES[$type]);
     return new $className($row);
   }
 
@@ -134,8 +134,11 @@ class Units extends \M44\Helpers\Pieces
       ->run();
     $board = $scenario['board'];
     $units = [];
-    foreach ($board['hexagons'] as $hex) {
+    foreach ($board['hexagons'] as &$hex) {
       if (isset($hex['unit'])) {
+        if (isset($hex['unit']['behavior']) && isset(\TROOP_BADGE_MAPPING[$hex['unit']['behavior']])) {
+          $hex['unit']['badge'] = \TROOP_BADGE_MAPPING[$hex['unit']['behavior']];
+        }
         $data = self::getTypeAndNation($hex['unit']);
         $unit = self::getInstance($data['type'], $data['badge']);
         $data['figures'] = $unit->getMaxUnits();

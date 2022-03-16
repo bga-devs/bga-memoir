@@ -417,17 +417,18 @@ class Board
 
     $pos = $cell ?? $unit->getPos();
     // if ($m > 0) {
-    foreach (self::getTerrainsInCell($pos) as $terrain) {
-      // Check whether unit moved into a cell that prevent attack
-      if ($terrain->enteringCannotBattle($unit) && $m > 0) {
-        return [];
-      }
-      // Check whether unit is in a cell that prevent attack
-      if ($terrain->cannotBattle($unit)) {
-        return [];
+    if (!$unit->getIgnoreCannotBattle()) {
+      foreach (self::getTerrainsInCell($pos) as $terrain) {
+        // Check whether unit moved into a cell that prevent attack
+        if ($terrain->enteringCannotBattle($unit) && $m > 0) {
+          return [];
+        }
+        // Check whether unit is in a cell that prevent attack
+        if ($terrain->cannotBattle($unit)) {
+          return [];
+        }
       }
     }
-    // }
 
     // Compute cells at fire range
     $power = $unit->getAttackPower();
@@ -750,7 +751,7 @@ class Board
       }
 
       // If there is an impassable terrain => can't retreat there
-      if (self::isImpassable($unit, $target) ||  self::isImpassableForRetreat($unit, $target)) {
+      if (self::isImpassable($unit, $target) || self::isImpassableForRetreat($unit, $target)) {
         return \INFINITY;
       }
 

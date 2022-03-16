@@ -44,6 +44,7 @@ $scenarios[5] = [
         'unit' => [
           'name' => 'tank2ger',
           'behavior' => 'GERMAN_2VICTANK',
+          'badge' => 'badge4',
         ],
       ],
       1 => [
@@ -80,6 +81,7 @@ $scenarios[5] = [
         'unit' => [
           'name' => 'tank2ger',
           'behavior' => 'GERMAN_2VICTANK',
+          'badge' => 'badge4',
         ],
       ],
       6 => [
@@ -375,7 +377,7 @@ Allied Player: Take 5 command cards.
 You move first.'),
       'victory' => clienttranslate('4 Medals
 Eliminating an Axis tank unit counts as two victory medals for the Allied player.'),
-      'rules' => clienttranslate('The Axis Special Forces tank units have 4 figures. 
+      'rules' => clienttranslate('The Axis Special Forces tank units have 4 figures.
 
 All the Allied units are French Resistance infantry. Therefore, there is no need to place Resistance badges with the units. These units only have 3 figures. A Resistance unit may move onto terrain and still battle. When retreating, the unit may move back 1, 2 or 3 hexes before it regroups. '),
     ],

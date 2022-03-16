@@ -183,15 +183,19 @@ const TROOP_CLASSES = [
   'inf' => 'Infantry',
   'tank' => 'Armor',
   'gun' => 'Artillery',
+  // type + badge number if non decorative
+  'inf23' => 'FrenchResistance',
 ];
 
-const TROOP_FIGURES = [
-  'inf2' => 4,
-  'tank2' => 3,
-  'inf' => 4,
-  'tank' => 3,
-  'gun' => 2,
-];
+const TROOP_BADGE_MAPPING = ['FRENCH_RESISTANCE' => 'badge3'];
+
+// const TROOP_FIGURES = [
+//   'inf2' => 4,
+//   'tank2' => 3,
+//   'inf' => 4,
+//   'tank' => 3,
+//   'gun' => 2,
+// ];
 
 /******************
  ****** STATS ******

@@ -37,6 +37,8 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     'mustSeeToAttack',
     'maxGrounds',
     'medalsWorth',
+    'retreatHex',
+    'ignoreCannotBattle',
   ];
 
   protected $id = null;
@@ -62,6 +64,8 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
   protected $mustSeeToAttack = true;
   protected $maxGrounds = 0;
   protected $medalsWorth = 1;
+  protected $retreatHex = 1;
+  protected $ignoreCannotBattle = false;
 
   public function __construct($row)
   {
@@ -241,7 +245,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
    */
   public function takeDamage($hits)
   {
-    $hits = ($hits >= $this->nUnits)? $this->nUnits : $hits;
+    $hits = $hits >= $this->nUnits ? $this->nUnits : $hits;
     $this->incNUnits(-$hits);
     return $hits;
   }
