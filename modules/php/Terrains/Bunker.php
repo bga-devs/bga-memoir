@@ -17,7 +17,6 @@ class Bunker extends \M44\Models\RectTerrain
     $this->isBlockingLineOfSight = true;
     $this->canIgnoreOneFlag = true;
     $this->defense = [\INFANTRY => -1, ARMOR => -2];
-    // $this->IsImpassableForRetreat = [\ARTILLERY];
     $this->cantLeave = [\ARTILLERY];
     $this->isBunker = true;
 

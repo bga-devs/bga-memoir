@@ -202,14 +202,14 @@ class Board
     return self::cellHasProperty($cell, 'cantLeave', $unit);
   }
 
+  public static function isImpassableForRetreat($unit, $cell)
+  {
+    return self::cellHasProperty($cell, 'isImpassableForRetreat', $unit);
+  }
+
   public static function isHill($cell)
   {
     return self::cellHasProperty($cell, 'isHill', null);
-  }
-
-  public static function isOcean($cell)
-  {
-    return self::cellHasProperty($cell, 'isOcean', null);
   }
 
   // Useful for DigIn card
@@ -290,13 +290,6 @@ class Board
     // Units activated by "BehindEnemyLines" card have no terrain restriction
     if ($unit->getActivationOCard()->getType() == \CARD_BEHIND_LINES) {
       return 1;
-    }
-
-    // If I am coming from Ocean and have already moved, must stop
-    if ($source['d'] >= 1 || $unit->getMoves() >= 1) {
-      if (self::isOcean($source)) {
-        return \INFINITY;
-      }
     }
 
     // If I'm coming from a 'must stop' terrain, can't go there unless dist = 0
@@ -689,7 +682,7 @@ class Board
    */
   public static function getReachableCellsForRetreat($unit, $d)
   {
-    // If the terrain is preventing retreat, return empty list
+    // If the terrain is preventing leaving, return empty list
     if (self::cantLeave($unit, $unit->getPos())) {
       return [];
     }
@@ -713,6 +706,10 @@ class Board
 
       // If there is an impassable terrain => can't retreat there
       if (self::isImpassable($unit, $target)) {
+        return \INFINITY;
+      }
+
+      if (self::isImpassableForRetreat($unit, $target)) {
         return \INFINITY;
       }
 
