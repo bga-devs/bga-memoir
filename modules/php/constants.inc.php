@@ -168,6 +168,7 @@ const TERRAIN_CLASSES = [
   'village' => 'Village',
   'hill' => 'Hill',
   'bunker' => 'Bunker',
+  'cliff' => 'Cliff',
 
   'bridge' => 'Bridge',
   'bunker' => 'Bunker',

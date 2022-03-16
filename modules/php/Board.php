@@ -325,6 +325,10 @@ class Board
       return $d - $source['d'];
     }
 
+    if (self::cellHasProperty($target, 'isCliff', $unit)) {
+      return 2;
+    }
+
     return 1;
   }
 
@@ -698,7 +702,7 @@ class Board
   {
     // If the terrain is preventing leaving, return empty list
     if (self::cantLeave($unit, $unit->getPos())) {
-      return [];
+      return [[], []];
     }
 
     // Compute all cells reachable at distance $d in the good vertical direction

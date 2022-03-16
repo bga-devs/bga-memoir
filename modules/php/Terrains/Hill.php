@@ -6,7 +6,7 @@ class Hill extends \M44\Models\Terrain
 {
   public static function isTileOfType($hex)
   {
-    return in_array($hex['name'], ['hills']);
+    return in_array($hex['name'], ['hills']) && !isset($hex['behavior']);
   }
 
   public function __construct($row)
