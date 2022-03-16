@@ -212,6 +212,11 @@ class Board
     return self::cellHasProperty($cell, 'isHill', null);
   }
 
+  public static function isBeach($cell)
+  {
+    return self::cellHasProperty($cell, 'isBeach', null);
+  }
+
   // Useful for DigIn card
   public function canPlaceSandbag($unit)
   {
@@ -257,13 +262,22 @@ class Board
     });
 
     // Compute for each cell whether the unit might be able to attack after the move
-    foreach ($cells as &$cell) {
+    foreach ($cells as $cellkey => &$cell) {
+      // movement more than 2 on beach
+      if ($cell['d'] + $unit->getMoves() > 2) {
+        foreach ($cell['paths'] as &$path) {
+          foreach ($path as &$indivCell) {
+            if (self::isBeach($indivCell) || (self::isBeach($unit->getPos()) && $unit->getMoves() > 0)) {
+              unset($cells[$cellkey]);
+            }
+          }
+        }
+      }
       if (!empty(self::getTargetableCells($unit, $cell, $cell['d']))) {
         $cell['canAttack'] = true;
       }
     }
-
-    return $cells;
+    return array_values($cells);
   }
 
   public static function getDeplacementCost($unit, $source, $target, $d)

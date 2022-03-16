@@ -28,7 +28,7 @@ trait DebugTrait
     //     $terrain->setExtraDatas('truc', 'mm');
     //   }
     // }
-    throw new \feException(print_r(Board::getReachableCellsAtDistance(Units::get(15), 2)));
+    throw new \feException(print_r(Board::getReachableCellsAtDistance(Units::get(14), 3)));
   }
 
   function tp($pId, $unitId, $min, $max)

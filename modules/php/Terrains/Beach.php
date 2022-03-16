@@ -12,8 +12,9 @@ class Beach extends \M44\Models\Terrain
   {
     $this->name = clienttranslate('Beaches');
     $this->number = 1;
+    $this->isBeach = true;
     // Maximum movement onto beaches is 2 hexes
-    
+
     parent::__construct($row);
   }
 }
