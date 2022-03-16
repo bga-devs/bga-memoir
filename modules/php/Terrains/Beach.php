@@ -17,4 +17,15 @@ class Beach extends \M44\Models\Terrain
 
     parent::__construct($row);
   }
+
+  public function isValidPath($unit, $cell, $path)
+  {
+    $mustCheck = true;
+    // If sand is under unit, only check constraint if unit already made at least 1 move
+    if ($this->getX() == $unit->getX() && $this->getY() == $unit->getY()) {
+      $mustCheck = $unit->getMoves() > 0;
+    }
+
+    return !$mustCheck || $unit->getMoves() + count($path) - 1 <= 2;
+  }
 }

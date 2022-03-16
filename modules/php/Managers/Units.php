@@ -145,11 +145,7 @@ class Units extends \M44\Helpers\Pieces
 
         foreach (Board::getTerrainsInCell($data) as $terrain) {
           if ($terrain->isBunker($data)) {
-            if (in_array($data['nation'], self::$nations[AXIS])) {
-              $side = AXIS;
-            } else {
-              $side = ALLIES;
-            }
+            $side = in_array($data['nation'], self::$nations[AXIS]) ? AXIS : ALLIES;
             $terrain->setExtraDatas('owner', $side);
           }
         }
@@ -197,7 +193,7 @@ class Units extends \M44\Helpers\Pieces
         return [
           'type' => $t,
           'nation' => $nation,
-          'badge' => $unit['badge'] ?? null,
+          'badge' => isset($unit['badge']) ? substr($unit['badge'], 5) : 0,
         ];
       }
     }

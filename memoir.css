@@ -987,6 +987,162 @@ html {
   width: 100%;
   height: 100%;
   position: relative; }
+  .m44-unit::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 63%;
+    left: 32%;
+    width: 35%;
+    height: 35%;
+    background-image: url("img/units_badges.png");
+    background-size: 600% 800%; }
+  .m44-unit[data-badge='0']::after {
+    display: none; }
+  .m44-unit[data-badge='1']::after {
+    background-position-x: 0%;
+    background-position-y: 0%; }
+  .m44-unit[data-badge='2']::after {
+    background-position-x: 20%;
+    background-position-y: 0%; }
+  .m44-unit[data-badge='3']::after {
+    background-position-x: 40%;
+    background-position-y: 0%; }
+  .m44-unit[data-badge='4']::after {
+    background-position-x: 60%;
+    background-position-y: 0%; }
+  .m44-unit[data-badge='5']::after {
+    background-position-x: 80%;
+    background-position-y: 0%; }
+  .m44-unit[data-badge='6']::after {
+    background-position-x: 100%;
+    background-position-y: 0%; }
+  .m44-unit[data-badge='7']::after {
+    background-position-x: 0%;
+    background-position-y: 14.2857142857%; }
+  .m44-unit[data-badge='8']::after {
+    background-position-x: 20%;
+    background-position-y: 14.2857142857%; }
+  .m44-unit[data-badge='9']::after {
+    background-position-x: 40%;
+    background-position-y: 14.2857142857%; }
+  .m44-unit[data-badge='10']::after {
+    background-position-x: 60%;
+    background-position-y: 14.2857142857%; }
+  .m44-unit[data-badge='11']::after {
+    background-position-x: 80%;
+    background-position-y: 14.2857142857%; }
+  .m44-unit[data-badge='12']::after {
+    background-position-x: 100%;
+    background-position-y: 14.2857142857%; }
+  .m44-unit[data-badge='13']::after {
+    background-position-x: 0%;
+    background-position-y: 28.5714285714%; }
+  .m44-unit[data-badge='14']::after {
+    background-position-x: 20%;
+    background-position-y: 28.5714285714%; }
+  .m44-unit[data-badge='15']::after {
+    background-position-x: 40%;
+    background-position-y: 28.5714285714%; }
+  .m44-unit[data-badge='16']::after {
+    background-position-x: 60%;
+    background-position-y: 28.5714285714%; }
+  .m44-unit[data-badge='17']::after {
+    background-position-x: 80%;
+    background-position-y: 28.5714285714%; }
+  .m44-unit[data-badge='18']::after {
+    background-position-x: 100%;
+    background-position-y: 28.5714285714%; }
+  .m44-unit[data-badge='19']::after {
+    background-position-x: 0%;
+    background-position-y: 42.8571428571%; }
+  .m44-unit[data-badge='20']::after {
+    background-position-x: 20%;
+    background-position-y: 42.8571428571%; }
+  .m44-unit[data-badge='21']::after {
+    background-position-x: 40%;
+    background-position-y: 42.8571428571%; }
+  .m44-unit[data-badge='22']::after {
+    background-position-x: 60%;
+    background-position-y: 42.8571428571%; }
+  .m44-unit[data-badge='23']::after {
+    background-position-x: 80%;
+    background-position-y: 42.8571428571%; }
+  .m44-unit[data-badge='24']::after {
+    background-position-x: 100%;
+    background-position-y: 42.8571428571%; }
+  .m44-unit[data-badge='25']::after {
+    background-position-x: 0%;
+    background-position-y: 57.1428571429%; }
+  .m44-unit[data-badge='26']::after {
+    background-position-x: 20%;
+    background-position-y: 57.1428571429%; }
+  .m44-unit[data-badge='27']::after {
+    background-position-x: 40%;
+    background-position-y: 57.1428571429%; }
+  .m44-unit[data-badge='28']::after {
+    background-position-x: 60%;
+    background-position-y: 57.1428571429%; }
+  .m44-unit[data-badge='29']::after {
+    background-position-x: 80%;
+    background-position-y: 57.1428571429%; }
+  .m44-unit[data-badge='30']::after {
+    background-position-x: 100%;
+    background-position-y: 57.1428571429%; }
+  .m44-unit[data-badge='31']::after {
+    background-position-x: 0%;
+    background-position-y: 71.4285714286%; }
+  .m44-unit[data-badge='32']::after {
+    background-position-x: 20%;
+    background-position-y: 71.4285714286%; }
+  .m44-unit[data-badge='33']::after {
+    background-position-x: 40%;
+    background-position-y: 71.4285714286%; }
+  .m44-unit[data-badge='34']::after {
+    background-position-x: 60%;
+    background-position-y: 71.4285714286%; }
+  .m44-unit[data-badge='35']::after {
+    background-position-x: 80%;
+    background-position-y: 71.4285714286%; }
+  .m44-unit[data-badge='36']::after {
+    background-position-x: 100%;
+    background-position-y: 71.4285714286%; }
+  .m44-unit[data-badge='37']::after {
+    background-position-x: 0%;
+    background-position-y: 85.7142857143%; }
+  .m44-unit[data-badge='38']::after {
+    background-position-x: 20%;
+    background-position-y: 85.7142857143%; }
+  .m44-unit[data-badge='39']::after {
+    background-position-x: 40%;
+    background-position-y: 85.7142857143%; }
+  .m44-unit[data-badge='40']::after {
+    background-position-x: 60%;
+    background-position-y: 85.7142857143%; }
+  .m44-unit[data-badge='41']::after {
+    background-position-x: 80%;
+    background-position-y: 85.7142857143%; }
+  .m44-unit[data-badge='42']::after {
+    background-position-x: 100%;
+    background-position-y: 85.7142857143%; }
+  .m44-unit[data-badge='43']::after {
+    background-position-x: 0%;
+    background-position-y: 100%; }
+  .m44-unit[data-badge='44']::after {
+    background-position-x: 20%;
+    background-position-y: 100%; }
+  .m44-unit[data-badge='45']::after {
+    background-position-x: 40%;
+    background-position-y: 100%; }
+  .m44-unit[data-badge='46']::after {
+    background-position-x: 60%;
+    background-position-y: 100%; }
+  .m44-unit[data-badge='47']::after {
+    background-position-x: 80%;
+    background-position-y: 100%; }
+  .m44-unit[data-badge='48']::after {
+    background-position-x: 100%;
+    background-position-y: 100%; }
   .m44-unit .m44-meeples-container {
     width: 100%;
     height: 0;

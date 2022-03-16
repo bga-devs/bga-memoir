@@ -381,9 +381,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       if (unit.onTheMove) classNames.push('onTheMove');
 
       return `
-      <div id="unit-${unit.id}" class="m44-unit ${classNames.join(' ')}" data-figures="${unit.figures}" data-type="${
-        unit.type
-      }" data-nation="${unit.nation}" data-orientation="${unit.orientation}">
+      <div id="unit-${unit.id}" class="m44-unit ${classNames.join(' ')}" data-figures="${unit.figures}"
+        data-type="${unit.type}" data-nation="${unit.nation}" data-orientation="${unit.orientation}"
+        data-badge="${unit.badge}">
         <div class='m44-meeples-container'>
           <div class="m44-unit-meeple"></div>
           <div class="m44-unit-meeple"></div>
