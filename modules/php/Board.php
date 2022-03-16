@@ -331,6 +331,15 @@ class Board
       return $d - $source['d'];
     }
 
+    // Armor & Artillery cannot go down from Cliff to Beach
+    if (
+      self::cellHasProperty($source, 'isCliffGetDown', $unit) &&
+      self::isBeach($target) &&
+      in_array($unit->getType(), [ARMOR, \INFANTRY])
+    ) {
+      return \INFINITY;
+    }
+
     if (self::cellHasProperty($target, 'isCliff', $unit)) {
       return 2;
     }

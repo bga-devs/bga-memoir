@@ -27,6 +27,11 @@ class Cliff extends \M44\Models\Terrain
     return false;
   }
 
+  public function isCliffGetDown($unit)
+  {
+    return true;
+  }
+
   public function isBlockingLineOfSight($unit, $target, $path)
   {
     $c = Board::getHillComponents();
