@@ -145,6 +145,9 @@ class Units extends \M44\Helpers\Pieces
         $data['location'] = 'board';
         $data['x'] = $hex['col'];
         $data['y'] = $hex['row'];
+        if (isset($hex['unit']['behavior'])) {
+          $data['extra_datas'] = ['behavior' => $hex['unit']['behavior']];
+        }
 
         foreach (Board::getTerrainsInCell($data) as $terrain) {
           if ($terrain->isBunker($data)) {

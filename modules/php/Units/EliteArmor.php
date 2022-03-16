@@ -9,4 +9,12 @@ class EliteArmor extends Armor
     $this->name = clienttranslate('Elite Armor');
     $this->maxUnits = 4;
   }
+
+  public function getMedalsWorth()
+  {
+    if ($this->getExtraDatas('behavior') == 'GERMAN_2VICTANK') {
+      return 2;
+    }
+    return 1;
+  }
 }
