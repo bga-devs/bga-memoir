@@ -56,6 +56,10 @@ $scenarios[7] = [
         'tags' => [
           0 => [
             'name' => 'medal1',
+            'medal' => [
+              'permanent' => true,
+              'counts_for' => 1,
+            ],
           ],
         ],
       ],
@@ -68,6 +72,10 @@ $scenarios[7] = [
         'tags' => [
           0 => [
             'name' => 'medal1',
+            'medal' => [
+              'permanent' => true,
+              'counts_for' => 1,
+            ],
           ],
         ],
       ],
