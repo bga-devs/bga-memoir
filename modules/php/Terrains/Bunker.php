@@ -22,26 +22,4 @@ class Bunker extends \M44\Models\RectTerrain
 
     parent::__construct($row);
   }
-
-  public function defense($unit)
-  {
-    if (!$this->isOriginalOwner($unit)) {
-      return $this->defense[$unit->getType()] ?? 0;
-    } else {
-      return 0;
-    }
-  }
-
-  protected function isOriginalOwner($unit)
-  {
-    return $unit
-      ->getPlayer()
-      ->getTeam()
-      ->getId() == $this->getExtraDatas('owner');
-  }
-
-  public function canIgnoreOneFlag($unit)
-  {
-    return $this->isOriginalOwner($unit);
-  }
 }

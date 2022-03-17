@@ -14,7 +14,7 @@ class Terrains extends \M44\Helpers\Pieces
 {
   protected static $table = 'terrains';
   protected static $prefix = 'tile_';
-  protected static $customFields = ['type', 'tile', 'orientation', 'extra_datas'];
+  protected static $customFields = ['type', 'tile', 'orientation', 'owner', 'extra_datas'];
   protected static $autoreshuffle = false;
   protected static function cast($row)
   {
@@ -89,12 +89,20 @@ class Terrains extends \M44\Helpers\Pieces
       foreach ($keys as $key) {
         if (isset($hex[$key])) {
           $terrain = $hex[$key];
+          $type = self::getTypeOfTile($terrain);
+          // Fallback code for bunker without original_owner flag
+          if($type == 'bunker' && !isset($terrain['original_owner'])){
+            $data = Units::getTypeAndNation($hex['unit']);
+            $terrain['original_owner'] = in_array($data['nation'], Units::$nations[ALLIES])? ALLIES : AXIS;
+          }
+
           $terrains[] = [
             'location' => $hex['col'] . '_' . $hex['row'],
             'tile' => $terrain['name'],
-            'type' => self::getTypeOfTile($terrain),
+            'type' => $type,
             'orientation' => $terrain['orientation'] ?? 1,
-            'extra_datas' => isset($terrain['behavior']) ? ['behavior' => $terrain['behavior']] : null,
+            'owner' => $terrain['original_owner'] ?? null,
+            'extra_datas' => null,
           ];
         }
       }

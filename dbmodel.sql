@@ -40,6 +40,7 @@ CREATE TABLE IF NOT EXISTS `terrains` (
   `type` VARCHAR(255) NOT NULL,
   `tile` VARCHAR(255) NOT NULL,
   `orientation` int(10) NOT NULL,
+  `owner` VARCHAR(255) NULL,
   `extra_datas` JSON NULL,
   PRIMARY KEY (`tile_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

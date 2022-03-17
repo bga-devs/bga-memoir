@@ -1204,9 +1204,9 @@ html {
     background-position: 66.666% 100%; }
   .m44-unit.attacked {
     background-position: 100% 100%; }
-  .m44-unit.airPowerTarget  {
+  .m44-unit.airPowerTarget {
     background-position: 100% 100%; }
-    .m44-unit.airPowerTarget ::before {
+    .m44-unit.airPowerTarget::before {
       content: attr(data-air-power-order);
       position: absolute;
       z-index: 2;

@@ -23,9 +23,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     setupBoard() {
       this._grid = [];
       let board = this.gamedatas.board;
-      let pId = this.isSpectator ? Object.values(this.gamedatas.players)[0] : this.player_id;
-      let bottomTeam = this.gamedatas.players[pId].team;
-      let rotate = this.gamedatas.teams.find((team) => team.team == bottomTeam).position == 1;
+      let rotate = this.gamedatas.teams.find((team) => team.team == this._bottomTeam).position == 1;
       this._isRotated = rotate;
 
       // Get dimensions based on type
@@ -117,7 +115,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
           let unit = board.grid[col][row].unit;
           if (unit) {
-            unit.orientation = bottomTeam != (ALLIES_NATIONS.includes(unit.nation) ? 'ALLIES' : 'AXIS') ? 1 : 0;
+            unit.orientation = this._bottomTeam != (ALLIES_NATIONS.includes(unit.nation) ? 'ALLIES' : 'AXIS') ? 1 : 0;
             this._grid[col][row].unit = unit;
             this.place('tplUnit', unit, `cell-${col}-${y}`);
           }

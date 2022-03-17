@@ -84,13 +84,17 @@ define([
       debug('SETUP', gamedatas);
       this.inherited(arguments);
 
+      // WHich player point of vue are we going to take ?
+      this._pId = this.isSpectator ? Object.values(this.gamedatas.players)[0] : this.player_id;
+      this._bottomTeam = this.gamedatas.players[this._pId].team;
+
       // Load board
       if (gamedatas.board) {
         this.setupBoard();
       }
+
       this.setupPlayers();
       this.setupTeams();
-
 
       // Handle deck and discard
       this._deckCounter = this.createCounter('deck-count', gamedatas.deckCount);
@@ -142,6 +146,7 @@ define([
       this.gamedatas.players = n.args.players;
       this.gamedatas.board = n.args.board;
       this.gamedatas.teams = n.args.teams;
+      this._bottomTeam = this.gamedatas.players[this._pId].team;
       this._deckCounter.setValue(n.args.deckCount);
 
       this.setupTeams();
