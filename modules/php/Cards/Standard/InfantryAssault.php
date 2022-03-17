@@ -49,12 +49,12 @@ class InfantryAssault extends \M44\Models\Card
   {
     $player = $this->getPlayer();
     $section = (int) $this->extraDatas['section'];
-    if($this->isCounterAttackMirror){
+    if ($this->isCounterAttackMirror) {
       $section = $this->mirrorSection($section);
     }
     $units = $player->getUnitsInSection($section);
 
-    // Keep only armor
+    // Keep only infantry
     $infantry = $units->filter(function ($unit) {
       return $unit->getType() == \INFANTRY;
     });
@@ -91,6 +91,22 @@ class InfantryAssault extends \M44\Models\Card
         } else {
           return $unit->getPossibleMoves();
         }
+      }),
+    ];
+  }
+
+  public function getArgsAttackUnits($overrideNbFights = null)
+  {
+    $player = $this->getPlayer();
+    $units = Units::getActivatedByCard($this);
+
+    return [
+      'units' => $units->map(function ($unit) use ($overrideNbFights) {
+        $maxFights = $overrideNbFights[$unit->getType()] ?? $this->nbFights;
+        if ($unit->getFights() >= $maxFights) {
+          return [];
+        }
+        return $unit->getTargetableUnits(-3);
       }),
     ];
   }

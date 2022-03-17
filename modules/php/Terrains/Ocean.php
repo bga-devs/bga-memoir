@@ -15,6 +15,7 @@ class Ocean extends \M44\Models\Terrain
     $this->cannotBattle = true;
     $this->mustStopWhenEntering = true;
     $this->isImpassableForRetreat = [\ARTILLERY, \ARMOR, \INFANTRY];
+    $this->isBlockingSandbag = true;
     parent::__construct($row);
   }
 }

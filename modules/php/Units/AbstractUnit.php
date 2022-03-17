@@ -215,9 +215,9 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     return $this->mustSeeToAttack;
   }
 
-  public function getTargetableUnits()
+  public function getTargetableUnits($overrideMoves = null)
   {
-    return Board::getTargetableCells($this);
+    return Board::getTargetableCells($this, null, $overrideMoves);
   }
 
   public function getHits($type, $nb)
