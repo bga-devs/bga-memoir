@@ -2,7 +2,7 @@
 namespace M44\Terrains;
 use M44\Board;
 
-class Cliff extends SeaBluff
+class Cliff extends Hill
 {
   public static function isTileOfType($hex)
   {
@@ -11,9 +11,6 @@ class Cliff extends SeaBluff
 
   public function __construct($row)
   {
-    $this->name = clienttranslate('Cliffs');
-    $this->number = 6;
-
     parent::__construct($row);
   }
 

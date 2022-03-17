@@ -47,7 +47,7 @@
 
   @for $i from 0 through 8 {
     &[data-sprite='#{$i}'] {
-      background-position-x: ($i % 2) * 100% / 2;
+      background-position-x: ($i % 2) * 100%;
       background-position-y: (($i - ($i % 2)) / 2) * 100% / 3;
     }
   }

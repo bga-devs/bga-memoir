@@ -6,16 +6,14 @@ class SeaBluff extends Hill
 {
   public static function isTileOfType($hex)
   {
-    return $hex['name'] == 'hills' && isset($hex['behavior']) && $hex['behavior'] == '????';
+    return $hex['name'] == 'hills' && isset($hex['behavior']) && $hex['behavior'] == 'BLUFF';
   }
 
   public function __construct($row)
   {
-    $this->name = clienttranslate('Sea Bluffs');
-    $this->number = 6;
-    $this->isHill = true;
-
     parent::__construct($row);
+    $this->name = clienttranslate('Cliffs & Sea Bluffs');
+    $this->number = 11;
   }
 
   public function getLeavingDeplacementCost($unit, $source, $target, $d, $takeGround)

@@ -166,7 +166,7 @@ $scenarios[11] = [
         'col' => 3,
         'terrain' => [
           'name' => 'hills',
-          'behavior' => 'STEEP_HILL',
+          'behavior' => 'BLUFF',
         ],
         'rect_terrain' => [
           'name' => 'bunker',
@@ -181,7 +181,7 @@ $scenarios[11] = [
         'col' => 5,
         'terrain' => [
           'name' => 'hills',
-          'behavior' => 'STEEP_HILL',
+          'behavior' => 'BLUFF',
         ],
       ],
       10 => [
@@ -197,7 +197,7 @@ $scenarios[11] = [
         'col' => 9,
         'terrain' => [
           'name' => 'hills',
-          'behavior' => 'STEEP_HILL',
+          'behavior' => 'BLUFF',
         ],
         'rect_terrain' => [
           'name' => 'bunker',
@@ -212,7 +212,7 @@ $scenarios[11] = [
         'col' => 11,
         'terrain' => [
           'name' => 'hills',
-          'behavior' => 'STEEP_HILL',
+          'behavior' => 'BLUFF',
         ],
       ],
       13 => [
@@ -220,7 +220,7 @@ $scenarios[11] = [
         'col' => 13,
         'terrain' => [
           'name' => 'hills',
-          'behavior' => 'STEEP_HILL',
+          'behavior' => 'BLUFF',
         ],
       ],
       14 => [
@@ -228,7 +228,7 @@ $scenarios[11] = [
         'col' => 17,
         'terrain' => [
           'name' => 'hills',
-          'behavior' => 'STEEP_HILL',
+          'behavior' => 'BLUFF',
         ],
         'rect_terrain' => [
           'name' => 'bunker',
@@ -243,7 +243,7 @@ $scenarios[11] = [
         'col' => 19,
         'terrain' => [
           'name' => 'hills',
-          'behavior' => 'STEEP_HILL',
+          'behavior' => 'BLUFF',
         ],
       ],
       16 => [
@@ -251,7 +251,7 @@ $scenarios[11] = [
         'col' => 21,
         'terrain' => [
           'name' => 'hills',
-          'behavior' => 'STEEP_HILL',
+          'behavior' => 'BLUFF',
         ],
         'obstacle' => [
           'name' => 'sand',
@@ -266,7 +266,7 @@ $scenarios[11] = [
         'col' => 0,
         'terrain' => [
           'name' => 'hills',
-          'behavior' => 'STEEP_HILL',
+          'behavior' => 'BLUFF',
         ],
         'obstacle' => [
           'name' => 'sand',
@@ -313,7 +313,7 @@ $scenarios[11] = [
         'col' => 24,
         'terrain' => [
           'name' => 'hills',
-          'behavior' => 'STEEP_HILL',
+          'behavior' => 'BLUFF',
         ],
         'rect_terrain' => [
           'name' => 'bunker',

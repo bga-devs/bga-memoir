@@ -251,26 +251,26 @@ html {
       z-index: 3; }
   #m44-board[data-type='standard'] {
     width: calc(var(--memoirBoardScale) * 900px);
-    height: calc(var(--memoirBoardScale) * 595.2px); }
+    height: calc(var(--memoirBoardScale) * 593.845991166px); }
     #m44-board[data-type='standard'] .m44-grid {
       grid-template-columns: repeat(28, 1fr);
       grid-template-rows: repeat(32, 1fr); }
   #m44-board[data-type='overlord'] {
     width: calc(var(--memoirBoardScale) * 1500px);
-    height: calc(var(--memoirBoardScale) * 519.6152px); }
+    height: calc(var(--memoirBoardScale) * 513.20023928px); }
     #m44-board[data-type='overlord'] .m44-grid {
       grid-template-columns: repeat(54, 1fr);
       grid-template-rows: repeat(32, 1fr); }
   #m44-board[data-type='brkthru'] {
     width: calc(var(--memoirBoardScale) * 800px);
-    height: calc(var(--memoirBoardScale) * 924.9px); }
+    height: calc(var(--memoirBoardScale) * 923.760430703px); }
     #m44-board[data-type='brkthru'] .m44-grid {
       grid-template-columns: repeat(28, 1fr);
       grid-template-rows: repeat(56, 1fr); }
   #m44-board .hex-grid-item {
     position: relative;
     height: 0;
-    padding-bottom: 115.7%; }
+    padding-bottom: 115.470053838%; }
     #m44-board .hex-grid-item.coordinate-marker {
       padding-bottom: 0;
       height: 100%;
@@ -288,8 +288,13 @@ html {
       left: 0;
       width: 100%;
       height: 100%;
-      clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-      -webkit-clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); }
+      clip-path: polygon(50% 0.7%, 99.3% 25%, 99.3% 75%, 50% 99.3%, 0.7% 75%, 0.7% 25%);
+      /*
+      &.hex-grid-background {
+        clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        -webkit-clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      }
+      */ }
       #m44-board .hex-grid-item .hex-grid-content[data-rotation='1'] {
         transform: rotate(30deg); }
       #m44-board .hex-grid-item .hex-grid-content[data-rotation='2'] {
@@ -1341,6 +1346,20 @@ html {
     left: 52%;
     top: 14%; }
 
+.m44-unit[data-orientation='0'][data-type='3'][data-nation='us'] .m44-unit-meeple {
+  width: 50%;
+  height: 61.165%;
+  background-size: 994.175%;
+  background-position: 71.987% 0.259067%;
+  background-color: transparent;
+  border-radius: none; }
+  .m44-unit[data-orientation='0'][data-type='3'][data-nation='us'] .m44-unit-meeple:nth-of-type(1) {
+    left: 12%;
+    top: -7%; }
+  .m44-unit[data-orientation='0'][data-type='3'][data-nation='us'] .m44-unit-meeple:nth-of-type(2) {
+    left: 44%;
+    top: 29%; }
+
 .m44-unit[data-orientation='1'][data-type='1'][data-nation='ger'] .m44-unit-meeple {
   width: 43%;
   height: 63.5239%;
@@ -1432,6 +1451,20 @@ html {
     left: -4%;
     top: 12%; }
   .m44-unit[data-orientation='1'][data-type='3'][data-nation='ger'] .m44-unit-meeple:nth-of-type(2) {
+    left: 26%;
+    top: 44%; }
+
+.m44-unit[data-orientation='1'][data-type='3'][data-nation='us'] .m44-unit-meeple {
+  width: 70%;
+  height: 50.169%;
+  background-size: 853.333%;
+  background-position: 0.110619% 85.446%;
+  background-color: transparent;
+  border-radius: none; }
+  .m44-unit[data-orientation='1'][data-type='3'][data-nation='us'] .m44-unit-meeple:nth-of-type(1) {
+    left: -4%;
+    top: 12%; }
+  .m44-unit[data-orientation='1'][data-type='3'][data-nation='us'] .m44-unit-meeple:nth-of-type(2) {
     left: 26%;
     top: 44%; }
 
@@ -1536,18 +1569,6 @@ html {
   height: 95px;
   background-position: 74.8116% 62.8297%;
   background-size: 1077.89%; }
-
-.usgun_bottom {
-  width: 103px;
-  height: 126px;
-  background-position: 71.987% 0.259067%;
-  background-size: 994.175%; }
-
-.usgun_top {
-  width: 120px;
-  height: 86px;
-  background-position: 0.110619% 85.446%;
-  background-size: 853.333%; }
 
 :root {
   --memoirCardScale: 0.9; }
@@ -1917,25 +1938,25 @@ html {
     background-position-x: 0%;
     background-position-y: 0%; }
   .hex-grid-item .board-medal[data-sprite='1'] {
-    background-position-x: 50%;
+    background-position-x: 100%;
     background-position-y: 0%; }
   .hex-grid-item .board-medal[data-sprite='2'] {
     background-position-x: 0%;
     background-position-y: 33.3333333333%; }
   .hex-grid-item .board-medal[data-sprite='3'] {
-    background-position-x: 50%;
+    background-position-x: 100%;
     background-position-y: 33.3333333333%; }
   .hex-grid-item .board-medal[data-sprite='4'] {
     background-position-x: 0%;
     background-position-y: 66.6666666667%; }
   .hex-grid-item .board-medal[data-sprite='5'] {
-    background-position-x: 50%;
+    background-position-x: 100%;
     background-position-y: 66.6666666667%; }
   .hex-grid-item .board-medal[data-sprite='6'] {
     background-position-x: 0%;
     background-position-y: 100%; }
   .hex-grid-item .board-medal[data-sprite='7'] {
-    background-position-x: 50%;
+    background-position-x: 100%;
     background-position-y: 100%; }
   .hex-grid-item .board-medal[data-sprite='8'] {
     background-position-x: 0%;

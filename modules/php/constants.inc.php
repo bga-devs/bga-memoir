@@ -170,6 +170,7 @@ const TERRAIN_CLASSES = [
   'bridge' => 'Bridge',
   'sand' => 'Sandbag',
   'cliff' => 'Cliff',
+  'bluff' => 'SeaBluff',
   'seawall' => 'SeaWall',
   'steephill' => 'SteepHill',
   'village' => 'Village',

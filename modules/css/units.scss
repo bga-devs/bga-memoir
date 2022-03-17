@@ -164,6 +164,7 @@ $units: (
     ),
     $ARTILLERY: (
       'ger' 50% 1.1636 930.909% 20.4595% 0.260417% (23% -2%, 52% 14%),
+      'us' 50% 1.2233 994.175% 71.987% 0.259067% (12% -7%, 44% 29%),
     ),
   ),
   $TOP: (
@@ -177,6 +178,7 @@ $units: (
     ),
     $ARTILLERY: (
       'ger' 70% 0.7759 882.759% 97.6872% 62.0853% (-4% 12%, 26% 44%),
+      'us' 70% 0.7167 853.333% 0.110619% 85.446% (-4% 12%, 26% 44%),
     ),
   ),
 );
@@ -308,16 +310,4 @@ $units: (
   height: 95px;
   background-position: 74.8116% 62.8297%;
   background-size: 1077.89%;
-}
-.usgun_bottom {
-  width: 103px;
-  height: 126px;
-  background-position: 71.987% 0.259067%;
-  background-size: 994.175%;
-}
-.usgun_top {
-  width: 120px;
-  height: 86px;
-  background-position: 0.110619% 85.446%;
-  background-size: 853.333%;
 }

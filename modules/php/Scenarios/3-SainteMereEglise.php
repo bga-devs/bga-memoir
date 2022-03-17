@@ -244,7 +244,7 @@ $scenarios[3] = [
         'row' => 4,
         'col' => 12,
         'terrain' => [
-          'name' => 'buildings',
+          'name' => 'church',
         ],
         'unit' => [
           'name' => 'infger',

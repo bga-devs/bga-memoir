@@ -11,10 +11,9 @@ class SteepHill extends Hill
 
   public function __construct($row)
   {
+    parent::__construct($row);
     $this->name = clienttranslate('Steep Hills');
     $this->number = 13;
-
-    parent::__construct($row);
   }
 
   public function getEnteringDeplacementCost($unit, $source, $target, $d, $takeGround)
