@@ -84,13 +84,13 @@ define([
       debug('SETUP', gamedatas);
       this.inherited(arguments);
 
-      this.setupPlayers();
-      this.setupTeams();
-
       // Load board
       if (gamedatas.board) {
         this.setupBoard();
       }
+      this.setupPlayers();
+      this.setupTeams();
+
 
       // Handle deck and discard
       this._deckCounter = this.createCounter('deck-count', gamedatas.deckCount);

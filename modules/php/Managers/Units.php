@@ -47,7 +47,7 @@ class Units extends \M44\Helpers\Pieces
 
   public function getInstance($type, $badge, $row = null)
   {
-    $className = '\M44\Units\\' . (TROOP_CLASSES[$type . $badge] ?? TROOP_CLASSES[$type]);
+    $className = '\M44\Units\\' . (TROOP_CLASSES[$type . '_' . $badge] ?? TROOP_CLASSES[$type]);
     return new $className($row);
   }
 

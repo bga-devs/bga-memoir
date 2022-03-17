@@ -13,13 +13,13 @@ class Beach extends \M44\Models\Terrain
     $this->name = clienttranslate('Beaches');
     $this->number = 1;
     $this->isBeach = true;
-    // Maximum movement onto beaches is 2 hexes
 
     parent::__construct($row);
   }
 
   public function isValidPath($unit, $cell, $path)
   {
+    return true;
     $mustCheck = true;
     // If sand is under unit, only check constraint if unit already made at least 1 move
     if ($this->getX() == $unit->getX() && $this->getY() == $unit->getY()) {

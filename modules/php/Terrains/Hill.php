@@ -31,7 +31,7 @@ class Hill extends \M44\Models\Terrain
     if ($unit->getType() == \ARTILLERY) {
       return 0;
     } else {
-      $isHill = Board::isHill($unit->getPos());
+      $isHill = Board::isHillCell($unit->getPos());
       return $isHill ? 0 : -1;
     }
   }

@@ -17,21 +17,18 @@ trait TakeGroundTrait
     $unit = $attack['unit'];
 
     // To take ground, we must have the following:
-    //   - attack at distance 1
+    //   - attack at distance 1 and cost of deplacement of 1
     //   - attacked cell is now empty (opp unit retreated or eliminated)
     //   - unit has not taken too many grounds already (1 for infantry, 2 for armors)
     //   - unit has not entered a mustStopWhenEntering terrain during the move phase
-    //   - unit can enter on the terrain
-    //   - unit is not trying to take ground from a beach on a cliff
+    //   - unit can enter and take ground on the terrain
     if (
       $attack['distance'] != 1 ||
+      Board::getDeplacementCost($unit, $unit->getPos(), $attack, 1, true) > 1 ||
       $unit->getGrounds() >= $unit->getMaxGrounds() ||
       Board::getUnitInCell($attack['x'], $attack['y']) != null ||
       ($unit->getMoves() > 0 && Board::mustStopWhenEntering($unit, $unit->getPos())) ||
-      Board::isImpassable($unit, ['x' => $attack['x'], 'y' => $attack['y']]) ||
-      ($unit->getType() == \INFANTRY &&
-        Board::cellHasProperty(['x' => $attack['x'], 'y' => $attack['y']], 'isCliff', $unit) &&
-        Board::isBeach($unit->getPos()))
+      Board::isImpassable($unit, ['x' => $attack['x'], 'y' => $attack['y']])
     ) {
       $this->closeCurrentAttack();
     }

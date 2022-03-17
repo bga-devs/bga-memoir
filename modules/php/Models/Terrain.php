@@ -46,12 +46,11 @@ class Terrain extends \M44\Helpers\DB_Model
     'cantLeave',
     'isImpassableForRetreat',
     'cannotBattle',
+    'cantTakeGround',
 
     'isHill',
     'isBunker',
     'isBeach',
-    'isCliff',
-    'isCliffGetDown',
 
     'defense',
     'offense',
@@ -135,5 +134,15 @@ class Terrain extends \M44\Helpers\DB_Model
   public function isValidPath($unit, $cell, $path)
   {
     return true;
+  }
+
+  public function getLeavingDeplacementCost($unit, $source, $target, $d, $takeGround)
+  {
+    return 1;
+  }
+
+  public function getEnteringDeplacementCost($unit, $source, $target, $d, $takeGround)
+  {
+    return 1;
   }
 }

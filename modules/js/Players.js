@@ -56,6 +56,12 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         container = pos + '-medals-container';
       }
 
+      if (medal.type == MEDAL_POSITION) {
+        let boardMedal = $(`board-medal-${medal.foreign_id}`);
+        if (boardMedal.dataset.permanent == 1) {
+          boardMedal.classList.add('hide');
+        }
+      }
       this.place('tplMedal', medal, container);
     },
 

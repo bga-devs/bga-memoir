@@ -144,6 +144,17 @@ class Terrains extends \M44\Helpers\Pieces
     }
     // TODO : handle flooded grounds
 
+    // Remove the beach/flooded hexes if something else is on top of it
+    $locations = [];
+    foreach ($board['hexagons'] as $hex) {
+      if (isset($hex['terrain'])) {
+        $locations[] = $hex['col'] . '_' . $hex['row'];
+      }
+    }
+    Utils::filter($terrains, function ($terrain) use ($locations) {
+      return !in_array($terrain['location'], $locations);
+    });
+
     return $terrains;
   }
 }

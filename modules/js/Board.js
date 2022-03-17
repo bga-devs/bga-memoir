@@ -259,7 +259,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       let sprite = SPRITES.findIndex((t) => t == medal.sprite);
 
       return `
-      <div id='board-medal-${medal.id}' class="board-medal" data-team="${medal.team}" data-sprite="${sprite}"></div>`;
+      <div id='board-medal-${medal.id}' class="board-medal"
+        data-team="${medal.team}" data-sprite="${sprite}" data-permanent="${medal.permanent ? 1 : 0}"></div>`;
     },
 
     notif_addObstacle(n) {

@@ -1911,6 +1911,8 @@ html {
   z-index: 3;
   background-image: url("img/medals.png");
   background-size: 200% 400%; }
+  .hex-grid-item .board-medal.hide {
+    visibility: hidden; }
   .hex-grid-item .board-medal[data-sprite='0'] {
     background-position-x: 0%;
     background-position-y: 0%; }

@@ -36,6 +36,10 @@
   top: 16%;
   z-index: 3;
 
+  &.hide {
+    visibility: hidden;
+  }
+
   background-image: url('img/medals.png');
   background-size: 200% 400%;
 

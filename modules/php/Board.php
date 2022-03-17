@@ -173,54 +173,24 @@ class Board
     return false;
   }
 
-  public static function isImpassable($unit, $cell)
+  /**
+   * Do some magic to call self::{$property}Cell that will call cellHasProperty
+   *  eg: self::isImpassableCell will call cellHasProperty(..., 'isImpassable', ...)
+   */
+  public static function __callStatic($method, $args)
   {
-    return self::cellHasProperty($cell, 'isImpassable', $unit);
-  }
-
-  public static function mustStopWhenEntering($unit, $cell)
-  {
-    return self::cellHasProperty($cell, 'mustStopWhenEntering', $unit);
-  }
-
-  public static function mustBeAdjacentToEnter($unit, $cell)
-  {
-    return self::cellHasProperty($cell, 'mustBeAdjacentToEnter', $unit);
-  }
-
-  public static function mustStopWhenLeaving($unit, $cell)
-  {
-    return self::cellHasProperty($cell, 'mustStopWhenLeaving', $unit);
-  }
-
-  // public static function cantRetreat($unit, $cell)
-  // {
-  //   return self::cellHasProperty($cell, 'cantRetreat', $unit);
-
-  public static function cantLeave($unit, $cell)
-  {
-    return self::cellHasProperty($cell, 'cantLeave', $unit);
-  }
-
-  public static function isImpassableForRetreat($unit, $cell)
-  {
-    return self::cellHasProperty($cell, 'isImpassableForRetreat', $unit);
-  }
-
-  public static function isHill($cell)
-  {
-    return self::cellHasProperty($cell, 'isHill', null);
-  }
-
-  public static function isBeach($cell)
-  {
-    return self::cellHasProperty($cell, 'isBeach', null);
+    if (preg_match('/^([a-zA-Z]+)Cell$/', $method, $match)) {
+      $prop = $match[1];
+      $cell = $args[0];
+      $unit = $args[1] ?? null;
+      return self::cellHasProperty($cell, $prop, $unit);
+    }
   }
 
   // Useful for DigIn card
   public function canPlaceSandbag($unit)
   {
-    return self::cellHasProperty($unit->getPos(), 'isBlockingSandbag', $unit);
+    return !self::cellHasProperty($unit->getPos(), 'isBlockingSandbag', $unit);
   }
 
   /////////////////////////////////
@@ -286,7 +256,7 @@ class Board
    * getDeplacementCost: return the cost for a unit to move from $source to an adjacent $target,
    *    given the fact that the unit can move at most $d hexes
    */
-  public static function getDeplacementCost($unit, $source, $target, $d)
+  public static function getDeplacementCost($unit, $source, $target, $d, $takeGround = false)
   {
     // Get corresponding cells
     $sourceCell = self::$grid[$source['x']][$source['y']];
@@ -298,12 +268,12 @@ class Board
     }
 
     // If there is an impassable terrain => can't go there
-    if (self::isImpassable($unit, $target)) {
+    if (self::isImpassableCell($target, $unit)) {
       return \INFINITY;
     }
 
     // If my unit cannot leave the hex (bunker & artillery)
-    if (self::cantLeave($unit, $source)) {
+    if (self::cantLeaveCell($source, $unit)) {
       return \INFINITY;
     }
 
@@ -314,37 +284,33 @@ class Board
 
     // If I'm coming from a 'must stop' terrain, can't go there unless dist = 0
     if ($source['d'] > 0 || $unit->getMoves() > 0) {
-      if (self::mustStopWhenEntering($unit, $source)) {
+      if (self::mustStopWhenEnteringCell($source, $unit)) {
         return \INFINITY;
       }
     }
 
     // If I'm going to a 'must be adjacent' terrain, can't go there unless dist = 0
     if ($source['d'] > 0 || $unit->getMoves() > 0) {
-      if (self::mustBeAdjacentToEnter($unit, $target)) {
+      if (self::mustBeAdjacentToEnterCell($target, $unit)) {
         return \INFINITY;
       }
     }
 
     // If I'm coming from a 'must stop when leaving' terrain, consume all the moves
-    if (self::mustStopWhenLeaving($unit, $source)) {
+    if (self::mustStopWhenLeavingCell($source, $unit)) {
       return $d - $source['d'];
     }
 
-    // Armor & Artillery cannot go down from Cliff to Beach
-    if (
-      self::cellHasProperty($source, 'isCliffGetDown', $unit) &&
-      self::isBeach($target) &&
-      in_array($unit->getType(), [ARMOR, \INFANTRY])
-    ) {
-      return \INFINITY;
+    // Otherwise, ask the terrains about it and take the maximum of the costs
+    $cost = 1;
+    foreach ($sourceCell['terrains'] as $terrain) {
+      $cost = max($cost, $terrain->getLeavingDeplacementCost($unit, $source, $target, $d, $takeGround));
+    }
+    foreach ($targetCell['terrains'] as $terrain) {
+      $cost = max($cost, $terrain->getEnteringDeplacementCost($unit, $source, $target, $d, $takeGround));
     }
 
-    if (self::cellHasProperty($target, 'isCliff', $unit)) {
-      return 2;
-    }
-
-    return 1;
+    return $cost;
   }
 
   /**
@@ -651,7 +617,7 @@ class Board
       $hills = self::createGrid(false);
       foreach ($hills as $x => $col) {
         foreach ($col as $y => $node) {
-          $hills[$x][$y] = self::isHill(['x' => $x, 'y' => $y]);
+          $hills[$x][$y] = self::isHillCell(['x' => $x, 'y' => $y]);
         }
       }
 
@@ -675,14 +641,7 @@ class Board
   public static function canIgnoreOneFlag($unit)
   {
     $cell = $unit->getPos();
-    $t = self::$grid[$cell['x']][$cell['y']];
-    foreach ($t['terrains'] as $t) {
-      if ($t->canIgnoreOneFlag($unit)) {
-        return true;
-      }
-    }
-
-    return false;
+    return self::canIgnoreOneFlagCell($unit->getPos(), $unit);
   }
 
   /**
@@ -738,7 +697,7 @@ class Board
   public static function getReachableCellsForRetreat($unit, $d)
   {
     // If the terrain is preventing leaving, return empty list
-    if (self::cantLeave($unit, $unit->getPos())) {
+    if (self::cantLeaveCell($unit->getPos(), $unit)) {
       return [[], []];
     }
 
@@ -760,7 +719,7 @@ class Board
       }
 
       // If there is an impassable terrain => can't retreat there
-      if (self::isImpassable($unit, $target) || self::isImpassableForRetreat($unit, $target)) {
+      if (self::isImpassableCell($target, $unit) || self::isImpassableForRetreatCell($target, $unit)) {
         return \INFINITY;
       }
 

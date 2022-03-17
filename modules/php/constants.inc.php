@@ -155,8 +155,8 @@ const MEDAL_POSITION = 2;
 
 const WINTER_FACE = 'WINTER';
 const BEACH_FACE = 'BEACH';
-const COUNRY_FACE = 'COUNRY'; // TODO : check from editor
-const DESERT_FACE = 'DESERT'; // TODO : check from editor
+const COUNRY_FACE = 'COUNRY';
+const DESERT_FACE = 'DESERT';
 
 const TERRAIN_CLASSES = [
   'beach' => 'Beach',
@@ -184,18 +184,10 @@ const TROOP_CLASSES = [
   'tank' => 'Armor',
   'gun' => 'Artillery',
   // type + badge number if non decorative
-  'inf23' => 'FrenchResistance',
+  'inf_23' => 'FrenchResistance',
 ];
 
 const TROOP_BADGE_MAPPING = ['FRENCH_RESISTANCE' => 'badge3'];
-
-// const TROOP_FIGURES = [
-//   'inf2' => 4,
-//   'tank2' => 3,
-//   'inf' => 4,
-//   'tank' => 3,
-//   'gun' => 2,
-// ];
 
 /******************
  ****** STATS ******
