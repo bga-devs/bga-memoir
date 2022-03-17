@@ -148,17 +148,16 @@ trait AttackUnitsTrait
   public function stAttackThrow()
   {
     $attack = $this->getCurrentAttack();
-    $unit = $attack['unit']; // TODO : handle cards that attacks without activating units
+    $unit = $attack['unit'];
     $oppUnit = $attack['oppUnit'];
-    if ($unit != null) {
-      $player = $unit->getPlayer();
-    } else {
-      $player = Players::getActive();
-    }
-    $card = $player->getCardInPlay();
+    $player = $attack['player'];
+    $card = $attack['card'];
 
     // Check if ambush was played and successfull
     if ($attack['ambush']) {
+      if (is_null($unit)) {
+        throw new \BgaVisibleSystemException('Ambush was played on a card attack');
+      }
       // Check retreat
       if ($unit->getRetreats() > 0) {
         Notifications::message(
@@ -168,14 +167,15 @@ trait AttackUnitsTrait
         $this->closeCurrentAttack();
         return;
       }
-    }
 
-    if ($unit->isEliminated()) {
-      Notifications::message(clienttranslate('${player_name} unit has been destroyed. Attack cannot take place'), [
-        'player' => $player,
-      ]);
-      $this->closeCurrentAttack();
-      return;
+      // Check if attacking unit is still alive
+      if ($unit->isEliminated()) {
+        Notifications::message(clienttranslate('${player_name} unit has been destroyed. Attack cannot take place'), [
+          'player' => $player,
+        ]);
+        $this->closeCurrentAttack();
+        return;
+      }
     }
 
     // Launch dice
@@ -188,8 +188,11 @@ trait AttackUnitsTrait
       return;
     }
 
-    foreach (Board::getTerrainsInCell($unit->getPos()) as $terrain) {
-      $terrain->onAfterAttack($unit);
+    // Call listener for attacking unit (eg. to remove Wire for armors)
+    if ($unit != null) {
+      foreach (Board::getTerrainsInCell($unit->getPos()) as $terrain) {
+        $terrain->onAfterAttack($unit);
+      }
     }
 
     // Handle retreat

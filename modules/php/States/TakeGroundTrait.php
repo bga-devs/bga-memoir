@@ -15,6 +15,8 @@ trait TakeGroundTrait
   {
     $attack = $this->getCurrentAttack();
     $unit = $attack['unit'];
+    $cell = $unit->getPos();
+    $cell['d'] = 0;
 
     // To take ground, we must have the following:
     //   - attack at distance 1 and cost of deplacement of 1
@@ -24,7 +26,7 @@ trait TakeGroundTrait
     //   - unit can enter and take ground on the terrain
     if (
       $attack['distance'] != 1 ||
-      Board::getDeplacementCost($unit, $unit->getPos(), $attack, 1, true) > 1 ||
+      Board::getDeplacementCost($unit, $cell, $attack, 1, true) > 1 ||
       $unit->getGrounds() >= $unit->getMaxGrounds() ||
       Board::getUnitInCell($attack['x'], $attack['y']) != null ||
       ($unit->getMoves() > 0 && Board::mustStopWhenEntering($unit, $unit->getPos())) ||

@@ -19,7 +19,6 @@ class Beach extends \M44\Models\Terrain
 
   public function isValidPath($unit, $cell, $path)
   {
-    return true;
     $mustCheck = true;
     // If sand is under unit, only check constraint if unit already made at least 1 move
     if ($this->getX() == $unit->getX() && $this->getY() == $unit->getY()) {
