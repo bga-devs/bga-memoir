@@ -160,22 +160,20 @@ const DESERT_FACE = 'DESERT';
 
 const TERRAIN_CLASSES = [
   'beach' => 'Beach',
+  'bunker' => 'Bunker',
   'forest' => 'Forest',
+  'hedgerow' => 'Hedgerow',
   'hedgehog' => 'Hedgehog',
+  'hill' => 'Hill',
   'ocean' => 'Ocean',
   'river' => 'River',
-  'hedgerow' => 'Hedgerow',
-  'village' => 'Village',
-  'hill' => 'Hill',
-  'bunker' => 'Bunker',
-  'cliff' => 'Cliff',
-
   'bridge' => 'Bridge',
-  'bunker' => 'Bunker',
-
   'sand' => 'Sandbag',
-  'wire' => 'Wire',
+  'cliff' => 'Cliff',
   'seawall' => 'SeaWall',
+  'steephill' => 'SteepHill',
+  'village' => 'Village',
+  'wire' => 'Wire',
 ];
 
 const TROOP_CLASSES = [
