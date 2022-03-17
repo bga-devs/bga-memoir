@@ -107,7 +107,7 @@
   &.attacked {
     background-position: 100% 100%;
   }
-  &.airPowerTarget  {
+  &.airPowerTarget {
     background-position: 100% 100%;
     &::before {
       content: attr(data-air-power-order);

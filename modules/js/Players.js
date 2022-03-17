@@ -9,9 +9,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
     setupPlayers() {
       // Basic UI tweaking
-      let pId = this.isSpectator ? Object.values(this.gamedatas.players)[0] : this.player_id;
       this.forEachPlayer((player) => {
-        let pos = player.id == pId ? 'bottom' : 'top';
+        let pos = player.id == this._pId ? 'bottom' : 'top';
         dojo.place('overall_player_board_' + player.id, pos + '-player');
 
         if (player.id == this.player_id) {
@@ -29,7 +28,6 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         }
       });
       dojo.place('right-side', 'm44-central-part');
-      this._bottomTeam = this.gamedatas.players[pId].team;
     },
 
     setupTeams() {

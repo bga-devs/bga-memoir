@@ -6,13 +6,14 @@ class Terrain extends \M44\Helpers\DB_Model
   protected $table = 'terrains';
   protected $primary = 'tile_id';
   protected $attributes = [
+    'type' => ['type', 'str'],
     'id' => ['tile_id', 'int'],
     'tile' => 'tile',
     'x' => ['x', 'int'],
     'y' => ['y', 'int'],
     'orientation' => ['orientation', 'int'],
+    'owner' => 'owner',
     'extraDatas' => ['extra_datas', 'obj'],
-    'type' => ['type', 'str'],
   ];
 
   protected $id = null;
@@ -92,6 +93,23 @@ class Terrain extends \M44\Helpers\DB_Model
     return $datas;
   }
 
+  public function getProperty($prop, $unit)
+  {
+    if (!in_array($prop, $this->properties)) {
+      throw new \BgaVisibleSystemException('Trying to access a non existing terrain property : ' . $prop);
+    }
+
+    $isBoolean = !in_array($prop, ['offense', 'defense']);
+    $defaultValue = $isBoolean ? false : null;
+    return isset($this->$prop)
+      ? (is_array($this->$prop)
+        ? ($isBoolean
+          ? in_array($unit->getType(), $this->$prop)
+          : $this->$prop[$unit->getType()] ?? $defaultValue)
+        : $this->$prop)
+      : $defaultValue;
+  }
+
   public function __call($method, $args)
   {
     if (!in_array($method, $this->properties)) {
@@ -99,15 +117,7 @@ class Terrain extends \M44\Helpers\DB_Model
     }
 
     $unit = $args[0];
-    $isBoolean = !in_array($method, ['offense', 'defense']);
-    $defaultValue = $isBoolean ? false : null;
-    return isset($this->$method)
-      ? (is_array($this->$method)
-        ? ($isBoolean
-          ? in_array($unit->getType(), $this->$method)
-          : $this->$method[$unit->getType()] ?? $defaultValue)
-        : $this->$method)
-      : $defaultValue;
+    return $this->getProperty($method, $unit);
   }
 
   public function onUnitLeaving($unit, $isRetreat)
@@ -144,5 +154,20 @@ class Terrain extends \M44\Helpers\DB_Model
   public function getEnteringDeplacementCost($unit, $source, $target, $d, $takeGround)
   {
     return 1;
+  }
+
+  public function isOriginalOwner($unit)
+  {
+    return $this->owner == null || $unit->getTeamId() == $this->owner;
+  }
+
+  public function defense($unit)
+  {
+    return $this->isOriginalOwner($unit) ? $this->getProperty('defense', $unit) : null;
+  }
+
+  public function canIgnoreOneFlag($unit)
+  {
+    return $this->isOriginalOwner($unit) ? $this->getProperty('canIgnoreOneFlag', $unit) : false;
   }
 }

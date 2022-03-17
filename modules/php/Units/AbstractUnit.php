@@ -110,10 +110,13 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     ];
   }
 
+  public function getTeamId()
+  {
+    return in_array($this->nation, Units::$nations[AXIS]) ? AXIS : ALLIES;
+  }
   public function getTeam()
   {
-    $teamId = in_array($this->nation, Units::$nations[AXIS]) ? AXIS : ALLIES;
-    return Teams::get($teamId);
+    return Teams::get($this->getTeamId());
   }
   public function getPlayer()
   {
