@@ -373,8 +373,9 @@ $scenarios[11] = [
         'col' => 19,
         'obstacle' => [
           'name' => 'sand',
-          'orientation' => 1,
+          'orientation' => 2,
           'behavior' => 'SEAWALL',
+          'original_owner' => 'ALLIES',
         ],
       ],
       30 => [
@@ -382,8 +383,9 @@ $scenarios[11] = [
         'col' => 21,
         'obstacle' => [
           'name' => 'sand',
-          'orientation' => 1,
+          'orientation' => 2,
           'behavior' => 'SEAWALL',
+          'original_owner' => 'ALLIES',
         ],
       ],
       31 => [
