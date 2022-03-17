@@ -174,6 +174,8 @@ const TERRAIN_CLASSES = [
   'steephill' => 'SteepHill',
   'village' => 'Village',
   'wire' => 'Wire',
+
+  'church' => 'Church',
 ];
 
 const TROOP_CLASSES = [
