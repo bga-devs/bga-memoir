@@ -18,8 +18,19 @@ class Cliff extends Hill
   {
     if ($takeGround && $unit->getType() == \INFANTRY && Board::isBeachCell($source)) {
       return \INFINITY;
+    } elseif ($unit->getType() == \INFANTRY && Board::isBeachCell($source)) {
+      return 2;
     } else {
       return parent::getEnteringDeplacementCost($unit, $source, $target, $d, $takeGround);
+    }
+  }
+
+  public function getLeavingDeplacementCost($unit, $source, $target, $d, $takeGround)
+  {
+    if (Board::isBeachCell($target)) {
+      return $unit->getType() == \INFANTRY ? 2 : \INFINITY;
+    } else {
+      return 1;
     }
   }
 }
