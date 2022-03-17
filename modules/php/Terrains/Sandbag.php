@@ -5,7 +5,7 @@ class Sandbag extends \M44\Models\Obstacle
 {
   public static function isTileOfType($hex)
   {
-    return in_array($hex['name'], ['sand']);
+    return in_array($hex['name'], ['sand']) && !isset($hex['behavior']);
   }
 
   public function __construct($row)

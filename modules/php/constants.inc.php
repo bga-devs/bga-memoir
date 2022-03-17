@@ -175,6 +175,7 @@ const TERRAIN_CLASSES = [
 
   'sand' => 'Sandbag',
   'wire' => 'Wire',
+  'seawall' => 'SeaWall',
 ];
 
 const TROOP_CLASSES = [
