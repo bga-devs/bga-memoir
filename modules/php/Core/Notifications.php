@@ -235,6 +235,7 @@ class Notifications
   {
     self::notifyAll('removeObstacle', '', [
       'terrainId' => $terrain->getId(),
+      'cell' => $terrain->getPos(),
     ]);
   }
 

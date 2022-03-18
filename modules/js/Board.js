@@ -267,11 +267,15 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       let cellC = $(`cell-background-${terrain.x}-${terrain.y}`);
       terrain.rotate = this._isRotated;
       this.place('tplObstacleTile', terrain, cellC);
+      this._grid[terrain.x][terrain.y].terrains.push(terrain);
     },
 
     notif_removeObstacle(n) {
       debug('Notif: removing obstacle', n);
       $('obstacle-' + n.args.terrainId).remove();
+      let x = n.args.cell.x,
+        y = n.args.cell.y;
+      this._grid[x][y].terrains = this._grid[x][y].terrains.filter((terrain) => terrain.id != n.args.terrainId);
     },
 
     ////////////////////////////////////////

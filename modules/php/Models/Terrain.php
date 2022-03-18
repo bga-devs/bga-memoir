@@ -93,6 +93,11 @@ class Terrain extends \M44\Helpers\DB_Model
     return $datas;
   }
 
+  public function getPos()
+  {
+    return ['x' => $this->x, 'y' => $this->y];
+  }
+
   public function getProperty($prop, $unit)
   {
     if (!in_array($prop, $this->properties)) {

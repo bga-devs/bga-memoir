@@ -21,7 +21,7 @@ class Beach extends \M44\Models\Terrain
   {
     $mustCheck = true;
     // If sand is under unit, only check constraint if unit already made at least 1 move
-    if ($this->getX() == $unit->getX() && $this->getY() == $unit->getY()) {
+    if ($this->getPos() == $unit->getPos()) {
       $mustCheck = $unit->getMoves() > 0;
     }
 

@@ -146,6 +146,7 @@ define([
       this.gamedatas.players = n.args.players;
       this.gamedatas.board = n.args.board;
       this.gamedatas.teams = n.args.teams;
+      this.gamedatas.terrains = n.args.terrains;
       this._bottomTeam = this.gamedatas.players[this._pId].team;
       this._deckCounter.setValue(n.args.deckCount);
 
