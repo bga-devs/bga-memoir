@@ -980,13 +980,17 @@ html {
       position: absolute;
       left: 114px;
       top: 42px;
-      width: 174px;
+      width: 160px;
       bottom: 16px;
-      list-style-position: initial;
-      padding-left: 20px;
-      font-size: 13px; }
-      .board-tooltip .summary-card .summary-desc li {
-        list-style-type: disc; }
+      padding-left: 18px;
+      font-size: 12px; }
+      .board-tooltip .summary-card .summary-desc li::before {
+        content: '\25CF';
+        display: inline-block;
+        width: 1em;
+        margin-left: -1em; }
+      .board-tooltip .summary-card .summary-desc li.modified::before {
+        color: red; }
 
 .m44-unit {
   width: 100%;

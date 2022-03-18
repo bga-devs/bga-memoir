@@ -355,14 +355,22 @@
       position: absolute;
       left: 114px;
       top: 42px;
-      width: 174px;
+      width: 156px;
       bottom: 16px;
-      list-style-position: initial;
-      padding-left: 20px;
-      font-size: 13px;
+      padding-left: 18px;
+      font-size: 12px;
 
       li {
-        list-style-type: disc;
+        &::before {
+          content: '\25CF';
+          display: inline-block;
+          width: 1em;
+          margin-left: -1em;
+        }
+
+        &.modified::before {
+          color: red;
+        }
       }
     }
   }

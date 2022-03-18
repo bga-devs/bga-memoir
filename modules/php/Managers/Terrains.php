@@ -90,16 +90,32 @@ class Terrains extends \M44\Helpers\Pieces
         if (isset($hex[$key])) {
           $terrain = $hex[$key];
           $type = self::getTypeOfTile($terrain);
-          if($type == ''){
+          if ($type == '') {
             throw new \BgaVisibleSystemException('Unsupported terrains' . \var_export($terrain, true));
           }
 
-
           // Fallback code for bunker without original_owner flag
-          if($type == 'bunker' && !isset($terrain['original_owner'])){
+          if ($type == 'bunker' && !isset($terrain['original_owner'])) {
             $data = Units::getTypeAndNation($hex['unit']);
-            $terrain['original_owner'] = in_array($data['nation'], Units::$nations[ALLIES])? ALLIES : AXIS;
+            $terrain['original_owner'] = in_array($data['nation'], Units::$nations[ALLIES]) ? ALLIES : AXIS;
           }
+
+          // Custom properties
+          $properties = $terrain['properties'] ?? [];
+          $behavior = $terrain['behavior'] ?? null;
+          if ($behavior == 'IMPASSABLE_HILL') {
+            $properties['isImpassable'] = true;
+          } elseif ($behavior == 'IMPASSABLE_BLOCKING_HILL') {
+            $properties['isImpassable'] = true;
+            $properties['isBlockingLineOfAttack'] = true;
+          }
+
+          // Extra data
+          $extraDatas = empty($properties)
+            ? null
+            : [
+              'properties' => $properties,
+            ];
 
           $terrains[] = [
             'location' => $hex['col'] . '_' . $hex['row'],
@@ -107,7 +123,7 @@ class Terrains extends \M44\Helpers\Pieces
             'type' => $type,
             'orientation' => $terrain['orientation'] ?? 1,
             'owner' => $terrain['original_owner'] ?? null,
-            'extra_datas' => null,
+            'extra_datas' => $extraDatas,
           ];
         }
       }

@@ -57,7 +57,7 @@ class Scenario extends \APP_DbObject
   {
     require_once dirname(__FILE__) . '/Scenarios/list.inc.php';
     if (!isset($scenariosMap[$id])) {
-      throw new BgaVisibleSystemException('Invalid scenario id');
+      throw new \BgaVisibleSystemException('Invalid scenario id');
     }
     $name = $scenariosMap[$id];
     $scenarios = [];

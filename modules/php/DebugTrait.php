@@ -13,7 +13,7 @@ trait DebugTrait
 {
   function load($scenario)
   {
-    Globals::setRound(0);
+    Globals::setRound(1);
     Scenario::load($scenario);
     $this->gamestate->jumpToState(\ST_NEW_ROUND);
   }

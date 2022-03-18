@@ -26,10 +26,11 @@ class Terrain extends \M44\Helpers\DB_Model
   /*
    * STATIC INFORMATIONS
    */
-  protected $staticAttributes = ['type', 'number', 'name'];
+  protected $staticAttributes = ['type', 'number', 'name', 'desc'];
   protected $number = null;
   protected $type = null;
   protected $name = '';
+  protected $desc = [];
 
   /*
    * TERRAIN PROPERTIES
@@ -39,9 +40,9 @@ class Terrain extends \M44\Helpers\DB_Model
     'mustBeAdjacentToEnter',
     'mustStopWhenEntering',
     'enteringCannotBattle',
-    'enteringCannotTakeGround',
     'canIgnoreOneFlag',
     'isBlockingLineOfSight',
+    'isBlockingLineOfAttack',
     'mustStopWhenLeaving',
     'isBlockingSandbag',
     'cantLeave',
@@ -61,7 +62,10 @@ class Terrain extends \M44\Helpers\DB_Model
   {
     if ($row != null) {
       parent::__construct($row);
-      // TODO : use extra datas to update some property of the terrain, and mark the terrain as 'non standard' in this case
+      $prop = $this->getExtraDatas('properties') ?? [];
+      foreach ($prop as $name => $value) {
+        $this->$name = $value;
+      }
     }
   }
 
@@ -76,6 +80,11 @@ class Terrain extends \M44\Helpers\DB_Model
       'tile' => $this->tile,
       // 'datas' => $this->extraDatas,
     ];
+
+    $prop = $this->getExtraDatas('properties') ?? [];
+    if(!empty($prop)){
+      $datas['properties'] = $prop;
+    }
 
     return $datas;
   }

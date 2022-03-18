@@ -322,40 +322,84 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     },
 
     tplTerrainSummary(terrain) {
-      let terrainData = Object.assign(this.gamedatas.terrains[terrain.number], terrain);
+      if (!terrain.properties) terrain.properties = {};
+      let terrainData = Object.assign({}, this.gamedatas.terrains[terrain.number], terrain, terrain.properties);
       let tplName = OBSTACLES.includes(terrainData.tile) ? 'tplObstacleTile' : 'tplTerrainTile';
       let tile = this[tplName](terrainData);
-      let desc = [];
+      let desc = terrainData.desc.map((t) => `<li>${_(t)}</li>`);
 
-      if (terrainData.isImpassable) {
-        desc.push(_('Impassable'));
-      }
-      if (terrainData.mustBeAdjacentToEnter) {
-        desc.push(_('Must be adjacent to enter'));
-      }
-      if (terrainData.mustStopWhenEntering) {
-        desc.push(_('Must stop when entering'));
-      }
-      if (terrainData.enteringCannotBattle) {
-        desc.push(_('Entering cannot battle'));
-      }
-      if (terrainData.enteringCannotTakeGround) {
-        desc.push(_('Entering cannot take ground'));
-      }
-      if (terrainData.canIgnoreOneFlag) {
-        desc.push(_('Can ignore one flag'));
-      }
-      if (terrainData.isBlockingLineOfSight) {
-        desc.push(_('Block line of sight'));
-      } else {
-        desc.push(_('Do not block line of sight'));
-      }
-      if (terrainData.mustStopWhenLeaving) {
-        desc.push(_('Must stop when leaving'));
-      }
-      if (terrainData.cantRetreat) {
-        desc.push(_("Can't retreat"));
-      }
+      let properties = {
+        isImpassable: {
+          bool: _('Impassable'),
+          obj: _('Impassable by ${units}'),
+        },
+        mustBeAdjacentToEnter: {
+          bool: _('To enter or take ground, unit must start its move from adjacent hex'),
+          obj: _('To enter or take ground, ${units} must start its move from adjacent hex'),
+        },
+        mustStopWhenEntering: {
+          bool: _('Unit moving in must stop and may move no further on that turn'),
+          obj: _('${units} moving in must stop and may move no further on that turn'),
+        },
+        mustStopWhenLeaving: {
+          bool: _('When exiting, unit must stop on adjacent hex, may still take ground'),
+          obj: _('When exiting, ${units} must stop on adjacent hex, may still take ground'),
+        },
+        cantLeave: {
+          bool: _('Unit may not retreat, must take loss instead'),
+          obj: _('${units} may not retreat, must take loss instead'),
+        },
+        cantRetreat: {
+          bool: _('Unit cannot retreat on that hex'),
+          obj: _('${units} cannot retreat on that hex'),
+        },
+        enteringCannotBattle: {
+          bool: _('Unit moving in cannot battle'),
+          obj: _('${units} moving in cannot battle'),
+        },
+        cannotBattle: {
+          bool: _('Unit cannot battle on that hex'),
+          obj: _('${units} cannot battle on that hex'),
+        },
+        canIgnoreOneFlag: {
+          bool: _('Unit may ignore 1 flag'),
+          obj: _('${units} may ignore 1 flag'),
+        },
+        isBlockingLineOfSight: {
+          bool: _('Block line of sight'),
+          negbool: _('Do not block line of sight'),
+          hill: _('Block line of sight (except for contiguous adjacent hills)'),
+        },
+      };
+
+      let unitMap = {
+        1: _('Infantry'),
+        2: _('Armor'),
+        3: _('Artillery'),
+      };
+
+      Object.keys(properties).forEach((prop) => {
+        let content = '';
+        let propDesc = properties[prop];
+        if (terrainData[prop]) {
+          if (Array.isArray(terrainData[prop])) {
+            let units = terrainData[prop].map((unitId) => unitMap[unitId]).join(' & ');
+            content = dojo.string.substitute(propDesc.obj, { units });
+          } else {
+            content = propDesc.bool;
+          }
+        } else if (propDesc.negbool) {
+          content = propDesc.negbool;
+          if (prop == 'isBlockingLineOfSight' && terrainData.isHill) {
+            content = propDesc.hill;
+          }
+        }
+
+        if (content != '') {
+          let modified = terrain.properties && terrain.properties[prop] !== undefined;
+          desc.push(`<li class='${modified ? 'modified' : ''}'>${content}</li>`);
+        }
+      });
 
       return `<div class='summary-card summary-terrain'>
         <div class='summary-number'>${terrainData.number}</div>
@@ -364,7 +408,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           ${tile}
         </div>
         <ul class='summary-desc'>
-          ${desc.map((t) => '<li>' + t + '</li>').join('')}
+          ${desc.join('')}
         </ul>
       </div>`;
     },
