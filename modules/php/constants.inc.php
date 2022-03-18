@@ -148,6 +148,7 @@ const ARTILLERY = 3;
  */
 const MEDAL_ELIMINATION = 1;
 const MEDAL_POSITION = 2;
+const MEDAL_SUDDEN_DEATH = 3;
 
 /*
  * Terrains

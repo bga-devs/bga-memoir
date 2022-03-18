@@ -16,8 +16,9 @@ class Cards extends \M44\Helpers\Pieces
   protected static $table = 'cards';
   protected static $prefix = 'card_';
   protected static $customFields = ['type', 'value', 'extra_datas'];
-  protected static $autoreshuffle = false;
+  protected static $autoreshuffle = true;
   protected static $autoreshuffleCustom = ['deck' => 'discard'];
+  protected static $autoreshuffleListener = ['obj' => 'M44\Managers\Cards', 'method' => 'reshuffleListener'];
   protected static function cast($row)
   {
     $locations = explode('_', $row['location']);
@@ -36,6 +37,30 @@ class Cards extends \M44\Helpers\Pieces
 
     $className = '\M44\Cards\\' . $dirs[$mode] . '\\' . \CARD_CLASSES[$type];
     return new $className($row);
+  }
+
+  public static function pickForLocation($nbr, $fromLocation, $toLocation, $state = 0, $deckReform = true)
+  {
+    $remaining = self::countInLocation('deck');
+    if ($nbr > $remaining && !Globals::isDeckReshuffle()) {
+      self::reshuffleListener();
+      return null;
+    }
+
+    $p = parent::pickForLocation($nbr, $fromLocation, $toLocation, $state, $deckReform);
+
+    return $p;
+  }
+
+  public static function reshuffleListener()
+  {
+    Notifications::message(clienttranslate('There are not more cards in the deck. Victory of ${side'), [
+      'side' => Globals::getDefaultWinner(),
+      'i18n' => ['side'],
+    ]);
+    Teams::get(Globals::getDefaultWinner())->addSuddenDeathMedals();
+
+    Teams::checkVictory();
   }
 
   //////////////////////////////////
