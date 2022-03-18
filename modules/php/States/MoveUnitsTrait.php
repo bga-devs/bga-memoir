@@ -40,12 +40,14 @@ trait MoveUnitsTrait
     $cell = $cells[$k];
     $path = $cell['paths'][0]; // Take the first path
     $unit = Units::get($unitId);
+    $coordSource = $unit->getPos();
     foreach ($path as $c) {
-      Notifications::moveUnit($player, $unitId, $c['x'], $c['y']);
+      Notifications::moveUnit($player, $unit, $coordSource, $c);
       $interrupted = Board::moveUnit($unit, $c); // TODO : maybe we need to update moves of unit along the path for some terrains ?
       if ($interrupted) {
         return; // Victory or unit is dead
       }
+      $coordSource = $c;
     }
     $unit->incMoves($cell['d']);
     Globals::setUnitMoved($unitId);

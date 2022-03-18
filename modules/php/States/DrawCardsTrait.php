@@ -47,10 +47,16 @@ trait DrawCardsTrait
 
     if ($method['nKeep'] == $method['nDraw']) {
       $cards = Cards::pickForLocation($method['nDraw'], 'deck', ['hand', $player->getId()]);
+      if ($cards == null) {
+        return;
+      }
       Notifications::drawCards($player, $cards);
       $this->gamestate->nextState('endRound');
     } else {
       $cards = Cards::pickForLocation($method['nDraw'], 'deck', ['choice', $player->getId()]);
+      if ($cards == null) {
+        return;
+      }
       Notifications::drawCardsAndKeep($player, $cards, $method['nKeep']);
       Globals::setNToKeep($method['nKeep']);
       $this->gamestate->nextState('choice');

@@ -101,4 +101,19 @@ class Team extends \M44\Helpers\DB_Model
     $medals = Medals::addEliminationMedals($this->id, $medalsObtained, $unit);
     Notifications::scoreMedals($this->id, $medals, $unit->getPos());
   }
+
+  public function addSuddenDeathMedals()
+  {
+    $nMedals = $this->getMedals()->count();
+    $medalsObtained = $this->getNVictory() - $nMedals;
+
+    // Increase stats
+    $statName = 'incMedalRound' . Globals::getRound();
+    foreach ($this->getMembers() as $player) {
+      Stats::$statName($player, $medalsObtained);
+    }
+
+    $medals = Medals::addSuddenDeathMedals($this->id, $medalsObtained);
+    Notifications::scoreMedals($this->id, $medals, ['x' => 1, 'y' => 1]);
+  }
 }

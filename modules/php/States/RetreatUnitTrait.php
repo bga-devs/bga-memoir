@@ -111,12 +111,14 @@ trait RetreatUnitTrait
     $path = $cell['paths'][0]; // Take the first path
     $unitId = $args['unitId'];
     $unit = Units::get($unitId);
+    $coordSource = $unit->getPos();
     foreach ($path as $c) {
-      Notifications::moveUnit($player, $unitId, $c['x'], $c['y']);
+      Notifications::retreatUnit($player, $unit, $coordSource, $c);
       $interrupted = Board::moveUnit($unit, $c, true);
       if ($interrupted) {
         return; // Victory or unit is dead
       }
+      $coordSource = $c;
     }
 
     // Update min/max depending on the number of retreat done already
