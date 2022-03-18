@@ -114,14 +114,38 @@ class Notifications
     }
   }
 
-  public static function moveUnit($player, $unitId, $x, $y)
+  public static function moveUnit($player, $unit, $coordSource, $coordTarget)
   {
-    self::notifyAll('moveUnit', '', [
-      'player' => $player,
-      'unitId' => $unitId,
-      'x' => $x,
-      'y' => $y,
-    ]);
+    self::notifyAll(
+      'moveUnit',
+      clienttranslate('${player_name} moves ${unit_desc} (${coordSource} to ${coordTarget})'),
+      [
+        'player' => $player,
+        'unitId' => $unit->getId(),
+        'unit_desc' => self::computeUnitsDesc([$unit]),
+        'coordSource' => $coordSource,
+        'coordTarget' => $coordTarget,
+        'x' => $coordTarget['x'],
+        'y' => $coordTarget['y'],
+      ]
+    );
+  }
+
+  public static function retreatUnit($player, $unit, $coordSource, $coordTarget)
+  {
+    self::notifyAll(
+      'moveUnit',
+      clienttranslate('${player_name} retreats ${unit_desc} (${coordSource} to ${coordTarget})'),
+      [
+        'player' => $player,
+        'unitId' => $unit->getId(),
+        'unit_desc' => self::computeUnitsDesc([$unit]),
+        'coordSource' => $coordSource,
+        'coordTarget' => $coordTarget,
+        'x' => $coordTarget['x'],
+        'y' => $coordTarget['y'],
+      ]
+    );
   }
 
   public static function takeGround($player, $unitId, $x, $y)
@@ -270,7 +294,6 @@ class Notifications
     ]);
   }
 
-
   /*********************
    **** UPDATE ARGS ****
    *********************/
@@ -299,6 +322,14 @@ class Notifications
       $args['i18n'][] = 'team_name';
     }
 
+    if (isset($args['coordSource'])) {
+      $args['coordSource'] = self::computeCoords($args['coordSource']);
+    }
+
+    if (isset($args['coordTarget'])) {
+      $args['coordTarget'] = self::computeCoords($args['coordTarget']);
+    }
+
     // if (isset($args['task'])) {
     //   $c = $args['task'];
     //   $args['task_desc'] = $c->getText();
@@ -308,6 +339,19 @@ class Notifications
     //     $args['task'] = $args['task']->jsonSerialize($args['task']->getPId() == $args['player_id']);
     //   }
     // }
+  }
+
+  protected static function computeCoords($x, $y = null)
+  {
+    if (!is_array($x)) {
+      $x = ['x' => $x, 'y' => $y];
+    }
+    // capital
+    if ($x['x'] % 2 == 0) {
+      return strtoupper(alphabet[$x['x'] / 2]) . (9 - $x['y']);
+    } else {
+      return alphabet[($x['x'] - 1) / 2] . (9 - $x['y']);
+    }
   }
 
   protected static function computeUnitsDesc($units)
