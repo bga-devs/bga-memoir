@@ -40,7 +40,8 @@ class action_memoir extends APP_GameAction
     self::setAjaxMode();
     $cardId = self::getArg('cardId', AT_posint, true);
     $section = self::getArg('section', AT_posint, false);
-    $this->game->actPlayCard($cardId, $section);
+    $hill = self::getArg('hill317', AT_bool, false);
+    $this->game->actPlayCard($cardId, $section, $hill);
     self::ajaxResponse();
   }
 
@@ -101,7 +102,6 @@ class action_memoir extends APP_GameAction
     $this->game->actAirDrop($x, $y);
     self::ajaxResponse();
   }
-
 
   /////////////////////////////////
   //  __  __  _____     _______

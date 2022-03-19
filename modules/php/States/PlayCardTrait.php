@@ -24,11 +24,12 @@ trait PlayCardTrait
 
     $args = [
       'cards' => $cards,
+      'canHill317' => $player->canHill317(),
     ];
     return $singleActive ? Utils::privatise($args) : $args;
   }
 
-  function actPlayCard($cardId, $sectionId = null)
+  function actPlayCard($cardId, $sectionId = null, $hill317 = false)
   {
     // Sanity check
     $this->checkAction('actPlayCard');
@@ -39,15 +40,24 @@ trait PlayCardTrait
       throw new \BgaVisibleSystemException('Non playable card. Should not happen.');
     }
 
-    if (
-      $args['cards'][$cardId] != null &&
-      (!in_array($sectionId, $args['cards'][$cardId]) || $sectionId == null)
-    ) {
+    if ($args['cards'][$cardId] != null && (!in_array($sectionId, $args['cards'][$cardId]) || $sectionId == null)) {
       throw new \BgaVisibleSystemException('Invalid section. Should not happen');
     }
 
     if ($args['cards'][$cardId] == null && $sectionId != null) {
       throw new \BgaVisibleSystemException('Invalid section. Should not happen');
+    }
+
+    if ($hill317 && !$args['canHill317']) {
+      throw new \BgaVisibleSystemException('Cannot play card as hill317. Should not happen');
+    }
+
+    if ($hill317 && Cards::get($cardId)->getType() != CARD_RECON) {
+      throw new \BgaVisibleSystemException('Cannot play this type of card as hill317. Should not happen');
+    }
+
+    if ($hill317) {
+      Cards::get($cardId)->setExtraDatas('hill317', true);
     }
 
     // Play the card

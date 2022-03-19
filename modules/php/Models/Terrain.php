@@ -49,6 +49,7 @@ class Terrain extends \M44\Helpers\DB_Model
     'isImpassableForRetreat',
     'cannotBattle',
     'cantTakeGround',
+    'hill317',
 
     'isHill',
     'isBunker',
@@ -82,7 +83,7 @@ class Terrain extends \M44\Helpers\DB_Model
     ];
 
     $prop = $this->getExtraDatas('properties') ?? [];
-    if(!empty($prop)){
+    if (!empty($prop)) {
       $datas['properties'] = $prop;
     }
 

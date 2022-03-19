@@ -370,6 +370,10 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           negbool: _('Do not block line of sight'),
           hill: _('Block line of sight (except for contiguous adjacent hills)'),
         },
+        hill317: {
+          bool: _('Hill317: If Allies has a unit on the hill, Recon cards can be played as Air Power card'),
+          obj: '',
+        },
       };
 
       let unitMap = {

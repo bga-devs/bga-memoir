@@ -84,6 +84,7 @@ class Terrains extends \M44\Helpers\Pieces
       ->run();
     $board = $scenario['board'];
     $terrains = self::getBackgroundSpecialTerrains($board);
+    $options = $scenario['game_info']['options'] ?? [];
     foreach ($board['hexagons'] as $hex) {
       $keys = ['terrain', 'rect_terrain', 'obstacle'];
       foreach ($keys as $key) {
@@ -110,6 +111,12 @@ class Terrains extends \M44\Helpers\Pieces
             $properties['isBlockingLineOfAttack'] = true;
           }
 
+          if (isset($options['hill317'])) {
+            $coords = Notifications::computeCoords(['x' => $hex['col'], 'y' => $hex['row']]);
+            if (in_array($coords, array_values($options['hill317']))) {
+              $properties['hill317'] = true;
+            }
+          }
           // Extra data
           $extraDatas = empty($properties)
             ? null

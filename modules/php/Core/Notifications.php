@@ -358,7 +358,7 @@ class Notifications
     // }
   }
 
-  protected static function computeCoords($x, $y = null)
+  public static function computeCoords($x, $y = null)
   {
     if (!is_array($x)) {
       $x = ['x' => $x, 'y' => $y];
