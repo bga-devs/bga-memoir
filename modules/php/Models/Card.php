@@ -189,6 +189,11 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
     return null;
   }
 
+  public function canHill317()
+  {
+    return false;
+  }
+
   /**
    *
    * @param $overrideNbFights = [UNIT_TYPE => maxFights]]

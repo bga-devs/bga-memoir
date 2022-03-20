@@ -33,7 +33,20 @@ class CounterAttack extends \M44\Models\Card
   public function nextStateAfterPlay()
   {
     $card = $this->getCopiedCard();
-    return is_null($card)? 'counterAttack' : $card->nextStateAfterPlay();
+    if ($card != null) {
+      $card->setExtraDatas('hill317', $this->getExtraDatas('hill317'));
+    }
+    return is_null($card) ? 'counterAttack' : $card->nextStateAfterPlay();
+  }
+
+  public function canHill317()
+  {
+    $lastCards = Globals::getLastPlayedCards();
+    $oppId = $this->getOpponentPId();
+    $cardId = $lastCards[$oppId] ?? null;
+    $copiedCard = $this->getCopiedCard($cardId);
+
+    return is_null($copiedCard) ? false : $copiedCard->canHill317();
   }
 
   public function stCounterAttack()
@@ -46,13 +59,17 @@ class CounterAttack extends \M44\Models\Card
 
     // Transition to next state depending on copied card
     $copiedCard = $this->getCopiedCard();
+    $copiedCard->setExtraDatas('hill317', $this->getExtraDatas('hill317'));
     $transition = is_null($copiedCard) ? 'draw' : $copiedCard->nextStateAfterPlay();
     Game::get()->nextState($transition);
   }
 
-  public function getCopiedCard()
+  public function getCopiedCard($forceCard = null)
   {
     $cardId = $this->getExtraDatas('cardId');
+    if ($forceCard != null && $cardId == null) {
+      $cardId = $forceCard;
+    }
     if (!is_null($cardId)) {
       $card = Cards::get($cardId);
       $card->setCounterAttack($this->pId, $this->getId(), $this->isCounterAttackMirror);
@@ -113,6 +130,68 @@ class CounterAttack extends \M44\Models\Card
     return $this->getCopiedCard()->getArgsArmorOverrun($unitId);
   }
 
+  public function argsTargetAirPower()
+  {
+    return $this->getCopiedCard()->argsTargetAirPower();
+  }
+
+  public function actTargetAirPower($unitIds)
+  {
+    return $this->getCopiedCard()->actTargetAirPower($unitIds);
+  }
+
+  public function stDigIn()
+  {
+    return $this->getCopiedCard()->stDigIn();
+  }
+
+  public function stMoveAgain()
+  {
+    return $this->getCopiedCard()->stMoveAgain();
+  }
+
+  public function stFinestHourRoll()
+  {
+    return $this->getCopiedCard()->stFinestHourRoll();
+  }
+
+  public function argsOrderUnitsFinestHour()
+  {
+    return $this->getCopiedCard()->argsOrderUnitsFinestHour();
+  }
+
+  public function actOrderUnitsFinestHour($unitIds)
+  {
+    return $this->getCopiedCard()->actOrderUnitsFinestHour($unitIds);
+  }
+
+  /************ BARRAGE **************/
+  public function argsTargetBarrage()
+  {
+    return $this->getCopiedCard()->argsTargetBarrage();
+  }
+
+  public function actTargetBarrage($unitId)
+  {
+    return $this->getCopiedCard()->actTargetBarrage($unitId);
+  }
+
+  /************ MEDICS **************/
+  public function argsTargetMedics()
+  {
+    return $this->getCopiedCard()->argsTargetMedics();
+  }
+
+  public function stTargetMedics()
+  {
+    return $this->getCopiedCard()->stTargetMedics();
+  }
+
+  public function actTargetMedics($unitId)
+  {
+    return $this->getCopiedCard()->actTargetMedics($unitId);
+  }
+
   public function __call($method, $args)
   {
     $card = $this->getCopiedCard();
@@ -121,6 +200,8 @@ class CounterAttack extends \M44\Models\Card
     }
 
     if (!\method_exists($card, $method)) {
+      // throw new \feException($this->counterAttackCardId);
+      // throw new \feException(print_r($this));
       throw new \feException("Trying to call unexistant $method on copied card of CounterAttack, Should not happen");
     }
 

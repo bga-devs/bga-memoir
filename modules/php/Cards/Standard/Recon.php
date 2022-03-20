@@ -36,8 +36,15 @@ class Recon extends \M44\Models\SectionCard
     if ($this->getExtraDatas('hill317') === true) {
       return 'airpower';
     } else {
+      // throw new \feException(print_r(\debug_print_backtrace()));
+      // throw new \feException($this->id);
       return parent::nextStateAfterPlay();
     }
+  }
+
+  public function canHill317()
+  {
+    return true;
   }
 
   public function argsTargetAirPower()

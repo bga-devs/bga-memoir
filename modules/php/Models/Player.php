@@ -116,22 +116,8 @@ class Player extends \M44\Helpers\DB_Model
 
     foreach (self::getUnits() as $unit) {
       if (Board::cellHasProperty($unit->getPos(), 'hill317', $unit)) {
-        $canHill317 = true;
+        return true;
       }
-    }
-
-    if (!$canHill317) {
-      return false;
-    }
-
-    if (
-      self::getCards()
-        ->filter(function ($c) {
-          return $c->getType() == CARD_RECON;
-        })
-        ->count() != 0
-    ) {
-      return true;
     }
     return false;
   }

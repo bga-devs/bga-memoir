@@ -22,8 +22,18 @@ trait PlayCardTrait
         return $card->getAdditionalPlayConstraints();
       });
 
+    $cardsHill317 = $player
+      ->getCards()
+      ->filter(function ($card) {
+        return $card->getType() != \CARD_AMBUSH;
+      })
+      ->map(function ($card) {
+        return $card->canHill317();
+      });
+
     $args = [
       'cards' => $cards,
+      'cardsHill317' => $player->canHill317() ? $cardsHill317 : [],
       'canHill317' => $player->canHill317(),
     ];
     return $singleActive ? Utils::privatise($args) : $args;
@@ -52,12 +62,16 @@ trait PlayCardTrait
       throw new \BgaVisibleSystemException('Cannot play card as hill317. Should not happen');
     }
 
-    if ($hill317 && Cards::get($cardId)->getType() != CARD_RECON) {
+    if ($hill317 && !Cards::get($cardId)->canHill317()) {
       throw new \BgaVisibleSystemException('Cannot play this type of card as hill317. Should not happen');
     }
 
     if ($hill317) {
-      Cards::get($cardId)->setExtraDatas('hill317', true);
+      $card = Cards::get($cardId);
+      $card->setExtraDatas('hill317', true);
+      // if ($card->getType() == \CARD_COUNTER_ATTACK) {
+      //   $card->getCopiedCard()->setExtraDatas('hill317', true);
+      // }
     }
 
     // Play the card
