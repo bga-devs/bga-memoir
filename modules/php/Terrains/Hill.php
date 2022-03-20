@@ -27,6 +27,11 @@ class Hill extends \M44\Models\Terrain
     return $c[$this->x][$this->y] != $c[$s['x']][$s['y']] || $c[$this->x][$this->y] != $c[$t['x']][$t['y']];
   }
 
+  public function isBlockingLineOfAttack()
+  {
+    return $this->getExtraDatas('properties')['isBlockingLineOfAttack'] ?? false;
+  }
+
   public function defense($unit)
   {
     if ($unit->getType() == \ARTILLERY) {

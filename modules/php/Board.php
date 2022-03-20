@@ -418,12 +418,12 @@ class Board
       return !is_null($oppUnit) && $oppUnit->isOpponent($unit);
     });
 
-    // Keep only the cells in sight if unit need to see to shoot
-    if ($unit->mustSeeToAttack()) {
-      Utils::filter($cells, function ($cell) use ($unit, $pos) {
-        return self::isInLineOfSight($unit, $cell, $pos);
-      });
-    }
+    // Keep only the cells in sight
+    // if ($unit->mustSeeToAttack()) {
+    Utils::filter($cells, function ($cell) use ($unit, $pos) {
+      return self::isInLineOfSight($unit, $cell, $pos);
+    });
+    // }
 
     // Compute the opponents in contact with the unit
     $inContact = array_values(
@@ -475,9 +475,19 @@ class Board
     $path = self::getCellsInLine($source, $target);
     $blockedLeft = false;
     $blockedRight = false;
+
     foreach ($path as $cell) {
       // Starting and ending points are never blocking
       if (self::areSameCell($cell, $source) || self::areSameCell($cell, $target)) {
+        continue;
+      }
+
+      // If the cell is blocked by a terrain that blocks everything
+      if (self::isBlockingLineOfAttack($unit, $target, $cell, $path)) {
+        return false;
+      }
+
+      if (!$unit->mustSeeToAttack()) {
         continue;
       }
 
@@ -512,7 +522,27 @@ class Board
     }
 
     foreach ($t['terrains'] as $t) {
-      if ($t->isBlockingLineOfSight($unit, $target, $path)) {
+      if ($t->isBlockingLineOfAttack($unit)) {
+        return true;
+      }
+
+      if ($unit->mustSeeToAttack() && $t->isBlockingLineOfSight($unit, $target, $path)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  /**
+   * Return whether a given cell is blocking line of attack
+   */
+  public static function isBlockingLineOfAttack($unit, $target, $cell, $path)
+  {
+    $t = self::$grid[$cell['x']][$cell['y']];
+
+    foreach ($t['terrains'] as $t) {
+      if ($t->isBlockingLineOfAttack($unit)) {
         return true;
       }
     }
