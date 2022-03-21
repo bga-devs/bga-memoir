@@ -113,7 +113,7 @@ class Terrains extends \M44\Helpers\Pieces
           } elseif ($behavior == 'BRIDGE_SECTION') {
             $properties['bridgeSection'] = true;
           } elseif ($behavior == 'WIDE_RIVER') {
-            $properties['wideRiver'] = true;
+            $properties['isBlockingLineOfSight'] = [\INFANTRY];
           }
 
           if (isset($options['hill317'])) {

@@ -368,6 +368,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         isBlockingLineOfSight: {
           bool: _('Block line of sight'),
           negbool: _('Do not block line of sight'),
+          obj: _('Block line of sight of ${units}'),
           hill: _('Block line of sight (except for contiguous adjacent hills)'),
         },
         hill317: {
@@ -376,9 +377,6 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         },
         isBlockingLineOfAttack: {
           bool: _('Block line of attack for all units (including Artillery)'),
-        },
-        wideRiver: {
-          bool: _('Too wide for Infantry to attack'),
         },
       };
 

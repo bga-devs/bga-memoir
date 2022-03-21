@@ -13,8 +13,8 @@ class BridgeSection extends Bridge
   public function __construct($row)
   {
     $this->name = clienttranslate('Bridge Section');
-    $this->number = 9;
-
+    $this->number = '9b';
+    $this->desc = [\clienttranslate('You can only enter from the enter/exit hex')];
     parent::__construct($row);
   }
 
