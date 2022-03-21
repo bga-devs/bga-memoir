@@ -161,6 +161,61 @@ $game_options = [
         'tmdisplay' => '[29]',
         'description' => clienttranslate('Saverne Gap'),
       ],
+      1302 => [
+        'name' => clienttranslate('[1302] Nijmegen Bridges'),
+        'tmdisplay' => '[1302]',
+        'description' => clienttranslate('Nijmegen Bridges'),
+      ],
+      1311 => [
+        'name' => clienttranslate('[1311] Bug River'),
+        'tmdisplay' => '[1311]',
+        'description' => clienttranslate('Bug River'),
+      ],
+      1325 => [
+        'name' => clienttranslate('[1325] Gates of Moscow'),
+        'tmdisplay' => '[1325]',
+        'description' => clienttranslate('Gates of Moscow'),
+      ],
+      1340 => [
+        'name' => clienttranslate('[1340] Across the River Roer'),
+        'tmdisplay' => '[1340]',
+        'description' => clienttranslate('Across the River Roer'),
+      ],
+      1346 => [
+        'name' => clienttranslate('[1346] Knightsbridge'),
+        'tmdisplay' => '[1346]',
+        'description' => clienttranslate('Knightsbridge'),
+      ],
+      1365 => [
+        'name' => clienttranslate('[1365] Ponyri'),
+        'tmdisplay' => '[1365]',
+        'description' => clienttranslate('Ponyri'),
+      ],
+      1407 => [
+        'name' => clienttranslate('[1407] Red Barricades Factory'),
+        'tmdisplay' => '[1407]',
+        'description' => clienttranslate('Red Barricades Factory'),
+      ],
+      1409 => [
+        'name' => clienttranslate('[1409] Suomussalmi'),
+        'tmdisplay' => '[1409]',
+        'description' => clienttranslate('Suomussalmi'),
+      ],
+      1422 => [
+        'name' => clienttranslate('[1422] Schwammenauel Dam'),
+        'tmdisplay' => '[1422]',
+        'description' => clienttranslate('Schwammenauel Dam'),
+      ],
+      1433 => [
+        'name' => clienttranslate('[1433] Breakout at Klin'),
+        'tmdisplay' => '[1433]',
+        'description' => clienttranslate('Breakout at Klin'),
+      ],
+      1434 => [
+        'name' => clienttranslate('[1434] Breakout to Lisyanka'),
+        'tmdisplay' => '[1434]',
+        'description' => clienttranslate('Breakout to Lisyanka'),
+      ],
       23806 => [
         'name' => clienttranslate('[23806] [Battle of the Bulge] German counter-attack at Chaumont [FFM44]'),
         'tmdisplay' => '[23806]',
@@ -199,6 +254,11 @@ $game_options = [
         'name' => clienttranslate('[13] Omaha Beach Overlord'),
         'tmdisplay' => '[13]',
         'description' => clienttranslate('Omaha Beach Overlord'),
+      ],
+      1367 => [
+        'name' => clienttranslate('[1367] Prokhorovka Overlord'),
+        'tmdisplay' => '[1367]',
+        'description' => clienttranslate('Prokhorovka Overlord'),
       ],
     ],
   ],

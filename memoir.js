@@ -113,8 +113,13 @@ define([
       dojo.empty('bottom-medals-slots');
       dojo.empty('bottom-medals-container');
 
-      dojo.empty('top-player-hand');
-      dojo.empty('bottom-player-hand');
+      if ($('m44-player-hand')) {
+        dojo.empty('m44-player-hand');
+      }
+
+      this.forEachPlayer((player) => {
+        this._handCounters[player.id].setValue(0);
+      });
 
       dojo.empty('discard');
     },
