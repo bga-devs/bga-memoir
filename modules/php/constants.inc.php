@@ -176,7 +176,7 @@ const TERRAIN_CLASSES = [
   'steephill' => 'SteepHill',
   'village' => 'Village',
   'wire' => 'Wire',
-
+  'bridgesection' => 'BridgeSection',
   'church' => 'Church',
 ];
 

@@ -21,7 +21,7 @@ class River extends \M44\Models\Terrain
   {
     $terrains = Board::getTerrainsInCell($this->x, $this->y);
     foreach ($terrains as $terrain) {
-      if ($terrain->getType() == 'bridge') {
+      if ($terrain->getType() == 'bridge' || $terrain->getType() == 'bridgesection') {
         return false;
       }
     }

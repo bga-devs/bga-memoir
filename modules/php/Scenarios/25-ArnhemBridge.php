@@ -266,7 +266,7 @@ $scenarios[25] = [
         ],
         'rect_terrain' => [
           'name' => 'bridge',
-          'orientation' => 1,
+          'orientation' => 2,
           'behavior' => 'BRIDGE_SECTION',
         ],
       ],
@@ -305,6 +305,7 @@ $scenarios[25] = [
         ],
         'unit' => [
           'name' => 'inf2us',
+          'badge' => 'badge1',
         ],
       ],
       33 => [
@@ -319,6 +320,7 @@ $scenarios[25] = [
         ],
         'unit' => [
           'name' => 'inf2us',
+          'badge' => 'badge1',
         ],
       ],
       34 => [
@@ -326,7 +328,7 @@ $scenarios[25] = [
         'col' => 14,
         'rect_terrain' => [
           'name' => 'bridge',
-          'orientation' => 1,
+          'orientation' => 2,
           'behavior' => 'BRIDGE_SECTION',
         ],
       ],
@@ -349,7 +351,7 @@ $scenarios[25] = [
         'col' => 13,
         'rect_terrain' => [
           'name' => 'bridge',
-          'orientation' => 1,
+          'orientation' => 2,
           'behavior' => 'BRIDGE_SECTION',
         ],
       ],
@@ -372,6 +374,7 @@ $scenarios[25] = [
         ],
         'unit' => [
           'name' => 'inf2us',
+          'badge' => 'badge1',
         ],
       ],
       40 => [
@@ -400,6 +403,7 @@ $scenarios[25] = [
         ],
         'unit' => [
           'name' => 'inf2us',
+          'badge' => 'badge1',
         ],
       ],
       43 => [
@@ -456,6 +460,7 @@ $scenarios[25] = [
         ],
         'unit' => [
           'name' => 'inf2us',
+          'badge' => 'badge1',
         ],
       ],
     ],

@@ -110,6 +110,8 @@ class Terrains extends \M44\Helpers\Pieces
             $properties['isImpassable'] = true;
             $properties['isBlockingLineOfAttack'] = true;
             $properties['isBlockingLineOfSight'] = false;
+          } elseif ($behavior == 'BRIDGE_SECTION') {
+            $properties['bridgeSection'] = true;
           }
 
           if (isset($options['hill317'])) {
