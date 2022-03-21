@@ -439,7 +439,7 @@ class Board
 
     // Compute shooting powers for the remaining cells
     foreach ($cells as &$cell) {
-      $cell['dice'] = $power[$cell['d'] - 1];
+      $cell['dice'] = $power[$cell['d'] - 1] + $unit->getAttackModifier($cell);
       $offenseModifier = self::getDiceModifier($unit, $pos, false);
       $defenseModifier = self::getDiceModifier($unit, $cell, true);
       $cardModifier = 0;
