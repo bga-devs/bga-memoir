@@ -40,7 +40,9 @@ class Terrain extends \M44\Helpers\DB_Model
     'mustBeAdjacentToEnter',
     'mustStopWhenEntering',
     'enteringCannotBattle',
+    'leavingCannotBattle',
     'canIgnoreOneFlag',
+    'canIgnoreAllFlags',
     'isBlockingLineOfSight',
     'isBlockingLineOfAttack',
     'mustStopWhenLeaving',
@@ -49,10 +51,14 @@ class Terrain extends \M44\Helpers\DB_Model
     'isImpassableForRetreat',
     'cannotBattle',
     'cantTakeGround',
+    'hill317',
+    'cannotArmorOverrun',
 
     'isHill',
     'isBunker',
     'isBeach',
+    'isBridge',
+    'isMountain',
 
     'defense',
     'offense',
@@ -82,7 +88,7 @@ class Terrain extends \M44\Helpers\DB_Model
     ];
 
     $prop = $this->getExtraDatas('properties') ?? [];
-    if(!empty($prop)){
+    if (!empty($prop)) {
       $datas['properties'] = $prop;
     }
 

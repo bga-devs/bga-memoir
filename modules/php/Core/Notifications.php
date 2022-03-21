@@ -150,12 +150,17 @@ class Notifications
 
   public static function takeGround($player, $unitId, $x, $y)
   {
-    self::notifyAll('moveUnit', clienttranslate('${player_name} takes ground after successfull attack'), [
-      'player' => $player,
-      'unitId' => $unitId,
-      'x' => $x,
-      'y' => $y,
-    ]);
+    self::notifyAll(
+      'moveUnit',
+      clienttranslate('${player_name} takes ground in ${coordTarget} after successfull attack'),
+      [
+        'player' => $player,
+        'unitId' => $unitId,
+        'x' => $x,
+        'y' => $y,
+        'coordTarget' => ['x' => $x, 'y' => $y],
+      ]
+    );
   }
 
   public static function drawCards($player, $cards, $silent = false)
@@ -229,13 +234,14 @@ class Notifications
   public static function takeDamage($player, $oppUnit, $hits, $cantRetreat)
   {
     $msg = $cantRetreat
-      ? clienttranslate('${player_name}\'s unit takes ${hits} damage(s) because retreat is blocked')
-      : clienttranslate('${player_name}\'s unit takes ${hits} damage(s)');
+      ? clienttranslate('${player_name}\'s unit (in ${coordSource}) takes ${hits} damage(s) because retreat is blocked')
+      : clienttranslate('${player_name}\'s unit (in ${coordSource}) takes ${hits} damage(s)');
     self::notifyAll('takeDamage', $msg, [
       'player' => $player,
       'unitId' => $oppUnit->getId(),
       'cell' => $oppUnit->getPos(),
       'hits' => $hits,
+      'coordSource' => $oppUnit->getPos(),
     ]);
   }
 
@@ -248,18 +254,27 @@ class Notifications
 
   public static function healUnit($player, $nb, $unit)
   {
-    self::notifyAll('healUnit', clienttranslate('${player_name} heals ${nb} damage(s)'), [
-      'player' => $player,
-      'unitId' => $unit->getId(),
-      'nb' => $nb,
-    ]);
+    self::notifyAll(
+      'healUnit',
+      clienttranslate('${player_name} heals ${nb} damage(s) to ${unit_desc} (in ${coordSource})'),
+      [
+        'player' => $player,
+        'unitId' => $unit->getId(),
+        'nb' => $nb,
+        'unit_desc' => self::computeUnitsDesc([$unit]),
+        'coordSource' => $unit->getPos(),
+      ]
+    );
   }
 
   public static function removeObstacle($terrain)
   {
-    self::notifyAll('removeObstacle', '', [
+    self::notifyAll('removeObstacle', clienttranslate('${obstacle} is removed in ${coordSource}'), [
       'terrainId' => $terrain->getId(),
       'cell' => $terrain->getPos(),
+      'obstacle' => $terrain->getName(),
+      'coordSource' => $terrain->getPos(),
+      'i18n' => ['obstacle'],
     ]);
   }
 
@@ -268,6 +283,7 @@ class Notifications
     self::notifyAll('addObstacle', $msg, [
       'player' => $player,
       'terrain' => $terrain,
+      'coordSource' => $terrain->getPos(),
     ]);
   }
 
@@ -288,9 +304,10 @@ class Notifications
 
   public static function airDrop($player, $unit)
   {
-    self::notifyAll('airDrop', \clienttranslate('${player_name} successfully air drops a unit at XX'), [
+    self::notifyAll('airDrop', \clienttranslate('${player_name} successfully air drops a unit in ${coordSource}'), [
       'player' => $player,
       'unit' => $unit,
+      'coordSource' => $unit->getPos(),
     ]);
   }
 
@@ -323,11 +340,11 @@ class Notifications
     }
 
     if (isset($args['coordSource'])) {
-      $args['coordSource'] = self::computeCoords($args['coordSource']);
+      $args['coordSource'] = Utils::computeCoords($args['coordSource']);
     }
 
     if (isset($args['coordTarget'])) {
-      $args['coordTarget'] = self::computeCoords($args['coordTarget']);
+      $args['coordTarget'] = Utils::computeCoords($args['coordTarget']);
     }
 
     // if (isset($args['task'])) {
@@ -339,19 +356,6 @@ class Notifications
     //     $args['task'] = $args['task']->jsonSerialize($args['task']->getPId() == $args['player_id']);
     //   }
     // }
-  }
-
-  protected static function computeCoords($x, $y = null)
-  {
-    if (!is_array($x)) {
-      $x = ['x' => $x, 'y' => $y];
-    }
-    // capital
-    if ($x['x'] % 2 == 0) {
-      return strtoupper(alphabet[$x['x'] / 2]) . (9 - $x['y']);
-    } else {
-      return alphabet[($x['x'] - 1) / 2] . (9 - $x['y']);
-    }
   }
 
   protected static function computeUnitsDesc($units)

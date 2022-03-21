@@ -22,13 +22,24 @@ trait PlayCardTrait
         return $card->getAdditionalPlayConstraints();
       });
 
+    $cardsHill317 = $player
+      ->getCards()
+      ->filter(function ($card) {
+        return $card->getType() != \CARD_AMBUSH;
+      })
+      ->map(function ($card) {
+        return $card->canHill317();
+      });
+
     $args = [
       'cards' => $cards,
+      'cardsHill317' => $player->canHill317() ? $cardsHill317 : [],
+      'canHill317' => $player->canHill317(),
     ];
     return $singleActive ? Utils::privatise($args) : $args;
   }
 
-  function actPlayCard($cardId, $sectionId = null)
+  function actPlayCard($cardId, $sectionId = null, $hill317 = false)
   {
     // Sanity check
     $this->checkAction('actPlayCard');
@@ -39,15 +50,28 @@ trait PlayCardTrait
       throw new \BgaVisibleSystemException('Non playable card. Should not happen.');
     }
 
-    if (
-      $args['cards'][$cardId] != null &&
-      (!in_array($sectionId, $args['cards'][$cardId]) || $sectionId == null)
-    ) {
+    if ($args['cards'][$cardId] != null && (!in_array($sectionId, $args['cards'][$cardId]) || $sectionId == null)) {
       throw new \BgaVisibleSystemException('Invalid section. Should not happen');
     }
 
     if ($args['cards'][$cardId] == null && $sectionId != null) {
       throw new \BgaVisibleSystemException('Invalid section. Should not happen');
+    }
+
+    if ($hill317 && !$args['canHill317']) {
+      throw new \BgaVisibleSystemException('Cannot play card as hill317. Should not happen');
+    }
+
+    if ($hill317 && !Cards::get($cardId)->canHill317()) {
+      throw new \BgaVisibleSystemException('Cannot play this type of card as hill317. Should not happen');
+    }
+
+    if ($hill317) {
+      $card = Cards::get($cardId);
+      $card->setExtraDatas('hill317', true);
+      // if ($card->getType() == \CARD_COUNTER_ATTACK) {
+      //   $card->getCopiedCard()->setExtraDatas('hill317', true);
+      // }
     }
 
     // Play the card

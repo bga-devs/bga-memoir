@@ -1,5 +1,9 @@
 <?php
 namespace M44\Cards\Standard;
+use M44\Managers\Units;
+use M44\Board;
+use M44\Core\Game;
+use M44\Core\Globals;
 
 class Recon extends \M44\Models\SectionCard
 {
@@ -25,5 +29,130 @@ class Recon extends \M44\Models\SectionCard
     ];
 
     $this->draw = ['nDraw' => 2, 'nKeep' => 1];
+  }
+
+  public function nextStateAfterPlay()
+  {
+    if ($this->getExtraDatas('hill317') === true) {
+      return 'airpower';
+    } else {
+      // throw new \feException(print_r(\debug_print_backtrace()));
+      // throw new \feException($this->id);
+      return parent::nextStateAfterPlay();
+    }
+  }
+
+  public function canHill317()
+  {
+    return true;
+  }
+
+  public function argsTargetAirPower()
+  {
+    $units = $this->getPlayer()
+      ->getTeam()
+      ->getOpponent()
+      ->getUnits()
+      ->map(function ($unit) {
+        return array_merge($unit->getPos(), ['section' => $unit->getSection()]);
+      });
+    return ['units' => $units, 'section' => $this->getSections()];
+  }
+
+  public function actTargetAirPower($unitIds)
+  {
+    // Sanity checks
+    $args = $this->argsTargetAirPower();
+    if (count(array_diff($unitIds, $args['units']->getIds())) > 0) {
+      throw new \feException('Those units cannot be attacked. Should not happen');
+    }
+    if (count($unitIds) > 4) {
+      throw new \BgaUserException(clienttranslate('You must choose maximum 4 units'));
+    }
+    // check adjacent of Units
+    if (!$this->areUnitsContiguous($unitIds)) {
+      throw new \BgaUserException(clienttranslate('You must select a contiguous sequence of adjacent ennemy units'));
+    }
+
+    // TODO check that one unit is in the section
+    $found = false;
+    foreach ($args['units'] as $uId => $d) {
+      foreach ($d['section'] as $section) {
+        if ($this->getSections()[$section] == 1) {
+          $found = true;
+        }
+      }
+    }
+    if ($found == false) {
+      throw new \BgaUserException('No ennemy in the card section. Should not happen');
+    }
+
+    // Create all the corresponding attacks
+    $player = $this->getPlayer();
+    $nDice = $player->getTeam()->getId() == ALLIES ? 2 : 1;
+    $stack = Globals::getAttackStack();
+    foreach (array_reverse($unitIds) as $unitId) {
+      $stack[] = [
+        'pId' => $player->getId(),
+        'unitId' => -1,
+        'cardId' => $this->getId(),
+        'x' => $args['units'][$unitId]['x'],
+        'y' => $args['units'][$unitId]['y'],
+        'oppUnitId' => $unitId,
+        'nDice' => $nDice,
+        'distance' => 0,
+        'ambush' => false,
+      ];
+    }
+    Globals::setAttackStack($stack);
+
+    Game::get()->nextState('attack');
+  }
+
+  public function areUnitsContiguous($unitIds)
+  {
+    $previousUnit = null;
+    foreach ($unitIds as $unitId) {
+      $unit = Units::get($unitId);
+      if ($previousUnit != null) {
+        $pos1 = $unit->getPos();
+        $pos2 = $previousUnit->getPos();
+        if (abs($pos1['x'] - $pos2['x']) + abs($pos1['y'] - $pos2['y']) > 2) {
+          return false;
+        }
+      }
+      $previousUnit = $unit;
+    }
+
+    return true;
+  }
+
+  public function getDrawMethod()
+  {
+    if ($this->getExtraDatas('hill317') === true) {
+      return ['nDraw' => 1, 'nKeep' => 1];
+    }
+    return $this->draw;
+  }
+
+  public function getHits($type, $nb)
+  {
+    if ($this->getExtraDatas('hill317') === true) {
+      $this->hitMap[DICE_STAR] = true;
+    }
+    if ($this->hitMap[$type]) {
+      return $nb;
+    }
+
+    return -1;
+  }
+
+  public function cannotIgnoreFlags()
+  {
+    if ($this->getExtraDatas('hill317') === true) {
+      return true;
+    }
+
+    return $this->cannotIgnoreFlags;
   }
 }

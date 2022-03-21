@@ -18,16 +18,18 @@ trait RetreatUnitTrait
   {
     $oppUnit = Units::get($attack['oppUnitId']);
     $canIgnore1Flag = Board::canIgnoreOneFlag($oppUnit);
+    $canIgnoreAllFlags = Board::canIgnoreAllFlagsCell($oppUnit);
     $currentAttack = $this->getCurrentAttack();
 
     if ($currentAttack['card']->cannotIgnoreFlags()) {
       $canIgnore1Flag = false;
+      $canIgnoreAllFlags = false;
     }
     $attackedUnit = Units::get($attack['oppUnitId']);
     // TODO : compute the min/max flags
 
     Globals::setRetreat([
-      'min' => $dice[\DICE_FLAG] - ($canIgnore1Flag ? 1 : 0),
+      'min' => $canIgnoreAllFlags ? 0 : $dice[\DICE_FLAG] - ($canIgnore1Flag ? 1 : 0),
       'max' => $dice[\DICE_FLAG] * $attackedUnit->getRetreatHex(),
       'unit' => $attack['oppUnitId'],
     ]);

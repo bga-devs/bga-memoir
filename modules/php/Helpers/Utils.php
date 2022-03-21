@@ -93,4 +93,41 @@ abstract class Utils extends \APP_DbObject
       }
     }
   }
+
+  public static function computeCoords($x, $y = null)
+  {
+    if (!is_array($x)) {
+      $x = ['x' => $x, 'y' => $y];
+    }
+
+    // capital
+    if ($x['x'] % 2 == 0) {
+      return strtoupper(alphabet[$x['x'] / 2]) . (9 - $x['y']);
+    } else {
+      return alphabet[($x['x'] - 1) / 2] . (9 - $x['y']);
+    }
+  }
+
+  public static function revertCoords($coord)
+  {
+    $xy = ['x' => substr($coord, 0, 1), 'y' => substr($coord, -1)];
+
+    $v = \array_search($xy['x'], alphabet);
+    if ($v === false) {
+      $v = \array_search(strtolower($xy['x']), alphabet);
+      $xy['x'] = $v * 2;
+    } else {
+      $xy['x'] = $v * 2 + 1;
+    }
+
+    $xy['y'] = 9 - $xy['y'];
+    return $xy;
+
+    // capital
+    if ($x['x'] % 2 == 0) {
+      return strtoupper(alphabet[$x['x'] / 2]) . (9 - $x['y']);
+    } else {
+      return alphabet[($x['x'] - 1) / 2] . (9 - $x['y']);
+    }
+  }
 }

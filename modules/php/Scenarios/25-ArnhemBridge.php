@@ -112,6 +112,7 @@ $scenarios[25] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 2,
+          'behavior' => 'WIDE_RIVER',
         ],
       ],
       9 => [
@@ -127,6 +128,7 @@ $scenarios[25] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
+          'behavior' => 'WIDE_RIVER',
         ],
       ],
       11 => [
@@ -135,6 +137,7 @@ $scenarios[25] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
+          'behavior' => 'WIDE_RIVER',
         ],
       ],
       12 => [
@@ -143,6 +146,7 @@ $scenarios[25] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
+          'behavior' => 'WIDE_RIVER',
         ],
       ],
       13 => [
@@ -151,6 +155,7 @@ $scenarios[25] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
+          'behavior' => 'WIDE_RIVER',
         ],
       ],
       14 => [
@@ -159,6 +164,7 @@ $scenarios[25] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
+          'behavior' => 'WIDE_RIVER',
         ],
       ],
       15 => [
@@ -167,6 +173,7 @@ $scenarios[25] = [
         'terrain' => [
           'name' => 'curve',
           'orientation' => 5,
+          'behavior' => 'WIDE_RIVER',
         ],
       ],
       16 => [
@@ -196,6 +203,7 @@ $scenarios[25] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 2,
+          'behavior' => 'WIDE_RIVER',
         ],
       ],
       20 => [
@@ -232,6 +240,7 @@ $scenarios[25] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 3,
+          'behavior' => 'WIDE_RIVER',
         ],
       ],
       25 => [
@@ -240,6 +249,7 @@ $scenarios[25] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 2,
+          'behavior' => 'WIDE_RIVER',
         ],
       ],
       26 => [
@@ -255,6 +265,7 @@ $scenarios[25] = [
         'terrain' => [
           'name' => 'curve',
           'orientation' => 2,
+          'behavior' => 'WIDE_RIVER',
         ],
       ],
       28 => [
@@ -263,10 +274,11 @@ $scenarios[25] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
+          'behavior' => 'WIDE_RIVER',
         ],
         'rect_terrain' => [
           'name' => 'bridge',
-          'orientation' => 1,
+          'orientation' => 2,
           'behavior' => 'BRIDGE_SECTION',
         ],
       ],
@@ -276,6 +288,7 @@ $scenarios[25] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
+          'behavior' => 'WIDE_RIVER',
         ],
       ],
       30 => [
@@ -284,6 +297,7 @@ $scenarios[25] = [
         'terrain' => [
           'name' => 'curve',
           'orientation' => 3,
+          'behavior' => 'WIDE_RIVER',
         ],
       ],
       31 => [
@@ -305,6 +319,7 @@ $scenarios[25] = [
         ],
         'unit' => [
           'name' => 'inf2us',
+          'badge' => 'badge1',
         ],
       ],
       33 => [
@@ -319,6 +334,7 @@ $scenarios[25] = [
         ],
         'unit' => [
           'name' => 'inf2us',
+          'badge' => 'badge1',
         ],
       ],
       34 => [
@@ -326,7 +342,7 @@ $scenarios[25] = [
         'col' => 14,
         'rect_terrain' => [
           'name' => 'bridge',
-          'orientation' => 1,
+          'orientation' => 2,
           'behavior' => 'BRIDGE_SECTION',
         ],
       ],
@@ -349,7 +365,7 @@ $scenarios[25] = [
         'col' => 13,
         'rect_terrain' => [
           'name' => 'bridge',
-          'orientation' => 1,
+          'orientation' => 2,
           'behavior' => 'BRIDGE_SECTION',
         ],
       ],
@@ -372,6 +388,7 @@ $scenarios[25] = [
         ],
         'unit' => [
           'name' => 'inf2us',
+          'badge' => 'badge1',
         ],
       ],
       40 => [
@@ -400,6 +417,7 @@ $scenarios[25] = [
         ],
         'unit' => [
           'name' => 'inf2us',
+          'badge' => 'badge1',
         ],
       ],
       43 => [
@@ -456,6 +474,7 @@ $scenarios[25] = [
         ],
         'unit' => [
           'name' => 'inf2us',
+          'badge' => 'badge1',
         ],
       ],
     ],

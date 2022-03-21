@@ -258,7 +258,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
       return `
       <div id='board-medal-${medal.id}' class="board-medal"
-        data-team="${medal.team}" data-sprite="${sprite}" data-permanent="${medal.permanent ? 1 : 0}"></div>`;
+        data-team="${medal.team}" data-sprite="${sprite}" data-permanent="${medal.permanent}"></div>`;
     },
 
     notif_addObstacle(n) {
@@ -368,7 +368,15 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         isBlockingLineOfSight: {
           bool: _('Block line of sight'),
           negbool: _('Do not block line of sight'),
+          obj: _('Block line of sight of ${units}'),
           hill: _('Block line of sight (except for contiguous adjacent hills)'),
+        },
+        hill317: {
+          bool: _('Hill317: If Allies has a unit on the hill, Recon cards can be played as Air Power card'),
+          obj: '',
+        },
+        isBlockingLineOfAttack: {
+          bool: _('Block line of attack for all units (including Artillery)'),
         },
       };
 
@@ -389,9 +397,12 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
             content = propDesc.bool;
           }
         } else if (propDesc.negbool) {
-          content = propDesc.negbool;
-          if (prop == 'isBlockingLineOfSight' && terrainData.isHill) {
-            content = propDesc.hill;
+          if (Object.keys(properties).indexOf('isBlockingLineOfAttack') == -1) {
+            content = propDesc.negbool;
+
+            if (prop == 'isBlockingLineOfSight' && terrainData.isHill) {
+              content = propDesc.hill;
+            }
           }
         }
 

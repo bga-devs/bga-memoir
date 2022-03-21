@@ -7,6 +7,7 @@ use M44\Core\Preferences;
 use M44\Helpers\Collection;
 use M44\Managers\Units;
 use M44\Board;
+use M44\Helpers\Utils;
 
 /*
  * Medals manager
@@ -93,8 +94,9 @@ class Medals extends \M44\Helpers\DB_Manager
           $permanent = $tag['medal']['permanent'] ?? false;
           $hexes = [['x' => $hex['col'], 'y' => $hex['row']]];
           if (isset($tag['group']) && !empty($tag['group'])) {
-            // TODO : handle group fields
-            die('todo: handle group hexes');
+            foreach ($tag['group'] as $g) {
+              $hexes[] = Utils::revertCoords($g);
+            }
           }
 
           $boardMedals[] = [

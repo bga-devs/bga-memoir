@@ -10,6 +10,7 @@ use M44\Managers\Players;
 use M44\Managers\Teams;
 use M44\Managers\Units;
 use M44\Scenario;
+use M44\Board;
 
 /*
  * Player: all utility functions concerning a player
@@ -104,5 +105,20 @@ class Player extends \M44\Helpers\DB_Model
     }
 
     return $units;
+  }
+
+  public function canHill317()
+  {
+    $canHill317 = false;
+    if (self::getTeam()->getId() == \AXIS) {
+      return false;
+    }
+
+    foreach (self::getUnits() as $unit) {
+      if (Board::cellHasProperty($unit->getPos(), 'hill317', $unit)) {
+        return true;
+      }
+    }
+    return false;
   }
 }

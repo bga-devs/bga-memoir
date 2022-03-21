@@ -182,10 +182,14 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
     onEnteringStatePlayCard(args) {
       let cards = args._private.cards;
+      let cards317 = args._private.cardsHill317;
+      let canHill317 = args._private.canHill317;
       Object.keys(cards).forEach((cardId) => {
         this.onClick(`card-${cardId}`, () => {
           if (cards[cardId]) {
             this.clientState('playCardSelectSection', _('Choose target section'), { cardId, sections: cards[cardId] });
+          } else if (canHill317 && cards317[cardId] == true) {
+            this.clientState('playCardHill317', _('Do you wish to play it as Air Power card?'), { cardId });
           } else {
             this.takeAction('actPlayCard', { cardId });
           }
@@ -207,6 +211,20 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           this.takeAction('actPlayCard', { cardId, section }),
         );
       });
+    },
+
+    onEnteringStatePlayCardHill317(args) {
+      let cardId = args.cardId;
+      let section = null;
+      this.addCancelStateBtn();
+      this.addPrimaryActionButton(`btnHillYes`, _('Yes'), () =>
+        this.takeAction('actPlayCard', { cardId, section, hill317: true }),
+      );
+      hill = false;
+
+      this.addPrimaryActionButton(`btnHillNo`, _('No'), () =>
+        this.takeAction('actPlayCard', { cardId, section, hill317: false }),
+      );
     },
 
     notif_playCard(n) {

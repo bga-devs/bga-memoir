@@ -84,6 +84,7 @@ class Terrains extends \M44\Helpers\Pieces
       ->run();
     $board = $scenario['board'];
     $terrains = self::getBackgroundSpecialTerrains($board);
+    $options = $scenario['game_info']['options'] ?? [];
     foreach ($board['hexagons'] as $hex) {
       $keys = ['terrain', 'rect_terrain', 'obstacle'];
       foreach ($keys as $key) {
@@ -108,8 +109,19 @@ class Terrains extends \M44\Helpers\Pieces
           } elseif ($behavior == 'IMPASSABLE_BLOCKING_HILL') {
             $properties['isImpassable'] = true;
             $properties['isBlockingLineOfAttack'] = true;
+            $properties['isBlockingLineOfSight'] = false;
+          } elseif ($behavior == 'BRIDGE_SECTION') {
+            $properties['bridgeSection'] = true;
+          } elseif ($behavior == 'WIDE_RIVER') {
+            $properties['isBlockingLineOfSight'] = [\INFANTRY];
           }
 
+          if (isset($options['hill317'])) {
+            $coords = Utils::computeCoords(['x' => $hex['col'], 'y' => $hex['row']]);
+            if (in_array($coords, array_values($options['hill317']))) {
+              $properties['hill317'] = true;
+            }
+          }
           // Extra data
           $extraDatas = empty($properties)
             ? null

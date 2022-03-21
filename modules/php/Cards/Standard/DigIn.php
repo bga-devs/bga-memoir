@@ -75,7 +75,7 @@ class DigIn extends \M44\Models\Card
         Notifications::addObstacle(
           $player,
           $terrain,
-          \clienttranslate('${player_name} reinforces their position by placing a sandbag')
+          \clienttranslate('${player_name} reinforces their position by placing a sandbag (in ${coordSource})')
         );
       }
     }

@@ -5,6 +5,7 @@ use M44\Core\Stats;
 use M44\Models\Team;
 use M44\Core\Notifications;
 use M44\Core\Game;
+use M44\Helpers\Utils;
 
 /**
  * Teams
@@ -104,6 +105,22 @@ class Teams extends \M44\Helpers\DB_Manager
         Notifications::winRound($team, Globals::getRound());
         Game::get()->gamestate->jumpToState(ST_NEW_ROUND);
         return true;
+      }
+    }
+
+    // sudden death
+    $suddenDeath = Globals::getSuddenDeath();
+    if ($suddenDeath != null) {
+      $team = Teams::get($suddenDeath['side']);
+      $n = 0;
+      foreach ($team->getUnits() as $unit) {
+        if (in_array(Utils::computeCoords($unit->getPos()), $suddenDeath['group'])) {
+          $n++;
+        }
+      }
+      if ($n >= $suddenDeath['number']) {
+        $team->addSuddenDeathMedals();
+        return self::checkVictory();
       }
     }
     return false;

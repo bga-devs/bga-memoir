@@ -176,8 +176,35 @@ const TERRAIN_CLASSES = [
   'steephill' => 'SteepHill',
   'village' => 'Village',
   'wire' => 'Wire',
-
+  'airfield' => 'AirField',
+  'barack' => 'Barrack',
+  'cemetery' => 'Cemetery',
   'church' => 'Church',
+  'dam' => 'Dam',
+  'factory' => 'FactoryComplex',
+  'fieldbunker' => 'FieldBunker',
+  'fortress' => 'Fortress',
+  'lighthouse' => 'Lighthouse',
+  'highground' => 'HighGround',
+  'marsh' => 'Marsh',
+  'mountain' => 'Mountain',
+  'oasis' => 'Oasis',
+  'palmforest' => 'PalmForest',
+  'poontoon' => 'Poontoon',
+  'powerplant' => 'PowerPlant',
+  'prisoncamp' => 'PrisonCamp',
+  'radarstation' => 'RadarStation',
+  'railroadbridge' => 'RailroadBridge',
+  'rail' => 'Rail',
+  'wadi' => 'Wadi',
+  'railstation' => 'RailStation',
+  'supplydepot' => 'SupplyDepot',
+  'roadblock' => 'RoadBlock',
+  'ford' => 'Ford',
+  'road' => 'Road',
+  'hillroad' => 'HillRoad',
+  'bridgesection' => 'BridgeSection',
+  'lake' => 'Lake',
 ];
 
 const TROOP_CLASSES = [
@@ -187,7 +214,8 @@ const TROOP_CLASSES = [
   'tank' => 'Armor',
   'gun' => 'Artillery',
   // type + badge number if non decorative
-  'inf_23' => 'FrenchResistance',
+  'inf2_3' => 'FrenchResistance',
+  'gun_5' => 'BigGun',
 ];
 
 const TROOP_BADGE_MAPPING = ['FRENCH_RESISTANCE' => 'badge3'];

@@ -6,7 +6,7 @@ class Hill extends \M44\Models\Terrain
 {
   public static function isTileOfType($hex)
   {
-    return in_array($hex['name'], ['hills']) &&
+    return in_array($hex['name'], ['hills', 'mountain']) &&
       (!isset($hex['behavior']) || in_array($hex['behavior'], ['HILL', 'IMPASSABLE_HILL', 'IMPASSABLE_BLOCKING_HILL']));
   }
 
@@ -25,6 +25,11 @@ class Hill extends \M44\Models\Terrain
     $s = $unit->getPos();
     $t = $target;
     return $c[$this->x][$this->y] != $c[$s['x']][$s['y']] || $c[$this->x][$this->y] != $c[$t['x']][$t['y']];
+  }
+
+  public function isBlockingLineOfAttack()
+  {
+    return $this->getExtraDatas('properties')['isBlockingLineOfAttack'] ?? false;
   }
 
   public function defense($unit)
