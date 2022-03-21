@@ -258,7 +258,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
       return `
       <div id='board-medal-${medal.id}' class="board-medal"
-        data-team="${medal.team}" data-sprite="${sprite}" data-permanent="${medal.permanent ? 1 : 0}"></div>`;
+        data-team="${medal.team}" data-sprite="${sprite}" data-permanent="${medal.permanent}"></div>`;
     },
 
     notif_addObstacle(n) {

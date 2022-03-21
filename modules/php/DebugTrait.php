@@ -18,7 +18,7 @@ trait DebugTrait
     $this->gamestate->jumpToState(\ST_NEW_ROUND);
   }
 
-  function vt()
+  function vt($c)
   {
     // $this->actChooseCard([35]);
     // throw new \feException(print_r(Cards::getInPlayOfAll()));
@@ -29,7 +29,8 @@ trait DebugTrait
     //     $terrain->setExtraDatas('truc', 'mm');
     //   }
     // }
-    throw new \feException(print_r(Board::getReachableCellsAtDistance(Units::get(14), 3)));
+    // throw new \feException(print_r(Board::getReachableCellsAtDistance(Units::get(14), 3)));
+    throw new \feException(print_r(Utils::revertCoords($c)));
   }
 
   function tp($pId, $unitId, $min, $max)
