@@ -214,7 +214,8 @@ const TROOP_CLASSES = [
   'tank' => 'Armor',
   'gun' => 'Artillery',
   // type + badge number if non decorative
-  'inf_23' => 'FrenchResistance',
+  'inf2_3' => 'FrenchResistance',
+  'gun_5' => 'BigGun',
 ];
 
 const TROOP_BADGE_MAPPING = ['FRENCH_RESISTANCE' => 'badge3'];

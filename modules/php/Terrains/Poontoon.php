@@ -1,7 +1,7 @@
 <?php
 namespace M44\Terrains;
 
-class Pontoon extends \M44\Models\RectTerrain
+class Poontoon extends \M44\Models\RectTerrain
 {
   public static function isTileOfType($hex)
   {
