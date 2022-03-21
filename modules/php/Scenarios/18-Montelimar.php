@@ -210,7 +210,7 @@ $scenarios[18] = [
         'col' => 20,
         'terrain' => [
           'name' => 'hills',
-          'behavior' => 'IMPASSABLE_BLOCKING_HILL',
+          'behavior' => 'IMPASSABLE_HILL',
         ],
       ],
       20 => [
@@ -254,7 +254,7 @@ $scenarios[18] = [
         'col' => 19,
         'terrain' => [
           'name' => 'hills',
-          'behavior' => 'IMPASSABLE_BLOCKING_HILL',
+          'behavior' => 'IMPASSABLE_HILL',
         ],
       ],
       26 => [
@@ -322,7 +322,7 @@ $scenarios[18] = [
         'col' => 18,
         'terrain' => [
           'name' => 'hills',
-          'behavior' => 'IMPASSABLE_BLOCKING_HILL',
+          'behavior' => 'IMPASSABLE_HILL',
         ],
       ],
       34 => [
@@ -330,7 +330,7 @@ $scenarios[18] = [
         'col' => 20,
         'terrain' => [
           'name' => 'hills',
-          'behavior' => 'IMPASSABLE_BLOCKING_HILL',
+          'behavior' => 'IMPASSABLE_HILL',
         ],
       ],
       35 => [
@@ -345,7 +345,7 @@ $scenarios[18] = [
         'col' => 19,
         'terrain' => [
           'name' => 'hills',
-          'behavior' => 'IMPASSABLE_BLOCKING_HILL',
+          'behavior' => 'IMPASSABLE_HILL',
         ],
       ],
       37 => [
@@ -398,7 +398,7 @@ $scenarios[18] = [
         'col' => 20,
         'terrain' => [
           'name' => 'hills',
-          'behavior' => 'IMPASSABLE_BLOCKING_HILL',
+          'behavior' => 'IMPASSABLE_HILL',
         ],
       ],
       44 => [

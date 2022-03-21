@@ -374,6 +374,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           bool: _('Hill317: If Allies has a unit on the hill, Recon cards can be played as Air Power card'),
           obj: '',
         },
+        isBlockingLineOfAttack: {
+          bool: _('Block line of attack for all units (including Artillery)'),
+        },
       };
 
       let unitMap = {
