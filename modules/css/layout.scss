@@ -21,36 +21,12 @@ html {
     z-index: 2;
     display: flex;
 
-    --memoirCardScale: 0.2;
-
-    #top-player {
-      position: relative;
-
-      .player-board {
-        height: 42px !important;
-        width: 244px !important;
-        border-radius: 0px;
-        overflow: hidden;
-      }
+    #top-team {
+      height: 52px;
 
       #top-medals {
         position: absolute;
-        bottom: -10px;
-      }
-    }
-
-    #top-player-hand {
-      display: flex;
-      column-gap: 5px;
-
-      .section-card,
-      .tactic-card {
-        max-height: 52px;
-
-        &.inplay {
-          max-height: none;
-          --memoirCardScale: 0.3;
-        }
+        bottom: -29px;
       }
     }
   }
@@ -62,7 +38,7 @@ html {
     margin-bottom: -4px;
     //background: url('img/background.jpg');
 
-    #deck-holder {
+    #left-holder {
       width: 122px;
       flex-shrink: 0;
       background: url('img/ui/game_left.png');
@@ -159,7 +135,160 @@ html {
         display: none;
       }
     }
+  }
 
+  #m44-bottom-part {
+    height: 71px;
+    background: url('img/ui/game_bottom.png');
+    background-repeat: repeat-x;
+    background-size: auto 100%;
+    position: relative;
+    z-index: 2;
+    display: flex;
+
+    #bottom-team {
+      height: 59px;
+      margin-top: 12px;
+      #bottom-medals {
+        position: absolute;
+        top: -29px;
+      }
+    }
+  }
+
+  .m44-team {
+    display: flex;
+    position: relative;
+
+    .m44-team-medals {
+      position: absolute;
+      z-index: 2;
+
+      .medals-slots-container,
+      .medals-container {
+        height: 35px;
+        display: flex;
+        column-gap: 3px;
+        padding-left: 3px;
+      }
+
+      .medals-slots-container {
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+
+        .m44-medal-slot {
+          width: 35px;
+          height: 35px;
+          background-image: url('img/ui/medalspot.png');
+          background-size: 100% 100%;
+        }
+      }
+    }
+
+    .m44-team-name {
+      width: 90px;
+      color: white;
+      font-weight: bold;
+      font-family: Gunplay;
+      font-size: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &[data-team='AXIS'] {
+        background: radial-gradient(farthest-corner at 10% 95%, #b6291b, #dc672e);
+        border: 2px solid #b72c14;
+      }
+      &[data-team='ALLIES'] {
+        background: radial-gradient(farthest-corner at 10% 95%, #77b3d2, #348eb1);
+        border: 2px solid #1d6f98;
+      }
+    }
+
+    .m44-player-panel {
+      display: flex;
+      background: #ebd5bd;
+      min-width: 240px;
+      padding: 5px 10px;
+
+      .player-name {
+        flex-grow: 1;
+      }
+
+      .card-in-play {
+        width: 65px;
+        --memoirCardScale: 0.2;
+      }
+
+      .hand-count-holder {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .hand-count-back {
+          width: 35px;
+          height: 49px;
+          background-image: url('img/card_back.jpg');
+          background-size: auto 100%;
+          background-repeat: no-repeat;
+          background-position: center center;
+        }
+
+        .hand-count::before {
+          content: 'x';
+          margin: 0px 3px;
+        }
+      }
+    }
+  }
+
+  #m44-player-hand {
+    width: 100%;
+    background: #ffffff8c;
+    height: 200px;
+    --memoirCardScale: 0.38;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+  }
+}
+
+/*
+
+
+--memoirCardScale: 0.2;
+
+#top-player {
+  position: relative;
+
+  .player-board {
+    height: 42px !important;
+    width: 244px !important;
+    border-radius: 0px;
+    overflow: hidden;
+  }
+
+}
+
+#top-player-hand {
+  display: flex;
+  column-gap: 5px;
+
+  .section-card,
+  .tactic-card {
+    max-height: 52px;
+
+    &.inplay {
+      max-height: none;
+      --memoirCardScale: 0.3;
+    }
+  }
+}
+
+/*
     #right-side {
       float: none;
       margin-left: 0px;
@@ -171,18 +300,7 @@ html {
       background: url('img/ui/game_right.png');
       background-repeat: repeat-y;
     }
-  }
 
-  #m44-bottom-part {
-    height: 220px;
-    background: url('img/ui/game_bottom.png');
-    background-repeat: repeat-x;
-    background-size: auto 100%;
-    position: relative;
-    z-index: 2;
-    display: flex;
-
-    --memoirCardScale: 0.4;
 
     #bottom-player {
       margin-top: 25px;
@@ -192,10 +310,6 @@ html {
         border-radius: 0px;
       }
 
-      #bottom-medals {
-        position: absolute;
-        top: -33px;
-      }
     }
 
     #bottom-player-hand {
@@ -209,36 +323,5 @@ html {
         margin-top: -20px;
       }
     }
-  }
 
-  #top-medals,
-  #bottom-medals {
-    z-index: 2;
-
-    .medals-slots-container,
-    .medals-container {
-      height: 35px;
-      display: flex;
-      column-gap: 3px;
-      padding-left: 3px;
-    }
-
-    .medals-slots-container {
-      position: absolute;
-      z-index: -1;
-      top: 0;
-      left: 0;
-
-      .m44-medal-slot {
-        width: 35px;
-        height: 35px;
-        background-image: url('img/ui/medalspot.png');
-        background-size: 100% 100%;
-      }
-    }
-  }
-}
-
-#left-side {
-  margin-right: 1px !important;
-}
+*/

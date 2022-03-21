@@ -2,18 +2,18 @@
 <div id="m44-container">
   <div class="m44-hrule"></div>
   <div id="m44-top-part">
-    <div id="top-player">
-      <div id="top-medals">
+    <div id="top-team" class='m44-team'>
+      <div id="top-medals" class='m44-team-medals'>
         <div id="top-medals-slots" class='medals-slots-container'></div>
         <div id="top-medals-container" class='medals-container'></div>
       </div>
+      <div id="top-team-name" class='m44-team-name'></div>
     </div>
-    <div id="top-player-hand"></div>
     <div id="scenario-informations"></div>
   </div>
 
   <div id="m44-central-part">
-    <div id="deck-holder">
+    <div id="left-holder">
       <div id="deck"><div id="deck-count"></div></div>
       <div id="discard"></div>
     </div>
@@ -39,13 +39,14 @@
   </div>
 
   <div id="m44-bottom-part">
-    <div id="bottom-player">
-      <div id="bottom-medals">
+    <div id="bottom-team" class='m44-team'>
+      <div id="bottom-medals" class='m44-team-medals'>
         <div id="bottom-medals-slots" class='medals-slots-container'></div>
         <div id="bottom-medals-container" class='medals-container'></div>
       </div>
+      <div id="bottom-team-name" class='m44-team-name'></div>
     </div>
-    <div id="bottom-player-hand"></div>
   </div>
+  <div id="player-hand"></div>
 </div>
 {OVERALL_GAME_FOOTER}

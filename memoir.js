@@ -85,7 +85,7 @@ define([
       this.inherited(arguments);
 
       // WHich player point of vue are we going to take ?
-      this._pId = this.isSpectator ? Object.values(this.gamedatas.players)[0] : this.player_id;
+      this._pId = this.isSpectator ? Object.keys(this.gamedatas.players)[0] : this.player_id;
       this._bottomTeam = this.gamedatas.players[this._pId].team;
 
       // Load board
@@ -172,8 +172,6 @@ define([
       dojo.query('.choice').removeClass('choice');
       dojo.query('.dice-mini').forEach(dojo.destroy);
     },
-
-    updatePlayerOrdering() {},
 
     /* This enable to inject translatable styled things to logs or action bar */
     /* @Override */
