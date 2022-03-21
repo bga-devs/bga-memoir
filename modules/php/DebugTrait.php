@@ -8,6 +8,7 @@ use M44\Managers\Cards;
 use M44\Managers\Units;
 use M44\Managers\Players;
 use M44\Board;
+use M44\Managers\Tokens;
 
 trait DebugTrait
 {
@@ -30,7 +31,8 @@ trait DebugTrait
     //   }
     // }
     // throw new \feException(print_r(Board::getReachableCellsAtDistance(Units::get(14), 3)));
-    throw new \feException(print_r(Utils::revertCoords($c)));
+    // throw new \feException(print_r(Utils::revertCoords($c)));
+    throw new \feException(print_r(Tokens::getOnCoords('target', ['x' => 0, 'y' => 0])));
   }
 
   function tp($pId, $unitId, $min, $max)

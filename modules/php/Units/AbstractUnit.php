@@ -275,4 +275,9 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
   {
     return Board::cannotArmorOverrunCell(self::getPos());
   }
+
+  public function afterAttack($coords, $hits, $eliminated)
+  {
+    return;
+  }
 }

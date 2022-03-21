@@ -180,6 +180,7 @@ trait AttackUnitsTrait
 
     // Launch dice
     $results = Dice::roll($player, $attack['nDice'], $oppUnit->getPos());
+    $coord = $oppUnit->getPos();
 
     // $hits = $oppUnit->getHits($results);
     $hits = $this->calculateHits($unit, $oppUnit, $card, $results);
@@ -193,6 +194,8 @@ trait AttackUnitsTrait
       foreach (Board::getTerrainsInCell($unit->getPos()) as $terrain) {
         $terrain->onAfterAttack($unit);
       }
+
+      $unit->afterAttack($coord, $hits, $eliminated);
     }
 
     // Handle retreat

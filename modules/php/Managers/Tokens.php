@@ -90,9 +90,12 @@ class Tokens extends \M44\Helpers\Pieces
     self::create($boardMedals);
   }
 
-  public static function addTagClause(&$q, $tag)
+  public static function addCoordsClause(&$q, $coords)
   {
-    $q = $q->where('tag', $tag);
+    $q = $q->where('x', $coords['x']);
+    $q = $q->where('y', $coords['y']);
+
+    return $q;
   }
 
   /******************************
@@ -101,6 +104,12 @@ class Tokens extends \M44\Helpers\Pieces
   public function getOnBoardMedals()
   {
     return self::getInLocation('board_medal');
-    return $query->get();
+  }
+
+  public function getOnCoords($location, $coords)
+  {
+    $query = self::getSelectWhere(null, $location, null);
+    $q = self::addCoordsClause($query, $coords);
+    return $q->get();
   }
 }
