@@ -11,6 +11,7 @@ use M44\Managers\Terrains;
 use M44\Managers\Units;
 use M44\Managers\Teams;
 use M44\Managers\Medals;
+use M44\Managers\Tokens;
 use M44\Board;
 
 class Scenario extends \APP_DbObject
@@ -95,6 +96,7 @@ class Scenario extends \APP_DbObject
 
     // Initialize medals
     Medals::loadScenario($scenario, $rematch);
+    Tokens::loadScenario($scenario, $rematch);
 
     if (isset(self::getOptions()['deck_reshuffling'])) {
       Globals::setDeckReshuffle(self::getOptions()['deck_reshuffling']);
