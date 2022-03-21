@@ -168,6 +168,7 @@ const TERRAIN_CLASSES = [
   'hill' => 'Hill',
   'ocean' => 'Ocean',
   'river' => 'River',
+  'wideriver' => 'WideRiver',
   'bridge' => 'Bridge',
   'sand' => 'Sandbag',
   'cliff' => 'Cliff',

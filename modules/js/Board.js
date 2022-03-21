@@ -377,6 +377,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         isBlockingLineOfAttack: {
           bool: _('Block line of attack for all units (including Artillery)'),
         },
+        wideRiver: {
+          bool: _('Too wide for Infantry to attack'),
+        },
       };
 
       let unitMap = {
