@@ -47,6 +47,5 @@
       <div id="bottom-team-name" class='m44-team-name'></div>
     </div>
   </div>
-  <div id="player-hand"></div>
 </div>
 {OVERALL_GAME_FOOTER}
