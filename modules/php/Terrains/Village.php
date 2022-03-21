@@ -5,7 +5,7 @@ class Village extends \M44\Models\Terrain
 {
   public static function isTileOfType($hex)
   {
-    return in_array($hex['name'], ['buildings']);
+    return in_array($hex['name'], ['buildings', 'bled']);
   }
 
   public function __construct($row)

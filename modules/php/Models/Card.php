@@ -223,7 +223,7 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
   public function getArgsArmorOverrun($unitId)
   {
     $unit = Units::get($unitId);
-    if ($unit->getType() != ARMOR || $unit->getFights() > 1) {
+    if ($unit->getType() != ARMOR || $unit->getFights() > 1 || $unit->cannotArmorOverrun()) {
       // TODO : this would break if a card allow an armor to fight twice
       return ['unit' => []];
     }

@@ -27,6 +27,7 @@ class Board
 
   protected static $grid = [];
   protected static $hillComponents = null;
+  protected static $mountainComponents = null;
   public function init()
   {
     // Try to fetch scenario from DB
@@ -73,6 +74,7 @@ class Board
     }
 
     self::$hillComponents = null;
+    self::$mountainComponents = null;
   }
 
   public function removeTerrain($terrain)
@@ -655,6 +657,22 @@ class Board
     }
 
     return self::$hillComponents;
+  }
+
+  public static function getMountainComponents()
+  {
+    if (self::$mountainComponents == null) {
+      $mountains = self::createGrid(false);
+      foreach ($mountains as $x => $col) {
+        foreach ($col as $y => $node) {
+          $mountains[$x][$y] = self::isMountainCell(['x' => $x, 'y' => $y]);
+        }
+      }
+
+      self::$mountainComponents = self::computeConnectedComponents($mountains);
+    }
+
+    return self::$mountainComponents;
   }
 
   /////////////////////////////////////////////

@@ -40,6 +40,7 @@ class Terrain extends \M44\Helpers\DB_Model
     'mustBeAdjacentToEnter',
     'mustStopWhenEntering',
     'enteringCannotBattle',
+    'leavingCannotBattle',
     'canIgnoreOneFlag',
     'isBlockingLineOfSight',
     'isBlockingLineOfAttack',
@@ -50,11 +51,13 @@ class Terrain extends \M44\Helpers\DB_Model
     'cannotBattle',
     'cantTakeGround',
     'hill317',
+    'cannotArmorOverrun',
 
     'isHill',
     'isBunker',
     'isBeach',
     'isBridge',
+    'isMountain',
 
     'defense',
     'offense',

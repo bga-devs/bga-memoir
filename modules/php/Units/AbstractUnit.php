@@ -265,4 +265,9 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
   {
     return $this->nUnits == 0;
   }
+
+  public function cannotArmorOverrun()
+  {
+    return Board::cannotArmorOverrunCell(self::getPos());
+  }
 }
