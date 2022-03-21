@@ -109,6 +109,7 @@ class Terrains extends \M44\Helpers\Pieces
           } elseif ($behavior == 'IMPASSABLE_BLOCKING_HILL') {
             $properties['isImpassable'] = true;
             $properties['isBlockingLineOfAttack'] = true;
+            $properties['isBlockingLineOfSight'] = false;
           }
 
           if (isset($options['hill317'])) {

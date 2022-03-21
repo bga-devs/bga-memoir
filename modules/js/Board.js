@@ -396,9 +396,12 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
             content = propDesc.bool;
           }
         } else if (propDesc.negbool) {
-          content = propDesc.negbool;
-          if (prop == 'isBlockingLineOfSight' && terrainData.isHill) {
-            content = propDesc.hill;
+          if (Object.keys(properties).indexOf('isBlockingLineOfAttack') == -1) {
+            content = propDesc.negbool;
+
+            if (prop == 'isBlockingLineOfSight' && terrainData.isHill) {
+              content = propDesc.hill;
+            }
           }
         }
 
