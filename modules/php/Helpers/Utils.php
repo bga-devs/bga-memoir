@@ -93,4 +93,17 @@ abstract class Utils extends \APP_DbObject
       }
     }
   }
+
+  public static function computeCoords($x, $y = null)
+  {
+    if (!is_array($x)) {
+      $x = ['x' => $x, 'y' => $y];
+    }
+    // capital
+    if ($x['x'] % 2 == 0) {
+      return strtoupper(alphabet[$x['x'] / 2]) . (9 - $x['y']);
+    } else {
+      return alphabet[($x['x'] - 1) / 2] . (9 - $x['y']);
+    }
+  }
 }

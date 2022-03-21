@@ -112,7 +112,7 @@ class Terrains extends \M44\Helpers\Pieces
           }
 
           if (isset($options['hill317'])) {
-            $coords = Notifications::computeCoords(['x' => $hex['col'], 'y' => $hex['row']]);
+            $coords = Utils::computeCoords(['x' => $hex['col'], 'y' => $hex['row']]);
             if (in_array($coords, array_values($options['hill317']))) {
               $properties['hill317'] = true;
             }

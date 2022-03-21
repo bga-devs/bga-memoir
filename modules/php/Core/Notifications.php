@@ -340,11 +340,11 @@ class Notifications
     }
 
     if (isset($args['coordSource'])) {
-      $args['coordSource'] = self::computeCoords($args['coordSource']);
+      $args['coordSource'] = Utils::computeCoords($args['coordSource']);
     }
 
     if (isset($args['coordTarget'])) {
-      $args['coordTarget'] = self::computeCoords($args['coordTarget']);
+      $args['coordTarget'] = Utils::computeCoords($args['coordTarget']);
     }
 
     // if (isset($args['task'])) {
@@ -356,19 +356,6 @@ class Notifications
     //     $args['task'] = $args['task']->jsonSerialize($args['task']->getPId() == $args['player_id']);
     //   }
     // }
-  }
-
-  public static function computeCoords($x, $y = null)
-  {
-    if (!is_array($x)) {
-      $x = ['x' => $x, 'y' => $y];
-    }
-    // capital
-    if ($x['x'] % 2 == 0) {
-      return strtoupper(alphabet[$x['x'] / 2]) . (9 - $x['y']);
-    } else {
-      return alphabet[($x['x'] - 1) / 2] . (9 - $x['y']);
-    }
   }
 
   protected static function computeUnitsDesc($units)

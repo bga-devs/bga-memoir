@@ -5,6 +5,7 @@ use M44\Core\Stats;
 use M44\Models\Team;
 use M44\Core\Notifications;
 use M44\Core\Game;
+use M44\Helpers\Utils;
 
 /**
  * Teams
@@ -113,7 +114,7 @@ class Teams extends \M44\Helpers\DB_Manager
       $team = Teams::get($suddenDeath['side']);
       $n = 0;
       foreach ($team->getUnits() as $unit) {
-        if (in_array(Notifications::computeCoords($unit->getPos()), $suddenDeath['group'])) {
+        if (in_array(Utils::computeCoords($unit->getPos()), $suddenDeath['group'])) {
           $n++;
         }
       }
