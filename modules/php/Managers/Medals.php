@@ -8,6 +8,7 @@ use M44\Helpers\Collection;
 use M44\Managers\Units;
 use M44\Board;
 use M44\Helpers\Utils;
+use M44\Managers\Tokens;
 
 /*
  * Medals manager
@@ -80,45 +81,45 @@ class Medals extends \M44\Helpers\DB_Manager
     self::DB()
       ->delete()
       ->run();
-    self::DB('board_medals')
-      ->delete()
-      ->run();
-
-    $board = $scenario['board'];
-    $boardMedals = [];
-    foreach ($board['hexagons'] as $hex) {
-      $tags = $hex['tags'] ?? [];
-      foreach ($tags as $tag) {
-        if (strpos($tag['name'], 'medal') === 0) {
-          $team = in_array($tag['name'], ['medal1', 'medal4', 'medal6']) ? ALLIES : AXIS;
-          $permanent = $tag['medal']['permanent'] ?? false;
-          $hexes = [['x' => $hex['col'], 'y' => $hex['row']]];
-          if (isset($tag['group']) && !empty($tag['group'])) {
-            foreach ($tag['group'] as $g) {
-              $hexes[] = Utils::revertCoords($g);
-            }
-          }
-
-          $boardMedals[] = [
-            'x' => $hex['col'],
-            'y' => $hex['row'],
-            'team' => $team,
-            'sprite' => $tag['name'],
-            'type' => 0,
-            'permanent' => $permanent ? 1 : 0,
-            'counts_for' => $tag['medal']['counts_for'] ?? 1,
-            'nbr_hex' => $tag['medal']['nbr_hex'] ?? 1,
-            'group' => \json_encode($hexes),
-          ];
-        }
-      }
-    }
-
-    if (!empty($boardMedals)) {
-      self::DB('board_medals')
-        ->multipleInsert(['x', 'y', 'team', 'sprite', 'type', 'permanent', 'counts_for', 'nbr_hex', 'group'])
-        ->values($boardMedals);
-    }
+    // self::DB('board_medals')
+    //   ->delete()
+    //   ->run();
+    //
+    // $board = $scenario['board'];
+    // $boardMedals = [];
+    // foreach ($board['hexagons'] as $hex) {
+    //   $tags = $hex['tags'] ?? [];
+    //   foreach ($tags as $tag) {
+    //     if (strpos($tag['name'], 'medal') === 0) {
+    //       $team = in_array($tag['name'], ['medal1', 'medal4', 'medal6']) ? ALLIES : AXIS;
+    //       $permanent = $tag['medal']['permanent'] ?? false;
+    //       $hexes = [['x' => $hex['col'], 'y' => $hex['row']]];
+    //       if (isset($tag['group']) && !empty($tag['group'])) {
+    //         foreach ($tag['group'] as $g) {
+    //           $hexes[] = Utils::revertCoords($g);
+    //         }
+    //       }
+    //
+    //       $boardMedals[] = [
+    //         'x' => $hex['col'],
+    //         'y' => $hex['row'],
+    //         'team' => $team,
+    //         'sprite' => $tag['name'],
+    //         'type' => 0,
+    //         'permanent' => $permanent ? 1 : 0,
+    //         'counts_for' => $tag['medal']['counts_for'] ?? 1,
+    //         'nbr_hex' => $tag['medal']['nbr_hex'] ?? 1,
+    //         'group' => \json_encode($hexes),
+    //       ];
+    //     }
+    //   }
+    // }
+    //
+    // if (!empty($boardMedals)) {
+    //   self::DB('board_medals')
+    //     ->multipleInsert(['x', 'y', 'team', 'sprite', 'type', 'permanent', 'counts_for', 'nbr_hex', 'group'])
+    //     ->values($boardMedals);
+    // }
   }
 
   /******************************
@@ -126,7 +127,7 @@ class Medals extends \M44\Helpers\DB_Manager
    ******************************/
   public function getOnBoard()
   {
-    return self::DB('board_medals')->get();
+    return Tokens::getOnBoardMedals();
   }
 
   public function getBoardMedalHolder($mId)

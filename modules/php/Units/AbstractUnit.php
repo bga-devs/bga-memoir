@@ -153,6 +153,11 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     return $this->maxUnits != $this->nUnits;
   }
 
+  public function getAttackModifier($cell)
+  {
+    return 0;
+  }
+
   //////////////////////////////////////
   //    ___  ____  ____  _____ ____
   //   / _ \|  _ \|  _ \| ____|  _ \
