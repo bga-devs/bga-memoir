@@ -42,6 +42,7 @@ class Terrain extends \M44\Helpers\DB_Model
     'enteringCannotBattle',
     'leavingCannotBattle',
     'canIgnoreOneFlag',
+    'canIgnoreAllFlags',
     'isBlockingLineOfSight',
     'isBlockingLineOfAttack',
     'mustStopWhenLeaving',

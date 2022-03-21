@@ -21,13 +21,9 @@ class River extends \M44\Models\Terrain
 
   public function isImpassable($unit)
   {
-    $terrains = Board::getTerrainsInCell($this->x, $this->y);
-    foreach ($terrains as $terrain) {
-      if ($terrain->getType() == 'bridge' || $terrain->getType() == 'bridgesection') {
-        return false;
-      }
+    if (Board::isBridgeCell(['x' => $this->x, 'y' => $this->y])) {
+      return false;
     }
-
     return true;
   }
 }

@@ -14,9 +14,11 @@ class Fortress extends Bunker
     parent::__construct($row);
     $this->name = clienttranslate('Fortresses');
     $this->number = 24;
+    $this->canIgnoreAllFlags = true;
+    $this->desc[] = clienttranslate('Unit may ignore all flags');
   }
 
-  protected function isOriginalOwner($unit)
+  public function isOriginalOwner($unit)
   {
     return true;
   }
