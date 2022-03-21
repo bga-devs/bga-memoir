@@ -296,7 +296,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           return; // Nothing to show !
         }
 
-        let tooltip = this.place('tplBoardTooltip', cell, 'deck-holder');
+        let tooltip = this.place('tplBoardTooltip', cell, 'left-holder');
         tooltip.innerWidth;
         tooltip.classList.add('open');
         this._boardTooltips[uid] = tooltip;

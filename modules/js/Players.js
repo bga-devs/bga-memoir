@@ -8,31 +8,41 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     },
 
     setupPlayers() {
-      // Basic UI tweaking
+      this._handCounters = {};
       this.forEachPlayer((player) => {
-        let pos = player.id == this._pId ? 'bottom' : 'top';
-        dojo.place('overall_player_board_' + player.id, pos + '-player');
-
-        if (player.id == this.player_id) {
-          player.cards.forEach((card) => this.addCard(card, pos + '-player-hand'));
-        } else {
-          // Add fakeCard
-          let inPlay = player.inplay ? 1 : 0;
-          for (let i = 0; i < player.cardsCount - inPlay; i++) {
-            this.addCardBack(pos + '-player-hand');
-          }
-        }
-
+        let pos = player.team == this._bottomTeam ? 'bottom' : 'top';
+        this.place('tplPlayerPanel', player, pos + '-team');
+        this._handCounters[player.id] = this.createCounter(`hand-count-${player.id}`, player.cardsCount);
         if (player.inplay) {
-          this.addCard(player.inplay, pos + '-player-hand');
+          this.addCard(player.inplay, 'in-play-' + player.id);
         }
       });
-      dojo.place('right-side', 'm44-central-part');
+
+      if (!this.isSpectator) {
+        dojo.place('<div id="m44-player-hand"></div>', 'm44-container');
+        this.gamedatas.players[this._pId].cards.forEach((card) => this.addCard(card, 'm44-player-hand'));
+      }
+    },
+
+    tplPlayerPanel(player) {
+      return `<div class='m44-player-panel'>
+        <div class='player-name' style='color:#${player.color}'>${player.name}</div>
+        <div class='card-in-play' id='in-play-${player.id}'></div>
+        <div class='hand-count-holder'>
+          <div class='hand-count-back'></div>
+          <div class='hand-count' id="hand-count-${player.id}">${player.cardsCount}</div>
+        </div>
+      </div>`;
     },
 
     setupTeams() {
       this.gamedatas.teams.forEach((team) => {
         let pos = this._bottomTeam == team.team ? 'bottom' : 'top';
+        // Add basic infos
+        $(`${pos}-team-name`).dataset.team = team.team;
+        $(`${pos}-team-name`).innerHTML = _(team.team);
+
+        // Add medals
         for (let i = 0; i < team.victory; i++) {
           dojo.place('<div class="m44-medal-slot"></div>', pos + '-medals-slots');
         }
@@ -202,13 +212,11 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     notif_playCard(n) {
       debug('Notif: playing a card', n);
       if (this.player_id == n.args.player_id) {
-        $('card-' + n.args.card.id).classList.add('inplay');
-        //        this.slide('card-' + n.args.card.id, 'inplay');
+        this.slide('card-' + n.args.card.id, `in-play-${n.args.player_id}`);
       } else {
-        let target = $('top-player-hand').querySelector('[data-type="-1"]:last-of-type');
-        this.addCard(n.args.card, 'top-player-hand');
-        this.flipAndReplace(target, $('card-' + n.args.card.id));
+        this.addCard(n.args.card, `in-play-${n.args.player_id}`);
       }
+      this._handCounters[n.args.player_id].incValue(-1);
     },
 
     notif_discardCard(n) {
@@ -238,8 +246,11 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       if (this.player_id == n.args.player_id) return;
       for (let i = 0; i < n.args.nb; i++) {
         let card = this.addCardBack('deck');
-        this.slide(card, 'top-player-hand');
+        this.slide(card, `in-play-${n.args.player_id}`, {
+          destroy: true,
+        });
       }
+      this._handCounters[n.args.player_id].incValue(n.args.nb);
       this._deckCounter.incValue(-n.args.nb);
     },
 
@@ -247,9 +258,10 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       debug('Notif: you are drawing card(s)', n);
       n.args.cards.forEach((card) => {
         this.addCard(card, 'deck');
-        this.slide('card-' + card.id, 'bottom-player-hand');
+        this.slide('card-' + card.id, 'm44-player-hand');
       });
       this._deckCounter.incValue(-n.args.cards.length);
+      this._handCounters[this.player_id].incValue(n.args.cards.length);
     },
 
     // Recon
