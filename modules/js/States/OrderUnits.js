@@ -276,6 +276,10 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       this.onClick(oCell, () => this.takeAction('actTakeGround'));
     },
 
+    onEnteringStateArmorOverrun(args, excludeUnit = null) {
+      this.onEnteringStateAttackUnits(args, excludeUnit);
+    },
+
     ////////////////////////////////////////////////
     //     _              _               _
     //    / \   _ __ ___ | |__  _   _ ___| |__
