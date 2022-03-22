@@ -94,7 +94,9 @@ class Tokens extends \M44\Helpers\Pieces
       }
     }
 
-    self::create($tokens);
+    if (!empty($tokens)) {
+      self::create($tokens);
+    }
   }
 
   //////////////////////////////////////
