@@ -18,7 +18,7 @@ trait RetreatUnitTrait
   {
     $oppUnit = Units::get($attack['oppUnitId']);
     $canIgnore1Flag = Board::canIgnoreOneFlag($oppUnit);
-    $canIgnoreAllFlags = Board::canIgnoreAllFlagsCell($oppUnit);
+    $canIgnoreAllFlags = Board::canIgnoreAllFlagsCell($oppUnit->getPos(), $oppUnit);
     $currentAttack = $this->getCurrentAttack();
 
     if ($currentAttack['card']->cannotIgnoreFlags()) {
