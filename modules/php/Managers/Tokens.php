@@ -16,25 +16,13 @@ use M44\Managers\Medals;
 class Tokens extends \M44\Helpers\Pieces
 {
   protected static $table = 'tokens';
-  // protected static $primary = 'id';
   protected static $prefix = 'token_';
-  protected static $customFields = [
-    'team',
-    'x',
-    'y',
-    'sprite',
-    'type',
-    'tag',
-    'permanent',
-    'counts_for',
-    'nbr_hex',
-    'group',
-  ];
+  protected static $customFields = ['type', 'team', 'x', 'y', 'sprite', 'datas'];
   protected static $autoreshuffle = false;
   protected static function cast($row)
   {
-    if (isset($row['group'])) {
-      $row['group'] = \json_decode($row['group'], true);
+    if (isset($row['datas'])) {
+      $row['datas'] = \json_decode($row['datas'], true);
     }
 
     return $row;
@@ -47,6 +35,21 @@ class Tokens extends \M44\Helpers\Pieces
       ->get();
   }
 
+  public static function addCoordsClause(&$q, $coords)
+  {
+    $q = $q->where('x', $coords['x']);
+    $q = $q->where('y', $coords['y']);
+
+    return $q;
+  }
+
+  public function getOnCoords($location, $coords)
+  {
+    $query = self::getSelectWhere(null, $location, null);
+    $q = self::addCoordsClause($query, $coords);
+    return $q->get();
+  }
+
   /**
    * Load a scenario
    */
@@ -57,59 +60,107 @@ class Tokens extends \M44\Helpers\Pieces
       ->run();
 
     $board = $scenario['board'];
-    $boardMedals = [];
+    $tokens = [];
     foreach ($board['hexagons'] as $hex) {
       $tags = $hex['tags'] ?? [];
       foreach ($tags as $tag) {
-        if (strpos($tag['name'], 'medal') === 0) {
-          $team = in_array($tag['name'], ['medal1', 'medal4', 'medal6']) ? ALLIES : AXIS;
-          $permanent = $tag['medal']['permanent'] ?? false;
-          $hexes = [['x' => $hex['col'], 'y' => $hex['row']]];
-          if (isset($tag['group']) && !empty($tag['group'])) {
-            foreach ($tag['group'] as $g) {
-              $hexes[] = Utils::revertCoords($g);
-            }
-          }
+        $baseDatas = [
+          'location' => 'board',
+          'x' => $hex['col'],
+          'y' => $hex['row'],
+          'sprite' => $tag['name'],
+        ];
 
-          $boardMedals[] = [
-            'x' => $hex['col'],
-            'y' => $hex['row'],
-            'location' => 'board_medal',
-            'team' => $team,
-            'sprite' => $tag['name'],
-            'type' => 0,
-            'permanent' => $permanent ? 1 : 0,
-            'counts_for' => $tag['medal']['counts_for'] ?? 1,
-            'nbr_hex' => $tag['medal']['nbr_hex'] ?? 1,
-            'group' => \json_encode($hexes),
-          ];
+        // Medal
+        if (strpos($tag['name'], 'medal') === 0) {
+          $tokens[] = self::extractMedalDatas($hex, $tag, $baseDatas);
+        }
+        // Mines
+        elseif ($tag['behavior'] == 'MINE_FIELD') {
+          $baseDatas['type'] = \TOKEN_MINE;
+          $baseDatas['team'] = $tag['side'];
+          $baseDatas['datas'] = \json_encode([]);
+          $tokens[] = $baseDatas;
         }
       }
     }
 
-    self::create($boardMedals);
+    // Add sudden death tokens
+    if (isset($scenario['game_info']['victory']) && isset($scenario['game_info']['victory']['condition'])) {
+      $condition = $scenario['game_info']['victory']['condition'];
+      if (isset($condition[0]['group_sudden_death'])) {
+        // TODO : Not very robust, can we have an array of condition ??
+        $tokens[] = self::extractSuddenDeathDatas($condition[0]['group_sudden_death']);
+      }
+    }
+
+    self::create($tokens);
   }
 
-  public static function addCoordsClause(&$q, $coords)
-  {
-    $q = $q->where('x', $coords['x']);
-    $q = $q->where('y', $coords['y']);
+  //////////////////////////////////////
+  //  __  __          _       _
+  // |  \/  | ___  __| | __ _| |___
+  // | |\/| |/ _ \/ _` |/ _` | / __|
+  // | |  | |  __/ (_| | (_| | \__ \
+  // |_|  |_|\___|\__,_|\__,_|_|___/
+  //////////////////////////////////////
 
-    return $q;
+  /**
+   * extract all the needed datas from m44 about the medal
+   */
+  protected function extractMedalDatas($hex, $tag, $baseDatas)
+  {
+    $team = in_array($tag['name'], ['medal1', 'medal4', 'medal6']) ? ALLIES : AXIS;
+    $permanent = $tag['medal']['permanent'] ?? false;
+    $hexes = [['x' => $hex['col'], 'y' => $hex['row']]];
+    if (isset($tag['group']) && !empty($tag['group'])) {
+      foreach ($tag['group'] as $g) {
+        $hexes[] = Utils::revertCoords($g);
+      }
+    }
+
+    $baseDatas['type'] = \TOKEN_MEDAL;
+    $baseDatas['team'] = $team;
+    $baseDatas['datas'] = json_encode([
+      'permanent' => $permanent ? 1 : 0,
+      'counts_for' => $tag['medal']['counts_for'] ?? 1,
+      'nbr_hex' => $tag['medal']['nbr_hex'] ?? 1,
+      'group' => $hexes,
+    ]);
+
+    return $baseDatas;
   }
 
-  /******************************
-   ******** Board Medals *********
-   ******************************/
-  public function getOnBoardMedals()
+  /**
+   * convert a sudden death victory conditions into a position medal
+   */
+  protected function extractSuddenDeathDatas($condition)
   {
-    return self::getInLocation('board_medal');
+    $hexes = [];
+    foreach ($condition['group'] as $g) {
+      $hexes[] = Utils::revertCoords($g);
+    }
+
+    return [
+      'location' => 'board',
+      'x' => $hexes[0]['x'],
+      'y' => $hexes[0]['y'],
+      'sprite' => $condition['side'] == ALLIES ? 'medal1' : 'medal2',
+      'team' => $condition['side'],
+      'type' => \TOKEN_MEDAL,
+      'datas' => json_encode([
+        'permanent' => true,
+        'counts_for' => \INFINITY,
+        'nbr_hex' => $condition['number'] ?? 1,
+        'group' => $hexes,
+      ]),
+    ];
   }
 
-  public function getOnCoords($location, $coords)
+  public function getBoardMedals()
   {
-    $query = self::getSelectWhere(null, $location, null);
-    $q = self::addCoordsClause($query, $coords);
-    return $q->get();
+    return self::getSelectQuery()
+      ->where('type', \TOKEN_MEDAL)
+      ->get();
   }
 }

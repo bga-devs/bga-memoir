@@ -108,21 +108,6 @@ class Teams extends \M44\Helpers\DB_Manager
       }
     }
 
-    // sudden death
-    $suddenDeath = Globals::getSuddenDeath();
-    if ($suddenDeath != null) {
-      $team = Teams::get($suddenDeath['side']);
-      $n = 0;
-      foreach ($team->getUnits() as $unit) {
-        if (in_array(Utils::computeCoords($unit->getPos()), $suddenDeath['group'])) {
-          $n++;
-        }
-      }
-      if ($n >= $suddenDeath['number']) {
-        $team->addSuddenDeathMedals();
-        return self::checkVictory();
-      }
-    }
     return false;
   }
 }

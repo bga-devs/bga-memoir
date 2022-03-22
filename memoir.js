@@ -116,6 +116,7 @@ define([
       if ($('m44-player-hand')) {
         dojo.empty('m44-player-hand');
       }
+      dojo.query('.card-in-play').empty();
 
       this.forEachPlayer((player) => {
         this._handCounters[player.id].setValue(0);

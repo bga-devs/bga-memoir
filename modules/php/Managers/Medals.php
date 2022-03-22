@@ -1,6 +1,7 @@
 <?php
 namespace M44\Managers;
 use M44\Core\Game;
+use M44\Core\Stats;
 use M44\Core\Globals;
 use M44\Core\Notifications;
 use M44\Core\Preferences;
@@ -56,23 +57,6 @@ class Medals extends \M44\Helpers\DB_Manager
       ->get();
   }
 
-  public function addSuddenDeathMedals($team, $nMedals)
-  {
-    $ids = [];
-    for ($i = 0; $i < $nMedals; $i++) {
-      $ids[] = self::DB()->insert([
-        'team' => $team,
-        'type' => \MEDAL_SUDDEN_DEATH,
-        'foreign_id' => 0,
-        'sprite' => $team == ALLIES ? 'medal8' : 'medal9',
-      ]);
-    }
-
-    return self::DB()
-      ->whereIn('id', $ids)
-      ->get();
-  }
-
   /**
    * Load a scenario
    */
@@ -81,55 +65,11 @@ class Medals extends \M44\Helpers\DB_Manager
     self::DB()
       ->delete()
       ->run();
-    // self::DB('board_medals')
-    //   ->delete()
-    //   ->run();
-    //
-    // $board = $scenario['board'];
-    // $boardMedals = [];
-    // foreach ($board['hexagons'] as $hex) {
-    //   $tags = $hex['tags'] ?? [];
-    //   foreach ($tags as $tag) {
-    //     if (strpos($tag['name'], 'medal') === 0) {
-    //       $team = in_array($tag['name'], ['medal1', 'medal4', 'medal6']) ? ALLIES : AXIS;
-    //       $permanent = $tag['medal']['permanent'] ?? false;
-    //       $hexes = [['x' => $hex['col'], 'y' => $hex['row']]];
-    //       if (isset($tag['group']) && !empty($tag['group'])) {
-    //         foreach ($tag['group'] as $g) {
-    //           $hexes[] = Utils::revertCoords($g);
-    //         }
-    //       }
-    //
-    //       $boardMedals[] = [
-    //         'x' => $hex['col'],
-    //         'y' => $hex['row'],
-    //         'team' => $team,
-    //         'sprite' => $tag['name'],
-    //         'type' => 0,
-    //         'permanent' => $permanent ? 1 : 0,
-    //         'counts_for' => $tag['medal']['counts_for'] ?? 1,
-    //         'nbr_hex' => $tag['medal']['nbr_hex'] ?? 1,
-    //         'group' => \json_encode($hexes),
-    //       ];
-    //     }
-    //   }
-    // }
-    //
-    // if (!empty($boardMedals)) {
-    //   self::DB('board_medals')
-    //     ->multipleInsert(['x', 'y', 'team', 'sprite', 'type', 'permanent', 'counts_for', 'nbr_hex', 'group'])
-    //     ->values($boardMedals);
-    // }
   }
 
   /******************************
    ******** Board Medals *********
    ******************************/
-  public function getOnBoard()
-  {
-    return Tokens::getOnBoardMedals();
-  }
-
   public function getBoardMedalHolder($mId)
   {
     $medal = self::DB()
@@ -142,15 +82,16 @@ class Medals extends \M44\Helpers\DB_Manager
 
   public function checkBoardMedals()
   {
-    foreach (self::getOnBoard() as $medal) {
+    foreach (Tokens::getBoardMedals() as $medal) {
+      $datas = $medal['datas'];
       $currentHolder = self::getBoardMedalHolder($medal['id']);
-      if ($currentHolder != null && $medal['permanent']) {
+      if ($currentHolder != null && $datas['permanent']) {
         continue; // No need to check gained permanent medals
       }
 
       // Compute the nbr of hexes owned by each nation
       $nHexes = [ALLIES => 0, AXIS => 0];
-      foreach ($medal['group'] as $hex) {
+      foreach ($datas['group'] as $hex) {
         $unit = Board::getUnitInCell($hex);
         if ($unit !== null) {
           $nHexes[$unit->getTeam()->getId()]++;
@@ -159,9 +100,9 @@ class Medals extends \M44\Helpers\DB_Manager
 
       // Is there a new medal owner ?
       $newHolder = null;
-      if ($nHexes[ALLIES] >= $medal['nbr_hex'] && $medal['team'] != AXIS) {
+      if ($nHexes[ALLIES] >= $datas['nbr_hex'] && $medal['team'] != AXIS) {
         $newHolder = ALLIES;
-      } elseif ($nHexes[AXIS] >= $medal['nbr_hex'] && $medal['team'] != ALLIES) {
+      } elseif ($nHexes[AXIS] >= $datas['nbr_hex'] && $medal['team'] != ALLIES) {
         $newHolder = AXIS;
       }
 
@@ -169,13 +110,35 @@ class Medals extends \M44\Helpers\DB_Manager
       if ($currentHolder != $newHolder) {
         // Remove the medal of old owner, if any
         if ($currentHolder !== null) {
+          // Remove the medals
           $medalIds = self::removePositionMedals($medal);
           Notifications::removeMedals($currentHolder, $medalIds, $medal);
+
+          // Decrease stats
+          $team = Teams::get($currentHolder);
+          $statName = 'incMedalRound' . Globals::getRound();
+          foreach ($team->getMembers() as $player) {
+            Stats::$statName($player, -count($medalIds));
+          }
         }
 
         // Add the medal to new owner, if any
         if ($newHolder !== null) {
-          $medals = self::addPositionMedals($newHolder, $medal['counts_for'], $medal);
+          $nMedals = $datas['counts_for'];
+          $team = Teams::get($newHolder);
+          $nMedals = min($nMedals, $team->getNVictory() - $team->getMedals()->count());
+          if ($nMedals == 0) {
+            continue;
+          }
+
+          // Increase stats
+          $statName = 'incMedalRound' . Globals::getRound();
+          foreach ($team->getMembers() as $player) {
+            Stats::$statName($player, $nMedals);
+          }
+
+          // Create medals and notify them
+          $medals = self::addPositionMedals($newHolder, $nMedals, $medal);
           Notifications::scoreMedals($newHolder, $medals);
         }
       }

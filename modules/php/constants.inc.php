@@ -144,11 +144,14 @@ const ARMOR = 2;
 const ARTILLERY = 3;
 
 /*
- * Medals
+ * Medals / Tokens
  */
 const MEDAL_ELIMINATION = 1;
 const MEDAL_POSITION = 2;
 const MEDAL_SUDDEN_DEATH = 3;
+
+const TOKEN_MEDAL = 1;
+const TOKEN_MINE = 2;
 
 /*
  * Terrains

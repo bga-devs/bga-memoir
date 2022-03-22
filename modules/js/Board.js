@@ -19,6 +19,14 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
   const ALLIES_NATIONS = ['gb', 'us', 'ru'];
 
+  const TOKEN_MEDAL = 1;
+  const TOKEN_MINE = 2;
+
+  function computeCoords(x, y) {
+    // TODO : replace 9 by dim.y
+    return String.fromCharCode(65 + (x % 2 == 0 ? 0 : 32) + parseInt(x / 2)) + (9 - y);
+  }
+
   return declare('memoir.board', null, {
     setupBoard() {
       this._grid = [];
@@ -82,6 +90,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           if (!this._grid[col]) this._grid[col] = [];
           this._grid[col][row] = {
             terrains: [],
+            tokens: [],
             unit: null,
           };
 
@@ -120,8 +129,12 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
             this.place('tplUnit', unit, `cell-${col}-${y}`);
           }
 
-          // Medals
-          board.grid[col][row].medals.forEach((medal) => this.place('tplBoardMedal', medal, cellC));
+          // Tokens/medals
+          board.grid[col][row].tokens.forEach((token) => {
+            let tplName = token.type == TOKEN_MEDAL ? 'tplBoardMedal' : 'tplBoardToken';
+            this.place(tplName, token, cellC);
+            this._grid[col][row].tokens.push(token);
+          });
 
           // Add tooltip listeners
           cell.addEventListener('mouseenter', () => this.openBoardTooltip(col, row));
@@ -258,7 +271,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
       return `
       <div id='board-medal-${medal.id}' class="board-medal"
-        data-team="${medal.team}" data-sprite="${sprite}" data-permanent="${medal.permanent}"></div>`;
+        data-team="${medal.team}" data-sprite="${sprite}" data-permanent="${medal.datas.permanent}"></div>`;
     },
 
     notif_addObstacle(n) {
@@ -292,7 +305,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         // TODO
       } else {
         let cell = this._grid[col][row];
-        if (cell.terrains.length == 0 && cell.unit == null) {
+        if (cell.terrains.length == 0 && cell.unit == null && cell.tokens.length == 0) {
           return; // Nothing to show !
         }
 
@@ -312,13 +325,11 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     },
 
     tplBoardTooltip(cell) {
-      let terrainDivs = [];
-      cell.terrains.forEach((terrain) => {
-        terrainDivs.push(this.tplTerrainSummary(terrain));
-      });
+      let terrainDivs = cell.terrains.map((terrain) => this.tplTerrainSummary(terrain));
+      let tokenDivs = cell.tokens.map((token) => this.tplTokenSummary(token));
       let unitDiv = '';
 
-      return `<div class='board-tooltip'>${terrainDivs.join('')} ${unitDiv}</div>`;
+      return `<div class='board-tooltip'>${terrainDivs.join('')} ${unitDiv} ${tokenDivs.join('')}</div>`;
     },
 
     tplTerrainSummary(terrain) {
@@ -417,6 +428,66 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       return `<div class='summary-card summary-terrain'>
         <div class='summary-number'>${terrainData.number}</div>
         <div class='summary-name'>${terrainData.name}</div>
+        <div class='summary-tile'>
+          ${tile}
+        </div>
+        <ul class='summary-desc'>
+          ${desc.join('')}
+        </ul>
+      </div>`;
+    },
+
+    tplTokenSummary(token) {
+      let name = '';
+      let desc = [];
+      let tile = '';
+
+      // Medals
+      if (token.type == TOKEN_MEDAL) {
+        let sides = {
+          ALLIES: _('Allied units'),
+          AXIS: _('Axis units'),
+        };
+        let hexes = token.datas.group.map((cell) => computeCoords(cell.x, cell.y)).join(', ');
+        let subst = {
+          units: sides[token.team],
+          nb: token.datas.nbr_hex,
+          counts_for: token.datas.counts_for,
+          hexes,
+        };
+        tile = this.tplBoardMedal(token);
+
+        if (token.datas.counts_for == 100) {
+          name = _('Sudden death');
+          let msg =
+            token.datas.group.length == 1
+              ? _('If ${units} occupy this hex at the end of their turn, they win immediately')
+              : _(
+                  'If ${units} occupy ${nb} hexes in the group ${hexes}, they win immediately',
+                );
+          desc = ['<li>' + this.strReplace(msg, subst) + '</li>'];
+        } else {
+          name = _('Objective medal');
+          let msg =
+            token.datas.group.length == 1
+              ? _('If ${units} occupy this hex, they win ${counts_for} victory medal(s)')
+              : _('If ${units} occupy ${nb} hexes in the group ${hexes}, they win ${counts_for} victory medals(s)');
+
+          desc = [
+            '<li>' + this.strReplace(msg, subst) + '</li>',
+            '<li>' +
+              (token.datas.permanent
+                ? _(
+                    'The medal(s), once gained, continues to count toward the victory, even if the conditions is no longer satisfied',
+                  )
+                : _('Remove the medal(s) if this is no longer the case')) +
+              '</li>',
+          ];
+        }
+      }
+
+      return `<div class='summary-card summary-token'>
+        <div class='summary-name'>${name}</div>
         <div class='summary-tile'>
           ${tile}
         </div>

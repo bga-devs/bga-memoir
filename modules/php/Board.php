@@ -10,6 +10,7 @@ use M44\Managers\Terrains;
 use M44\Managers\Medals;
 use M44\Managers\Teams;
 use M44\Managers\Units;
+use M44\Managers\Tokens;
 use M44\Scenario;
 
 const LINE_INTERSECTION = 0;
@@ -44,7 +45,7 @@ class Board
           'terrains' => [],
           'unit' => null,
           'labels' => [],
-          'medals' => [],
+          'tokens' => [],
         ];
       }
     }
@@ -68,14 +69,22 @@ class Board
       }
     }
 
-    // Add the medals
-    foreach (Medals::getOnBoard() as $medal) {
-      self::$grid[$medal['x']][$medal['y']]['medals'][] = $medal;
+    // Add the medals/tokens
+    foreach (Tokens::getAll() as $token) {
+      self::$grid[$token['x']][$token['y']]['tokens'][] = $token;
     }
 
     self::$hillComponents = null;
     self::$mountainComponents = null;
   }
+
+  /////////////////////////////////////////
+  //  ____       _   _
+  // / ___|  ___| |_| |_ ___ _ __ ___
+  // \___ \ / _ \ __| __/ _ \ '__/ __|
+  //  ___) |  __/ |_| ||  __/ |  \__ \
+  // |____/ \___|\__|\__\___|_|  |___/
+  /////////////////////////////////////////
 
   public function removeTerrain($terrain)
   {

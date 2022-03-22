@@ -929,6 +929,10 @@ define(['dojo', 'dojo/_base/declare', 'ebg/core/gamegui'], (dojo, declare) => {
       });
     },
 
+    strReplace(str, subst){
+      return dojo.string.substitute(str, subst);
+    },
+
     addCancelStateBtn(text = null) {
       if (text == null) {
         text = _('Cancel');

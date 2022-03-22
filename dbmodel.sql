@@ -92,14 +92,11 @@ CREATE TABLE IF NOT EXISTS `tokens` (
   `token_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `token_location` varchar(32) NOT NULL,
   `token_state` int(10) DEFAULT 0,
+  `type` int(10) DEFAULT 0,
   `team` varchar(32) NULL,
   `x` int(10) NOT NULL,
   `y` int(10) NOT NULL,
   `sprite` varchar(32) NOT NULL,
-  `type` int(10) DEFAULT 0,
-  `permanent` int(2) DEFAULT 0,
-  `counts_for` int(10) DEFAULT 0,
-  `nbr_hex` int(10) DEFAULT 0,
-  `group` JSON NULL,
+  `datas` JSON NULL,
   PRIMARY KEY (`token_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

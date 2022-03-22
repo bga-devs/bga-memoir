@@ -105,12 +105,6 @@ class Scenario extends \APP_DbObject
       }
     }
 
-    if (isset($scenario['game_info']['victory']) && isset($scenario['game_info']['victory']['condition'])) {
-      $condition = $scenario['game_info']['victory']['condition'];
-      if (isset($condition[0]['group_sudden_death'])) {
-        Globals::setSuddenDeath($condition[0]['group_sudden_death']);
-      }
-    }
 
     Board::init();
     // Notify

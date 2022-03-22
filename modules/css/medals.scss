@@ -28,6 +28,18 @@
   position: absolute;
 }
 
+.board-medal {
+  background-image: url('img/medals.png');
+  background-size: 200% 400%;
+
+  @for $i from 0 through 8 {
+    &[data-sprite='#{$i}'] {
+      background-position-x: ($i % 2) * 100%;
+      background-position-y: (($i - ($i % 2)) / 2) * 100% / 3;
+    }
+  }
+}
+
 .hex-grid-item .board-medal {
   width: 42.8%;
   height: 37%;
@@ -38,17 +50,5 @@
 
   &.hide {
     visibility: hidden;
-  }
-
-  background-image: url('img/medals.png');
-  background-size: 200% 400%;
-
-  // TODO : handle multiple board medals
-
-  @for $i from 0 through 8 {
-    &[data-sprite='#{$i}'] {
-      background-position-x: ($i % 2) * 100%;
-      background-position-y: (($i - ($i % 2)) / 2) * 100% / 3;
-    }
   }
 }
