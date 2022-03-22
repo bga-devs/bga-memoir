@@ -123,6 +123,7 @@ define([
       });
 
       dojo.empty('discard');
+      dojo.destroy('scenario-dropzone');
     },
 
     onEnteringState(stateName, args) {
@@ -178,6 +179,35 @@ define([
       $('m44-board').classList.remove('displayLineOfSight');
       dojo.query('.choice').removeClass('choice');
       dojo.query('.dice-mini').forEach(dojo.destroy);
+    },
+
+    displayScenarioLoader() {
+      this.clearInterface();
+      dojo.place(
+        `<div id="scenario-dropzone" class="dropzone" style="position:absolute; z-index:12; display: flex; flex-flow: column;justify-content: center; align-items: center;">
+          <svg style="width:100px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M384 0v128h128L384 0zM352 128L352 0H176C149.5 0 128 21.49 128 48V288h174.1l-39.03-39.03c-9.375-9.375-9.375-24.56 0-33.94s24.56-9.375 33.94 0l80 80c9.375 9.375 9.375 24.56 0 33.94l-80 80c-9.375 9.375-24.56 9.375-33.94 0C258.3 404.3 256 398.2 256 392s2.344-12.28 7.031-16.97L302.1 336H128v128C128 490.5 149.5 512 176 512h288c26.51 0 48-21.49 48-48V160h-127.1C366.3 160 352 145.7 352 128zM24 288C10.75 288 0 298.7 0 312c0 13.25 10.75 24 24 24H128V288H24z"/></svg>
+
+          <input type="file" id="scenario-input" />
+           <label for="scenario-input">Choose scenario</label>
+      </div>`,
+        'm44-board',
+      );
+
+      let handleImages = (files) => {
+        let file = files[0];
+        const reader = new FileReader();
+        reader.readAsText(file);
+        reader.addEventListener('load', (e) => {
+          let content = e.target.result;
+          let scenario = JSON.parse(content);
+          this.takeAction('actUploadScenario', { scenario: JSON.stringify(scenario) }, false);
+        });
+      };
+
+      $('scenario-input').addEventListener('change', (e) => {
+        const { files } = e.target;
+        handleImages(files);
+      });
     },
 
     /* This enable to inject translatable styled things to logs or action bar */

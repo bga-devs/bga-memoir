@@ -115,6 +115,7 @@ define(['dojo', 'dojo/_base/declare', 'ebg/core/gamegui'], (dojo, declare) => {
           (isError, message, code) => {
             if (isError) reject(message, code);
           },
+          'post'
         );
       });
     },

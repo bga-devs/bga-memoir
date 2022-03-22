@@ -35,6 +35,14 @@ class action_memoir extends APP_GameAction
     }
   }
 
+  public function actUploadScenario()
+  {
+    self::setAjaxMode();
+    $scenario = self::getArg('scenario', AT_json, true);
+    $this->game->actUploadScenario($scenario);
+    self::ajaxResponse();
+  }
+
   public function actPlayCard()
   {
     self::setAjaxMode();
@@ -240,5 +248,24 @@ class action_memoir extends APP_GameAction
   {
     $t = $this->getArg($name, AT_numberlist, $mandatory);
     return $t == '' ? [] : explode(';', $t);
+  }
+
+  public function validateJSonAlphaNum($value, $argName = 'unknown')
+  {
+    if (is_array($value)) {
+      foreach ($value as $key => $v) {
+        $this->validateJSonAlphaNum($key, $argName);
+        $this->validateJSonAlphaNum($v, $argName);
+      }
+      return true;
+    }
+    if (is_int($value)) {
+      return true;
+    }
+    $bValid = preg_match("/^[_0-9a-zA-Z- ]*$/", $value) === 1;
+    if (!$bValid) {
+      throw new feException("Bad value for: $argName", true, true, FEX_bad_input_argument);
+    }
+    return true;
   }
 }
