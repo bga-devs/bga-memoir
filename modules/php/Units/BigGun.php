@@ -11,6 +11,7 @@ class BigGun extends Artillery
     parent::__construct($row);
     $this->name = clienttranslate('Big Gun');
     $this->attackPower = [3, 3, 2, 2, 1, 1, 1, 1];
+    $this->number = 3;
   }
 
   public function getAttackModifier($target)

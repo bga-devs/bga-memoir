@@ -76,7 +76,7 @@ class Tokens extends \M44\Helpers\Pieces
           $tokens[] = self::extractMedalDatas($hex, $tag, $baseDatas);
         }
         // Mines
-        elseif ($tag['behavior'] == 'MINE_FIELD') {
+        elseif (($tag['behavior'] ?? null) == 'MINE_FIELD') {
           $baseDatas['type'] = \TOKEN_MINE;
           $baseDatas['team'] = $tag['side'];
           $baseDatas['datas'] = \json_encode([]);

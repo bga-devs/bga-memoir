@@ -7,11 +7,12 @@ class Infantry extends AbstractUnit
   {
     parent::__construct($row);
     $this->type = INFANTRY;
+    $this->number = 1;
     $this->statName = 'Inf';
     $this->name = clienttranslate('Infantry');
     $this->maxUnits = 4;
-    $this->movementRadius = 20;
-    $this->movementAndAttackRadius = 10;
+    $this->movementRadius = 2;
+    $this->movementAndAttackRadius = 1;
     $this->attackPower = [3, 2, 1];
     $this->mustSeeToAttack = true;
     $this->maxGrounds = 1;

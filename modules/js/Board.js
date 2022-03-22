@@ -327,9 +327,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     tplBoardTooltip(cell) {
       let terrainDivs = cell.terrains.map((terrain) => this.tplTerrainSummary(terrain));
       let tokenDivs = cell.tokens.map((token) => this.tplTokenSummary(token));
-      let unitDiv = '';
+      let unitDiv = cell.unit ? this.tplUnitSummary(cell.unit) : '';
 
-      return `<div class='board-tooltip'>${terrainDivs.join('')} ${unitDiv} ${tokenDivs.join('')}</div>`;
+      return `<div class='board-tooltip'>${unitDiv} ${terrainDivs.join('')} ${tokenDivs.join('')}</div>`;
     },
 
     tplTerrainSummary(terrain) {
@@ -425,9 +425,48 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         }
       });
 
+      // Remove letter in number (used for bis/ter for some terrains)
+      let number = String(terrainData.number).replace(/\D/g, '');
+
       return `<div class='summary-card summary-terrain'>
-        <div class='summary-number'>${terrainData.number}</div>
-        <div class='summary-name'>${terrainData.name}</div>
+        <div class='summary-number'>${number}</div>
+        <div class='summary-name'>${_(terrainData.name)}</div>
+        <div class='summary-tile'>
+          ${tile}
+        </div>
+        <ul class='summary-desc'>
+          ${desc.join('')}
+        </ul>
+      </div>`;
+    },
+
+    tplUnitSummary(unit) {
+      if (!unit.properties) unit.properties = {};
+      let unitData = Object.assign({}, this.gamedatas.units[unit.number], unit, unit.properties);
+      let tile = this.tplUnit(unitData, true);
+      let desc = unitData.desc.map((t) => `<li>${_(t)}</li>`);
+      let isModified = (prop) => unit.properties[prop] !== undefined;
+
+      let content = this.strReplace(
+        unitData.movementRadius == unitData.movementAndAttackRadius
+          ? _('Move 0-${maxBattle} and battle')
+          : unitData.movementAndAttackRadius == 0
+          ? _('Move ${maxMove} or battle')
+          : _('Move 0-${maxBattle} and battle or move ${maxMove} no battle'),
+        { maxBattle: unitData.movementAndAttackRadius, maxMove: unitData.movementRadius },
+      );
+      desc.push(
+        `<li class='${
+          isModified('movementRadius') || isModified('movementAndAttackRadius') ? 'modified' : ''
+        }'>${content}</li>`,
+      );
+
+      // Remove letter in number (used for bis/ter for some terrains)
+      let number = String(unitData.number).replace(/\D/g, '');
+
+      return `<div class='summary-card summary-unit'>
+        <div class='summary-number'>${number}</div>
+        <div class='summary-name'>${_(unitData.name)}</div>
         <div class='summary-tile'>
           ${tile}
         </div>
@@ -462,9 +501,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           let msg =
             token.datas.group.length == 1
               ? _('If ${units} occupy this hex at the end of their turn, they win immediately')
-              : _(
-                  'If ${units} occupy ${nb} hexes in the group ${hexes}, they win immediately',
-                );
+              : _('If ${units} occupy ${nb} hexes in the group ${hexes}, they win immediately');
           desc = ['<li>' + this.strReplace(msg, subst) + '</li>'];
         } else {
           name = _('Objective medal');
@@ -506,13 +543,14 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     //
     //////////////////////////////////////////
 
-    tplUnit(unit) {
+    tplUnit(unit, tooltip = false) {
       let classNames = [];
-      if (unit.activationCard > 0) classNames.push('activated');
-      if (unit.onTheMove) classNames.push('onTheMove');
+      if (unit.activationCard > 0 && !tooltip) classNames.push('activated');
+      if (unit.onTheMove && !tooltip) classNames.push('onTheMove');
 
       return `
-      <div id="unit-${unit.id}" class="m44-unit ${classNames.join(' ')}" data-figures="${unit.figures}"
+      <div id="unit-${unit.id}${tooltip ? '-tooltip' : ''}" class="m44-unit ${classNames.join(' ')}"
+        data-figures="${tooltip ? 1 : unit.figures}"
         data-type="${unit.type}" data-nation="${unit.nation}" data-orientation="${unit.orientation}"
         data-badge="${unit.badge}">
         <div class='m44-meeples-container'>

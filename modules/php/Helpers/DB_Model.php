@@ -65,6 +65,8 @@ abstract class DB_Model extends \APP_DbObject implements \JsonSerializable
         // Static attribute getters
         if (in_array($name, $this->staticAttributes) && $match[1] == 'get') {
           return $this->$name;
+        } elseif (in_array($name, $this->properties ?? []) && $match[1] == 'get') {
+          return $this->getProperty($name);
         } else {
           throw new \InvalidArgumentException("Attribute {$name} doesn't exist");
         }

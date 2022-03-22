@@ -56,18 +56,25 @@ class Units extends \M44\Helpers\Pieces
   //////////// GETTERS /////////////
   //////////////////////////////////
   //////////////////////////////////
+
+  /**
+   * getStaticUiData : return all units static datas
+   */
+  public static function getStaticUiData()
+  {
+    $data = [];
+    foreach (TROOP_CLASSES as $type => $className) {
+      $className = '\M44\Units\\' . $className;
+      $unit = new $className(null);
+      $data[$unit->getNumber()] = $unit->getStaticUiData();
+    }
+    return $data;
+  }
+
   public static $nations = [
     ALLIES => ['fr', 'gb', 'us', 'ru', 'ch'],
     AXIS => ['ger', 'jp', 'it'],
   ];
-
-  /**
-   * getUiData : return all terrain tiles
-   */
-  public static function getUiData()
-  {
-    return self::getAllOrdered()->ui();
-  }
 
   public static $sections = [
     STANDARD_DECK => [0, 7, 17, 24],

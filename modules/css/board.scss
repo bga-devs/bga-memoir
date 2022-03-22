@@ -382,5 +382,32 @@
         height: 52.3%;
       }
     }
+
+    &.summary-unit {
+      background-position-y: 50%;
+
+      .summary-number {
+        color: #882f14;
+      }
+      .summary-name {
+        color: white;
+      }
+
+      .summary-tile {
+        width: 50px;
+        .m44-unit {
+          &::after {
+            width: 40px;
+            height: 40px;
+            left: 5px;
+          }
+        }
+      }
+
+      .summary-desc {
+        left: 65px;
+        width: 200px;
+      }
+    }
   }
 }

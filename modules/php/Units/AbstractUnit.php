@@ -26,20 +26,6 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     'activationCard' => 'activation_card',
     'extraDatas' => ['extra_datas', 'obj'],
   ];
-  protected $staticAttributes = [
-    'type',
-    'statName',
-    'name',
-    'maxUnits',
-    'movementRadius',
-    'movementAndAttackRadius',
-    'attackPower',
-    'mustSeeToAttack',
-    'maxGrounds',
-    'medalsWorth',
-    'retreatHex',
-    'ignoreCannotBattle',
-  ];
 
   protected $id = null;
   protected $x = null;
@@ -54,12 +40,39 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
   protected $fights = 0;
   protected $grounds = 0;
 
+
+
+  /*
+   * STATIC INFORMATIONS
+   */
+  protected $staticAttributes = [
+    'number',
+    'type',
+    'statName',
+    'name',
+    'desc',
+  ];
+  protected $number = null;
   protected $type = null;
   protected $statName = null;
   protected $name = null;
-  protected $maxUnits = null;
-  protected $movementRadius = null;
-  protected $movementAndAttackRadius = null;
+  protected $desc = [];
+
+  /*
+   * UNIT PROPERTIES
+   */
+  protected $properties = [
+    'maxUnits',
+    'movementRadius',
+    'movementAndAttackRadius',
+    'attackPower',
+    'mustSeeToAttack',
+    'maxGrounds',
+    'medalsWorth',
+    'retreatHex',
+    'ignoreCannotBattle',
+  ];
+
   protected $attackPower = [];
   protected $mustSeeToAttack = true;
   protected $maxGrounds = 0;
@@ -72,7 +85,10 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     if ($row != null) {
       parent::__construct($row);
       $this->sections = $row['sections'];
-      $this->datas = \json_decode($row['extra_datas'], true);
+      $prop = $this->getExtraDatas('properties') ?? [];
+      foreach ($prop as $name => $value) {
+        $this->$name = $value;
+      }
     }
   }
 
@@ -84,6 +100,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
       'y' => $this->y,
       'sections' => $this->sections,
 
+      'number' => $this->number,
       'type' => $this->type,
       'nation' => $this->nation,
       'name' => $this->name,
@@ -94,6 +111,19 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     ];
   }
 
+  public function getStaticUiData()
+  {
+    $t = array_merge($this->staticAttributes, $this->properties);
+    $datas = [];
+    foreach ($t as $prop) {
+      if (isset($this->$prop)) {
+        $datas[$prop] = $this->$prop;
+      }
+    }
+
+    return $datas;
+  }
+
   /////////////////////////////////////////
   //    ____      _   _
   //  / ___| ___| |_| |_ ___ _ __ ___
@@ -101,6 +131,27 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
   // | |_| |  __/ |_| ||  __/ |  \__ \
   //  \____|\___|\__|\__\___|_|  |___/
   /////////////////////////////////////////
+
+  public function getProperty($prop)
+  {
+    if (!in_array($prop, $this->properties)) {
+      throw new \BgaVisibleSystemException('Trying to access a non existing terrain property : ' . $prop);
+    }
+
+    return $this->$prop ?? null;
+  }
+
+  public function __call($method, $args)
+  {
+    if (!in_array($method, $this->properties)) {
+      return parent::__call($method, $args);
+    }
+
+    $unit = $args[0];
+    return $this->getProperty($method, $unit);
+  }
+
+
 
   public function getPos()
   {

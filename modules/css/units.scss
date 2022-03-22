@@ -205,6 +205,15 @@ $units: (
           }
         }
       }
+
+      .summary-tile
+        .m44-unit[data-orientation='#{$orientation}'][data-type='#{$type}'][data-nation='#{$nation}']
+        .m44-unit-meeple {
+        width: 100%;
+        height: 100% * $ratio;
+        left: 0;
+        top: 0;
+      }
     }
   }
 }

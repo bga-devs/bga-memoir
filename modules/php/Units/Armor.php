@@ -7,6 +7,7 @@ class Armor extends AbstractUnit
   {
     parent::__construct($row);
     $this->type = ARMOR;
+    $this->number = '1b';
     $this->statName = 'Armor';
     $this->name = clienttranslate('Armor');
     $this->maxUnits = 3;

@@ -7,6 +7,7 @@ class SpecialForces extends Infantry
   {
     parent::__construct($row);
     $this->name = clienttranslate('Special Forces');
+    $this->number = 2;
     $this->movementAndAttackRadius = 2;
   }
 }

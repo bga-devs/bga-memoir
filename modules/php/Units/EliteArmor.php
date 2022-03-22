@@ -7,6 +7,7 @@ class EliteArmor extends Armor
   {
     parent::__construct($row);
     $this->name = clienttranslate('Elite Armor');
+    $this->number = '2b';
     $this->maxUnits = 4;
   }
 

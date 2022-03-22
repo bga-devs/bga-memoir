@@ -40,6 +40,7 @@ use M44\Managers\Cards;
 use M44\Managers\Players;
 use M44\Managers\Terrains;
 use M44\Managers\Teams;
+use M44\Managers\Units;
 use M44\Board;
 use M44\Scenario;
 
@@ -115,6 +116,7 @@ class memoir extends Table
       'discard' => Cards::getTopOf('discard'),
 
       'terrains' => Terrains::getStaticUiData(),
+      'units' => Units::getStaticUiData(),
     ];
   }
 
