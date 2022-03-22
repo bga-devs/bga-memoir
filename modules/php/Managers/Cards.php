@@ -52,15 +52,17 @@ class Cards extends \M44\Helpers\Pieces
     return $p;
   }
 
-  public static function reshuffleListener()
+  public static function reshuffleListener($loca = null)
   {
-    Notifications::message(clienttranslate('There are not more cards in the deck. Victory of ${side'), [
-      'side' => Globals::getDefaultWinner(),
-      'i18n' => ['side'],
-    ]);
-    Teams::get(Globals::getDefaultWinner())->addSuddenDeathMedals();
+    if (Globals::getDefaultWinner() != null) {
+      Notifications::message(clienttranslate('There are not more cards in the deck. Victory of ${side'), [
+        'side' => Globals::getDefaultWinner(),
+        'i18n' => ['side'],
+      ]);
+      Teams::get(Globals::getDefaultWinner())->addSuddenDeathMedals();
 
-    Teams::checkVictory();
+      Teams::checkVictory();
+    }
   }
 
   //////////////////////////////////
