@@ -329,6 +329,11 @@ class Board
    */
   public static function isValidPath($unit, $cell, $path)
   {
+    // All paths are valid for Behind ennemy lines
+    if ($unit->getActivationOCard()->getType() == \CARD_BEHIND_LINES) {
+      return true;
+    }
+
     $totalPath = array_merge([$unit->getPos()], $path);
     foreach ($totalPath as $node) {
       $t = self::$grid[$node['x']][$node['y']];
