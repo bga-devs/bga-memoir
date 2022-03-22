@@ -101,6 +101,13 @@ class memoir extends Table
     $this->gamestate->nextState();
   }
 
+  public function actUploadScenario($scenario)
+  {
+    Globals::setRound(1);
+    Globals::setScenario($scenario);
+    $this->gamestate->jumpToState(\ST_NEW_ROUND);
+  }
+
   /*
    * getAllDatas:
    */
