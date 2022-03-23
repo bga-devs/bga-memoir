@@ -291,6 +291,14 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       this._grid[x][y].terrains = this._grid[x][y].terrains.filter((terrain) => terrain.id != n.args.terrainId);
     },
 
+    notif_addToken(token) {
+      debug('Notif: a token is added on the board', token);
+    },
+
+    notif_removeToken(token) {
+      debug('Notif: a token is removed from the board', token);
+    },
+
     ////////////////////////////////////////
     //  _____           _ _   _
     // |_   _|__   ___ | | |_(_)_ __

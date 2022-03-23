@@ -40,18 +40,10 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
   protected $fights = 0;
   protected $grounds = 0;
 
-
-
   /*
    * STATIC INFORMATIONS
    */
-  protected $staticAttributes = [
-    'number',
-    'type',
-    'statName',
-    'name',
-    'desc',
-  ];
+  protected $staticAttributes = ['number', 'type', 'statName', 'name', 'desc'];
   protected $number = null;
   protected $type = null;
   protected $statName = null;
@@ -150,8 +142,6 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     $unit = $args[0];
     return $this->getProperty($method, $unit);
   }
-
-
 
   public function getPos()
   {
@@ -328,6 +318,12 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
   }
 
   public function afterAttack($coords, $hits, $eliminated)
+  {
+    return;
+  }
+
+  // Called if after an attack a retreat gave a hit
+  public function afterAttackRetreatHit($coords, $hits, $eliminated)
   {
     return;
   }

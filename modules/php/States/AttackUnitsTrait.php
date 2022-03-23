@@ -273,6 +273,7 @@ trait AttackUnitsTrait
       Board::removeUnit($unit);
       $team = $attacker->getTeam();
       $team->addEliminationMedals($unit);
+      Tokens::removeTargets($unit->getPos());
 
       // Increse the stat
       $statName = 'inc' . $unit->getStatName() . 'UnitRound' . Globals::getRound();
