@@ -63,7 +63,11 @@ trait TakeGroundTrait
       return; // Victory or unit is dead
     }
     $unit->incGrounds(1);
-    $this->nextState('overrun');
+    if ($unit->getGrounds() == $unit->getMaxGrounds()) {
+      $this->nextState('next');
+    } else {
+      $this->nextState('overrun');
+    }
   }
 
   public function actPassTakeGround()

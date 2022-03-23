@@ -100,11 +100,11 @@ class Scenario extends \APP_DbObject
 
     if (isset(self::getOptions()['deck_reshuffling'])) {
       Globals::setDeckReshuffle(self::getOptions()['deck_reshuffling']);
+      Globals::setDefaultWinner(null);
       if (self::getId() == 19) {
         Globals::setDefaultWinner(AXIS);
       }
     }
-
 
     Board::init();
     // Notify

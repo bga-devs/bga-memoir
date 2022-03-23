@@ -232,6 +232,7 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
       'units' => [
         $unit->getId() => $unit->getTargetableUnits(),
       ],
+      'lastUnitAttacker' => $unit->getId(),
     ];
   }
 
