@@ -32,7 +32,13 @@ trait DebugTrait
     // }
     // throw new \feException(print_r(Board::getReachableCellsAtDistance(Units::get(14), 3)));
     // throw new \feException(print_r(Utils::revertCoords($c)));
-    throw new \feException(print_r(Tokens::getOnCoords('target', ['x' => 0, 'y' => 0])));
+    $terrains = Board::getTerrainsInCell(5, 3);
+    $x = 0;
+    foreach ($terrains as $t) {
+      throw new \feException($t->isOriginalOwner(Units::get(9)));
+      // $x += $t->defense(Units::get(9));
+    }
+    // throw
   }
 
   function tp($pId, $unitId, $min, $max)
