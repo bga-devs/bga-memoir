@@ -38,6 +38,14 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: 'Dax';
+  src: url('img/fonts/DaxLight.woff2') format('woff2'), url('img/fonts/DaxLight.woff') format('woff'),
+    url('img/fonts/DaxLight.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
 
 .phantom {
   visibility: hidden;
@@ -50,8 +58,6 @@
   transition: none !important;
 }
 
-
-
 @import 'modules/css/layout';
 @import 'modules/css/board';
 @import 'modules/css/units';
@@ -60,3 +66,4 @@
 @import 'modules/css/dice';
 @import 'modules/css/flip';
 @import 'modules/css/explosion';
+@import 'modules/css/modals.scss';

@@ -29,6 +29,27 @@ html {
         bottom: -29px;
       }
     }
+
+    #scenario-informations {
+      margin-left: auto;
+
+      #clipboard-button {
+        width: 40px;
+        background: #ebd5bd;
+        padding: 5px 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        svg {
+          width: 80%;
+          cursor: pointer;
+          &:hover {
+            fill: gray;
+          }
+        }
+      }
+    }
   }
 
   #m44-central-part {
@@ -201,7 +222,6 @@ html {
           [type='file']:focus + label {
             outline: 1px dotted #fff;
           }
-
 
           h5 {
             font-family: 'Gunplay';

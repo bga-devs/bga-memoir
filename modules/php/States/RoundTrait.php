@@ -30,9 +30,9 @@ trait RoundTrait
 
     // Check for options
     $options = Scenario::getOptions();
-    if(isset($options['airdrop'])){
+    if (isset($options['airdrop'])) {
       $team = Teams::get($options['airdrop']['side']);
-      $this->nextState('airdrop', $team->getCommander());
+      $this->changeActivePlayerAndJumpTo($team->getCommander(), ST_AIR_DROP);
       return;
     }
 
@@ -41,14 +41,14 @@ trait RoundTrait
 
   public function stEndOfGame()
   {
-    $nRounds = Globals::isTwoWaysGame()? 2 : 1;
+    $nRounds = Globals::isTwoWaysGame() ? 2 : 1;
 
     foreach (Players::getAll() as $player) {
       $nWins = 0;
       $nFigs = 0;
-      for($i = 1; $i <= $nRounds; $i++){
+      for ($i = 1; $i <= $nRounds; $i++) {
         $nWins += $player->getStat('statusRound' . $i);
-        foreach(['inf', 'armor', 'artillery'] as $type){
+        foreach (['inf', 'armor', 'artillery'] as $type) {
           $nFigs += $player->getStat($type . 'FigRound' . $i);
         }
       }

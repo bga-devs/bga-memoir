@@ -1,0 +1,99 @@
+.memoir44_popin {
+  width: 80%;
+  position: relative;
+
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-image: url('img/ui/dialog-texture.jpg');
+    box-shadow: 5px 5px 3px 0px rgba(20, 20, 20, 0.6), -5px 5px 3px 0px rgba(20, 20, 20, 0.6),
+      -5px -5px 3px 0px rgba(20, 20, 20, 0.5);
+    z-index: -1;
+  }
+
+  &::before {
+    transform: rotate(-2deg);
+    transform-origin: top left;
+    z-index: -2;
+    left: -11px;
+    top: 25px;
+  }
+
+  .memoir44_popin_closeicon {
+    background-color: #b74d44;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: -15px;
+    right: -15px;
+    font-size: 100%;
+    color: white !important;
+
+    &:hover {
+      text-decoration: none;
+      color: #ccc !important;
+      transform: scale(1.1);
+    }
+
+    i {
+      margin-top: -2px;
+    }
+  }
+}
+
+#popin_showScenario {
+  width: 1000px;
+
+  h2 {
+    text-align: center;
+    font-family: 'Gunplay';
+    color: #9e0a0f;
+    font-size: 39px;
+    text-transform: uppercase;
+    margin: 0px;
+    background: #ffffffab;
+    padding: 14px 0px 7px;
+    border-bottom: 1px solid #8080808a;
+  }
+
+  #popin_showScenario_contents {
+    display: flex;
+    flex-flow: column;
+    padding: 10px 15px;
+
+    h5 {
+      font-family: 'Gunplay';
+      color: #c2602f;
+      font-size: 23px;
+    }
+
+    #scenario-historical {
+      font-family: 'Dax';
+      text-align: justify;
+    }
+
+    #scenario-bottom-container {
+      display: flex;
+      margin-top: 20px;
+      justify-content: space-between;
+
+      & > div {
+        width: 49%;
+      }
+
+      #scenario-brief {
+        border-right: 2px solid #9e0a0f;
+      }
+    }
+  }
+}

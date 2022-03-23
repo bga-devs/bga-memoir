@@ -52,7 +52,7 @@ $machinestates = [
     'type' => 'game',
     'action' => 'stNewRound',
     'possibleactions' => [],
-    'transitions' => ['' => ST_NEW_ROUND, 'airdrop' => ST_AIR_DROP],
+    'transitions' => ['' => ST_NEW_ROUND],
   ],
 
   ST_AIR_DROP => [

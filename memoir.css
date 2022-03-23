@@ -31,6 +31,12 @@
   font-weight: normal;
   font-style: normal;
   font-display: swap; }
+@font-face {
+  font-family: 'Dax';
+  src: url("img/fonts/DaxLight.woff2") format("woff2"), url("img/fonts/DaxLight.woff") format("woff"), url("img/fonts/DaxLight.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap; }
 .phantom {
   visibility: hidden; }
 
@@ -63,6 +69,20 @@ html {
       #m44-container #m44-top-part #top-team #top-medals {
         position: absolute;
         bottom: -29px; }
+    #m44-container #m44-top-part #scenario-informations {
+      margin-left: auto; }
+      #m44-container #m44-top-part #scenario-informations #clipboard-button {
+        width: 40px;
+        background: #ebd5bd;
+        padding: 5px 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center; }
+        #m44-container #m44-top-part #scenario-informations #clipboard-button svg {
+          width: 80%;
+          cursor: pointer; }
+          #m44-container #m44-top-part #scenario-informations #clipboard-button svg:hover {
+            fill: gray; }
   #m44-container #m44-central-part {
     max-height: 600px;
     display: flex;
@@ -3268,5 +3288,76 @@ span.m44-dice-result {
     109.0909090909% {
     background-position-x: 100%;
     background-position-y: 100%; } }
+.memoir44_popin {
+  width: 80%;
+  position: relative; }
+  .memoir44_popin::before, .memoir44_popin::after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-image: url("img/ui/dialog-texture.jpg");
+    box-shadow: 5px 5px 3px 0px rgba(20, 20, 20, 0.6), -5px 5px 3px 0px rgba(20, 20, 20, 0.6), -5px -5px 3px 0px rgba(20, 20, 20, 0.5);
+    z-index: -1; }
+  .memoir44_popin::before {
+    transform: rotate(-2deg);
+    transform-origin: top left;
+    z-index: -2;
+    left: -11px;
+    top: 25px; }
+  .memoir44_popin .memoir44_popin_closeicon {
+    background-color: #b74d44;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: -15px;
+    right: -15px;
+    font-size: 100%;
+    color: white !important; }
+    .memoir44_popin .memoir44_popin_closeicon:hover {
+      text-decoration: none;
+      color: #ccc !important;
+      transform: scale(1.1); }
+    .memoir44_popin .memoir44_popin_closeicon i {
+      margin-top: -2px; }
+
+#popin_showScenario {
+  width: 1000px; }
+  #popin_showScenario h2 {
+    text-align: center;
+    font-family: 'Gunplay';
+    color: #9e0a0f;
+    font-size: 39px;
+    text-transform: uppercase;
+    margin: 0px;
+    background: #ffffffab;
+    padding: 14px 0px 7px;
+    border-bottom: 1px solid #8080808a; }
+  #popin_showScenario #popin_showScenario_contents {
+    display: flex;
+    flex-flow: column;
+    padding: 10px 15px; }
+    #popin_showScenario #popin_showScenario_contents h5 {
+      font-family: 'Gunplay';
+      color: #c2602f;
+      font-size: 23px; }
+    #popin_showScenario #popin_showScenario_contents #scenario-historical {
+      font-family: 'Dax';
+      text-align: justify; }
+    #popin_showScenario #popin_showScenario_contents #scenario-bottom-container {
+      display: flex;
+      margin-top: 20px;
+      justify-content: space-between; }
+      #popin_showScenario #popin_showScenario_contents #scenario-bottom-container > div {
+        width: 49%; }
+      #popin_showScenario #popin_showScenario_contents #scenario-bottom-container #scenario-brief {
+        border-right: 2px solid #9e0a0f; }
 
 /*# sourceMappingURL=memoir.css.map */

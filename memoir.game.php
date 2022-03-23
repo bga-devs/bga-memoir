@@ -101,6 +101,7 @@ class memoir extends Table
   public function getAllDatas()
   {
     $pId = self::getCurrentPId();
+    $scenario = Scenario::get();
     return [
       'prefs' => Preferences::getUiData($pId),
       'players' => Players::getUiData($pId),
@@ -108,6 +109,7 @@ class memoir extends Table
       'teams' => Teams::getAll()->toArray(),
       'deckCount' => Cards::countInLocation('deck'),
       'discard' => Cards::getTopOf('discard'),
+      'scenario' => is_null($scenario) ? null : $scenario['text']['en'],
 
       'terrains' => Terrains::getStaticUiData(),
       'units' => Units::getStaticUiData(),

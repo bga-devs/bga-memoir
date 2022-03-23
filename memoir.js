@@ -92,6 +92,10 @@ define([
       if (gamedatas.board) {
         this.setupBoard();
       }
+      // Load scenario infos
+      if (gamedatas.scenario) {
+        this.setupScenario();
+      }
 
       this.setupPlayers();
       this.setupTeams();
@@ -113,6 +117,8 @@ define([
       dojo.empty('bottom-medals-slots');
       dojo.empty('bottom-medals-container');
 
+      dojo.empty('scenario-informations');
+      dojo.destroy('popin_showScenario_container');
       dojo.query('.m44-player-panel').remove();
 
       if ($('m44-player-hand')) {
@@ -157,11 +163,13 @@ define([
       this.gamedatas.teams = n.args.teams;
       this.gamedatas.terrains = n.args.terrains;
       this.gamedatas.units = n.args.units;
+      this.gamedatas.scenario = n.args.scenario;
       this._bottomTeam = this.gamedatas.players[this._pId].team;
       this._deckCounter.setValue(n.args.deckCount);
 
       this.setupTeams();
       this.setupPlayers();
+      this.setupScenario();
       this.setupBoard();
     },
 
@@ -201,6 +209,68 @@ define([
       }
 
       return this.inherited(arguments);
+    },
+
+    ////////////////////////////////////
+    //  __  __           _       _
+    // |  \/  | ___   __| | __ _| |
+    // | |\/| |/ _ \ / _` |/ _` | |
+    // | |  | | (_) | (_| | (_| | |
+    // |_|  |_|\___/ \__,_|\__,_|_|
+    ////////////////////////////////////
+    setupScenario() {
+      dojo.place(
+        `<div id='clipboard-button'>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M336 64h-53.88C268.9 26.8 233.7 0 192 0S115.1 26.8 101.9 64H48C21.5 64 0 85.48 0 112v352C0 490.5 21.5 512 48 512h288c26.5 0 48-21.48 48-48v-352C384 85.48 362.5 64 336 64zM192 64c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S160 113.7 160 96C160 78.33 174.3 64 192 64zM272 224h-160C103.2 224 96 216.8 96 208C96 199.2 103.2 192 112 192h160C280.8 192 288 199.2 288 208S280.8 224 272 224z"/></svg>
+    </div>`,
+        'scenario-informations',
+      );
+
+      var dial = new customgame.modal('showScenario', {
+        class: 'memoir44_popin',
+        closeIcon: 'fa-times',
+        openAnimation: true,
+        openAnimationTarget: 'clipboard-button',
+        contents: this.tplScenarioModal(),
+        breakpoint: 800,
+        closeAction: 'hide',
+        scale: 0.8,
+        title: _(this.gamedatas.scenario.name),
+      });
+
+      this.addTooltip('clipboard-button', _('Show the scenario informations'), '');
+      $('clipboard-button').addEventListener('click', () => dial.show());
+    },
+
+    tplScenarioModal() {
+      let scenario = this.gamedatas.scenario;
+      return (
+        `
+      <div id='scenario-historical'>
+        <h5>${_('Historical Background')}</h5>
+        ${_(scenario.historical).replace(/\n/g, '<br />')}
+      </div>
+
+      <div id='scenario-bottom-container'>
+        <div id='scenario-brief'>
+          <h5>${_('Briefing')}</h5>
+          ${_(scenario.description).replace(/\n/g, '<br />')}
+        </div>
+        <div id='scenario-conditions-rules'>
+          <h5>${_('Conditions of Victory')}</h5>
+          ${_(scenario.victory).replace(/\n/g, '<br />')}
+          ` +
+        (scenario.rules === undefined
+          ? ''
+          : `
+          <h5>${_('Special rules')}</h5>
+          ${_(scenario.rules).replace(/\n/g, '<br />')}
+            `) +
+        `
+        </div>
+      </div>
+    `
+      );
     },
 
     ////////////////////////////////////////////
