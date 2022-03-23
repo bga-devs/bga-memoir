@@ -14,9 +14,9 @@ trait DebugTrait
 {
   function load($scenario)
   {
-    Globals::setRound(1);
-    Scenario::load($scenario);
-    $this->gamestate->jumpToState(\ST_NEW_ROUND);
+    Globals::setRound(0);
+    Scenario::loadId($scenario);
+    $this->stNewRound(true);
   }
 
   function vt($c)

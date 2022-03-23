@@ -106,6 +106,7 @@ define(['dojo', 'dojo/_base/declare', 'ebg/core/gamegui'], (dojo, declare) => {
       } else if (data.lock === false) {
         delete data.lock;
       }
+      let method = data.method === undefined ? 'get' : data.method;
       return new Promise((resolve, reject) => {
         this.ajaxcall(
           '/' + this.game_name + '/' + this.game_name + '/' + action + '.html',
@@ -115,7 +116,7 @@ define(['dojo', 'dojo/_base/declare', 'ebg/core/gamegui'], (dojo, declare) => {
           (isError, message, code) => {
             if (isError) reject(message, code);
           },
-          'post'
+          method,
         );
       });
     },
@@ -311,7 +312,7 @@ define(['dojo', 'dojo/_base/declare', 'ebg/core/gamegui'], (dojo, declare) => {
     },
 
     changePageTitle(suffix = null, save = false) {
-      debug("test");
+      debug('test');
       if (suffix == null) {
         suffix = 'generic';
       }
@@ -930,7 +931,7 @@ define(['dojo', 'dojo/_base/declare', 'ebg/core/gamegui'], (dojo, declare) => {
       });
     },
 
-    strReplace(str, subst){
+    strReplace(str, subst) {
       return dojo.string.substitute(str, subst);
     },
 

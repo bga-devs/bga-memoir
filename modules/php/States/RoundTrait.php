@@ -12,7 +12,7 @@ use M44\Scenario;
 
 trait RoundTrait
 {
-  public function stNewRound()
+  public function stNewRound($forceRefresh = false)
   {
     $round = Globals::incRound();
     $maxRound = Globals::isTwoWaysGame() ? 2 : 1;
@@ -22,7 +22,7 @@ trait RoundTrait
     }
 
     $rematch = $round == 2;
-    Scenario::setup($rematch);
+    Scenario::setup($rematch, $forceRefresh);
     Globals::setUnitMoved(-1);
     Globals::setUnitAttacker(-1);
     Globals::setLastPlayedCards([]);
