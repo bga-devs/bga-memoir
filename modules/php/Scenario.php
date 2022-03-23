@@ -54,7 +54,7 @@ class Scenario extends \APP_DbObject
   /**
    * Load a scenario from a file and store it into a global
    */
-  function load($id)
+  function loadId($id)
   {
     require_once dirname(__FILE__) . '/Scenarios/list.inc.php';
     if (!isset($scenariosMap[$id])) {

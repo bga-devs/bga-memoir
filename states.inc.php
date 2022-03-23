@@ -21,17 +21,28 @@ $machinestates = [
     'description' => '',
     'type' => 'manager',
     'action' => 'stGameSetup',
-    'transitions' => ['' => ST_LOAD_SCENARIO],
+    'transitions' => ['' => ST_START_TABLE],
   ],
 
-  ST_LOAD_SCENARIO => [
-    'name' => 'loadScenario',
+  ST_START_TABLE => [
+    'name' => 'startTable',
     'description' => '',
     'descriptionmyturn' => '',
     'type' => 'game',
-    'action' => 'stLoadScenario',
+    'action' => 'stStartTable',
     'possibleactions' => [],
-    'transitions' => ['' => ST_NEW_ROUND],
+    'transitions' => ['upload' => ST_UPLOAD_SCENARIO],
+  ],
+
+  ST_UPLOAD_SCENARIO => [
+    'name' => 'uploadScenario',
+    'description' => clienttranslate('You must upload a m44 scenario'),
+    'descriptionmyturn' => clienttranslate('${you} must upload a m44 scenario'),
+    'type' => 'multipleactiveplayer',
+    'possibleactions' => ['actUploadScenario'],
+    'transitions' => [
+      '' => ST_NEW_ROUND,
+    ],
   ],
 
   ST_NEW_ROUND => [

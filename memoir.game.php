@@ -47,6 +47,7 @@ use M44\Scenario;
 class memoir extends Table
 {
   use M44\DebugTrait;
+  use M44\States\LoadScenarioTrait;
   use M44\States\RoundTrait;
   use M44\States\TurnTrait;
   use M44\States\PlayCardTrait;
@@ -92,20 +93,6 @@ class memoir extends Table
     Players::setupNewGame($players, $options);
 
     $this->activeNextPlayer();
-  }
-
-  public function stLoadScenario()
-  {
-    $scenario = Globals::getScenarioId();
-    Scenario::load($scenario);
-    $this->gamestate->nextState();
-  }
-
-  public function actUploadScenario($scenario)
-  {
-    Globals::setRound(1);
-    Globals::setScenario($scenario);
-    $this->gamestate->jumpToState(\ST_NEW_ROUND);
   }
 
   /*

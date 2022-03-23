@@ -15,6 +15,7 @@ class Globals extends \M44\Helpers\DB_Manager
     // Game options
     'duration' => 'int', // 1 way, 2 ways
     'mode' => 'int', // Standard, Breakthrough, Overlord
+    'officialScenario' => 'bool', // Official VS custom
     'scenarioId' => 'int', // Used to store the scenario id
     'scenario' => 'obj', // Used to store the scenario
 
@@ -161,7 +162,8 @@ class Globals extends \M44\Helpers\DB_Manager
   {
     Globals::setDuration($options[OPTION_DURATION]);
     Globals::setMode($options[OPTION_MODE]);
-    Globals::setScenarioId($options[OPTION_MODE + $options[OPTION_MODE]]);
+    Globals::setOfficialScenario($options[\OPTION_SCENARIO_TYPE] == \OPTION_SCENARIO_OFFICIAL);
+    Globals::setScenarioId(Globals::isOfficialScenario() ? $options[OPTION_MODE + 1 + $options[OPTION_MODE]] : -1);
     Globals::setUnitMoved(-1);
     Globals::setUnitAttacker(-1);
     Globals::setLastPlayedCards([]);

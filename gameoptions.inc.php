@@ -72,12 +72,32 @@ $game_options = [
   ],
 
   102 => [
+    'name' => totranslate('Scenario type'),
+    'values' => [
+      1 => [
+        'name' => clienttranslate('Official'),
+        'description' => clienttranslate('Official DaysOfWonder scenario'),
+      ],
+      2 => [
+        'name' => clienttranslate('From the front'),
+        'tmdisplay' => clienttranslate('[fan-made]'),
+        'description' => clienttranslate('Loading a m44 scenario made with the editor'),
+      ],
+    ],
+  ],
+
+  103 => [
     'name' => clienttranslate('Scenario'),
     'displaycondition' => [
       0 => [
         'type' => 'otheroption',
         'id' => 101,
         'value' => 1,
+      ],
+      1 => [
+        'type' => 'otheroptionisnot',
+        'id' => 102,
+        'value' => 2,
       ],
     ],
     'values' => [
@@ -223,12 +243,17 @@ $game_options = [
       ],
     ],
   ],
-  103 => [
+  104 => [
     'name' => clienttranslate('Scenario'),
     'displaycondition' => [
       0 => [
         'type' => 'otheroption',
         'id' => 101,
+        'value' => 2,
+      ],
+      1 => [
+        'type' => 'otheroptionisnot',
+        'id' => 102,
         'value' => 2,
       ],
     ],
@@ -240,13 +265,18 @@ $game_options = [
       ],
     ],
   ],
-  104 => [
+  105 => [
     'name' => clienttranslate('Scenario'),
     'displaycondition' => [
       0 => [
         'type' => 'otheroption',
         'id' => 101,
         'value' => 3,
+      ],
+      1 => [
+        'type' => 'otheroptionisnot',
+        'id' => 102,
+        'value' => 2,
       ],
     ],
     'values' => [
