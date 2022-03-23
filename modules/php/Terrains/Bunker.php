@@ -22,4 +22,9 @@ class Bunker extends \M44\Models\RectTerrain
 
     parent::__construct($row);
   }
+
+  public function defense($unit)
+  {
+    return !$this->isOriginalOwner($unit) ? $this->getProperty('defense', $unit) : null;
+  }
 }
