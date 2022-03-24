@@ -6,7 +6,7 @@ class Marsh extends \M44\Models\Terrain
 {
   public static function isTileOfType($hex)
   {
-    return in_array($hex['name'], ['marshes']);
+    return in_array($hex['name'], ['marshes', 'wmarshes']);
   }
 
   public function __construct($row)
@@ -14,17 +14,11 @@ class Marsh extends \M44\Models\Terrain
     $this->name = clienttranslate('Marshes');
     $this->number = 28;
     $this->desc = [
-      \clienttranslate(
-        'An Infantry or Armor unit that moves onto a Marsh hex must stop and may not move further on that turn.'
-      ),
-      clienttranslate('An Infantry or Armor unit moving out may only move onto an adjacent hex.'),
-      clienttranslate('Impassable by Artillery'),
       clienttranslate('Infantry moving in or out does not have any combat restrictions'),
       clienttranslate('Armor moving in/out cannot battle'),
       clienttranslate(
         'Armor that makes successfull combat against a unit on a Marsh may Take Ground, but not Armor overrun.'
       ),
-      clienttranslate('Do not block line of sight'),
     ];
     $this->isImpassable = [ARTILLERY];
     $this->mustStopWhenEntering = true;

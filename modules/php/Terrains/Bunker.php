@@ -2,7 +2,7 @@
 namespace M44\Terrains;
 use M44\Board;
 
-class Bunker extends \M44\Models\RectTerrain
+class Bunker extends \M44\Models\Terrain
 {
   public static function isTileOfType($hex)
   {

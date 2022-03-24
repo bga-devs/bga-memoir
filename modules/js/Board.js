@@ -188,7 +188,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     getBackgroundTile(face, dim, x, y) {
       let tile = 0;
       if (face == 'winter') {
-        type = getRandomInt(30, 35);
+        tile = getRandomInt(30, 35);
       } else if (face == 'desert') {
         tile = getRandomInt(19, 24);
       } else if (face == 'country') {
@@ -274,7 +274,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         data-team="${medal.team}" data-sprite="${sprite}" data-permanent="${medal.datas.permanent}"></div>`;
     },
 
-    notif_addObstacle(n) {
+    notif_addTerrain(n) {
       debug('Notif: adding obstacle', n);
       let terrain = n.args.terrain;
       let cellC = $(`cell-background-${terrain.x}-${terrain.y}`);
@@ -283,7 +283,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       this._grid[terrain.x][terrain.y].terrains.push(terrain);
     },
 
-    notif_removeObstacle(n) {
+    notif_removeTerrain(n) {
       debug('Notif: removing obstacle', n);
       $('obstacle-' + n.args.terrainId).remove();
       let x = n.args.cell.x,

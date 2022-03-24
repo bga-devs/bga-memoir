@@ -1,5 +1,8 @@
 <?php
 namespace M44\Models;
+use M44\Board;
+use M44\Core\Notifications;
+
 
 class Terrain extends \M44\Helpers\DB_Model
 {
@@ -138,6 +141,12 @@ class Terrain extends \M44\Helpers\DB_Model
 
     $unit = $args[0];
     return $this->getProperty($method, $unit);
+  }
+
+  public function removeFromBoard()
+  {
+    Board::removeTerrain($this);
+    Notifications::removeTerrain($this);
   }
 
   public function onUnitLeaving($unit, $isRetreat)

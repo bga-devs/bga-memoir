@@ -1,7 +1,7 @@
 <?php
 namespace M44\Terrains;
 
-class Sandbag extends \M44\Models\Obstacle
+class Sandbag extends \M44\Models\Terrain
 {
   public static function isTileOfType($hex)
   {

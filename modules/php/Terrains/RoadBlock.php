@@ -1,7 +1,7 @@
 <?php
 namespace M44\Terrains;
 
-class RoadBlock extends \M44\Models\RectTerrain
+class RoadBlock extends \M44\Models\Terrain
 {
   public static function isTileOfType($hex)
   {

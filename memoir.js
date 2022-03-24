@@ -56,8 +56,8 @@ define([
         ['takeDamage', 1000],
         ['miss', 200],
         ['healUnit', 800],
-        ['removeObstacle', 200],
-        ['addObstacle', 200],
+        ['removeTerrain', 200],
+        ['addTerrain', 200],
         ['reshuffle', 1000],
         ['scoreMedals', 1000],
         ['removeMedals', 1000],
@@ -236,6 +236,7 @@ define([
         contents: this.tplScenarioModal(),
         breakpoint: 800,
         closeAction: 'hide',
+        verticalAlign: 'flex-begin',
         scale: 0.8,
         title: _(this.gamedatas.scenario.name),
       });

@@ -34,6 +34,10 @@ $scenarios[1325] = [
         'standard' => [],
       ],
     ],
+    'options' => [
+      'blitz_rules' => true,
+      'russian_commissar_rule' => 'ALLIES',
+    ],
   ],
   'board' => [
     'type' => 'STANDARD',
@@ -291,7 +295,7 @@ $scenarios[1325] = [
         'row' => 4,
         'col' => 10,
         'terrain' => [
-          'name' => 'hills',
+          'name' => 'whill',
         ],
         'obstacle' => [
           'name' => 'sand',
@@ -305,7 +309,7 @@ $scenarios[1325] = [
         'row' => 4,
         'col' => 12,
         'terrain' => [
-          'name' => 'hills',
+          'name' => 'whill',
         ],
         'obstacle' => [
           'name' => 'sand',
@@ -319,7 +323,7 @@ $scenarios[1325] = [
         'row' => 4,
         'col' => 14,
         'terrain' => [
-          'name' => 'hills',
+          'name' => 'whill',
         ],
         'obstacle' => [
           'name' => 'sand',
@@ -333,14 +337,14 @@ $scenarios[1325] = [
         'row' => 4,
         'col' => 16,
         'terrain' => [
-          'name' => 'hills',
+          'name' => 'whill',
         ],
       ],
       37 => [
         'row' => 4,
         'col' => 18,
         'terrain' => [
-          'name' => 'hills',
+          'name' => 'whill',
         ],
         'obstacle' => [
           'name' => 'sand',
@@ -354,7 +358,7 @@ $scenarios[1325] = [
         'row' => 4,
         'col' => 20,
         'terrain' => [
-          'name' => 'hills',
+          'name' => 'whill',
         ],
         'obstacle' => [
           'name' => 'sand',
@@ -368,7 +372,7 @@ $scenarios[1325] = [
         'row' => 4,
         'col' => 22,
         'terrain' => [
-          'name' => 'hills',
+          'name' => 'whill',
         ],
       ],
       40 => [
@@ -467,7 +471,7 @@ $scenarios[1325] = [
         'row' => 7,
         'col' => 13,
         'terrain' => [
-          'name' => 'buildings',
+          'name' => 'wvillage',
         ],
         'unit' => [
           'name' => 'infru',
@@ -477,7 +481,7 @@ $scenarios[1325] = [
         'row' => 7,
         'col' => 19,
         'terrain' => [
-          'name' => 'buildings',
+          'name' => 'wvillage',
         ],
         'unit' => [
           'name' => 'infru',
@@ -492,7 +496,7 @@ $scenarios[1325] = [
         'row' => 7,
         'col' => 21,
         'terrain' => [
-          'name' => 'hills',
+          'name' => 'whill',
         ],
         'unit' => [
           'name' => 'infru',
@@ -502,7 +506,7 @@ $scenarios[1325] = [
         'row' => 7,
         'col' => 23,
         'terrain' => [
-          'name' => 'hills',
+          'name' => 'whill',
         ],
       ],
       55 => [

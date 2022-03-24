@@ -173,6 +173,7 @@ const TERRAIN_CLASSES = [
   'ocean' => 'Ocean',
   'river' => 'River',
   'bridge' => 'Bridge',
+  'bridgesection' => 'BridgeSection',
   'sand' => 'Sandbag',
   'cliff' => 'Cliff',
   'bluff' => 'SeaBluff',
@@ -187,10 +188,13 @@ const TERRAIN_CLASSES = [
   'dam' => 'Dam',
   'factory' => 'FactoryComplex',
   'fieldbunker' => 'FieldBunker',
+  // Flooded Fields
   'fortress' => 'Fortress',
-  'lighthouse' => 'Lighthouse',
   'highground' => 'HighGround',
+  'lake' => 'Lake',
+  'lighthouse' => 'Lighthouse',
   'marsh' => 'Marsh',
+  // Minefiled
   'mountain' => 'Mountain',
   'oasis' => 'Oasis',
   'palmforest' => 'PalmForest',
@@ -200,15 +204,23 @@ const TERRAIN_CLASSES = [
   'radarstation' => 'RadarStation',
   'railroadbridge' => 'RailroadBridge',
   'rail' => 'Rail',
-  'wadi' => 'Wadi',
   'railstation' => 'RailStation',
-  'supplydepot' => 'SupplyDepot',
   'roadblock' => 'RoadBlock',
   'ford' => 'Ford',
   'road' => 'Road',
+  'supplydepot' => 'SupplyDepot',
+  'wadi' => 'Wadi',
+
+  'ruins' => 'Ruins',
+  'dragonteeth' => 'DragonTeeth',
+  'frozenriver' => 'FrozenRiver',
+  'hillforest' => 'HillForest',
+  'hillvillage' => 'HillVillage',
+  'ravine' => 'Ravine',
+  'trenches' => 'Trenches',
+
+
   'hillroad' => 'HillRoad',
-  'bridgesection' => 'BridgeSection',
-  'lake' => 'Lake',
 ];
 
 const TROOP_CLASSES = [

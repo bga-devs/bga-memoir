@@ -1,7 +1,7 @@
 <?php
 namespace M44\Terrains;
 
-class RailroadBridge extends \M44\Models\RectTerrain
+class RailroadBridge extends \M44\Models\Terrain
 {
   public static function isTileOfType($hex)
   {

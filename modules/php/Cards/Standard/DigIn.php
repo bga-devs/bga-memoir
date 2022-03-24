@@ -72,7 +72,7 @@ class DigIn extends \M44\Models\Card
           'orientation' => ($unit->getCampDirection() + 3) / 2,
         ]);
 
-        Notifications::addObstacle(
+        Notifications::addTerrain(
           $player,
           $terrain,
           \clienttranslate('${player_name} reinforces their position by placing a sandbag (in ${coordSource})')

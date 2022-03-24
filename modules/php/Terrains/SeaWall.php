@@ -2,7 +2,7 @@
 namespace M44\Terrains;
 use M44\Board;
 
-class SeaWall extends \M44\Models\Obstacle
+class SeaWall extends \M44\Models\Terrain
 {
   public static function isTileOfType($hex)
   {

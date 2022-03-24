@@ -14,10 +14,7 @@ class Dam extends \M44\Models\Terrain
     $this->number = 20;
     $this->desc = [
       clienttranslate('No movement restrictions for Infantry'),
-      clienttranslate('Impassable to Armor and Artillery'),
       clienttranslate('No combat restrictions'),
-      clienttranslate('Unit may ignore one flag'),
-      clienttranslate('Block line of sight'),
     ];
     $this->impassable = [ARMOR, \ARTILLERY];
     $this->canIgnoreOneFlag = true;

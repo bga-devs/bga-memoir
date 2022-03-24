@@ -277,9 +277,9 @@ class Notifications
     );
   }
 
-  public static function removeObstacle($terrain)
+  public static function removeTerrain($terrain)
   {
-    self::notifyAll('removeObstacle', clienttranslate('${obstacle} is removed in ${coordSource}'), [
+    self::notifyAll('removeTerrain', clienttranslate('${obstacle} is removed in ${coordSource}'), [
       'terrainId' => $terrain->getId(),
       'cell' => $terrain->getPos(),
       'obstacle' => $terrain->getName(),
@@ -288,9 +288,9 @@ class Notifications
     ]);
   }
 
-  public static function addObstacle($player, $terrain, $msg)
+  public static function addTerrain($player, $terrain, $msg)
   {
-    self::notifyAll('addObstacle', $msg, [
+    self::notifyAll('addTerrain', $msg, [
       'player' => $player,
       'terrain' => $terrain,
       'coordSource' => $terrain->getPos(),

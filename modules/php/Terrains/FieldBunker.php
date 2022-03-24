@@ -6,7 +6,7 @@ class FieldBunker extends Bunker
 {
   public static function isTileOfType($hex)
   {
-    return in_array($hex['name'], ['casemate']);
+    return in_array($hex['name'], ['casemate', 'wbunker', 'dbunker', 'pbunker']);
   }
 
   public function __construct($row)

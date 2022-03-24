@@ -1,7 +1,7 @@
 <?php
 namespace M44\Terrains;
 
-class Ford extends \M44\Models\RectTerrain
+class Ford extends \M44\Models\Terrain
 {
   public static function isTileOfType($hex)
   {

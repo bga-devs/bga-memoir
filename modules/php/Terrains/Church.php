@@ -10,9 +10,9 @@ class Church extends Village
 
   public function __construct($row)
   {
+    $this->canIgnoreOneFlag = true;
     parent::__construct($row);
     $this->name = clienttranslate('Churches');
     $this->number = 19;
-    $this->canIgnoreOneFlag = true;
   }
 }

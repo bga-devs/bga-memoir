@@ -1,23 +1,24 @@
 <?php
 namespace M44\Terrains;
 
-class Village extends \M44\Models\Terrain
+class Ruins extends \M44\Models\Terrain
 {
   public static function isTileOfType($hex)
   {
-    return in_array($hex['name'], ['buildings', 'bled', 'wvillage']);
+    return in_array($hex['name'], ['wruins']);
   }
 
   public function __construct($row)
   {
-    $this->name = clienttranslate('Towns & Villages');
-    $this->number = 14;
+    $this->name = clienttranslate('City Ruins');
+    $this->number = 45;
 
     $this->mustStopWhenEntering = true;
     $this->enteringCannotBattle = true;
+    $this->isImpassable = [ARMOR, ARTILLERY];
+    $this->canIgnoreOneFlag = true;
     $this->isBlockingLineOfSight = true;
     $this->defense = [INFANTRY => -1, ARMOR => -2];
-    $this->offense = [ARMOR => -2];
     parent::__construct($row);
   }
 }

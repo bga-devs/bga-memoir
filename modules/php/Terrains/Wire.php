@@ -3,7 +3,7 @@ namespace M44\Terrains;
 use M44\Core\Game;
 use M44\Core\Notifications;
 
-class Wire extends \M44\Models\Obstacle
+class Wire extends \M44\Models\Terrain
 {
   public static function isTileOfType($hex)
   {

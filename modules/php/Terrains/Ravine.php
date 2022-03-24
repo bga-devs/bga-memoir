@@ -1,17 +1,17 @@
 <?php
 namespace M44\Terrains;
 
-class Hedgehog extends \M44\Models\Terrain
+class Ravine extends \M44\Models\Terrain
 {
   public static function isTileOfType($hex)
   {
-    return in_array($hex['name'], ['hedgehog']);
+    return in_array($hex['name'], ['wravine']);
   }
 
   public function __construct($row)
   {
-    $this->name = clienttranslate('Hedgehogs');
-    $this->number = 5;
+    $this->name = clienttranslate('Ravine');
+    $this->number = 50;
     $this->isImpassable = [ARMOR, \ARTILLERY];
     $this->canIgnoreOneFlag = true;
 

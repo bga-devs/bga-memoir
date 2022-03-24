@@ -5,7 +5,7 @@ class FactoryComplex extends Village
 {
   public static function isTileOfType($hex)
   {
-    return in_array($hex['name'], ['factory']);
+    return in_array($hex['name'], ['factory', 'wfactory']);
   }
 
   public function __construct($row)
