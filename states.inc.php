@@ -144,7 +144,11 @@ $machinestates = [
     'descriptionmyturn' => '',
     'type' => 'game',
     'action' => 'stAttackThrow', // TODO: possible that attack not possible anymore
-    'transitions' => ['retreat' => ST_ATTACK_RETREAT, 'nextAttack' => ST_ATTACK_THROW],
+    'transitions' => [
+      'retreat' => ST_ATTACK_RETREAT,
+      'nextAttack' => ST_ATTACK_THROW,
+      'takeGround' => ST_TAKING_GROUND,
+    ],
   ],
 
   ST_ATTACK_RETREAT => [
