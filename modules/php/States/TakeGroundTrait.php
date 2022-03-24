@@ -60,10 +60,13 @@ trait TakeGroundTrait
     Notifications::takeGround($player, $attack['unitId'], $attack['x'], $attack['y']);
     $interrupted = Board::moveUnit($unit, $attack);
     if ($interrupted) {
+      $this->closeCurrentAttack();
       return; // Victory or unit is dead
     }
     $unit->incGrounds(1);
+
     if ($unit->getGrounds() == $unit->getMaxGrounds()) {
+      $this->closeCurrentAttack();
       $this->nextState('next');
     } else {
       $this->nextState('overrun');
@@ -77,6 +80,8 @@ trait TakeGroundTrait
     Notifications::message(\clienttranslate('${player_name} does not take ground'), [
       'player' => Players::getCurrent(),
     ]);
+
+    $this->closeCurrentAttack();
     $this->nextState('next');
   }
 
