@@ -364,6 +364,7 @@ class Board
     foreach ($sourceCell['terrains'] as $terrain) {
       $terrain->onUnitLeaving($unit, $isRetreat);
     }
+    Tokens::removeTargets($pos);
     foreach ($targetCell['terrains'] as $terrain) {
       if ($terrain->onUnitEntering($unit, $isRetreat) == true) {
         $interrupted = true;

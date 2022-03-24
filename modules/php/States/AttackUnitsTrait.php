@@ -12,6 +12,7 @@ use M44\Managers\Cards;
 use M44\Helpers\Utils;
 use M44\Board;
 use M44\Dice;
+use M44\Managers\Tokens;
 
 trait AttackUnitsTrait
 {
@@ -203,7 +204,8 @@ trait AttackUnitsTrait
       $this->initRetreat($attack, $results);
       $this->nextState('retreat', $oppUnit->getPlayer());
     } else {
-      $this->closeCurrentAttack();
+      $this->nextState('takeGround', $attack['pId']);
+      // $this->closeCurrentAttack();
     }
   }
 
@@ -273,6 +275,7 @@ trait AttackUnitsTrait
       Board::removeUnit($unit);
       $team = $attacker->getTeam();
       $team->addEliminationMedals($unit);
+      Tokens::removeTargets($unit->getPos());
 
       // Increse the stat
       $statName = 'inc' . $unit->getStatName() . 'UnitRound' . Globals::getRound();

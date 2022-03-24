@@ -226,6 +226,16 @@ class Notifications
     ]);
   }
 
+  public static function addToken($token)
+  {
+    self::notifyAll('addToken', '', ['token' => $token]);
+  }
+
+  public static function removeToken($token)
+  {
+    self::notifyAll('removeToken', '', ['token' => $token]);
+  }
+
   public static function clearUnitsStatus()
   {
     self::notifyAll('clearUnitsStatus', '', []);

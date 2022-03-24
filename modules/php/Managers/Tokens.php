@@ -46,8 +46,10 @@ class Tokens extends \M44\Helpers\Pieces
   public function getOnCoords($location, $coords)
   {
     $query = self::getSelectWhere(null, $location, null);
-    $q = self::addCoordsClause($query, $coords);
-    return $q->get();
+    if ($coords != null) {
+      self::addCoordsClause($query, $coords);
+    }
+    return $query->get();
   }
 
   /**
@@ -164,5 +166,14 @@ class Tokens extends \M44\Helpers\Pieces
     return self::getSelectQuery()
       ->where('type', \TOKEN_MEDAL)
       ->get();
+  }
+
+  public function removeTargets($coords)
+  {
+    $tokens = self::getOnCoords('target', $coords);
+    foreach ($tokens as $t) {
+      self::DB()->delete($t['id']);
+      Notifications::removeToken($t);
+    }
   }
 }

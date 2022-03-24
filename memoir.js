@@ -63,6 +63,8 @@ define([
         ['removeMedals', 1000],
         ['refreshInterface', 100],
         ['airDrop', 500],
+        ['addToken', 1000],
+        ['removeToken', 1000],
       ];
 
       // Fix mobile viewport (remove CSS zoom)

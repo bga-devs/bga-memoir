@@ -12,16 +12,20 @@ class BigGun extends Artillery
     $this->name = clienttranslate('Big Gun');
     $this->attackPower = [3, 3, 2, 2, 1, 1, 1, 1];
     $this->number = 3;
+    $this->maxTarget = 3;
   }
 
   public function getAttackModifier($target)
   {
-    return Tokens::getOnCoords('target', $coords)->count() != 0;
+    return (int) Tokens::getOnCoords('target', $target)->count() != 0;
   }
 
   public function afterAttack($coords, $hits, $eliminated)
   {
     if ($hits == 0 || $eliminated) {
+      return;
+    }
+    if (Tokens::getOnCoords('target', null)->count() >= $this->maxTarget) {
       return;
     }
 
@@ -36,7 +40,13 @@ class BigGun extends Artillery
         ],
       ];
       $created = Tokens::create($token);
-      Notifications::message('test', ['cr' => $created]);
+      Notifications::addToken(Tokens::get($created));
     }
+  }
+
+  // Called if after an attack a retreat gave a hit
+  public function afterAttackRetreatHit($coords, $hits, $eliminated)
+  {
+    $this->afterAttack($coords, $hits, $eliminated);
   }
 }
