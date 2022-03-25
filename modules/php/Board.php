@@ -420,8 +420,22 @@ class Board
   {
     // Already attacked before ?
     $uId = Globals::getUnitAttacker();
-    if ($unit->getFights() > 0 && $uId != -1 && $uId != $unit->getId()) {
-      return [];
+    if ($unit->getFights() > 0) {
+      if ($uId != -1 && $uId != $unit->getId()) {
+        return [];
+      } elseif ($unit->canBattleAndRemoveWire()) {
+        $cells = [];
+        foreach (self::getTerrainsInCell($unit->getPos()) as $terrain) {
+          $actions = $terrain->getPossibleAttackActions($unit);
+          foreach ($actions as $action) {
+            $action['type'] = 'action';
+            $action['terrainId'] = $terrain->getId();
+            $cells[] = $action;
+          }
+        }
+        // throw new \feException(print_r($cells));
+        return $cells;
+      }
     }
 
     // Check whether the unit moved too much to attack
@@ -480,6 +494,11 @@ class Board
       $cell['dice'] = $power[$cell['d'] - 1] + $unit->getAttackModifier($cell);
       $offenseModifier = self::getDiceModifier($unit, $pos, false);
       $defenseModifier = self::getDiceModifier($unit, $cell, true);
+
+      if ($unit->ignoreDefenseOnCloseAssault($unit) && $cell['d'] == 1) {
+        $defenseModifier = 0;
+      }
+
       $cardModifier = 0;
       if ($unit->getActivationOCard() != null) {
         $cardModifier = $unit->getActivationOCard()->getDiceModifier($unit, $cell);
@@ -799,6 +818,8 @@ class Board
       }
 
       $targetCell = self::$grid[$target['x']][$target['y']];
+      $sourceCell = self::$grid[$source['x']][$source['y']];
+
       // If there is a unit => can't retreat there
       if (!is_null($targetCell['unit'])) {
         return \INFINITY;

@@ -63,6 +63,9 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     'medalsWorth',
     'retreatHex',
     'ignoreCannotBattle',
+    'canBattleAndRemoveWire',
+    'ignoreDefenseOnCloseAssault',
+    'mustSweep', // must sweep the mines instead of attack
   ];
 
   protected $attackPower = [];
@@ -139,8 +142,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
       return parent::__call($method, $args);
     }
 
-    $unit = $args[0];
-    return $this->getProperty($method, $unit);
+    return $this->getProperty($method);
   }
 
   public function getPos()
