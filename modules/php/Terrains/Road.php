@@ -28,7 +28,9 @@ class Road extends \M44\Models\Terrain
       'roadX' => [0, 2, 6, 8],
       'roadY' => [0, 4, 8],
     ];
-    $this->linkedDirections = $links[$row['tile'] ?? null] ?? [];
+    $this->linkedDirections = [
+      ALL_UNITS => $links[$row['tile'] ?? null] ?? [],
+    ];
     parent::__construct($row);
   }
 }

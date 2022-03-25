@@ -265,7 +265,6 @@ class Board
           $cells2[] = $oldCell;
         }
       }
-
       $cells = $cells2;
     }
 
@@ -301,8 +300,16 @@ class Board
     $targetCell = self::$grid[$target['x']][$target['y']];
 
     // If we are computing ROAD only and target is not a road, abort
-    if ($roadOnly && !self::isRoadCell($target, $unit)) {
-      return \INFINITY;
+    if ($roadOnly) {
+      if (!self::isRoadCell($target, $unit)) {
+        return \INFINITY;
+      }
+      // We must also make sure that the road are connected
+      foreach ($targetCell['terrains'] as $terrain) {
+        if ($terrain->isRoad($unit) && !$terrain->isLinked($source, $unit)) {
+          return INFINITY;
+        }
+      }
     }
 
     // If there is a unit => can't go there
