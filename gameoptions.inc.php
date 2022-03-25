@@ -241,6 +241,84 @@ $game_options = [
         'tmdisplay' => '[23806]',
         'description' => clienttranslate('[Battle of the Bulge] German counter-attack at Chaumont [FFM44]'),
       ],
+
+      1412 => [
+        'name' => clienttranslate('[PT] [1412] Matanikau River'),
+        'tmdisplay' => '[1412]',
+        'description' => clienttranslate('Matanikau River'),
+      ],
+      1413 => [
+        'name' => clienttranslate('[PT] [1413] Slopes of Mount Austen'),
+        'tmdisplay' => '[1413]',
+        'description' => clienttranslate('Slopes of Mount Austen'),
+      ],
+      1483 => [
+        'name' => clienttranslate('[PT] [1483] The Meat Grinder'),
+        'tmdisplay' => '[1483]',
+        'description' => clienttranslate('The Meat Grinder'),
+      ],
+      1487 => [
+        'name' => clienttranslate('[PT] [1487] Guam Landings'),
+        'tmdisplay' => '[1487]',
+        'description' => clienttranslate('Guam Landings'),
+      ],
+      1488 => [
+        'name' => clienttranslate('[PT] [1488] Japanese Counterattack'),
+        'tmdisplay' => '[1488]',
+        'description' => clienttranslate('Japanese Counterattack'),
+      ],
+      1518 => [
+        'name' => clienttranslate('[PT] [1518] Sugar Loaf and Half Moon'),
+        'tmdisplay' => '[1518]',
+        'description' => clienttranslate('Sugar Loaf and Half Moon'),
+      ],
+      1599 => [
+        'name' => clienttranslate('[PT] [1599] Wake Island'),
+        'tmdisplay' => '[1599]',
+        'description' => clienttranslate('Wake Island'),
+      ],
+
+      1324 => [
+        'name' => clienttranslate('[MT] [1324] Dug in at Sidi Omar'),
+        'tmdisplay' => '[1324]',
+        'description' => clienttranslate('Dug in at Sidi Omar'),
+      ],
+
+      4230 => [
+        'name' => clienttranslate('[MT] [4230] Flanking Maneuver at Bir Hakeim'),
+        'tmdisplay' => '[4230]',
+        'description' => clienttranslate('Flanking Maneuver at Bir Hakeim'),
+      ],
+      4231 => [
+        'name' => clienttranslate('[MT] [4231] Panzers versus Grants'),
+        'tmdisplay' => '[4231]',
+        'description' => clienttranslate('Panzers versus Grants'),
+      ],
+      4232 => [
+        'name' => clienttranslate('[MT] [4232] 1st Armoured to the rescue'),
+        'tmdisplay' => '[4232]',
+        'description' => clienttranslate('1st Armoured to the rescue'),
+      ],
+      4237 => [
+        'name' => clienttranslate('[MT] [4237] Into the Cauldron'),
+        'tmdisplay' => '[4237]',
+        'description' => clienttranslate('Into the Cauldron'),
+      ],
+      4241 => [
+        'name' => clienttranslate('[MT] [4241] Escape via the Coastal Road'),
+        'tmdisplay' => '[4241]',
+        'description' => clienttranslate('Escape via the Coastal Road'),
+      ],
+      4245 => [
+        'name' => clienttranslate('[MT] [4245] Hellfire Pass'),
+        'tmdisplay' => '[4245]',
+        'description' => clienttranslate('Hellfire Pass'),
+      ],
+      4246 => [
+        'name' => clienttranslate('[MT] [4246] Sidi Rezegh Airfield'),
+        'tmdisplay' => '[4246]',
+        'description' => clienttranslate('Sidi Rezegh Airfield'),
+      ],
     ],
   ],
   104 => [
@@ -289,6 +367,12 @@ $game_options = [
         'name' => clienttranslate('[1367] Prokhorovka Overlord'),
         'tmdisplay' => '[1367]',
         'description' => clienttranslate('Prokhorovka Overlord'),
+      ],
+
+      1517 => [
+        'name' => clienttranslate('[1517] Peleliu Landings Overlord'),
+        'tmdisplay' => '[1517]',
+        'description' => clienttranslate('Peleliu Landings Overlord'),
       ],
     ],
   ],

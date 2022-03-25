@@ -33,6 +33,25 @@ $scenariosMap = [
   1346 => '1346-Knightsbridge',
   1422 => '1422-SchwammenauelDam',
 
+  1324 => '1324-DugInAtSidiOmar',
+  4230 => '4230-FlankingManeuverAtBirHakeim',
+  4231 => '4231-PanzersVersusGrants',
+  4232 => '4232-1stArmouredToTheRescue',
+  4237 => '4237-IntoTheCauldron',
+  4241 => '4241-EscapeViaTheCoastalRoad',
+  4245 => '4245-HellfirePass',
+  4246 => '4246-SidiRezeghAirfield',
+
+  1412 => '1412-MatanikauRiver',
+  1413 => '1413-SlopesOfMountAusten',
+  1483 => '1483-TheMeatGrinder',
+  1487 => '1487-GuamLandings',
+  1488 => '1488-JapaneseCounterattack',
+  1517 => '1517-PeleliuLandingsOverlord',
+  1518 => '1518-SugarLoafAndHalfMoon',
+  1599 => '1599-WakeIsland',
+
+
   18261 => '18261-SovietRaidOnGrigorevka',
   23806 => '23806-GermanCounterattackAtChaumont',
 ];
