@@ -141,7 +141,7 @@ $scenarios[1433] = [
         'row' => 1,
         'col' => 13,
         'terrain' => [
-          'name' => 'buildings',
+          'name' => 'wvillage',
         ],
         'unit' => [
           'name' => 'inf2ger',
@@ -465,7 +465,7 @@ $scenarios[1433] = [
         'row' => 8,
         'col' => 14,
         'terrain' => [
-          'name' => 'buildings',
+          'name' => 'wvillage',
         ],
         'tags' => [
           0 => [
@@ -477,7 +477,7 @@ $scenarios[1433] = [
         'row' => 8,
         'col' => 16,
         'terrain' => [
-          'name' => 'buildings',
+          'name' => 'wvillage',
         ],
         'tags' => [
           0 => [
@@ -545,7 +545,7 @@ $scenarios[1433] = [
       'subtitle' => clienttranslate('Eastern Front'),
       'historical' => clienttranslate('When the German offensive against Moscow came to a halt on December 6, 1941, the 1st Panzer Division was ordered to Klin with the mission of keeping the town open for the withdrawal of other German formations. It succeeded in holding the junction against persistent Russian attacks until German forces completed their retreat.
 
-As the 1st Division began their own withdrawal to Nekrasino, it found the Russian forces had surrounded the town. A bold plan was devised that called for a feint toward nearby Golyadi supported by artillery. If the Russians reacted as hoped, the main breakout to Nekrasino could then take place. 
+As the 1st Division began their own withdrawal to Nekrasino, it found the Russian forces had surrounded the town. A bold plan was devised that called for a feint toward nearby Golyadi supported by artillery. If the Russians reacted as hoped, the main breakout to Nekrasino could then take place.
 
 The intended deception was a complete success. The Russians around Golyadi were surprised and reserves were rushed to the town. The main breakout was then lead by German combat engineers. With artillery support, the breakout force fought its way through to Nekrasino.
 

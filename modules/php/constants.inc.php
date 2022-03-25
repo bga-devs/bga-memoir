@@ -143,6 +143,7 @@ const DICE_STAR = 4;
 const INFANTRY = 1;
 const ARMOR = 2;
 const ARTILLERY = 3;
+const ALL_UNITS = 4;
 
 /*
  * Medals / Tokens
@@ -208,6 +209,7 @@ const TERRAIN_CLASSES = [
   'roadblock' => 'RoadBlock',
   'ford' => 'Ford',
   'road' => 'Road',
+  'roadhill' => 'RoadHill',
   'supplydepot' => 'SupplyDepot',
   'wadi' => 'Wadi',
 
