@@ -220,9 +220,6 @@ const TERRAIN_CLASSES = [
   'hillvillage' => 'HillVillage',
   'ravine' => 'Ravine',
   'trenches' => 'Trenches',
-
-
-  'hillroad' => 'HillRoad',
 ];
 
 const TROOP_CLASSES = [

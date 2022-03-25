@@ -168,6 +168,13 @@ class Units extends \M44\Helpers\Pieces
     self::DB()
       ->update(['activation_card' => null, 'moves' => 0, 'fights' => 0, 'retreats' => 0])
       ->run();
+
+    // Reset road bonuses
+    foreach (self::getAll() as $unit) {
+      if ($unit->getRoadBonus() == 0) {
+        $unit->setExtraDatas('roadBonus', null);
+      }
+    }
   }
 
   public function addInCell($unit, $cell)

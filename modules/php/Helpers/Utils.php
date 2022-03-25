@@ -51,6 +51,11 @@ abstract class Utils extends \APP_DbObject
 
   public static function searchCell($cells, $x, $y = null)
   {
+    if ($y == null) {
+      $y = $x['y'];
+      $x = $x['x'];
+    }
+
     return self::array_usearch($cells, function ($cell) use ($x, $y) {
       return $cell['x'] == $x && $cell['y'] == $y;
     });

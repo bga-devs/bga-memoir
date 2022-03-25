@@ -250,6 +250,17 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     $this->setY($cell['y']);
   }
 
+  public function getRoadBonus()
+  {
+    return $this->getExtraDatas('roadBonus') ?? 1;
+  }
+
+  public function useRoadBonus()
+  {
+    return $this->setExtraDatas('roadBonus', 0);
+  }
+
+
   //////////////////////////////////////////
   //    _  _____ _____  _    ____ _  __
   //    / \|_   _|_   _|/ \  / ___| |/ /
