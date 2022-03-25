@@ -201,6 +201,11 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     return 0;
   }
 
+  public function cannotBattle()
+  {
+    return $this->getExtraDatas('cannotBattle');
+  }
+
   //////////////////////////////////////
   //    ___  ____  ____  _____ ____
   //   / _ \|  _ \|  _ \| ____|  _ \

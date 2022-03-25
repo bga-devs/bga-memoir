@@ -29,4 +29,11 @@ class Marsh extends \M44\Models\Terrain
 
     parent::__construct($row);
   }
+
+  public function onUnitLeaving($unit, $isRetreat)
+  {
+    if (!$isRetreat) {
+      $this->setExtraDatas('cannotBattle', $this->leavingCannotBattle[$unit->getType()] ?? false);
+    }
+  }
 }

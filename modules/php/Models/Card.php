@@ -207,7 +207,7 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
     return [
       'units' => $units->map(function ($unit) use ($overrideNbFights) {
         $maxFights = $overrideNbFights[$unit->getType()] ?? $this->nbFights;
-        if ($unit->getFights() >= $maxFights && !$unit->canBattleAndRemoveWire()) {
+        if ($unit->cannotBattle() || ($unit->getFights() >= $maxFights && !$unit->canBattleAndRemoveWire())) {
           return [];
         }
         return $unit->getTargetableUnits();
