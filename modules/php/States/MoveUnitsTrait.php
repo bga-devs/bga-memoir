@@ -53,9 +53,13 @@ trait MoveUnitsTrait
       $coordSource = $c;
     }
     $unit->incMoves($cell['d']);
+    // Handle Road
     if ($cell['road'] ?? false) {
       $unit->useRoadBonus();
+    } else {
+      $unit->leaveRoad();
     }
+
     Globals::setUnitMoved($unitId);
 
     $this->gamestate->nextState('moveUnits');

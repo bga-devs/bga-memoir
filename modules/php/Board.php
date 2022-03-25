@@ -244,7 +244,7 @@ class Board
     });
 
     // Compute road paths with bonus of 1 move if starting pos is on road
-    if (self::isRoadCell($startingCell, $unit)) {
+    if (self::isRoadCell($startingCell, $unit) && $unit->stayedOnRoad()) {
       $d2 = $d + $unit->getRoadBonus();
       list($cells2, $markers2) = self::getCellsAtDistance($startingCell, $d2, function ($source, $target, $d) use (
         $unit
@@ -252,11 +252,9 @@ class Board
         return self::getDeplacementCost($unit, $source, $target, $d, false, true);
       });
       // Reduce cost by 1 if bonus not used
-      if ($unit->getRoadBonus() != 0) {
-        foreach ($cells2 as &$cell) {
-          $cell['d'] -= $unit->getRoadBonus();
-          $cell['road'] = true;
-        }
+      foreach ($cells2 as &$cell) {
+        $cell['d'] -= $unit->getRoadBonus();
+        $cell['road'] = true;
       }
 
       // Merge with other matching cell, avoiding duplicates

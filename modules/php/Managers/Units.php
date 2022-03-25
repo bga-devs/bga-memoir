@@ -171,6 +171,9 @@ class Units extends \M44\Helpers\Pieces
 
     // Reset road bonuses
     foreach (self::getAll() as $unit) {
+      if (!$unit->stayedOnRoad()) {
+        $unit->setExtraDatas('stayedOnRoad', null);
+      }
       if ($unit->getRoadBonus() == 0) {
         $unit->setExtraDatas('roadBonus', null);
       }
