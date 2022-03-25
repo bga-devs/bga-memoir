@@ -209,6 +209,7 @@ const TERRAIN_CLASSES = [
   'roadblock' => 'RoadBlock',
   'ford' => 'Ford',
   'road' => 'Road',
+  'roadhill' => 'RoadHill',
   'supplydepot' => 'SupplyDepot',
   'wadi' => 'Wadi',
 

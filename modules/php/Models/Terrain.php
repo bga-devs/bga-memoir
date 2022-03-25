@@ -62,13 +62,16 @@ class Terrain extends \M44\Helpers\DB_Model
     'isBeach',
     'isBridge',
     'isMountain',
+    'isRoad',
 
     'defense',
     'offense',
 
     'blockedDirections',
+    'linkedDirections',
   ];
   protected $blockedDirections = [];
+  protected $linkedDirections = [];
 
   public function __construct($row)
   {
@@ -202,7 +205,7 @@ class Terrain extends \M44\Helpers\DB_Model
     return $this->isOriginalOwner($unit) ? $this->getProperty('canIgnoreOneFlag', $unit) : false;
   }
 
-  public function getBlockedNeighbours($unit)
+  public function getNeighboursInDirections($unit, $directions)
   {
     $orientationMap = [
       0 => ['x' => 2, 'y' => 0],
@@ -214,8 +217,8 @@ class Terrain extends \M44\Helpers\DB_Model
     ];
 
     $cells = [];
-    $blocked = $this->blockedDirections[$unit->getType()] ?? ($this->blockedDirections[ALL_UNITS] ?? []);
-    foreach ($blocked as $angle) {
+    $angles = $directions[$unit->getType()] ?? ($directions[ALL_UNITS] ?? []);
+    foreach ($angles as $angle) {
       // Check whether this corresponds to a real location
       $realOrientation = (($this->orientation - 1) * $this->deltaAngle + $angle) % 12;
       $delta = $orientationMap[$realOrientation] ?? null;
@@ -233,6 +236,17 @@ class Terrain extends \M44\Helpers\DB_Model
 
   public function isBlocked($cell, $unit)
   {
-    return in_array(['x' => $cell['x'], 'y' => $cell['y']], $this->getBlockedNeighbours($unit));
+    return in_array(
+      ['x' => $cell['x'], 'y' => $cell['y']],
+      $this->getNeighboursInDirections($unit, $this->blockedDirections)
+    );
+  }
+
+  public function isLinked($cell, $unit)
+  {
+    return in_array(
+      ['x' => $cell['x'], 'y' => $cell['y']],
+      $this->getNeighboursInDirections($unit, $this->linkedDirections)
+    );
   }
 }

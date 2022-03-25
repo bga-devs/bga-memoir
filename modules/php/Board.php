@@ -239,8 +239,18 @@ class Board
   {
     $startingCell = $unit->getPos();
     list($cells, $markers) = self::getCellsAtDistance($startingCell, $d, function ($source, $target, $d) use ($unit) {
-      return self::getDeplacementCost($unit, $source, $target, $d);
+      return self::getDeplacementCost($unit, $source, $target, $d, false, false);
     });
+
+    // Compute road paths with bonus of 1 move if starting pos is on road
+    if (self::isRoadCell($startingCell, $unit)) {
+      list($cells2, $markers2) = self::getCellsAtDistance($startingCell, $d + 1, function ($source, $target, $d) use (
+        $unit
+      ) {
+        return self::getDeplacementCost($unit, $source, $target, $d, false, true);
+      });
+      $cells = array_merge($cells, $cells2);
+    }
 
     // Filter out paths if needed
     foreach ($cells as &$cell) {
@@ -267,11 +277,16 @@ class Board
    * getDeplacementCost: return the cost for a unit to move from $source to an adjacent $target,
    *    given the fact that the unit can move at most $d hexes
    */
-  public static function getDeplacementCost($unit, $source, $target, $d, $takeGround = false)
+  public static function getDeplacementCost($unit, $source, $target, $d, $takeGround = false, $roadOnly = false)
   {
     // Get corresponding cells
     $sourceCell = self::$grid[$source['x']][$source['y']];
     $targetCell = self::$grid[$target['x']][$target['y']];
+
+    // If we are computing ROAD only and target is not a road, abort
+    if ($roadOnly && !self::isRoadCell($target, $unit)) {
+      return \INFINITY;
+    }
 
     // If there is a unit => can't go there
     if (!is_null($targetCell['unit'])) {
