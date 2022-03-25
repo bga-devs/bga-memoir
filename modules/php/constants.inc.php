@@ -231,6 +231,11 @@ const TROOP_CLASSES = [
   // type + badge number if non decorative
   'inf2_3' => 'FrenchResistance',
   'gun_5' => 'BigGun',
+  'inf2_4' => 'CombatEngineer',
+  'inf2_6' => 'CombatEngineer',
+  'inf2_8' => 'CombatEngineer',
+  'inf2_12' => 'CombatEngineer',
+  'inf2_28' => 'CombatEngineer',
 ];
 
 const TROOP_BADGE_MAPPING = ['FRENCH_RESISTANCE' => 'badge3'];
