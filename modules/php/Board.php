@@ -288,6 +288,18 @@ class Board
       return \INFINITY;
     }
 
+    // If the edge is not possible, return infinity
+    foreach ($sourceCell['terrains'] as $terrain) {
+      if ($terrain->isBlocked($target, $unit)) {
+        return INFINITY;
+      }
+    }
+    foreach ($targetCell['terrains'] as $terrain) {
+      if ($terrain->isBlocked($source, $unit)) {
+        return INFINITY;
+      }
+    }
+
     // Units activated by "BehindEnemyLines" card have no terrain restriction
     if ($unit->getActivationOCard()->getType() == \CARD_BEHIND_LINES) {
       return 1;
@@ -780,6 +792,18 @@ class Board
       // If there is an impassable terrain => can't retreat there
       if (self::isImpassableCell($target, $unit) || self::isImpassableForRetreatCell($target, $unit)) {
         return \INFINITY;
+      }
+
+      // If the edge is not possible, return infinity
+      foreach ($sourceCell['terrains'] as $terrain) {
+        if ($terrain->isBlocked($target, $unit)) {
+          return INFINITY;
+        }
+      }
+      foreach ($targetCell['terrains'] as $terrain) {
+        if ($terrain->isBlocked($source, $unit)) {
+          return INFINITY;
+        }
       }
 
       // Ignore all other terrains restriction

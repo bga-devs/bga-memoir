@@ -3,7 +3,6 @@ namespace M44\Models;
 use M44\Board;
 use M44\Core\Notifications;
 
-
 class Terrain extends \M44\Helpers\DB_Model
 {
   protected $table = 'terrains';
@@ -34,6 +33,7 @@ class Terrain extends \M44\Helpers\DB_Model
   protected $type = null;
   protected $name = '';
   protected $desc = [];
+  protected $deltaAngle = 2;
 
   /*
    * TERRAIN PROPERTIES
@@ -65,7 +65,10 @@ class Terrain extends \M44\Helpers\DB_Model
 
     'defense',
     'offense',
+
+    'blockedDirections',
   ];
+  protected $blockedDirections = [];
 
   public function __construct($row)
   {
@@ -87,7 +90,6 @@ class Terrain extends \M44\Helpers\DB_Model
       'y' => $this->y,
       'orientation' => $this->orientation,
       'tile' => $this->tile,
-      // 'datas' => $this->extraDatas,
     ];
 
     $prop = $this->getExtraDatas('properties') ?? [];
@@ -198,5 +200,39 @@ class Terrain extends \M44\Helpers\DB_Model
   public function canIgnoreOneFlag($unit)
   {
     return $this->isOriginalOwner($unit) ? $this->getProperty('canIgnoreOneFlag', $unit) : false;
+  }
+
+  public function getBlockedNeighbours($unit)
+  {
+    $orientationMap = [
+      0 => ['x' => 2, 'y' => 0],
+      2 => ['x' => 1, 'y' => -1],
+      4 => ['x' => -1, 'y' => -1],
+      6 => ['x' => -2, 'y' => 0],
+      8 => ['x' => -1, 'y' => 1],
+      10 => ['x' => 1, 'y' => 1],
+    ];
+
+    $cells = [];
+    $blocked = $this->blockedDirections[$unit->getType()] ?? ($this->blockedDirections[ALL_UNITS] ?? []);
+    foreach ($blocked as $angle) {
+      // Check whether this corresponds to a real location
+      $realOrientation = (($this->orientation - 1) * $this->deltaAngle + $angle) % 12;
+      $delta = $orientationMap[$realOrientation] ?? null;
+      if (is_null($delta)) {
+        continue;
+      }
+      $cells[] = [
+        'x' => $this->x + $delta['x'],
+        'y' => $this->y + $delta['y'],
+      ];
+    }
+
+    return $cells;
+  }
+
+  public function isBlocked($cell, $unit)
+  {
+    return in_array(['x' => $cell['x'], 'y' => $cell['y']], $this->getBlockedNeighbours($unit));
   }
 }
