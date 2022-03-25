@@ -25,6 +25,8 @@ class Wadi extends \M44\Models\Terrain
     parent::__construct($row);
   }
 
+  // TODO: Wadi tunnel effect
+
   // public function getLeavingDeplacementCost($unit, $source, $target, $d, $takeGround)
   // {
   //   if (Board::isBridgeCell($target)) {

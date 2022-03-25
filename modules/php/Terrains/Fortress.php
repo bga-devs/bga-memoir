@@ -20,6 +20,6 @@ class Fortress extends Bunker
 
   public function isOriginalOwner($unit)
   {
-    return true;
+    return false;
   }
 }

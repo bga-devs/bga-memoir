@@ -18,6 +18,6 @@ class FieldBunker extends Bunker
 
   public function isOriginalOwner($unit)
   {
-    return true;
+    return false;
   }
 }

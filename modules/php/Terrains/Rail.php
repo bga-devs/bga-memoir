@@ -23,4 +23,6 @@ class Rail extends \M44\Models\Terrain
     $this->mustStopWhenEntering = [ARMOR, \ARTILLERY];
     parent::__construct($row);
   }
+
+  // TODO Rail
 }

@@ -22,4 +22,6 @@ class HillRoad extends Road
     $t = $target;
     return $c[$this->x][$this->y] != $c[$s['x']][$s['y']] || $c[$this->x][$this->y] != $c[$t['x']][$t['y']];
   }
+
+  // TODO Rail
 }

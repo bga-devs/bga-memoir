@@ -21,6 +21,7 @@ class RoadBlock extends \M44\Models\Terrain
     $this->mustStopWhenEntering = true;
     $this->isImpassable = [ARMOR, \ARTILLERY];
     $this->canIgnoreOneFlag = true;
+    $this->defense = [\INFANTRY => -1, ARMOR => -1];
     parent::__construct($row);
   }
 }
