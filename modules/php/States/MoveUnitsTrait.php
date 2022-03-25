@@ -43,9 +43,12 @@ trait MoveUnitsTrait
     $coordSource = $unit->getPos();
     foreach ($path as $c) {
       Notifications::moveUnit($player, $unit, $coordSource, $c);
-      $interrupted = Board::moveUnit($unit, $c); // TODO : maybe we need to update moves of unit along the path for some terrains ?
-      if ($interrupted) {
-        return; // Victory or unit is dead
+      list($interrupted, $isWinning) = Board::moveUnit($unit, $c);
+      if ($isWinning) {
+        return;
+      } elseif ($interrupted) {
+        $this->gamestate->nextState('moveUnits');
+        return;
       }
       $coordSource = $c;
     }

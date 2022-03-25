@@ -112,6 +112,10 @@ trait AttackUnitsTrait
   public function getCurrentAttack($fetchAdditionalInfos = true)
   {
     $stack = Globals::getAttackStack();
+    if (empty($stack)) {
+      return null;
+    }
+
     $currentAttack = $stack[count($stack) - 1];
     if ($fetchAdditionalInfos) {
       $currentAttack['unit'] = $currentAttack['unitId'] == -1 ? null : Units::get($currentAttack['unitId']);
@@ -257,10 +261,18 @@ trait AttackUnitsTrait
     // Take the hits
     $realHits = $unit->takeDamage($hits);
     // Increase the stats
-    if (!$ambush) {
-      $attacker = $this->getCurrentAttack()['player'];
+    $attack = $this->getCurrentAttack();
+    if ($attack != null) {
+      if (!$ambush) {
+        $attacker = $attack['player'];
+      } else {
+        $attacker = $attack['oppUnit']->getPlayer();
+      }
     } else {
-      $attacker = $this->getCurrentAttack()['oppUnit']->getPlayer();
+      $attacker = $unit
+        ->getTeam()
+        ->getOpponent()
+        ->getCommander();
     }
 
     $statName = 'inc' . $unit->getStatName() . 'FigRound' . Globals::getRound();

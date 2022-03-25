@@ -121,10 +121,14 @@ trait RetreatUnitTrait
     $coordSource = $unit->getPos();
     foreach ($path as $c) {
       Notifications::retreatUnit($player, $unit, $coordSource, $c);
-      $interrupted = Board::moveUnit($unit, $c, true);
-      if ($interrupted) {
-        return; // Victory or unit is dead
+      list($interrupted, $isWinning) = Board::moveUnit($unit, $c, true);
+      if ($isWinning) {
+        return;
+      } elseif ($interrupted) {
+        $this->nextState('retreat');
+        return;
       }
+
       $coordSource = $c;
     }
 

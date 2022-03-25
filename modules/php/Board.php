@@ -366,17 +366,13 @@ class Board
     }
     Tokens::removeTargets($pos);
     foreach ($targetCell['terrains'] as $terrain) {
-      if ($terrain->onUnitEntering($unit, $isRetreat) == true) {
+      if ($terrain->onUnitEntering($unit, $isRetreat) === true) {
         $interrupted = true;
       }
-      // $terrain->onUnitEntering($unit, $isRetreat);
     }
 
     Medals::checkBoardMedals();
-    if (Teams::checkVictory()) {
-      return true;
-    }
-    return $interrupted;
+    return [$interrupted, Teams::checkVictory()];
   }
 
   //////////////////////////////////////////
