@@ -236,6 +236,8 @@ const TROOP_CLASSES = [
   'inf2_8' => 'CombatEngineer',
   'inf2_12' => 'CombatEngineer',
   'inf2_28' => 'CombatEngineer',
+  'inf_26' => 'Sniper',
+  'inf_27' => 'Sniper',
 ];
 
 const TROOP_BADGE_MAPPING = ['FRENCH_RESISTANCE' => 'badge3'];

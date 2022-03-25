@@ -511,6 +511,11 @@ class Board
       $cells = $inContact; // If at least one in contact => must fight one of them
     }
 
+    // filter only the ennemy than can be targeted
+    Utils::filter($cells, function ($cell) use ($unit) {
+      return $unit->targets()[self::getUnitInCell($cell)->getType()];
+    });
+
     // Compute shooting powers for the remaining cells
     foreach ($cells as &$cell) {
       $cell['dice'] = $power[$cell['d'] - 1] + $unit->getAttackModifier($cell);
@@ -518,6 +523,9 @@ class Board
       $defenseModifier = self::getDiceModifier($unit, $cell, true);
 
       if ($unit->ignoreDefenseOnCloseAssault($unit) && $cell['d'] == 1) {
+        $defenseModifier = 0;
+      }
+      if ($unit->ignoreDefense()) {
         $defenseModifier = 0;
       }
 

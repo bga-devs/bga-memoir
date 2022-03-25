@@ -65,7 +65,9 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     'ignoreCannotBattle',
     'canBattleAndRemoveWire',
     'ignoreDefenseOnCloseAssault',
+    'ignoreDefense',
     'mustSweep', // must sweep the mines instead of attack
+    'targets',
   ];
 
   protected $attackPower = [];
@@ -74,6 +76,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
   protected $medalsWorth = 1;
   protected $retreatHex = 1;
   protected $ignoreCannotBattle = false;
+  protected $targets = [\INFANTRY => true, ARMOR => true, ARTILLERY => true];
 
   public function __construct($row)
   {
