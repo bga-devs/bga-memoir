@@ -239,17 +239,31 @@ class Board
   {
     $startingCell = $unit->getPos();
     list($cells, $markers) = self::getCellsAtDistance($startingCell, $d, function ($source, $target, $d) use ($unit) {
-      return self::getDeplacementCost($unit, $source, $target, $d, false, false);
+      $cost = self::getDeplacementCost($unit, $source, $target, $d, false, false);
+      return min(INFINITY, $cost + (1 - $unit->getRoadBonus()));
     });
 
     // Compute road paths with bonus of 1 move if starting pos is on road
-    if (self::isRoadCell($startingCell, $unit)) {
-      list($cells2, $markers2) = self::getCellsAtDistance($startingCell, $d + 1, function ($source, $target, $d) use (
+    if (self::isRoadCell($startingCell, $unit) && $unit->stayedOnRoad()) {
+      $d2 = $d + $unit->getRoadBonus();
+      list($cells2, $markers2) = self::getCellsAtDistance($startingCell, $d2, function ($source, $target, $d) use (
         $unit
       ) {
         return self::getDeplacementCost($unit, $source, $target, $d, false, true);
       });
-      $cells = array_merge($cells, $cells2);
+      // Reduce cost by 1 if bonus not used
+      foreach ($cells2 as &$cell) {
+        $cell['d'] -= $unit->getRoadBonus();
+        $cell['road'] = true;
+      }
+
+      // Merge with other matching cell, avoiding duplicates
+      foreach ($cells as $oldCell) {
+        if (Utils::searchCell($cells2, $oldCell) === false) {
+          $cells2[] = $oldCell;
+        }
+      }
+      $cells = $cells2;
     }
 
     // Filter out paths if needed
@@ -284,8 +298,16 @@ class Board
     $targetCell = self::$grid[$target['x']][$target['y']];
 
     // If we are computing ROAD only and target is not a road, abort
-    if ($roadOnly && !self::isRoadCell($target, $unit)) {
-      return \INFINITY;
+    if ($roadOnly) {
+      if (!self::isRoadCell($target, $unit)) {
+        return \INFINITY;
+      }
+      // We must also make sure that the road are connected
+      foreach ($targetCell['terrains'] as $terrain) {
+        if ($terrain->isRoad($unit) && !$terrain->isLinked($source, $unit)) {
+          return INFINITY;
+        }
+      }
     }
 
     // If there is a unit => can't go there

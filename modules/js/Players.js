@@ -240,7 +240,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     notif_discardCard(n) {
       debug('Notif: discarding a card', n);
       if (!$('card-' + n.args.card.id)) {
-        this.addCard(n.args.card, 'top-player-hand');
+        this.addCard(n.args.card, `in-play-${n.args.player_id}`);
       }
       this.slide('card-' + n.args.card.id, 'discard', { duration: 1100 });
     },
