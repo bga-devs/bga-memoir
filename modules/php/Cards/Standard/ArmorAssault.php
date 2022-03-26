@@ -48,7 +48,7 @@ class ArmorAssault extends \M44\Models\Card
 
   public function getDiceModifier($unit, $cell)
   {
-    // Bonus dice is only for close combat
-    return $cell['d'] == 1 ? 1 : 0;
+    // Bonus dice is only for close combat & for Armor
+    return $unit->getType() == \ARMOR && $cell['d'] == 1 ? 1 : 0;
   }
 }

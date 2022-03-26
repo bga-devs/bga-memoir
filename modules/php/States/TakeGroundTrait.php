@@ -29,11 +29,11 @@ trait TakeGroundTrait
     if (
       $attack['distance'] != 1 ||
       $unit == null ||
-      Board::getDeplacementCost($unit, $cell, $attack, 1, true) > 1 ||
+      Board::getDeplacementCost($unit, $cell, $attack, 1, true) == \INFINITY ||
       $unit->getGrounds() >= $unit->getMaxGrounds() ||
       Board::getUnitInCell($attack['x'], $attack['y']) != null ||
       ($unit->getMoves() > 0 && Board::mustStopWhenEntering($unit, $unit->getPos())) ||
-      Board::isImpassable($unit, ['x' => $attack['x'], 'y' => $attack['y']])
+      Board::isImpassableCell($unit, ['x' => $attack['x'], 'y' => $attack['y']])
     ) {
       $this->closeCurrentAttack();
     }
