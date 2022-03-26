@@ -58,7 +58,7 @@ trait TakeGroundTrait
     // Move unit
     $unit = $attack['unit'];
     Notifications::takeGround($player, $attack['unitId'], $attack['x'], $attack['y']);
-    $interrupted = Board::moveUnit($unit, $attack);
+    list($interrupted, $victory) = Board::moveUnit($unit, $attack);
     if ($interrupted) {
       $this->closeCurrentAttack();
       return; // Victory or unit is dead
@@ -67,7 +67,6 @@ trait TakeGroundTrait
 
     if ($unit->getGrounds() == $unit->getMaxGrounds()) {
       $this->closeCurrentAttack();
-      $this->nextState('next');
     } else {
       $this->nextState('overrun');
     }

@@ -16,5 +16,6 @@ class Armor extends AbstractUnit
     $this->attackPower = [3, 3, 3];
     $this->mustSeeToAttack = true;
     $this->maxGrounds = 2;
+    $this->canOverrun = true;
   }
 }

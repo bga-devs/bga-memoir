@@ -87,6 +87,10 @@ trait AttackUnitsTrait
     // Prepare attack
     $unit = Units::get($unitId);
     $unit->incFights(1);
+    if ($this->gamestate->state()['name'] == 'armorOverrun') {
+      // in case of armor overrun , to close the previous attack
+      $this->closeCurrentAttack(false);
+    }
 
     // log attack information
     $stack = Globals::getAttackStack();
@@ -129,21 +133,23 @@ trait AttackUnitsTrait
   /**
    * Close current attack and jump depending on what's left in the stack
    */
-  public function closeCurrentAttack()
+  public function closeCurrentAttack($transition = true)
   {
     $stack = Globals::getAttackStack();
     $currentAttack = array_pop($stack);
     Globals::setAttackStack($stack);
     Globals::setUnitAttacker($currentAttack['unitId']);
 
-    if (empty($stack)) {
-      // No more pending attack, jump to next attack
-      $this->changeActivePlayerAndJumpTo($currentAttack['pId'], \ST_ATTACK);
-    } else {
-      $newAttack = array_pop($stack);
-      $this->nextState('nextAttack', $newAttack['pId']);
+    if ($transition) {
+      if (empty($stack)) {
+        // No more pending attack, jump to next attack
+        $this->changeActivePlayerAndJumpTo($currentAttack['pId'], \ST_ATTACK);
+      } else {
+        $newAttack = array_pop($stack);
+        $this->nextState('nextAttack', $newAttack['pId']);
 
-      // throw new \BgaVisibleSystemException('Resuming stacked attack is not implemented yet');
+        // throw new \BgaVisibleSystemException('Resuming stacked attack is not implemented yet');
+      }
     }
   }
 
