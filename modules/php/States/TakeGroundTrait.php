@@ -33,7 +33,7 @@ trait TakeGroundTrait
       $unit->getGrounds() >= $unit->getMaxGrounds() ||
       Board::getUnitInCell($attack['x'], $attack['y']) != null ||
       ($unit->getMoves() > 0 && Board::mustStopWhenEntering($unit, $unit->getPos())) ||
-      Board::isImpassableCell($unit, ['x' => $attack['x'], 'y' => $attack['y']])
+      Board::isImpassableCell(['x' => $attack['x'], 'y' => $attack['y']], $unit)
     ) {
       $this->closeCurrentAttack();
     }
