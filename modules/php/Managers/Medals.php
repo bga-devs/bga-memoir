@@ -24,6 +24,7 @@ class Medals extends \M44\Helpers\DB_Manager
       $unit = Units::get($row['foreign_id']);
       $row['unit_type'] = $unit->getType();
       $row['unit_nation'] = $unit->getNation();
+      $row['unit_badge'] = $unit->getBadge();
     }
 
     if (isset($row['group'])) {

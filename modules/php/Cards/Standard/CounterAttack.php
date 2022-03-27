@@ -58,9 +58,12 @@ class CounterAttack extends \M44\Models\Card
     $this->setExtraDatas('cardId', $cardId);
 
     // Transition to next state depending on copied card
+    $transition = 'draw';
     $copiedCard = $this->getCopiedCard();
-    $copiedCard->setExtraDatas('hill317', $this->getExtraDatas('hill317'));
-    $transition = is_null($copiedCard) ? 'draw' : $copiedCard->nextStateAfterPlay();
+    if ($copiedCard !== null) {
+      $copiedCard->setExtraDatas('hill317', $this->getExtraDatas('hill317'));
+      $transition = $copiedCard->nextStateAfterPlay();
+    }
     Game::get()->nextState($transition);
   }
 

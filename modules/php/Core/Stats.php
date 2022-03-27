@@ -47,9 +47,6 @@ class Stats extends \M44\Helpers\DB_Manager
       if ($stat['id'] < 10) {
         continue;
       }
-      if (!Globals::isTwoWaysGame() && $stat['id'] >= 30 && $stat['id'] <= 38) {
-        continue;
-      }
 
       if (!in_array($stat['id'] . ',table', $existingStats)) {
         $values[] = [
@@ -66,6 +63,10 @@ class Stats extends \M44\Helpers\DB_Manager
       if ($stat['id'] < 10) {
         continue;
       }
+      if (!Globals::isTwoWaysGame() && $stat['id'] >= 30 && $stat['id'] <= 38) {
+        continue;
+      }
+
       if (!in_array($stat['id'] . ',player', $existingStats)) {
         foreach ($playerIds as $i => $pId) {
           $value = $default[$stat['type']];
