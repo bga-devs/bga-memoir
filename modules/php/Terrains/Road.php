@@ -6,7 +6,19 @@ class Road extends \M44\Models\Terrain
 {
   public static function isTileOfType($hex)
   {
-    return in_array($hex['name'], ['road', 'roadcurve', 'roadFL', 'roadFR', 'roadX', 'roadY']);
+    return in_array($hex['name'], [
+      'road',
+      'roadcurve',
+      'roadFL',
+      'roadFR',
+      'roadX',
+      'roadY',
+      'droad',
+      'droadX',
+      'droadcurve',
+      'droadFL',
+      'droadFR',
+    ]);
   }
 
   public function __construct($row)
@@ -27,6 +39,11 @@ class Road extends \M44\Models\Terrain
       'roadFR' => [0, 6, 10],
       'roadX' => [0, 2, 6, 8],
       'roadY' => [0, 4, 8],
+      'droad' => [0, 6],
+      'droadcurve' => [2, 10],
+      'droadFL' => [0, 2, 6],
+      'droadFR' => [0, 6, 10],
+      'droadX' => [0, 2, 6, 8],
     ];
     $this->linkedDirections = [
       ALL_UNITS => $links[$row['tile'] ?? null] ?? [],
