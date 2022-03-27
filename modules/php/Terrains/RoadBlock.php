@@ -5,7 +5,7 @@ class RoadBlock extends \M44\Models\Terrain
 {
   public static function isTileOfType($hex)
   {
-    return in_array($hex['name'], ['roadblock']);
+    return in_array($hex['name'], ['roadblock', 'droadblock']);
   }
 
   public function __construct($row)
