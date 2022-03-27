@@ -18,6 +18,7 @@ class Globals extends \M44\Helpers\DB_Manager
     'officialScenario' => 'bool', // Official VS custom
     'scenarioId' => 'int', // Used to store the scenario id
     'scenario' => 'obj', // Used to store the scenario
+    'forcedTeam' => 'obj', // Used for one-way game to let a player pick the side he will play
 
     'round' => 'int',
     'turn' => 'int',
@@ -169,6 +170,26 @@ class Globals extends \M44\Helpers\DB_Manager
     Globals::setUnitAttacker(-1);
     Globals::setLastPlayedCards([]);
     Globals::setDeckReshuffle(true);
+
+    // One way game : a player can pick his side
+    if ($options[\OPTION_DURATION] == \OPTION_DURATION_ONE_WAY && $options[OPTION_ONE_WAY_SIDE] != 0) {
+      // Find first player around the table
+      $orderTable = [];
+      foreach ($players as $pId => $player) {
+        $orderTable[$player['player_table_order']] = $pId;
+      }
+
+      // Find coresponding team
+      $teams = [
+        1 => ALLIES,
+        2 => AXIS,
+      ];
+
+      Globals::setForcedTeam([
+        'pId' => $orderTable[1],
+        'team' => $teams[$options[\OPTION_ONE_WAY_SIDE]],
+      ]);
+    }
   }
 
   public static function isStandard()

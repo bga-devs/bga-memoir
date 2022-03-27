@@ -128,6 +128,8 @@ const OPTION_SCENARIO_STANDARD = 103;
 const OPTION_SCENARIO_BREAKTHROUGH = 104;
 const OPTION_SCENARIO_OVERLORD = 105;
 
+const OPTION_ONE_WAY_SIDE = 106;
+
 /*
  * Dice
  */
@@ -154,6 +156,7 @@ const MEDAL_SUDDEN_DEATH = 3;
 
 const TOKEN_MEDAL = 1;
 const TOKEN_MINE = 2;
+const TOKEN_TARGET = 3;
 
 /*
  * Terrains

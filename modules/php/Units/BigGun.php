@@ -15,32 +15,31 @@ class BigGun extends Artillery
     $this->maxTarget = 3;
   }
 
+  protected function getTokens($cell = null)
+  {
+    return Tokens::getOnCoords('target_' . $this->id, $cell);
+  }
+
   public function getAttackModifier($target)
   {
-    return (int) Tokens::getOnCoords('target', $target)->count() != 0;
+    return $this->getTokens($target)->empty() ? 0 : 1;
   }
 
   public function afterAttack($coords, $hits, $eliminated)
   {
-    if ($hits == 0 || $eliminated) {
-      return;
-    }
-    if (Tokens::getOnCoords('target', null)->count() >= $this->maxTarget) {
+    if ($hits == 0 || $eliminated || $this->getTokens()->count() >= $this->maxTarget) {
       return;
     }
 
-    if (Tokens::getOnCoords('target', $coords)->count() == 0) {
-      $token = [
-        [
-          'x' => $coords['x'],
-          'y' => $coords['y'],
-          'location' => 'target',
-          'sprite' => 'target',
-          'type' => 0,
-        ],
-      ];
-      $created = Tokens::create($token);
-      Notifications::addToken(Tokens::get($created));
+    if ($this->getTokens($coords)->count() == 0) {
+      $token = Tokens::singleCreate([
+        'x' => $coords['x'],
+        'y' => $coords['y'],
+        'location' => 'target_' . $this->id,
+        'sprite' => 'target',
+        'type' => \TOKEN_TARGET,
+      ]);
+      Notifications::addToken($token);
     }
   }
 

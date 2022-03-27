@@ -79,7 +79,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       let sprite = SPRITES.findIndex((t) => t == medal.sprite);
       let content = '';
       if (medal.type == MEDAL_ELIMINATION) {
-        content = `<div class="m44-unit" data-type="${medal.unit_type}" data-nation="${medal.unit_nation}" data-orientation="0">
+        content = `<div class="m44-unit" data-type="${medal.unit_type}" data-nation="${medal.unit_nation}" data-badge="${medal.unit_badge}" data-orientation="0">
                   <div class="m44-unit-meeple"></div>
           </div>`;
       }

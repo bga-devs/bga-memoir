@@ -55,9 +55,18 @@ class Teams extends \M44\Helpers\DB_Manager
     // Get team composition
     $composition = Players::getTeamsComposition();
     $players = Players::getAll();
+    $info = $scenario['game_info'];
+
+    // Flip teams if forced team for one way game
+    $forced = Globals::getForcedTeam();
+    if (!$rematch && isset($forced['pId'])) {
+      $j = in_array($forced['pId'], $composition[0]) ? 1 : 2;
+      if ($info['side_player' . $j] != $forced['team']) {
+        $rematch = true;
+      }
+    }
 
     // Create teams
-    $info = $scenario['game_info'];
     for ($i = 1; $i <= 2; $i++) {
       $teamId = $rematch ? 2 - $i : $i - 1;
       $team = $info['side_player' . $i];

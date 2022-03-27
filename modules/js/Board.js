@@ -21,6 +21,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
   const TOKEN_MEDAL = 1;
   const TOKEN_MINE = 2;
+  const TOKEN_ON_TOP = ['target'];
 
   function computeCoords(x, y) {
     // TODO : replace 9 by dim.y
@@ -130,11 +131,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           }
 
           // Tokens/medals
-          board.grid[col][row].tokens.forEach((token) => {
-            let tplName = token.type == TOKEN_MEDAL ? 'tplBoardMedal' : 'tplBoardToken';
-            this.place(tplName, token, cellC);
-            this._grid[col][row].tokens.push(token);
-          });
+          board.grid[col][row].tokens.forEach((token) => this.addToken(token));
 
           // Add tooltip listeners
           cell.addEventListener('mouseenter', () => this.openBoardTooltip(col, row));
@@ -223,6 +220,42 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     </li>`;
     },
 
+    tplBoardDivider() {
+      return '<li class="board-divider"></li>';
+    },
+
+    tplTileLabel(label) {
+      return `
+      <div class="hex-label-container" style="grid-area:${label.area}">
+        <div class="hex-label">${label.label}</div>
+      </div>`;
+    },
+
+    ////////////////////////////////////////////
+    //  _____                   _
+    // |_   _|__ _ __ _ __ __ _(_)_ __  ___
+    //   | |/ _ \ '__| '__/ _` | | '_ \/ __|
+    //   | |  __/ |  | | | (_| | | | | \__ \
+    //   |_|\___|_|  |_|  \__,_|_|_| |_|___/
+    ////////////////////////////////////////////
+
+    notif_addTerrain(n) {
+      debug('Notif: adding obstacle', n);
+      let terrain = n.args.terrain;
+      let cellC = $(`cell-background-${terrain.x}-${terrain.y}`);
+      terrain.rotate = this._isRotated;
+      this.place('tplObstacleTile', terrain, cellC);
+      this._grid[terrain.x][terrain.y].terrains.push(terrain);
+    },
+
+    notif_removeTerrain(n) {
+      debug('Notif: removing obstacle', n);
+      $('obstacle-' + n.args.terrainId).remove();
+      let x = n.args.cell.x,
+        y = n.args.cell.y;
+      this._grid[x][y].terrains = this._grid[x][y].terrains.filter((terrain) => terrain.id != n.args.terrainId);
+    },
+
     tplTerrainTile(terrain) {
       let className = '';
       let tile = TERRAINS.findIndex((t) => t == terrain.tile);
@@ -254,15 +287,28 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       return `<div id="obstacle-${obstacle.id}" class="hex-grid-content hex-grid-obstacle" data-tile="${tile}" data-rotation="${rotation}"></div>`;
     },
 
-    tplBoardDivider() {
-      return '<li class="board-divider"></li>';
+    ////////////////////////////////////////
+    //  _____     _
+    // |_   _|__ | | _____ _ __  ___
+    //   | |/ _ \| |/ / _ \ '_ \/ __|
+    //   | | (_) |   <  __/ | | \__ \
+    //   |_|\___/|_|\_\___|_| |_|___/
+    ////////////////////////////////////////
+
+    addToken(token) {
+      let tplName = token.type == TOKEN_MEDAL ? 'tplBoardMedal' : 'tplBoardToken';
+      let onTop = TOKEN_ON_TOP.includes(token.sprite);
+      let container = `cell${onTop ? '' : '-background'}-${token.x}-${token.y}`;
+      this.place(tplName, token, container);
+      this._grid[token.x][token.y].tokens.push(token);
     },
 
-    tplTileLabel(label) {
-      return `
-      <div class="hex-label-container" style="grid-area:${label.area}">
-        <div class="hex-label">${label.label}</div>
-      </div>`;
+    tplBoardToken(token) {
+      // prettier-ignore
+      const SPRITES = ['star', 'exitV', 'exitH', 'mine0', 'mine1', 'mine2', 'mine3', 'mine4', 'mineX', 'camo', 'wcamo', 'target'];
+      let sprite = SPRITES.findIndex((t) => t == token.sprite);
+
+      return `<div id='board-token-${token.id}' class="board-token" data-sprite="${sprite}"></div>`;
     },
 
     tplBoardMedal(medal) {
@@ -274,29 +320,16 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         data-team="${medal.team}" data-sprite="${sprite}" data-permanent="${medal.datas.permanent}"></div>`;
     },
 
-    notif_addTerrain(n) {
-      debug('Notif: adding obstacle', n);
-      let terrain = n.args.terrain;
-      let cellC = $(`cell-background-${terrain.x}-${terrain.y}`);
-      terrain.rotate = this._isRotated;
-      this.place('tplObstacleTile', terrain, cellC);
-      this._grid[terrain.x][terrain.y].terrains.push(terrain);
+    notif_addToken(n) {
+      debug('Notif: a token is added on the board', n);
+      this.addToken(n.args.token);
     },
 
-    notif_removeTerrain(n) {
-      debug('Notif: removing obstacle', n);
-      $('obstacle-' + n.args.terrainId).remove();
-      let x = n.args.cell.x,
-        y = n.args.cell.y;
-      this._grid[x][y].terrains = this._grid[x][y].terrains.filter((terrain) => terrain.id != n.args.terrainId);
-    },
-
-    notif_addToken(token) {
-      debug('Notif: a token is added on the board', token);
-    },
-
-    notif_removeToken(token) {
-      debug('Notif: a token is removed from the board', token);
+    notif_removeToken(n) {
+      debug('Notif: a token is removed from the board', n);
+      let token = n.args.token;
+      $(`board-token-${token.id}`).remove();
+      this._grid[token.x][token.y].tokens = this._grid[token.x][token.y].tokens.filter((t) => t.id != token.id);
     },
 
     ////////////////////////////////////////
@@ -736,6 +769,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         unit.dataset.figures -= n.args.hits;
         if (unit.dataset.figures <= 0) {
           unit.remove();
+          this._grid[n.args.cell.x][n.args.cell.y].unit = null;
         }
       };
 

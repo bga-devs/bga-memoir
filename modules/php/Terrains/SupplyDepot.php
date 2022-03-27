@@ -16,7 +16,6 @@ class SupplyDepot extends \M44\Models\Terrain
     $this->desc = [
       clienttranslate('No movement restriction'),
       clienttranslate('No combat restriction'),
-      clienttranslate('Block line of sight'),
     ];
 
     $this->isBlockingLineOfSight = true;

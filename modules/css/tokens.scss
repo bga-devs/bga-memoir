@@ -1,0 +1,27 @@
+.board-token {
+  background-image: url('img/tokens.png');
+  background-size: 300% 400%;
+
+  @for $i from 0 through 12 {
+    &[data-sprite='#{$i}'] {
+      background-position-x: ($i % 3) * 100% / 2;
+      background-position-y: (($i - ($i % 3)) / 3) * 100% / 3;
+    }
+  }
+}
+
+.hex-grid-item .board-token {
+  width: 42.8%;
+  height: 37%;
+  position: absolute;
+  right: 4%;
+  top: 16%;
+  z-index: 3;
+
+  // Target
+  &[data-sprite='11'] {
+    right: 33%;
+    top: 32%;
+    pointer-events: none;
+  }
+}

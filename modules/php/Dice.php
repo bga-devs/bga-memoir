@@ -18,7 +18,7 @@ class Dice
     }
 
     // debug
-    // $results = [DICE_STAR, DICE_STAR, DICE_STAR, DICE_STAR];
+//    $results = [\DICE_INFANTRY];
 
     Notifications::rollDice($player, $nDice, $results, $cell);
 

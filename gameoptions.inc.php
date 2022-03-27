@@ -376,6 +376,31 @@ $game_options = [
       ],
     ],
   ],
+
+  106 => [
+    'name' => clienttranslate('Side of the first player at the table'),
+    'displaycondition' => [
+      0 => [
+        'type' => 'otheroption',
+        'id' => 100,
+        'value' => 2,
+      ],
+    ],
+    'values' => [
+      0 => [
+        'name' => clienttranslate('Random'),
+        'description' => clienttranslate('Random'),
+      ],
+      1 => [
+        'name' => clienttranslate('Allies'),
+        'tmdisplay' => \clienttranslate('[Allies]'),
+      ],
+      2 => [
+        'name' => clienttranslate('Axis'),
+        'tmdisplay' => \clienttranslate('[Axis]'),
+      ],
+    ],
+  ],
 ];
 
 $game_preferences = [];
