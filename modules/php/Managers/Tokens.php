@@ -37,9 +37,7 @@ class Tokens extends \M44\Helpers\Pieces
 
   public static function addCoordsClause(&$q, $coords)
   {
-    $q = $q->where('x', $coords['x']);
-    $q = $q->where('y', $coords['y']);
-
+    $q = $q->where('x', $coords['x'])->where('y', $coords['y']);
     return $q;
   }
 
@@ -170,7 +168,12 @@ class Tokens extends \M44\Helpers\Pieces
 
   public function removeTargets($coords)
   {
-    $tokens = self::getOnCoords('target', $coords);
+    $tokens = self::getSelectQuery()
+      ->where('x', $coords['x'])
+      ->where('y', $coords['y'])
+      ->where('type', \TOKEN_TARGET)
+      ->get();
+
     foreach ($tokens as $t) {
       self::DB()->delete($t['id']);
       Notifications::removeToken($t);

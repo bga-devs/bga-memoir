@@ -142,6 +142,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       this.clearPossible();
       $('unit-' + n.args.unitId).classList.add('moving');
       this.slide('unit-' + n.args.unitId, `cell-${n.args.x}-${n.args.y}`, { duration: 580, preserveSize: true });
+      this._grid[n.args.x][n.args.y].unit = this._grid[n.args.fromX][n.args.fromY].unit;
+      this._grid[n.args.fromX][n.args.fromY].unit = null;
     },
 
     //////////////////////////////////////////

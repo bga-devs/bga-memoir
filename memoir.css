@@ -3494,4 +3494,59 @@ span.m44-dice-result {
       #popin_showScenario #popin_showScenario_contents #scenario-bottom-container #scenario-brief {
         border-right: 2px solid #9e0a0f; }
 
+.board-token {
+  background-image: url("img/tokens.png");
+  background-size: 300% 400%; }
+  .board-token[data-sprite='0'] {
+    background-position-x: 0%;
+    background-position-y: 0%; }
+  .board-token[data-sprite='1'] {
+    background-position-x: 50%;
+    background-position-y: 0%; }
+  .board-token[data-sprite='2'] {
+    background-position-x: 100%;
+    background-position-y: 0%; }
+  .board-token[data-sprite='3'] {
+    background-position-x: 0%;
+    background-position-y: 33.3333333333%; }
+  .board-token[data-sprite='4'] {
+    background-position-x: 50%;
+    background-position-y: 33.3333333333%; }
+  .board-token[data-sprite='5'] {
+    background-position-x: 100%;
+    background-position-y: 33.3333333333%; }
+  .board-token[data-sprite='6'] {
+    background-position-x: 0%;
+    background-position-y: 66.6666666667%; }
+  .board-token[data-sprite='7'] {
+    background-position-x: 50%;
+    background-position-y: 66.6666666667%; }
+  .board-token[data-sprite='8'] {
+    background-position-x: 100%;
+    background-position-y: 66.6666666667%; }
+  .board-token[data-sprite='9'] {
+    background-position-x: 0%;
+    background-position-y: 100%; }
+  .board-token[data-sprite='10'] {
+    background-position-x: 50%;
+    background-position-y: 100%; }
+  .board-token[data-sprite='11'] {
+    background-position-x: 100%;
+    background-position-y: 100%; }
+  .board-token[data-sprite='12'] {
+    background-position-x: 0%;
+    background-position-y: 133.3333333333%; }
+
+.hex-grid-item .board-token {
+  width: 42.8%;
+  height: 37%;
+  position: absolute;
+  right: 4%;
+  top: 16%;
+  z-index: 3; }
+  .hex-grid-item .board-token[data-sprite='11'] {
+    right: 33%;
+    top: 32%;
+    pointer-events: none; }
+
 /*# sourceMappingURL=memoir.css.map */

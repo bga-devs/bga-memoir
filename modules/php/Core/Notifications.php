@@ -127,6 +127,8 @@ class Notifications
         'coordTarget' => $coordTarget,
         'x' => $coordTarget['x'],
         'y' => $coordTarget['y'],
+        'fromX' => $coordSource['x'],
+        'fromY' => $coordSource['y'],
       ]
     );
   }
