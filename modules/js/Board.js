@@ -769,6 +769,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         unit.dataset.figures -= n.args.hits;
         if (unit.dataset.figures <= 0) {
           unit.remove();
+          this._grid[n.args.cell.x][n.args.cell.y].unit = null;
         }
       };
 

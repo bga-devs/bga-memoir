@@ -185,6 +185,7 @@ define([
         'forAttack',
         'retreating',
         'forRetreat',
+        'forAirDrop',
         'attacked',
       ].forEach((className) => {
         this.removeClassNameOfCells(className);
@@ -299,7 +300,7 @@ define([
         'm44-board-wrapper',
       );
 
-      $('scenario-input').addEventListener('change', (e) => this.uploadScenario(e.target[0]));
+      $('scenario-input').addEventListener('change', (e) => this.uploadScenario(e.target.files[0]));
       let dropzone = $('scenario-dropzone-container');
       let toggleActive = (b) => {
         return (e) => {
