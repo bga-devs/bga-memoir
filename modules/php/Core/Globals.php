@@ -34,6 +34,7 @@ class Globals extends \M44\Helpers\DB_Manager
     'lastPlayedCards' => 'obj', // Store information of who played what (overlord) [player_id]
     'deckReshuffle' => 'bool',
     'defaultWinner' => 'str',
+    'blitz' => 'bool',
   ];
 
   protected static $table = 'global_variables';

@@ -141,6 +141,7 @@ class Units extends \M44\Helpers\Pieces
       ->run();
     $board = $scenario['board'];
     $units = [];
+    $isBlitz = $scenario['game_info']['options']['blitz_rules'] ?? false;
     foreach ($board['hexagons'] as &$hex) {
       if (isset($hex['unit'])) {
         if (isset($hex['unit']['behavior']) && isset(\TROOP_BADGE_MAPPING[$hex['unit']['behavior']])) {
@@ -154,6 +155,13 @@ class Units extends \M44\Helpers\Pieces
         $data['y'] = $hex['row'];
         if (isset($hex['unit']['behavior'])) {
           $data['extra_datas'] = ['behavior' => $hex['unit']['behavior']];
+        }
+
+        if ($isBlitz && $unit->getType() == ARMOR && in_array($data['nation'], self::$nations[ALLIES])) {
+          $data['extra_datas']['properties'] = [
+            'movementRadius' => 2,
+            'movementAndAttackRadius' => 2,
+          ];
         }
 
         $units[] = $data;

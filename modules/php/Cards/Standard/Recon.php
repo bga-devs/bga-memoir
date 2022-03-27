@@ -4,6 +4,7 @@ use M44\Managers\Units;
 use M44\Board;
 use M44\Core\Game;
 use M44\Core\Globals;
+use M44\Scenario;
 
 class Recon extends \M44\Models\SectionCard
 {
@@ -74,11 +75,25 @@ class Recon extends \M44\Models\SectionCard
       throw new \BgaUserException(clienttranslate('You must select a contiguous sequence of adjacent ennemy units'));
     }
 
-    // TODO check that one unit is in the section
+    // check that one unit is in the section
     $found = false;
+    $flipped =
+      $this->getPlayer()
+        ->getTeam()
+        ->getId() == Scenario::getTopTeam();
+
     foreach ($args['units'] as $uId => $d) {
+      if (!in_array($uId, $unitIds)) {
+        continue;
+      }
+
       foreach ($d['section'] as $section) {
-        if ($this->getSections()[$section] == 1) {
+        if ($flipped) {
+          $s = 2 - $section;
+        } else {
+          $s = $section;
+        }
+        if ($this->getSections()[$s] == 1) {
           $found = true;
         }
       }

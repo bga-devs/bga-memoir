@@ -268,7 +268,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     //   |_|\__,_|_|\_\___|  \____|_|  \___/ \__,_|_| |_|\__,_|
     ///////////////////////////////////////////////////////////////
     onEnteringStateTakeGround(args) {
-      $('unit-' + args.unitId).classList.add('attacking');
+      if (args.unitId != -1) {
+        $('unit-' + args.unitId).classList.add('attacking');
+      }
       if (!this.isCurrentPlayerActive()) return;
 
       this.addDangerActionButton('btnPassTakeGround', _('Pass'), () => this.takeAction('actPassTakeGround'));

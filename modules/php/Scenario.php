@@ -105,6 +105,7 @@ class Scenario extends \APP_DbObject
         Globals::setDefaultWinner(AXIS);
       }
     }
+    Globals::setBlitz($scenario['game_info']['options']['blitz_rules'] ?? false);
 
     Board::init();
     // Notify
