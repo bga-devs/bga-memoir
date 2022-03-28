@@ -18,6 +18,12 @@ class Road extends \M44\Models\Terrain
       'droadcurve',
       'droadFL',
       'droadFR',
+      'wroad',
+      'wroadcurve',
+      'wroadFL',
+      'wroadFR',
+      'wroadX',
+      'wroadY',
     ]);
   }
 
@@ -39,11 +45,19 @@ class Road extends \M44\Models\Terrain
       'roadFR' => [0, 6, 10],
       'roadX' => [0, 2, 6, 8],
       'roadY' => [0, 4, 8],
+
       'droad' => [0, 6],
       'droadcurve' => [2, 10],
       'droadFL' => [0, 2, 6],
       'droadFR' => [0, 6, 10],
       'droadX' => [0, 2, 6, 8],
+
+      'wroad' => [0, 6],
+      'wroadcurve' => [2, 10],
+      'wroadFL' => [0, 2, 6],
+      'wroadFR' => [0, 6, 10],
+      'wroadX' => [0, 2, 6, 8],
+      'wroadY' => [0, 4, 8],
     ];
     $this->linkedDirections = [
       ALL_UNITS => $links[$row['tile'] ?? null] ?? [],

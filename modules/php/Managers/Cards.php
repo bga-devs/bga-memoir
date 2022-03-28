@@ -141,7 +141,8 @@ class Cards extends \M44\Helpers\Pieces
     $mode = $scenario['board']['type'];
 
     // Create deck
-    self::initDeck(self::$decks[$mode] ?? self::$decks[STANDARD_DECK]);
+    $deckName = $scenario['game_info']['options']['deck_name'] ?? null;
+    self::initDeck(self::$decks[$mode] ?? self::$decks[STANDARD_DECK], $deckName);
   }
 
   public function initHands()
@@ -158,10 +159,14 @@ class Cards extends \M44\Helpers\Pieces
     }
   }
 
-  public function initDeck($deck)
+  public function initDeck($deck, $deckName)
   {
     $cards = [];
     foreach ($deck as $type => $occurences) {
+      if ($type == \CARD_AIR_POWER && $deckName == "AIR_POWER_AS_ARTILLERY_BOMBARD_DECK") {
+        $type = \CARD_ARTILLERY_BOMBARD;
+      }
+
       if (\is_array($occurences)) {
         foreach ($occurences as $value => $n) {
           $cards[] = [
