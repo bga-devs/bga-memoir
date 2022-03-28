@@ -65,6 +65,7 @@ define([
         ['airDrop', 500],
         ['addToken', 1000],
         ['removeToken', 1000],
+        ['revealMinefield', 400],
       ];
 
       // Fix mobile viewport (remove CSS zoom)

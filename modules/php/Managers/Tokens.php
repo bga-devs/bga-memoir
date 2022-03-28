@@ -77,10 +77,7 @@ class Tokens extends \M44\Helpers\Pieces
         }
         // Mines
         elseif (($tag['behavior'] ?? null) == 'MINE_FIELD') {
-          $baseDatas['type'] = \TOKEN_MINE;
-          $baseDatas['team'] = $tag['side'];
-          $baseDatas['datas'] = \json_encode([]);
-          $tokens[] = $baseDatas;
+          continue; // Handle in terrains instead
         }
       }
     }

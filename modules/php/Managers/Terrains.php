@@ -85,6 +85,7 @@ class Terrains extends \M44\Helpers\Pieces
     $board = $scenario['board'];
     $terrains = self::getBackgroundSpecialTerrains($board);
     $options = $scenario['game_info']['options'] ?? [];
+
     foreach ($board['hexagons'] as $hex) {
       $keys = ['terrain', 'rect_terrain', 'obstacle'];
       foreach ($keys as $key) {
@@ -136,6 +137,27 @@ class Terrains extends \M44\Helpers\Pieces
             'orientation' => $terrain['orientation'] ?? 1,
             'owner' => $terrain['original_owner'] ?? null,
             'extra_datas' => $extraDatas,
+          ];
+        }
+      }
+    }
+
+    // Handle mines
+    $mineTokens = [0, 0, 0, 1, 1, 2, 2, 3, 4];
+    foreach ($board['hexagons'] as $hex) {
+      foreach ($hex['tags'] ?? [] as $tag) {
+        if (($tag['behavior'] ?? null) == 'MINE_FIELD') {
+          shuffle($mineTokens);
+          $value = \array_pop($mineTokens);
+          $terrains[] = [
+            'location' => $hex['col'] . '_' . $hex['row'],
+            'tile' => 'mineX',
+            'type' => 'minefield',
+            'orientation' => 1,
+            'owner' => $tag['side'] ?? null,
+            'extra_datas' => json_encode([
+              'value' => $value,
+            ]),
           ];
         }
       }

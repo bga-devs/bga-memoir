@@ -306,12 +306,14 @@
   background-color: #000;
   display: flex;
   flex-flow: column;
-  justify-content: center;
   align-items: center;
+  overflow-y: auto;
+  overflow-x: hidden;
 
   .summary-card {
     width: 303px;
     height: 190px;
+    flex-shrink: 0;
     background: url('img/summary_cards.jpg');
     background-size: 100% 300%;
     border-radius: 14px;

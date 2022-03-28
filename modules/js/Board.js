@@ -250,10 +250,23 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
     notif_removeTerrain(n) {
       debug('Notif: removing obstacle', n);
-      $('obstacle-' + n.args.terrainId).remove();
+      $('terrain-' + n.args.terrainId).remove();
       let x = n.args.cell.x,
         y = n.args.cell.y;
       this._grid[x][y].terrains = this._grid[x][y].terrains.filter((terrain) => terrain.id != n.args.terrainId);
+    },
+
+    notif_revealMinefield(n) {
+      debug('Notif: revealing minefiled', n);
+      if (n.args.value > 0) {
+        let tile = `mine${n.args.value}`;
+        $(`terrain-${n.args.terrainId}`).dataset.tile = tile;
+        this._grid[n.args.cell.x][n.args.cell.y].terrains.forEach((terrain) => {
+          if (terrain.id == n.args.terrainId) {
+            terrain.tile = tile;
+          }
+        });
+      }
     },
 
     tplTerrainTile(terrain) {
@@ -264,6 +277,10 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         tile = terrain.tile.substr(11);
         className = 'background-terrain';
       }
+      if (terrain.tile.substr(0, 4) == 'mine') {
+        // Special case of minefields
+        tile = terrain.tile;
+      }
 
       let rotation = terrain.rotate ? 6 : 0;
       if (terrain.orientation != 1) {
@@ -273,7 +290,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         rotation += ((terrain.orientation - 1) * 12) / nbrRotation + 12;
       }
       rotation = rotation % 12;
-      return `<div class="hex-grid-content hex-grid-terrain ${className}" data-tile="${tile}" data-rotation="${rotation}"></div>`;
+      return `<div id="terrain-${terrain.id}" class="hex-grid-content hex-grid-terrain ${className}" data-tile="${tile}" data-rotation="${rotation}"></div>`;
     },
 
     tplObstacleTile(obstacle) {
@@ -284,7 +301,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         rotation += (obstacle.orientation - 1) * angle + 12;
       }
       rotation = rotation % 12;
-      return `<div id="obstacle-${obstacle.id}" class="hex-grid-content hex-grid-obstacle" data-tile="${tile}" data-rotation="${rotation}"></div>`;
+      return `<div id="terrain-${obstacle.id}" class="hex-grid-content hex-grid-obstacle" data-tile="${tile}" data-rotation="${rotation}"></div>`;
     },
 
     ////////////////////////////////////////

@@ -198,7 +198,7 @@ const TERRAIN_CLASSES = [
   'lake' => 'Lake',
   'lighthouse' => 'Lighthouse',
   'marsh' => 'Marsh',
-  // Minefiled
+  'minefield' => 'Minefield',
   'mountain' => 'Mountain',
   'oasis' => 'Oasis',
   'palmforest' => 'PalmForest',

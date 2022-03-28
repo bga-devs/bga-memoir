@@ -25,3 +25,32 @@
     pointer-events: none;
   }
 }
+
+.hex-grid-terrain[data-tile^='mine'] {
+  background-image: url('img/tokens.png');
+  background-size: 300% 400%;
+  background-position: 100% 66.6666%;
+
+  @for $i from 0 through 5 {
+    &[data-tile='mine#{$i}'] {
+      $j: $i + 3;
+      background-position-x: ($j % 3) * 100% / 2;
+      background-position-y: (($j - ($j % 3)) / 3) * 100% / 3;
+    }
+  }
+}
+
+#m44-board .hex-grid-item .hex-grid-content.hex-grid-terrain[data-tile^='mine'] {
+  width: 70%;
+  height: 60.6218%;
+  top: 19.3%;
+  left: 15%;
+  clip-path: none;
+  transform: none;
+}
+
+.board-tooltip .summary-card .summary-tile .hex-grid-content.hex-grid-terrain[data-tile^='mine'] {
+  width: 70px;
+  height: 70px;
+  clip-path: none;
+}

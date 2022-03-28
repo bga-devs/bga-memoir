@@ -1,0 +1,50 @@
+<?php
+namespace M44\Terrains;
+use M44\Board;
+use M44\Dice;
+use M44\Core\Game;
+use M44\Core\Notifications;
+
+class Minefield extends \M44\Models\Terrain
+{
+  public static function isTileOfType($hex)
+  {
+    return false;
+  }
+
+  public function __construct($row)
+  {
+    $this->name = clienttranslate('Minefields');
+    $this->number = 29;
+    $this->desc = [];
+    $this->mustStopWhenEntering = true;
+
+    parent::__construct($row);
+  }
+
+  public function onUnitEntering($unit, $isRetreat)
+  {
+    // A bit counter-intuitive but the side indicated by editor is the one that is affected by mines
+    if ($isRetreat && !$this->isOriginalOwner()) {
+      return false;
+    }
+
+    $isHidden = $this->tile == 'mineX';
+    $value = $this->getExtraDatas('value');
+    if ($isHidden) {
+      // Reveal the mine
+      Notifications::revealMinefield($unit->getPlayer(), $this->id, $this->getPos(), $value);
+      $this->setTile('mine' . $value);
+    }
+
+    if ($value == 0) {
+      $this->removeFromBoard();
+    } else {
+      $player = $unit->getPlayer();
+      $results = Dice::roll($player, $value, $unit->getPos());
+
+      $hits = Game::get()->calculateHits(null, $unit, null, $results);
+      return Game::get()->damageUnit($unit, $hits);
+    }
+  }
+}

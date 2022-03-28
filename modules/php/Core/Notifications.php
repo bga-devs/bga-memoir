@@ -323,6 +323,22 @@ class Notifications
     ]);
   }
 
+  public static function revealMinefield($player, $terrainId, $cell, $value)
+  {
+    $msg =
+      $value == 0
+        ? \clienttranslate('${player_name} reveals Minefield at ${coordSource}: it\'s a decoy!')
+        : \clienttranslate('${player_name} reveals Minefield at ${coordSource}: it\'s a ${value} force Minefield');
+
+    self::notifyAll('revealMinefield', $msg, [
+      'player' => $player,
+      'coordSource' => $cell,
+      'cell' => $cell,
+      'terrainId' => $terrainId,
+      'value' => $value,
+    ]);
+  }
+
   /*********************
    **** UPDATE ARGS ****
    *********************/

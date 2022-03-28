@@ -1125,11 +1125,13 @@ html {
   background-color: #000;
   display: flex;
   flex-flow: column;
-  justify-content: center;
-  align-items: center; }
+  align-items: center;
+  overflow-y: auto;
+  overflow-x: hidden; }
   .board-tooltip .summary-card {
     width: 303px;
     height: 190px;
+    flex-shrink: 0;
     background: url("img/summary_cards.jpg");
     background-size: 100% 300%;
     border-radius: 14px;
@@ -3548,5 +3550,41 @@ span.m44-dice-result {
     right: 33%;
     top: 32%;
     pointer-events: none; }
+
+.hex-grid-terrain[data-tile^='mine'] {
+  background-image: url("img/tokens.png");
+  background-size: 300% 400%;
+  background-position: 100% 66.6666%; }
+  .hex-grid-terrain[data-tile^='mine'][data-tile='mine0'] {
+    background-position-x: 0%;
+    background-position-y: 33.3333333333%; }
+  .hex-grid-terrain[data-tile^='mine'][data-tile='mine1'] {
+    background-position-x: 50%;
+    background-position-y: 33.3333333333%; }
+  .hex-grid-terrain[data-tile^='mine'][data-tile='mine2'] {
+    background-position-x: 100%;
+    background-position-y: 33.3333333333%; }
+  .hex-grid-terrain[data-tile^='mine'][data-tile='mine3'] {
+    background-position-x: 0%;
+    background-position-y: 66.6666666667%; }
+  .hex-grid-terrain[data-tile^='mine'][data-tile='mine4'] {
+    background-position-x: 50%;
+    background-position-y: 66.6666666667%; }
+  .hex-grid-terrain[data-tile^='mine'][data-tile='mine5'] {
+    background-position-x: 100%;
+    background-position-y: 66.6666666667%; }
+
+#m44-board .hex-grid-item .hex-grid-content.hex-grid-terrain[data-tile^='mine'] {
+  width: 70%;
+  height: 60.6218%;
+  top: 19.3%;
+  left: 15%;
+  clip-path: none;
+  transform: none; }
+
+.board-tooltip .summary-card .summary-tile .hex-grid-content.hex-grid-terrain[data-tile^='mine'] {
+  width: 70px;
+  height: 70px;
+  clip-path: none; }
 
 /*# sourceMappingURL=memoir.css.map */
