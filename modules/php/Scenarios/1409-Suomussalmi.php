@@ -29,6 +29,21 @@ $scenarios[1409] = [
     'victory_player1' => 6,
     'victory_player2' => 6,
     'expert_mode' => 0,
+    'options' => [
+      'deck_name' => 'AIR_POWER_AS_ARTILLERY_BOMBARD_DECK',
+      'russian_commissar_rule' => 'ALLIES',
+    ],
+    'victory' => [
+      'condition' => [
+        [
+          'group_sudden_death' => [
+            'side' => 'AXIS',
+            'number' => 3,
+            'group' => ['c4', 'F5', 'f4', 'F3'],
+          ],
+        ],
+      ],
+    ],
   ],
   'board' => [
     'type' => 'STANDARD',
