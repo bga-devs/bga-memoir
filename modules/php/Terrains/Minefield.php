@@ -25,7 +25,7 @@ class Minefield extends \M44\Models\Terrain
   public function onUnitEntering($unit, $isRetreat)
   {
     // A bit counter-intuitive but the side indicated by editor is the one that is affected by mines
-    if ($isRetreat && !$this->isOriginalOwner()) {
+    if ($isRetreat || !$this->isOriginalOwner()) {
       return false;
     }
 
