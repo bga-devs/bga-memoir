@@ -26,7 +26,7 @@ class Wire extends \M44\Models\Terrain
       $this->removeFromBoard();
       Notifications::message(\clienttranslate('Wire is removed by the Tank'), []);
       $unit->setMoves($unit->getMovementRadius());
-      Game::get()->nextState('moveUnits');
+      // Game::get()->nextState('moveUnits');
       return true;
     }
   }

@@ -175,6 +175,13 @@ class action_memoir extends APP_GameAction
     self::ajaxResponse();
   }
 
+  public function actNextAttack()
+  {
+    self::setAjaxMode();
+    $this->game->actNextAttack();
+    self::ajaxResponse();
+  }
+
   public function actAttackUnit()
   {
     self::setAjaxMode();

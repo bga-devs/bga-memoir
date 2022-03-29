@@ -27,6 +27,10 @@ class FrozenRiver extends \M44\Models\Terrain
 
   public function onUnitEntering($unit, $isRetreat)
   {
+    if (Board::isBridgeCell(['x' => $this->x, 'y' => $this->y])) {
+      return;
+    }
+
     $player = $unit->getPlayer();
     $results = Dice::roll($player, 2, $unit->getPos());
 

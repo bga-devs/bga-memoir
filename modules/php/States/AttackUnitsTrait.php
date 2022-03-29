@@ -163,6 +163,11 @@ trait AttackUnitsTrait
     }
   }
 
+  public function actNextAttack()
+  {
+    $this->closeCurrentAttack();
+  }
+
   /**
    * Resolve the pending attack
    */

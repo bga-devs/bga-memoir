@@ -161,7 +161,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     // /_/   \_\_|   |_/_/   \_\____|_|\_\
     //////////////////////////////////////////
 
-    onEnteringStateAttackUnits(args, excludeUnit = null) {
+    onEnteringStateAttackUnits(args, excludeUnit = null, btn = true) {
       this.removeClassNameOfCells('unselectableForMoving');
       let nonEmptyUnits = [];
 
@@ -174,6 +174,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         this.clientState('attackUnitsChooseTarget', msg, {
           unitId,
           cells: args.units[unitId],
+          btn: btn,
         });
       };
       Object.keys(args.units).forEach((unitId) => {
@@ -190,7 +191,11 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         callback(nonEmptyUnits[0]);
       }
 
-      this.addPrimaryActionButton('btnAttackUnitsDone', _('Attacks Done'), () => this.takeAction('actAttackUnitsDone'));
+      if (btn == true) {
+        this.addPrimaryActionButton('btnAttackUnitsDone', _('Attacks Done'), () =>
+          this.takeAction('actAttackUnitsDone'),
+        );
+      }
 
       // Auto select if a unit was partially moved
       let unitId = args.lastUnitAttacker;
@@ -221,7 +226,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       });
 
       // Makes other units selectable
-      this.onEnteringStateAttackUnits(this.last_server_state.args, args.unitId);
+      this.onEnteringStateAttackUnits(this.last_server_state.args, args.unitId, args.btn);
 
       // Line of sight visualization
       let source = $('unit-' + args.unitId).parentNode.parentNode;
@@ -290,7 +295,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     },
 
     onEnteringStateArmorOverrun(args, excludeUnit = null) {
-      this.onEnteringStateAttackUnits(args, excludeUnit);
+      this.onEnteringStateAttackUnits(args, excludeUnit, false);
+      this.addPrimaryActionButton('btnOverrunDone', _('Do not attack'), () => this.takeAction('actNextAttack'));
     },
 
     onEnteringStateDesertMove(args, excludeUnit = null) {

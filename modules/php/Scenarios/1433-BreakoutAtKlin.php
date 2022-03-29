@@ -149,7 +149,7 @@ $scenarios[1433] = [
         ],
         'unit' => [
           'name' => 'inf2ger',
-          'badge' => 'badge4',
+          'badge' => 'badge6',
         ],
       ],
       13 => [
@@ -160,7 +160,7 @@ $scenarios[1433] = [
         ],
         'unit' => [
           'name' => 'inf2ger',
-          'badge' => 'badge4',
+          'badge' => 'badge6',
         ],
       ],
       14 => [
