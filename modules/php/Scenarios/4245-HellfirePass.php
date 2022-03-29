@@ -45,6 +45,9 @@ $scenarios[4245] = [
         'tags' => [
           0 => [
             'name' => 'tag5',
+            'behavior' => 'EXIT_MARKER',
+            'group' => ['E9', 'F9', 'G9', 'H9', 'I9'],
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -658,7 +661,7 @@ You move first.
 '),
       'victory' => clienttranslate('6 Medals.
 
-Exit markers are in effect on the portion of the Axis baseline in between the 2 Exit markers, for the Allied forces.
+Exit markers are in effect for Allies on the portion of the Axis baseline in between the 2 Exit markers.
 '),
       'rules' => clienttranslate('North African Desert Rules are in effect (Actions 9 - North African Desert Rules). In addition, Allied Armor units may only move 2 hexes and battle, not the normal 3 hexes.
 

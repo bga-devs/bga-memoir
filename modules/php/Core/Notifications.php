@@ -261,6 +261,15 @@ class Notifications
     ]);
   }
 
+  public static function exitUnit($player, $unit)
+  {
+    self::notifyAll('exitUnit', clienttranslate('${player_name} exits 1 unit'), [
+      'player' => $player,
+      'unitId' => $unit->getId(),
+      'cell' => $unit->getPos(),
+    ]);
+  }
+
   public static function miss($oppUnit)
   {
     self::notifyAll('miss', '', [

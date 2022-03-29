@@ -70,6 +70,7 @@ define([
         ['commissarCard', 1000],
         ['pCommissarCard', 1000],
         ['revealCommissarCard', 1000],
+        ['exitUnit', 500],
       ];
 
       // Fix mobile viewport (remove CSS zoom)

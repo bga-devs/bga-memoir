@@ -22,6 +22,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
   const TOKEN_MEDAL = 1;
   const TOKEN_MINE = 2;
   const TOKEN_CAMOUFLAGE = 4;
+  const TOKEN_EXIT_MARKER = 5;
   const TOKEN_ON_TOP = ['target'];
 
   function computeCoords(x, y) {
@@ -323,7 +324,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
     tplBoardToken(token) {
       // prettier-ignore
-      const SPRITES = ['star', 'exitV', 'exitH', 'mine0', 'mine1', 'mine2', 'mine3', 'mine4', 'mineX', 'tag14', 'tag15', 'target'];
+      const SPRITES = ['star', 'tag4', 'tag5', 'mine0', 'mine1', 'mine2', 'mine3', 'mine4', 'mineX', 'tag14', 'tag15', 'target'];
       let sprite = SPRITES.findIndex((t) => t == token.sprite);
 
       return `<div id='board-token-${token.id}' class="board-token" data-sprite="${sprite}"></div>`;
@@ -815,6 +816,14 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       debug('Notif: a unit was missed', n);
       let unit = $('unit-' + n.args.unitId);
       unit.classList.remove('airPowerTarget');
+    },
+
+    notif_exitUnit(n) {
+      debug('Notif: exit unit', n);
+      let unit = $('unit-' + n.args.unitId);
+      unit.dataset.figures;
+      unit.remove();
+      this._grid[n.args.cell.x][n.args.cell.y].unit = null;
     },
   });
 });

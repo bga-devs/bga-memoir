@@ -160,6 +160,7 @@ const TOKEN_MEDAL = 1;
 const TOKEN_MINE = 2;
 const TOKEN_TARGET = 3;
 const TOKEN_CAMOUFLAGE = 4;
+const TOKEN_EXIT_MARKER = 5;
 
 /*
  * Terrains

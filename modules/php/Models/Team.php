@@ -8,6 +8,7 @@ use M44\Managers\Cards;
 use M44\Managers\Players;
 use M44\Managers\Teams;
 use M44\Managers\Units;
+use M44\Managers\Tokens;
 use M44\Managers\Medals;
 use M44\Scenario;
 
@@ -82,6 +83,32 @@ class Team extends \M44\Helpers\DB_Model
   {
     $nMedals = $this->getMedals()->count();
     $medalsObtained = $unit->getMedalsWorth();
+    if ($nMedals + $medalsObtained > $this->nVictory) {
+      // Can't get more medals that winning condition
+      $medalsObtained = $this->nVictory - $nMedals;
+    }
+
+    if ($medalsObtained == 0) {
+      // No medal to add, abort
+      return;
+    }
+
+    // Increase stats
+    $statName = 'incMedalRound' . Globals::getRound();
+    foreach ($this->getMembers() as $player) {
+      Stats::$statName($player, $medalsObtained);
+    }
+
+    $medals = Medals::addEliminationMedals($this->id, $medalsObtained, $unit);
+    Notifications::scoreMedals($this->id, $medals, $unit->getPos());
+  }
+
+  public function addExitMedals($unit)
+  {
+    $nMedals = $this->getMedals()->count();
+    $marker = Tokens::getOnCoords('board', $unit->getPos(), \TOKEN_EXIT_MARKER)->first();
+
+    $medalsObtained = $marker['datas']['medals'];
     if ($nMedals + $medalsObtained > $this->nVictory) {
       // Can't get more medals that winning condition
       $medalsObtained = $this->nVictory - $nMedals;
