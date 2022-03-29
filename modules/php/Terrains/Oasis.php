@@ -1,5 +1,6 @@
 <?php
 namespace M44\Terrains;
+use M44\Board;
 
 class Oasis extends \M44\Models\Terrain
 {
@@ -17,14 +18,37 @@ class Oasis extends \M44\Models\Terrain
     $this->isBlockingLineOfSight = true;
     $this->canIgnoreOneFlag = true;
     $this->defense = [INFANTRY => -1, ARMOR => -1];
-    $this->desc = [
-      \clienttranslate('Unit moving in must stop and may move no further on that turn'),
-      clienttranslate('Unit moving in may still battle'),
-      clienttranslate('Unit may ignore one flag'),
-      clienttranslate('Blocks line of sight'),
-    ];
+    // $this->desc = [
+    //   // \clienttranslate('Unit moving in must stop and may move no further on that turn'),
+    //   clienttranslate('Unit moving in may still battle'),
+    //   clienttranslate('Unit may ignore one flag'),
+    //   clienttranslate('Blocks line of sight'),
+    // ];
     parent::__construct($row);
   }
 
   //TODO : healing possible
+  public function getPossibleMoveActions($unit)
+  {
+    // only an INFANTRY
+    // wounded
+    // that did not move
+    // with no adjacent ennemy
+    // can be healed
+    if (
+      $unit->getType() == \INFANTRY &&
+      $unit->isWounded() &&
+      $unit->getMoves() == 0 &&
+      !Board::isAdjacentToEnnemy($unit)
+    ) {
+      return [
+        [
+          'desc' => \clienttranslate('Heal the unit'),
+          'action' => 'actHealUnit',
+        ],
+      ];
+    } else {
+      return [];
+    }
+  }
 }

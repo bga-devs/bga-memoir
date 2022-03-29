@@ -6,6 +6,8 @@ use M44\Core\Notifications;
 use M44\Managers\Players;
 use M44\Managers\Teams;
 use M44\Managers\Units;
+use M44\Helpers\Utils;
+use M44\Dice;
 
 trait OrderUnitsTrait
 {
@@ -68,5 +70,39 @@ trait OrderUnitsTrait
     // Get next state from the card
     $nextState = $card->nextStateAfterOrder($unitIds, $onTheMoveIds);
     $this->gamestate->nextState($nextState);
+  }
+
+  public function actHealUnit($unitId)
+  {
+    $player = Players::getCurrent();
+
+    $unit = Units::get($unitId);
+    $moves = $unit->getPossibleMoves();
+    Utils::filter($moves, function ($m) {
+      return isset($m['type']) && $m['type'] == 'action' && $m['action'] == 'actHealUnit';
+    });
+    if (count($moves) == 0) {
+      throw new \feException('This unit cannot be healed. Should not happen');
+    }
+
+    // Roll dice corresponding to number of cards
+    $nbCard = $player->getCards()->count() + 1;
+    $results = Dice::roll($player, $nbCard, $unit->getPos());
+
+    // Compute number of heal
+    $nHeal = $results[DICE_STAR] ?? 0;
+    if ($unit->getType() == \INFANTRY) {
+      $nHeal += $results[\DICE_INFANTRY] ?? 0;
+    }
+
+    if ($nHeal > 0) {
+      // Heal and then disable the unit all together
+      $nHealed = $unit->heal($nHeal);
+      Notifications::healUnit($player, $nHealed, $unit);
+      $unit->disable();
+      // Notifications::disable($unit);
+    }
+
+    $this->gamestate->nextState('moveUnits');
   }
 }

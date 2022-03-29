@@ -56,6 +56,7 @@ class Terrain extends \M44\Helpers\DB_Model
     'cantTakeGround',
     'hill317',
     'cannotArmorOverrun',
+    'canRecover',
 
     'isHill',
     'isBunker',
@@ -167,6 +168,11 @@ class Terrain extends \M44\Helpers\DB_Model
   }
 
   public function getPossibleAttackActions($unit)
+  {
+    return [];
+  }
+
+  public function getPossibleMoveActions($unit)
   {
     return [];
   }

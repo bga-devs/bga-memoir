@@ -111,6 +111,14 @@ class action_memoir extends APP_GameAction
     self::ajaxResponse();
   }
 
+  public function actHealUnit()
+  {
+    self::setAjaxMode();
+    $unitId = self::getArg('unitId', AT_posint, false);
+    $this->game->actHealUnit($unitId);
+    self::ajaxResponse();
+  }
+
   /////////////////////////////////
   //  __  __  _____     _______
   // |  \/  |/ _ \ \   / / ____|

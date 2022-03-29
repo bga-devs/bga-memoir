@@ -448,6 +448,11 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         isBlockingLineOfAttack: {
           bool: _('Block line of attack for all units (including Artillery)'),
         },
+        canRecover: {
+          bool: _(
+            'An ordered Infantry unit, with no adjacent ennemy units, may recover lost figures. Resolution is done like for Medics card. The unit cannot move or battle this turn',
+          ),
+        },
       };
 
       let unitMap = {

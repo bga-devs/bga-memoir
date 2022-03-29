@@ -436,6 +436,7 @@ $scenarios[4230] = [
         'col' => 21,
         'terrain' => [
           'name' => 'oasis',
+          'behavior' => 'OASIS_RECOVERY',
         ],
       ],
       43 => [

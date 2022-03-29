@@ -235,6 +235,12 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     $this->setExtraDatas('onTheMove', $onTheMove);
   }
 
+  public function disable()
+  {
+    $this->setMoves(\INFINITY);
+    $this->setFights(\INFINITY);
+  }
+
   public function getActivationPlayer()
   {
     if ($this->getActivationCard() != null) {
@@ -262,7 +268,17 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
       $this->movementAndAttackRadius = $maxMoveAttack;
     }
 
-    return Board::getReachableCells($this);
+    $pAction = [];
+    foreach (Board::getTerrainsInCell($this->getPos()) as $terrain) {
+      $actions = $terrain->getPossibleMoveActions($this);
+      foreach ($actions as $action) {
+        $action['type'] = 'action';
+        $action['terrainId'] = $terrain->getId();
+        $pAction[] = $action;
+      }
+    }
+
+    return array_merge(Board::getReachableCells($this), $pAction);
   }
 
   public function moveTo($cell)
