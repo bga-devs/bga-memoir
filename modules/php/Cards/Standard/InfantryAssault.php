@@ -30,7 +30,7 @@ class InfantryAssault extends \M44\Models\Card
     $infSections = [];
     $units = $player->getUnits();
     foreach ($units as $unit) {
-      foreach ($unit->getSection() as $section) {
+      foreach ($unit->getSections() as $section) {
         if (!in_array($section, $sections)) {
           $sections[] = $section;
         }

@@ -16,6 +16,14 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         if (player.inplay) {
           this.addCard(player.inplay, 'in-play-' + player.id);
         }
+        if (player.commissarCard) {
+          let container = 'commissar-' + player.id;
+          if (player.commissarCard === true) {
+            this.addCardBack(container);
+          } else {
+            this.addCard(player.commissarCard, container);
+          }
+        }
       });
 
       if (!this.isSpectator) {
@@ -25,9 +33,11 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     },
 
     tplPlayerPanel(player) {
+      let commissar = player.isCommissar ? `<div class='commissar-slot' id='commissar-${player.id}'></div>` : '';
       return `<div class='m44-player-panel'>
         <div class='player-name' style='color:#${player.color}'>${player.name}</div>
         <div class='card-in-play' id='in-play-${player.id}'></div>
+        ${commissar}
         <div class='hand-count-holder'>
           <div class='hand-count-back'></div>
           <div class='hand-count' id="hand-count-${player.id}">${player.cardsCount}</div>
@@ -152,7 +162,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       }
 
       return (
-        `<div id='card-${card.id + (tooltip ? '-tooltip' : '')}' class='${className}' data-type='${card.asset}'>
+        `<div id='card-${card.id + (tooltip ? '-tooltip' : '')}' class='m44-card ${className}' data-type='${
+          card.asset
+        }'>
           <div class='card-resizable'>
             <div class='card-title'>${_(card.name)}</div> ` +
         (isSection ? `<div class='card-subtitle'>${_(card.subtitle)}</div>` : '') +
@@ -183,12 +195,11 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     onEnteringStatePlayCard(args) {
       let cards = args._private.cards;
       let cards317 = args._private.cardsHill317;
-      let canHill317 = args._private.canHill317;
       Object.keys(cards).forEach((cardId) => {
         this.onClick(`card-${cardId}`, () => {
           if (cards[cardId]) {
             this.clientState('playCardSelectSection', _('Choose target section'), { cardId, sections: cards[cardId] });
-          } else if (canHill317 && cards317[cardId] == true) {
+          } else if (cards317.includes(cardId)) {
             this.clientState('playCardHill317', _('Do you wish to play it as Air Power card?'), { cardId });
           } else {
             this.takeAction('actPlayCard', { cardId });
@@ -215,15 +226,13 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
     onEnteringStatePlayCardHill317(args) {
       let cardId = args.cardId;
-      let section = null;
       this.addCancelStateBtn();
       this.addPrimaryActionButton(`btnHillYes`, _('Yes'), () =>
-        this.takeAction('actPlayCard', { cardId, section, hill317: true }),
+        this.takeAction('actPlayCard', { cardId, hill317: true }),
       );
-      hill = false;
 
       this.addPrimaryActionButton(`btnHillNo`, _('No'), () =>
-        this.takeAction('actPlayCard', { cardId, section, hill317: false }),
+        this.takeAction('actPlayCard', { cardId, hill317: false }),
       );
     },
 
@@ -261,7 +270,11 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
     notif_drawCards(n) {
       debug('Notif: a player is drawing card(s)', n);
-      if (this.player_id == n.args.player_id) return;
+      if (this.player_id == n.args.player_id) {
+        this.notifqueue.setSynchronousDuration(1);
+        return;
+      }
+
       for (let i = 0; i < n.args.nb; i++) {
         let card = this.addCardBack('deck');
         this.slide(card, `in-play-${n.args.player_id}`, {
@@ -293,6 +306,71 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         $('card-' + card.id).classList.add('choice');
         this.onClick(`card-${card.id}`, () => this.takeAction('actChooseCard', { cardId: card.id }));
       });
+    },
+
+    onEnteringStateCommissarCard(args) {
+      let cards = args._private.cards;
+      Object.keys(cards).forEach((cardId) => {
+        this.onClick(`card-${cardId}`, () => {
+          if (args._private.playableCards[cardId] !== undefined) {
+            this.clientState('commissarCardChoice', _('Select how to use this card'), {
+              cardId,
+              hill317: args._private.playableCards[cardId],
+            });
+          } else {
+            this.takeAction('actCommissarCard', { cardId });
+          }
+        });
+      });
+    },
+
+    onEnteringStateCommissarCardChoice(args) {
+      let cardId = args.cardId;
+      this.addCancelStateBtn();
+      this.addPrimaryActionButton(`btnCommissar`, _('Put it under commissar token'), () =>
+        this.takeAction('actCommissarCard', { cardId }),
+      );
+      this.addPrimaryActionButton(`btnCommissarPlay`, _('Play it'), () =>
+        this.takeAction('actPlayCard', { cardId, hill317: false }),
+      );
+
+      if (args.hill317) {
+        this.addPrimaryActionButton(`btnCommissarPlay317`, _('Play it as an air power'), () =>
+          this.takeAction('actPlayCard', { cardId, hill317: true }),
+        );
+      }
+    },
+
+    notif_commissarCard(n) {
+      debug('Notif: a player is putting his card under his commissar token', n);
+      if (this.player_id == n.args.player_id) {
+        this.notifqueue.setSynchronousDuration(1);
+        return;
+      }
+      let card = this.addCardBack(`hand-count-${n.args.player_id}`);
+      this.slide(card, `commissar-${n.args.player_id}`);
+      this._handCounters[n.args.player_id].incValue(-1);
+    },
+
+    notif_pCommissarCard(n) {
+      debug('Notif: you are putting a card under your commissar token', n);
+      this.slide('card-' + n.args.card.id, `commissar-${this.player_id}`);
+      this._handCounters[this.player_id].incValue(-1);
+    },
+
+    notif_revealCommissarCard(n) {
+      debug('Notif: revealing someone commissar card', n);
+
+      if (n.args.player_id == this.player_id) {
+        this.slide(`card-${n.args.card.id}`, `in-play-${this.player_id}`);
+      } else {
+        let c = $(`commissar-${n.args.player_id}`).querySelector('.m44-card');
+        this.slide(c, `in-play-${n.args.player_id}`, {
+          destroy: true,
+        }).then(() => {
+          this.addCard(n.args.card, `in-play-${n.args.player_id}`);
+        });
+      }
     },
   });
 });

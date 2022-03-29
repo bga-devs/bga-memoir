@@ -54,6 +54,8 @@ class Player extends \M44\Helpers\DB_Model
       'cards' => $current ? $this->getCards()->toArray() : [],
       'cardsCount' => $this->getCards()->count() + $this->getCardsChoice()->count(),
       'inplay' => $this->getCardInPlay(),
+      'isCommissar' => $this->isCommissar(),
+      'commissarCard' => $current ? $this->getCommissarCard() : $this->getCommissarCard() != null,
     ]);
 
     return $data;
@@ -108,8 +110,7 @@ class Player extends \M44\Helpers\DB_Model
   }
 
   public function canHill317()
-  {
-    $canHill317 = false;
+  {  
     if (Globals::isBlitz() && self::getTeam()->getId() == \AXIS) {
       return true;
     }
@@ -124,5 +125,20 @@ class Player extends \M44\Helpers\DB_Model
       }
     }
     return false;
+  }
+
+  /**************
+   * Commissar
+   *************/
+
+  public function isCommissar()
+  {
+    $team = Globals::getCommissar();
+    return $team == $this->team && $this->getTeam()->getCommanderPId() == $this->id;
+  }
+
+  public function getCommissarCard()
+  {
+    return Cards::getInLocation(['commissar', $this->id])->first();
   }
 }

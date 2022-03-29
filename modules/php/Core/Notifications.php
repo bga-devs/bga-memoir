@@ -339,6 +339,26 @@ class Notifications
     ]);
   }
 
+  public static function commissarCard($player, $card)
+  {
+    self::notifyAll('commissarCard', clienttranslate('${player_name} puts 1 card under the commissar token'), [
+      'player' => $player,
+    ]);
+    self::notify($player, 'pCommissarCard', '', ['card' => $card]);
+  }
+
+  public static function revealCommissarCard($player, $card)
+  {
+    self::notifyAll(
+      'revealCommissarCard',
+      clienttranslate('${player_name} plays ${card_name} from its commissar token'),
+      [
+        'player' => $player,
+        'card' => $card,
+      ]
+    );
+  }
+
   /*********************
    **** UPDATE ARGS ****
    *********************/

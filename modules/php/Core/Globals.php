@@ -33,9 +33,12 @@ class Globals extends \M44\Helpers\DB_Manager
     'retreat' => 'obj', // ['unit' => id, 'min' => min number of retreats hexes, 'max' => max number of retreat hexes]
 
     'lastPlayedCards' => 'obj', // Store information of who played what (overlord) [player_id]
+
+    // Scenario option
     'deckReshuffle' => 'bool',
     'defaultWinner' => 'str',
     'blitz' => 'bool',
+    'commissar' => 'str',
   ];
 
   protected static $table = 'global_variables';

@@ -22,19 +22,19 @@ trait PlayCardTrait
         return $card->getAdditionalPlayConstraints();
       });
 
-    $cardsHill317 = $player
-      ->getCards()
-      ->filter(function ($card) {
-        return $card->getType() != \CARD_AMBUSH;
-      })
-      ->map(function ($card) {
-        return $card->canHill317();
-      });
+    $cardsHill317 = [];
+    if ($player->canHill317()) {
+      $cardsHill317 = $player
+        ->getCards()
+        ->filter(function ($card) {
+          return $card->canHill317();
+        })
+        ->getIds();
+    }
 
     $args = [
       'cards' => $cards,
-      'cardsHill317' => $player->canHill317() ? $cardsHill317 : [],
-      'canHill317' => $player->canHill317(),
+      'cardsHill317' => $cardsHill317,
     ];
     return $singleActive ? Utils::privatise($args) : $args;
   }
@@ -58,7 +58,7 @@ trait PlayCardTrait
       throw new \BgaVisibleSystemException('Invalid section. Should not happen');
     }
 
-    if ($hill317 && !$args['canHill317']) {
+    if ($hill317 && !$player->canHill317()) {
       throw new \BgaVisibleSystemException('Cannot play card as hill317. Should not happen');
     }
 
@@ -69,15 +69,17 @@ trait PlayCardTrait
     if ($hill317) {
       $card = Cards::get($cardId);
       $card->setExtraDatas('hill317', true);
-      // if ($card->getType() == \CARD_COUNTER_ATTACK) {
-      //   $card->getCopiedCard()->setExtraDatas('hill317', true);
-      // }
     }
 
     // Play the card
     $card = Cards::play($player, $cardId, $sectionId);
     Notifications::playCard($player, $card);
     $nextState = $card->nextStateAfterPlay();
+
+    // Handle first turn of Russian
+    if ($player->isCommissar() && $player->getCommissarCard() == null) {
+      $nextState = 'commissar';
+    }
     $this->gamestate->nextState($nextState);
   }
 }

@@ -82,7 +82,7 @@ class AirPower extends \M44\Models\Card
     Game::get()->nextState('attack');
   }
 
-  public function areUnitsContiguous($unitIds)
+  public static function areUnitsContiguous($unitIds)
   {
     $previousUnit = null;
     foreach ($unitIds as $unitId) {
@@ -90,7 +90,7 @@ class AirPower extends \M44\Models\Card
       if ($previousUnit != null) {
         $pos1 = $unit->getPos();
         $pos2 = $previousUnit->getPos();
-        if (abs($pos1['x'] - $pos2['x']) + abs($pos1['y'] - $pos2['y']) > 2) {
+        if (abs($pos1['x'] - $pos2['x']) + 2 * abs($pos1['y'] - $pos2['y']) > 3) {
           return false;
         }
       }
