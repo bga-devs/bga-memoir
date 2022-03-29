@@ -23,8 +23,18 @@ trait AttackUnitsTrait
   {
     $args = $this->argsAttackUnit();
     $nTargets = 0;
-    foreach ($args['units'] as $targets) {
+    foreach ($args['units'] as $uId => $targets) {
       $nTargets += count($targets);
+      $unit = Units::get($uId);
+      // if Combat engineer doesn't move and is on a mine field, it must sweep it
+      if ($unit->mustSweep()) {
+        foreach (Board::getTerrainsInCell($unit->getPos()) as $t) {
+          if ($t instanceof \M44\Terrains\Minefield) {
+            $t->onUnitEntering($unit, false);
+            $nTargets -= count($targets);
+          }
+        }
+      }
     }
     if ($nTargets == 0) {
       $this->actAttackUnitsDone(true);

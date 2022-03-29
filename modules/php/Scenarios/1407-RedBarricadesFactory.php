@@ -33,6 +33,9 @@ $scenarios[1407] = [
         'standard' => [],
       ],
     ],
+    'options' => [
+      'russian_commissar_rule' => 'ALLIES',
+    ],
   ],
   'board' => [
     'type' => 'STANDARD',

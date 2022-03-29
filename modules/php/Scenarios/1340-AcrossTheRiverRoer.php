@@ -276,7 +276,7 @@ $scenarios[1340] = [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
             'group' => [],
-            'side' => 'ALLIED',
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -288,7 +288,7 @@ $scenarios[1340] = [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
             'group' => [],
-            'side' => 'ALLIED',
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -304,7 +304,7 @@ $scenarios[1340] = [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
             'group' => [],
-            'side' => 'ALLIED',
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -332,7 +332,7 @@ $scenarios[1340] = [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
             'group' => [],
-            'side' => 'ALLIED',
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -344,7 +344,7 @@ $scenarios[1340] = [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
             'group' => [],
-            'side' => 'ALLIED',
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -356,7 +356,7 @@ $scenarios[1340] = [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
             'group' => [],
-            'side' => 'ALLIED',
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -462,6 +462,7 @@ $scenarios[1340] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
+          'behavior' => 'FORDABLE_STREAM',
         ],
       ],
       46 => [
@@ -470,6 +471,7 @@ $scenarios[1340] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
+          'behavior' => 'FORDABLE_STREAM',
         ],
       ],
       47 => [
@@ -478,6 +480,7 @@ $scenarios[1340] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
+          'behavior' => 'FORDABLE_STREAM',
         ],
       ],
       48 => [
@@ -486,6 +489,7 @@ $scenarios[1340] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
+          'behavior' => 'FORDABLE_STREAM',
         ],
         'unit' => [
           'name' => 'infus',
@@ -497,6 +501,7 @@ $scenarios[1340] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
+          'behavior' => 'FORDABLE_STREAM',
         ],
         'unit' => [
           'name' => 'infus',
@@ -508,6 +513,7 @@ $scenarios[1340] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
+          'behavior' => 'FORDABLE_STREAM',
         ],
         'unit' => [
           'name' => 'infus',
@@ -519,6 +525,7 @@ $scenarios[1340] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
+          'behavior' => 'FORDABLE_STREAM',
         ],
       ],
       52 => [
@@ -527,6 +534,7 @@ $scenarios[1340] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
+          'behavior' => 'FORDABLE_STREAM',
         ],
       ],
       53 => [
@@ -535,6 +543,7 @@ $scenarios[1340] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
+          'behavior' => 'FORDABLE_STREAM',
         ],
       ],
       54 => [
@@ -543,6 +552,7 @@ $scenarios[1340] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
+          'behavior' => 'FORDABLE_STREAM',
         ],
       ],
       55 => [
@@ -551,6 +561,7 @@ $scenarios[1340] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
+          'behavior' => 'FORDABLE_STREAM',
         ],
       ],
       56 => [
@@ -559,6 +570,7 @@ $scenarios[1340] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
+          'behavior' => 'FORDABLE_STREAM',
         ],
       ],
       57 => [
@@ -567,6 +579,7 @@ $scenarios[1340] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
+          'behavior' => 'FORDABLE_STREAM',
         ],
       ],
       58 => [

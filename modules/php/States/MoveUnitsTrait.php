@@ -42,6 +42,7 @@ trait MoveUnitsTrait
     $unit = Units::get($unitId);
     $coordSource = $unit->getPos();
     foreach ($path as $c) {
+      $unit->incMoves(1);
       Notifications::moveUnit($player, $unit, $coordSource, $c);
       list($interrupted, $isWinning) = Board::moveUnit($unit, $c);
       if ($isWinning) {
@@ -56,7 +57,7 @@ trait MoveUnitsTrait
       }
       $coordSource = $c;
     }
-    $unit->incMoves($cell['d']);
+    // $unit->incMoves($cell['d']);
     // Handle Road
     if ($cell['road'] ?? false) {
       $unit->useRoadBonus();

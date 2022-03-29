@@ -25,8 +25,21 @@ class Minefield extends \M44\Models\Terrain
   public function onUnitEntering($unit, $isRetreat)
   {
     // A bit counter-intuitive but the side indicated by editor is the one that is affected by mines
-    if ($isRetreat || !$this->isOriginalOwner()) {
+    if ($isRetreat || !$this->isOriginalOwner($unit)) {
       return false;
+    }
+
+    if ($unit->mustSweep()) {
+      if (
+        $unit->getMoves() <= $unit->getMovementAndAttackRadius() ||
+        $unit->getActivationOCard()->getType() == \CARD_BEHIND_LINES
+      ) {
+        // Sweep the mine
+        Notifications::message(clienttranslate('Combat engineer sweeps the mine instead of battling'), []);
+        $this->removeFromBoard();
+        $unit->disable();
+        return;
+      }
     }
 
     $isHidden = $this->tile == 'mineX';
