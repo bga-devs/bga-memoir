@@ -6,6 +6,7 @@ use M44\Scenario;
 use M44\Managers\Players;
 use M44\Managers\Units;
 use M44\Managers\Cards;
+use M44\Managers\Tokens;
 use M44\Managers\Teams;
 
 class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
@@ -208,6 +209,15 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
   public function cannotBattle()
   {
     return $this->getExtraDatas('cannotBattle');
+  }
+
+  public function isCamouflaged()
+  {
+    return Tokens::getOnCoords('board', $this->getPos())
+      ->filter(function ($t) {
+        return $t['type'] == \TOKEN_CAMOUFLAGE;
+      })
+      ->count() != 0;
   }
 
   //////////////////////////////////////

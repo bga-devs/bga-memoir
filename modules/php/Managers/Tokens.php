@@ -79,6 +79,11 @@ class Tokens extends \M44\Helpers\Pieces
         elseif (($tag['behavior'] ?? null) == 'MINE_FIELD') {
           continue; // Handle in terrains instead
         }
+        // Camouflage tags
+        elseif (in_array($tag['name'], ['tag14', 'tag15'])) {
+          $baseDatas['type'] = TOKEN_CAMOUFLAGE;
+          $tokens[] = $baseDatas;
+        }
       }
     }
 
@@ -169,6 +174,20 @@ class Tokens extends \M44\Helpers\Pieces
       ->where('x', $coords['x'])
       ->where('y', $coords['y'])
       ->where('type', \TOKEN_TARGET)
+      ->get();
+
+    foreach ($tokens as $t) {
+      self::DB()->delete($t['id']);
+      Notifications::removeToken($t);
+    }
+  }
+
+  public function removeCamouflage($coords)
+  {
+    $tokens = self::getSelectQuery()
+      ->where('x', $coords['x'])
+      ->where('y', $coords['y'])
+      ->where('type', \TOKEN_CAMOUFLAGE)
       ->get();
 
     foreach ($tokens as $t) {

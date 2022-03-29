@@ -414,6 +414,7 @@ class Board
       $terrain->onUnitLeaving($unit, $isRetreat);
     }
     Tokens::removeTargets($pos);
+    Tokens::removeCamouflage($pos);
     foreach ($targetCell['terrains'] as $terrain) {
       if ($terrain->onUnitEntering($unit, $isRetreat) === true) {
         $interrupted = true;
@@ -489,9 +490,10 @@ class Board
     });
 
     // Keep only the ones where an enemy stands
+    // remove units that are camouflage where not close assault
     Utils::filter($cells, function ($cell) use ($unit) {
       $oppUnit = self::getUnitInCell($cell);
-      return !is_null($oppUnit) && $oppUnit->isOpponent($unit);
+      return !is_null($oppUnit) && $oppUnit->isOpponent($unit) && ($cell['d'] == 1 || !$oppUnit->isCamouflaged());
     });
 
     // Keep only the cells in sight

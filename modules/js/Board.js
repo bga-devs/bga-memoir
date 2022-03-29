@@ -21,6 +21,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
   const TOKEN_MEDAL = 1;
   const TOKEN_MINE = 2;
+  const TOKEN_CAMOUFLAGE = 4;
   const TOKEN_ON_TOP = ['target'];
 
   function computeCoords(x, y) {
@@ -322,7 +323,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
     tplBoardToken(token) {
       // prettier-ignore
-      const SPRITES = ['star', 'exitV', 'exitH', 'mine0', 'mine1', 'mine2', 'mine3', 'mine4', 'mineX', 'camo', 'wcamo', 'target'];
+      const SPRITES = ['star', 'exitV', 'exitH', 'mine0', 'mine1', 'mine2', 'mine3', 'mine4', 'mineX', 'tag14', 'tag15', 'target'];
       let sprite = SPRITES.findIndex((t) => t == token.sprite);
 
       return `<div id='board-token-${token.id}' class="board-token" data-sprite="${sprite}"></div>`;
