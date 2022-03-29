@@ -462,10 +462,30 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         3: _('Artillery'),
       };
 
+      let movementProperties = [
+        'isImpassable',
+        'mustBeAdjacentToEnter',
+        'mustStopWhenEntering',
+        'mustStopWhenLeaving',
+        'cantLeave',
+        'cantRetreat',
+      ];
+      let movementRestriction = false;
+
+      let combatProperties = ['enteringCannotBattle', 'cannotBattle'];
+      let combatRestriction = false;
+
       Object.keys(properties).forEach((prop) => {
         let content = '';
         let propDesc = properties[prop];
         if (terrainData[prop]) {
+          if (movementProperties.includes(prop)) {
+            movementRestriction = true;
+          }
+          if (combatProperties.includes(prop)) {
+            combatRestriction = true;
+          }
+
           if (Array.isArray(terrainData[prop])) {
             let units = terrainData[prop].map((unitId) => unitMap[unitId]).join(' & ');
             content = dojo.string.substitute(propDesc.obj, { units });
@@ -488,7 +508,29 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           let modified = terrain.properties && terrain.properties[prop] !== undefined;
           desc.push(`<li class='${modified ? 'modified' : ''}'>${content}</li>`);
         }
+
+        if (prop == 'cantRetreat' && !movementRestriction) {
+          desc.push(`<li>${_('No movement restrictions')}</li>`);
+        }
+        if (prop == 'cannotBattle' && !combatRestriction && !terrainData['defense'] && !terrainData['offense']) {
+          desc.push(`<li>${_('No combat restrictions')}</li>`);
+        }
       });
+
+      if (terrainData['defense']) {
+        let defense = [];
+        Object.keys(unitMap).forEach((type) => {
+          if (terrainData['defense'][type]) {
+            defense.push(
+              this.strReplace(_('${unit} fires at ${nb}'), { unit: unitMap[type], nb: terrainData['defense'][type] }),
+            );
+          }
+        });
+        if (defense.length > 0) {
+          let modified = terrain.properties && terrain.properties['defense'] !== undefined;
+          desc.push(`<li class='${modified ? 'modified' : ''}'>${defense.join(', ')}</li>`);
+        }
+      }
 
       // Remove letter in number (used for bis/ter for some terrains)
       let number = String(terrainData.number).replace(/\D/g, '');

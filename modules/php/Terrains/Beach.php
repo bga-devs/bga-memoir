@@ -14,7 +14,6 @@ class Beach extends \M44\Models\Terrain
     $this->number = 1;
     $this->desc = [
       \clienttranslate('Maximum movement onto beaches is 2 hexes'),
-      \clienttranslate('No combat restrictions'),
       \clienttranslate('Taking Ground and Armor Overrun remains possible'),
     ];
     $this->isBeach = true;
