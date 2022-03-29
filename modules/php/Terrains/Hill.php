@@ -15,6 +15,7 @@ class Hill extends \M44\Models\Terrain
     $this->name = clienttranslate('Hills');
     $this->number = 6;
     $this->isHill = true;
+    $this->defense = [\INFANTRY => "-1*", ARMOR => "-1*"];
 
     parent::__construct($row);
   }
