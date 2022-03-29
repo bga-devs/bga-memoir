@@ -191,7 +191,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     return is_null($this->activationCard) ? null : Cards::get($this->activationCard);
   }
 
-  public function getSection()
+  public function getSections()
   {
     return $this->sections;
   }

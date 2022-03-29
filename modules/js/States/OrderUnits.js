@@ -411,7 +411,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       if (this._selectedUnits.length == 4) return false;
       // Otherwise, it must be adjacent to the last selected unit
       let lastUnitPos = this.getArgs()['units'][lastUnitId];
-      return Math.abs(pos.x - lastUnitPos.x) + Math.abs(pos.y - lastUnitPos.y) <= 2;
+      return Math.abs(pos.x - lastUnitPos.x) + 2*Math.abs(pos.y - lastUnitPos.y) <= 3;
     },
 
     /////////////////////////////////////////////

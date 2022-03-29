@@ -53,6 +53,15 @@ class action_memoir extends APP_GameAction
     self::ajaxResponse();
   }
 
+  public function actCommissarCard()
+  {
+    self::setAjaxMode();
+    $cardId = self::getArg('cardId', AT_posint, true);
+    $this->game->actCommissarCard($cardId);
+    self::ajaxResponse();
+  }
+
+
   public function actOrderUnits()
   {
     self::setAjaxMode();

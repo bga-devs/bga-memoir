@@ -33,6 +33,7 @@ define([
     constructor() {
       this._activeStates = [
         'playCard',
+        'commissarCard',
         'orderUnits',
         'moveUnits',
         'attackUnits',
@@ -66,6 +67,9 @@ define([
         ['addToken', 1000],
         ['removeToken', 1000],
         ['revealMinefield', 400],
+        ['commissarCard', 1000],
+        ['pCommissarCard', 1000],
+        ['revealCommissarCard', 1000],
       ];
 
       // Fix mobile viewport (remove CSS zoom)

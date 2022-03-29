@@ -130,6 +130,19 @@ class Cards extends \M44\Helpers\Pieces
     return self::countInLocation('deck');
   }
 
+  public static function commissar($player, $cardId)
+  {
+    self::move($cardId, ['commissar', $player->getId()]);
+    return self::getSingle($cardId);
+  }
+
+  public static function revealCommissar($player)
+  {
+    $pId = $player->getId();
+    self::moveAllInLocation(['commissar', $pId], ['inplay', $pId]);
+    return self::getInLocation(['inplay', $pId])->first();
+  }
+
   /**
    * Load a scenario
    */
@@ -163,7 +176,7 @@ class Cards extends \M44\Helpers\Pieces
   {
     $cards = [];
     foreach ($deck as $type => $occurences) {
-      if ($type == \CARD_AIR_POWER && $deckName == "AIR_POWER_AS_ARTILLERY_BOMBARD_DECK") {
+      if ($type == \CARD_AIR_POWER && $deckName == 'AIR_POWER_AS_ARTILLERY_BOMBARD_DECK') {
         $type = \CARD_ARTILLERY_BOMBARD;
       }
 

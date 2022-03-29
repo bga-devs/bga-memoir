@@ -80,7 +80,24 @@ $machinestates = [
     'descriptionmyturn' => '',
     'type' => 'game',
     'action' => 'stPrepareTurn',
-    'transitions' => ['playCard' => ST_PLAY_CARD],
+    'transitions' => ['playCard' => ST_PLAY_CARD, 'commissar' => ST_COMMISSAR],
+  ],
+
+  ST_COMMISSAR => [
+    'name' => 'commissarCard',
+    'description' => clienttranslate('${actplayer} must put a card under commissar token'),
+    'descriptionmyturn' => clienttranslate('${you} must put a card under commissar token'),
+    'type' => 'activeplayer',
+    'args' => 'argsCommissarCard',
+    'possibleactions' => ['actCommissarCard', 'actPlayCard'],
+    'transitions' => [
+      'selectUnits' => ST_ORDER_UNITS,
+      'finestHour' => ST_FINEST_HOUR_ROLL,
+      'airpower' => ST_AIRPOWER_TARGET,
+      'barrage' => ST_BARRAGE_TARGET,
+      'medics' => ST_MEDICS_TARGET,
+      'counterAttack' => ST_COUNTER_ATTACK,
+    ],
   ],
 
   ST_PLAY_CARD => [
@@ -97,6 +114,7 @@ $machinestates = [
       'barrage' => ST_BARRAGE_TARGET,
       'medics' => ST_MEDICS_TARGET,
       'counterAttack' => ST_COUNTER_ATTACK,
+      'commissar' => ST_COMMISSAR,
     ],
   ],
 

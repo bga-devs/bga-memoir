@@ -37,8 +37,6 @@ class Recon extends \M44\Models\SectionCard
     if ($this->getExtraDatas('hill317') === true) {
       return 'airpower';
     } else {
-      // throw new \feException(print_r(\debug_print_backtrace()));
-      // throw new \feException($this->id);
       return parent::nextStateAfterPlay();
     }
   }
@@ -55,9 +53,9 @@ class Recon extends \M44\Models\SectionCard
       ->getOpponent()
       ->getUnits()
       ->map(function ($unit) {
-        return array_merge($unit->getPos(), ['section' => $unit->getSection()]);
+        return $unit->getPos();
       });
-    return ['units' => $units, 'section' => $this->getSections()];
+    return ['units' => $units];
   }
 
   public function actTargetAirPower($unitIds)
@@ -71,35 +69,21 @@ class Recon extends \M44\Models\SectionCard
       throw new \BgaUserException(clienttranslate('You must choose maximum 4 units'));
     }
     // check adjacent of Units
-    if (!$this->areUnitsContiguous($unitIds)) {
+    if (!AirPower::areUnitsContiguous($unitIds)) {
       throw new \BgaUserException(clienttranslate('You must select a contiguous sequence of adjacent ennemy units'));
     }
 
     // check that one unit is in the section
     $found = false;
-    $flipped =
-      $this->getPlayer()
-        ->getTeam()
-        ->getId() == Scenario::getTopTeam();
-
-    foreach ($args['units'] as $uId => $d) {
-      if (!in_array($uId, $unitIds)) {
-        continue;
-      }
-
-      foreach ($d['section'] as $section) {
-        if ($flipped) {
-          $s = 2 - $section;
-        } else {
-          $s = $section;
-        }
-        if ($this->getSections()[$s] == 1) {
-          $found = true;
-        }
+    $section = array_search(1, $this->getSections());
+    $section = 2 - $section; // Flip it because it's computed from the ennmey point of vue
+    foreach (Units::getMany($unitIds) as $unit) {
+      if (in_array($section, $unit->getSections())) {
+        $found = true;
       }
     }
     if ($found == false) {
-      throw new \BgaUserException('No ennemy in the card section. Should not happen');
+      throw new \BgaUserException(clienttranslate('No ennemy in the card section.'));
     }
 
     // Create all the corresponding attacks
@@ -122,24 +106,6 @@ class Recon extends \M44\Models\SectionCard
     Globals::setAttackStack($stack);
 
     Game::get()->nextState('attack');
-  }
-
-  public function areUnitsContiguous($unitIds)
-  {
-    $previousUnit = null;
-    foreach ($unitIds as $unitId) {
-      $unit = Units::get($unitId);
-      if ($previousUnit != null) {
-        $pos1 = $unit->getPos();
-        $pos2 = $previousUnit->getPos();
-        if (abs($pos1['x'] - $pos2['x']) + abs($pos1['y'] - $pos2['y']) > 2) {
-          return false;
-        }
-      }
-      $previousUnit = $unit;
-    }
-
-    return true;
   }
 
   public function getDrawMethod()

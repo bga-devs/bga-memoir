@@ -98,6 +98,7 @@ class Scenario extends \APP_DbObject
     Medals::loadScenario($scenario, $rematch);
     Tokens::loadScenario($scenario, $rematch);
 
+    // Handle options
     if (isset(self::getOptions()['deck_reshuffling'])) {
       Globals::setDeckReshuffle(self::getOptions()['deck_reshuffling']);
       Globals::setDefaultWinner(null);
@@ -106,6 +107,8 @@ class Scenario extends \APP_DbObject
       }
     }
     Globals::setBlitz($scenario['game_info']['options']['blitz_rules'] ?? false);
+    Globals::setCommissar($scenario['game_info']['options']['russian_commissar_rule'] ?? '');
+
 
     Board::init();
     // Notify

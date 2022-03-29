@@ -39,7 +39,12 @@ trait TurnTrait
     if (true) {
       $team = Teams::getTeamTurn();
       $player = $team->getMembers()->first();
-      $this->nextState('playCard', $player->getId());
+      $transition = 'playCard';
+      if ($player->isCommissar() && $player->getCommissarCard() != null) {
+        $transition = 'commissar';
+      }
+
+      $this->nextState($transition, $player->getId());
     } else {
       // Activate commander in chief only
       // TODO

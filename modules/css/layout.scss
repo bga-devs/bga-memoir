@@ -304,18 +304,44 @@ html {
     }
 
     .m44-player-panel {
+      position: relative;
       display: flex;
       background: #ebd5bd;
       min-width: 240px;
       padding: 5px 10px;
+      --memoirCardScale: 0.2;
 
       .player-name {
         flex-grow: 1;
       }
 
+      .commissar-slot {
+        position: absolute;
+        left: 0px;
+        bottom: 0px;
+        width: 40px;
+        height: 40px;
+
+        .m44-card {
+          position: absolute;
+          left: 30px;
+          top: 10px;
+        }
+
+        &::after {
+          content: '';
+          width: 40px;
+          height: 40px;
+          background-image: url('img/ui/commissar.png');
+          background-size: 100% 100%;
+          z-index: 4;
+          display: block;
+          position: absolute;
+        }
+      }
+
       .card-in-play {
         width: 65px;
-        --memoirCardScale: 0.2;
       }
 
       .hand-count-holder {
@@ -335,6 +361,10 @@ html {
         .hand-count::before {
           content: 'x';
           margin: 0px 3px;
+        }
+
+        .m44-card {
+          position: absolute;
         }
       }
     }
