@@ -34,6 +34,7 @@ $scenarios[1433] = [
       ],
     ],
     'options' => [
+      'blitz_rules' => true,
       'russian_commissar_rule' => 'ALLIES',
     ],
   ],
