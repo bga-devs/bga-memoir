@@ -60,7 +60,7 @@ trait TakeGroundTrait
     $attack = $this->getCurrentAttack();
     // Move unit
     $unit = $attack['unit'];
-    Notifications::takeGround($player, $attack['unitId'], $attack['x'], $attack['y']);
+    Notifications::takeGround($player, $attack['unitId'], $attack['x'], $attack['y'], $unit->getPos());
     list($interrupted, $victory) = Board::moveUnit($unit, $attack);
     if ($interrupted) {
       $this->closeCurrentAttack();
@@ -71,7 +71,11 @@ trait TakeGroundTrait
     if ($unit->getGrounds() == $unit->getMaxGrounds()) {
       $this->closeCurrentAttack();
     } else {
-      $this->nextState('overrun');
+      if (Globals::isDesert() && $unit->getType() == ARMOR) {
+        $this->nextState('desertMove');
+      } else {
+        $this->nextState('overrun');
+      }
     }
   }
 
@@ -110,5 +114,13 @@ trait TakeGroundTrait
     $args = $card->getArgsArmorOverrun($attack['unitId']);
     Utils::clearPaths($args['units']);
     return $args;
+  }
+
+  // DESERT rules
+  public function argsDesertMove()
+  {
+    $unit = $this->getCurrentAttack()['unit'];
+
+    return ['units' => [$unit->getId() => $unit->getPossibleMoves(1, 1, false)], 'lastUnitMoved' => $unit->getId()];
   }
 }

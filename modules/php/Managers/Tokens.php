@@ -41,11 +41,20 @@ class Tokens extends \M44\Helpers\Pieces
     return $q;
   }
 
-  public function getOnCoords($location, $coords)
+  public static function addTypeClause(&$q, $type)
+  {
+    $q = $q->where('type', $type);
+    return $q;
+  }
+
+  public function getOnCoords($location, $coords, $type = null)
   {
     $query = self::getSelectWhere(null, $location, null);
     if ($coords != null) {
       self::addCoordsClause($query, $coords);
+    }
+    if ($type != null) {
+      self::addTypeClause($query, $type);
     }
     return $query->get();
   }
@@ -61,6 +70,8 @@ class Tokens extends \M44\Helpers\Pieces
 
     $board = $scenario['board'];
     $tokens = [];
+    $exitMedals = $scenario['game_info']['options']['infantry_exit_counts_2'] ?? 1;
+
     foreach ($board['hexagons'] as $hex) {
       $tags = $hex['tags'] ?? [];
       foreach ($tags as $tag) {
@@ -76,13 +87,46 @@ class Tokens extends \M44\Helpers\Pieces
           $tokens[] = self::extractMedalDatas($hex, $tag, $baseDatas);
         }
         // Mines
-        elseif (($tag['behavior'] ?? null) == 'MINE_FIELD') {
+        elseif (in_array($tag['behavior'] ?? null, ['MINE_FIELD'])) {
           continue; // Handle in terrains instead
         }
         // Camouflage tags
         elseif (in_array($tag['name'], ['tag14', 'tag15'])) {
           $baseDatas['type'] = TOKEN_CAMOUFLAGE;
           $tokens[] = $baseDatas;
+        } elseif (($tag['behavior'] ?? null) == 'EXIT_MARKER') {
+          // at least the hex on the marker.
+          $tokens[] = [
+            'location' => 'board',
+            'x' => $hex['col'],
+            'y' => $hex['row'],
+            'sprite' => $tag['name'],
+            'type' => \TOKEN_EXIT_MARKER,
+            'team' => $tag['side'] ?? null,
+            'datas' => json_encode([
+              'medals' => $exitMedals,
+            ]),
+          ];
+          $origin = ['x' => $hex['col'], 'y' => $hex['row']];
+
+          foreach ($tag['group'] as $g) {
+            $calc = Utils::revertCoords($g);
+            if ($calc == $origin) {
+              continue;
+            }
+            // throw new \feException(print_r($calc));
+            $tokens[] = [
+              'location' => 'board',
+              'x' => $calc['x'],
+              'y' => $calc['y'],
+              'sprite' => $tag['name'],
+              'type' => \TOKEN_EXIT_MARKER,
+              'team' => $tag['side'] ?? null,
+              'datas' => json_encode([
+                'medals' => $exitMedals,
+              ]),
+            ];
+          }
         }
       }
     }

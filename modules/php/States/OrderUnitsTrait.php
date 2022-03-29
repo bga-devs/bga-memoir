@@ -6,7 +6,9 @@ use M44\Core\Notifications;
 use M44\Managers\Players;
 use M44\Managers\Teams;
 use M44\Managers\Units;
+use M44\Managers\Tokens;
 use M44\Helpers\Utils;
+use M44\Board;
 use M44\Dice;
 
 trait OrderUnitsTrait
@@ -74,6 +76,7 @@ trait OrderUnitsTrait
 
   public function actHealUnit($unitId)
   {
+    self::checkAction('actHealUnit');
     $player = Players::getCurrent();
 
     $unit = Units::get($unitId);
@@ -104,5 +107,31 @@ trait OrderUnitsTrait
     }
 
     $this->gamestate->nextState('moveUnits');
+  }
+
+  public function actExitUnit($unitId)
+  {
+    self::checkAction('actExitUnit');
+    $player = Players::getCurrent();
+    $args = $this->argsMoveUnits($player, false);
+    if (!\array_key_exists($unitId, $args['units'])) {
+      throw new \BgaVisibleSystemException('You cannot move this unit. Should not happen');
+    }
+
+    $unit = Units::get($unitId);
+
+    $unit->setNUnits(0);
+
+    Board::removeUnit($unit);
+    Notifications::exitUnit($player, $unit);
+    $team = $unit->getTeam();
+    $team->addExitMedals($unit);
+    Tokens::removeTargets($unit->getPos());
+    Tokens::removeCamouflage($unit->getPos());
+    if (Teams::checkVictory()) {
+      return;
+    }
+
+    $this->nextState('moveUnits');
   }
 }

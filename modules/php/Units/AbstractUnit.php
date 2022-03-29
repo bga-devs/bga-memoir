@@ -258,7 +258,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
   // |_|  |_|\___/  \_/  |_____|
   /////////////////////////////////
 
-  public function getPossibleMoves($maxMove = null, $maxMoveAttack = null)
+  public function getPossibleMoves($maxMove = null, $maxMoveAttack = null, $additionalAction = true)
   {
     if ($maxMove != null) {
       $this->movementRadius = $maxMove;
@@ -269,12 +269,27 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     }
 
     $pAction = [];
-    foreach (Board::getTerrainsInCell($this->getPos()) as $terrain) {
-      $actions = $terrain->getPossibleMoveActions($this);
-      foreach ($actions as $action) {
-        $action['type'] = 'action';
-        $action['terrainId'] = $terrain->getId();
-        $pAction[] = $action;
+    if ($additionalAction) {
+      foreach (Board::getTerrainsInCell($this->getPos()) as $terrain) {
+        $actions = $terrain->getPossibleMoveActions($this);
+        foreach ($actions as $action) {
+          $action['type'] = 'action';
+          $action['terrainId'] = $terrain->getId();
+          $pAction[] = $action;
+        }
+      }
+
+      // exit markers
+      $tokens = Tokens::getOnCoords('board', $this->getPos(), \TOKEN_EXIT_MARKER);
+      $team = $this->getTeamId();
+      foreach ($tokens as $t) {
+        if ($t['team'] == $team) {
+          $pAction[] = [
+            'type' => 'action',
+            'action' => 'actExitUnit',
+            'desc' => \clienttranslate('Exit unit and gain medals'),
+          ];
+        }
       }
     }
 

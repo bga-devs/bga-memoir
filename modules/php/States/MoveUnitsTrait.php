@@ -42,17 +42,22 @@ trait MoveUnitsTrait
     $unit = Units::get($unitId);
     $coordSource = $unit->getPos();
     foreach ($path as $c) {
+      $unit->incMoves(1);
       Notifications::moveUnit($player, $unit, $coordSource, $c);
       list($interrupted, $isWinning) = Board::moveUnit($unit, $c);
       if ($isWinning) {
         return;
       } elseif ($interrupted) {
+        if ($this->gamestate->state()['name'] == 'desertMove') {
+          $this->gamestate->nextState('overrun');
+          return;
+        }
         $this->gamestate->nextState('moveUnits');
         return;
       }
       $coordSource = $c;
     }
-    $unit->incMoves($cell['d']);
+    // $unit->incMoves($cell['d']);
     // Handle Road
     if ($cell['road'] ?? false) {
       $unit->useRoadBonus();
@@ -62,6 +67,10 @@ trait MoveUnitsTrait
 
     Globals::setUnitMoved($unitId);
 
+    if ($this->gamestate->state()['name'] == 'desertMove') {
+      $this->gamestate->nextState('overrun');
+      return;
+    }
     $this->gamestate->nextState('moveUnits');
   }
 
@@ -70,6 +79,12 @@ trait MoveUnitsTrait
     if ($check) {
       self::checkAction('actMoveUnitsDone');
     }
+
+    if ($this->gamestate->state()['name'] == 'desertMove') {
+      $this->gamestate->nextState('overrun');
+      return;
+    }
+
     $this->gamestate->nextState('attackUnits');
   }
 

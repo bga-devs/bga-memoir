@@ -108,7 +108,7 @@ class Scenario extends \APP_DbObject
     }
     Globals::setBlitz($scenario['game_info']['options']['blitz_rules'] ?? false);
     Globals::setCommissar($scenario['game_info']['options']['russian_commissar_rule'] ?? '');
-
+    Globals::setDesert($scenario['game_info']['options']['north_african_desert_rules'] ?? false);
 
     Board::init();
     // Notify

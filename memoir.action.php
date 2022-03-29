@@ -61,7 +61,6 @@ class action_memoir extends APP_GameAction
     self::ajaxResponse();
   }
 
-
   public function actOrderUnits()
   {
     self::setAjaxMode();
@@ -125,6 +124,14 @@ class action_memoir extends APP_GameAction
     self::setAjaxMode();
     $unitId = self::getArg('unitId', AT_posint, false);
     $this->game->actHealUnit($unitId);
+    self::ajaxResponse();
+  }
+
+  public function actExitUnit()
+  {
+    self::setAjaxMode();
+    $unitId = self::getArg('unitId', AT_posint, false);
+    $this->game->actExitUnit($unitId);
     self::ajaxResponse();
   }
 

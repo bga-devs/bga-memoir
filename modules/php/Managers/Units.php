@@ -72,7 +72,7 @@ class Units extends \M44\Helpers\Pieces
   }
 
   public static $nations = [
-    ALLIES => ['fr', 'gb', 'us', 'ru', 'ch'],
+    ALLIES => ['fr', 'gb', 'us', 'ru', 'ch', 'brit'],
     AXIS => ['ger', 'jp', 'it'],
   ];
 
