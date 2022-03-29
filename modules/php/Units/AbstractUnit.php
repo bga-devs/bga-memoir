@@ -6,6 +6,7 @@ use M44\Scenario;
 use M44\Managers\Players;
 use M44\Managers\Units;
 use M44\Managers\Cards;
+use M44\Managers\Tokens;
 use M44\Managers\Teams;
 
 class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
@@ -210,6 +211,15 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     return $this->getExtraDatas('cannotBattle');
   }
 
+  public function isCamouflaged()
+  {
+    return Tokens::getOnCoords('board', $this->getPos())
+      ->filter(function ($t) {
+        return $t['type'] == \TOKEN_CAMOUFLAGE;
+      })
+      ->count() != 0;
+  }
+
   //////////////////////////////////////
   //    ___  ____  ____  _____ ____
   //   / _ \|  _ \|  _ \| ____|  _ \
@@ -223,6 +233,12 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     $cardId = is_int($card) ? $card : $card->getId();
     $this->setActivationCard($cardId);
     $this->setExtraDatas('onTheMove', $onTheMove);
+  }
+
+  public function disable()
+  {
+    $this->setMoves(\INFINITY);
+    $this->setFights(\INFINITY);
   }
 
   public function getActivationPlayer()
@@ -252,7 +268,17 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
       $this->movementAndAttackRadius = $maxMoveAttack;
     }
 
-    return Board::getReachableCells($this);
+    $pAction = [];
+    foreach (Board::getTerrainsInCell($this->getPos()) as $terrain) {
+      $actions = $terrain->getPossibleMoveActions($this);
+      foreach ($actions as $action) {
+        $action['type'] = 'action';
+        $action['terrainId'] = $terrain->getId();
+        $pAction[] = $action;
+      }
+    }
+
+    return array_merge(Board::getReachableCells($this), $pAction);
   }
 
   public function moveTo($cell)

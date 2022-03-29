@@ -300,6 +300,9 @@ $scenarios[1483] = [
         'tags' => [
           0 => [
             'name' => 'tag3',
+            'behavior' => 'MINE_FIELD',
+            'group' => [],
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -309,6 +312,9 @@ $scenarios[1483] = [
         'tags' => [
           0 => [
             'name' => 'tag3',
+            'behavior' => 'MINE_FIELD',
+            'group' => [],
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -346,6 +352,9 @@ $scenarios[1483] = [
         'tags' => [
           0 => [
             'name' => 'tag3',
+            'behavior' => 'MINE_FIELD',
+            'group' => [],
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -355,6 +364,9 @@ $scenarios[1483] = [
         'tags' => [
           0 => [
             'name' => 'tag3',
+            'behavior' => 'MINE_FIELD',
+            'group' => [],
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -364,6 +376,9 @@ $scenarios[1483] = [
         'tags' => [
           0 => [
             'name' => 'tag3',
+            'behavior' => 'MINE_FIELD',
+            'group' => [],
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -591,7 +606,7 @@ $scenarios[1483] = [
     'en' => [
       'name' => clienttranslate('The Meat Grinder'),
       'subtitle' => clienttranslate('Iwo Jima'),
-      'historical' => clienttranslate('On February 26, 1945 the Marines of the 4th Division found themselves facing a formidable complex of defensive positions on Iwo Jima. Hill 382, The Amphitheater, Turkey Knob and the village of Minami, were to become collectively known as the \'Meat Grinder\'. A well-planned defense layout, the remarkable combination of weapons, minefields, caves and bunkers devised by Japanese General Kuribayashi held out against repeated attacks. 
+      'historical' => clienttranslate('On February 26, 1945 the Marines of the 4th Division found themselves facing a formidable complex of defensive positions on Iwo Jima. Hill 382, The Amphitheater, Turkey Knob and the village of Minami, were to become collectively known as the \'Meat Grinder\'. A well-planned defense layout, the remarkable combination of weapons, minefields, caves and bunkers devised by Japanese General Kuribayashi held out against repeated attacks.
 
 Several times, the Marines\' advance looked promising, only to bog down and then be driven back to retreat under heavy fire. The Japanese forces also used infiltration tactics and a counter-attack with a limited number of tanks to further slow the Marines down.
 

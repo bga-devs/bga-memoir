@@ -32,13 +32,14 @@ trait DebugTrait
     // }
     // throw new \feException(print_r(Board::getReachableCellsAtDistance(Units::get(14), 3)));
     // throw new \feException(print_r(Utils::revertCoords($c)));
-    $terrains = Board::getTerrainsInCell(5, 3);
-    $x = 0;
-    foreach ($terrains as $t) {
-      throw new \feException($t->isOriginalOwner(Units::get(9)));
-      // $x += $t->defense(Units::get(9));
-    }
+    // $terrains = Board::getTerrainsInCell(5, 3);
+    // $x = 0;
+    // foreach ($terrains as $t) {
+    //   throw new \feException($t->isOriginalOwner(Units::get(9)));
+    //   // $x += $t->defense(Units::get(9));
+    // }
     // throw
+    throw new \feException('titi ' . Units::get(1086)->isCamouflaged() . ' toto');
   }
 
   function tp($pId, $unitId, $min, $max)

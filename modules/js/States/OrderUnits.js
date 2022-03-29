@@ -128,9 +128,16 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     onEnteringStateMoveUnitsChooseTarget(args) {
       $('unit-' + args.unitId).classList.add('moving');
       args.cells.forEach((cell) => {
-        let oCell = $(`cell-${cell.x}-${cell.y}`);
-        this.onClick(oCell, () => this.takeAction('actMoveUnit', { unitId: args.unitId, x: cell.x, y: cell.y }));
-        oCell.classList.add(cell.canAttack ? 'forMoveAndAttack' : 'forMove');
+        // Mixed can either be a cell or an action (eg removing wire)
+        if (cell.type && cell.type == 'action') {
+          this.addPrimaryActionButton('btn' + cell.action, _(cell.desc), () =>
+            this.takeAction(cell.action, { unitId: args.unitId }),
+          );
+        } else {
+          let oCell = $(`cell-${cell.x}-${cell.y}`);
+          this.onClick(oCell, () => this.takeAction('actMoveUnit', { unitId: args.unitId, x: cell.x, y: cell.y }));
+          oCell.classList.add(cell.canAttack ? 'forMoveAndAttack' : 'forMove');
+        }
       });
 
       // Makes other units selectable

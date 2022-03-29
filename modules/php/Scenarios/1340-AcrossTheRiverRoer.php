@@ -274,6 +274,8 @@ $scenarios[1340] = [
         'tags' => [
           0 => [
             'name' => 'tag3',
+            'behavior' => 'MINE_FIELD',
+            'group' => [],
           ],
         ],
       ],
@@ -283,6 +285,8 @@ $scenarios[1340] = [
         'tags' => [
           0 => [
             'name' => 'tag3',
+            'behavior' => 'MINE_FIELD',
+            'group' => [],
           ],
         ],
       ],
@@ -296,6 +300,8 @@ $scenarios[1340] = [
         'tags' => [
           0 => [
             'name' => 'tag3',
+            'behavior' => 'MINE_FIELD',
+            'group' => [],
           ],
         ],
       ],
@@ -321,6 +327,8 @@ $scenarios[1340] = [
         'tags' => [
           0 => [
             'name' => 'tag3',
+            'behavior' => 'MINE_FIELD',
+            'group' => [],
           ],
         ],
       ],
@@ -330,6 +338,8 @@ $scenarios[1340] = [
         'tags' => [
           0 => [
             'name' => 'tag3',
+            'behavior' => 'MINE_FIELD',
+            'group' => [],
           ],
         ],
       ],
@@ -339,6 +349,8 @@ $scenarios[1340] = [
         'tags' => [
           0 => [
             'name' => 'tag3',
+            'behavior' => 'MINE_FIELD',
+            'group' => [],
           ],
         ],
       ],
@@ -671,7 +683,7 @@ $scenarios[1340] = [
 
 The 84th Division was the most northerly of all the assault divisions. The first wave made it across a relatively narrow section of the Roer at Linnich. Once over the river the 1st Battalion did not stop to clear the German defenders but wheeled to the left. The 3rd battalion then crossed and while the 1st Battalion continued to press north, the 3rd moved against the elements of the 59th Infantry Division and the 183rd Volksgrenadier Division in their defensive positions across from Linnich.
 
-By the end of the second day two regiments were over the Roer and occupied a bridgehead of over 3 miles. 
+By the end of the second day two regiments were over the Roer and occupied a bridgehead of over 3 miles.
 
 The stage is set, the battle lines are drawn, and you are in command. The rest is history.'),
       'description' => clienttranslate('Axis Player: Take 4 Command cards

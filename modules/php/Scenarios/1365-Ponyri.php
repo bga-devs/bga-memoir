@@ -180,6 +180,8 @@ $scenarios[1365] = [
         'tags' => [
           0 => [
             'name' => 'tag3',
+            'behavior' => 'MINE_FIELD',
+            'group' => [],
           ],
         ],
       ],
@@ -189,6 +191,8 @@ $scenarios[1365] = [
         'tags' => [
           0 => [
             'name' => 'tag3',
+            'behavior' => 'MINE_FIELD',
+            'group' => [],
           ],
         ],
       ],
@@ -198,6 +202,8 @@ $scenarios[1365] = [
         'tags' => [
           0 => [
             'name' => 'tag3',
+            'behavior' => 'MINE_FIELD',
+            'group' => [],
           ],
         ],
       ],
@@ -207,6 +213,8 @@ $scenarios[1365] = [
         'tags' => [
           0 => [
             'name' => 'tag3',
+            'behavior' => 'MINE_FIELD',
+            'group' => [],
           ],
         ],
       ],
@@ -216,6 +224,8 @@ $scenarios[1365] = [
         'tags' => [
           0 => [
             'name' => 'tag3',
+            'behavior' => 'MINE_FIELD',
+            'group' => [],
           ],
         ],
       ],
