@@ -213,6 +213,20 @@ $machinestates = [
     'transitions' => [
       'next' => ST_ATTACK,
       'nextAttack' => ST_ATTACK_THROW,
+      'desertOverrun' => ST_DESERT_MOVE,
+      'overrun' => ST_ARMOR_OVERRUN,
+    ],
+  ],
+
+  ST_DESERT_MOVE => [
+    'name' => 'desertMove',
+    'description' => clienttranslate('${actplayer} may move an additional hex (Desert rules)'),
+    'descriptionmyturn' => clienttranslate('${you}  may move an additional hex (Desert rules)'),
+    'type' => 'activeplayer',
+    'args' => 'argsDesertMove',
+    // 'action' => 'stArmorOverrun',
+    'possibleactions' => ['actMoveUnit', 'actMoveUnitsDone'],
+    'transitions' => [
       'overrun' => ST_ARMOR_OVERRUN,
     ],
   ],
