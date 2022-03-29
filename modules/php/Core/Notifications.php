@@ -146,11 +146,13 @@ class Notifications
         'coordTarget' => $coordTarget,
         'x' => $coordTarget['x'],
         'y' => $coordTarget['y'],
+        'fromX' => $coordSource['x'],
+        'fromY' => $coordSource['y'],
       ]
     );
   }
 
-  public static function takeGround($player, $unitId, $x, $y)
+  public static function takeGround($player, $unitId, $x, $y, $coordSource)
   {
     self::notifyAll(
       'moveUnit',
@@ -161,6 +163,8 @@ class Notifications
         'x' => $x,
         'y' => $y,
         'coordTarget' => ['x' => $x, 'y' => $y],
+        'fromX' => $coordSource['x'],
+        'fromY' => $coordSource['y'],
       ]
     );
   }

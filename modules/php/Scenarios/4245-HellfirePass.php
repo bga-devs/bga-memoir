@@ -33,6 +33,7 @@ $scenarios[4245] = [
         'standard' => [],
       ],
     ],
+    'options' => ['north_african_desert_rules' => true],
   ],
   'board' => [
     'type' => 'STANDARD',

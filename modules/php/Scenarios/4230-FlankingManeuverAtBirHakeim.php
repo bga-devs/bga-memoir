@@ -29,6 +29,7 @@ $scenarios[4230] = [
     'cards_player2' => 5,
     'victory_player1' => 5,
     'victory_player2' => 5,
+    'options' => ['north_african_desert_rules' => true],
   ],
   'board' => [
     'type' => 'STANDARD',

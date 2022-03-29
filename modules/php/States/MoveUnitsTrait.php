@@ -47,6 +47,10 @@ trait MoveUnitsTrait
       if ($isWinning) {
         return;
       } elseif ($interrupted) {
+        if ($this->gamestate->state()['name'] == 'desertMove') {
+          $this->gamestate->nextState('overrun');
+          return;
+        }
         $this->gamestate->nextState('moveUnits');
         return;
       }
@@ -62,6 +66,10 @@ trait MoveUnitsTrait
 
     Globals::setUnitMoved($unitId);
 
+    if ($this->gamestate->state()['name'] == 'desertMove') {
+      $this->gamestate->nextState('overrun');
+      return;
+    }
     $this->gamestate->nextState('moveUnits');
   }
 
@@ -70,6 +78,12 @@ trait MoveUnitsTrait
     if ($check) {
       self::checkAction('actMoveUnitsDone');
     }
+
+    if ($this->gamestate->state()['name'] == 'desertMove') {
+      $this->gamestate->nextState('overrun');
+      return;
+    }
+
     $this->gamestate->nextState('attackUnits');
   }
 

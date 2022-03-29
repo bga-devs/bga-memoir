@@ -293,6 +293,10 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       this.onEnteringStateAttackUnits(args, excludeUnit);
     },
 
+    onEnteringStateDesertMove(args, excludeUnit = null) {
+      this.onEnteringStateMoveUnits(args, excludeUnit);
+    },
+
     ////////////////////////////////////////////////
     //     _              _               _
     //    / \   _ __ ___ | |__  _   _ ___| |__
@@ -411,7 +415,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       if (this._selectedUnits.length == 4) return false;
       // Otherwise, it must be adjacent to the last selected unit
       let lastUnitPos = this.getArgs()['units'][lastUnitId];
-      return Math.abs(pos.x - lastUnitPos.x) + 2*Math.abs(pos.y - lastUnitPos.y) <= 3;
+      return Math.abs(pos.x - lastUnitPos.x) + 2 * Math.abs(pos.y - lastUnitPos.y) <= 3;
     },
 
     /////////////////////////////////////////////

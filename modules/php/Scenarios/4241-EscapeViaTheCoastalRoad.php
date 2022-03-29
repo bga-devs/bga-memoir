@@ -29,6 +29,7 @@ $scenarios[4241] = [
     'cards_player2' => 5,
     'victory_player1' => 6,
     'victory_player2' => 6,
+    'options' => ['north_african_desert_rules' => true],
   ],
   'board' => [
     'type' => 'STANDARD',
@@ -465,7 +466,7 @@ $scenarios[4241] = [
 Defenders in El Adem and neighbouring boxes held firm, allowing the 1st South African Division to escape intact along the coastal road. But the road could not accommodate two divisions. With Panzer Divisions blocking the east, the remaining brigades of the Northumbrian Division were forced to attack the Brescia and Pavia Divisions and head south in the desert, before turning back west. The German Panzers raced north, but could not move fast enough to close the road before the bulk of British troops had escaped!
 
 The stage is set, the battle lines drawn, and you are in command. The rest is history.'),
-      'description' => clienttranslate('Axis Player 
+      'description' => clienttranslate('Axis Player
 [Germany/Italy]
 Take 5 Command cards.
 

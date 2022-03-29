@@ -39,6 +39,7 @@ class Globals extends \M44\Helpers\DB_Manager
     'defaultWinner' => 'str',
     'blitz' => 'bool',
     'commissar' => 'str',
+    'desert' => 'bool',
   ];
 
   protected static $table = 'global_variables';
