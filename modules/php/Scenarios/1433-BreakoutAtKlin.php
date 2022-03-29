@@ -307,6 +307,12 @@ $scenarios[1433] = [
           0 => [
             'name' => 'medal2',
           ],
+          1 => [
+            'name' => 'tag5',
+            'behavior' => 'EXIT_MARKER',
+            'group' => ['D1', 'E1', 'F1', 'G1', 'H1', 'I1', 'J1', 'K1'],
+            'side' => 'AXIS',
+          ],
         ],
       ],
       29 => [
