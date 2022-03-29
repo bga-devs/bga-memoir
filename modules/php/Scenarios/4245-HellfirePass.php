@@ -358,6 +358,9 @@ $scenarios[4245] = [
         'tags' => [
           0 => [
             'name' => 'tag3',
+            'behavior' => 'MINE_FIELD',
+            'group' => [],
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -367,6 +370,9 @@ $scenarios[4245] = [
         'tags' => [
           0 => [
             'name' => 'tag3',
+            'behavior' => 'MINE_FIELD',
+            'group' => [],
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -376,6 +382,9 @@ $scenarios[4245] = [
         'tags' => [
           0 => [
             'name' => 'tag3',
+            'behavior' => 'MINE_FIELD',
+            'group' => [],
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -389,6 +398,9 @@ $scenarios[4245] = [
         'tags' => [
           0 => [
             'name' => 'tag3',
+            'behavior' => 'MINE_FIELD',
+            'group' => [],
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -398,6 +410,9 @@ $scenarios[4245] = [
         'tags' => [
           0 => [
             'name' => 'tag3',
+            'behavior' => 'MINE_FIELD',
+            'group' => [],
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -407,6 +422,9 @@ $scenarios[4245] = [
         'tags' => [
           0 => [
             'name' => 'tag3',
+            'behavior' => 'MINE_FIELD',
+            'group' => [],
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -416,6 +434,9 @@ $scenarios[4245] = [
         'tags' => [
           0 => [
             'name' => 'tag3',
+            'behavior' => 'MINE_FIELD',
+            'group' => [],
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -644,7 +665,7 @@ British Commonwealth Forces and Italian Royal Army command rules are in effect.
 
 All Allied tank units are Elite armor units (Troops 2 - Specialized Units). Badges are not required.
 
-Special Weapon Asset rules are in effect for the two German units equipped with Anti-Tank weapons. 
+Special Weapon Asset rules are in effect for the two German units equipped with Anti-Tank weapons.
 
 The German player lays out the Minefields (Terrain 29 - Minefields).
 

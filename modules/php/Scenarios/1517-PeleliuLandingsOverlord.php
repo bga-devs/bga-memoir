@@ -586,6 +586,9 @@ $scenarios[1517] = [
         'tags' => [
           0 => [
             'name' => 'tag3',
+            'behavior' => 'MINE_FIELD',
+            'group' => [],
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -595,6 +598,9 @@ $scenarios[1517] = [
         'tags' => [
           0 => [
             'name' => 'tag3',
+            'behavior' => 'MINE_FIELD',
+            'group' => [],
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -604,6 +610,9 @@ $scenarios[1517] = [
         'tags' => [
           0 => [
             'name' => 'tag3',
+            'behavior' => 'MINE_FIELD',
+            'group' => [],
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -624,6 +633,9 @@ $scenarios[1517] = [
         'tags' => [
           0 => [
             'name' => 'tag3',
+            'behavior' => 'MINE_FIELD',
+            'group' => [],
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -633,6 +645,9 @@ $scenarios[1517] = [
         'tags' => [
           0 => [
             'name' => 'tag3',
+            'behavior' => 'MINE_FIELD',
+            'group' => [],
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -642,6 +657,9 @@ $scenarios[1517] = [
         'tags' => [
           0 => [
             'name' => 'tag3',
+            'behavior' => 'MINE_FIELD',
+            'group' => [],
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -668,6 +686,9 @@ $scenarios[1517] = [
         'tags' => [
           0 => [
             'name' => 'tag3',
+            'behavior' => 'MINE_FIELD',
+            'group' => [],
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -1163,7 +1184,7 @@ $scenarios[1517] = [
 
 On the far left, the 1st Marines, led by Guadalcanal veteran, Captain George P. Hunt, flushed out the Japanese troops holed up in the caves of the \'Point\'. In the center the 5th Marines met scattered resistance and moved inland toward the airfield. Their advance, however, was soon halted because of the lack of progress on their left. On the far right, the 7th Marines drew heavy fire from nearby islands, before veering off to their left and causing confusion on the center landing beaches.
 
-Around 16.30, a Japanese counter-attack of tanks and infantry across the airfield was repulsed and a second attack later in the day also thrown back. 
+Around 16.30, a Japanese counter-attack of tanks and infantry across the airfield was repulsed and a second attack later in the day also thrown back.
 
 The stage is set, the battle lines are drawn, and you are in command. The rest is history.'),
       'description' => clienttranslate('Japanese Player: Take 8 Command cards.
