@@ -346,11 +346,12 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       if (selected) return true;
       // Compute selected units by type
       let t = [0, 0, 0];
-      this._selectedUnits.forEach((unitId) => t[this.getArgs().units[unitId] - 1]++);
+      this._selectedUnits.forEach((unit2Id) => t[this.getArgs().units[unit2Id] - 1]++);
       // Compute remaining jokers
       let dice = this.getArgs().results;
-      let remainingJokers =
-        dice[2] - t[2] - (t[0] <= dice[0] ? 0 : t[0] - dice[0]) - (t[1] <= dice[1] ? 0 : t[1] - dice[1]);
+      let usedJokers = t[2] + (t[0] <= dice[0] ? 0 : t[0] - dice[0]) + (t[1] <= dice[1] ? 0 : t[1] - dice[1]);
+      t[2] = usedJokers;
+      let remainingJokers = dice[2] - usedJokers;
       // Ok if enough remaining unit of this type of enough jokers left
       let type = this.getArgs().units[unitId] - 1;
       return t[type] < dice[type] || remainingJokers > 0;
