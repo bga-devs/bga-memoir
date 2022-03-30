@@ -62,7 +62,7 @@ class MedicsAndMechanics extends \M44\Models\Card
 
     // Roll dice corresponding to number of cards
     $unit = Units::get($unitId);
-    $nbCard = $player->getCards()->count() + 1;
+    $nbCard = $player->countAllCards();
     $results = Dice::roll($player, $nbCard, $unit->getPos());
 
     // Compute number of heal

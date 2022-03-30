@@ -30,7 +30,7 @@ class FinestHour extends \M44\Models\Card
   public function stFinestHourRoll()
   {
     $player = $this->getPlayer();
-    $n = $player->getCards()->count() + 1;
+    $n = $player->countAllCards();
     $results = Dice::roll($player, $n);
     $this->setExtraDatas('dice', $results);
     Game::get()->nextState('selectUnits');

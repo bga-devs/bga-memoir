@@ -81,6 +81,13 @@ class Player extends \M44\Helpers\DB_Model
     return Cards::getInPlayOfPlayer($this->id);
   }
 
+  public function countAllCards()
+  {
+    $inPlay = $this->getCardInPlay() ? 1 : 0;
+    $commissar = $this->getCommissarCard() ? 1 : 0;
+    return $this->getCards()->count() + $inPlay + $commissar;
+  }
+
   public function getTeam()
   {
     return Teams::get($this->team);
@@ -110,7 +117,7 @@ class Player extends \M44\Helpers\DB_Model
   }
 
   public function canHill317()
-  {  
+  {
     if (Globals::isBlitz() && self::getTeam()->getId() == \AXIS) {
       return true;
     }
