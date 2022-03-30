@@ -13,6 +13,13 @@ class BigGun extends Artillery
     $this->attackPower = [3, 3, 2, 2, 1, 1, 1, 1];
     $this->number = 3;
     $this->maxTarget = 3;
+    $this->desc = [
+      clienttranslate('Fire at 3, 3, 2, 2, 1, 1, 1, 1'),
+      clienttranslate(
+        'Place a cross-hair marker when a target is hit on the hex. Until moved or destroyed, zeroed-in unit take fire at +1 on future rounds'
+      ),
+      clienttranslate('Cross-hair markers are not cumulative'),
+    ];
   }
 
   protected function getTokens($cell = null)
