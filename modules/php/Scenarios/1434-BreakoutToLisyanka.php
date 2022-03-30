@@ -33,6 +33,7 @@ $scenarios[1434] = [
         'standard' => [],
       ],
     ],
+    'options' => ['infantry_exit_counts_2' => true],
   ],
   'board' => [
     'type' => 'STANDARD',
@@ -63,7 +64,7 @@ $scenarios[1434] = [
         'row' => 0,
         'col' => 10,
         'terrain' => [
-          'name' => 'buildings',
+          'name' => 'wvillage',
         ],
         'unit' => [
           'name' => 'infger',
@@ -267,7 +268,7 @@ $scenarios[1434] = [
         'row' => 4,
         'col' => 4,
         'terrain' => [
-          'name' => 'buildings',
+          'name' => 'wvillage',
         ],
       ],
       29 => [
@@ -283,7 +284,7 @@ $scenarios[1434] = [
         'row' => 5,
         'col' => 3,
         'terrain' => [
-          'name' => 'buildings',
+          'name' => 'wvillage',
         ],
       ],
       31 => [
@@ -389,7 +390,7 @@ $scenarios[1434] = [
         'row' => 6,
         'col' => 22,
         'terrain' => [
-          'name' => 'buildings',
+          'name' => 'wvillage',
         ],
       ],
       44 => [
@@ -403,7 +404,7 @@ $scenarios[1434] = [
         'row' => 8,
         'col' => 4,
         'terrain' => [
-          'name' => 'buildings',
+          'name' => 'wvillage',
         ],
         'unit' => [
           'name' => 'infru',
@@ -423,6 +424,14 @@ $scenarios[1434] = [
         'terrain' => [
           'name' => 'wriver',
           'orientation' => 1,
+        ],
+        'tags' => [
+          0 => [
+            'name' => 'tag5',
+            'behavior' => 'EXIT_MARKER',
+            'group' => ['D1', 'E1', 'F1', 'G1', 'H1', 'I1', 'J1', 'K1'],
+            'side' => 'AXIS',
+          ],
         ],
       ],
       48 => [
@@ -509,9 +518,9 @@ $scenarios[1434] = [
     'en' => [
       'name' => clienttranslate('Breakout to Lisyanka'),
       'subtitle' => clienttranslate('Eastern Front'),
-      'historical' => clienttranslate('In January, 1944 a large pocket of 6 German divisions with over 56,000 troops had been cut-off by the Soviet Army\'s 1st and 2nd Ukrainian Front troops. For days the Russians continued the attack in an attempt to split up the pocket and destroy the German forces. 
+      'historical' => clienttranslate('In January, 1944 a large pocket of 6 German divisions with over 56,000 troops had been cut-off by the Soviet Army\'s 1st and 2nd Ukrainian Front troops. For days the Russians continued the attack in an attempt to split up the pocket and destroy the German forces.
 
-Just prior to midnight February 16, in a desperate attempt to escape what the German\'s called the \'kessel\' (or cauldron), the 72d Division and 5th Panzer Division attacked from the Khilki-Komarovka pocket. Infantry regiments fixed bayonets and moved out. The Soviet defenders were caught by surprise and the German force broke through the first line and continued the attack up into the hills. 
+Just prior to midnight February 16, in a desperate attempt to escape what the German\'s called the \'kessel\' (or cauldron), the 72d Division and 5th Panzer Division attacked from the Khilki-Komarovka pocket. Infantry regiments fixed bayonets and moved out. The Soviet defenders were caught by surprise and the German force broke through the first line and continued the attack up into the hills.
 
 The Russian counter attacked from Dzhurzhentsy with tanks and artillery. Many Germans panicked and began a mad dash for freedom. The Soviet guns caused horrific casualties, however relief soon came in the form of Panzers from III Panzerkorps. The breakout force had lost most of its artillery, tanks and supplies but many of the German units made it to the Gniloy-Tikich River and crossed to safety.
 

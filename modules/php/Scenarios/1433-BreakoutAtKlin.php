@@ -149,7 +149,7 @@ $scenarios[1433] = [
         ],
         'unit' => [
           'name' => 'inf2ger',
-          'badge' => 'badge4',
+          'badge' => 'badge6',
         ],
       ],
       13 => [
@@ -160,7 +160,7 @@ $scenarios[1433] = [
         ],
         'unit' => [
           'name' => 'inf2ger',
-          'badge' => 'badge4',
+          'badge' => 'badge6',
         ],
       ],
       14 => [
@@ -306,6 +306,12 @@ $scenarios[1433] = [
         'tags' => [
           0 => [
             'name' => 'medal2',
+          ],
+          1 => [
+            'name' => 'tag5',
+            'behavior' => 'EXIT_MARKER',
+            'group' => ['D1', 'E1', 'F1', 'G1', 'H1', 'I1', 'J1', 'K1'],
+            'side' => 'AXIS',
           ],
         ],
       ],

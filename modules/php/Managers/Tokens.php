@@ -70,7 +70,7 @@ class Tokens extends \M44\Helpers\Pieces
 
     $board = $scenario['board'];
     $tokens = [];
-    $exitMedals = $scenario['game_info']['options']['infantry_exit_counts_2'] ?? 1;
+    $exitMedals = $scenario['game_info']['options']['infantry_exit_counts_2'] ?? false ? 2 : 1;
 
     foreach ($board['hexagons'] as $hex) {
       $tags = $hex['tags'] ?? [];
