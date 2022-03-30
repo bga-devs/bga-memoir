@@ -28,11 +28,10 @@ class Minefield extends \M44\Models\Terrain
     if ($isRetreat || !$this->isOriginalOwner($unit)) {
       return false;
     }
-
     if ($unit->mustSweep()) {
       if (
         $unit->getMoves() <= $unit->getMovementAndAttackRadius() ||
-        $unit->getActivationOCard()->getType() == \CARD_BEHIND_LINES
+        ($unit->getActivationOCard()->getType() == \CARD_BEHIND_LINES && $unit->getMoves() == 3)
       ) {
         // Sweep the mine
         Notifications::message(clienttranslate('Combat engineer sweeps the mine instead of battling'), []);
@@ -40,6 +39,11 @@ class Minefield extends \M44\Models\Terrain
         $unit->disable();
         return;
       }
+    }
+
+    // mines are not triggered with behind ennemy lines
+    if ($unit->getActivationOCard()->getType() == CARD_BEHIND_LINES) {
+      return false;
     }
 
     $isHidden = $this->tile == 'mineX';
