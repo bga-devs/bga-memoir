@@ -111,7 +111,7 @@ class Board
     }
 
     // Check for potential lost medals
-    Medals::checkBoardMedals();
+    Medals::checkBoardMedals(false);
 
     if (Teams::checkVictory()) {
       return;
@@ -421,7 +421,7 @@ class Board
       }
     }
 
-    Medals::checkBoardMedals();
+    Medals::checkBoardMedals(false);
     return [$interrupted, Teams::checkVictory()];
   }
 

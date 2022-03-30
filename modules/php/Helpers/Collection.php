@@ -30,10 +30,22 @@ class Collection extends \ArrayObject
   {
     return array_values($this->getArrayCopy());
   }
+  public function toJsonArray()
+  {
+    return $this->map(function ($o) {
+      return $o->jsonSerialize();
+    })->toArray();
+  }
 
   public function toAssoc()
   {
     return $this->getArrayCopy();
+  }
+  public function toJsonAssoc()
+  {
+    return $this->map(function ($o) {
+      return $o->jsonSerialize();
+    })->toAssoc();
   }
 
   public function map($func)

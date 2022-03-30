@@ -158,8 +158,7 @@ class Tokens extends \M44\Helpers\Pieces
    */
   protected function extractMedalDatas($hex, $tag, $baseDatas)
   {
-    $team = in_array($tag['name'], ['medal1', 'medal4', 'medal6']) ? ALLIES : AXIS;
-    $permanent = $tag['medal']['permanent'] ?? false;
+    $team = $tag['name'] == 'medal0' ? null : (in_array($tag['name'], ['medal1', 'medal4', 'medal6']) ? ALLIES : AXIS);
     $hexes = [['x' => $hex['col'], 'y' => $hex['row']]];
     if (isset($tag['group']) && !empty($tag['group'])) {
       foreach ($tag['group'] as $g) {
@@ -170,10 +169,14 @@ class Tokens extends \M44\Helpers\Pieces
     $baseDatas['type'] = \TOKEN_MEDAL;
     $baseDatas['team'] = $team;
     $baseDatas['datas'] = json_encode([
-      'permanent' => $permanent ? 1 : 0,
+      'permanent' => $tag['medal']['permanent'] ?? false,
       'counts_for' => $tag['medal']['counts_for'] ?? 1,
       'nbr_hex' => $tag['medal']['nbr_hex'] ?? 1,
       'group' => $hexes,
+      'majority' => $tag['medal']['majority'] ?? false,
+      'turn_start' => $tag['medal']['turn_start'] ?? false,
+      'last_to_occupy' => $tag['medal']['last_to_occupy'] ?? false,
+      'sole_control' => $tag['medal']['sole_control'] ?? false,
     ]);
 
     return $baseDatas;

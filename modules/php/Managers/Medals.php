@@ -81,13 +81,16 @@ class Medals extends \M44\Helpers\DB_Manager
     return is_null($medal) ? null : $medal['team'];
   }
 
-  public function checkBoardMedals()
+  public function checkBoardMedals($startOfTurn = false)
   {
     foreach (Tokens::getBoardMedals() as $medal) {
       $datas = $medal['datas'];
       $currentHolder = self::getBoardMedalHolder($medal['id']);
       if ($currentHolder != null && $datas['permanent']) {
         continue; // No need to check gained permanent medals
+      }
+      if ($datas['turn_start'] && !$startOfTurn) {
+        continue; // No need to check startOfTurn medals if not at start of turn
       }
 
       // Compute the nbr of hexes owned by each nation
@@ -107,19 +110,40 @@ class Medals extends \M44\Helpers\DB_Manager
         $newHolder = AXIS;
       }
 
+      // Is this a majority medal ?
+      if ($newHolder != null && $datas['majority']) {
+        if ($nHexes[ALLIES] > $nHexes[AXIS]) {
+          $newHolder = ALLIES;
+        } elseif ($nHexes[AXIS] > $nHexes[ALLIES]) {
+          $newHolder = AXIS;
+        } else {
+          $newHolder = null;
+        }
+      }
+
+      // Is this a sole control medal ?
+      if ($newHolder != null && $datas['sole_control']) {
+        if (min($nHexes) > 0) {
+          $newHolder = null;
+        }
+      }
+
       // Has the owner changed ?
       if ($currentHolder != $newHolder) {
-        // Remove the medal of old owner, if any
+        // Remove the medal of old owner
         if ($currentHolder !== null) {
-          // Remove the medals
-          $medalIds = self::removePositionMedals($medal);
-          Notifications::removeMedals($currentHolder, $medalIds, $medal);
+          // Remove only if new owner or if it's not a 'lastToOccupy' medal
+          if ($newHolder != null || !$datas['last_to_occupy']) {
+            // Remove the medals
+            $medalIds = self::removePositionMedals($medal);
+            Notifications::removeMedals($currentHolder, $medalIds, $medal);
 
-          // Decrease stats
-          $team = Teams::get($currentHolder);
-          $statName = 'incMedalRound' . Globals::getRound();
-          foreach ($team->getMembers() as $player) {
-            Stats::$statName($player, -count($medalIds));
+            // Decrease stats
+            $team = Teams::get($currentHolder);
+            $statName = 'incMedalRound' . Globals::getRound();
+            foreach ($team->getMembers() as $player) {
+              Stats::$statName($player, -count($medalIds));
+            }
           }
         }
 
