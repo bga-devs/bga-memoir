@@ -89,6 +89,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
     onEnteringStateMoveUnits(args, excludeUnit = null) {
       let nonEmptyUnits = [];
+      this.removeClassNameOfCells('unselectableForAttacking');
       // When a unit is clicked => prompt for the cell to move
       let callback = (unitId) => {
         let msg =
@@ -258,6 +259,11 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     //   |_| \_\_____| |_| |_| \_\_____/_/   \_\_|
     ///////////////////////////////////////////////////
     onEnteringStateAttackRetreat(args) {
+      // if unit was killed in action
+      if (!$('unit-' + args.unitId)) {
+        return;
+      }
+
       $('unit-' + args.unitId).classList.add('retreating');
       if (!this.isCurrentPlayerActive()) return;
 
