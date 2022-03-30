@@ -247,6 +247,21 @@ $scenarios[1365] = [
         'terrain' => [
           'name' => 'buildings',
         ],
+        'tags' => [
+          0 => [
+            'name' => 'medal0',
+            'medal' => [
+              'counts_for' => 2,
+              'majority' => true,
+            ],
+            'group' => [
+              0 => 'G5',
+              1 => 'g4',
+              2 => 'H3',
+              3 => 'G3',
+            ],
+          ],
+        ],
       ],
       25 => [
         'row' => 4,

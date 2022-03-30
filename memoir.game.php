@@ -107,7 +107,7 @@ class memoir extends Table
       'prefs' => Preferences::getUiData($pId),
       'players' => Players::getUiData($pId),
       'board' => Board::getUiData(),
-      'teams' => Teams::getAll()->toArray(),
+      'teams' => Teams::getAll()->toJsonArray(),
       'deckCount' => Cards::countInLocation('deck'),
       'discard' => Cards::getTopOf('discard'),
       'scenario' => is_null($scenario) ? null : $scenario['text']['en'],

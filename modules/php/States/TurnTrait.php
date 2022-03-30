@@ -5,6 +5,7 @@ use M44\Core\Globals;
 use M44\Managers\Players;
 use M44\Managers\Teams;
 use M44\Managers\Cards;
+use M44\Managers\Medals;
 use M44\Managers\Units;
 use M44\Core\Notifications;
 use M44\Scenario;
@@ -35,6 +36,11 @@ trait TurnTrait
   function stPrepareTurn()
   {
     Globals::incTurn();
+    Medals::checkBoardMedals(true);
+    if (Teams::checkVictory()) {
+      return;
+    }
+
     // TODO : Overlord => branch here to distribute cards instead
     if (true) {
       $team = Teams::getTeamTurn();

@@ -333,10 +333,13 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     tplBoardMedal(medal) {
       const SPRITES = ['medal1', 'medal2', 'medal4', 'medal5', 'medal6', 'medal7', 'medal8', 'medal9'];
       let sprite = SPRITES.findIndex((t) => t == medal.sprite);
+      if (medal.sprite == 'medal0') {
+        sprite = 'both';
+      }
 
       return `
       <div id='board-medal-${medal.id}' class="board-medal"
-        data-team="${medal.team}" data-sprite="${sprite}" data-permanent="${medal.datas.permanent}"></div>`;
+        data-team="${medal.team}" data-sprite="${sprite}" data-permanent="${medal.datas.permanent ? 1 : 0}"></div>`;
     },
 
     notif_addToken(n) {
@@ -591,6 +594,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       // Medals
       if (token.type == TOKEN_MEDAL) {
         let sides = {
+          null: _('Anyone units'),
           ALLIES: _('Allied units'),
           AXIS: _('Axis units'),
         };
@@ -627,6 +631,10 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
                 : _('Remove the medal(s) if this is no longer the case')) +
               '</li>',
           ];
+
+          if (token.datas.majority) {
+            desc.push('<li>' + _('Majority medal') + '</li>');
+          }
         }
       }
 

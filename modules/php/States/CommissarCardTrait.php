@@ -5,6 +5,7 @@ use M44\Core\Notifications;
 use M44\Helpers\Utils;
 use M44\Managers\Cards;
 use M44\Managers\Players;
+use M44\Managers\Teams;
 
 trait CommissarCardTrait
 {
@@ -61,8 +62,64 @@ trait CommissarCardTrait
     $card = Cards::commissar($player, $cardId);
     Notifications::commissarCard($player, $card);
 
-    // Switch to next state depending on card in play
+    if ($isInitial) {
+      $team = Teams::getTeamTurn();
+      $player = $team->getMembers()->first();
+      $this->changeActivePlayerAndJumpTo($player, \ST_PLAY_CARD);
+    } else {
+      $this->gamestate->nextState('play');
+    }
+  }
+
+  function stPlayCommissarCard()
+  {
+    $args = self::argsPlayCommissarCard();
+    if ($args['sections'] == null && !$args['canHill317']) {
+      $this->actPlayCommissarCard(null, false, false);
+    }
+  }
+
+  function argsPlayCommissarCard()
+  {
+    $player = Players::getActive();
     $card = $player->getCardInPlay();
+    return [
+      'cardId' => $card->getId(),
+      'sections' => $card->getAdditionalPlayConstraints(),
+      'canHill317' => $player->canHill317() && $card->canHill317(),
+    ];
+  }
+
+  function actPlayCommissarCard($sectionId = null, $hill317 = false, $check = true)
+  {
+    // Sanity check
+    if ($check) {
+      $this->checkAction('actPlayCommissarCard');
+    }
+    $player = Players::getCurrent();
+    $args = $this->argsPlayCommissarCard();
+    $card = $player->getCardInPlay();
+
+    if ($args['sections'] != null && (!in_array($sectionId, $args['sections']) || $sectionId == null)) {
+      throw new \BgaVisibleSystemException('Invalid section. Should not happen');
+    }
+
+    if ($args['sections'] == null && $sectionId != null) {
+      throw new \BgaVisibleSystemException('Invalid section. Should not happen');
+    }
+
+    if ($hill317 && !$player->canHill317()) {
+      throw new \BgaVisibleSystemException('Cannot play card as hill317. Should not happen');
+    }
+
+    if ($hill317 && !$card->canHill317()) {
+      throw new \BgaVisibleSystemException('Cannot play this type of card as hill317. Should not happen');
+    }
+
+    if ($hill317) {
+      $card->setExtraDatas('hill317', true);
+    }
+    $card->setExtraDatas('section', $sectionId);
     $this->gamestate->nextState($card->nextStateAfterPlay());
   }
 }

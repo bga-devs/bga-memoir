@@ -34,6 +34,7 @@ define([
       this._activeStates = [
         'playCard',
         'commissarCard',
+        'playCommissarCard',
         'orderUnits',
         'moveUnits',
         'attackUnits',
@@ -175,10 +176,10 @@ define([
       this._bottomTeam = this.gamedatas.players[this._pId].team;
       this._deckCounter.setValue(n.args.deckCount);
 
-      this.setupTeams();
-      this.setupPlayers();
-      this.setupScenario();
       this.setupBoard();
+      this.setupScenario();
+      this.setupPlayers();
+      this.setupTeams();
     },
 
     clearPossible() {

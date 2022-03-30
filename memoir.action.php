@@ -61,6 +61,16 @@ class action_memoir extends APP_GameAction
     self::ajaxResponse();
   }
 
+  public function actPlayCommissarCard()
+  {
+    self::setAjaxMode();
+    $section = self::getArg('section', AT_posint, false);
+    $hill = self::getArg('hill317', AT_bool, false);
+    $this->game->actPlayCommissarCard($section, $hill);
+    self::ajaxResponse();
+  }
+
+
   public function actOrderUnits()
   {
     self::setAjaxMode();

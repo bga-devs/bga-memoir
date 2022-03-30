@@ -28,6 +28,7 @@ $scenariosMap = [
   1407 => '1407-RedBarricadesFactory',
   1433 => '1433-BreakoutAtKlin',
   1434 => '1434-BreakoutToLisyanka',
+  
   1302 => '1302-NijmegenBridges',
   1340 => '1340-AcrossTheRiverRoer',
   1346 => '1346-Knightsbridge',

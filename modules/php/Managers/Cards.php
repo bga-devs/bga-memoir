@@ -139,8 +139,15 @@ class Cards extends \M44\Helpers\Pieces
   public static function revealCommissar($player)
   {
     $pId = $player->getId();
-    self::moveAllInLocation(['commissar', $pId], ['inplay', $pId]);
-    return self::getInLocation(['inplay', $pId])->first();
+    $cardId = self::getInLocation(['commissar', $pId])
+      ->first()
+      ->getId();
+    self::move($cardId, ['inplay', $pId]);
+
+    $last = Globals::getLastPlayedCards();
+    $last[$player->getId()] = $cardId;
+    Globals::setLastPlayedCards($last);
+    return self::get($cardId);
   }
 
   /**
