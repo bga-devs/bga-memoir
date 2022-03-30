@@ -1209,6 +1209,12 @@ html {
       .board-tooltip .summary-card.summary-token .board-medal {
         width: 70%;
         height: 52.3%; }
+        .board-tooltip .summary-card.summary-token .board-medal[data-sprite='both'] {
+          position: relative;
+          top: 20%; }
+          .board-tooltip .summary-card.summary-token .board-medal[data-sprite='both']::after {
+            left: 0;
+            top: -68%; }
     .board-tooltip .summary-card.summary-unit {
       background-position-y: 50%; }
       .board-tooltip .summary-card.summary-unit .summary-number {
@@ -2392,6 +2398,18 @@ html {
   .board-medal[data-sprite='8'] {
     background-position-x: 0%;
     background-position-y: 133.3333333333%; }
+  .board-medal[data-sprite='both'] {
+    background-position-x: 100%; }
+    .board-medal[data-sprite='both']::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: -50%;
+      top: 0;
+      background-image: url("img/medals.png");
+      background-size: 200% 400%; }
 
 .hex-grid-item .board-medal {
   width: 42.8%;

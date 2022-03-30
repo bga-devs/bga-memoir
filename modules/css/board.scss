@@ -386,6 +386,15 @@
       .board-medal {
         width: 70%;
         height: 52.3%;
+
+        &[data-sprite='both'] {
+          position: relative;
+          top: 20%;
+          &::after {
+            left: 0;
+            top: -68%;
+          }
+        }
       }
     }
 

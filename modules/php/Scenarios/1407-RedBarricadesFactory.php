@@ -515,10 +515,7 @@ $scenarios[1407] = [
         ],
         'tags' => [
           0 => [
-            'name' => 'medal1',
-          ],
-          1 => [
-            'name' => 'medal2',
+            'name' => 'medal0',
           ],
         ],
       ],
@@ -558,10 +555,7 @@ $scenarios[1407] = [
         ],
         'tags' => [
           0 => [
-            'name' => 'medal1',
-          ],
-          1 => [
-            'name' => 'medal2',
+            'name' => 'medal0',
           ],
         ],
       ],
@@ -573,10 +567,16 @@ $scenarios[1407] = [
         ],
         'tags' => [
           0 => [
-            'name' => 'medal1',
-          ],
-          1 => [
-            'name' => 'medal2',
+            'name' => 'medal0',
+            'medal' => [
+              'counts_for' => 2,
+              'majority' => true,
+            ],
+            'group' => [
+              0 => 'b2',
+              1 => 'c2',
+              2 => 'd2',
+            ],
           ],
         ],
       ],

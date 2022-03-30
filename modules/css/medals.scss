@@ -38,6 +38,22 @@
       background-position-y: (($i - ($i % 2)) / 2) * 100% / 3;
     }
   }
+
+  &[data-sprite='both'] {
+    background-position-x: 100%;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: -50%;
+      top: 0;
+      background-image: url('img/medals.png');
+      background-size: 200% 400%;
+    }
+  }
 }
 
 .hex-grid-item .board-medal {

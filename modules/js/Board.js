@@ -333,6 +333,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     tplBoardMedal(medal) {
       const SPRITES = ['medal1', 'medal2', 'medal4', 'medal5', 'medal6', 'medal7', 'medal8', 'medal9'];
       let sprite = SPRITES.findIndex((t) => t == medal.sprite);
+      if (medal.sprite == 'medal0') {
+        sprite = 'both';
+      }
 
       return `
       <div id='board-medal-${medal.id}' class="board-medal"
@@ -628,6 +631,10 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
                 : _('Remove the medal(s) if this is no longer the case')) +
               '</li>',
           ];
+
+          if (token.datas.majority) {
+            desc.push('<li>' + _('Majority medal') + '</li>');
+          }
         }
       }
 

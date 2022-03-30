@@ -173,12 +173,18 @@ class Medals extends \M44\Helpers\DB_Manager
   public function addPositionMedals($team, $nMedals, $boardMedal)
   {
     $ids = [];
+    $sprite = $boardMedal['sprite'];
+    if ($sprite == 'medal0') {
+      // Handle the case of 'both team' medal
+      $sprite = $team == ALLIES ? 'medal1' : 'medal2';
+    }
+
     for ($i = 0; $i < $nMedals; $i++) {
       $ids[] = self::DB()->insert([
         'team' => $team,
         'type' => \MEDAL_POSITION,
         'foreign_id' => $boardMedal['id'],
-        'sprite' => $boardMedal['sprite'],
+        'sprite' => $sprite,
       ]);
     }
 
