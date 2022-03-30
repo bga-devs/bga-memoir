@@ -2,12 +2,22 @@
 namespace M44\States;
 
 use M44\Core\Notifications;
+use M44\Core\Globals;
 use M44\Helpers\Utils;
 use M44\Managers\Cards;
 use M44\Managers\Players;
+use M44\Managers\Teams;
 
 trait PlayCardTrait
 {
+  function stPlayCard()
+  {
+    if (Globals::getCommissar() != '' && $this->isInitialCommissar()) {
+      $pId = Teams::get(Globals::getCommissar())->getCommander();
+      $this->changeActivePlayerAndJumpTo($pId, \ST_COMMISSAR);
+    }
+  }
+
   function argsPlayCard($player = null)
   {
     $singleActive = is_null($player);

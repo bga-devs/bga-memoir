@@ -372,5 +372,28 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         });
       }
     },
+
+    onEnteringStatePlayCommissarCard(args) {
+      let cardId = args.cardId;
+      $(`card-${cardId}`).classList.add('choice');
+
+      let sections = {
+        0: _('Left'),
+        1: _('Central'),
+        2: _('Right'),
+      };
+      if (args.sections) {
+        args.sections.forEach((section) => {
+          this.addPrimaryActionButton(`btnSection-${section}`, sections[section], () =>
+            this.takeAction('actPlayCommissarCard', { section }),
+          );
+        });
+      }
+      if (args.canHill317) {
+        this.addPrimaryActionButton(`btnCommissarPlay317`, _('Play it as an air power'), () =>
+          this.takeAction('actPlayCommissarCard', { hill317: true }),
+        );
+      }
+    },
   });
 });

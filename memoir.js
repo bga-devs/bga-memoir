@@ -34,6 +34,7 @@ define([
       this._activeStates = [
         'playCard',
         'commissarCard',
+        'playCommissarCard',
         'orderUnits',
         'moveUnits',
         'attackUnits',

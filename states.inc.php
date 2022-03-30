@@ -91,6 +91,19 @@ $machinestates = [
     'args' => 'argsCommissarCard',
     'possibleactions' => ['actCommissarCard', 'actPlayCard'],
     'transitions' => [
+      'play' => ST_PLAY_COMMISSAR,
+    ],
+  ],
+
+  ST_PLAY_COMMISSAR => [
+    'name' => 'playCommissarCard',
+    'description' => clienttranslate('${actplayer} must choose how/where to play the card'),
+    'descriptionmyturn' => clienttranslate('${you} must choose how/where to play the card'),
+    'type' => 'activeplayer',
+    'action' => 'stPlayCommissarCard',
+    'args' => 'argsPlayCommissarCard',
+    'possibleactions' => ['actPlayCommissarCard'],
+    'transitions' => [
       'selectUnits' => ST_ORDER_UNITS,
       'finestHour' => ST_FINEST_HOUR_ROLL,
       'airpower' => ST_AIRPOWER_TARGET,
@@ -106,6 +119,7 @@ $machinestates = [
     'descriptionmyturn' => clienttranslate('${you} must play a card'),
     'type' => 'activeplayer',
     'args' => 'argsPlayCard',
+    'action' => 'stPlayCard',
     'possibleactions' => ['actPlayCard'],
     'transitions' => [
       'selectUnits' => ST_ORDER_UNITS,
