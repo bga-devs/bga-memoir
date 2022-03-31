@@ -203,7 +203,7 @@ class Terrain extends \M44\Helpers\DB_Model
 
   public function defense($unit)
   {
-    return $this->isOriginalOwner($unit) ? null : $this->getProperty('defense', $unit);
+    return $this->isOriginalOwner($unit) ? $this->getProperty('defense', $unit) : null;
   }
 
   public function canIgnoreOneFlag($unit)

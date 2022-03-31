@@ -127,5 +127,7 @@ class Scenario extends \APP_DbObject
     $startingTeam = $infos['side_' . \strtolower($infos['starting'])];
     Globals::setTeamTurn($startingTeam);
     Globals::setTurn(0);
+
+    Medals::checkBoardMedals();
   }
 }

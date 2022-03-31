@@ -80,6 +80,23 @@ trait MoveUnitsTrait
       self::checkAction('actMoveUnitsDone');
     }
 
+    if (Globals::getUnitMoved() != -1) {
+      $oldUnit = Units::get(Globals::getUnitMoved());
+      // Unit won't move anymore
+      // if on mine field + CombatEngineer => mustsweep the mine
+      if (
+        $oldUnit instanceof \M44\Units\CombatEngineer &&
+        $oldUnit->getActivationOCard()->getType() == CARD_BEHIND_LINES
+      ) {
+        foreach (Board::getTerrainsInCell($oldUnit->getPos()) as $t) {
+          if ($t instanceof \M44\Terrains\Minefield) {
+            $oldUnit->setMoves(3);
+            $t->onUnitEntering($oldUnit, false);
+          }
+        }
+      }
+    }
+
     if ($this->gamestate->state()['name'] == 'desertMove') {
       $this->gamestate->nextState('overrun');
       return;
