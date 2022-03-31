@@ -89,7 +89,7 @@ class Medals extends \M44\Helpers\DB_Manager
       if ($currentHolder != null && $datas['permanent']) {
         continue; // No need to check gained permanent medals
       }
-      if ($datas['turn_start'] && !$startOfTurn) {
+      if (isset($datas['turn_start']) && $datas['turn_start'] && !$startOfTurn) {
         continue; // No need to check startOfTurn medals if not at start of turn
       }
 
