@@ -54,16 +54,10 @@ html {
   margin-bottom: 0px; }
 
 #right-side {
-  background: url("img/ui/game_right.jpg");
-  background-size: 100% auto;
-  background-repeat: repeat-y;
-  margin-left: -270px;
+  margin-left: -250px;
   margin-top: 0px;
   padding-top: 10px;
-  padding-left: 30px;
-  box-shadow: -1px -1px 3px black;
-  z-index: 5;
-  position: relative; }
+  padding-left: 10px; }
 
 .mobile_version #right-side {
   padding-left: 0px;
@@ -84,12 +78,26 @@ html {
 
 #page-title {
   position: absolute;
-  left: 0%;
-  right: 5px;
+  left: 2px;
+  right: 2px;
   top: 8px;
   z-index: 1000; }
   #page-title.fixed-page-title {
     right: auto; }
+
+#page-content::before {
+  content: '';
+  display: block;
+  position: absolute;
+  right: -18px;
+  width: 18px;
+  top: 0;
+  bottom: 0;
+  z-index: 10;
+  background-image: url("img/ui/game_right.jpg");
+  background-size: 100% auto;
+  background-repeat: repeat-y;
+  box-shadow: -1px -1px 3px black; }
 
 #m44-container {
   display: flex;
