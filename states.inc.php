@@ -92,6 +92,8 @@ $machinestates = [
     'possibleactions' => ['actCommissarCard', 'actPlayCard'],
     'transitions' => [
       'play' => ST_PLAY_COMMISSAR,
+      'selectUnits' => ST_ORDER_UNITS,
+      'counterAttack' => ST_COUNTER_ATTACK,
     ],
   ],
 
