@@ -60,11 +60,11 @@ trait PlayCardTrait
       throw new \BgaVisibleSystemException('Non playable card. Should not happen.');
     }
 
-    if ($args['cards'][$cardId] != null && (!in_array($sectionId, $args['cards'][$cardId]) || $sectionId == null)) {
+    if (!is_null($args['cards'][$cardId]) && (!in_array($sectionId, $args['cards'][$cardId]) || is_null($sectionId))) {
       throw new \BgaVisibleSystemException('Invalid section. Should not happen');
     }
 
-    if ($args['cards'][$cardId] == null && $sectionId != null) {
+    if (is_null($args['cards'][$cardId]) && !is_null($sectionId)) {
       throw new \BgaVisibleSystemException('Invalid section. Should not happen');
     }
 

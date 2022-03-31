@@ -200,6 +200,9 @@ class Units extends \M44\Helpers\Pieces
       if ($unit->getRoadBonus() == 0) {
         $unit->setExtraDatas('roadBonus', null);
       }
+      if ($unit->isStopped() == true) {
+        $unit->setExtraDatas('stopped', false);
+      }
       $unit->setExtraDatas('cannotBattle', false);
     }
   }

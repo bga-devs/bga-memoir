@@ -50,10 +50,10 @@ class Tokens extends \M44\Helpers\Pieces
   public function getOnCoords($location, $coords, $type = null)
   {
     $query = self::getSelectWhere(null, $location, null);
-    if ($coords != null) {
+    if (!is_null($coords)) {
       self::addCoordsClause($query, $coords);
     }
-    if ($type != null) {
+    if (!is_null($type)) {
       self::addTypeClause($query, $type);
     }
     return $query->get();

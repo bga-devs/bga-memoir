@@ -157,7 +157,7 @@ class memoir extends Table
   function nextState($transition, $pId = null)
   {
     $pId = is_null($pId) || is_int($pId) ? $pId : $pId->getId();
-    if ($pId === null || $pId == $this->getActivePlayerId()) {
+    if (is_null($pId) || $pId == $this->getActivePlayerId()) {
       $this->gamestate->nextState($transition);
     } else {
       $state = $this->gamestate->state();

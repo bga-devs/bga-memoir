@@ -216,7 +216,7 @@ trait AttackUnitsTrait
     }
 
     // Call listener for attacking unit (eg. to remove Wire for armors)
-    if ($unit != null) {
+    if ($unit !== null) {
       foreach (Board::getTerrainsInCell($unit->getPos()) as $terrain) {
         $terrain->onAfterAttack($unit);
       }
@@ -257,14 +257,14 @@ trait AttackUnitsTrait
       $hit = $target->getHits($type, $nb);
 
       // check hits of attacker
-      if ($attacker != null) {
+      if ($attacker !== null) {
         $hitAttacker = $attacker->getHitsOnTarget($type, $nb, $target);
         if ($hitAttacker != -1) {
           $hit = $hitAttacker;
         }
       }
 
-      if ($card != null) {
+      if ($card !== null) {
         // check hits of card
         $hitCards = $card->getHits($type, $nb);
         if ($hitCards != -1) {
@@ -291,7 +291,7 @@ trait AttackUnitsTrait
     $realHits = $unit->takeDamage($hits);
     // Increase the stats
     $attack = $this->getCurrentAttack();
-    if ($attack != null) {
+    if ($attack !== null) {
       if (!$ambush) {
         $attacker = $attack['player'];
       } else {

@@ -41,7 +41,7 @@ trait AirDropTrait
       $pos = Board::randomWalk(['x' => $x, 'y' => $y], $options['range']);
       $unit = Units::addInCell($options['unit'], $pos);
 
-      if ($pos == null || Board::isImpassable($unit, $pos) || Board::getUnitInCell($pos) != null) {
+      if (is_null($pos) || Board::isImpassable($unit, $pos) || Board::getUnitInCell($pos) !== null) {
         // Unsafed landing => remove unit
         Units::remove($unit->getId());
       } else {

@@ -100,11 +100,11 @@ trait CommissarCardTrait
     $args = $this->argsPlayCommissarCard();
     $card = $player->getCardInPlay();
 
-    if ($args['sections'] != null && (!in_array($sectionId, $args['sections']) || $sectionId == null)) {
+    if (!is_null($args['sections']) && (!in_array($sectionId, $args['sections']) || is_null($sectionId))) {
       throw new \BgaVisibleSystemException('Invalid section. Should not happen');
     }
 
-    if ($args['sections'] == null && $sectionId != null) {
+    if (is_null($args['sections']) && !is_null($sectionId)) {
       throw new \BgaVisibleSystemException('Invalid section. Should not happen');
     }
 

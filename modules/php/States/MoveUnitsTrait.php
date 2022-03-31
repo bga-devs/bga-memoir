@@ -43,6 +43,10 @@ trait MoveUnitsTrait
     $coordSource = $unit->getPos();
     $initMove = $unit->getMoves();
     foreach ($path as $c) {
+      if (Board::mustStopWhenLeavingCell($coordSource, $unit)) {
+        $unit->mustStop();
+      }
+
       $unit->incMoves($c['cost'] ?? 1);
       Notifications::moveUnit($player, $unit, $coordSource, $c);
       list($interrupted, $isWinning) = Board::moveUnit($unit, $c);

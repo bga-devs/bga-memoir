@@ -141,7 +141,7 @@ class Board
 
   public function getUnitInCell($x, $y = null)
   {
-    if ($y === null) {
+    if (is_null($y)) {
       $y = $x['y'];
       $x = $x['x'];
     }
@@ -150,7 +150,7 @@ class Board
 
   public function getTerrainsInCell($x, $y = null)
   {
-    if ($y === null) {
+    if (is_null($y)) {
       $y = $x['y'];
       $x = $x['x'];
     }
@@ -162,7 +162,7 @@ class Board
   {
     foreach (self::getNeighbours($unit->getPos()) as $cell) {
       $t = self::$grid[$cell['x']][$cell['y']];
-      if ($t['unit'] !== null && $t['unit']->isOpponent($unit)) {
+      if (!is_null($t['unit']) && $t['unit']->isOpponent($unit)) {
         return true;
       }
     }
@@ -237,6 +237,10 @@ class Board
    */
   public static function getReachableCellsAtDistance($unit, $d)
   {
+    if($unit->isStopped()){
+      return [];
+    }
+
     $startingCell = $unit->getPos();
     list($cells, $markers) = self::getCellsAtDistance($startingCell, $d, function ($source, $target, $d) use ($unit) {
       $cost = self::getDeplacementCost($unit, $source, $target, $d, false, false);
@@ -356,11 +360,6 @@ class Board
       }
     }
 
-    // If I'm coming from a 'must stop when leaving' terrain, consume all the moves
-    if (self::mustStopWhenLeavingCell($source, $unit)) {
-      return $d - $source['d'];
-    }
-
     // Otherwise, ask the terrains about it and take the maximum of the costs
     $cost = 1;
     foreach ($sourceCell['terrains'] as $terrain) {
@@ -381,6 +380,11 @@ class Board
     // All paths are valid for Behind ennemy lines
     if ($unit->getActivationOCard()->getType() == \CARD_BEHIND_LINES) {
       return true;
+    }
+
+    // If I'm coming from a 'must stop when leaving' terrain, path should be of length 1
+    if (self::mustStopWhenLeavingCell($unit->getPos(), $unit) && count($path) > 1) {
+      return false;
     }
 
     $totalPath = array_merge([$unit->getPos()], $path);
@@ -735,7 +739,7 @@ class Board
    */
   public static function getHillComponents()
   {
-    if (self::$hillComponents == null) {
+    if (is_null(self::$hillComponents)) {
       $hills = self::createGrid(false);
       foreach ($hills as $x => $col) {
         foreach ($col as $y => $node) {
@@ -751,7 +755,7 @@ class Board
 
   public static function getMountainComponents()
   {
-    if (self::$mountainComponents == null) {
+    if (is_null(self::$mountainComponents)) {
       $mountains = self::createGrid(false);
       foreach ($mountains as $x => $col) {
         foreach ($col as $y => $node) {

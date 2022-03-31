@@ -33,7 +33,7 @@ class CounterAttack extends \M44\Models\Card
   public function nextStateAfterPlay()
   {
     $card = $this->getCopiedCard();
-    if ($card != null) {
+    if (!is_null($card)) {
       $card->setExtraDatas('hill317', $this->getExtraDatas('hill317'));
     }
     return is_null($card) ? 'counterAttack' : $card->nextStateAfterPlay();
@@ -70,7 +70,7 @@ class CounterAttack extends \M44\Models\Card
   public function getCopiedCard($forceCard = null)
   {
     $cardId = $this->getExtraDatas('cardId');
-    if ($forceCard != null && $cardId == null) {
+    if (!is_null($forceCard) && is_null($cardId)) {
       $cardId = $forceCard;
     }
     if (!is_null($cardId)) {

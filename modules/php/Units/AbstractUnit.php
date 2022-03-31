@@ -261,11 +261,11 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
 
   public function getPossibleMoves($maxMove = null, $maxMoveAttack = null, $additionalAction = true)
   {
-    if ($maxMove != null) {
+    if (!is_null($maxMove)) {
       $this->movementRadius = $maxMove;
     }
 
-    if ($maxMoveAttack != null) {
+    if (!is_null($maxMoveAttack)) {
       $this->movementAndAttackRadius = $maxMoveAttack;
     }
 
@@ -321,6 +321,16 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
   public function useRoadBonus()
   {
     return $this->setExtraDatas('roadBonus', 0);
+  }
+
+  public function mustStop()
+  {
+    return $this->setExtraDatas('stopped', true);
+  }
+
+  public function isStopped()
+  {
+    return $this->getExtraDatas('stopped') ?? false;
   }
 
   //////////////////////////////////////////

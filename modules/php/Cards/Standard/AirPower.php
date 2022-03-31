@@ -87,7 +87,7 @@ class AirPower extends \M44\Models\Card
     $previousUnit = null;
     foreach ($unitIds as $unitId) {
       $unit = Units::get($unitId);
-      if ($previousUnit != null) {
+      if (!is_null($previousUnit)) {
         $pos1 = $unit->getPos();
         $pos2 = $previousUnit->getPos();
         if (abs($pos1['x'] - $pos2['x']) + 2 * abs($pos1['y'] - $pos2['y']) > 3) {
