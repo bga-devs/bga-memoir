@@ -1,7 +1,7 @@
 <?php
 namespace M44\Terrains;
 
-class CoastLine extends \M44\Models\Terrain
+class CoastLine extends Beach
 {
   public static function isTileOfType($hex)
   {
@@ -13,12 +13,6 @@ class CoastLine extends \M44\Models\Terrain
   {
     $this->name = clienttranslate('Coastlines');
     $this->number = 68;
-    // $this->desc = [
-    //   \clienttranslate('Maximum movement onto beaches is 2 hexes'),
-    //   \clienttranslate('No combat restrictions'),
-    //   \clienttranslate('Taking Ground and Armor Overrun remains possible'),
-    // ];
-    // $this->isBeach = true;
 
     parent::__construct($row);
   }

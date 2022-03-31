@@ -29,7 +29,12 @@ $scenarios[4230] = [
     'cards_player2' => 5,
     'victory_player1' => 5,
     'victory_player2' => 5,
-    'options' => ['north_african_desert_rules' => true],
+    'options' => [
+      'north_african_desert_rules' => true,
+      'italy_royal_army' => true,
+      'partial_blitz_rules' => ALLIES,
+      'british_commonwealth' => true,
+    ],
   ],
   'board' => [
     'type' => 'STANDARD',
@@ -446,6 +451,9 @@ $scenarios[4230] = [
         'tags' => [
           0 => [
             'name' => 'tag5',
+            'behavior' => 'EXIT_MARKER',
+            'group' => ['C1', 'E1', 'D1'],
+            'side' => 'AXIS',
           ],
         ],
       ],

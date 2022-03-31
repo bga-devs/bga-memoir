@@ -36,7 +36,8 @@ $scenarios[4245] = [
     'options' => [
       'north_african_desert_rules' => true,
       'italy_royal_army' => true,
-      'partial_blitz_rules' => true,
+      'partial_blitz_rules' => ALLIES,
+      'british_commonwealth' => true,
     ],
   ],
   'board' => [

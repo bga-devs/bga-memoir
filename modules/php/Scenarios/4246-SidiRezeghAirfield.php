@@ -19,6 +19,8 @@ $scenarios[4246] = [
     'side_player2' => 'ALLIES',
     'options' => [
       'north_african_desert_rules' => true,
+      'partial_blitz_rules' => ALLIES,
+      'british_commonwealth' => true,
     ],
     'date_end' => '1941-11-22',
     'front' => 'MEDITERRANEAN',
@@ -88,16 +90,7 @@ $scenarios[4246] = [
         ],
         'tags' => [
           0 => [
-            'name' => 'medal4',
-            'group' => [],
-            'medal' => [
-              'permanent' => false,
-              'counts_for' => 1,
-              'nbr_hex' => 1,
-            ],
-          ],
-          1 => [
-            'name' => 'medal2',
+            'name' => 'medal0',
             'group' => [],
             'medal' => [
               'permanent' => false,

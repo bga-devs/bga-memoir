@@ -33,7 +33,11 @@ $scenarios[4231] = [
         'standard' => [],
       ],
     ],
-    'options' => ['north_african_desert_rules' => true],
+    'options' => [
+      'north_african_desert_rules' => true,
+      'partial_blitz_rules' => ALLIES,
+      'british_commonwealth' => true,
+    ],
   ],
   'board' => [
     'type' => 'STANDARD',
@@ -237,6 +241,12 @@ $scenarios[4231] = [
         'tags' => [
           0 => [
             'name' => 'medal2',
+            'group' => [],
+            'medal' => [
+              'permanent' => true,
+              'counts_for' => 1,
+              'nbr_hex' => 1,
+            ],
           ],
         ],
       ],

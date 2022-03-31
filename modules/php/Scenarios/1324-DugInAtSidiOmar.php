@@ -33,7 +33,11 @@ $scenarios[1324] = [
         'standard' => [],
       ],
     ],
-    'options' => ['north_african_desert_rules' => true],
+    'options' => [
+      'north_african_desert_rules' => true,
+      'partial_blitz_rules' => ALLIES,
+      'british_commonwealth' => true,
+    ],
   ],
   'board' => [
     'type' => 'STANDARD',
@@ -257,6 +261,9 @@ $scenarios[1324] = [
         'tags' => [
           0 => [
             'name' => 'tag5',
+            'behavior' => 'EXIT_MARKER',
+            'group' => ['F1', 'E1', 'D1'],
+            'side' => 'AXIS',
           ],
         ],
       ],

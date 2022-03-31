@@ -143,7 +143,7 @@ class Units extends \M44\Helpers\Pieces
     $units = [];
     $isBlitz = $scenario['game_info']['options']['blitz_rules'] ?? false;
     $isItalyRoyalArmy = Globals::isItalyRoyalArmy();
-    $isPartialBlitz = $scenario['game_info']['options']['partial_blitz_rules'] ?? false; // Affect only armor movement
+    $isPartialBlitz = $scenario['game_info']['options']['partial_blitz_rules'] ?? ''; // Affect only armor movement
 
     foreach ($board['hexagons'] as &$hex) {
       if (isset($hex['unit'])) {
@@ -162,9 +162,10 @@ class Units extends \M44\Helpers\Pieces
         }
 
         if (
-          ($isBlitz || $isPartialBlitz) &&
           $unit->getType() == ARMOR &&
-          in_array($data['nation'], self::$nations[ALLIES])
+          ((in_array($data['nation'], self::$nations[ALLIES]) && $isPartialBlitz == ALLIES) ||
+            (in_array($data['nation'], self::$nations[AXIS]) && $isPartialBlitz == AXIS) ||
+            $isPartialBlitz == 'all')
         ) {
           $data['extra_datas']['properties']['movementRadius'] = 2;
           $data['extra_datas']['properties']['movementAndAttackRadius'] = 2;
