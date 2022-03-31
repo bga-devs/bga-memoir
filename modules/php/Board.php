@@ -463,7 +463,7 @@ class Board
 
     // Check whether the unit moved too much to attack
     // if unit moved on road, we need to remove one move linked to the bonus
-    $m = $unit->getMoves() + ($moves ?? 0) - ($unit->getRoadBonus() ? 0 : 1);
+    $m = $unit->getMoves() + ($moves ?? 0);
     if ($m > $unit->getMovementAndAttackRadius() && $unit->getActivationOCard()->getType() != \CARD_BEHIND_LINES) {
       return [];
     }
@@ -989,13 +989,15 @@ class Board
       // Look at neighbours
       $neighbours = self::getNeighbours($pos);
       foreach ($neighbours as $nextCell) {
-        $dist = $cell['d'] + $costCallback($cell, $nextCell, $d);
+        $cost = $costCallback($cell, $nextCell, $d);
+        $dist = $cell['d'] + $cost;
         $t = $markers[$nextCell['x']][$nextCell['y']];
         if ($t !== false) {
           continue;
         }
 
         if ($dist <= $d) {
+          $nextCell['cost'] = $cost;
           $queue->insert(
             [
               'cell' => $nextCell,

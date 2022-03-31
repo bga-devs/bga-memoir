@@ -189,7 +189,7 @@ class Units extends \M44\Helpers\Pieces
   public function reset()
   {
     self::DB()
-      ->update(['activation_card' => null, 'moves' => 0, 'fights' => 0, 'retreats' => 0])
+      ->update(['activation_card' => null, 'moves' => 0, 'fights' => 0, 'retreats' => 0, 'grounds' => 0])
       ->run();
 
     // Reset road bonuses

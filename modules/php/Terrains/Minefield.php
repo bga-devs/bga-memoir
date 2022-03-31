@@ -64,4 +64,18 @@ class Minefield extends \M44\Models\Terrain
       return Game::get()->damageUnit($unit, $hits);
     }
   }
+
+  public function getPossibleAttackActions($unit)
+  {
+    if ($unit->mustSweep()) {
+      return [
+        [
+          'desc' => \clienttranslate('Sweep mine'),
+          'action' => 'actSweepMine',
+        ],
+      ];
+    } else {
+      return [];
+    }
+  }
 }

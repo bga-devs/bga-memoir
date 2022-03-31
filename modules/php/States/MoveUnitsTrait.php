@@ -43,7 +43,7 @@ trait MoveUnitsTrait
     $coordSource = $unit->getPos();
     $initMove = $unit->getMoves();
     foreach ($path as $c) {
-      $unit->incMoves(1);
+      $unit->incMoves($c['cost'] ?? 1);
       Notifications::moveUnit($player, $unit, $coordSource, $c);
       list($interrupted, $isWinning) = Board::moveUnit($unit, $c);
       if ($isWinning) {
@@ -58,7 +58,7 @@ trait MoveUnitsTrait
       }
       $coordSource = $c;
     }
-    $unit->setMoves($cell['d'] + $initMove);
+
     // Handle Road
     if ($cell['road'] ?? false) {
       $unit->useRoadBonus();
@@ -79,23 +79,6 @@ trait MoveUnitsTrait
   {
     if ($check) {
       self::checkAction('actMoveUnitsDone');
-    }
-
-    if (Globals::getUnitMoved() != -1) {
-      $oldUnit = Units::get(Globals::getUnitMoved());
-      // Unit won't move anymore
-      // if on mine field + CombatEngineer => mustsweep the mine
-      if (
-        $oldUnit instanceof \M44\Units\CombatEngineer &&
-        $oldUnit->getActivationOCard()->getType() == CARD_BEHIND_LINES
-      ) {
-        foreach (Board::getTerrainsInCell($oldUnit->getPos()) as $t) {
-          if ($t instanceof \M44\Terrains\Minefield) {
-            $oldUnit->setMoves(3);
-            $t->onUnitEntering($oldUnit, false);
-          }
-        }
-      }
     }
 
     if ($this->gamestate->state()['name'] == 'desertMove') {
