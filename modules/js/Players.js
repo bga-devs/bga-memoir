@@ -199,7 +199,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         this.onClick(`card-${cardId}`, () => {
           if (cards[cardId]) {
             this.clientState('playCardSelectSection', _('Choose target section'), { cardId, sections: cards[cardId] });
-          } else if (cards317.includes(cardId)) {
+          } else if (cards317.includes(parseInt(cardId))) {
             this.clientState('playCardHill317', _('Do you wish to play it as Air Power card?'), { cardId });
           } else {
             this.takeAction('actPlayCard', { cardId });
