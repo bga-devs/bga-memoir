@@ -237,7 +237,7 @@ class Board
    */
   public static function getReachableCellsAtDistance($unit, $d)
   {
-    if($unit->isStopped()){
+    if ($unit->isStopped()) {
       return [];
     }
 
@@ -257,8 +257,15 @@ class Board
       });
       // Reduce cost by 1 if bonus not used
       foreach ($cells2 as &$cell) {
-        $cell['d'] -= $unit->getRoadBonus();
         $cell['road'] = true;
+        if($unit->getRoadBonus() != 0){
+          $cell['d'] -= $unit->getRoadBonus();
+          foreach ($cell['paths'] as &$path) {
+            if (!empty($path)) {
+              $path[0]['cost'] -= $unit->getRoadBonus();
+            }
+          }
+        }
       }
 
       // Merge with other matching cell, avoiding duplicates
