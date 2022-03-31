@@ -18,6 +18,10 @@ trait RetreatUnitTrait
   {
     $oppUnit = Units::get($attack['oppUnitId']);
     $canIgnore1Flag = Board::canIgnoreOneFlag($oppUnit);
+    if (!$canIgnore1Flag) {
+      $canIgnore1Flag = $oppUnit->canIgnoreOneFlag();
+    }
+
     $canIgnoreAllFlags = Board::canIgnoreAllFlagsCell($oppUnit->getPos(), $oppUnit);
     $currentAttack = $this->getCurrentAttack();
 
@@ -136,6 +140,9 @@ trait RetreatUnitTrait
     $unit->incRetreats($dist);
     $r = Globals::getRetreat();
     $r['min'] -= $dist;
+    if ($r['min'] < 0) {
+      $r['min'] = 0;
+    }
     $r['max'] -= $dist;
     Globals::setRetreat($r);
 
