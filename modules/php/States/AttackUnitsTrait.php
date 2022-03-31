@@ -258,7 +258,7 @@ trait AttackUnitsTrait
 
       // check hits of attacker
       if ($attacker != null) {
-        $hitAttacker = $attacker->getHitsOnTarget($type, $nb);
+        $hitAttacker = $attacker->getHitsOnTarget($type, $nb, $target);
         if ($hitAttacker != -1) {
           $hit = $hitAttacker;
         }

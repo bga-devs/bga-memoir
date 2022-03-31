@@ -37,7 +37,7 @@ class Sniper extends Infantry
   }
 
   // used to get additional hits from special power of unit (sniper, etc.)
-  public function getHitsOnTarget($type, $nb)
+  public function getHitsOnTarget($type, $nb, $target)
   {
     if ($type == \DICE_STAR) {
       return $nb;

@@ -30,6 +30,7 @@
   background-image: url('img/tokens.png');
   background-size: 300% 400%;
   background-position: 100% 66.6666%;
+  z-index: 10;
 
   @for $i from 0 through 5 {
     &[data-tile='mine#{$i}'] {

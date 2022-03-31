@@ -357,7 +357,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
   }
 
   // used to get additional hits from special power of unit (sniper, etc.)
-  public function getHitsOnTarget($type, $nb)
+  public function getHitsOnTarget($type, $nb, $target)
   {
     return -1;
   }
