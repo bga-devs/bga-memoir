@@ -27,7 +27,6 @@ class Oasis extends \M44\Models\Terrain
     parent::__construct($row);
   }
 
-  //TODO : healing possible
   public function getPossibleMoveActions($unit)
   {
     // only an INFANTRY

@@ -70,7 +70,6 @@ class action_memoir extends APP_GameAction
     self::ajaxResponse();
   }
 
-
   public function actOrderUnits()
   {
     self::setAjaxMode();
@@ -207,6 +206,14 @@ class action_memoir extends APP_GameAction
     self::setAjaxMode();
     $unitId = self::getArg('unitId', AT_posint, false);
     $this->game->actRemoveWire($unitId);
+    self::ajaxResponse();
+  }
+
+  public function actRemoveRoadBlock()
+  {
+    self::setAjaxMode();
+    $unitId = self::getArg('unitId', AT_posint, false);
+    $this->game->actRemoveRoadBlock($unitId);
     self::ajaxResponse();
   }
 

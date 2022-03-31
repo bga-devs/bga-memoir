@@ -24,4 +24,18 @@ class RoadBlock extends \M44\Models\Terrain
     $this->defense = [\INFANTRY => -1, ARMOR => -1];
     parent::__construct($row);
   }
+
+  public function getPossibleAttackActions($unit)
+  {
+    if ($unit instanceof \M44\Units\CombatEngineer) {
+      return [
+        [
+          'desc' => \clienttranslate('Remove RoadBlock'),
+          'action' => 'actRemoveRoadBlock',
+        ],
+      ];
+    } else {
+      return [];
+    }
+  }
 }

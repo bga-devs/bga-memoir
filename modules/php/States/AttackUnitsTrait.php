@@ -350,4 +350,34 @@ trait AttackUnitsTrait
 
     $this->nextState('attack');
   }
+
+  public function actRemoveRoadBlock($unitId)
+  {
+    // Sanity checks
+    self::checkAction('actRemoveRoadBlock');
+
+    $player = Players::getCurrent();
+    $args = $this->gamestate->state()['args'];
+    if (!\array_key_exists($unitId, $args['units'])) {
+      throw new \BgaVisibleSystemException('You cannot remove roadblock with this unit. Should not happen');
+    }
+    $cells = $args['units'][$unitId];
+    $k = Utils::array_usearch($cells, function ($cell) {
+      return ($cell['action'] ?? null) == 'actRemoveRoadBlock';
+    });
+    if ($k === false) {
+      throw new \BgaVisibleSystemException('You cannot remove roadblock with this unit. Should not happen');
+    }
+    $info = $cells[$k];
+
+    // Inc attack counter by 1
+    $unit = Units::get($unitId);
+    $unit->incFights(1);
+    // Remove RoadBlock
+    $terrain = Terrains::get($info['terrainId']);
+    $terrain->removeFromBoard();
+    Notifications::message(\clienttranslate('${player_name} removes RoadBlock on their hex'), ['player' => $player]);
+
+    $this->nextState('attack');
+  }
 }
