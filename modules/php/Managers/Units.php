@@ -170,7 +170,7 @@ class Units extends \M44\Helpers\Pieces
           $data['extra_datas']['properties']['movementAndAttackRadius'] = 2;
         }
 
-        if ($isItalyRoyalArmy && $data['nation'] == 'it') {
+        if ($isItalyRoyalArmy && (TROOP_NATION_MAPPING[$data['badge'] ?? ''] ?? $data['nation']) == 'it') {
           // to exclude planes (later on)
           if ($unit->getType() == \INFANTRY || $unit->getType() == \ARMOR || $unit->getType() == \ARTILLERY) {
             $data['extra_datas']['properties']['retreatHex'] = 3;
@@ -229,7 +229,7 @@ class Units extends \M44\Helpers\Pieces
     foreach (array_keys(TROOP_CLASSES) as $t) {
       if (stripos($name, $t) !== false) {
         $nation = substr($name, strlen($t));
-        $nation = TROOP_NATION_MAPPING[$unit['badge'] ?? ''] ?? $nation;
+        // $nation = TROOP_NATION_MAPPING[$unit['badge'] ?? ''] ?? $nation;
         return [
           'type' => $t,
           'nation' => $nation,
