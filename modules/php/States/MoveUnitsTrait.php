@@ -41,6 +41,7 @@ trait MoveUnitsTrait
     $path = $cell['paths'][0]; // Take the first path
     $unit = Units::get($unitId);
     $coordSource = $unit->getPos();
+    $initMove = $unit->getMoves();
     foreach ($path as $c) {
       $unit->incMoves(1);
       Notifications::moveUnit($player, $unit, $coordSource, $c);
@@ -57,7 +58,7 @@ trait MoveUnitsTrait
       }
       $coordSource = $c;
     }
-    // $unit->incMoves($cell['d']);
+    $unit->setMoves($cell['d'] + $initMove);
     // Handle Road
     if ($cell['road'] ?? false) {
       $unit->useRoadBonus();
