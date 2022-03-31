@@ -3,6 +3,58 @@ html {
   background-size: 75px;
 }
 
+#topbar {
+  margin-bottom: 0px;
+}
+
+#right-side {
+  background: url('img/ui/game_right.jpg');
+  background-size: 100% auto;
+  background-repeat: repeat-y;
+
+  margin-left: -270px;
+  margin-top: 0px;
+  padding-top: 10px;
+  padding-left: 30px;
+  box-shadow: -1px -1px 3px black;
+
+  z-index: 5;
+  position: relative;
+}
+
+.mobile_version #right-side {
+  padding-left: 0px;
+  background: url('img/ui/game_top.jpg');
+  background-repeat: repeat-x;
+  background-size: auto 100%;
+  background-position: bottom center;
+}
+
+#left-side-wrapper {
+  margin-top: 0px;
+
+  #left-side {
+    margin-right: 270px;
+    top: -4px;
+    margin-left: 0px;
+  }
+}
+.mobile_version #left-side-wrapper #left-side {
+  margin-right: 0;
+}
+
+#page-title {
+  position: absolute;
+  left: 0%;
+  right: 5px;
+  top: 8px;
+  z-index: 1000;
+
+  &.fixed-page-title {
+    right: auto;
+  }
+}
+
 #m44-container {
   display: flex;
   flex-flow: column;
@@ -13,12 +65,22 @@ html {
     background-repeat: repeat-x;
   }
 
-  #m44-top-part {
-    height: 71px;
-    background: url('img/ui/game_top.png');
+  #m44-top-container {
+    height: 120px;
+    background: url('img/ui/game_top.jpg');
     background-repeat: repeat-x;
+    background-size: auto 100%;
+    background-position: bottom center;
     position: relative;
     z-index: 5;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-end;
+    box-shadow: 0px 2px 3px black;
+  }
+
+  #m44-top-part {
+    height: 52px;
     display: flex;
 
     #top-team {
@@ -55,7 +117,7 @@ html {
   #m44-central-part {
     max-height: 600px; // TODO
     display: flex;
-    margin-top: -6px;
+    margin-top: 0px;
     margin-bottom: -4px;
     //background: url('img/background.jpg');
 
@@ -112,7 +174,10 @@ html {
       flex-grow: 2;
       position: relative;
       overflow: hidden;
-      min-height: 400px;
+      min-height: 420px;
+      background-image: url('img/ui/background_center.jpg');
+      background-size: cover;
+      background-position: center center;
 
       #m44-board-scrollable {
         width: 100%;

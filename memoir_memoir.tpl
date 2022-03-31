@@ -1,15 +1,17 @@
 {OVERALL_GAME_HEADER}
 <div id="m44-container">
-  <div class="m44-hrule"></div>
-  <div id="m44-top-part">
-    <div id="top-team" class='m44-team'>
-      <div id="top-medals" class='m44-team-medals'>
-        <div id="top-medals-slots" class='medals-slots-container'></div>
-        <div id="top-medals-container" class='medals-container'></div>
+  <div id="m44-top-container">
+    <div id="m44-top-part">
+      <div id="top-team" class='m44-team'>
+        <div id="top-medals" class='m44-team-medals'>
+          <div id="top-medals-slots" class='medals-slots-container'></div>
+          <div id="top-medals-container" class='medals-container'></div>
+        </div>
+        <div id="top-team-name" class='m44-team-name'></div>
       </div>
-      <div id="top-team-name" class='m44-team-name'></div>
+      <div id="scenario-informations"></div>
     </div>
-    <div id="scenario-informations"></div>
+    <div class="m44-hrule"></div>
   </div>
 
   <div id="m44-central-part">
