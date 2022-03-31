@@ -174,7 +174,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
 
   public function isOpponent($unit)
   {
-    $allies = ['fr', 'gb', 'us', 'ru', 'ch'];
+    $allies = Units::$nations[ALLIES];
     $a = in_array($this->nation, $allies);
     $b = in_array($unit->getNation(), $allies);
     return ($a && !$b) || (!$a && $b);

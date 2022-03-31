@@ -142,6 +142,9 @@ class Units extends \M44\Helpers\Pieces
     $board = $scenario['board'];
     $units = [];
     $isBlitz = $scenario['game_info']['options']['blitz_rules'] ?? false;
+    $isItalyRoyalArmy = Globals::isItalyRoyalArmy();
+    $isPartialBlitz = $scenario['game_info']['options']['partial_blitz_rules'] ?? false; // Affect only armor movement
+
     foreach ($board['hexagons'] as &$hex) {
       if (isset($hex['unit'])) {
         if (isset($hex['unit']['behavior']) && isset(\TROOP_BADGE_MAPPING[$hex['unit']['behavior']])) {
@@ -153,21 +156,32 @@ class Units extends \M44\Helpers\Pieces
         $data['location'] = 'board';
         $data['x'] = $hex['col'];
         $data['y'] = $hex['row'];
+        $data['extra_datas'] = ['properties' => []];
         if (isset($hex['unit']['behavior'])) {
-          $data['extra_datas'] = ['behavior' => $hex['unit']['behavior']];
+          $data['extra_datas']['behavior'] = $hex['unit']['behavior'];
         }
 
-        if ($isBlitz && $unit->getType() == ARMOR && in_array($data['nation'], self::$nations[ALLIES])) {
-          $data['extra_datas']['properties'] = [
-            'movementRadius' => 2,
-            'movementAndAttackRadius' => 2,
-          ];
+        if (
+          ($isBlitz || $isPartialBlitz) &&
+          $unit->getType() == ARMOR &&
+          in_array($data['nation'], self::$nations[ALLIES])
+        ) {
+          $data['extra_datas']['properties']['movementRadius'] = 2;
+          $data['extra_datas']['properties']['movementAndAttackRadius'] = 2;
         }
 
+        if ($isItalyRoyalArmy && $data['nation'] == 'it') {
+          // to exclude planes (later on)
+          if ($unit->getType() == \INFANTRY || $unit->getType() == \ARMOR || $unit->getType() == \ARTILLERY) {
+            $data['extra_datas']['properties']['retreatHex'] = 3;
+          }
+          if ($unit->getType() == \ARTILLERY) {
+            $data['extra_datas']['properties']['canIgnoreOneFlag'] = true;
+          }
+        }
         $units[] = $data;
       }
     }
-
     self::create($units);
   }
 
@@ -215,6 +229,7 @@ class Units extends \M44\Helpers\Pieces
     foreach (array_keys(TROOP_CLASSES) as $t) {
       if (stripos($name, $t) !== false) {
         $nation = substr($name, strlen($t));
+        $nation = TROOP_NATION_MAPPING[$unit['badge'] ?? ''] ?? $nation;
         return [
           'type' => $t,
           'nation' => $nation,

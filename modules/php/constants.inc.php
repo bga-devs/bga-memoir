@@ -257,6 +257,9 @@ const TROOP_CLASSES = [
 
 const TROOP_BADGE_MAPPING = ['FRENCH_RESISTANCE' => 'badge3'];
 
+// badge mapping nation
+const TROOP_NATION_MAPPING = ['badge38' => 'it'];
+
 /******************
  ****** STATS ******
  ******************/

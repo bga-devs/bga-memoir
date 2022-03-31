@@ -81,6 +81,13 @@ class Scenario extends \APP_DbObject
     // Game mode : standard, breakthrouh, overlord
     $mode = self::getMode();
 
+    // Init Globals
+    Globals::setBlitz($scenario['game_info']['options']['blitz_rules'] ?? false);
+    Globals::setCommissar($scenario['game_info']['options']['russian_commissar_rule'] ?? '');
+    Globals::setDesert($scenario['game_info']['options']['north_african_desert_rules'] ?? false);
+    Globals::setItalyRoyalArmy($scenario['game_info']['options']['italy_royal_army'] ?? false);
+    Globals::setItalyHighCommand($scenario['game_info']['options']['italy_high_command'] ?? false);
+
     // Create Teams
     Teams::loadScenario($scenario, $rematch);
 
@@ -106,9 +113,6 @@ class Scenario extends \APP_DbObject
         Globals::setDefaultWinner(AXIS);
       }
     }
-    Globals::setBlitz($scenario['game_info']['options']['blitz_rules'] ?? false);
-    Globals::setCommissar($scenario['game_info']['options']['russian_commissar_rule'] ?? '');
-    Globals::setDesert($scenario['game_info']['options']['north_african_desert_rules'] ?? false);
 
     Board::init();
     // Notify

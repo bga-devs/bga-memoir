@@ -23,5 +23,5 @@ class HQ extends \M44\Models\Terrain
     parent::__construct($row);
   }
 
-  // TODO: scenario specific / control
+  // TODO: scenario specific / control with owner of HQ
 }
