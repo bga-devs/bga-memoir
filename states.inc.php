@@ -182,6 +182,21 @@ $machinestates = [
       'retreat' => ST_ATTACK_RETREAT,
       'nextAttack' => ST_ATTACK_THROW,
       'takeGround' => ST_TAKING_GROUND,
+      'battleBack' => ST_BATTLE_BACK,
+    ],
+  ],
+
+  ST_BATTLE_BACK => [
+    'name' => 'battleBack',
+    'description' => clienttranslate('${actplayer} may battle back with 1 die'),
+    'descriptionmyturn' => clienttranslate('${you} may battle back with 1 die'),
+    'type' => 'activeplayer',
+    'args' => 'argsBattleBack',
+    // 'action' => 'stRetreatUnit',
+    'possibleactions' => ['actBattleBack', 'actBattleBackPass'],
+    'transitions' => [
+      'retreat' => ST_AMBUSH_RESOLVE,
+      'nextAttack' => ST_ATTACK,
     ],
   ],
 
@@ -199,6 +214,7 @@ $machinestates = [
       'retreat' => ST_ATTACK_RETREAT,
       'nextAttack' => ST_ATTACK_THROW,
       'takeGround' => ST_TAKING_GROUND,
+      'battleBack' => ST_BATTLE_BACK,
     ],
   ],
 
@@ -301,6 +317,8 @@ $machinestates = [
     'name' => 'ambushResolve',
     'description' => clienttranslate('${actplayer} must retreat the unit (Ambush effect)'),
     'descriptionmyturn' => clienttranslate('${you} must retreat the unit (Ambush effect)'),
+    'descriptionbattleBack' => clienttranslate('${actplayer} must retreat the unit (Battle back effect)'),
+    'descriptionmyturnbattleBack' => clienttranslate('${you} must retreat the unit (Battle back effect)'),
     'type' => 'activeplayer',
     // 'args' => 'argsAmbushResolve',
     // 'possibleactions' => ['actRetreat'],

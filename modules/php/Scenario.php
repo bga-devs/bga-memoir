@@ -87,6 +87,7 @@ class Scenario extends \APP_DbObject
     Globals::setDesert($scenario['game_info']['options']['north_african_desert_rules'] ?? false);
     Globals::setItalyRoyalArmy($scenario['game_info']['options']['italy_royal_army'] ?? false);
     Globals::setItalyHighCommand($scenario['game_info']['options']['italy_high_command'] ?? false);
+    Globals::setBritishCommand($scenario['game_info']['options']['british_commonwealth'] ?? false);
 
     // Create Teams
     Teams::loadScenario($scenario, $rematch);

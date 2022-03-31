@@ -39,6 +39,7 @@ define([
         'moveUnits',
         'attackUnits',
         'opponentAmbush',
+        'battleBack',
         'drawChoice',
         'targetMedics',
         'targetAirPower',

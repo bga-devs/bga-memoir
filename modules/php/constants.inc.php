@@ -24,6 +24,7 @@ const ST_DRAW = 21;
 const ST_DRAW_CHOICE = 22;
 const ST_END_TURN = 23;
 const ST_DESERT_MOVE = 24; // desert rules
+const ST_BATTLE_BACK = 25; // British command
 
 const ST_DIG_IN = 30;
 const ST_PRE_MOVE_AGAIN = 31; // Behind ennemy lines

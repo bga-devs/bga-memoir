@@ -36,6 +36,7 @@ trait RetreatUnitTrait
       'min' => $canIgnoreAllFlags ? 0 : $dice[\DICE_FLAG] - ($canIgnore1Flag ? 1 : 0),
       'max' => $dice[\DICE_FLAG] * $attackedUnit->getRetreatHex(),
       'unit' => $attack['oppUnitId'],
+      'effect' => $attack['effect'] ?? '',
     ]);
   }
 
@@ -46,7 +47,7 @@ trait RetreatUnitTrait
   {
     $data = Globals::getRetreat();
     // $attack = $this->getCurrentAttack();
-    return [Units::get($data['unit']), $data['min'], $data['max']];
+    return [Units::get($data['unit']), $data['min'], $data['max'], $data['effect']];
   }
 
   /**
@@ -89,14 +90,14 @@ trait RetreatUnitTrait
   public function argsRetreatUnit($clearPaths = false)
   {
     $player = Players::getActive();
-    list($unit, $minFlags, $maxFlags) = $this->getRetreatInfo();
+    list($unit, $minFlags, $maxFlags, $effect) = $this->getRetreatInfo();
     $args = array_merge(Board::getArgsRetreat($unit, $minFlags, $maxFlags), [
       'unitId' => $unit->getId(),
       'min' => $minFlags,
       'max' => $maxFlags,
       'desc' => $minFlags == $maxFlags ? '' : \clienttranslate('(up to ${max} cells)'),
       'i18n' => ['desc'],
-      'titleSuffix' => $minFlags == 0 ? 'skippable' : false,
+      'titleSuffix' => $effect == '' ? ($minFlags == 0 ? 'skippable' : false) : $effect,
     ]);
     Utils::clearPaths($args['units'], $clearPaths); // Remove paths, useless for UI
     return $args;
@@ -156,15 +157,24 @@ trait RetreatUnitTrait
       self::checkAction('actRetreatUnitDone');
     }
     // check that retreat = 0
-    list(, $minFlags) = $this->getRetreatInfo();
+    list(, $minFlags, , $effect) = $this->getRetreatInfo();
     if ($minFlags > 0) {
       throw new \BgaUserException(clienttranslate('You did not retreat far enough. Should not happen.'));
     }
 
     $attack = $this->getCurrentAttack();
-    if ($attack['unit'] == null) {
+    $oppUnit = $attack['oppUnit'];
+    if ($attack['unit'] == null || $effect == 'battleBack') {
       // Attack triggered by a card without order
       $this->closeCurrentAttack();
+    } elseif (
+      Globals::isBritishCommand() &&
+      $oppUnit->getNation() == 'brit' &&
+      $attack['distance'] == 1 &&
+      $oppUnit->getNUnits() == 1 &&
+      $oppUnit->getRetreats() == 0
+    ) {
+      $this->nextState('battleBack', $oppUnit->getPlayer());
     } else {
       $this->nextState('takeGround', $attack['pId']);
     }

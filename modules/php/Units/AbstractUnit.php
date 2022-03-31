@@ -70,6 +70,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     'mustSweep', // must sweep the mines instead of attack
     'targets',
     'canOverrun',
+    'canIgnoreOneFlag',
   ];
 
   protected $attackPower = [];

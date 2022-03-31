@@ -42,6 +42,7 @@ class Globals extends \M44\Helpers\DB_Manager
     'desert' => 'bool',
     'italyRoyalArmy' => 'bool', // affect units
     'italyHighCommand' => 'bool', // affect cards of the player when loose unit
+    'britishCommand' => 'bool',
   ];
 
   protected static $table = 'global_variables';

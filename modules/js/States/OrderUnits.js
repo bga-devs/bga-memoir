@@ -251,6 +251,16 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       $('lineOfSight').classList.toggle('vertical', x1 == x2);
     },
 
+    onEnteringStateBattleBack(args) {
+      $('unit-' + args.unitId).classList.add('attacking');
+      let oCell = $(`cell-${args.cell.x}-${args.cell.y}`);
+      oCell.classList.add('forAttack');
+      oCell.classList.add('selectable');
+
+      this.addPrimaryActionButton('btnBattleBack', _('Battle back'), () => this.takeAction('actBattleBack'));
+      this.addPrimaryActionButton('btnBattleBackPass', _('Pass'), () => this.takeAction('actBattleBackPass'));
+    },
+
     ///////////////////////////////////////////////////
     //    ____  _____ _____ ____  _____    _  _____
     //   |  _ \| ____|_   _|  _ \| ____|  / \|_   _|

@@ -228,6 +228,14 @@ trait AttackUnitsTrait
     if (isset($results[DICE_FLAG]) && !$eliminated) {
       $this->initRetreat($attack, $results);
       $this->nextState('retreat', $oppUnit->getPlayer());
+    } elseif (
+      Globals::isBritishCommand() &&
+      $oppUnit->getNation() == 'brit' &&
+      $attack['distance'] == 1 &&
+      !$eliminated &&
+      $oppUnit->getNUnits() == 1
+    ) {
+      $this->nextState('battleBack', $oppUnit->getPlayer());
     } else {
       $this->nextState('takeGround', $attack['pId']);
       // $this->closeCurrentAttack();
@@ -395,5 +403,68 @@ trait AttackUnitsTrait
     Notifications::message(\clienttranslate('${player_name} removes RoadBlock on their hex'), ['player' => $player]);
 
     $this->nextState('attack');
+  }
+
+  public function argsBattleBack()
+  {
+    $attack = $this->getCurrentAttack();
+    return [
+      'unitId' => $attack['oppUnit']->getId(),
+      'target' => $attack['unit']->getId(),
+      'cell' => $attack['unit']->getPos(),
+    ];
+  }
+
+  public function actBattleBack()
+  {
+    self::checkAction('actBattleBack');
+    $attack = $this->getCurrentAttack();
+
+    Notifications::message(clienttranslate('${player_name} battles back with 1 die'), [
+      'player' => $attack['oppUnit']->getPlayer(),
+    ]);
+
+    $oppUnit = $attack['unit'];
+    $unit = $attack['oppUnit'];
+    $oppPlayer = $oppUnit->getPlayer();
+    $player = $unit->getPlayer();
+    $results = Dice::roll($player, 1, $oppUnit->getPos());
+
+    $hits = $this->calculateHits(null, $oppUnit, null, $results);
+    $eliminated = $this->damageUnit($oppUnit, $hits);
+
+    if (Teams::checkVictory()) {
+      return;
+    }
+
+    $attack = [
+      'pId' => $player->getId(),
+      'unitId' => $unit->getId(),
+      'x' => $unit->getX(),
+      'y' => $unit->getY(),
+      'oppUnitId' => $oppUnit->getId(),
+      'nDice' => 1,
+      'distance' => 1,
+      'effect' => 'battleBack',
+    ];
+
+    if (isset($results[DICE_FLAG]) && !$eliminated) {
+      $this->initRetreat($attack, $results);
+      $this->nextState('retreat', $oppPlayer);
+    } else {
+      $this->closeCurrentAttack();
+    }
+  }
+
+  public function actBattleBackPass()
+  {
+    self::checkAction('actBattleBackPass');
+
+    $attack = $this->getCurrentAttack();
+
+    Notifications::message(clienttranslate('${player_name} does not battle'), [
+      'player' => $attack['oppUnit']->getPlayer(),
+    ]);
+    $this->closeCurrentAttack();
   }
 }

@@ -217,6 +217,20 @@ class action_memoir extends APP_GameAction
     self::ajaxResponse();
   }
 
+  public function actBattleBack()
+  {
+    self::setAjaxMode();
+    $this->game->actBattleBack();
+    self::ajaxResponse();
+  }
+
+  public function actBattleBackPass()
+  {
+    self::setAjaxMode();
+    $this->game->actBattleBackPass();
+    self::ajaxResponse();
+  }
+
   ///////////////////////////////////////////////////
   //    ____  _____ _____ ____  _____    _  _____
   //   |  _ \| ____|_   _|  _ \| ____|  / \|_   _|
