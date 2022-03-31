@@ -14,6 +14,7 @@ class SteepHill extends Hill
     parent::__construct($row);
     $this->name = clienttranslate('Steep Hills');
     $this->number = 13;
+    $this->desc[] = \clienttranslate('Movement up onto steep hill is a 2 hex move');
   }
 
   public function getEnteringDeplacementCost($unit, $source, $target, $d, $takeGround)

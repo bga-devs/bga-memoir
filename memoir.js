@@ -132,9 +132,7 @@ define([
       dojo.destroy('popin_showScenario_container');
       dojo.query('.m44-player-panel').remove();
 
-      if ($('m44-player-hand')) {
-        dojo.empty('m44-player-hand');
-      }
+      dojo.destroy('m44-player-hand');
       dojo.query('.card-in-play').empty();
 
       this.forEachPlayer((player) => {

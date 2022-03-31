@@ -96,37 +96,7 @@ class Tokens extends \M44\Helpers\Pieces
           $tokens[] = $baseDatas;
         } elseif (($tag['behavior'] ?? null) == 'EXIT_MARKER') {
           // at least the hex on the marker.
-          $tokens[] = [
-            'location' => 'board',
-            'x' => $hex['col'],
-            'y' => $hex['row'],
-            'sprite' => $tag['name'],
-            'type' => \TOKEN_EXIT_MARKER,
-            'team' => $tag['side'] ?? null,
-            'datas' => json_encode([
-              'medals' => $exitMedals,
-            ]),
-          ];
-          $origin = ['x' => $hex['col'], 'y' => $hex['row']];
-
-          foreach ($tag['group'] as $g) {
-            $calc = Utils::revertCoords($g);
-            if ($calc == $origin) {
-              continue;
-            }
-            // throw new \feException(print_r($calc));
-            $tokens[] = [
-              'location' => 'board',
-              'x' => $calc['x'],
-              'y' => $calc['y'],
-              'sprite' => $tag['name'],
-              'type' => \TOKEN_EXIT_MARKER,
-              'team' => $tag['side'] ?? null,
-              'datas' => json_encode([
-                'medals' => $exitMedals,
-              ]),
-            ];
-          }
+          self::addExitTokensData($tokens, $tag, $hex);
         }
       }
     }
@@ -240,6 +210,41 @@ class Tokens extends \M44\Helpers\Pieces
     foreach ($tokens as $t) {
       self::DB()->delete($t['id']);
       Notifications::removeToken($t);
+    }
+  }
+
+  public static function addExitTokensData(&$tokens, $tag, $hex)
+  {
+    $tokens[] = [
+      'location' => 'board',
+      'x' => $hex['col'],
+      'y' => $hex['row'],
+      'sprite' => $tag['name'],
+      'type' => \TOKEN_EXIT_MARKER,
+      'team' => $tag['side'] ?? null,
+      'datas' => json_encode([
+        'medals' => $exitMedals,
+      ]),
+    ];
+    $origin = ['x' => $hex['col'], 'y' => $hex['row']];
+
+    foreach ($tag['group'] as $g) {
+      $calc = Utils::revertCoords($g);
+      if ($calc == $origin) {
+        continue;
+      }
+      // throw new \feException(print_r($calc));
+      $tokens[] = [
+        'location' => 'board',
+        'x' => $calc['x'],
+        'y' => $calc['y'],
+        'sprite' => $tag['name'],
+        'type' => \TOKEN_EXIT_MARKER,
+        'team' => $tag['side'] ?? null,
+        'datas' => json_encode([
+          'medals' => $exitMedals,
+        ]),
+      ];
     }
   }
 }
