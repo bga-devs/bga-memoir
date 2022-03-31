@@ -313,6 +313,22 @@ trait AttackUnitsTrait
       // Increse the stat
       $statName = 'inc' . $unit->getStatName() . 'UnitRound' . Globals::getRound();
       Stats::$statName($attacker, 1);
+
+      if (
+        Globals::isItalyHighCommand() &&
+        $unit->getTeamId() == \AXIS &&
+        $unit
+          ->getPlayer()
+          ->getCards()
+          ->count() > 3
+      ) {
+        $card = $unit
+          ->getPlayer()
+          ->getCards()
+          ->rand();
+        Cards::discard($card);
+        Notifications::discardItalianHighCommand($unit->getPlayer(), $card);
+      }
     }
 
     return $unit->isEliminated();

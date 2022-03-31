@@ -48,6 +48,7 @@ define([
       this._notifications = [
         ['playCard', 1000],
         ['discardCard', 1200],
+        ['discardCardItalianHighCommand', 1200],
         ['discardCards', 1200],
         ['drawCards', 1000],
         ['pDrawCards', 1000],

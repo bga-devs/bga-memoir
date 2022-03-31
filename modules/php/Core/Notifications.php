@@ -198,6 +198,18 @@ class Notifications
     ]);
   }
 
+  public static function discardItalianHighCommand($player, $card)
+  {
+    self::notifyAll(
+      'discardCardItalianHighCommand',
+      clienttranslate('${player_name} discards ${card_name} due to Italian High command rule'),
+      [
+        'player' => $player,
+        'card' => $card,
+      ]
+    );
+  }
+
   public static function discardCards($player, $cards)
   {
     if ($cards->count() == 1) {
