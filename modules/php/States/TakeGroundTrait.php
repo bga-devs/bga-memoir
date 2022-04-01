@@ -143,7 +143,11 @@ trait TakeGroundTrait
   public function argsDesertMove()
   {
     $unit = $this->getCurrentAttack()['unit'];
+    $moves = $unit->getMoves();
 
-    return ['units' => [$unit->getId() => $unit->getPossibleMoves(1, 1, false)], 'lastUnitMoved' => $unit->getId()];
+    return [
+      'units' => [$unit->getId() => $unit->getPossibleMoves($moves + 1, $moves + 1, false)],
+      'lastUnitMoved' => $unit->getId(),
+    ];
   }
 }
