@@ -20,6 +20,28 @@ trait TakeGroundTrait
       $cell['d'] = 0;
     }
 
+    // if ($attack['distance'] != 1) {
+    //   throw new \feException('titi 1');
+    // }
+    // if (is_null($unit)) {
+    //   throw new \feException('toto2');
+    // }
+    // if (Board::getDeplacementCost($unit, $cell, $attack, 1, true) == \INFINITY) {
+    //   throw new \feException('tata3');
+    // }
+    // if ($unit->getGrounds() >= $unit->getMaxGrounds()) {
+    //   throw new \feException('truc 4');
+    // }
+    // if (Board::getUnitInCell($attack['x'], $attack['y']) != null) {
+    //   throw new \feException('machin 5');
+    // }
+    // if ($unit->getMoves() > 0 && Board::mustStopWhenEntering($unit, $unit->getPos())) {
+    //   throw new \feException('bidule 6');
+    // }
+    // if (Board::isImpassableCell(['x' => $attack['x'], 'y' => $attack['y']], $unit)) {
+    //   throw new \feException('crotte');
+    // }
+
     // To take ground, we must have the following:
     //   - attack at distance 1 and cost of deplacement of 1
     //   - attacked cell is now empty (opp unit retreated or eliminated)
@@ -71,6 +93,7 @@ trait TakeGroundTrait
     if ($unit->getGrounds() == $unit->getMaxGrounds()) {
       $this->closeCurrentAttack();
     } else {
+      Globals::setUnitAttacker($unit->getId()); // to make sure armor overrun can be done
       if (Globals::isDesert() && $unit->getType() == ARMOR) {
         $this->nextState('desertMove');
       } else {

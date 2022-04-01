@@ -258,7 +258,7 @@ class Board
       // Reduce cost by 1 if bonus not used
       foreach ($cells2 as &$cell) {
         $cell['road'] = true;
-        if($unit->getRoadBonus() != 0){
+        if ($unit->getRoadBonus() != 0) {
           $cell['d'] -= $unit->getRoadBonus();
           foreach ($cell['paths'] as &$path) {
             if (!empty($path)) {
@@ -360,7 +360,7 @@ class Board
       }
     }
 
-    // If I'm going to a 'must be adjacent' terrain, can't go there unless dist = 0
+    // If I'm going to a 'must be adjacent' terrain, can't go there unless dist = 0, even in take ground
     if ($source['d'] > 0 || $unit->getMoves() > 0) {
       if (self::mustBeAdjacentToEnterCell($target, $unit)) {
         return \INFINITY;
