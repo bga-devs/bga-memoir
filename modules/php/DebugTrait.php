@@ -57,4 +57,11 @@ trait DebugTrait
     $hillComponents = Board::getHillComponents();
     var_dump($hillComponents);
   }
+
+  function lm()
+  {
+    $this->gamestate->setAllPlayersMultiactive();
+
+    $this->gamestate->jumpToState(\ST_UPLOAD_SCENARIO);
+  }
 }

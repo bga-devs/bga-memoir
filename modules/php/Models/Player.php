@@ -141,7 +141,7 @@ class Player extends \M44\Helpers\DB_Model
   public function isCommissar()
   {
     $team = Globals::getCommissar();
-    return $team == $this->team && $this->getTeam()->getCommanderPId() == $this->id;
+    return $team != '' && $team == $this->team && $this->getTeam()->getCommanderPId() == $this->id;
   }
 
   public function getCommissarCard()

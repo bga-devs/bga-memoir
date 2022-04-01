@@ -250,10 +250,16 @@ const TROOP_CLASSES = [
   'inf2_8' => 'CombatEngineer',
   'inf2_12' => 'CombatEngineer',
   'inf2_28' => 'CombatEngineer',
+  'inf_4' => 'CombatEngineer',
+  'inf_6' => 'CombatEngineer',
+  'inf_8' => 'CombatEngineer',
+  'inf_12' => 'CombatEngineer',
+  'inf_28' => 'CombatEngineer',
   'inf_26' => 'Sniper',
   'inf_27' => 'Sniper',
   'inf_29' => 'Cavalry',
   'inf2_30' => 'SkiTroop',
+  'inf_30' => 'SkiTroop',
   'inf_37' => 'AntiTank',
 ];
 
