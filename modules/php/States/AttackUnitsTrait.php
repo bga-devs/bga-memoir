@@ -204,6 +204,9 @@ trait AttackUnitsTrait
       }
     }
 
+    // Display who is attacking who
+    Notifications::throwAttack($player, $unit, $attack['nDice'], $oppUnit);
+
     // Launch dice
     $results = Dice::roll($player, $attack['nDice'], $oppUnit->getPos());
     $coord = $oppUnit->getPos();

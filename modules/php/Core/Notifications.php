@@ -38,6 +38,31 @@ class Notifications
     self::notifyAll('refreshInterface', '', $data);
   }
 
+  public static function throwAttack($player, $unit, $nDice, $oppUnit)
+  {
+    $data = [
+      'player' => $player,
+      'coordTarget' => $oppUnit->getPos(),
+      'oppUnitId' => $oppUnit->getId(),
+      'unit_desc' => self::computeUnitsDesc([$oppUnit]),
+    ];
+
+    if (is_null($unit)) {
+      self::notifyAll('throwAttack', clienttranslate('${player_name} attacks ${unit_desc} (${coordTarget})'), $data);
+    } else {
+      $data['unitId'] = $unit->getId();
+      $data['unit2_desc'] = self::computeUnitsDesc([$unit]);
+      $data['coordSource'] = $unit->getPos();
+      self::notifyAll(
+        'throwAttack',
+        clienttranslate(
+          '${player_name} attacks ${unit_desc} (${coordTarget}) with their ${unit2_desc} at ${coordSource}'
+        ),
+        $data
+      );
+    }
+  }
+
   public static function rollDice($player, $nDice, $results, $cell)
   {
     $faces = [

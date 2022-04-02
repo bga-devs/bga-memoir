@@ -388,7 +388,10 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
-    column-gap: 10px; }
+    column-gap: 10px;
+    z-index: 5; }
+    #m44-container #m44-player-hand .m44-card.choice {
+      margin-top: -40px; }
 
 /*
 
@@ -642,6 +645,19 @@ html {
       border: none; }
   #m44-board.displayLineOfSight:hover #lineOfSight {
     display: block; }
+  #m44-board.displayLineOfSightAttack #lineOfSight {
+    display: block;
+    background: linear-gradient(to top left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) calc(50% - 2px), red 50%, rgba(0, 0, 0, 0) calc(50% + 3px), rgba(0, 0, 0, 0) 100%); }
+    #m44-board.displayLineOfSightAttack #lineOfSight.antidiagonal {
+      background: linear-gradient(to top right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) calc(50% - 2px), red 50%, rgba(0, 0, 0, 0) calc(50% + 3px), rgba(0, 0, 0, 0) 100%); }
+    #m44-board.displayLineOfSightAttack #lineOfSight.horizontal {
+      background: none;
+      border-top: 2px solid red; }
+    #m44-board.displayLineOfSightAttack #lineOfSight.vertical {
+      background: none;
+      border-left: 2px solid red; }
+    #m44-board.displayLineOfSightAttack #lineOfSight.vertical.horizontal {
+      border: none; }
 
 .hex-grid-background,
 .hex-grid-terrain.background-terrain {

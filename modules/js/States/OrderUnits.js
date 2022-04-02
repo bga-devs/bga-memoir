@@ -261,6 +261,20 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       this.addPrimaryActionButton('btnBattleBackPass', _('Pass'), () => this.takeAction('actBattleBackPass'));
     },
 
+    notif_throwAttack(n) {
+      debug('Someone throws an attack', n);
+      let target = $(`unit-${n.args.oppUnitId}`);
+      target.classList.add('attacked');
+
+      if (n.args.unitId) {
+        let source = $(`unit-${n.args.unitId}`);
+        source.classList.add('attacking');
+
+        $('m44-board').classList.add('displayLineOfSightAttack');
+        this.updateLineOfSight(source.parentNode.parentNode, target.parentNode.parentNode);
+      }
+    },
+
     ///////////////////////////////////////////////////
     //    ____  _____ _____ ____  _____    _  _____
     //   |  _ \| ____|_   _|  _ \| ____|  / \|_   _|

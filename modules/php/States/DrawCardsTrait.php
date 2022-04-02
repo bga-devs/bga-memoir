@@ -100,14 +100,16 @@ trait DrawCardsTrait
       throw new \BgaVisibleSystemException('Those cards cannot be selected. Should not happen');
     }
 
-    // Move selected cards to hand
-    Cards::move($cardIds, ['hand', $player->getId()]);
-    // Discard other cards
-    $otherCards = $player->getCardsChoice();
-    foreach ($otherCards as $card) {
-      Cards::discard($card);
+    // Move selected cards to discard
+    foreach ($cardIds as $cardId) {
+      Cards::discard((int) $cardId);
     }
-    Notifications::discardCards($player, $otherCards);
+    $cards = Cards::get($cardIds);
+
+    // Move other cards to hand
+    $otherCards = $player->getCardsChoice();
+    Cards::move($otherCards->getIds(), ['hand', $player->getId()]);
+    Notifications::discardCard($player, $cards);
 
     $this->gamestate->nextState('endRound');
   }
