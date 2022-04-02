@@ -150,7 +150,7 @@ class Terrains extends \M44\Helpers\Pieces
     $mineTokens = [0, 0, 0, 1, 1, 2, 2, 3, 4];
     foreach ($board['hexagons'] as $hex) {
       foreach ($hex['tags'] ?? [] as $tag) {
-        if (($tag['behavior'] ?? null) == 'MINE_FIELD') {
+        if (in_array($tag['behavior'] ?? null, ['MINE_FIELD', 'DECOY_MEDAL_MINE_FIELD'])) {
           shuffle($mineTokens);
           $value = \array_pop($mineTokens);
           $terrains[] = [
@@ -161,6 +161,7 @@ class Terrains extends \M44\Helpers\Pieces
             'owner' => $tag['side'] ?? null,
             'extra_datas' => json_encode([
               'value' => $value,
+              'decoyMedal' => $tag['behavior'] == 'DECOY_MEDAL_MINE_FIELD',
             ]),
           ];
         }
@@ -223,5 +224,15 @@ class Terrains extends \M44\Helpers\Pieces
     });
 
     return $terrains;
+  }
+
+  public function removeDecoyMedals()
+  {
+    $mines = self::getSelectQuery()
+      ->where('type', 'minefield')
+      ->get();
+    foreach ($mines as $mine) {
+      $mine->setExtraDatas('decoyMedal', false);
+    }
   }
 }

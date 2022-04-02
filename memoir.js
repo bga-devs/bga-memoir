@@ -69,7 +69,7 @@ define([
         ['airDrop', 500],
         ['addToken', 1000],
         ['removeToken', 1000],
-        ['revealMinefield', 400],
+        ['revealMinefield', 100],
         ['commissarCard', 1000],
         ['pCommissarCard', 1000],
         ['revealCommissarCard', 1000],

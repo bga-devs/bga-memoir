@@ -58,6 +58,22 @@ class Medals extends \M44\Helpers\DB_Manager
       ->get();
   }
 
+  public function addDecoyMedals($team, $terrain)
+  {
+    $ids = [];
+
+    $ids[] = self::DB()->insert([
+      'team' => $team,
+      'type' => \MEDAL_DECOY,
+      'foreign_id' => $terrain->getId(),
+      'sprite' => $team == ALLIES ? 'medal8' : 'medal9',
+    ]);
+
+    return self::DB()
+      ->whereIn('id', $ids)
+      ->get();
+  }
+
   /**
    * Load a scenario
    */

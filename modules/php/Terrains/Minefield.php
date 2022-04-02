@@ -4,6 +4,9 @@ use M44\Board;
 use M44\Dice;
 use M44\Core\Game;
 use M44\Core\Notifications;
+use M44\Managers\Medals;
+use M44\Managers\Terrains;
+use M44\Managers\Teams;
 
 class Minefield extends \M44\Models\Terrain
 {
@@ -56,6 +59,13 @@ class Minefield extends \M44\Models\Terrain
 
     if ($value == 0) {
       $this->removeFromBoard();
+
+      if ($this->getExtraDatas('decoyMedal')) {
+        $medals = Medals::addDecoyMedals($unit->getTeamId(), $this);
+        Notifications::scoreMedals($unit->getTeamId(), $medals, $unit->getPos());
+        Terrains::removeDecoyMedals();
+        return Teams::checkVictory();
+      }
     } else {
       $player = $unit->getPlayer();
       $results = Dice::roll($player, $value, $unit->getPos());
