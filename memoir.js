@@ -37,7 +37,6 @@ define([
         'playCommissarCard',
         'orderUnits',
         'moveUnits',
-        'attackUnits',
         'opponentAmbush',
         'battleBack',
         'drawChoice',

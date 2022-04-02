@@ -184,10 +184,14 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           $('unit-' + unitId).classList.add('unselectableForAttacking');
           return;
         }
-
-        nonEmptyUnits.push(unitId);
-        this.onClick('unit-' + unitId, () => callback(unitId));
+        if (this.isCurrentPlayerActive()) {
+          nonEmptyUnits.push(unitId);
+          this.onClick('unit-' + unitId, () => callback(unitId));
+        }
       });
+      if (!this.isCurrentPlayerActive()) {
+        return;
+      }
       if (excludeUnit == null && nonEmptyUnits.length == 1) {
         callback(nonEmptyUnits[0]);
       }
