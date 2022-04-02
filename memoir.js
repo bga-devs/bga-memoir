@@ -55,6 +55,7 @@ define([
         ['pDrawCards', 1000],
         ['activateUnits', 2],
         ['moveUnit', 600],
+        ['throwAttack', 300],
         ['rollDice', 3300],
         ['clearUnitsStatus', 2],
         ['takeDamage', 1000],
@@ -197,7 +198,7 @@ define([
       ].forEach((className) => {
         this.removeClassNameOfCells(className);
       });
-      $('m44-board').classList.remove('displayLineOfSight');
+      $('m44-board').classList.remove('displayLineOfSight', 'displayLineOfSightAttack');
       dojo.query('.choice').removeClass('choice');
       dojo.query('.dice-mini').forEach(dojo.destroy);
     },

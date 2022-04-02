@@ -452,6 +452,11 @@ html {
     justify-content: center;
     align-items: center;
     column-gap: 10px;
+    z-index: 5;
+
+    .m44-card.choice {
+      margin-top: -40px;
+    }
   }
 }
 

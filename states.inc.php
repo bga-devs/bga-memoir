@@ -228,8 +228,8 @@ $machinestates = [
 
   ST_DRAW_CHOICE => [
     'name' => 'drawChoice',
-    'description' => clienttranslate('${actplayer} must choose which card to keep'),
-    'descriptionmyturn' => clienttranslate('${you} must choose which card to keep'),
+    'description' => clienttranslate('${actplayer} must choose which card to discard'),
+    'descriptionmyturn' => clienttranslate('${you} must choose which card to discard'),
     'type' => 'activeplayer',
     'args' => 'argsDrawChoice',
     'possibleactions' => ['actChooseCard'],

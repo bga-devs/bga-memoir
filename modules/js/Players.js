@@ -252,6 +252,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         this.addCard(n.args.card, `in-play-${n.args.player_id}`);
       }
       this.slide('card-' + n.args.card.id, 'discard', { duration: 1100 });
+      this._handCounters[n.args.player_id].incValue(-1);
     },
 
     notif_discardCardItalianHighCommand(n) {
@@ -306,7 +307,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       // TODO : handle the case for nKeep > 1
       Object.values(args._private.cards).forEach((card) => {
         if (!$('card-' + card.id)) {
-          this.addCard(card, 'bottom-player-hand');
+          this.addCard(card, 'm44-player-hand');
         }
 
         $('card-' + card.id).classList.add('choice');
