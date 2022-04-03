@@ -96,7 +96,7 @@ class Tokens extends \M44\Helpers\Pieces
           $tokens[] = $baseDatas;
         } elseif (($tag['behavior'] ?? null) == 'EXIT_MARKER') {
           // at least the hex on the marker.
-          self::addExitTokensData($tokens, $tag, $hex);
+          self::addExitTokensData($tokens, $tag, $hex, $exitMedals);
         }
       }
     }
@@ -213,7 +213,7 @@ class Tokens extends \M44\Helpers\Pieces
     }
   }
 
-  public static function addExitTokensData(&$tokens, $tag, $hex)
+  public static function addExitTokensData(&$tokens, $tag, $hex, $exitMedals)
   {
     $tokens[] = [
       'location' => 'board',
