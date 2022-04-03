@@ -121,11 +121,14 @@ trait OrderUnitsTrait
     $unit = Units::get($unitId);
 
     $unit->setNUnits(0);
+    $pos = $unit->getPos();
 
     Board::removeUnit($unit);
     Notifications::exitUnit($player, $unit);
     $team = $unit->getTeam();
-    $team->addExitMedals($unit);
+    $medals = $team->addExitMedals($unit);
+    Notifications::scoreMedals($team->getId(), $medals, $pos);
+
     Tokens::removeTargets($unit->getPos());
     Tokens::removeCamouflage($unit->getPos());
     if (Teams::checkVictory()) {
