@@ -212,11 +212,11 @@ class Board
   // |_|  |_|\___/  \_/  |_____|
   /////////////////////////////////
 
-  public static function getReachableCells($unit)
+  public static function getReachableCells($unit, $force = false)
   {
     // Already moved before ?
     $uId = Globals::getUnitMoved();
-    if ($unit->getMoves() > 0 && $uId != -1 && $uId != $unit->getId()) {
+    if (!$force && $unit->getMoves() > 0 && $uId != -1 && $uId != $unit->getId()) {
       return [];
     }
 

@@ -259,7 +259,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
   // |_|  |_|\___/  \_/  |_____|
   /////////////////////////////////
 
-  public function getPossibleMoves($maxMove = null, $maxMoveAttack = null, $additionalAction = true)
+  public function getPossibleMoves($maxMove = null, $maxMoveAttack = null, $additionalAction = true, $force = false)
   {
     if (!is_null($maxMove)) {
       $this->movementRadius = $maxMove;
@@ -294,7 +294,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
       }
     }
 
-    return array_merge(Board::getReachableCells($this), $pAction);
+    return array_merge(Board::getReachableCells($this, $force), $pAction);
   }
 
   public function moveTo($cell)
