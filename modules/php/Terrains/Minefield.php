@@ -45,7 +45,7 @@ class Minefield extends \M44\Models\Terrain
     }
 
     // mines are not triggered with behind ennemy lines
-    if ($unit->getActivationOCard()->getType() == CARD_BEHIND_LINES) {
+    if ($unit->getActivationOCard()->getType() == CARD_BEHIND_LINES && $unit->getMoves() < 3) {
       return false;
     }
 
