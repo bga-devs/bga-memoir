@@ -515,6 +515,14 @@ class Board
     });
     // }
 
+    // check if unit must be adjacent to battle in
+    Utils::filter($cells, function ($cell) use ($unit, $pos) {
+      if (self::mustBeAdjacentToBattleCell($unit->getPos(), $unit) || self::mustBeAdjacentToBattleCell($cell, $unit)) {
+        return $cell['d'] == 1;
+      }
+      return true;
+    });
+
     // Compute the opponents in contact with the unit
     $inContact = array_values(
       \array_filter($cells, function ($cell) {

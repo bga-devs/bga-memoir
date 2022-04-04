@@ -39,7 +39,8 @@ trait DebugTrait
     //   // $x += $t->defense(Units::get(9));
     // }
     // throw
-    throw new \feException('titi ' . Units::get(1086)->isCamouflaged() . ' toto');
+    // throw new \feException('titi ' . Units::get(1086)->isCamouflaged() . ' toto');
+    $this->argsAttackUnit();
   }
 
   function tp($pId, $unitId, $min, $max)

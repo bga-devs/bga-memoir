@@ -41,6 +41,7 @@ class Terrain extends \M44\Helpers\DB_Model
   protected $properties = [
     'isImpassable',
     'mustBeAdjacentToEnter',
+    'mustBeAdjacentToBattle',
     'mustStopWhenEntering',
     'enteringCannotBattle',
     'leavingCannotBattle',
