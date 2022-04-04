@@ -43,4 +43,14 @@ class Wadi extends \M44\Models\Terrain
 
     return $this->mustBeAdjacentToBattle;
   }
+
+  public function defense($unit)
+  {
+    foreach (Board::getTerrainsInCell($unit->getPos()) as $t) {
+      if ($t instanceof \M44\Terrains\Wadi) {
+        return null;
+      }
+    }
+    return $this->getProperty('defense', $unit);
+  }
 }
