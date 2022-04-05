@@ -54,7 +54,7 @@ trait TakeGroundTrait
       Board::getDeplacementCost($unit, $cell, $attack, 1, true) == \INFINITY ||
       $unit->getGrounds() >= $unit->getMaxGrounds() ||
       Board::getUnitInCell($attack['x'], $attack['y']) != null ||
-      ($unit->getMoves() > 0 && Board::mustStopWhenEntering($unit, $unit->getPos())) ||
+      ($unit->getMoves() > 0 && Board::mustStopWhenEnteringCell($unit->getPos(), $unit)) ||
       Board::isImpassableCell(['x' => $attack['x'], 'y' => $attack['y']], $unit)
     ) {
       $this->closeCurrentAttack();

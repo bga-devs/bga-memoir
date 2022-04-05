@@ -24,7 +24,7 @@ class Marsh extends \M44\Models\Terrain
     $this->mustStopWhenEntering = true;
     $this->mustStopWhenLeaving = true;
     $this->enteringCannotBattle = [ARMOR];
-    $this->leavingCannotBattle = [ARMOR]; // TODO
+    $this->leavingCannotBattle = [ARMOR];
     $this->cannotArmorOverrun = true;
 
     parent::__construct($row);

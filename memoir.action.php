@@ -136,6 +136,14 @@ class action_memoir extends APP_GameAction
     self::ajaxResponse();
   }
 
+  public function actHealUnitHospital()
+  {
+    self::setAjaxMode();
+    $unitId = self::getArg('unitId', AT_posint, false);
+    $this->game->actHealUnitHospital($unitId);
+    self::ajaxResponse();
+  }
+
   public function actExitUnit()
   {
     self::setAjaxMode();

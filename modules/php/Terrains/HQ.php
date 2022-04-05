@@ -5,7 +5,7 @@ class HQ extends \M44\Models\Terrain
 {
   public static function isTileOfType($hex)
   {
-    return in_array($hex['name'], ['dcamp']);
+    return in_array($hex['name'], ['dcamp', 'pheadquarter']);
   }
 
   public function __construct($row)

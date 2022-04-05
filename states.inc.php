@@ -152,7 +152,7 @@ $machinestates = [
     'type' => 'activeplayer',
     'args' => 'argsMoveUnits',
     'action' => 'stMoveUnits',
-    'possibleactions' => ['actMoveUnit', 'actMoveUnitsDone', 'actHealUnit', 'actExitUnit'],
+    'possibleactions' => ['actMoveUnit', 'actMoveUnitsDone', 'actHealUnit', 'actHealUnitHospital', 'actExitUnit'],
     'transitions' => ['moveUnits' => ST_MOVE_UNITS, 'attackUnits' => ST_ATTACK],
   ],
 

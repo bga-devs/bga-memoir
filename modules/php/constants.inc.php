@@ -235,6 +235,11 @@ const TERRAIN_CLASSES = [
   'erg' => 'Erg',
   'escarpment' => 'Escarpment',
   'hq' => 'HQ',
+  'cave' => 'HillCave',
+  'mountaincave' => 'MountainCave',
+  'hospital' => 'Hospital',
+  'jungle' => 'Jungle',
+  'pier' => 'Pier',
 ];
 
 const TROOP_CLASSES = [

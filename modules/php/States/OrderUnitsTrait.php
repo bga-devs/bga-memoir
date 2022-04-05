@@ -74,7 +74,7 @@ trait OrderUnitsTrait
     $this->gamestate->nextState($nextState);
   }
 
-  public function actHealUnit($unitId)
+  public function actHealUnit($unitId, $nDice = null)
   {
     self::checkAction('actHealUnit');
     $player = Players::getCurrent();
@@ -89,7 +89,11 @@ trait OrderUnitsTrait
     }
 
     // Roll dice corresponding to number of cards
-    $nbCard = $player->getCards()->count() + 1;
+    if (is_null($nDice)) {
+      $nbCard = $player->getCards()->count() + 1;
+    } else {
+      $nbCard = $nDice;
+    }
     $results = Dice::roll($player, $nbCard, $unit->getPos());
 
     // Compute number of heal
@@ -107,6 +111,13 @@ trait OrderUnitsTrait
     }
 
     $this->gamestate->nextState('moveUnits');
+  }
+
+  public function actHealUnitHospital($unitId)
+  {
+    self::checkAction('actHealUnitHospital');
+
+    $this->actHealUnit($unitId, 6);
   }
 
   public function actExitUnit($unitId)
