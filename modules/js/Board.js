@@ -162,9 +162,10 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       dojo.connect($('m44-board-zoom-in'), 'click', () => this.incBoardScale(0.1));
       dojo.connect($('m44-board-zoom-out'), 'click', () => this.incBoardScale(-0.1));
 
-      this._labelsVisibility = this.getConfig('m44Labels', 1);
-      $('m44-board-wrapper').dataset.labels = this._labelsVisibility;
-      dojo.connect($('m44-labels-settings'), 'click', () => this.toggleLabelsVisibility());
+      ['terrains', 'units', 'tokens', 'labels', 'coords'].forEach((layer) => {
+        this.toggleLayerVisibility(layer, this.getConfig('m44' + layer, 1));
+        dojo.connect($(`m44-${layer}-settings`), 'click', () => this.toggleLayerVisibility(layer));
+      });
     },
 
     removeClassNameOfCells(className) {
@@ -172,10 +173,16 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       cells.forEach((cell) => cell.classList.remove(className));
     },
 
-    toggleLabelsVisibility() {
-      this._labelsVisibility = 1 - this._labelsVisibility;
-      $('m44-board-wrapper').dataset.labels = this._labelsVisibility;
-      localStorage.setItem('m44Labels', this._labelsVisibility);
+    toggleLayerVisibility(layer, value = null) {
+      let name = '_' + layer + 'Visibility';
+      if (value == null) {
+        this[name] = 1 - this[name];
+      } else {
+        this[name] = value;
+      }
+
+      $('m44-board-wrapper').dataset[layer] = this[name];
+      localStorage.setItem('m44' + layer, this[name]);
     },
 
     incBoardScale(delta) {

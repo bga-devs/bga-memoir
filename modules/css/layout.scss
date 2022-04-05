@@ -28,7 +28,7 @@ html {
 
   #left-side {
     margin-right: 270px;
-    top: -4px;
+    top: 0px;
     margin-left: 0px;
   }
 }
@@ -36,31 +36,45 @@ html {
   margin-right: 0;
 }
 
-#page-title {
-  position: absolute;
-  left: 2px;
-  right: 2px;
-  top: 8px;
-  z-index: 1000;
+#title-content-wrapper {
+  position: relative;
+  background: url('img/ui/game_top.jpg');
+  background-repeat: repeat-x;
+  background-size: auto 185px;
+  background-position: top center;
+  padding-top: 5px;
 
-  &.fixed-page-title {
-    right: auto;
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    right: -18px;
+    width: 18px;
+    top: 0;
+    bottom: 0;
+    z-index: 10;
+    background-image: url('img/ui/game_right.jpg');
+    background-size: 100% auto;
+    background-repeat: repeat-y;
+    box-shadow: -1px -1px 3px black;
+    background-position: bottom right;
   }
-}
 
-#page-content::before {
-  content: '';
-  display: block;
-  position: absolute;
-  right: -18px;
-  width: 18px;
-  top: 0;
-  bottom: 0;
-  z-index: 10;
-  background-image: url('img/ui/game_right.jpg');
-  background-size: 100% auto;
-  background-repeat: repeat-y;
-  box-shadow: -1px -1px 3px black;
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    height: 19px;
+    left: 0;
+    right: 0;
+    bottom: 0px;
+    z-index: 11;
+    background: url('img/ui/game_bottom.jpg');
+    background-size: auto 100%;
+    background-repeat: repeat-x;
+    background-position: right top;
+    box-shadow: -6px -1px 3px -1px black;
+  }
 }
 
 #m44-container {
@@ -74,11 +88,7 @@ html {
   }
 
   #m44-top-container {
-    height: 120px;
-    background: url('img/ui/game_top.jpg');
-    background-repeat: repeat-x;
-    background-size: auto 100%;
-    background-position: bottom center;
+    height: 65px;
     position: relative;
     z-index: 5;
     display: flex;
@@ -88,45 +98,28 @@ html {
   }
 
   #m44-top-part {
-    height: 52px;
+    height: 54px;
     display: flex;
 
     #top-team {
       height: 52px;
+      background-color: #ffffff2e;
+      border-top: 1px solid #2f2f2f;
+      border-bottom: 1px solid #4f4c4c;
 
       #top-medals {
         position: absolute;
         bottom: -29px;
       }
     }
-
-    #scenario-informations {
-      margin-left: auto;
-
-      #clipboard-button {
-        width: 40px;
-        background: #ebd5bd;
-        padding: 5px 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        svg {
-          width: 80%;
-          cursor: pointer;
-          &:hover {
-            fill: gray;
-          }
-        }
-      }
-    }
   }
 
   #m44-central-part {
     max-height: 600px; // TODO
+    min-height: 560px;
     display: flex;
     margin-top: 0px;
-    margin-bottom: -4px;
+    margin-bottom: 0px;
     //background: url('img/background.jpg');
 
     #left-holder {
@@ -139,22 +132,28 @@ html {
       justify-content: center;
       padding-left: 4px;
       box-sizing: border-box;
-      row-gap: 10px;
+      row-gap: 5px;
       position: relative;
       z-index: 4;
       margin-right: -8px;
+      padding: 18px 0px 18px 10px;
 
       #deck,
-      #discard {
+      #discard,
+      #top-in-play,
+      #bottom-in-play {
         width: 80px;
         height: 128px;
         --memoirCardScale: 0.2548;
         position: relative;
-        .section-card,
-        .tactic-card {
+        .m44-card {
           position: absolute;
           top: 0;
         }
+      }
+
+      #top-in-play {
+        transform: rotate(180deg);
       }
 
       #deck {
@@ -176,6 +175,11 @@ html {
           line-height: 30px;
         }
       }
+
+      #discard {
+        background-color: rgba(255, 255, 255, 0.4);
+        border-radius: 8px;
+      }
     }
 
     #m44-board-wrapper {
@@ -195,41 +199,6 @@ html {
         z-index: 1;
         //        padding: 20px;
         box-sizing: border-box;
-      }
-
-      #m44-board-zoom-in,
-      #m44-board-zoom-out,
-      #m44-labels-settings {
-        position: absolute;
-        z-index: 2;
-        top: 0;
-        right: 0px;
-        width: 40px;
-        height: 40px;
-
-        svg {
-          width: 100%;
-          height: 100%;
-          cursor: pointer;
-        }
-        &:hover svg {
-          color: white;
-        }
-      }
-
-      #m44-board-zoom-in {
-        right: 40px;
-      }
-
-      #m44-labels-settings {
-        right: 80px;
-      }
-
-      &[data-labels='0'] #m44-labels-settings svg:first-of-type {
-        display: none;
-      }
-      &[data-labels='1'] #m44-labels-settings svg:last-of-type {
-        display: none;
       }
 
       #scenario-dropzone-container {
@@ -304,20 +273,115 @@ html {
         }
       }
     }
+
+    #right-holder {
+      width: 52px;
+      flex-shrink: 0;
+      background: #4a6632;
+      box-shadow: -1px -1px 3px black;
+      z-index: 4;
+
+      #scenario-informations {
+        #clipboard-button {
+          width: 40px;
+          padding: 6px 6px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-bottom: 1px solid #0f330a;
+
+          svg {
+            width: 80%;
+            cursor: pointer;
+            &:hover {
+              fill: white;
+            }
+          }
+        }
+      }
+
+      #m44-board-zoom-in,
+      #m44-board-zoom-out,
+      #m44-terrains-settings,
+      #m44-units-settings,
+      #m44-tokens-settings,
+      #m44-labels-settings,
+      #m44-coords-settings {
+        width: 40px;
+        padding: 6px 6px;
+
+        svg {
+          width: 40px;
+          height: 40px;
+          cursor: pointer;
+        }
+        &:hover svg {
+          fill: white;
+          color: white;
+        }
+      }
+
+      #m44-coords-settings,
+      #m44-board-zoom-out {
+        border-bottom: 1px solid #0f330a;
+      }
+    }
+
+    #m44-board-wrapper[data-terrains='1'] ~ #right-holder #m44-terrains-settings svg:first-of-type {
+      display: none;
+    }
+    #m44-board-wrapper[data-terrains='0'] ~ #right-holder #m44-terrains-settings svg:last-of-type {
+      display: none;
+    }
+    #m44-board-wrapper[data-units='1'] ~ #right-holder #m44-units-settings svg:first-of-type {
+      display: none;
+    }
+    #m44-board-wrapper[data-units='0'] ~ #right-holder #m44-units-settings svg:last-of-type {
+      display: none;
+    }
+    #m44-board-wrapper[data-tokens='1'] ~ #right-holder #m44-tokens-settings svg:first-of-type {
+      display: none;
+    }
+    #m44-board-wrapper[data-tokens='0'] ~ #right-holder #m44-tokens-settings svg:last-of-type {
+      display: none;
+    }
+    #m44-board-wrapper[data-labels='1'] ~ #right-holder #m44-labels-settings svg:first-of-type {
+      display: none;
+    }
+    #m44-board-wrapper[data-labels='0'] ~ #right-holder #m44-labels-settings svg:last-of-type {
+      display: none;
+    }
+    #m44-board-wrapper[data-coords='1'] ~ #right-holder #m44-coords-settings svg:first-of-type {
+      display: none;
+    }
+    #m44-board-wrapper[data-coords='0'] ~ #right-holder #m44-coords-settings svg:last-of-type {
+      display: none;
+    }
   }
 
-  #m44-bottom-part {
-    height: 71px;
-    background: url('img/ui/game_bottom.png');
-    background-repeat: repeat-x;
-    background-size: auto 100%;
+  #m44-bottom-container {
     position: relative;
     z-index: 5;
     display: flex;
+    flex-flow: column;
+    justify-content: flex-end;
+    box-shadow: 0px -2px 3px -1px black;
+
+    background: url('img/ui/game_top.jpg');
+    background-repeat: repeat;
+    background-size: auto 180px;
+  }
+
+  #m44-bottom-part {
+    height: 54px;
+    display: flex;
 
     #bottom-team {
-      height: 59px;
-      margin-top: 12px;
+      height: 52px;
+      background-color: #ffffff2e;
+      border-bottom: 1px solid #2f2f2f;
+      border-top: 1px solid #4f4c4c;
+
       #bottom-medals {
         position: absolute;
         top: -29px;
@@ -328,6 +392,7 @@ html {
   .m44-team {
     display: flex;
     position: relative;
+    width: 100%;
 
     .m44-team-medals {
       position: absolute;
@@ -376,76 +441,125 @@ html {
       }
     }
 
-    .m44-player-panel {
-      position: relative;
+    .m44-team-players {
       display: flex;
-      background: #ebd5bd;
-      min-width: 240px;
-      padding: 5px 10px;
-      --memoirCardScale: 0.2;
+      flex-grow: 1;
 
-      .player-name {
-        flex-grow: 1;
-      }
-
-      .commissar-slot {
-        position: absolute;
-        left: 0px;
-        bottom: 0px;
-        width: 40px;
-        height: 40px;
-
-        .m44-card {
-          position: absolute;
-          left: 30px;
-          top: 10px;
-        }
-
-        &::after {
-          content: '';
-          width: 40px;
-          height: 40px;
-          background-image: url('img/ui/commissar.png');
-          background-size: 100% 100%;
-          z-index: 4;
-          display: block;
-          position: absolute;
-        }
-      }
-
-      .card-in-play {
-        width: 65px;
-      }
-
-      .hand-count-holder {
+      .m44-player-panel {
+        position: relative;
         display: flex;
-        justify-content: center;
-        align-items: center;
+        background: #ebd5bd;
+        --memoirCardScale: 0.095;
+        border-right: 1px solid #2f2f2f;
 
-        .hand-count-back {
-          width: 35px;
-          height: 49px;
-          background-image: url('img/card_back.jpg');
-          background-size: auto 100%;
-          background-repeat: no-repeat;
-          background-position: center center;
+        .player-avatar {
+          display: flex;
+          align-items: center;
+          padding-left: 2px;
         }
 
-        .hand-count::before {
-          content: 'x';
-          margin: 0px 3px;
+        .player-name {
+          flex-grow: 1;
+          min-width: 100px;
+          padding: 5px 10px 5px 5px;
+          border-right: 1px solid #2f2f2f;
         }
 
-        .m44-card {
-          position: absolute;
+        .commissar-holder {
+          display: flex;
+          padding: 2px 7px;
+          background-color: #95612a3b;
+          border-left: 1px solid #2f2f2f;
+
+          .commissar-token {
+            width: 40px;
+            height: 40px;
+            background-image: url('img/ui/commissar.png');
+            background-size: 100% 100%;
+            margin-top: 2px;
+          }
+
+          .commissar-slot {
+            position: relative;
+            width: 34px;
+            height: 48px;
+            margin-left: 3px;
+
+            .m44-card {
+              position: absolute;
+            }
+          }
         }
+
+        /*
+        .card-in-play {
+          width: 65px;
+        }
+*/
+
+        .hand-count-holder {
+          display: flex;
+          padding: 2px 7px;
+          font-family: 'Gunplay';
+          font-size: 28px;
+          line-height: 52px;
+          background-color: #95612a3b;
+
+          .hand-count-back {
+            width: 34px;
+            height: 48px;
+            background-image: url('img/card_back.jpg');
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position: center center;
+          }
+
+          .hand-count::before {
+            content: 'x';
+            margin: 0px 3px;
+          }
+
+          .m44-card {
+            position: absolute;
+          }
+        }
+      }
+    }
+
+    .m44-team-status {
+      width: 172px;
+      height: 52px;
+      background-image: url('img/ui/phases.jpg');
+      background-size: 700% 200%;
+      border-left: 1px solid #2f2f2f;
+
+      &[data-status='order'] {
+        background-position-x: 0;
+      }
+      &[data-status='para'] {
+        background-position-x: 1 * 100% / 6;
+      }
+      &[data-status='attack'] {
+        background-position-x: 2 * 100% / 6;
+      }
+      &[data-status='command'] {
+        background-position-x: 3 * 100% / 6;
+      }
+      &[data-status='move'] {
+        background-position-x: 5 * 100% / 6;
+      }
+      &[data-status='idle'] {
+        background-position-x: 5 * 100% / 6;
+      }
+      &[data-status='commissar'] {
+        background-position-x: 6 * 100% / 6;
       }
     }
   }
 
   #m44-player-hand {
     width: 100%;
-    background: #ffffff8c;
+    // background: #ffffff8c;
     height: 200px;
     --memoirCardScale: 0.38;
     display: flex;
@@ -456,6 +570,23 @@ html {
 
     .m44-card.choice {
       margin-top: -40px;
+    }
+
+    .commissar-holder {
+      position: relative;
+      width: calc(var(--memoirCardScale) * 314px);
+      height: calc(var(--memoirCardScale) * 503px);
+
+      .commissar-token {
+        width: 50px;
+        height: 50px;
+        background-image: url('img/ui/commissar.png');
+        background-size: 100% 100%;
+        position: absolute;
+        z-index: 7;
+        top: -10px;
+        left: -10px;
+      }
     }
   }
 }

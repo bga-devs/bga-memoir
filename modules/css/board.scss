@@ -29,6 +29,10 @@
     }
     &#m44-board-units {
       z-index: 3;
+
+      [data-units='0'] & {
+        display: none;
+      }
     }
   }
 
@@ -79,6 +83,10 @@
       font-size: calc(var(--memoirBoardScale) * 21px);
       text-shadow: -1px -1px 0 #00000090, 1px -1px 0 #00000090, -1px 1px 0 #00000090, 1px 1px 0 #00000090;
       opacity: 0.3;
+
+      [data-coords='0'] & {
+        visibility: hidden;
+      }
     }
 
     .hex-grid-content {
@@ -293,6 +301,10 @@
       background-position-y: (($i - ($i % 6)) / 6) * 100% / 5;
     }
   }
+
+  [data-terrains='0'] & {
+    display: none;
+  }
 }
 
 .hex-grid-terrain {
@@ -307,6 +319,10 @@
       background-position-y: (($i - ($i % 10)) / 10) * 100% / 10;
     }
   }
+
+  [data-terrains='0'] & {
+    display: none;
+  }
 }
 
 .hex-grid-obstacle {
@@ -319,6 +335,10 @@
       background-position-x: ($i % 6) * 100% / 5;
       background-position-y: (($i - ($i % 6)) / 6) * 100% / 4;
     }
+  }
+
+  [data-terrains='0'] & {
+    display: none;
   }
 }
 

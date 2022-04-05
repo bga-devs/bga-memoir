@@ -9,13 +9,21 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
     setupPlayers() {
       this._handCounters = {};
+      if (!this.isSpectator) {
+        dojo.place('<div id="m44-player-hand"></div>', 'm44-bottom-container');
+        this.gamedatas.players[this._pId].cards.forEach((card) => this.addCard(card, 'm44-player-hand'));
+      }
+
       this.forEachPlayer((player) => {
         let pos = player.team == this._bottomTeam ? 'bottom' : 'top';
-        this.place('tplPlayerPanel', player, pos + '-team');
+        this.place('tplPlayerPanel', player, pos + '-team-players');
+        dojo.place(`<div class='card-in-play' id='in-play-${player.id}'></div>`, pos + '-in-play');
         this._handCounters[player.id] = this.createCounter(`hand-count-${player.id}`, player.cardsCount);
+
         if (player.inplay) {
           this.addCard(player.inplay, 'in-play-' + player.id);
         }
+
         if (player.commissarCard) {
           let container = 'commissar-' + player.id;
           if (player.commissarCard === true) {
@@ -24,24 +32,35 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
             this.addCard(player.commissarCard, container);
           }
         }
-      });
 
-      if (!this.isSpectator) {
-        dojo.place('<div id="m44-player-hand"></div>', 'm44-container');
-        this.gamedatas.players[this._pId].cards.forEach((card) => this.addCard(card, 'm44-player-hand'));
-      }
+        if (player.isCommissar && player.id == this.player_id) {
+          dojo.place('commissar-holder-' + player.id, 'm44-player-hand', 'first');
+        }
+      });
     },
 
     tplPlayerPanel(player) {
-      let commissar = player.isCommissar ? `<div class='commissar-slot' id='commissar-${player.id}'></div>` : '';
+      let img = $('avatar_' + player.id);
+      let commissar = player.isCommissar
+        ? `
+        <div class='commissar-holder' id="commissar-holder-${player.id}">
+          <div class='commissar-token'></div>
+          <div class='commissar-slot' id='commissar-${player.id}'></div>
+        </div>`
+        : '';
+
       return `<div class='m44-player-panel'>
-        <div class='player-name' style='color:#${player.color}'>${player.name}</div>
-        <div class='card-in-play' id='in-play-${player.id}'></div>
-        ${commissar}
+        <div class='player-avatar'>
+          <img src="${img.src}" alt="" class="avatar emblem" />
+        </div>
+        <div class='player-name' style='color:#${player.color}' data-commissar="${player.isCommissar ? 1 : 0}">${
+        player.name
+      }</div>
         <div class='hand-count-holder'>
           <div class='hand-count-back'></div>
           <div class='hand-count' id="hand-count-${player.id}">${player.cardsCount}</div>
         </div>
+        ${commissar}
       </div>`;
     },
 
@@ -59,6 +78,13 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
         Object.values(team.medals).forEach((medal) => this.addMedal(medal));
       });
+    },
+
+    updateTeamStatus(teamId, status = 'idle') {
+      let pos = this._bottomTeam == teamId ? 'bottom' : 'top';
+      let pos2 = pos == 'top' ? 'bottom' : 'top';
+      $(pos + '-team-status').dataset.status = status;
+      $(pos2 + '-team-status').dataset.status = 'idle';
     },
 
     ////////////////////////////////////

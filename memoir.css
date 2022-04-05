@@ -46,6 +46,13 @@
   -o-transition: none !important;
   transition: none !important; }
 
+#logs .roundedbox {
+  background-color: #eadacc;
+  border-radius: 2px; }
+
+#logs .timestamp {
+  color: black; }
+
 html {
   background: url("img/ui/background.jpg");
   background-size: 75px; }
@@ -70,34 +77,47 @@ html {
   margin-top: 0px; }
   #left-side-wrapper #left-side {
     margin-right: 270px;
-    top: -4px;
+    top: 0px;
     margin-left: 0px; }
 
 .mobile_version #left-side-wrapper #left-side {
   margin-right: 0; }
 
-#page-title {
-  position: absolute;
-  left: 2px;
-  right: 2px;
-  top: 8px;
-  z-index: 1000; }
-  #page-title.fixed-page-title {
-    right: auto; }
-
-#page-content::before {
-  content: '';
-  display: block;
-  position: absolute;
-  right: -18px;
-  width: 18px;
-  top: 0;
-  bottom: 0;
-  z-index: 10;
-  background-image: url("img/ui/game_right.jpg");
-  background-size: 100% auto;
-  background-repeat: repeat-y;
-  box-shadow: -1px -1px 3px black; }
+#title-content-wrapper {
+  position: relative;
+  background: url("img/ui/game_top.jpg");
+  background-repeat: repeat-x;
+  background-size: auto 185px;
+  background-position: top center;
+  padding-top: 5px; }
+  #title-content-wrapper::before {
+    content: '';
+    display: block;
+    position: absolute;
+    right: -18px;
+    width: 18px;
+    top: 0;
+    bottom: 0;
+    z-index: 10;
+    background-image: url("img/ui/game_right.jpg");
+    background-size: 100% auto;
+    background-repeat: repeat-y;
+    box-shadow: -1px -1px 3px black;
+    background-position: bottom right; }
+  #title-content-wrapper::after {
+    content: '';
+    display: block;
+    position: absolute;
+    height: 19px;
+    left: 0;
+    right: 0;
+    bottom: 0px;
+    z-index: 11;
+    background: url("img/ui/game_bottom.jpg");
+    background-size: auto 100%;
+    background-repeat: repeat-x;
+    background-position: right top;
+    box-shadow: -6px -1px 3px -1px black; }
 
 #m44-container {
   display: flex;
@@ -107,11 +127,7 @@ html {
     background: url("img/ui/h_rule.jpg");
     background-repeat: repeat-x; }
   #m44-container #m44-top-container {
-    height: 120px;
-    background: url("img/ui/game_top.jpg");
-    background-repeat: repeat-x;
-    background-size: auto 100%;
-    background-position: bottom center;
+    height: 65px;
     position: relative;
     z-index: 5;
     display: flex;
@@ -119,32 +135,22 @@ html {
     justify-content: flex-end;
     box-shadow: 0px 2px 3px black; }
   #m44-container #m44-top-part {
-    height: 52px;
+    height: 54px;
     display: flex; }
     #m44-container #m44-top-part #top-team {
-      height: 52px; }
+      height: 52px;
+      background-color: #ffffff2e;
+      border-top: 1px solid #2f2f2f;
+      border-bottom: 1px solid #4f4c4c; }
       #m44-container #m44-top-part #top-team #top-medals {
         position: absolute;
         bottom: -29px; }
-    #m44-container #m44-top-part #scenario-informations {
-      margin-left: auto; }
-      #m44-container #m44-top-part #scenario-informations #clipboard-button {
-        width: 40px;
-        background: #ebd5bd;
-        padding: 5px 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center; }
-        #m44-container #m44-top-part #scenario-informations #clipboard-button svg {
-          width: 80%;
-          cursor: pointer; }
-          #m44-container #m44-top-part #scenario-informations #clipboard-button svg:hover {
-            fill: gray; }
   #m44-container #m44-central-part {
     max-height: 600px;
+    min-height: 560px;
     display: flex;
     margin-top: 0px;
-    margin-bottom: -4px; }
+    margin-bottom: 0px; }
     #m44-container #m44-central-part #left-holder {
       width: 122px;
       flex-shrink: 0;
@@ -155,22 +161,27 @@ html {
       justify-content: center;
       padding-left: 4px;
       box-sizing: border-box;
-      row-gap: 10px;
+      row-gap: 5px;
       position: relative;
       z-index: 4;
-      margin-right: -8px; }
+      margin-right: -8px;
+      padding: 18px 0px 18px 10px; }
       #m44-container #m44-central-part #left-holder #deck,
-      #m44-container #m44-central-part #left-holder #discard {
+      #m44-container #m44-central-part #left-holder #discard,
+      #m44-container #m44-central-part #left-holder #top-in-play,
+      #m44-container #m44-central-part #left-holder #bottom-in-play {
         width: 80px;
         height: 128px;
         --memoirCardScale: 0.2548;
         position: relative; }
-        #m44-container #m44-central-part #left-holder #deck .section-card,
-        #m44-container #m44-central-part #left-holder #deck .tactic-card,
-        #m44-container #m44-central-part #left-holder #discard .section-card,
-        #m44-container #m44-central-part #left-holder #discard .tactic-card {
+        #m44-container #m44-central-part #left-holder #deck .m44-card,
+        #m44-container #m44-central-part #left-holder #discard .m44-card,
+        #m44-container #m44-central-part #left-holder #top-in-play .m44-card,
+        #m44-container #m44-central-part #left-holder #bottom-in-play .m44-card {
           position: absolute;
           top: 0; }
+      #m44-container #m44-central-part #left-holder #top-in-play {
+        transform: rotate(180deg); }
       #m44-container #m44-central-part #left-holder #deck {
         background-image: url("img/card_back.jpg");
         background-size: 100% 100%;
@@ -187,6 +198,9 @@ html {
           border: 1px solid black;
           text-align: center;
           line-height: 30px; }
+      #m44-container #m44-central-part #left-holder #discard {
+        background-color: rgba(255, 255, 255, 0.4);
+        border-radius: 8px; }
     #m44-container #m44-central-part #m44-board-wrapper {
       flex-grow: 2;
       position: relative;
@@ -202,33 +216,6 @@ html {
         position: relative;
         z-index: 1;
         box-sizing: border-box; }
-      #m44-container #m44-central-part #m44-board-wrapper #m44-board-zoom-in,
-      #m44-container #m44-central-part #m44-board-wrapper #m44-board-zoom-out,
-      #m44-container #m44-central-part #m44-board-wrapper #m44-labels-settings {
-        position: absolute;
-        z-index: 2;
-        top: 0;
-        right: 0px;
-        width: 40px;
-        height: 40px; }
-        #m44-container #m44-central-part #m44-board-wrapper #m44-board-zoom-in svg,
-        #m44-container #m44-central-part #m44-board-wrapper #m44-board-zoom-out svg,
-        #m44-container #m44-central-part #m44-board-wrapper #m44-labels-settings svg {
-          width: 100%;
-          height: 100%;
-          cursor: pointer; }
-        #m44-container #m44-central-part #m44-board-wrapper #m44-board-zoom-in:hover svg,
-        #m44-container #m44-central-part #m44-board-wrapper #m44-board-zoom-out:hover svg,
-        #m44-container #m44-central-part #m44-board-wrapper #m44-labels-settings:hover svg {
-          color: white; }
-      #m44-container #m44-central-part #m44-board-wrapper #m44-board-zoom-in {
-        right: 40px; }
-      #m44-container #m44-central-part #m44-board-wrapper #m44-labels-settings {
-        right: 80px; }
-      #m44-container #m44-central-part #m44-board-wrapper[data-labels='0'] #m44-labels-settings svg:first-of-type {
-        display: none; }
-      #m44-container #m44-central-part #m44-board-wrapper[data-labels='1'] #m44-labels-settings svg:last-of-type {
-        display: none; }
       #m44-container #m44-central-part #m44-board-wrapper #scenario-dropzone-container {
         position: absolute;
         top: 0;
@@ -283,23 +270,100 @@ html {
             font-family: 'Gunplay';
             font-size: 25px;
             margin-top: 30px; }
-  #m44-container #m44-bottom-part {
-    height: 71px;
-    background: url("img/ui/game_bottom.png");
-    background-repeat: repeat-x;
-    background-size: auto 100%;
+    #m44-container #m44-central-part #right-holder {
+      width: 52px;
+      flex-shrink: 0;
+      background: #4a6632;
+      box-shadow: -1px -1px 3px black;
+      z-index: 4; }
+      #m44-container #m44-central-part #right-holder #scenario-informations #clipboard-button {
+        width: 40px;
+        padding: 6px 6px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom: 1px solid #0f330a; }
+        #m44-container #m44-central-part #right-holder #scenario-informations #clipboard-button svg {
+          width: 80%;
+          cursor: pointer; }
+          #m44-container #m44-central-part #right-holder #scenario-informations #clipboard-button svg:hover {
+            fill: white; }
+      #m44-container #m44-central-part #right-holder #m44-board-zoom-in,
+      #m44-container #m44-central-part #right-holder #m44-board-zoom-out,
+      #m44-container #m44-central-part #right-holder #m44-terrains-settings,
+      #m44-container #m44-central-part #right-holder #m44-units-settings,
+      #m44-container #m44-central-part #right-holder #m44-tokens-settings,
+      #m44-container #m44-central-part #right-holder #m44-labels-settings,
+      #m44-container #m44-central-part #right-holder #m44-coords-settings {
+        width: 40px;
+        padding: 6px 6px; }
+        #m44-container #m44-central-part #right-holder #m44-board-zoom-in svg,
+        #m44-container #m44-central-part #right-holder #m44-board-zoom-out svg,
+        #m44-container #m44-central-part #right-holder #m44-terrains-settings svg,
+        #m44-container #m44-central-part #right-holder #m44-units-settings svg,
+        #m44-container #m44-central-part #right-holder #m44-tokens-settings svg,
+        #m44-container #m44-central-part #right-holder #m44-labels-settings svg,
+        #m44-container #m44-central-part #right-holder #m44-coords-settings svg {
+          width: 40px;
+          height: 40px;
+          cursor: pointer; }
+        #m44-container #m44-central-part #right-holder #m44-board-zoom-in:hover svg,
+        #m44-container #m44-central-part #right-holder #m44-board-zoom-out:hover svg,
+        #m44-container #m44-central-part #right-holder #m44-terrains-settings:hover svg,
+        #m44-container #m44-central-part #right-holder #m44-units-settings:hover svg,
+        #m44-container #m44-central-part #right-holder #m44-tokens-settings:hover svg,
+        #m44-container #m44-central-part #right-holder #m44-labels-settings:hover svg,
+        #m44-container #m44-central-part #right-holder #m44-coords-settings:hover svg {
+          fill: white;
+          color: white; }
+      #m44-container #m44-central-part #right-holder #m44-coords-settings,
+      #m44-container #m44-central-part #right-holder #m44-board-zoom-out {
+        border-bottom: 1px solid #0f330a; }
+    #m44-container #m44-central-part #m44-board-wrapper[data-terrains='1'] ~ #right-holder #m44-terrains-settings svg:first-of-type {
+      display: none; }
+    #m44-container #m44-central-part #m44-board-wrapper[data-terrains='0'] ~ #right-holder #m44-terrains-settings svg:last-of-type {
+      display: none; }
+    #m44-container #m44-central-part #m44-board-wrapper[data-units='1'] ~ #right-holder #m44-units-settings svg:first-of-type {
+      display: none; }
+    #m44-container #m44-central-part #m44-board-wrapper[data-units='0'] ~ #right-holder #m44-units-settings svg:last-of-type {
+      display: none; }
+    #m44-container #m44-central-part #m44-board-wrapper[data-tokens='1'] ~ #right-holder #m44-tokens-settings svg:first-of-type {
+      display: none; }
+    #m44-container #m44-central-part #m44-board-wrapper[data-tokens='0'] ~ #right-holder #m44-tokens-settings svg:last-of-type {
+      display: none; }
+    #m44-container #m44-central-part #m44-board-wrapper[data-labels='1'] ~ #right-holder #m44-labels-settings svg:first-of-type {
+      display: none; }
+    #m44-container #m44-central-part #m44-board-wrapper[data-labels='0'] ~ #right-holder #m44-labels-settings svg:last-of-type {
+      display: none; }
+    #m44-container #m44-central-part #m44-board-wrapper[data-coords='1'] ~ #right-holder #m44-coords-settings svg:first-of-type {
+      display: none; }
+    #m44-container #m44-central-part #m44-board-wrapper[data-coords='0'] ~ #right-holder #m44-coords-settings svg:last-of-type {
+      display: none; }
+  #m44-container #m44-bottom-container {
     position: relative;
     z-index: 5;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-end;
+    box-shadow: 0px -2px 3px -1px black;
+    background: url("img/ui/game_top.jpg");
+    background-repeat: repeat;
+    background-size: auto 180px; }
+  #m44-container #m44-bottom-part {
+    height: 54px;
     display: flex; }
     #m44-container #m44-bottom-part #bottom-team {
-      height: 59px;
-      margin-top: 12px; }
+      height: 52px;
+      background-color: #ffffff2e;
+      border-bottom: 1px solid #2f2f2f;
+      border-top: 1px solid #4f4c4c; }
       #m44-container #m44-bottom-part #bottom-team #bottom-medals {
         position: absolute;
         top: -29px; }
   #m44-container .m44-team {
     display: flex;
-    position: relative; }
+    position: relative;
+    width: 100%; }
     #m44-container .m44-team .m44-team-medals {
       position: absolute;
       z-index: 2; }
@@ -334,55 +398,88 @@ html {
       #m44-container .m44-team .m44-team-name[data-team='ALLIES'] {
         background: radial-gradient(farthest-corner at 10% 95%, #77b3d2, #348eb1);
         border: 2px solid #1d6f98; }
-    #m44-container .m44-team .m44-player-panel {
-      position: relative;
+    #m44-container .m44-team .m44-team-players {
       display: flex;
-      background: #ebd5bd;
-      min-width: 240px;
-      padding: 5px 10px;
-      --memoirCardScale: 0.2; }
-      #m44-container .m44-team .m44-player-panel .player-name {
-        flex-grow: 1; }
-      #m44-container .m44-team .m44-player-panel .commissar-slot {
-        position: absolute;
-        left: 0px;
-        bottom: 0px;
-        width: 40px;
-        height: 40px; }
-        #m44-container .m44-team .m44-player-panel .commissar-slot .m44-card {
-          position: absolute;
-          left: 30px;
-          top: 10px; }
-        #m44-container .m44-team .m44-player-panel .commissar-slot::after {
-          content: '';
-          width: 40px;
-          height: 40px;
-          background-image: url("img/ui/commissar.png");
-          background-size: 100% 100%;
-          z-index: 4;
-          display: block;
-          position: absolute; }
-      #m44-container .m44-team .m44-player-panel .card-in-play {
-        width: 65px; }
-      #m44-container .m44-team .m44-player-panel .hand-count-holder {
+      flex-grow: 1; }
+      #m44-container .m44-team .m44-team-players .m44-player-panel {
+        position: relative;
         display: flex;
-        justify-content: center;
-        align-items: center; }
-        #m44-container .m44-team .m44-player-panel .hand-count-holder .hand-count-back {
-          width: 35px;
-          height: 49px;
-          background-image: url("img/card_back.jpg");
-          background-size: auto 100%;
-          background-repeat: no-repeat;
-          background-position: center center; }
-        #m44-container .m44-team .m44-player-panel .hand-count-holder .hand-count::before {
-          content: 'x';
-          margin: 0px 3px; }
-        #m44-container .m44-team .m44-player-panel .hand-count-holder .m44-card {
-          position: absolute; }
+        background: #ebd5bd;
+        --memoirCardScale: 0.095;
+        border-right: 1px solid #2f2f2f;
+        /*
+        .card-in-play {
+          width: 65px;
+        }
+*/ }
+        #m44-container .m44-team .m44-team-players .m44-player-panel .player-avatar {
+          display: flex;
+          align-items: center;
+          padding-left: 2px; }
+        #m44-container .m44-team .m44-team-players .m44-player-panel .player-name {
+          flex-grow: 1;
+          min-width: 100px;
+          padding: 5px 10px 5px 5px;
+          border-right: 1px solid #2f2f2f; }
+        #m44-container .m44-team .m44-team-players .m44-player-panel .commissar-holder {
+          display: flex;
+          padding: 2px 7px;
+          background-color: #95612a3b;
+          border-left: 1px solid #2f2f2f; }
+          #m44-container .m44-team .m44-team-players .m44-player-panel .commissar-holder .commissar-token {
+            width: 40px;
+            height: 40px;
+            background-image: url("img/ui/commissar.png");
+            background-size: 100% 100%;
+            margin-top: 2px; }
+          #m44-container .m44-team .m44-team-players .m44-player-panel .commissar-holder .commissar-slot {
+            position: relative;
+            width: 34px;
+            height: 48px;
+            margin-left: 3px; }
+            #m44-container .m44-team .m44-team-players .m44-player-panel .commissar-holder .commissar-slot .m44-card {
+              position: absolute; }
+        #m44-container .m44-team .m44-team-players .m44-player-panel .hand-count-holder {
+          display: flex;
+          padding: 2px 7px;
+          font-family: 'Gunplay';
+          font-size: 28px;
+          line-height: 52px;
+          background-color: #95612a3b; }
+          #m44-container .m44-team .m44-team-players .m44-player-panel .hand-count-holder .hand-count-back {
+            width: 34px;
+            height: 48px;
+            background-image: url("img/card_back.jpg");
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position: center center; }
+          #m44-container .m44-team .m44-team-players .m44-player-panel .hand-count-holder .hand-count::before {
+            content: 'x';
+            margin: 0px 3px; }
+          #m44-container .m44-team .m44-team-players .m44-player-panel .hand-count-holder .m44-card {
+            position: absolute; }
+    #m44-container .m44-team .m44-team-status {
+      width: 172px;
+      height: 52px;
+      background-image: url("img/ui/phases.jpg");
+      background-size: 700% 200%;
+      border-left: 1px solid #2f2f2f; }
+      #m44-container .m44-team .m44-team-status[data-status='order'] {
+        background-position-x: 0; }
+      #m44-container .m44-team .m44-team-status[data-status='para'] {
+        background-position-x: 16.6666666667%; }
+      #m44-container .m44-team .m44-team-status[data-status='attack'] {
+        background-position-x: 33.3333333333%; }
+      #m44-container .m44-team .m44-team-status[data-status='command'] {
+        background-position-x: 50%; }
+      #m44-container .m44-team .m44-team-status[data-status='move'] {
+        background-position-x: 83.3333333333%; }
+      #m44-container .m44-team .m44-team-status[data-status='idle'] {
+        background-position-x: 83.3333333333%; }
+      #m44-container .m44-team .m44-team-status[data-status='commissar'] {
+        background-position-x: 100%; }
   #m44-container #m44-player-hand {
     width: 100%;
-    background: #ffffff8c;
     height: 200px;
     --memoirCardScale: 0.38;
     display: flex;
@@ -392,6 +489,19 @@ html {
     z-index: 5; }
     #m44-container #m44-player-hand .m44-card.choice {
       margin-top: -40px; }
+    #m44-container #m44-player-hand .commissar-holder {
+      position: relative;
+      width: calc(var(--memoirCardScale) * 314px);
+      height: calc(var(--memoirCardScale) * 503px); }
+      #m44-container #m44-player-hand .commissar-holder .commissar-token {
+        width: 50px;
+        height: 50px;
+        background-image: url("img/ui/commissar.png");
+        background-size: 100% 100%;
+        position: absolute;
+        z-index: 7;
+        top: -10px;
+        left: -10px; }
 
 /*
 
@@ -487,6 +597,8 @@ html {
         display: none; }
     #m44-board .m44-grid#m44-board-units {
       z-index: 3; }
+      [data-units='0'] #m44-board .m44-grid#m44-board-units {
+        display: none; }
   #m44-board[data-type='standard'] {
     width: calc(var(--memoirBoardScale) * 900px);
     height: calc(var(--memoirBoardScale) * 593.845991166px); }
@@ -520,6 +632,8 @@ html {
       font-size: calc(var(--memoirBoardScale) * 21px);
       text-shadow: -1px -1px 0 #00000090, 1px -1px 0 #00000090, -1px 1px 0 #00000090, 1px 1px 0 #00000090;
       opacity: 0.3; }
+      [data-coords='0'] #m44-board .hex-grid-item.coordinate-marker {
+        visibility: hidden; }
     #m44-board .hex-grid-item .hex-grid-content {
       position: absolute;
       top: 0;
@@ -659,8 +773,7 @@ html {
     #m44-board.displayLineOfSightAttack #lineOfSight.vertical.horizontal {
       border: none; }
 
-.hex-grid-background,
-.hex-grid-terrain.background-terrain {
+.hex-grid-background, .hex-grid-terrain.background-terrain {
   z-index: 1;
   background-image: url("img/board_backgrounds.jpg");
   background-size: 600% 600%; }
@@ -812,6 +925,9 @@ html {
   .hex-grid-terrain.background-terrain[data-tile='36'] {
     background-position-x: 0%;
     background-position-y: 120%; }
+  [data-terrains='0'] .hex-grid-background,
+  [data-terrains='0'] .hex-grid-terrain.background-terrain {
+    display: none; }
 
 .hex-grid-terrain {
   z-index: 2;
@@ -1133,6 +1249,8 @@ html {
   .hex-grid-terrain[data-tile='104'] {
     background-position-x: 44.4444444444%;
     background-position-y: 100%; }
+  [data-terrains='0'] .hex-grid-terrain {
+    display: none; }
 
 .hex-grid-obstacle {
   z-index: 3;
@@ -1213,6 +1331,8 @@ html {
   .hex-grid-obstacle[data-tile='24'] {
     background-position-x: 0%;
     background-position-y: 100%; }
+  [data-terrains='0'] .hex-grid-obstacle {
+    display: none; }
 
 .board-tooltip {
   position: absolute;
@@ -1635,6 +1755,34 @@ html {
   left: 0;
   top: 0; }
 
+.m44-unit[data-orientation='0'][data-type='1'][data-nation='brit'] .m44-unit-meeple {
+  width: 43%;
+  height: 53.75%;
+  background-size: 1066.67%;
+  background-position: 36.2069% 34.949%;
+  background-color: transparent;
+  border-radius: none; }
+  .m44-unit[data-orientation='0'][data-type='1'][data-nation='brit'] .m44-unit-meeple:nth-of-type(1) {
+    left: 22%;
+    top: -2%; }
+  .m44-unit[data-orientation='0'][data-type='1'][data-nation='brit'] .m44-unit-meeple:nth-of-type(2) {
+    left: 50%;
+    top: 11%; }
+  .m44-unit[data-orientation='0'][data-type='1'][data-nation='brit'] .m44-unit-meeple:nth-of-type(3) {
+    left: 3%;
+    top: 18%; }
+  .m44-unit[data-orientation='0'][data-type='1'][data-nation='brit'] .m44-unit-meeple:nth-of-type(4) {
+    left: 32%;
+    top: 28%; }
+
+.summary-tile
+.m44-unit[data-orientation='0'][data-type='1'][data-nation='brit']
+.m44-unit-meeple {
+  width: 100%;
+  height: 125%;
+  left: 0;
+  top: 0; }
+
 .m44-unit[data-orientation='0'][data-type='2'][data-nation='ger'] .m44-unit-meeple {
   width: 50%;
   height: 50%;
@@ -1719,6 +1867,34 @@ html {
   left: 0;
   top: 0; }
 
+.m44-unit[data-orientation='0'][data-type='2'][data-nation='brit'] .m44-unit-meeple {
+  width: 50%;
+  height: 47.37%;
+  background-size: 1077.89%;
+  background-position: 85.1453% 62.0853%;
+  background-color: transparent;
+  border-radius: none; }
+  .m44-unit[data-orientation='0'][data-type='2'][data-nation='brit'] .m44-unit-meeple:nth-of-type(1) {
+    left: 23%;
+    top: -2%; }
+  .m44-unit[data-orientation='0'][data-type='2'][data-nation='brit'] .m44-unit-meeple:nth-of-type(2) {
+    left: 52%;
+    top: 14%; }
+  .m44-unit[data-orientation='0'][data-type='2'][data-nation='brit'] .m44-unit-meeple:nth-of-type(3) {
+    left: 4%;
+    top: 19%; }
+  .m44-unit[data-orientation='0'][data-type='2'][data-nation='brit'] .m44-unit-meeple:nth-of-type(4) {
+    left: 33%;
+    top: 33%; }
+
+.summary-tile
+.m44-unit[data-orientation='0'][data-type='2'][data-nation='brit']
+.m44-unit-meeple {
+  width: 100%;
+  height: 94.74%;
+  left: 0;
+  top: 0; }
+
 .m44-unit[data-orientation='0'][data-type='3'][data-nation='ger'] .m44-unit-meeple {
   width: 50%;
   height: 58.18%;
@@ -1779,6 +1955,28 @@ html {
 
 .summary-tile
 .m44-unit[data-orientation='0'][data-type='3'][data-nation='ru']
+.m44-unit-meeple {
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0; }
+
+.m44-unit[data-orientation='0'][data-type='3'][data-nation='brit'] .m44-unit-meeple {
+  width: 50%;
+  height: 50%;
+  background-size: 812.698%;
+  background-position: 45.5457% 0.259067%;
+  background-color: transparent;
+  border-radius: none; }
+  .m44-unit[data-orientation='0'][data-type='3'][data-nation='brit'] .m44-unit-meeple:nth-of-type(1) {
+    left: 12%;
+    top: -7%; }
+  .m44-unit[data-orientation='0'][data-type='3'][data-nation='brit'] .m44-unit-meeple:nth-of-type(2) {
+    left: 44%;
+    top: 29%; }
+
+.summary-tile
+.m44-unit[data-orientation='0'][data-type='3'][data-nation='brit']
 .m44-unit-meeple {
   width: 100%;
   height: 100%;
@@ -1869,6 +2067,34 @@ html {
   left: 0;
   top: 0; }
 
+.m44-unit[data-orientation='1'][data-type='1'][data-nation='brit'] .m44-unit-meeple {
+  width: 50%;
+  height: 65.105%;
+  background-size: 1066.67%;
+  background-position: 82.6509% 0.258398%;
+  background-color: transparent;
+  border-radius: none; }
+  .m44-unit[data-orientation='1'][data-type='1'][data-nation='brit'] .m44-unit-meeple:nth-of-type(1) {
+    left: 24%;
+    top: 3%; }
+  .m44-unit[data-orientation='1'][data-type='1'][data-nation='brit'] .m44-unit-meeple:nth-of-type(2) {
+    left: 52%;
+    top: 14%; }
+  .m44-unit[data-orientation='1'][data-type='1'][data-nation='brit'] .m44-unit-meeple:nth-of-type(3) {
+    left: 2%;
+    top: 24%; }
+  .m44-unit[data-orientation='1'][data-type='1'][data-nation='brit'] .m44-unit-meeple:nth-of-type(4) {
+    left: 33%;
+    top: 35%; }
+
+.summary-tile
+.m44-unit[data-orientation='1'][data-type='1'][data-nation='brit']
+.m44-unit-meeple {
+  width: 100%;
+  height: 130.21%;
+  left: 0;
+  top: 0; }
+
 .m44-unit[data-orientation='1'][data-type='2'][data-nation='ger'] .m44-unit-meeple {
   width: 45%;
   height: 45%;
@@ -1953,6 +2179,34 @@ html {
   left: 0;
   top: 0; }
 
+.m44-unit[data-orientation='1'][data-type='2'][data-nation='brit'] .m44-unit-meeple {
+  width: 50%;
+  height: 55.115%;
+  background-size: 1163.64%;
+  background-position: 35.7906% 63.1325%;
+  background-color: transparent;
+  border-radius: none; }
+  .m44-unit[data-orientation='1'][data-type='2'][data-nation='brit'] .m44-unit-meeple:nth-of-type(1) {
+    left: 14%;
+    top: -5%; }
+  .m44-unit[data-orientation='1'][data-type='2'][data-nation='brit'] .m44-unit-meeple:nth-of-type(2) {
+    left: 49%;
+    top: 11%; }
+  .m44-unit[data-orientation='1'][data-type='2'][data-nation='brit'] .m44-unit-meeple:nth-of-type(3) {
+    left: 3%;
+    top: 38%; }
+  .m44-unit[data-orientation='1'][data-type='2'][data-nation='brit'] .m44-unit-meeple:nth-of-type(4) {
+    left: 33%;
+    top: 33%; }
+
+.summary-tile
+.m44-unit[data-orientation='1'][data-type='2'][data-nation='brit']
+.m44-unit-meeple {
+  width: 100%;
+  height: 110.23%;
+  left: 0;
+  top: 0; }
+
 .m44-unit[data-orientation='1'][data-type='3'][data-nation='ger'] .m44-unit-meeple {
   width: 70%;
   height: 54.313%;
@@ -2019,41 +2273,27 @@ html {
   left: 0;
   top: 0; }
 
-.gbgun_bottom {
-  width: 126px;
-  height: 126px;
-  background-position: 45.5457% 0.259067%;
-  background-size: 812.698%; }
-
-.gbgun_top {
-  width: 120px;
-  height: 120px;
+.m44-unit[data-orientation='1'][data-type='3'][data-nation='brit'] .m44-unit-meeple {
+  width: 70%;
+  height: 70%;
+  background-size: 853.333%;
   background-position: 23.7832% 34.949%;
-  background-size: 853.333%; }
+  background-color: transparent;
+  border-radius: none; }
+  .m44-unit[data-orientation='1'][data-type='3'][data-nation='brit'] .m44-unit-meeple:nth-of-type(1) {
+    left: -4%;
+    top: 12%; }
+  .m44-unit[data-orientation='1'][data-type='3'][data-nation='brit'] .m44-unit-meeple:nth-of-type(2) {
+    left: 26%;
+    top: 44%; }
 
-.gbinf_bottom {
-  width: 96px;
-  height: 125px;
-  background-position: 82.6509% 0.258398%;
-  background-size: 1066.67%; }
-
-.gbinf_top {
-  width: 96px;
-  height: 120px;
-  background-position: 36.2069% 34.949%;
-  background-size: 1066.67%; }
-
-.gbtank_bottom {
-  width: 88px;
-  height: 97px;
-  background-position: 35.7906% 63.1325%;
-  background-size: 1163.64%; }
-
-.gbtank_top {
-  width: 95px;
-  height: 90px;
-  background-position: 85.1453% 62.0853%;
-  background-size: 1077.89%; }
+.summary-tile
+.m44-unit[data-orientation='1'][data-type='3'][data-nation='brit']
+.m44-unit-meeple {
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0; }
 
 .jpgun_bottom {
   width: 110px;
@@ -3662,6 +3902,8 @@ span.m44-dice-result {
   right: 4%;
   top: 16%;
   z-index: 3; }
+  [data-tokens='0'] .hex-grid-item .board-token {
+    display: none; }
   .hex-grid-item .board-token[data-sprite='11'] {
     right: 33%;
     top: 32%;

@@ -57,6 +57,13 @@
   -o-transition: none !important;
   transition: none !important;
 }
+#logs .roundedbox {
+  background-color: #eadacc;
+  border-radius: 2px;
+}
+#logs .timestamp {
+  color: black;
+}
 
 @import 'modules/css/layout';
 @import 'modules/css/board';

@@ -95,6 +95,25 @@ define([
       debug('SETUP', gamedatas);
       this.inherited(arguments);
 
+      // Basic twist of UI
+      dojo.place('<div id="title-content-wrapper"></div>', 'after-page-title', 'before');
+      [
+        'after-page-title',
+        'page-title',
+        'arena_cannot_play_panel',
+        'table-decision',
+        'zombieBack',
+        'connect_status',
+        'connect_gs_status',
+        'arena_ending_soon',
+        'log_history_status',
+        'page-content',
+      ].forEach((elt) => {
+        if ($(elt)) {
+          dojo.place(elt, 'title-content-wrapper');
+        }
+      });
+
       // WHich player point of vue are we going to take ?
       this._pId = this.isSpectator ? Object.keys(this.gamedatas.players)[0] : this.player_id;
       this._bottomTeam = this.gamedatas.players[this._pId].team;
@@ -125,12 +144,15 @@ define([
 
       dojo.empty('top-medals-slots');
       dojo.empty('top-medals-container');
+      dojo.empty('top-team-players');
+      dojo.empty('top-in-play');
       dojo.empty('bottom-medals-slots');
       dojo.empty('bottom-medals-container');
+      dojo.empty('bottom-team-players');
+      dojo.empty('bottom-in-play');
 
       dojo.empty('scenario-informations');
       dojo.destroy('popin_showScenario_container');
-      dojo.query('.m44-player-panel').remove();
 
       dojo.destroy('m44-player-hand');
       dojo.query('.card-in-play').empty();
@@ -141,6 +163,8 @@ define([
 
       dojo.empty('discard');
       dojo.destroy('scenario-dropzone-container');
+
+      this.updateTeamStatus('ALLIES', 'idle');
     },
 
     onEnteringState(stateName, args) {
@@ -159,6 +183,26 @@ define([
           // TODO : useless ?
           $(`cell-${attack.x}-${attack.y}`).classList.add('attacked');
         }
+      }
+
+      // Update team status
+      let statusMapping = {
+        airDrop: 'para',
+        commissarCard: 'commissar',
+        playCommissarCard: 'command',
+        playCard: 'command',
+        orderUnits: 'order',
+        moveUnits: 'move',
+        attackUnits: 'attack',
+        drawChoice: 'command',
+        targetAirPower: 'attack',
+        targetBarrage: 'attack',
+      };
+
+      if (Object.keys(statusMapping).includes(stateName)) {
+        let pId = this.getActivePlayerId();
+        let team = this.gamedatas.players[pId].team;
+        this.updateTeamStatus(team, statusMapping[stateName]);
       }
     },
 

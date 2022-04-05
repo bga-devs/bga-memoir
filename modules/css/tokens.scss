@@ -18,6 +18,10 @@
   top: 16%;
   z-index: 3;
 
+  [data-tokens='0'] & {
+    display: none;
+  }
+
   // Target
   &[data-sprite='11'] {
     right: 33%;
