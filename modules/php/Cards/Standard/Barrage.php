@@ -14,7 +14,7 @@ class Barrage extends \M44\Models\Card
     $this->type = \CARD_BARRAGE;
     $this->name = clienttranslate('Barrage');
     $this->text = [
-      clienttranslate('Target any 1 enemy unit.'),
+      clienttranslate('Target any 1 ennemy unit.'),
       clienttranslate('Roll 4 battle dice, ignoring any terrain battle die reduction.'),
       clienttranslate("Score 1 hit for each die matching the unit's symbol or grenade."),
       clienttranslate('For each flag, retreat 1 hex.'),
