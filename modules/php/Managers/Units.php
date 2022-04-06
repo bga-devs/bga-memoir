@@ -163,7 +163,7 @@ class Units extends \M44\Helpers\Pieces
 
         if (
           $unit->getType() == ARMOR &&
-          ((in_array($data['nation'], self::$nations[ALLIES]) && $isPartialBlitz == ALLIES) ||
+          ((in_array($data['nation'], self::$nations[ALLIES]) && ($isPartialBlitz == ALLIES || $isBlitz)) ||
             (in_array($data['nation'], self::$nations[AXIS]) && $isPartialBlitz == AXIS) ||
             $isPartialBlitz == 'all')
         ) {
