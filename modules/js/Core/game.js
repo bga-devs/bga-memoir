@@ -947,5 +947,9 @@ define(['dojo', 'dojo/_base/declare', 'ebg/core/gamegui'], (dojo, declare) => {
       //this.clearPossible();
       this.restoreServerGameState();
     },
+
+    isMobile() {
+      return $('ebd-body').classList.contains('mobile_version');
+    },
   });
 });

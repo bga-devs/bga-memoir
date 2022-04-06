@@ -63,6 +63,9 @@
   right: 4%;
   top: 16%;
   z-index: 3;
+  [data-tokens='0'] & {
+    display: none;
+  }
 
   &.hide {
     visibility: hidden;

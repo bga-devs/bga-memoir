@@ -188,16 +188,18 @@ html {
         border-radius: 7px;
         position: relative; }
         #m44-container #m44-central-part #left-holder #deck #deck-count {
-          width: 30px;
-          height: 30px;
+          width: 40px;
+          height: 39px;
           position: absolute;
-          left: 25px;
-          top: 49px;
+          left: 20px;
+          top: 45px;
           background: #ffffffed;
-          border-radius: 50%;
+          border-radius: 15%;
           border: 1px solid black;
           text-align: center;
-          line-height: 30px; }
+          line-height: 42px;
+          font-family: Gunplay;
+          font-size: 30px; }
       #m44-container #m44-central-part #left-holder #discard {
         background-color: rgba(255, 255, 255, 0.4);
         border-radius: 8px; }
@@ -294,7 +296,8 @@ html {
       #m44-container #m44-central-part #right-holder #m44-units-settings,
       #m44-container #m44-central-part #right-holder #m44-tokens-settings,
       #m44-container #m44-central-part #right-holder #m44-labels-settings,
-      #m44-container #m44-central-part #right-holder #m44-coords-settings {
+      #m44-container #m44-central-part #right-holder #m44-coords-settings,
+      #m44-container #m44-central-part #right-holder #m44-summary-settings {
         width: 40px;
         padding: 6px 6px; }
         #m44-container #m44-central-part #right-holder #m44-board-zoom-in svg,
@@ -303,7 +306,8 @@ html {
         #m44-container #m44-central-part #right-holder #m44-units-settings svg,
         #m44-container #m44-central-part #right-holder #m44-tokens-settings svg,
         #m44-container #m44-central-part #right-holder #m44-labels-settings svg,
-        #m44-container #m44-central-part #right-holder #m44-coords-settings svg {
+        #m44-container #m44-central-part #right-holder #m44-coords-settings svg,
+        #m44-container #m44-central-part #right-holder #m44-summary-settings svg {
           width: 40px;
           height: 40px;
           cursor: pointer; }
@@ -313,7 +317,8 @@ html {
         #m44-container #m44-central-part #right-holder #m44-units-settings:hover svg,
         #m44-container #m44-central-part #right-holder #m44-tokens-settings:hover svg,
         #m44-container #m44-central-part #right-holder #m44-labels-settings:hover svg,
-        #m44-container #m44-central-part #right-holder #m44-coords-settings:hover svg {
+        #m44-container #m44-central-part #right-holder #m44-coords-settings:hover svg,
+        #m44-container #m44-central-part #right-holder #m44-summary-settings:hover svg {
           fill: white;
           color: white; }
       #m44-container #m44-central-part #right-holder #m44-coords-settings,
@@ -338,6 +343,12 @@ html {
     #m44-container #m44-central-part #m44-board-wrapper[data-coords='1'] ~ #right-holder #m44-coords-settings svg:first-of-type {
       display: none; }
     #m44-container #m44-central-part #m44-board-wrapper[data-coords='0'] ~ #right-holder #m44-coords-settings svg:last-of-type {
+      display: none; }
+    #m44-container #m44-central-part #m44-board-wrapper[data-summary='0'] ~ #right-holder #m44-summary-settings svg:not(:first-of-type) {
+      display: none; }
+    #m44-container #m44-central-part #m44-board-wrapper[data-summary='1'] ~ #right-holder #m44-summary-settings svg:not(:nth-of-type(2)) {
+      display: none; }
+    #m44-container #m44-central-part #m44-board-wrapper[data-summary='2'] ~ #right-holder #m44-summary-settings svg:not(:last-of-type) {
       display: none; }
   #m44-container #m44-bottom-container {
     position: relative;
@@ -597,8 +608,6 @@ html {
         display: none; }
     #m44-board .m44-grid#m44-board-units {
       z-index: 3; }
-      [data-units='0'] #m44-board .m44-grid#m44-board-units {
-        display: none; }
   #m44-board[data-type='standard'] {
     width: calc(var(--memoirBoardScale) * 900px);
     height: calc(var(--memoirBoardScale) * 593.845991166px); }
@@ -2295,6 +2304,9 @@ html {
   left: 0;
   top: 0; }
 
+[data-units='0'] .hex-cell .m44-unit {
+  display: none; }
+
 .jpgun_bottom {
   width: 110px;
   height: 128px;
@@ -2734,6 +2746,8 @@ html {
   right: 4%;
   top: 16%;
   z-index: 3; }
+  [data-tokens='0'] .hex-grid-item .board-medal {
+    display: none; }
   .hex-grid-item .board-medal.hide {
     visibility: hidden; }
 

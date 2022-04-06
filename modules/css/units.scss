@@ -229,6 +229,10 @@ $units: (
   }
 }
 
+[data-units='0'] .hex-cell .m44-unit {
+  display: none;
+}
+
 .jpgun_bottom {
   width: 110px;
   height: 128px;

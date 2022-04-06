@@ -136,8 +136,16 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           board.grid[col][row].tokens.forEach((token) => this.addToken(token));
 
           // Add tooltip listeners
-          cell.addEventListener('mouseenter', () => this.openBoardTooltip(col, row));
-          cell.addEventListener('mouseleave', () => this.closeBoardTooltip(col, row));
+          cell.addEventListener('mouseenter', () => {
+            if (this._summaryCardsBehavior == 1) {
+              this.openBoardTooltip(col, row);
+            }
+          });
+          cell.addEventListener('mouseleave', () => {
+            if (this._summaryCardsBehavior == 1) {
+              this.closeBoardTooltip(col, row);
+            }
+          });
         }
       }
 
@@ -166,6 +174,10 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         this.toggleLayerVisibility(layer, this.getConfig('m44' + layer, 1));
         dojo.connect($(`m44-${layer}-settings`), 'click', () => this.toggleLayerVisibility(layer));
       });
+
+      this._summaryCardsBehavior = this.getConfig('m44summaryCards', this.isMobile() ? 2 : 1);
+      $('m44-board-wrapper').dataset.summary = this._summaryCardsBehavior;
+      dojo.connect($('m44-summary-settings'), 'click', () => this.changeSummaryCardsBehavior());
     },
 
     removeClassNameOfCells(className) {
@@ -183,6 +195,20 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
       $('m44-board-wrapper').dataset[layer] = this[name];
       localStorage.setItem('m44' + layer, this[name]);
+    },
+
+    changeSummaryCardsBehavior() {
+      let val = parseInt(this._summaryCardsBehavior + 1) % 3;
+      this._summaryCardsBehavior = val;
+      $('m44-board-wrapper').dataset.summary = val;
+      localStorage.setItem('m44summaryCards', val);
+
+      if (val == 1 && this.isMobile()) {
+        this.changeSummaryCardsBehavior();
+      }
+      if (val == 2 && !this.isMobile()) {
+        this.changeSummaryCardsBehavior();
+      }
     },
 
     incBoardScale(delta) {
@@ -375,7 +401,11 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         // TODO
       } else {
         let cell = this._grid[col][row];
-        if (cell.terrains.length == 0 && cell.unit == null && cell.tokens.length == 0) {
+        if (
+          (cell.terrains.length == 0 || this._terrainsVisibility == 0) &&
+          (cell.unit == null || this._unitsVisibility == 0) &&
+          (cell.tokens.length == 0 || this._tokensVisibility == 0)
+        ) {
           return; // Nothing to show !
         }
 
@@ -395,9 +425,10 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     },
 
     tplBoardTooltip(cell) {
-      let terrainDivs = cell.terrains.map((terrain) => this.tplTerrainSummary(terrain));
-      let tokenDivs = cell.tokens.map((token) => this.tplTokenSummary(token));
-      let unitDiv = cell.unit ? this.tplUnitSummary(cell.unit) : '';
+      let terrainDivs =
+        this._terrainsVisibility == 0 ? [] : cell.terrains.map((terrain) => this.tplTerrainSummary(terrain));
+      let tokenDivs = this._tokensVisibility == 0 ? [] : cell.tokens.map((token) => this.tplTokenSummary(token));
+      let unitDiv = cell.unit && this._unitsVisibility == 1 ? this.tplUnitSummary(cell.unit) : '';
 
       return `<div class='board-tooltip'>${unitDiv} ${terrainDivs.join('')} ${tokenDivs.join('')}</div>`;
     },

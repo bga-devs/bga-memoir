@@ -163,16 +163,18 @@ html {
         position: relative;
 
         #deck-count {
-          width: 30px;
-          height: 30px;
+          width: 40px;
+          height: 39px;
           position: absolute;
-          left: 25px;
-          top: 49px;
+          left: 20px;
+          top: 45px;
           background: #ffffffed;
-          border-radius: 50%;
+          border-radius: 15%;
           border: 1px solid black;
           text-align: center;
-          line-height: 30px;
+          line-height: 42px;
+          font-family: Gunplay;
+          font-size: 30px;
         }
       }
 
@@ -306,7 +308,8 @@ html {
       #m44-units-settings,
       #m44-tokens-settings,
       #m44-labels-settings,
-      #m44-coords-settings {
+      #m44-coords-settings,
+      #m44-summary-settings {
         width: 40px;
         padding: 6px 6px;
 
@@ -355,6 +358,16 @@ html {
       display: none;
     }
     #m44-board-wrapper[data-coords='0'] ~ #right-holder #m44-coords-settings svg:last-of-type {
+      display: none;
+    }
+
+    #m44-board-wrapper[data-summary='0'] ~ #right-holder #m44-summary-settings svg:not(:first-of-type) {
+      display: none;
+    }
+    #m44-board-wrapper[data-summary='1'] ~ #right-holder #m44-summary-settings svg:not(:nth-of-type(2)) {
+      display: none;
+    }
+    #m44-board-wrapper[data-summary='2'] ~ #right-holder #m44-summary-settings svg:not(:last-of-type) {
       display: none;
     }
   }
