@@ -25,24 +25,39 @@ trait OrderUnitsTrait
     $player = $player ?? Players::getActive();
     $args = $this->argsOrderUnits($player);
     $tmpSection = [0, 0, 0];
-    // throw new \feException(print_r($args));
-    if (isset($args['sections'])) {
-      foreach ($args['sections'] as $sNum => $s) {
-        foreach ($args['units'] as $u) {
-          $tmpSection[$sNum] += in_array($sNum, $u['sections']) ? 1 : 0;
+
+    if ($args['units']->count() <= $args['n']) {
+      // Do the automatic selection only if sections constraints are ok
+      if (isset($args['sections'])) {
+        $unitsPerSections = [0, 0, 0];
+
+        // Start assigning unit with only one section, if possible
+        foreach ($args['units'] as $unit) {
+          if (count($unit['sections']) == 1) {
+            $section = $unit['sections'][0];
+            if ($unitsPerSections[$section] == $args['sections'][$section]) {
+              return;
+            } else {
+              $unitsPerSections[$section]++;
+            }
+          }
+        }
+        // Now tru assigning unit with two sections where it fits
+        foreach ($args['units'] as $unit) {
+          if (count($unit['sections']) > 1) {
+            $section1 = $unit['sections'][0];
+            $section2 = $unit['sections'][1];
+            if ($unitsPerSections[$section1] < $args['sections'][$section1]) {
+              $unitsPerSections[$section1]++;
+            } elseif ($unitsPerSections[$section2] < $args['sections'][$section2]) {
+              $unitsPerSections[$section2]++;
+            } else {
+              return;
+            }
+          }
         }
       }
 
-      foreach ($tmpSection as $s => $nb) {
-        if ($nb > $args['sections'][$s]) {
-          return;
-        }
-      }
-
-      if ($args['units']->count() <= $args['n']) {
-        $this->actOrderUnits($args['units']->getIds(), [], true);
-      }
-    } elseif ($args['units']->count() <= $args['n']) {
       $this->actOrderUnits($args['units']->getIds(), [], true);
     }
   }
