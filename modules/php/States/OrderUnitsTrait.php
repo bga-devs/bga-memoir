@@ -24,7 +24,25 @@ trait OrderUnitsTrait
   {
     $player = $player ?? Players::getActive();
     $args = $this->argsOrderUnits($player);
-    if ($args['units']->count() <= $args['n']) {
+    $tmpSection = [0, 0, 0];
+
+    if (isset($args['sections'])) {
+      foreach ($args['sections'] as $sNum => $s) {
+        foreach ($args['units'] as $u) {
+          $tmpSection[$sNum] += in_array($sNum, $u['sections']) ? 1 : 0;
+        }
+      }
+
+      foreach ($tmpSection as $s => $nb) {
+        if ($nb > $args['sections'][$s]) {
+          return;
+        }
+      }
+
+      if ($args['units']->count() <= $args['n']) {
+        $this->actOrderUnits($args['units']->getIds(), [], true);
+      }
+    } elseif ($args['units']->count() <= $args['n']) {
       $this->actOrderUnits($args['units']->getIds(), [], true);
     }
   }
