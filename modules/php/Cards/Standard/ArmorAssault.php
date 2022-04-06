@@ -33,7 +33,7 @@ class ArmorAssault extends \M44\Models\Card
         'n' => 1,
         'nTitle' => 1,
         'desc' => \clienttranslate('(because no armor units)'),
-        'units' => $units,
+        'units' => $units->getPositions(),
       ];
     } else {
       return [
@@ -41,7 +41,7 @@ class ArmorAssault extends \M44\Models\Card
         'n' => 4,
         'nTitle' => 4,
         'desc' => \clienttranslate('(armor units only)'),
-        'units' => $armors,
+        'units' => $armors->getPositions(),
       ];
     }
   }

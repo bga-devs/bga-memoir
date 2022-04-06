@@ -30,7 +30,7 @@ class CloseAssault extends \M44\Models\Card
       'n' => \INFINITY,
       'nTitle' => '',
       'desc' => '',
-      'units' => $units,
+      'units' => $units->getPositions(),
     ];
   }
 

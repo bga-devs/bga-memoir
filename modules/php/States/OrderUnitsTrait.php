@@ -25,7 +25,7 @@ trait OrderUnitsTrait
     $player = $player ?? Players::getActive();
     $args = $this->argsOrderUnits($player);
     $tmpSection = [0, 0, 0];
-
+    // throw new \feException(print_r($args));
     if (isset($args['sections'])) {
       foreach ($args['sections'] as $sNum => $s) {
         foreach ($args['units'] as $u) {

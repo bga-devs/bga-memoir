@@ -34,7 +34,7 @@ class ArtilleryBombard extends \M44\Models\Card
         'n' => 1,
         'nTitle' => 1,
         'desc' => \clienttranslate('(because no armor units)'),
-        'units' => $units,
+        'units' => $units->getPositions(),
       ];
     } else {
       return [
@@ -42,7 +42,7 @@ class ArtilleryBombard extends \M44\Models\Card
         'n' => \INFINITY,
         'nTitle' => \INFINITY,
         'desc' => \clienttranslate('(artillery units only)'),
-        'units' => $artillery,
+        'units' => $artillery->getPositions(),
       ];
     }
   }

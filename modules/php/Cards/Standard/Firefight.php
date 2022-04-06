@@ -29,7 +29,7 @@ class Firefight extends \M44\Models\Card
       'n' => 4,
       'nTitle' => 4,
       'desc' => \clienttranslate('(Firefigth)'),
-      'units' => $units,
+      'units' => $units->getPositions(),
     ];
   }
 
