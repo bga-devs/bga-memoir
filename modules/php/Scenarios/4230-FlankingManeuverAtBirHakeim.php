@@ -554,10 +554,7 @@ Place a badge on the German elite infantry units (Troops 2 - Specialized Units) 
 
 Special Weapon Asset rules are in effect for the units equipped with Anti-Tank weapons.
 
-The British player lays out the Minefields (Terrain 29 - Minefields).
-
-Air rules are not in effect. The Air Sortie cards are set aside and are not used in this mission.
-'),
+The British player lays out the Minefields (Terrain 29 - Minefields).'),
       'victory' => clienttranslate('5 Medals.
 
 Each Field Bunker is a Temporary Medal Objective for the Axis forces.
