@@ -32,7 +32,7 @@ class MoveOut extends \M44\Models\Card
         'n' => 1,
         'nTitle' => 1,
         'desc' => \clienttranslate('(because no infantry units)'),
-        'units' => $units,
+        'units' => $units->getPositions(),
       ];
     } else {
       return [
@@ -40,7 +40,7 @@ class MoveOut extends \M44\Models\Card
         'n' => 4,
         'nTitle' => 4,
         'desc' => \clienttranslate('(infantry units only)'),
-        'units' => $infantry,
+        'units' => $infantry->getPositions(),
       ];
     }
   }

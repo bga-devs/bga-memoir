@@ -66,7 +66,7 @@ class InfantryAssault extends \M44\Models\Card
         'n' => 1,
         'nTitle' => 1,
         'desc' => \clienttranslate('(because no infantry units)'),
-        'units' => $units,
+        'units' => $units->getPositions(),
       ];
     } else {
       return [
@@ -74,7 +74,7 @@ class InfantryAssault extends \M44\Models\Card
         'n' => \INFINITY,
         'nTitle' => \INFINITY,
         'desc' => \clienttranslate('(infantry units only)'),
-        'units' => $infantry,
+        'units' => $infantry->getPositions(),
       ];
     }
   }

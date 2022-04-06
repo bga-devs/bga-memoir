@@ -14,7 +14,7 @@ class DirectFromHQ extends \M44\Models\Card
   public function getArgsOrderUnits()
   {
     $player = $this->getPlayer();
-    $units = $player->getUnits();
+    $units = $player->getUnits()->getPositions();
 
     return [
       'n' => 4,
