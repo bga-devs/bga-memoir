@@ -20,4 +20,9 @@ class FieldBunker extends Bunker
   {
     return false;
   }
+
+  public function canIgnoreOneFlag($unit)
+  {
+    return $this->canIgnoreOneFlag;
+  }
 }
