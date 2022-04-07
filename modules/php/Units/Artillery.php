@@ -1,5 +1,6 @@
 <?php
 namespace M44\Units;
+use M44\Board;
 
 class Artillery extends AbstractUnit
 {
@@ -15,5 +16,15 @@ class Artillery extends AbstractUnit
     $this->attackPower = [3, 3, 2, 2, 1, 1];
     $this->mustSeeToAttack = false;
     parent::__construct($row);
+  }
+
+  public function getAttackPower()
+  {
+    $c = Board::getMountainComponents();
+    if (isset($c[$this->x][$this->y])) {
+      return [3, 3, 2, 2, 1, 1, 1];
+    } else {
+      return parent::getAttackPower();
+    }
   }
 }
