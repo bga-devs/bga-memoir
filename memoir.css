@@ -61,10 +61,8 @@ html {
   margin-bottom: 0px; }
 
 #right-side {
-  margin-left: -250px;
   margin-top: 0px;
-  padding-top: 10px;
-  padding-left: 10px; }
+  padding-top: 10px; }
 
 .mobile_version #right-side {
   padding-left: 0px;
@@ -79,9 +77,14 @@ html {
     margin-right: 270px;
     top: 0px;
     margin-left: 0px; }
+    .logs_on_additional_column #left-side-wrapper #left-side {
+      margin-right: 520px; }
 
 .mobile_version #left-side-wrapper #left-side {
   margin-right: 0; }
+
+.logs_on_additional_column .player-board {
+  border-radius: 8px; }
 
 #title-content-wrapper {
   position: relative;
