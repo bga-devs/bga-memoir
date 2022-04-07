@@ -37,7 +37,7 @@ trait DrawCardsTrait
     $method = $card->getDrawMethod();
 
     Cards::discard($card);
-    Notifications::discardCard($player, $card);
+    Notifications::discardCard($player, $card, false);
 
     // TODO : handle the mode where we don't reshuffle (deck exhaustion)
     if ($card->getType() == \CARD_FINEST_HOUR && Globals::getDeckReshuffle()) {

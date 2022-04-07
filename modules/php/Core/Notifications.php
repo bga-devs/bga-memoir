@@ -215,11 +215,12 @@ class Notifications
     self::notify($player, 'pDrawCards', '', ['cards' => $cards->toArray()]);
   }
 
-  public static function discardCard($player, $card)
+  public static function discardCard($player, $card, $decHandCounter = true)
   {
     self::notifyAll('discardCard', clienttranslate('${player_name} discards ${card_name}'), [
       'player' => $player,
       'card' => $card,
+      'handCounter' => $decHandCounter? -1 : 0,
     ]);
   }
 

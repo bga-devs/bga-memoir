@@ -278,17 +278,13 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         this.addCard(n.args.card, `in-play-${n.args.player_id}`);
       }
       this.slide('card-' + n.args.card.id, 'discard', { duration: 1100 });
-      this._handCounters[n.args.player_id].incValue(-1);
+      this._handCounters[n.args.player_id].incValue(n.args.handCounter);
     },
 
     notif_discardCardItalianHighCommand(n) {
       debug('Notif: discarding a card', n);
       this.notif_discardCard(n);
       this._handCounters[n.args.player_id].incValue(-1);
-    },
-
-    notif_discardCards(n) {
-      // TODO
     },
 
     notif_reshuffle(n) {
