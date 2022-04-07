@@ -62,6 +62,9 @@ trait RetreatUnitTrait
       $eliminated = $this->damageUnit($unit, $args['hits'], true);
       $retreatInfo = Globals::getRetreat();
       $retreatInfo['min'] -= $args['hits'];
+      if ($unit->isEliminated()) {
+        $retreatInfo['min'] = 0;
+      }
       Globals::setRetreat($retreatInfo);
       if (Teams::checkVictory()) {
         return;
@@ -71,7 +74,11 @@ trait RetreatUnitTrait
         $this->getCurrentAttack()['unit']->afterAttackRetreatHit($unit->getPos(), $args['hits'], $eliminated);
       }
 
-      $this->nextState('retreat');
+      if ($unit->isEliminated()) {
+        $this->actRetreatUnitDone(true);
+      } else {
+        $this->nextState('retreat');
+      }
     }
     // If no more cells, auto-done
     elseif (empty($args['cells'])) {
@@ -95,7 +102,13 @@ trait RetreatUnitTrait
       'unitId' => $unit->getId(),
       'min' => $minFlags,
       'max' => $maxFlags,
-      'desc' => $minFlags == $maxFlags ? '' : \clienttranslate('(up to ${max} cells)'),
+      'desc' =>
+        $minFlags == $maxFlags
+          ? ''
+          : [
+            'log' => \clienttranslate('(up to ${max} cells)'),
+            'args' => ['max' => $maxFlags],
+          ],
       'i18n' => ['desc'],
       'titleSuffix' => $effect == '' ? ($minFlags == 0 ? 'skippable' : false) : $effect,
     ]);
