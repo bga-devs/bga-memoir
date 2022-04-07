@@ -117,8 +117,6 @@ class Terrains extends \M44\Helpers\Pieces
             $properties['isBlockingLineOfSight'] = [\INFANTRY];
           } elseif ($behavior == 'OASIS_RECOVERY') {
             $properties['canRecover'] = true;
-          } elseif ($behavior == 'FORDABLE_STREAM') {
-            $type = 'ford';
           }
 
           if (isset($options['hill317'])) {

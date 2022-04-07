@@ -352,6 +352,7 @@
   left: 0px;
   width: 310px;
   height: 100%;
+  padding: 18px 0px;
   background-color: #000;
   display: flex;
   flex-flow: column;
@@ -386,8 +387,9 @@
       text-transform: uppercase;
       width: 188px;
       text-align: center;
-      font-size: 20px;
+      font-size: 19px;
       color: #882f14;
+      white-space: nowrap;
     }
 
     .summary-tile {
@@ -471,6 +473,36 @@
       .summary-desc {
         left: 65px;
         width: 200px;
+
+        .fire-power-handler {
+          display: inline-block;
+
+          .fire-power {
+            display: inline-block;
+            width: 21px;
+            height: 24px;
+            background-color: #408c40;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            margin-right: 1px;
+
+            span {
+              display: inline-block;
+              background: #e60202;
+              margin: auto;
+              width: 15px;
+              height: 15px;
+              border-radius: 50%;
+              color: white;
+              text-align: center;
+              margin: 4px 3px 0px 3px;
+            }
+
+            &:first-of-type span {
+              background: none;
+              color: transparent;
+            }
+          }
+        }
       }
     }
   }

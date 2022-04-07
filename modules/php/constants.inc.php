@@ -218,6 +218,7 @@ const TERRAIN_CLASSES = [
   'railstation' => 'RailStation',
   'roadblock' => 'RoadBlock',
   'ford' => 'Ford',
+  'fordableStream' => 'FordableStream',
   'road' => 'Road',
   'roadhill' => 'RoadHill',
   'supplydepot' => 'SupplyDepot',

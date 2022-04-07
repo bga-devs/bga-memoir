@@ -531,7 +531,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
             let units = terrainData[prop].map((unitId) => unitMap[unitId]).join(' & ');
             content = dojo.string.substitute(propDesc.obj, { units });
           } else {
-            content = propDesc.bool;
+            content = terrainData[prop] == -1 ? '' : propDesc.bool;
 
             if (prop == 'isBlockingLineOfSight' && terrainData['isBlockingLineOfAttack']) {
               content = '';
@@ -573,6 +573,24 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         }
       }
 
+      if (terrainData['offense']) {
+        let offense = [];
+        Object.keys(unitMap).forEach((type) => {
+          if (terrainData['offense'][type]) {
+            offense.push(
+              this.strReplace(_('${unit} fires out at ${nb}'), {
+                unit: unitMap[type],
+                nb: terrainData['offense'][type],
+              }),
+            );
+          }
+        });
+        if (offense.length > 0) {
+          let modified = terrain.properties && terrain.properties['offense'] !== undefined;
+          desc.push(`<li class='${modified ? 'modified' : ''}'>${offense.join(', ')}</li>`);
+        }
+      }
+
       // Remove letter in number (used for bis/ter for some terrains)
       let number = String(terrainData.number).replace(/\D/g, '');
 
@@ -607,6 +625,15 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         `<li class='${
           isModified('movementRadius') || isModified('movementAndAttackRadius') ? 'modified' : ''
         }'>${content}</li>`,
+      );
+
+      let divPowers = ['<div class="fire-power"><span>0</span></div>'];
+      unitData.attackPower.forEach((power) => divPowers.push(`<div class="fire-power"><span>${power}</span></div>`));
+      let power = divPowers.join('');
+      desc.push(
+        `<li class='${
+          isModified('attackPower') ? 'modified' : ''
+        }'><div class="fire-power-handler">${power}</div></li>`,
       );
 
       // Remove letter in number (used for bis/ter for some terrains)

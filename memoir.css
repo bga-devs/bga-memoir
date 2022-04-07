@@ -1349,6 +1349,7 @@ html {
   left: 0px;
   width: 310px;
   height: 100%;
+  padding: 18px 0px;
   background-color: #000;
   display: flex;
   flex-flow: column;
@@ -1380,8 +1381,9 @@ html {
       text-transform: uppercase;
       width: 188px;
       text-align: center;
-      font-size: 20px;
-      color: #882f14; }
+      font-size: 19px;
+      color: #882f14;
+      white-space: nowrap; }
     .board-tooltip .summary-card .summary-tile {
       position: absolute;
       top: 40px;
@@ -1435,6 +1437,28 @@ html {
       .board-tooltip .summary-card.summary-unit .summary-desc {
         left: 65px;
         width: 200px; }
+        .board-tooltip .summary-card.summary-unit .summary-desc .fire-power-handler {
+          display: inline-block; }
+          .board-tooltip .summary-card.summary-unit .summary-desc .fire-power-handler .fire-power {
+            display: inline-block;
+            width: 21px;
+            height: 24px;
+            background-color: #408c40;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            margin-right: 1px; }
+            .board-tooltip .summary-card.summary-unit .summary-desc .fire-power-handler .fire-power span {
+              display: inline-block;
+              background: #e60202;
+              margin: auto;
+              width: 15px;
+              height: 15px;
+              border-radius: 50%;
+              color: white;
+              text-align: center;
+              margin: 4px 3px 0px 3px; }
+            .board-tooltip .summary-card.summary-unit .summary-desc .fire-power-handler .fire-power:first-of-type span {
+              background: none;
+              color: transparent; }
 
 .m44-unit {
   width: 100%;
