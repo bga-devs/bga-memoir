@@ -47,7 +47,6 @@ $scenarios[1433] = [
         'col' => 0,
         'unit' => [
           'name' => 'tank2ger',
-          'nbr_units' => 4,
           'badge' => 'badge4',
         ],
       ],
@@ -92,7 +91,6 @@ $scenarios[1433] = [
         'col' => 12,
         'unit' => [
           'name' => 'tank2ger',
-          'nbr_units' => 4,
           'badge' => 'badge4',
         ],
       ],

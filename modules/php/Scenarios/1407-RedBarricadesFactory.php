@@ -61,7 +61,7 @@ $scenarios[1407] = [
         'col' => 4,
         'unit' => [
           'name' => 'inf2ger',
-          'badge' => 'badge4',
+          'badge' => 'badge6',
         ],
       ],
       3 => [
@@ -76,7 +76,7 @@ $scenarios[1407] = [
         'col' => 8,
         'unit' => [
           'name' => 'inf2ger',
-          'badge' => 'badge4',
+          'badge' => 'badge6',
         ],
       ],
       5 => [
@@ -98,7 +98,7 @@ $scenarios[1407] = [
         'col' => 14,
         'unit' => [
           'name' => 'inf2ger',
-          'badge' => 'badge4',
+          'badge' => 'badge6',
         ],
       ],
       8 => [
@@ -113,7 +113,6 @@ $scenarios[1407] = [
         'col' => 18,
         'unit' => [
           'name' => 'tank2ger',
-          'nbr_units' => 4,
           'badge' => 'badge4',
         ],
       ],
@@ -122,7 +121,7 @@ $scenarios[1407] = [
         'col' => 20,
         'unit' => [
           'name' => 'inf2ger',
-          'badge' => 'badge4',
+          'badge' => 'badge6',
         ],
       ],
       11 => [

@@ -152,7 +152,7 @@ class Units extends \M44\Helpers\Pieces
         }
         $data = self::getTypeAndNation($hex['unit']);
         $unit = self::getInstance($data['type'], $data['badge']);
-        $data['figures'] = $unit->getMaxUnits();
+        $data['figures'] = $hex['unit']['nbr_units'] ?? $unit->getMaxUnits();
         $data['location'] = 'board';
         $data['x'] = $hex['col'];
         $data['y'] = $hex['row'];
