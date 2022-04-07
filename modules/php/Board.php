@@ -29,6 +29,7 @@ class Board
   protected static $grid = [];
   protected static $hillComponents = null;
   protected static $mountainComponents = null;
+  protected static $caveComponents = null;
   public function init()
   {
     // Try to fetch scenario from DB
@@ -326,6 +327,24 @@ class Board
       return \INFINITY;
     }
 
+    // if it's a cave && not a neighbour: JP can teleport, other can go if near
+    if (
+      $unit->getNation() == 'jp' &&
+      $unit->getType() == \INFANTRY &&
+      !in_array($target, self::getNeighbours($source))
+    ) {
+      foreach ($targetCell['terrains'] as $terrain) {
+        if ($terrain->isCave($unit)) {
+          return $d - $source['d'];
+        }
+      }
+    }
+
+    // check to forbid caves teleportation
+    if (!in_array($target, self::getNeighbours($source))) {
+      return INFINITY;
+    }
+
     // If there is an impassable terrain => can't go there
     if (self::isImpassableCell($target, $unit)) {
       return \INFINITY;
@@ -498,6 +517,10 @@ class Board
     $power = $unit->getAttackPower();
     $range = count($power);
     list($cells, $markers) = self::getCellsAtDistance($pos, $range, function ($source, $target, $d) {
+      // check to forbid caves teleportation
+      if (!in_array($target, self::getNeighbours($source))) {
+        return INFINITY;
+      }
       return 1;
     });
 
@@ -784,6 +807,24 @@ class Board
     return self::$mountainComponents;
   }
 
+  public static function getCaveComponents()
+  {
+    if (is_null(self::$caveComponents)) {
+      $caves = self::createGrid(false);
+      $foundCaves = [];
+      foreach ($caves as $x => $col) {
+        foreach ($col as $y => $node) {
+          if (self::isCaveCell(['x' => $x, 'y' => $y])) {
+            $foundCaves[] = ['x' => $x, 'y' => $y];
+          }
+        }
+      }
+      self::$caveComponents = $foundCaves;
+    }
+
+    return self::$caveComponents;
+  }
+
   /////////////////////////////////////////////
   //  ____      _                  _
   // |  _ \ ___| |_ _ __ ___  __ _| |_
@@ -892,6 +933,11 @@ class Board
         if ($terrain->isBlocked($source, $unit)) {
           return INFINITY;
         }
+      }
+
+      // check to forbid caves teleportation
+      if (!in_array($target, self::getNeighbours($source))) {
+        return INFINITY;
       }
 
       // Ignore all other terrains restriction
@@ -1026,6 +1072,34 @@ class Board
             ],
             -$dist
           );
+        }
+      }
+
+      if (self::isCaveCell($pos) && $cell['d'] == 0) {
+        foreach (self::getCaveComponents() as $cave) {
+          if ($cave['x'] == $pos['x'] && $cave['y'] == $pos['y']) {
+            continue;
+          }
+          $cost = $costCallback($cell, $cave, $d);
+          $dist = $cell['d'] + $cost;
+          $t = $markers[$cave['x']][$cave['y']];
+          if ($t !== false) {
+            continue;
+          }
+
+          if ($dist <= $d) {
+            $cave['cost'] = $cost;
+            $cave['teleportation'] = true;
+            $queue->insert(
+              [
+                'cell' => $cave,
+                'paths' => array_map(function ($path) use ($cave) {
+                  return array_merge($path, [$cave]);
+                }, $markers[$pos['x']][$pos['y']]['paths']),
+              ],
+              -$dist
+            );
+          }
         }
       }
     }

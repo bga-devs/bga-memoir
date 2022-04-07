@@ -13,6 +13,7 @@ class HillCave extends Hill
     parent::__construct($row);
     $this->name = clienttranslate('Cave on a hill');
     $this->number = 52;
+    $this->isCave = true;
   }
 
   // TODO cave management

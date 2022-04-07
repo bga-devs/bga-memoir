@@ -65,6 +65,7 @@ class Terrain extends \M44\Helpers\DB_Model
     'isBridge',
     'isMountain',
     'isRoad',
+    'isCave',
 
     'defense',
     'offense',

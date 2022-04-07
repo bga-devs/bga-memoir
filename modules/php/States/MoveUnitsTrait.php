@@ -72,6 +72,12 @@ trait MoveUnitsTrait
 
     Globals::setUnitMoved($unitId);
 
+    if (isset($cell['teleportation']) && $cell['teleportation'] == true) {
+      // if teleported, force move at 1 and unit moved, ==> unit is no more available
+      $unit->setMoves(1);
+      Globals::setUnitMoved(9999);
+    }
+
     if ($this->gamestate->state()['name'] == 'desertMove') {
       $this->gamestate->nextState('overrun');
       return;
