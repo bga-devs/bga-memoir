@@ -1,6 +1,8 @@
 <?php
 namespace M44\Terrains;
 
+use M44\Board;
+
 class MountainCave extends Mountain
 {
   public static function isTileOfType($hex)
@@ -16,5 +18,20 @@ class MountainCave extends Mountain
     $this->isCave = true;
   }
 
-  // TODO cave management
+  public function getPossibleAttackActions($unit)
+  {
+    // only an INFANTRY United States
+    // with no adjacent ennemy
+    // can try to seal the cave
+    if ($unit->getType() == \INFANTRY && $unit->getTeamId() == ALLIES && !Board::isAdjacentToEnnemy($unit)) {
+      return [
+        [
+          'desc' => \clienttranslate('Attempt to seal the cave'),
+          'action' => 'actSealCave',
+        ],
+      ];
+    } else {
+      return [];
+    }
+  }
 }

@@ -418,6 +418,58 @@ trait AttackUnitsTrait
     $this->nextState('attack');
   }
 
+  public function actSealCave($unitId)
+  {
+    // Sanity checks
+    self::checkAction('actSealCave');
+
+    $player = Players::getCurrent();
+    $args = $this->gamestate->state()['args'];
+    if (!\array_key_exists($unitId, $args['units'])) {
+      throw new \BgaVisibleSystemException('You cannot seal the cave with this unit. Should not happen');
+    }
+    $cells = $args['units'][$unitId];
+    $k = Utils::array_usearch($cells, function ($cell) {
+      return ($cell['action'] ?? null) == 'actSealCave';
+    });
+    if ($k === false) {
+      throw new \BgaVisibleSystemException('You cannot seal the cave with this unit. Should not happen');
+    }
+    $info = $cells[$k];
+
+    // Inc attack counter by 1
+    $unit = Units::get($unitId);
+    $unit->incFights(1);
+    // throw dice
+    $results = Dice::roll($player, $unit->getAttackPower()[0], $unit->getPos());
+
+    // Compute number of heal
+    $seal = $results[DICE_STAR] ?? 0 ? true : false;
+
+    if ($seal) {
+      $terrain = Terrains::get($info['terrainId']);
+      $newTerrain = $terrain instanceof \M44\Terrains\HillCave ? 'hills' : 'mountain';
+      $terrain->removeFromBoard();
+      $terrain = Terrains::add([
+        'type' => $newTerrain == 'hills' ? 'hill' : $newTerrain,
+        'tile' => $newTerrain,
+        'x' => $unit->getX(),
+        'y' => $unit->getY(),
+        'orientation' => 1,
+      ]);
+
+      Notifications::addTerrain(
+        $player,
+        $terrain,
+        \clienttranslate('${player_name} seals the cave (in ${coordSource})')
+      );
+    } else {
+      Notifications::message(clienttranslate('${player_name} fails to seal the cave'), ['player' => $player]);
+    }
+
+    $this->nextState('attack');
+  }
+
   public function argsBattleBack()
   {
     $attack = $this->getCurrentAttack();

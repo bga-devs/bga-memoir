@@ -279,7 +279,11 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       let terrain = n.args.terrain;
       let cellC = $(`cell-background-${terrain.x}-${terrain.y}`);
       terrain.rotate = this._isRotated;
-      this.place('tplObstacleTile', terrain, cellC);
+      if (terrain.tile == 'hills' || terrain.tile == 'mountain') {
+        this.place('tplTerrainTile', terrain, cellC);
+      } else {
+        this.place('tplObstacleTile', terrain, cellC);
+      }
       this._grid[terrain.x][terrain.y].terrains.push(terrain);
     },
 
