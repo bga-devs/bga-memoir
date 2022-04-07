@@ -5,7 +5,6 @@ class Infantry extends AbstractUnit
 {
   public function __construct($row)
   {
-    parent::__construct($row);
     $this->type = INFANTRY;
     $this->number = 1;
     $this->statName = 'Inf';
@@ -16,5 +15,6 @@ class Infantry extends AbstractUnit
     $this->attackPower = [3, 2, 1];
     $this->mustSeeToAttack = true;
     $this->maxGrounds = 1;
+    parent::__construct($row);
   }
 }

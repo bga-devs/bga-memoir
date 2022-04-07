@@ -5,7 +5,6 @@ class Armor extends AbstractUnit
 {
   public function __construct($row)
   {
-    parent::__construct($row);
     $this->type = ARMOR;
     $this->number = '1b';
     $this->statName = 'Armor';
@@ -17,6 +16,7 @@ class Armor extends AbstractUnit
     $this->mustSeeToAttack = true;
     $this->maxGrounds = 2;
     $this->canOverrun = true;
+    parent::__construct($row);
   }
 
   public function getMovementRadius()

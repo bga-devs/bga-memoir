@@ -20,5 +20,6 @@ class SkiTroop extends Infantry
       clienttranslate('Move onto any terrain and may still battle, but must still obey terrain movement restrictions'),
       clienttranslate('May retreat 1 to 3 hexes on flag'),
     ];
+    $this->applyPropertiesModifiers();
   }
 }

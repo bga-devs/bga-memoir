@@ -5,7 +5,6 @@ class Artillery extends AbstractUnit
 {
   public function __construct($row)
   {
-    parent::__construct($row);
     $this->type = ARTILLERY;
     $this->number = '1t';
     $this->statName = 'Artillery';
@@ -15,5 +14,6 @@ class Artillery extends AbstractUnit
     $this->movementAndAttackRadius = 0;
     $this->attackPower = [3, 3, 2, 2, 1, 1];
     $this->mustSeeToAttack = false;
+    parent::__construct($row);
   }
 }

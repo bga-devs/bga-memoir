@@ -17,5 +17,6 @@ class Cavalry extends Infantry
     $this->desc[] = clienttranslate(
       'On successfull close assault, may Take Ground and battle again like an Armor Overrun combat'
     );
+    $this->applyPropertiesModifiers();
   }
 }

@@ -19,6 +19,7 @@ class BigGun extends Artillery
       ),
       clienttranslate('Cross-hair markers are not cumulative'),
     ];
+    $this->applyPropertiesModifiers();
   }
 
   protected function getTokens($cell = null)

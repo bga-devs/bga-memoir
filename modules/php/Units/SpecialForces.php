@@ -9,5 +9,6 @@ class SpecialForces extends Infantry
     $this->name = clienttranslate('Special Forces');
     $this->number = 2;
     $this->movementAndAttackRadius = 2;
+    $this->applyPropertiesModifiers();
   }
 }

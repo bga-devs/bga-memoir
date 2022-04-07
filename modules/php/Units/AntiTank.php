@@ -11,6 +11,7 @@ class AntiTank extends Infantry
     $this->movementAndAttackRadius = 0;
     $this->movementRadius = 2;
     $this->maxGrounds = 0; // unit with equipment cannot take ground
+    $this->applyPropertiesModifiers();
   }
 
   public function getHitsOnTarget($type, $nb, $target)

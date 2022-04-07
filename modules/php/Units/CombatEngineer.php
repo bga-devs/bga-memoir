@@ -17,5 +17,6 @@ class CombatEngineer extends Infantry
       clienttranslate('In minefield must clear the mines, instead of battling'),
       clienttranslate('If ordered on Infantry Assault, may move 2 hexes and remove wire or clear mines'),
     ];
+    $this->applyPropertiesModifiers();
   }
 }

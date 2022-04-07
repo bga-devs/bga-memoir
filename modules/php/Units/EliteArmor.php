@@ -9,6 +9,7 @@ class EliteArmor extends Armor
     $this->name = clienttranslate('Elite Armor');
     $this->number = '2b';
     $this->maxUnits = 4;
+    $this->applyPropertiesModifiers();
   }
 
   public function getMedalsWorth()

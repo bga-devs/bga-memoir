@@ -25,6 +25,7 @@ class Sniper extends Infantry
       clienttranslate('Sniper is only hit by a grenade (& star exceptions of cards / units)'),
       clienttranslate('Sniper does not count as Victory medal'),
     ];
+    $this->applyPropertiesModifiers();
   }
 
   public function getHits($type, $nb)

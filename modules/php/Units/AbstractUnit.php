@@ -86,10 +86,15 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     if ($row != null) {
       parent::__construct($row);
       $this->sections = $row['sections'];
-      $prop = $this->getExtraDatas('properties') ?? [];
-      foreach ($prop as $name => $value) {
-        $this->$name = $value;
-      }
+      $this->applyPropertiesModifiers();
+    }
+  }
+
+  public function applyPropertiesModifiers()
+  {
+    $prop = $this->getExtraDatas('properties') ?? [];
+    foreach ($prop as $name => $value) {
+      $this->$name = $value;
     }
   }
 

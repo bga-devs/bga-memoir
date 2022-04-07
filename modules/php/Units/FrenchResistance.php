@@ -19,5 +19,6 @@ class FrenchResistance extends AbstractUnit
     $this->ignoreCannotBattle = true;
     $this->retreatHex = 3;
     $this->desc = [clienttranslate('3 figures only'), clienttranslate('May retreat 1 to 3 hexes per flag')];
+    $this->applyPropertiesModifiers();
   }
 }
