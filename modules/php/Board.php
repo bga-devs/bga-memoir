@@ -331,7 +331,7 @@ class Board
     if (
       $unit->getNation() == 'jp' &&
       $unit->getType() == \INFANTRY &&
-      !in_array($target, self::getNeighbours($source))
+      !in_array(['x' => $target['x'], 'y' => $target['y']], self::getNeighbours($source))
     ) {
       foreach ($targetCell['terrains'] as $terrain) {
         if ($terrain->isCave($unit)) {
@@ -341,7 +341,7 @@ class Board
     }
 
     // check to forbid caves teleportation
-    if (!in_array($target, self::getNeighbours($source))) {
+    if (!in_array(['x' => $target['x'], 'y' => $target['y']], self::getNeighbours($source))) {
       return INFINITY;
     }
 
@@ -518,7 +518,7 @@ class Board
     $range = count($power);
     list($cells, $markers) = self::getCellsAtDistance($pos, $range, function ($source, $target, $d) {
       // check to forbid caves teleportation
-      if (!in_array($target, self::getNeighbours($source))) {
+      if (!in_array(['x' => $target['x'], 'y' => $target['y']], self::getNeighbours($source))) {
         return INFINITY;
       }
       return 1;
@@ -936,7 +936,7 @@ class Board
       }
 
       // check to forbid caves teleportation
-      if (!in_array($target, self::getNeighbours($source))) {
+      if (!in_array(['x' => $target['x'], 'y' => $target['y']], self::getNeighbours($source))) {
         return INFINITY;
       }
 
