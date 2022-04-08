@@ -78,36 +78,4 @@ class InfantryAssault extends \M44\Models\Card
       ];
     }
   }
-
-  public function getArgsMoveUnits()
-  {
-    $player = $this->getPlayer();
-    $units = Units::getActivatedByCard($this);
-
-    return [
-      'units' => $units->map(function ($unit) {
-        if ($unit->getType() == \INFANTRY) {
-          return $unit->getPossibleMoves(3, 2);
-        } else {
-          return $unit->getPossibleMoves();
-        }
-      }),
-    ];
-  }
-
-  // public function getArgsAttackUnits($overrideNbFights = null)
-  // {
-  //   $player = $this->getPlayer();
-  //   $units = Units::getActivatedByCard($this);
-  //
-  //   return [
-  //     'units' => $units->map(function ($unit) use ($overrideNbFights) {
-  //       $maxFights = $overrideNbFights[$unit->getType()] ?? $this->nbFights;
-  //       if ($unit->getFights() >= $maxFights) {
-  //         return [];
-  //       }
-  //       return $unit->getTargetableUnits(-3);
-  //     }),
-  //   ];
-  // }
 }

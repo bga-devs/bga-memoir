@@ -223,8 +223,15 @@ class Board
 
     // Compute remaining moves for the unit
     $maxDistance = $unit->getMovementRadius();
-    if ($unit->getActivationOCard()->getType() == \CARD_BEHIND_LINES) {
-      $maxDistance = 3; // Units activated by "BehindEnemyLines" can moves up to 3 hexes
+    $card = $unit->getActivationOCard();
+    if ($card != null) {
+      if ($card->getType() == \CARD_BEHIND_LINES) {
+        $maxDistance = 3; // Units activated by "BehindEnemyLines" can moves up to 3 hexes
+      } elseif ($card->getType() == \CARD_INFANTRY_ASSAULT && $unit->getType() == INFANTRY) {
+        $maxDistance++;
+      } elseif ($card->getType() == \CARD_ARTILLERY_BOMBARD && $unit->getType() == \ARTILLERY) {
+        $maxDistance = 3;
+      }
     }
 
     $m = $maxDistance - $unit->getMoves();
@@ -494,22 +501,17 @@ class Board
     // Check whether the unit moved too much to attack
     // if unit moved on road, we need to remove one move linked to the bonus
     $m = $unit->getMoves() + ($moves ?? 0);
-    if (
-      $m > $unit->getMovementAndAttackRadius() + 1 &&
-      $unit->getActivationOCard()->getType() == \CARD_INFANTRY_ASSAULT &&
-      $unit->getType() == \INFANTRY
-    ) {
-      return [];
-    } elseif (
-      $m <= $unit->getMovementAndAttackRadius() + 1 &&
-      $unit->getActivationOCard()->getType() == \CARD_INFANTRY_ASSAULT &&
-      $unit->getType() == \INFANTRY
-    ) {
-      // do nothing
-    } elseif (
-      $m > $unit->getMovementAndAttackRadius() &&
-      $unit->getActivationOCard()->getType() != \CARD_BEHIND_LINES
-    ) {
+    $maxMoves = $unit->getMovementAndAttackRadius();
+    $card = $unit->getActivationOCard();
+    if ($card !== null) {
+      if ($card->getType() == \CARD_INFANTRY_ASSAULT && $unit->getType() == \INFANTRY) {
+        $maxMoves++;
+      } elseif ($card->getType() == \CARD_BEHIND_LINES) {
+        $maxMoves = INFINITY;
+      }
+    }
+
+    if ($m > $maxMoves) {
       return [];
     }
 
