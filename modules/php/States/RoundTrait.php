@@ -47,7 +47,7 @@ trait RoundTrait
       $nWins = 0;
       $nFigs = 0;
       for ($i = 1; $i <= $nRounds; $i++) {
-        $nWins += $player->getStat('statusRound' . $i);
+        $nWins += $player->getStat('medalRound' . $i);
         foreach (['inf', 'armor', 'artillery'] as $type) {
           $nFigs += $player->getStat($type . 'FigRound' . $i);
         }
