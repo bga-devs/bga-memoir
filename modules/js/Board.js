@@ -496,7 +496,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         },
         canRecover: {
           bool: _(
-            'An ordered Infantry unit, with no adjacent ennemy units, may recover lost figures. Resolution is done like for Medics card. The unit cannot move or battle this turn',
+            'An ordered Infantry unit, with no adjacent enemy units, may recover lost figures. Resolution is done like for Medics card. The unit cannot move or battle this turn',
           ),
         },
       };

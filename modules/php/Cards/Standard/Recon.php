@@ -70,7 +70,7 @@ class Recon extends \M44\Models\SectionCard
     }
     // check adjacent of Units
     if (!AirPower::areUnitsContiguous($unitIds)) {
-      throw new \BgaUserException(clienttranslate('You must select a contiguous sequence of adjacent ennemy units'));
+      throw new \BgaUserException(clienttranslate('You must select a contiguous sequence of adjacent enemy units'));
     }
 
     // check that one unit is in the section
@@ -83,7 +83,7 @@ class Recon extends \M44\Models\SectionCard
       }
     }
     if ($found == false) {
-      throw new \BgaUserException(clienttranslate('No ennemy in the card section.'));
+      throw new \BgaUserException(clienttranslate('No enemy in the card section.'));
     }
 
     // Create all the corresponding attacks

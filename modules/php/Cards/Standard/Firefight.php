@@ -28,7 +28,7 @@ class Firefight extends \M44\Models\Card
       'i18n' => ['desc'],
       'n' => 4,
       'nTitle' => 4,
-      'desc' => \clienttranslate('(Firefigth)'),
+      'desc' => \clienttranslate('(Firefight)'),
       'units' => $units->getPositions(),
     ];
   }

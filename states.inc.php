@@ -357,8 +357,8 @@ $machinestates = [
 
   ST_MOVE_AGAIN => [
     'name' => 'moveUnits',
-    'description' => clienttranslate('${actplayer} may move activated units again (behind ennemy lines effect)'),
-    'descriptionmyturn' => clienttranslate('${you} may move activated units again (behind ennemy lines effect)'),
+    'description' => clienttranslate('${actplayer} may move activated units again (behind enemy lines effect)'),
+    'descriptionmyturn' => clienttranslate('${you} may move activated units again (behind enemy lines effect)'),
     'type' => 'activeplayer',
     'args' => 'argsMoveUnits',
     'action' => 'stMoveUnits',
@@ -390,8 +390,8 @@ $machinestates = [
   // Air power
   ST_AIRPOWER_TARGET => [
     'name' => 'targetAirPower',
-    'description' => clienttranslate('${actplayer} may target 4 or fewer ennemy units'),
-    'descriptionmyturn' => clienttranslate('${you} may target 4 or fewer ennemy units'),
+    'description' => clienttranslate('${actplayer} may target 4 or fewer enemy units'),
+    'descriptionmyturn' => clienttranslate('${you} may target 4 or fewer enemy units'),
     'type' => 'activeplayer',
     'args' => 'argsTargetAirPower',
     'possibleactions' => ['actTargetAirPower'],
@@ -400,8 +400,8 @@ $machinestates = [
 
   ST_BARRAGE_TARGET => [
     'name' => 'targetBarrage',
-    'description' => clienttranslate('${actplayer} may target 1 ennemy unit'),
-    'descriptionmyturn' => clienttranslate('${you} may target 1 ennemy unit'),
+    'description' => clienttranslate('${actplayer} may target 1 enemy unit'),
+    'descriptionmyturn' => clienttranslate('${you} may target 1 enemy unit'),
     'type' => 'activeplayer',
     'args' => 'argsTargetBarrage',
     'possibleactions' => ['actTargetBarrage'],

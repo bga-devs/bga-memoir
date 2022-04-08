@@ -21,7 +21,7 @@ class Sniper extends Infantry
       clienttranslate('Retreat up to 3 hex/ flag'),
       clienttranslate('Move onto any terrain and may still battle, but must obey terrain movement restrictions'),
       clienttranslate('May not target an Armor unit'),
-      clienttranslate('Hit ennemy on symbol, star & grenade. Ignore terrain protection'),
+      clienttranslate('Hit enemy on symbol, star & grenade. Ignore terrain protection'),
       clienttranslate('Sniper is only hit by a grenade (& star exceptions of cards / units)'),
       clienttranslate('Sniper does not count as Victory medal'),
     ];

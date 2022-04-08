@@ -55,7 +55,7 @@ class AirPower extends \M44\Models\Card
     }
     // check adjacent of Units
     if (!$this->areUnitsContiguous($unitIds)) {
-      throw new \BgaUserException(clienttranslate('You must select a contiguous sequence of adjacent ennemy units'));
+      throw new \BgaUserException(clienttranslate('You must select a contiguous sequence of adjacent enemy units'));
     }
 
     // Create all the corresponding attacks
