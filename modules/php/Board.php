@@ -494,7 +494,22 @@ class Board
     // Check whether the unit moved too much to attack
     // if unit moved on road, we need to remove one move linked to the bonus
     $m = $unit->getMoves() + ($moves ?? 0);
-    if ($m > $unit->getMovementAndAttackRadius() && $unit->getActivationOCard()->getType() != \CARD_BEHIND_LINES) {
+    if (
+      $m > $unit->getMovementAndAttackRadius() + 1 &&
+      $unit->getActivationOCard()->getType() == \CARD_INFANTRY_ASSAULT &&
+      $unit->getType() == \INFANTRY
+    ) {
+      return [];
+    } elseif (
+      $m <= $unit->getMovementAndAttackRadius() + 1 &&
+      $unit->getActivationOCard()->getType() == \CARD_INFANTRY_ASSAULT &&
+      $unit->getType() == \INFANTRY
+    ) {
+      // do nothing
+    } elseif (
+      $m > $unit->getMovementAndAttackRadius() &&
+      $unit->getActivationOCard()->getType() != \CARD_BEHIND_LINES
+    ) {
       return [];
     }
 
