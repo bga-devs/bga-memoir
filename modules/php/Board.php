@@ -217,7 +217,7 @@ class Board
   {
     // Already moved before ?
     $uId = Globals::getUnitMoved();
-    if (!$force && $unit->getMoves() > 0 && $uId != -1 && $uId != $unit->getId()) {
+    if (!$force && ($unit->getMoves() > 0 || $unit->hasUsedRoadBonus()) && $uId != -1 && $uId != $unit->getId()) {
       return [];
     }
 
@@ -501,6 +501,12 @@ class Board
     // Check whether the unit moved too much to attack
     // if unit moved on road, we need to remove one move linked to the bonus
     $m = $unit->getMoves() + ($moves ?? 0);
+
+    // no attack possible for a unit that moved and should not
+    if ($unit->getCannotBattleIfMoved() && ($m != 0 || $unit->hasUsedRoadBonus())) {
+      return [];
+    }
+
     $maxMoves = $unit->getMovementAndAttackRadius();
     $card = $unit->getActivationOCard();
     if ($card !== null) {

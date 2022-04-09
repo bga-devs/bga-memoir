@@ -71,6 +71,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     'targets',
     'canOverrun',
     'canIgnoreOneFlag',
+    'cannotBattleIfMoved',
   ];
 
   protected $attackPower = [];
@@ -323,6 +324,11 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
   public function getRoadBonus()
   {
     return $this->getExtraDatas('roadBonus') ?? 1;
+  }
+
+  public function hasUsedRoadBonus()
+  {
+    return ($this->getExtraDatas('roadBonus') ?? -1) == 0 ? true : false;
   }
 
   public function useRoadBonus()
