@@ -677,8 +677,6 @@ All Allied tank units are Elite armor units (Troops 2 - Specialized Units). Badg
 Special Weapon Asset rules are in effect for the two German units equipped with Anti-Tank weapons.
 
 The German player lays out the Minefields (Terrain 29 - Minefields).
-
-Air rules are not in effect. The Air Sortie cards are set aside and are not used in this mission.
 '),
       'bibliography' => clienttranslate('Scenario 1 - British Desert Expansion'),
     ],

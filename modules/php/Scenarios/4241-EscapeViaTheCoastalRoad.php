@@ -489,8 +489,6 @@ You move first.
       'rules' => clienttranslate('North African Desert Rules are in effect (Actions 9 - North African Desert Rules). In addition, Allied Armor units may only move 2 hexes and battle, not the normal 3 hexes.
 
 British Commonwealth Forces and Italian Royal Army command rules are in effect.
-
-Air rules are not in effect. The Air Sortie cards are set aside and are not used in this mission.
 '),
       'victory' => clienttranslate('6 Medals.
 

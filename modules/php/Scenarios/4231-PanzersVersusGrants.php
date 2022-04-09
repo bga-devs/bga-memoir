@@ -309,9 +309,7 @@ Capture HQ/Supply Tent rules are in effect (Action 17 - Capture HQ/Supply).
 
 British Commonwealth Forces command rules are in effect.
 
-Place badges on the British elite tank units (Troops 2 - Specialized Units).
-
-Air rules are not in effect. The Air Sortie cards are set aside and are not used in this mission.'),
+Place badges on the British elite tank units (Troops 2 - Specialized Units).'),
       'bibliography' => clienttranslate('Scenario 5 - British Desert Expansion'),
     ],
   ],

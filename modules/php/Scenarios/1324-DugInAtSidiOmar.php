@@ -358,8 +358,6 @@ Exit markers are in effect on the portion of the Allied baseline in between the 
 British Commonwealth Forces command rules are in effect.
 
 Place a badge on the German elite tank unit. Badges are not required for the Allied tank units, which are all elite armor units (Troops 2 - Specialized Units).
-
-Air rules are not in effect. The Air Sortie cards are set aside and are not used in this mission.
 '),
       'bibliography' => clienttranslate('Scenario 3 - British Desert Expansion'),
     ],

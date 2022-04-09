@@ -394,9 +394,7 @@ The Road hexes on the opposite edges of the board are Temporary Medal Objectives
 
 British Commonwealth Forces command rules are in effect.
 
-Special Weapon Asset rules are in effect for the units equipped with Anti-Tank weapons.
-
-Air rules are not in effect. The Air Sortie cards are set aside and are not used in this mission.'),
+Special Weapon Asset rules are in effect for the units equipped with Anti-Tank weapons.'),
       'bibliography' => clienttranslate('Scenario 6 -British Desert Expansion'),
     ],
   ],
