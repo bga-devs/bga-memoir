@@ -286,15 +286,17 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
       }
 
       // exit markers
-      $tokens = Tokens::getOnCoords('board', $this->getPos(), \TOKEN_EXIT_MARKER);
-      $team = $this->getTeamId();
-      foreach ($tokens as $t) {
-        if ($t['team'] == $team) {
-          $pAction[] = [
-            'type' => 'action',
-            'action' => 'actExitUnit',
-            'desc' => \clienttranslate('Exit unit and gain medals'),
-          ];
+      if ($this->getMoves() < $this->movementRadius) {
+        $tokens = Tokens::getOnCoords('board', $this->getPos(), \TOKEN_EXIT_MARKER);
+        $team = $this->getTeamId();
+        foreach ($tokens as $t) {
+          if ($t['team'] == $team) {
+            $pAction[] = [
+              'type' => 'action',
+              'action' => 'actExitUnit',
+              'desc' => \clienttranslate('Exit unit and gain medals'),
+            ];
+          }
         }
       }
     }
