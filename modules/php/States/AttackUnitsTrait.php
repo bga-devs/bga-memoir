@@ -158,7 +158,7 @@ trait AttackUnitsTrait
     $stack = Globals::getAttackStack();
     $currentAttack = array_pop($stack);
     Globals::setAttackStack($stack);
-    Globals::setUnitAttacker($currentAttack['unitId']);
+    Globals::setUnitAttacker($currentAttack['unitId'] ?? null);
 
     if ($transition) {
       if (empty($stack)) {

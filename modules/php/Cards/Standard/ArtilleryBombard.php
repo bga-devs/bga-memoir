@@ -47,22 +47,6 @@ class ArtilleryBombard extends \M44\Models\Card
     }
   }
 
-  public function getArgsMoveUnits()
-  {
-    $player = $this->getPlayer();
-    $units = Units::getActivatedByCard($this);
-
-    return [
-      'units' => $units->map(function ($unit) {
-        if ($unit->getType() == \ARTILLERY) {
-          return $unit->getPossibleMoves(3, 0);
-        } else {
-          return $unit->getPossibleMoves();
-        }
-      }),
-    ];
-  }
-
   public function getArgsAttackUnits($overrideNbFights = null)
   {
     return parent::getArgsAttackUnits([\ARTILLERY => 2]);

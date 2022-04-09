@@ -1,6 +1,7 @@
 <?php
 namespace M44\Cards\Standard;
 use M44\Managers\Units;
+use M44\Core\Game;
 
 class BehindEnemyLines extends \M44\Models\Card
 {
@@ -71,7 +72,7 @@ class BehindEnemyLines extends \M44\Models\Card
     }
 
     if (!$oneActive) {
-      $this->actMoveUnitsDone(false);
+      Game::get()->actMoveUnitsDone(false);
     }
   }
 }
