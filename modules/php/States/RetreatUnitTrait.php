@@ -29,6 +29,14 @@ trait RetreatUnitTrait
       $canIgnore1Flag = false;
       $canIgnoreAllFlags = false;
     }
+
+    if ($oppUnit->getMustIgnore1Flag()) {
+      $dice[\DICE_FLAG]--;
+      if ($canIgnore1Flag && $dice[\DICE_FLAG] != 0) {
+        $dice[\DICE_FLAG]--;
+        $canIgnore1Flag = false;
+      }
+    }
     $attackedUnit = Units::get($attack['oppUnitId']);
     // TODO : compute the min/max flags
 

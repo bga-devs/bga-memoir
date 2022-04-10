@@ -72,6 +72,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     'canOverrun',
     'canIgnoreOneFlag',
     'cannotBattleIfMoved',
+    'mustIgnore1Flag',
   ];
 
   protected $attackPower = [];

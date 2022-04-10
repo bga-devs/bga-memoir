@@ -185,6 +185,12 @@ class Units extends \M44\Helpers\Pieces
             $data['extra_datas']['properties']['canIgnoreOneFlag'] = true;
           }
         }
+
+        if ($data['nation'] == 'jp') {
+          if ($unit->getType() == \INFANTRY) {
+            $data['extra_datas']['properties']['mustIgnore1Flag'] = true;
+          }
+        }
         $units[] = $data;
       }
     }

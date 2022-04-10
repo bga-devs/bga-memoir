@@ -5,7 +5,7 @@ class AirField extends \M44\Models\Terrain
 {
   public static function isTileOfType($hex)
   {
-    return in_array($hex['name'], ['airfieldX', 'airfield', 'dairfieldX', 'dairfield']);
+    return in_array($hex['name'], ['airfieldX', 'airfield', 'dairfieldX', 'dairfield', 'pairfield', 'pairfieldX']);
   }
 
   public function __construct($row)
