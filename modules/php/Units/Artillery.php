@@ -22,7 +22,7 @@ class Artillery extends AbstractUnit
   public function getAttackPower()
   {
     $c = Board::getMountainComponents();
-    if (isset($c[$this->x][$this->y])) {
+    if (isset($c[$this->x][$this->y]) && $c[$this->x][$this->y] == true) {
       return [3, 3, 2, 2, 1, 1, 1];
     } else {
       return parent::getAttackPower();
