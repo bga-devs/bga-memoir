@@ -26,7 +26,11 @@ trait MoveUnitsTrait
     // Sanity checks
     self::checkAction('actMoveUnit');
     $player = Players::getCurrent();
-    $args = $this->argsMoveUnits($player, false);
+    if ($this->gamestate->state()['name'] == 'desertMove') {
+      $args = $this->argsDesertMove();
+    } else {
+      $args = $this->argsMoveUnits($player, false);
+    }
     if (!\array_key_exists($unitId, $args['units'])) {
       throw new \BgaVisibleSystemException('You cannot move this unit. Should not happen');
     }
