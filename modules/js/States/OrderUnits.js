@@ -15,10 +15,20 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         this.onClickUnitToOrder.bind(this),
         this.isUnitSelectable.bind(this),
         'activated',
+        this.updateOrderUnitsBtn.bind(this),
       );
 
       this._selectedUnitsOnTheMove = [];
-      this.addPrimaryActionButton('btnConfirmOrder', _('Confirm orders'), () => this.onClickConfirmOrders());
+      this.updateOrderUnitsBtn();
+    },
+
+    updateOrderUnitsBtn(){
+      dojo.destroy('btnConfirmOrder');
+      if(this._selectedUnits.length > 0){
+        this.addPrimaryActionButton('btnConfirmOrder', _('Confirm orders'), () => this.onClickConfirmOrders());
+      } else {
+        this.addDangerActionButton('btnConfirmOrder', _('Confirm no order and end your turn'), () => this.onClickConfirmOrders());
+      }
     },
 
     onClickUnitToOrder(unitId, pos, selected) {

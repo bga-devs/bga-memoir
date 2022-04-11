@@ -743,7 +743,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       </div>`;
     },
 
-    makeUnitsSelectable(units, callback, checkCallback, className = 'selected') {
+    makeUnitsSelectable(units, callback, checkCallback, className = 'selected', updateButtonCallback = null) {
       this._selectedUnits = [];
       this._selectableUnits = units;
       this._checkCallbackForSelectingUnit = checkCallback;
@@ -764,6 +764,10 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
               this._selectedUnits.push(unitId);
               $('unit-' + unitId).classList.add(className);
             }
+          }
+
+          if (updateButtonCallback) {
+            updateButtonCallback();
           }
 
           // Update unselectable units

@@ -74,6 +74,7 @@ define(['dojo', 'dojo/_base/declare', 'ebg/core/gamegui'], (dojo, declare) => {
     setup(gamedatas) {
       // Create a new div for buttons to avoid BGA auto clearing it
       dojo.place("<div id='customActions' style='display:inline-block'></div>", $('generalactions'), 'after');
+      dojo.place("<div id='restartAction' style='display:inline-block'></div>", $('customActions'), 'after');
 
       this.setupNotifications();
       this.initPreferencesObserver();

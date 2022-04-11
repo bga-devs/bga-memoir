@@ -213,6 +213,7 @@ define([
         this.updateTeamStatus(team, statusMapping[stateName]);
       }
 
+      // Add restart button
       if (args.possibleactions && args.possibleactions.includes('actRestart') && this.isCurrentPlayerActive()) {
         if (stateName == 'attackUnits' && args.args.lastUnitAttacker != -1) {
           return;
@@ -220,7 +221,7 @@ define([
 
         this.addDangerActionButton('btnRestartTurn', _('Restart turn'), () => {
           this.takeAction('actRestart');
-        });
+        }, 'restartAction');
       }
     },
 
