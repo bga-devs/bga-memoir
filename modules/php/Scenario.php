@@ -122,7 +122,7 @@ class Scenario extends \APP_DbObject
       $datas = Game::get()->getAllDatas();
       unset($datas['prefs']);
       unset($datas['discard']);
-      unset($data['canceledNotifIds']);
+      unset($datas['canceledNotifIds']);
       Notifications::refreshInterface($datas);
     }
 

@@ -14,7 +14,7 @@ class Bridge extends \M44\Models\Terrain
     $this->name = clienttranslate('Bridge');
     $this->number = 9;
     $this->isBridge = true;
-    $this->deltaAngle = 1;
+    $this->deltaAngle = -1;
 
     parent::__construct($row);
   }
