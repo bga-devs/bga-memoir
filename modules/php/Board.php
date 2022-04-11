@@ -102,6 +102,11 @@ class Board
     self::$grid[$terrain->getX()][$terrain->getY()]['terrains'][] = $terrain;
   }
 
+  public function addUnit($unit)
+  {
+    self::$grid[$unit->getX()][$unit->getY()]['unit'] = $unit;
+  }
+
   public function removeUnit($unit)
   {
     self::$grid[$unit->getX()][$unit->getY()]['unit'] = null;
@@ -501,7 +506,7 @@ class Board
     // Check whether the unit moved too much to attack
     // if unit moved on road, we need to remove one move linked to the bonus
     $m = $unit->getMoves() + ($moves ?? 0);
-    $hasMoved = ($m != 0 || $unit->hasUsedRoadBonus() || $unit->getGrounds() != 0);
+    $hasMoved = $m != 0 || $unit->hasUsedRoadBonus() || $unit->getGrounds() != 0;
 
     // no attack possible for a unit that moved and should not
     if ($unit->getCannotBattleIfMoved() && $hasMoved) {

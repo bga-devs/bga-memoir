@@ -46,9 +46,9 @@ trait AirDropTrait
         Units::remove($unit->getId());
       } else {
         // Notify about it
+        Board::addUnit($unit);
         Notifications::airDrop($player, $unit);
       }
-      Board::init();
     }
 
     $this->gamestate->jumpToState(ST_PREPARE_TURN);
