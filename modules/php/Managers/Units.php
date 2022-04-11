@@ -189,6 +189,7 @@ class Units extends \M44\Helpers\Pieces
         if ($data['nation'] == 'jp') {
           if ($unit->getType() == \INFANTRY) {
             $data['extra_datas']['properties']['mustIgnore1Flag'] = true;
+            $data['extra_datas']['properties']['bonusCloseAssault'] = true;
           }
         }
         $units[] = $data;

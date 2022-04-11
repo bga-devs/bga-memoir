@@ -17,4 +17,12 @@ class Infantry extends AbstractUnit
     $this->maxGrounds = 1;
     parent::__construct($row);
   }
+
+  public function getAttackModifier($target)
+  {
+    if ($this->getBonusCloseAssault() == true && !$this->isWounded() && $target['d'] == 1) {
+      return 1;
+    }
+    return 0;
+  }
 }
