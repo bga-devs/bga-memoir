@@ -501,9 +501,10 @@ class Board
     // Check whether the unit moved too much to attack
     // if unit moved on road, we need to remove one move linked to the bonus
     $m = $unit->getMoves() + ($moves ?? 0);
+    $hasMoved = ($m != 0 || $unit->hasUsedRoadBonus() || $unit->getGrounds() != 0);
 
     // no attack possible for a unit that moved and should not
-    if ($unit->getCannotBattleIfMoved() && ($m != 0 || $unit->hasUsedRoadBonus())) {
+    if ($unit->getCannotBattleIfMoved() && $hasMoved) {
       return [];
     }
 
@@ -526,7 +527,7 @@ class Board
     if (!$unit->getIgnoreCannotBattle()) {
       foreach (self::getTerrainsInCell($pos) as $terrain) {
         // Check whether unit moved into a cell that prevent attack
-        if ($terrain->enteringCannotBattle($unit) && $m > 0) {
+        if ($terrain->enteringCannotBattle($unit) && $hasMoved) {
           return [];
         }
         // Check whether unit is in a cell that prevent attack
