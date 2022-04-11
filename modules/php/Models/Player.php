@@ -148,4 +148,12 @@ class Player extends \M44\Helpers\DB_Model
   {
     return Cards::getInLocation(['commissar', $this->id])->first();
   }
+
+  public function isMarineCommand()
+  {
+    if ($this->getTeam()->getCountry() == 'US' && Globals::isMarineCommand()) {
+      return true;
+    }
+    return false;
+  }
 }

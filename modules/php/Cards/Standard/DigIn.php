@@ -22,6 +22,7 @@ class DigIn extends \M44\Models\Card
   public function getArgsOrderUnits()
   {
     $player = $this->getPlayer();
+    $marineCommand = $player->isMarineCommand();
     $units = $player->getUnits();
 
     // Keep only infantry
@@ -33,16 +34,16 @@ class DigIn extends \M44\Models\Card
       // No infantry => 1 unit of your choice
       return [
         'i18n' => ['desc'],
-        'n' => 1,
-        'nTitle' => 1,
+        'n' => $marineCommand ? 2 : 1,
+        'nTitle' => $marineCommand ? 2 : 1,
         'desc' => \clienttranslate('(because no infantry units)'),
         'units' => $units,
       ];
     } else {
       return [
         'i18n' => ['desc'],
-        'n' => 4,
-        'nTitle' => 4,
+        'n' => $marineCommand ? 5 : 4,
+        'nTitle' => $marineCommand ? 5 : 4,
         'desc' => \clienttranslate('(for improving positions)'),
         'units' => $infantry,
       ];

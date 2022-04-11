@@ -48,6 +48,7 @@ class InfantryAssault extends \M44\Models\Card
   public function getArgsOrderUnits()
   {
     $player = $this->getPlayer();
+    $marineCommand = $player->isMarineCommand();
     $section = (int) $this->extraDatas['section'];
     if ($this->isCounterAttackMirror) {
       $section = $this->mirrorSection($section);
@@ -63,8 +64,8 @@ class InfantryAssault extends \M44\Models\Card
       // No infantry => 1 unit of your choice
       return [
         'i18n' => ['desc'],
-        'n' => 1,
-        'nTitle' => 1,
+        'n' => $marineCommand ? 2 : 1,
+        'nTitle' => $marineCommand ? 2 : 1,
         'desc' => \clienttranslate('(because no infantry units)'),
         'units' => $units->getPositions(),
       ];

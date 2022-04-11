@@ -20,14 +20,15 @@ class Firefight extends \M44\Models\Card
   public function getArgsOrderUnits()
   {
     $player = $this->getPlayer();
+    $marineCommand = $player->isMarineCommand();
     $units = $player->getUnits()->filter(function ($unit) {
       return !Board::isAdjacentToEnnemy($unit);
     });
 
     return [
       'i18n' => ['desc'],
-      'n' => 4,
-      'nTitle' => 4,
+      'n' => $marineCommand ? 5 : 4,
+      'nTitle' => $marineCommand ? 5 : 4,
       'desc' => \clienttranslate('(Firefight)'),
       'units' => $units->getPositions(),
     ];

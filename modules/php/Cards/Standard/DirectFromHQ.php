@@ -14,11 +14,12 @@ class DirectFromHQ extends \M44\Models\Card
   public function getArgsOrderUnits()
   {
     $player = $this->getPlayer();
+    $marineCommand = $player->isMarineCommand();
     $units = $player->getUnits()->getPositions();
 
     return [
-      'n' => 4,
-      'nTitle' => 4,
+      'n' => $marineCommand ? 5 : 4,
+      'nTitle' => $marineCommand ? 5 : 4,
       'nOnTheMove' => 0,
       'desc' => '',
       'sections' => [\INFINITY, \INFINITY, INFINITY],

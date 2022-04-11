@@ -23,6 +23,7 @@ class BehindEnemyLines extends \M44\Models\Card
   public function getArgsOrderUnits()
   {
     $player = $this->getPlayer();
+    $marineCommand = $player->isMarineCommand();
     $units = $player->getUnits();
 
     // Keep only infantry
@@ -34,16 +35,16 @@ class BehindEnemyLines extends \M44\Models\Card
       // No infantry => 1 unit of your choice
       return [
         'i18n' => ['desc'],
-        'n' => 1,
-        'nTitle' => 1,
+        'n' => $marineCommand ? 2 : 1,
+        'nTitle' => $marineCommand ? 2 : 1,
         'desc' => \clienttranslate('(because no infantry units)'),
         'units' => $units->getPositions(),
       ];
     } else {
       return [
         'i18n' => ['desc'],
-        'n' => 1,
-        'nTitle' => 1,
+        'n' => $marineCommand ? 2 : 1,
+        'nTitle' => $marineCommand ? 2 : 1,
         'desc' => \clienttranslate('(infantry unit only)'),
         'units' => $infantry->getPositions(),
       ];
