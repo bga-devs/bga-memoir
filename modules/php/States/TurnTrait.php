@@ -9,6 +9,7 @@ use M44\Managers\Medals;
 use M44\Managers\Units;
 use M44\Core\Notifications;
 use M44\Scenario;
+use M44\Helpers\Log;
 
 trait TurnTrait
 {
@@ -27,6 +28,7 @@ trait TurnTrait
 
     // Update all tables with temp data
     Units::reset();
+    Globals::setAttackStack([]);
     Globals::setUnitMoved(-1);
     Globals::setUnitAttacker(-1);
     Notifications::clearUnitsStatus();
@@ -41,6 +43,10 @@ trait TurnTrait
       return;
     }
 
+    Log::enable();
+    Log::checkpoint();
+    Log::clearAll();
+
     // TODO : Overlord => branch here to distribute cards instead
     if (true) {
       $team = Teams::getTeamTurn();
@@ -54,7 +60,7 @@ trait TurnTrait
     } else {
       // Activate commander in chief only
       // TODO
-      $this->gamestate->nextState('distributeCard');
+      $this->nextState('distributeCard');
     }
   }
 }

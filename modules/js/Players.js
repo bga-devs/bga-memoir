@@ -39,6 +39,23 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       });
     },
 
+    updatePlayers() {
+      this.forEachPlayer((player) => {
+        this._handCounters[player.id].setValue(player.cardsCount);
+      });
+    },
+
+    updateHand() {
+      let player = this.gamedatas.players[this.player_id];
+      if (player.inplay) {
+        this.addCard(player.inplay, 'in-play-' + player.id);
+      }
+      if (player.commissarCard) {
+        this.addCard(player.commissarCard, 'commissar-' + player.id);
+      }
+      player.cards.forEach((card) => this.addCard(card, 'm44-player-hand'));
+    },
+
     tplPlayerPanel(player) {
       let img = $('avatar_' + player.id);
       let commissar = player.isCommissar
@@ -76,6 +93,12 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           dojo.place('<div class="m44-medal-slot"></div>', pos + '-medals-slots');
         }
 
+        Object.values(team.medals).forEach((medal) => this.addMedal(medal));
+      });
+    },
+
+    updateTeams() {
+      this.gamedatas.teams.forEach((team) => {
         Object.values(team.medals).forEach((medal) => this.addMedal(medal));
       });
     },

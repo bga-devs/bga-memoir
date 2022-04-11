@@ -74,6 +74,9 @@ define([
         ['pCommissarCard', 1000],
         ['revealCommissarCard', 1000],
         ['exitUnit', 500],
+        ['clearTurn', 1],
+        ['smallRefreshInterface', 1],
+        ['smallRefreshHand', 1],
       ];
 
       // Fix mobile viewport (remove CSS zoom)
@@ -137,34 +140,39 @@ define([
       }
     },
 
-    clearInterface() {
+    clearInterface(partial = false) {
       dojo.empty('m44-board-terrains');
       dojo.empty('m44-board-units');
       dojo.empty('m44-board-labels');
 
       dojo.empty('top-medals-slots');
-      dojo.empty('top-medals-container');
-      dojo.empty('top-team-players');
-      dojo.empty('top-in-play');
       dojo.empty('bottom-medals-slots');
-      dojo.empty('bottom-medals-container');
-      dojo.empty('bottom-team-players');
-      dojo.empty('bottom-in-play');
 
-      dojo.empty('scenario-informations');
-      dojo.destroy('popin_showScenario_container');
+      if (!partial) {
+        dojo.empty('bottom-medals-container');
+        dojo.empty('bottom-team-players');
+        dojo.empty('bottom-in-play');
+        dojo.empty('top-medals-container');
+        dojo.empty('top-team-players');
+        dojo.empty('top-in-play');
 
-      dojo.destroy('m44-player-hand');
-      dojo.query('.card-in-play').empty();
+        dojo.empty('scenario-informations');
+        dojo.destroy('popin_showScenario_container');
 
-      this.forEachPlayer((player) => {
-        this._handCounters[player.id].setValue(0);
-      });
+        dojo.destroy('m44-player-hand');
+        dojo.query('.card-in-play').empty();
 
-      dojo.empty('discard');
-      dojo.destroy('scenario-dropzone-container');
+        dojo.empty('discard');
+        dojo.destroy('scenario-dropzone-container');
 
-      this.updateTeamStatus('ALLIES', 'idle');
+        this.updateTeamStatus('ALLIES', 'idle');
+        this.forEachPlayer((player) => {
+          this._handCounters[player.id].setValue(0);
+        });
+      } else {
+        dojo.query('#bottom-in-play .m44-card').forEach(dojo.destroy);
+        dojo.query('#top-in-play .m44-card').forEach(dojo.destroy);
+      }
     },
 
     onEnteringState(stateName, args) {
@@ -204,6 +212,21 @@ define([
         let team = this.gamedatas.players[pId].team;
         this.updateTeamStatus(team, statusMapping[stateName]);
       }
+
+      if (args.possibleactions && args.possibleactions.includes('actRestart') && this.isCurrentPlayerActive()) {
+        if (stateName == 'attackUnits' && args.args.lastUnitAttacker != -1) {
+          return;
+        }
+
+        this.addDangerActionButton('btnRestartTurn', _('Restart turn'), () => {
+          this.takeAction('actRestart');
+        });
+      }
+    },
+
+    notif_clearTurn(n) {
+      debug('Notif: restarting turn', n);
+      this.cancelLogs(n.args.notifIds);
     },
 
     notif_refreshInterface(n) {
@@ -224,6 +247,29 @@ define([
       this.setupScenario();
       this.setupPlayers();
       this.setupTeams();
+    },
+
+    notif_smallRefreshInterface(n) {
+      debug('Refreshing the interface because of an undo', n);
+      this.clearInterface(true);
+
+      // Update gamedatas
+      this.gamedatas.players = n.args.players;
+      this.gamedatas.board = n.args.board;
+      this.gamedatas.teams = n.args.teams;
+      this._bottomTeam = this.gamedatas.players[this._pId].team;
+      this._deckCounter.setValue(n.args.deckCount);
+
+      this.setupBoard();
+      this.updatePlayers();
+      this.updateTeams();
+    },
+
+    notif_smallRefreshHand(n) {
+      debug('Refreshing your hand', n);
+      dojo.query('#m44-player-hand .m44-card').forEach(dojo.destroy);
+      this.gamedatas.players[this.player_id] = n.args.playerDatas;
+      this.updateHand();
     },
 
     clearPossible() {

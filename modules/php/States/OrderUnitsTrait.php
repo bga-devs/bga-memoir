@@ -104,7 +104,7 @@ trait OrderUnitsTrait
 
     // Get next state from the card
     $nextState = $card->nextStateAfterOrder($unitIds, $onTheMoveIds);
-    $this->gamestate->nextState($nextState);
+    $this->nextState($nextState);
   }
 
   public function actHealUnit($unitId, $nDice = null)
@@ -143,7 +143,7 @@ trait OrderUnitsTrait
       // Notifications::disable($unit);
     }
 
-    $this->gamestate->nextState('moveUnits');
+    $this->nextState('moveUnits');
   }
 
   public function actHealUnitHospital($unitId)

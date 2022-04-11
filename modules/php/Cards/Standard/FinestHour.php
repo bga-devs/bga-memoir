@@ -4,6 +4,7 @@ use M44\Core\Game;
 use M44\Core\Notifications;
 use M44\Managers\Units;
 use M44\Dice;
+use M44\Helpers\Log;
 
 class FinestHour extends \M44\Models\Card
 {
@@ -44,6 +45,13 @@ class FinestHour extends \M44\Models\Card
 
   public function stOrderUnitsFinestHour()
   {
+    $args = $this->argsOrderUnitsFinestHour();
+    foreach ($args['units'] as $type) {
+      if ($args['results'][$type - 1] > 0 || $args['results'][2] > 0) {
+        return;
+      }
+    }
+    $this->actOrderUnitsFinestHour([]);
   }
 
   public function argsOrderUnitsFinestHour()

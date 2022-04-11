@@ -38,6 +38,26 @@ class Notifications
     self::notifyAll('refreshInterface', '', $data);
   }
 
+  public static function smallRefreshInterface($data)
+  {
+    self::notifyAll('smallRefreshInterface', '', $data);
+  }
+
+  public static function smallRefreshHand($player)
+  {
+    self::notify($player, 'smallRefreshHand', '', [
+      'playerDatas' => $player->jsonSerialize($player->getId()),
+    ]);
+  }
+
+  public static function clearTurn($player, $notifIds)
+  {
+    self::notifyAll('clearTurn', clienttranslate('${player_name} restart their turn'), [
+      'player' => $player,
+      'notifIds' => $notifIds,
+    ]);
+  }
+
   public static function throwAttack($player, $unit, $nDice, $oppUnit)
   {
     $data = [
@@ -220,7 +240,7 @@ class Notifications
     self::notifyAll('discardCard', clienttranslate('${player_name} discards ${card_name}'), [
       'player' => $player,
       'card' => $card,
-      'handCounter' => $decHandCounter? -1 : 0,
+      'handCounter' => $decHandCounter ? -1 : 0,
     ]);
   }
 

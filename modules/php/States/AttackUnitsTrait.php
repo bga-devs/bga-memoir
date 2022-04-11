@@ -76,7 +76,7 @@ trait AttackUnitsTrait
     $player = Players::getActive();
     $card = $player->getCardInPlay();
     $nextState = $card->nextStateAfterAttacks();
-    $this->gamestate->nextState($nextState);
+    $this->nextState($nextState);
   }
 
   /**
@@ -159,7 +159,7 @@ trait AttackUnitsTrait
     $currentAttack = array_pop($stack);
     Globals::setAttackStack($stack);
     Globals::setUnitAttacker($currentAttack['unitId'] ?? null);
-
+    
     if ($transition) {
       if (empty($stack)) {
         // No more pending attack, jump to next attack

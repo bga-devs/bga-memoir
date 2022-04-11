@@ -1,8 +1,4 @@
 define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
-  function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-
   // prettier-ignore
   const TERRAINS = ['airfield','airfieldX','barracks','bled','buildings','cairfield','camp','cemetery','church','coastcurve','coast','cravine','curve','dairfield','dairfieldX','dam','dcamp','depot','descarpment','dhill','dridge','droadcurve','droadFL','droadFR','droad','droadX','factory','fortress','hedgerow','highground','hillcurve','hillroad','hills','lakeA','lakeB','lakeC','lighthouse','marshes','mountain','oasis','pairfield','pairfieldX','palmtrees','pbeach','pcave','pheadquarter','phospital','pjungle','pmcave','pmouth','pond','powerplant','ppier','price','ptrenches','pvillage','radar','railcurve','railFL','railFR','rail','railroad','railX','ravine','riverFL','riverFR','river','riverY','roadcurve','roadFL','roadFR','road','roadX','roadY','station','wadi','wairfield','wcastle','wchurch','wcurved','wcurve','wfactory','wforest','whillforest','whill','whillvillage','wmarshes','woods','wrailcurve','wrailFR','wrail','wrailroad','wravine','wriverFR','wriver','wroadcurve','wroadFL','wroadFR','wroad','wroadX','wroadY','wruins','wtrenches','wvillage'];
   // prettier-ignore
@@ -220,11 +216,11 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     getBackgroundTile(face, dim, x, y) {
       let tile = 0;
       if (face == 'winter') {
-        tile = getRandomInt(30, 35);
+        tile = 30 + (x % 6);
       } else if (face == 'desert') {
-        tile = getRandomInt(19, 24);
+        tile = 19 + (x % 6);
       } else if (face == 'country') {
-        tile = getRandomInt(9, 12);
+        tile = 9 + (x % 4);
       } else if (face == 'beach') {
         let b = dim.y - y;
         if (b < 2) tile = 27 + (x % 2);
@@ -233,7 +229,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         else if (b < 5) tile = 4 + (x % 2);
         else if (b < 6) tile = 2 + (x % 2);
         else if (b < 7) tile = 0 + (x % 2);
-        else tile = getRandomInt(9, 12);
+        else tile = 9 + (x % 4);
       }
       return tile;
     },

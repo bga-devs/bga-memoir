@@ -104,7 +104,7 @@ $machinestates = [
     'type' => 'activeplayer',
     'action' => 'stPlayCommissarCard',
     'args' => 'argsPlayCommissarCard',
-    'possibleactions' => ['actPlayCommissarCard'],
+    'possibleactions' => ['actRestart', 'actPlayCommissarCard'],
     'transitions' => [
       'selectUnits' => ST_ORDER_UNITS,
       'finestHour' => ST_FINEST_HOUR_ROLL,
@@ -141,7 +141,7 @@ $machinestates = [
     'type' => 'activeplayer',
     'args' => 'argsOrderUnits',
     'action' => 'stOrderUnits',
-    'possibleactions' => ['actOrderUnits'],
+    'possibleactions' => ['actOrderUnits', 'actRestart'],
     'transitions' => ['moveUnits' => ST_MOVE_UNITS, 'digIn' => ST_DIG_IN],
   ],
 
@@ -152,7 +152,7 @@ $machinestates = [
     'type' => 'activeplayer',
     'args' => 'argsMoveUnits',
     'action' => 'stMoveUnits',
-    'possibleactions' => ['actMoveUnit', 'actMoveUnitsDone', 'actHealUnit', 'actHealUnitHospital', 'actExitUnit'],
+    'possibleactions' => ['actRestart', 'actMoveUnit', 'actMoveUnitsDone', 'actHealUnit', 'actHealUnitHospital', 'actExitUnit'],
     'transitions' => ['moveUnits' => ST_MOVE_UNITS, 'attackUnits' => ST_ATTACK],
   ],
 
@@ -163,7 +163,7 @@ $machinestates = [
     'type' => 'activeplayer',
     'action' => 'stAttackUnits',
     'args' => 'argsAttackUnit',
-    'possibleactions' => ['actAttackUnit', 'actAttackUnitsDone', 'actRemoveWire', 'actRemoveRoadBlock', 'actSealCave'],
+    'possibleactions' => ['actRestart', 'actAttackUnit', 'actAttackUnitsDone', 'actRemoveWire', 'actRemoveRoadBlock', 'actSealCave'],
     'transitions' => [
       'ambush' => ST_OPPONENT_AMBUSH,
       'attack' => ST_ATTACK,
@@ -394,7 +394,7 @@ $machinestates = [
     'descriptionmyturn' => clienttranslate('${you} may target 4 or fewer enemy units'),
     'type' => 'activeplayer',
     'args' => 'argsTargetAirPower',
-    'possibleactions' => ['actTargetAirPower'],
+    'possibleactions' => ['actRestart', 'actTargetAirPower'],
     'transitions' => ['attack' => ST_ATTACK_THROW],
   ],
 
@@ -404,7 +404,7 @@ $machinestates = [
     'descriptionmyturn' => clienttranslate('${you} may target 1 enemy unit'),
     'type' => 'activeplayer',
     'args' => 'argsTargetBarrage',
-    'possibleactions' => ['actTargetBarrage'],
+    'possibleactions' => ['actRestart', 'actTargetBarrage'],
     'transitions' => ['attack' => ST_ATTACK_THROW],
   ],
 
@@ -415,7 +415,7 @@ $machinestates = [
     'type' => 'activeplayer',
     'args' => 'argsTargetMedics',
     'action' => 'stTargetMedics',
-    'possibleactions' => ['actTargetMedics'],
+    'possibleactions' => ['actRestart', 'actTargetMedics'],
     'transitions' => ['move' => ST_MOVE_UNITS, 'draw' => ST_DRAW],
   ],
 

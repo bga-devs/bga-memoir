@@ -34,6 +34,9 @@ trait TacticCardTrait
 
   public function stOrderUnitsFinestHour()
   {
+    $player = Players::getActive();
+    $card = $player->getCardInPlay();
+    return $card->stOrderUnitsFinestHour();
   }
   public function argsOrderUnitsFinestHour()
   {

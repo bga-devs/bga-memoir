@@ -51,7 +51,7 @@ trait DrawCardsTrait
         return;
       }
       Notifications::drawCards($player, $cards);
-      $this->gamestate->nextState('endRound');
+      $this->nextState('endRound');
     } else {
       $cards = Cards::pickForLocation($method['nDraw'], 'deck', ['choice', $player->getId()]);
       if (is_null($cards)) {
@@ -59,7 +59,7 @@ trait DrawCardsTrait
       }
       Notifications::drawCardsAndKeep($player, $cards, $method['nKeep']);
       Globals::setNToKeep($method['nKeep']);
-      $this->gamestate->nextState('choice');
+      $this->nextState('choice');
     }
   }
 
@@ -111,6 +111,6 @@ trait DrawCardsTrait
     Cards::move($otherCards->getIds(), ['hand', $player->getId()]);
     Notifications::discardCard($player, $cards);
 
-    $this->gamestate->nextState('endRound');
+    $this->nextState('endRound');
   }
 }

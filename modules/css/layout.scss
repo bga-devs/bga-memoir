@@ -42,6 +42,22 @@ html {
   border-radius: 8px;
 }
 
+/* Cancelled notification messages */
+.log.cancel {
+  color: #c62828 !important;
+  text-decoration: line-through;
+}
+
+/* Desktop logs */
+.log.cancel .roundedbox {
+  background-color: rgba(240, 186, 117, 0.6) !important;
+}
+
+/* Mobile logs */
+.log.cancel.roundedbox {
+  background-color: #ef9a9a;
+}
+
 #title-content-wrapper {
   position: relative;
   background: url('img/ui/game_top.jpg');

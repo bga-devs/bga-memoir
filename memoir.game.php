@@ -36,6 +36,7 @@ use M44\Core\Globals;
 use M44\Core\Preferences;
 use M44\Core\Notifications;
 use M44\Core\Stats;
+use M44\Helpers\Log;
 use M44\Managers\Cards;
 use M44\Managers\Players;
 use M44\Managers\Terrains;
@@ -93,15 +94,16 @@ class memoir extends Table
     Preferences::setupNewGame($players, $options);
     Players::setupNewGame($players, $options);
 
+    $this->setGameStateInitialValue('logging', false);
     $this->activeNextPlayer();
   }
 
   /*
    * getAllDatas:
    */
-  public function getAllDatas()
+  public function getAllDatas($pId = null)
   {
-    $pId = self::getCurrentPId();
+    $pId = $pId ?? self::getCurrentPId();
     $scenario = Scenario::get();
     return [
       'prefs' => Preferences::getUiData($pId),
@@ -114,6 +116,8 @@ class memoir extends Table
 
       'terrains' => Terrains::getStaticUiData(),
       'units' => Units::getStaticUiData(),
+
+      'canceledNotifIds' => Log::getCanceledNotifIds(),
     ];
   }
 
@@ -125,14 +129,40 @@ class memoir extends Table
     return 50; // TODO
   }
 
+  function startGame($c)
+  {
+    Scenario::setup($c == 1, true);
+  }
+
   function actChangePreference($pref, $value)
   {
     Preferences::set($this->getCurrentPId(), $pref, $value);
   }
 
-  function startGame($c)
+  public function actRestart()
   {
-    Scenario::setup($c == 1, true);
+    self::checkAction('actRestart');
+    if (Log::getAll()->empty()) {
+      throw new \BgaVisibleSystemException('Nothing to undo');
+    }
+
+    Log::revertAll();
+    Globals::fetch();
+    Board::init();
+
+    // Refresh interface
+    $datas = $this->getAllDatas(-1);
+    unset($datas['prefs']);
+    unset($datas['discard']);
+    unset($datas['scenario']);
+    unset($datas['terrains']);
+    unset($datas['units']);
+    unset($datas['canceledNotifIds']);
+    Notifications::smallRefreshInterface($datas);
+    $player = Players::getCurrent();
+    Notifications::smallRefreshHand($player);
+
+    $this->gamestate->jumpToState(Globals::getLogState());
   }
 
   /**
@@ -147,6 +177,11 @@ class memoir extends Table
 
   function changeActivePlayerAndJumpTo($pId, $state)
   {
+    if(Globals::getLogState() == -1){
+      Log::clearAll();
+      Globals::setLogState($state);
+    }
+
     Globals::setChangeActivePlayer([
       'pId' => is_int($pId) ? $pId : $pId->getId(),
       'st' => $state,
@@ -156,16 +191,22 @@ class memoir extends Table
 
   function nextState($transition, $pId = null)
   {
+    $state = $this->gamestate->state(true, false, true);
+    $st = $state['transitions'][$transition];
+
+    if(Globals::getLogState() == -1){
+      Globals::setLogState($st);
+      Log::clearAll();
+    }
+
     $pId = is_null($pId) || is_int($pId) ? $pId : $pId->getId();
     if (is_null($pId) || $pId == $this->getActivePlayerId()) {
       $this->gamestate->nextState($transition);
     } else {
-      $state = $this->gamestate->state();
       if ($state['type'] == 'game') {
         $this->gamestate->changeActivePlayer($pId);
         $this->gamestate->nextState($transition);
       } else {
-        $st = $state['transitions'][$transition];
         $this->changeActivePlayerAndJumpTo($pId, $st);
       }
     }
@@ -219,7 +260,7 @@ class memoir extends Table
     throw new feException('Zombie mode not supported at this game state: ' . $statename);
   }
 
-  /////////////////////////////////////
+  /////////////////////////////////////Globals
   //////////   DB upgrade   ///////////
   /////////////////////////////////////
   // You don't have to care about this until your game has been published on BGA.
@@ -234,5 +275,24 @@ class memoir extends Table
    */
   public function upgradeTableDb($from_version)
   {
+    if ($from_version <= 2204110002) {
+      $sql = <<<SQL
+CREATE TABLE IF NOT EXISTS `log` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `move_id` int(10) NOT NULL,
+  `table` varchar(32) NOT NULL,
+  `primary` varchar(32) NOT NULL,
+  `type` varchar(32) NOT NULL,
+  `affected` JSON,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+SQL;
+      self::applyDbUpgradeToAllDB($sql);
+
+      $sql = <<<SQL
+ALTER TABLE `DBPREFIX_gamelog` ADD `cancel` TINYINT(1) NOT NULL DEFAULT 0;
+SQL;
+      self::applyDbUpgradeToAllDB($sql);
+    }
   }
 }

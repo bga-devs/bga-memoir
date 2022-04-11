@@ -58,10 +58,10 @@ trait MoveUnitsTrait
         return;
       } elseif ($interrupted) {
         if ($this->gamestate->state()['name'] == 'desertMove') {
-          $this->gamestate->nextState('overrun');
+          $this->nextState('overrun');
           return;
         }
-        $this->gamestate->nextState('moveUnits');
+        $this->nextState('moveUnits');
         return;
       }
       $coordSource = $c;
@@ -83,10 +83,10 @@ trait MoveUnitsTrait
     }
 
     if ($this->gamestate->state()['name'] == 'desertMove') {
-      $this->gamestate->nextState('overrun');
+      $this->nextState('overrun');
       return;
     }
-    $this->gamestate->nextState('moveUnits');
+    $this->nextState('moveUnits');
   }
 
   public function actMoveUnitsDone($check = true)
@@ -96,11 +96,11 @@ trait MoveUnitsTrait
     }
 
     if ($this->gamestate->state()['name'] == 'desertMove') {
-      $this->gamestate->nextState('overrun');
+      $this->nextState('overrun');
       return;
     }
 
-    $this->gamestate->nextState('attackUnits');
+    $this->nextState('attackUnits');
   }
 
   public function stMoveUnits()
@@ -112,6 +112,6 @@ trait MoveUnitsTrait
         return;
       }
     }
-    $this->gamestate->nextState('attackUnits');
+    $this->nextState('attackUnits');
   }
 }

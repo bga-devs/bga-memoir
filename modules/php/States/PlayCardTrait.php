@@ -90,6 +90,6 @@ trait PlayCardTrait
     if ($player->isCommissar() && $player->getCommissarCard() == null) {
       $nextState = 'commissar';
     }
-    $this->gamestate->nextState($nextState);
+    $this->nextState($nextState);
   }
 }

@@ -2,6 +2,7 @@
 namespace M44;
 use M44\Core\Notifications;
 use M44\Core\Stats;
+use M44\Helpers\Log;
 
 class Dice
 {
@@ -18,10 +19,11 @@ class Dice
     }
 
     // debug
-    // $results = [\DICE_INFANTRY, DICE_STAR, DICE_ARMOR];
+    // $results = [DICE_FLAG, DICE_ARMOR, DICE_ARMOR];
     // $results = [\DICE_FLAG, DICE_STAR, DICE_STAR];
     // $results = [\DICE_INFANTRY, DICE_INFANTRY, DICE_INFANTRY];
 
+    Log::checkpoint(); // Make undo invalid
     Notifications::rollDice($player, $nDice, $results, $cell);
 
     $aggregated = array_count_values($results);

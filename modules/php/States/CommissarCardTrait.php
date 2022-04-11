@@ -67,7 +67,7 @@ trait CommissarCardTrait
       $player = $team->getMembers()->first();
       $this->changeActivePlayerAndJumpTo($player, \ST_PLAY_CARD);
     } else {
-      $this->gamestate->nextState('play');
+      $this->nextState('play');
     }
   }
 
@@ -120,6 +120,6 @@ trait CommissarCardTrait
       $card->setExtraDatas('hill317', true);
     }
     $card->setExtraDatas('section', $sectionId);
-    $this->gamestate->nextState($card->nextStateAfterPlay());
+    $this->nextState($card->nextStateAfterPlay());
   }
 }
