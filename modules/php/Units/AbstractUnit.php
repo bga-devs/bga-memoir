@@ -74,6 +74,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     'cannotBattleIfMoved',
     'mustIgnore1Flag', // Japanese
     'bonusCloseAssault', // Japanese
+    'banzai', // can move up to 2 and still battle
   ];
 
   protected $attackPower = [];

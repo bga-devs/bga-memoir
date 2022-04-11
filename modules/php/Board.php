@@ -502,6 +502,7 @@ class Board
         return $cells;
       }
     }
+    $banzai = false;
 
     // Check whether the unit moved too much to attack
     // if unit moved on road, we need to remove one move linked to the bonus
@@ -523,8 +524,15 @@ class Board
       }
     }
 
+    if ($unit->getBanzai() == true) {
+      $maxMoves = 2;
+      $banzai = true;
+    }
+
     if ($m > $maxMoves) {
       return [];
+    } elseif ($m < $maxMoves && $banzai) {
+      $banzai = false;
     }
 
     $pos = $cell ?? $unit->getPos();
@@ -592,6 +600,11 @@ class Board
 
     // Compute shooting powers for the remaining cells
     foreach ($cells as &$cell) {
+      // if banzai, unit can only attack in close assault
+      if ($banzai && $cell['d'] >= 2) {
+        $cell['dice'] = 0;
+        continue;
+      }
       $cell['dice'] = $power[$cell['d'] - 1] + $unit->getAttackModifier($cell);
       $offenseModifier = self::getDiceModifier($unit, $pos, false);
       $defenseModifier = self::getDiceModifier($unit, $cell, true);

@@ -190,6 +190,7 @@ class Units extends \M44\Helpers\Pieces
           if ($unit->getType() == \INFANTRY) {
             $data['extra_datas']['properties']['mustIgnore1Flag'] = true;
             $data['extra_datas']['properties']['bonusCloseAssault'] = true;
+            $data['extra_datas']['properties']['banzai'] = true;
           }
         }
         $units[] = $data;
