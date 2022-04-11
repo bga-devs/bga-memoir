@@ -48,6 +48,7 @@ trait AirDropTrait
         // Notify about it
         Notifications::airDrop($player, $unit);
       }
+      Board::init();
     }
 
     $this->gamestate->jumpToState(ST_PREPARE_TURN);

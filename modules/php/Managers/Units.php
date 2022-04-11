@@ -226,6 +226,7 @@ class Units extends \M44\Helpers\Pieces
     $data['x'] = $cell['x'];
     $data['y'] = $cell['y'];
     $data['figures'] = $unit->getMaxUnits();
+    $data['extra_datas']['properties'] = [];
     return self::singleCreate($data);
   }
 
