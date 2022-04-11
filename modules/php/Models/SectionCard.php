@@ -56,12 +56,13 @@ class SectionCard extends Card
       }
     }
 
+    $val = $this->isCounterAttackMirror ? 2 - $this->value : $this->value;
     return [
       'i18n' => ['desc'],
       'n' => $this->nUnits,
       'nTitle' => $this->nUnits,
       'nOnTheMove' => $this->nUnitsOnTheMove,
-      'desc' => $this->orderUnitsTitles[$this->value] ?? '',
+      'desc' => $this->orderUnitsTitles[$val] ?? '',
       'sections' => $this->getSections(),
       'units' => $units,
     ];

@@ -177,7 +177,7 @@ class memoir extends Table
 
   function changeActivePlayerAndJumpTo($pId, $state)
   {
-    if(Globals::getLogState() == -1){
+    if (Globals::getLogState() == -1) {
       Log::clearAll();
       Globals::setLogState($state);
     }
@@ -194,7 +194,7 @@ class memoir extends Table
     $state = $this->gamestate->state(true, false, true);
     $st = $state['transitions'][$transition];
 
-    if(Globals::getLogState() == -1){
+    if (Globals::getLogState() == -1) {
       Globals::setLogState($st);
       Log::clearAll();
     }
@@ -275,8 +275,10 @@ class memoir extends Table
    */
   public function upgradeTableDb($from_version)
   {
-    if ($from_version <= 2204110002) {
-      $sql = <<<SQL
+    if ($from_version <= 2204111507) {
+      $result = self::getUniqueValueFromDB("SHOW COLUMNS FROM `gamelog` LIKE 'cancel'");
+      if (is_null($result)) {
+        $sql = <<<SQL
 CREATE TABLE IF NOT EXISTS `log` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `move_id` int(10) NOT NULL,
@@ -287,12 +289,11 @@ CREATE TABLE IF NOT EXISTS `log` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 SQL;
-      self::applyDbUpgradeToAllDB($sql);
+        self::applyDbUpgradeToAllDB($sql);
 
-      $sql = <<<SQL
-ALTER TABLE `DBPREFIX_gamelog` ADD `cancel` TINYINT(1) NOT NULL DEFAULT 0;
-SQL;
-      self::applyDbUpgradeToAllDB($sql);
+        $sql = 'ALTER TABLE `DBPREFIX_gamelog` ADD `cancel` TINYINT(1) NOT NULL DEFAULT 0';
+        self::applyDbUpgradeToAllDB($sql);
+      }
     }
   }
 }
