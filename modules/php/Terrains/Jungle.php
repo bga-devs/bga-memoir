@@ -20,6 +20,7 @@ class Jungle extends \M44\Models\Terrain
       ),
     ];
     $this->isBlockingLineOfSight = true;
+    $this->mustStopWhenEntering = true;
     $this->defense = [INFANTRY => -1, ARMOR => -2];
     parent::__construct($row);
   }
