@@ -1,9 +1,7 @@
 <?php
 namespace M44\Terrains;
 
-use M44\Board;
-
-class BridgeSection extends Bridge
+class BridgeSection extends \M44\Models\Terrain
 {
   public static function isTileOfType($hex)
   {
@@ -16,9 +14,10 @@ class BridgeSection extends Bridge
     $this->number = '9b';
     $this->desc = [\clienttranslate('You can only enter from the enter/exit hex')];
     $this->blockedDirections = [
-      \ALL_UNITS => [2, 3, 4, 8, 9, 10],
+      \ALL_UNITS => [0, 1, 5, 6, 7, 11],
     ];
+    $this->isBridge = true;
+    $this->deltaAngle = -1;
     parent::__construct($row);
   }
-
 }
