@@ -52,27 +52,19 @@ class BehindEnemyLines extends \M44\Models\Card
 
   public function getDiceModifier($unit, $cell)
   {
-    return 1;
+    $unit = $this->getActivatedUnit();
+    return $unit->getType() == \INFANTRY ? 1 : 0;
   }
 
   public function nextStateAfterAttacks()
   {
-    return 'moveAgain';
+    $unit = $this->getActivatedUnit();
+    return is_null($unit) || $unit->isEliminated() || $unit->getType() != \INFANTRY ? 'draw' : 'moveAgain';
   }
 
   public function stMoveAgain()
   {
-    $units = Units::getActivatedByCard($this);
-    $oneActive = false;
-    foreach ($units as $unit) {
-      $unit->setMoves(0);
-      if (!$unit->isEliminated()) {
-        $oneActive = true;
-      }
-    }
-
-    if (!$oneActive) {
-      Game::get()->actMoveUnitsDone(false);
-    }
+    $unit = $this->getActivatedUnit();
+    $unit->setMoves(0);
   }
 }

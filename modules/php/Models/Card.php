@@ -146,6 +146,17 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
     return -1;
   }
 
+
+  public function getActivatedUnits()
+  {
+    return Units::getActivatedByCard($this);
+  }
+
+  public function getActivatedUnit()
+  {
+    return $this->getActivatedUnits()->first();
+  }
+
   //////////////////////////////////////////////////////
   //  _____ _                    _
   // |  ___| | _____      __    / \   _ __ __ _ ___
@@ -175,7 +186,7 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
   public function getArgsMoveUnits()
   {
     $player = $this->getPlayer();
-    $units = Units::getActivatedByCard($this);
+    $units = $this->getActivatedUnits();
 
     return [
       'units' => $units->map(function ($unit) {
@@ -202,7 +213,7 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
   public function getArgsAttackUnits($overrideNbFights = null)
   {
     $player = $this->getPlayer();
-    $units = Units::getActivatedByCard($this);
+    $units = $this->getActivatedUnits();
 
     return [
       'units' => $units->map(function ($unit) use ($overrideNbFights) {

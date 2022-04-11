@@ -18,6 +18,16 @@ trait MoveUnitsTrait
     $args = $card->getArgsMoveUnits();
     Utils::clearPaths($args['units'], $clearPaths);
     $args['lastUnitMoved'] = Globals::getUnitMoved();
+
+    // Clear attack highlights for second move of BehindEnemyLines
+    if ($this->gamestate->state_id() == \ST_MOVE_AGAIN) {
+      foreach ($args['units'] as &$cells) {
+        foreach ($cells as &$cell) {
+          $cell['canAttack'] = false;
+        }
+      }
+    }
+
     return $args;
   }
 

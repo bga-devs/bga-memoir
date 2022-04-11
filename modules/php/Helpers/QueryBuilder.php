@@ -82,8 +82,6 @@ class QueryBuilder extends \APP_DbObject
         $row[$this->primary] ?? ($this->insertPrimaryIndex === false ? $startingId++ : $row[$this->insertPrimaryIndex]);
     }
 
-    $this->sql .= implode(',', $vals);
-    self::DbQuery($this->sql);
     if ($this->log) {
       Log::addEntry([
         'table' => $this->table,
@@ -92,6 +90,9 @@ class QueryBuilder extends \APP_DbObject
         'affected' => $ids,
       ]);
     }
+
+    $this->sql .= implode(',', $vals);
+    self::DbQuery($this->sql);
     return $ids;
   }
 
