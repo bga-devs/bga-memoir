@@ -18,7 +18,11 @@ class FrenchResistance extends AbstractUnit
     $this->maxGrounds = 1;
     $this->ignoreCannotBattle = true;
     $this->retreatHex = 3;
-    $this->desc = [clienttranslate('3 figures only'), clienttranslate('May retreat 1 to 3 hexes per flag')];
+    $this->desc = [
+      clienttranslate('3 figures only'),
+      clienttranslate('May retreat 1 to 3 hexes per flag'),
+      \clienttranslate('Move onto any terrain and may still battle, but must still obey terrain movement restrictions'),
+    ];
     $this->applyPropertiesModifiers();
   }
 }

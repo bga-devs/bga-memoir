@@ -160,6 +160,7 @@ define(['dojo', 'dojo/_base/declare', 'ebg/core/gamegui'], (dojo, declare) => {
     clearPossible() {
       this.removeActionButtons();
       dojo.empty('customActions');
+      dojo.empty('restartAction');
 
       this._connections.forEach(dojo.disconnect);
       this._connections = [];

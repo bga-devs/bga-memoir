@@ -275,7 +275,7 @@ class memoir extends Table
    */
   public function upgradeTableDb($from_version)
   {
-    if ($from_version <= 2204111507) {
+    if ($from_version <= 2204111537) {
       $result = self::getUniqueValueFromDB("SHOW COLUMNS FROM `gamelog` LIKE 'cancel'");
       if (is_null($result)) {
         $sql = <<<SQL
