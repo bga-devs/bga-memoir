@@ -75,10 +75,22 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       // Try to find a section with still enough room
       let sections = this.getArgs().sections;
       if (!sections) return true; // No section restriction => all good!
+      let marineCommand = this.getArgs().marineCommand || false;
+      let extra = false;
       for (let i = 0; i < 3; i++) {
         if (pos.sections.includes(i) && minFilling[i] < sections[i]) {
           return true;
         }
+
+        if(minFilling[i] > sections[i]){
+          extra = true;
+        }
+      }
+      debug(minFilling, sections);
+
+      // Allow one extra unit
+      if(!extra && marineCommand){
+        return true;
       }
 
       return false;

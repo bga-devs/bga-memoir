@@ -818,9 +818,20 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       });
       // Keep only compatible fillings
       let sections = this.getArgs().sections;
+      let marineCommand = this.getArgs().marineCommand || false;
       if (sections) {
         fillings = fillings.filter(
-          (filling) => filling[0] <= sections[0] && filling[1] <= sections[1] && filling[2] <= sections[2],
+          (filling) =>
+            (filling[0] <= sections[0] && filling[1] <= sections[1] && filling[2] <= sections[2]) ||
+            (marineCommand &&
+              filling[0] <= sections[0] + 1 &&
+              filling[1] <= sections[1] &&
+              filling[2] <= sections[2]) ||
+            (marineCommand &&
+              filling[0] <= sections[0] &&
+              filling[1] <= sections[1] + 1 &&
+              filling[2] <= sections[2]) ||
+            (marineCommand && filling[0] <= sections[0] && filling[1] <= sections[1] && filling[2] <= sections[2] + 1),
         );
       }
 

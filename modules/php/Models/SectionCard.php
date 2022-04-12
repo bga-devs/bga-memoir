@@ -24,19 +24,13 @@ class SectionCard extends Card
     return $this->texts[$this->value] ?? $this->text;
   }
 
-  public function getSections($isMarineCommand)
+  public function getSections()
   {
     $sections = [0, 0, 0];
     if ($this->nUnits != null && empty($this->sections)) {
       $sections[$this->value] = $this->nUnits;
     } else {
       $sections = $this->sections;
-    }
-
-    if ($isMarineCommand) {
-      foreach ($sections as &$s) {
-        $s++;
-      }
     }
 
     return $this->isCounterAttackMirror ? array_reverse($sections) : $sections;
@@ -58,7 +52,7 @@ class SectionCard extends Card
         $units = $units->merge($player->getUnitsInSection($sectionId)->getPositions());
       }
     } else {
-      foreach ($this->getSections($marineCommand) as $i => $n) {
+      foreach ($this->getSections() as $i => $n) {
         if ($n > 0 || $this->nUnitsOnTheMove > 0) {
           $units = $units->merge($player->getUnitsInSection($i)->getPositions());
         }
@@ -75,8 +69,9 @@ class SectionCard extends Card
       'nTitle' => $nbUnits,
       'nOnTheMove' => $nbOnTheMove,
       'desc' => $this->orderUnitsTitles[$val] ?? '',
-      'sections' => $this->getSections($marineCommand),
+      'sections' => $this->getSections(),
       'units' => $units,
+      'marineCommand' => $marineCommand,
     ];
   }
 }
