@@ -1976,6 +1976,34 @@ html {
   left: 0;
   top: 0; }
 
+.m44-unit[data-orientation='0'][data-type='2'][data-nation='jp'] .m44-unit-meeple {
+  width: 50%;
+  height: 50%;
+  background-size: 1003.92%;
+  background-position: 0.10846% 63.747%;
+  background-color: transparent;
+  border-radius: none; }
+  .m44-unit[data-orientation='0'][data-type='2'][data-nation='jp'] .m44-unit-meeple:nth-of-type(1) {
+    left: 23%;
+    top: -2%; }
+  .m44-unit[data-orientation='0'][data-type='2'][data-nation='jp'] .m44-unit-meeple:nth-of-type(2) {
+    left: 52%;
+    top: 14%; }
+  .m44-unit[data-orientation='0'][data-type='2'][data-nation='jp'] .m44-unit-meeple:nth-of-type(3) {
+    left: 4%;
+    top: 19%; }
+  .m44-unit[data-orientation='0'][data-type='2'][data-nation='jp'] .m44-unit-meeple:nth-of-type(4) {
+    left: 33%;
+    top: 33%; }
+
+.summary-tile
+.m44-unit[data-orientation='0'][data-type='2'][data-nation='jp']
+.m44-unit-meeple {
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0; }
+
 .m44-unit[data-orientation='0'][data-type='3'][data-nation='ger'] .m44-unit-meeple {
   width: 50%;
   height: 58.18%;

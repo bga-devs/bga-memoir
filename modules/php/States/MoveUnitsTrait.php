@@ -59,6 +59,8 @@ trait MoveUnitsTrait
     foreach ($path as $c) {
       if (Board::mustStopWhenLeavingCell($coordSource, $unit)) {
         $unit->mustStop();
+      } elseif (Board::mustStopWhenEnteringCell($c, $unit)) {
+        $unit->mustStop();
       }
 
       $unit->incMoves($c['cost'] ?? 1);

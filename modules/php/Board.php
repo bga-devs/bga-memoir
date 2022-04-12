@@ -384,15 +384,15 @@ class Board
       return 1;
     }
 
-    // If I'm coming from a 'must stop' terrain, can't go there unless dist = 0
-    if ($source['d'] > 0 || $unit->getMoves() > 0) {
+    $hasMoved = $unit->getMoves() > 0 || $unit->hasUsedRoadBonus() || $unit->getGrounds() != 0;
+    $notFirstMovement = $source['d'] > 0 || $source['x'] != $unit->getX() || $source['y'] != $unit->getY();
+    if ($notFirstMovement || $hasMoved) {
+      // If I'm coming from a 'must stop' terrain, can't go there unless dist = 0
       if (self::mustStopWhenEnteringCell($source, $unit)) {
         return \INFINITY;
       }
-    }
 
-    // If I'm going to a 'must be adjacent' terrain, can't go there unless dist = 0, even in take ground
-    if ($source['d'] > 0 || $unit->getMoves() > 0) {
+      // If I'm going to a 'must be adjacent' terrain, can't go there unless dist = 0, even in take ground
       if (self::mustBeAdjacentToEnterCell($target, $unit)) {
         return \INFINITY;
       }
