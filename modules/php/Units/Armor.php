@@ -18,14 +18,4 @@ class Armor extends AbstractUnit
     $this->canOverrun = true;
     parent::__construct($row);
   }
-
-  public function getMovementRadius()
-  {
-    return $this->getExtraDatas('properties')['movementRadius'] ?? $this->movementRadius;
-  }
-
-  public function getMovementAndAttackRadius()
-  {
-    return $this->getExtraDatas('properties')['movementAndAttackRadius'] ?? $this->movementAndAttackRadius;
-  }
 }
