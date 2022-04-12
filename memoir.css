@@ -2071,18 +2071,18 @@ html {
   top: 0; }
 
 .m44-unit[data-orientation='0'][data-type='3'][data-nation='brit'] .m44-unit-meeple {
-  width: 50%;
-  height: 50%;
-  background-size: 812.698%;
-  background-position: 45.5457% 0.259067%;
+  width: 70%;
+  height: 70%;
+  background-size: 853.333%;
+  background-position: 23.7832% 34.949%;
   background-color: transparent;
   border-radius: none; }
   .m44-unit[data-orientation='0'][data-type='3'][data-nation='brit'] .m44-unit-meeple:nth-of-type(1) {
-    left: 12%;
-    top: -7%; }
+    left: -4%;
+    top: 12%; }
   .m44-unit[data-orientation='0'][data-type='3'][data-nation='brit'] .m44-unit-meeple:nth-of-type(2) {
-    left: 44%;
-    top: 29%; }
+    left: 26%;
+    top: 44%; }
 
 .summary-tile
 .m44-unit[data-orientation='0'][data-type='3'][data-nation='brit']
@@ -2461,18 +2461,18 @@ html {
   top: 0; }
 
 .m44-unit[data-orientation='1'][data-type='3'][data-nation='brit'] .m44-unit-meeple {
-  width: 70%;
-  height: 70%;
-  background-size: 853.333%;
-  background-position: 23.7832% 34.949%;
+  width: 50%;
+  height: 50%;
+  background-size: 812.698%;
+  background-position: 45.5457% 0.259067%;
   background-color: transparent;
   border-radius: none; }
   .m44-unit[data-orientation='1'][data-type='3'][data-nation='brit'] .m44-unit-meeple:nth-of-type(1) {
-    left: -4%;
-    top: 12%; }
+    left: 12%;
+    top: -7%; }
   .m44-unit[data-orientation='1'][data-type='3'][data-nation='brit'] .m44-unit-meeple:nth-of-type(2) {
-    left: 26%;
-    top: 44%; }
+    left: 44%;
+    top: 29%; }
 
 .summary-tile
 .m44-unit[data-orientation='1'][data-type='3'][data-nation='brit']
