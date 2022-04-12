@@ -5,7 +5,8 @@ class Beach extends \M44\Models\Terrain
 {
   public static function isTileOfType($hex)
   {
-    return false;
+    // return false;
+    return in_array($hex['name'], ['pbeach', 'beach']);
   }
 
   public function __construct($row)

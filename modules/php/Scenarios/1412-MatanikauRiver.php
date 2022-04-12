@@ -33,6 +33,9 @@ $scenarios[1412] = [
         'standard' => [],
       ],
     ],
+    'options' => [
+      'gung_ho' => true,
+    ],
   ],
   'board' => [
     'type' => 'STANDARD',
@@ -516,7 +519,7 @@ $scenarios[1412] = [
           0 => [
             'name' => 'tag5',
             'behavior' => 'EXIT_MARKER',
-            'group' => [],
+            'group' => ['E1', 'F1', 'G1', 'H1', 'I1', 'J1', 'K1', 'L1', 'M1'],
             'side' => 'AXIS',
           ],
         ],
@@ -557,15 +560,15 @@ $scenarios[1412] = [
     'en' => [
       'name' => clienttranslate('Matanikau River'),
       'subtitle' => clienttranslate('Guadalcanal'),
-      'historical' => clienttranslate('A four-pronged Japanese plan to attack and recapture Henderson Field on Guadalcanal was scheduled for October 22nd, 1942. 
+      'historical' => clienttranslate('A four-pronged Japanese plan to attack and recapture Henderson Field on Guadalcanal was scheduled for October 22nd, 1942.
 
 The main force, 7,000 men under the command of General Maruyama, planned to approach the airfield from the South, but found itself quickly bogged down in very difficult jungle terrain, forcing a two days postponement of the attack.
 
-Unaware of the delay, the tanks and infantry of Major General Sumiyoshi, at the mouth of the Matanikau River, and Colonel Oka\'s forces, positioned upstream, crossed the river on schedule and soon found themselves stuck in the river bed, under a withering crossfire of US artillery and anti-tank gunfire that wreaked havoc on them. 
+Unaware of the delay, the tanks and infantry of Major General Sumiyoshi, at the mouth of the Matanikau River, and Colonel Oka\'s forces, positioned upstream, crossed the river on schedule and soon found themselves stuck in the river bed, under a withering crossfire of US artillery and anti-tank gunfire that wreaked havoc on them.
 
 On the Western flank, Lt. General "Chesty" Puller and his 1st Battalion, 7th Marines, with the 2nd Battalion, 7th Infantry in support, held ground once again. By battle\'s end, over 1000 Japanese soldiers lay dead.
 
-The stage is set, the battle lines are drawn, and you are in command. The rest is history. 
+The stage is set, the battle lines are drawn, and you are in command. The rest is history.
 '),
       'description' => clienttranslate('Japanese Player: Take 6 Command cards.
 You move first.

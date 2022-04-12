@@ -11,9 +11,9 @@ class RicePaddie extends Marsh
 
   public function __construct($row)
   {
+    parent::__construct($row);
+
     $this->name = clienttranslate('Rice Paddies');
     $this->number = 60;
-
-    parent::__construct($row);
   }
 }
