@@ -1836,6 +1836,34 @@ html {
   left: 0;
   top: 0; }
 
+.m44-unit[data-orientation='0'][data-type='1'][data-nation='jp'] .m44-unit-meeple {
+  width: 43%;
+  height: 73.014%;
+  background-size: 966.038%;
+  background-position: 94.1176% 0.257732%;
+  background-color: transparent;
+  border-radius: none; }
+  .m44-unit[data-orientation='0'][data-type='1'][data-nation='jp'] .m44-unit-meeple:nth-of-type(1) {
+    left: 22%;
+    top: -2%; }
+  .m44-unit[data-orientation='0'][data-type='1'][data-nation='jp'] .m44-unit-meeple:nth-of-type(2) {
+    left: 50%;
+    top: 11%; }
+  .m44-unit[data-orientation='0'][data-type='1'][data-nation='jp'] .m44-unit-meeple:nth-of-type(3) {
+    left: 3%;
+    top: 18%; }
+  .m44-unit[data-orientation='0'][data-type='1'][data-nation='jp'] .m44-unit-meeple:nth-of-type(4) {
+    left: 32%;
+    top: 28%; }
+
+.summary-tile
+.m44-unit[data-orientation='0'][data-type='1'][data-nation='jp']
+.m44-unit-meeple {
+  width: 100%;
+  height: 169.8%;
+  left: 0;
+  top: 0; }
+
 .m44-unit[data-orientation='0'][data-type='2'][data-nation='ger'] .m44-unit-meeple {
   width: 50%;
   height: 50%;
@@ -2036,6 +2064,28 @@ html {
   left: 0;
   top: 0; }
 
+.m44-unit[data-orientation='0'][data-type='3'][data-nation='jp'] .m44-unit-meeple {
+  width: 50%;
+  height: 50%;
+  background-size: 1003.92%;
+  background-position: 0.10846% 63.747%;
+  background-color: transparent;
+  border-radius: none; }
+  .m44-unit[data-orientation='0'][data-type='3'][data-nation='jp'] .m44-unit-meeple:nth-of-type(1) {
+    left: 12%;
+    top: -7%; }
+  .m44-unit[data-orientation='0'][data-type='3'][data-nation='jp'] .m44-unit-meeple:nth-of-type(2) {
+    left: 44%;
+    top: 29%; }
+
+.summary-tile
+.m44-unit[data-orientation='0'][data-type='3'][data-nation='jp']
+.m44-unit-meeple {
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0; }
+
 .m44-unit[data-orientation='1'][data-type='1'][data-nation='ger'] .m44-unit-meeple {
   width: 43%;
   height: 63.5239%;
@@ -2145,6 +2195,34 @@ html {
 .m44-unit-meeple {
   width: 100%;
   height: 130.21%;
+  left: 0;
+  top: 0; }
+
+.m44-unit[data-orientation='1'][data-type='1'][data-nation='jp'] .m44-unit-meeple {
+  width: 50%;
+  height: 50%;
+  background-size: 930.909%;
+  background-position: 81.1816% 34.0796%;
+  background-color: transparent;
+  border-radius: none; }
+  .m44-unit[data-orientation='1'][data-type='1'][data-nation='jp'] .m44-unit-meeple:nth-of-type(1) {
+    left: 24%;
+    top: 3%; }
+  .m44-unit[data-orientation='1'][data-type='1'][data-nation='jp'] .m44-unit-meeple:nth-of-type(2) {
+    left: 52%;
+    top: 14%; }
+  .m44-unit[data-orientation='1'][data-type='1'][data-nation='jp'] .m44-unit-meeple:nth-of-type(3) {
+    left: 2%;
+    top: 24%; }
+  .m44-unit[data-orientation='1'][data-type='1'][data-nation='jp'] .m44-unit-meeple:nth-of-type(4) {
+    left: 33%;
+    top: 35%; }
+
+.summary-tile
+.m44-unit[data-orientation='1'][data-type='1'][data-nation='jp']
+.m44-unit-meeple {
+  width: 100%;
+  height: 100%;
   left: 0;
   top: 0; }
 
@@ -2260,6 +2338,34 @@ html {
   left: 0;
   top: 0; }
 
+.m44-unit[data-orientation='1'][data-type='2'][data-nation='jp'] .m44-unit-meeple {
+  width: 50%;
+  height: 53.335%;
+  background-size: 1137.78%;
+  background-position: 64.6681% 62.9808%;
+  background-color: transparent;
+  border-radius: none; }
+  .m44-unit[data-orientation='1'][data-type='2'][data-nation='jp'] .m44-unit-meeple:nth-of-type(1) {
+    left: 14%;
+    top: -5%; }
+  .m44-unit[data-orientation='1'][data-type='2'][data-nation='jp'] .m44-unit-meeple:nth-of-type(2) {
+    left: 49%;
+    top: 11%; }
+  .m44-unit[data-orientation='1'][data-type='2'][data-nation='jp'] .m44-unit-meeple:nth-of-type(3) {
+    left: 3%;
+    top: 38%; }
+  .m44-unit[data-orientation='1'][data-type='2'][data-nation='jp'] .m44-unit-meeple:nth-of-type(4) {
+    left: 33%;
+    top: 33%; }
+
+.summary-tile
+.m44-unit[data-orientation='1'][data-type='2'][data-nation='jp']
+.m44-unit-meeple {
+  width: 100%;
+  height: 106.67%;
+  left: 0;
+  top: 0; }
+
 .m44-unit[data-orientation='1'][data-type='3'][data-nation='ger'] .m44-unit-meeple {
   width: 70%;
   height: 54.313%;
@@ -2348,44 +2454,30 @@ html {
   left: 0;
   top: 0; }
 
+.m44-unit[data-orientation='1'][data-type='3'][data-nation='jp'] .m44-unit-meeple {
+  width: 70%;
+  height: 60.347%;
+  background-size: 930.909%;
+  background-position: 32.6039% 0.260417%;
+  background-color: transparent;
+  border-radius: none; }
+  .m44-unit[data-orientation='1'][data-type='3'][data-nation='jp'] .m44-unit-meeple:nth-of-type(1) {
+    left: -4%;
+    top: 12%; }
+  .m44-unit[data-orientation='1'][data-type='3'][data-nation='jp'] .m44-unit-meeple:nth-of-type(2) {
+    left: 26%;
+    top: 44%; }
+
+.summary-tile
+.m44-unit[data-orientation='1'][data-type='3'][data-nation='jp']
+.m44-unit-meeple {
+  width: 100%;
+  height: 86.21%;
+  left: 0;
+  top: 0; }
+
 [data-units='0'] .hex-cell .m44-unit {
   display: none; }
-
-.jpgun_bottom {
-  width: 110px;
-  height: 128px;
-  background-position: 32.6039% 0.260417%;
-  background-size: 930.909%; }
-
-.jpgun_top {
-  width: 116px;
-  height: 100px;
-  background-position: 24.0088% 63.5922%;
-  background-size: 882.759%; }
-
-.jpinf_bottom {
-  width: 106px;
-  height: 124px;
-  background-position: 94.1176% 0.257732%;
-  background-size: 966.038%; }
-
-.jpinf_top {
-  width: 110px;
-  height: 110px;
-  background-position: 81.1816% 34.0796%;
-  background-size: 930.909%; }
-
-.jptank_bottom {
-  width: 102px;
-  height: 101px;
-  background-position: 0.10846% 63.747%;
-  background-size: 1003.92%; }
-
-.jptank_top {
-  width: 90px;
-  height: 96px;
-  background-position: 64.6681% 62.9808%;
-  background-size: 1137.78%; }
 
 :root {
   --memoirCardScale: 0.9; }
