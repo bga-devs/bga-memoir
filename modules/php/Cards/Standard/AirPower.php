@@ -28,7 +28,41 @@ class AirPower extends \M44\Models\Card
 
   public function nextStateAfterPlay()
   {
+    if (Globals::getNightVisibility() != \INFINITY) {
+      return parent::nextStateAfterPlay();
+    }
     return 'airpower';
+  }
+
+  public function cannotIgnoreFlags()
+  {
+    if (Globals::getNightVisibility() != \INFINITY) {
+      return false;
+    }
+    return true;
+  }
+
+  public function getHits($type, $nb)
+  {
+    if (Globals::getNightVisibility() != \INFINITY) {
+      return -1;
+    }
+    parent::getHits($type, $nb);
+  }
+
+  public function getArgsOrderUnits()
+  {
+    $player = $this->getPlayer();
+    $marineCommand = $player->isMarineCommand();
+    $units = $player->getUnits()->getPositions();
+    return [
+      'n' => $marineCommand ? 2 : 1,
+      'nTitle' => $marineCommand ? 2 : 1,
+      'nOnTheMove' => 0,
+      'desc' => '',
+      'sections' => [\INFINITY, \INFINITY, INFINITY],
+      'units' => $units,
+    ];
   }
 
   public function argsTargetAirPower()

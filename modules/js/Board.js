@@ -304,6 +304,11 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       }
     },
 
+    notif_updateVisibility(n) {
+      debug('Notif: visibility update', n);
+      // TODO
+    },
+
     tplTerrainTile(terrain) {
       let className = '';
       let tile = TERRAINS.findIndex((t) => t == terrain.tile);

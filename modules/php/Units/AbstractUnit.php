@@ -145,7 +145,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
   public function getProperty($prop)
   {
     if (!in_array($prop, $this->properties)) {
-      throw new \BgaVisibleSystemException('Trying to access a non existing terrain property : ' . $prop);
+      throw new \BgaVisibleSystemException('Trying to access a non existing unit property : ' . $prop);
     }
 
     return $this->$prop ?? null;

@@ -77,6 +77,7 @@ define([
         ['clearTurn', 1],
         ['smallRefreshInterface', 1],
         ['smallRefreshHand', 1],
+        ['updateVisibility', 500],
       ];
 
       // Fix mobile viewport (remove CSS zoom)
@@ -219,9 +220,14 @@ define([
           return;
         }
 
-        this.addDangerActionButton('btnRestartTurn', _('Restart turn'), () => {
-          this.takeAction('actRestart');
-        }, 'restartAction');
+        this.addDangerActionButton(
+          'btnRestartTurn',
+          _('Restart turn'),
+          () => {
+            this.takeAction('actRestart');
+          },
+          'restartAction',
+        );
       }
     },
 

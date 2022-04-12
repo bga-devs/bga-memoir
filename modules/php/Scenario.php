@@ -89,6 +89,7 @@ class Scenario extends \APP_DbObject
     Globals::setItalyHighCommand($scenario['game_info']['options']['italy_high_command'] ?? false);
     Globals::setBritishCommand($scenario['game_info']['options']['british_commonwealth'] ?? false);
     Globals::setMarineCommand($scenario['game_info']['options']['gung_ho'] ?? false);
+    Globals::setNightVisibility($scenario['game_info']['options']['night_visibility_rules'] ?? false ? 1 : \INFINITY);
 
     // Create Teams
     Teams::loadScenario($scenario, $rematch);

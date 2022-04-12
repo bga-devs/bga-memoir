@@ -598,6 +598,11 @@ class Board
       return $unit->targets()[self::getUnitInCell($cell)->getType()];
     });
 
+    $visibility = Globals::getNightVisibility();
+    Utils::filter($cells, function ($cell) use ($visibility) {
+      return $cell['d'] <= $visibility;
+    });
+
     // Compute shooting powers for the remaining cells
     foreach ($cells as &$cell) {
       // if banzai, unit can only attack in close assault
@@ -605,6 +610,7 @@ class Board
         $cell['dice'] = 0;
         continue;
       }
+
       $cell['dice'] = $power[$cell['d'] - 1] + $unit->getAttackModifier($cell);
       $offenseModifier = self::getDiceModifier($unit, $pos, false);
       $defenseModifier = self::getDiceModifier($unit, $cell, true);

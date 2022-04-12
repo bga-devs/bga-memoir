@@ -50,6 +50,13 @@ class Notifications
     ]);
   }
 
+  public static function visibility($increase)
+  {
+    self::notifyAll('updateVisibility', clienttranslate('Night visibility increase by ${star}'), [
+      'star' => $increase,
+    ]);
+  }
+
   public static function clearTurn($player, $notifIds)
   {
     self::notifyAll('clearTurn', clienttranslate('${player_name} restart their turn'), [

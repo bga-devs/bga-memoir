@@ -9,6 +9,7 @@ use M44\Managers\Medals;
 use M44\Managers\Units;
 use M44\Core\Notifications;
 use M44\Scenario;
+use M44\Dice;
 use M44\Helpers\Log;
 
 trait TurnTrait
@@ -43,13 +44,29 @@ trait TurnTrait
       return;
     }
 
+    $team = Teams::getTeamTurn();
+    $player = $team->getMembers()->first();
+    if ($team->getId() == ALLIES && Globals::getNightVisibility() < \INFINITY) {
+      $results = Dice::roll($player, 4);
+      $star = $results[DICE_STAR] ?? 0;
+
+      if ($star > 0) {
+        Globals::incNightVisibility($star);
+        Notifications::visibility($star);
+      }
+      Notifications::message(clienttranslate('Night visibility is ${vis}'), ['vis' => Globals::getNightVisibility()]);
+
+      if (Globals::getNightVisibility() >= 6) {
+        Globals::setNightVisibility(\INFINITY);
+      }
+    }
+
     Log::enable();
     Log::checkpoint();
     Log::clearAll();
 
     // TODO : Overlord => branch here to distribute cards instead
     if (true) {
-      $team = Teams::getTeamTurn();
       $player = $team->getMembers()->first();
       $transition = 'playCard';
       if ($player->isCommissar() && $player->getCommissarCard() != null) {

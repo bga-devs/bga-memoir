@@ -36,6 +36,7 @@ $scenarios[1483] = [
     'options' => [
       'mine_deck_name' => 'PACIFIC',
       'gung_ho' => true,
+      'night_visibility_rules' => true,
     ],
   ],
   'board' => [
