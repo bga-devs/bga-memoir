@@ -54,12 +54,12 @@ class SectionCard extends Card
     }
 
     if ($sectionId != null) {
-      if ($this->nUnits > 0 || $this->nUnitsOnTheMove > 0) {
+      if ($n > 0 || $this->nUnitsOnTheMove > 0) {
         $units = $units->merge($player->getUnitsInSection($sectionId)->getPositions());
       }
     } else {
       foreach ($this->getSections($marineCommand) as $i => $n) {
-        if ($this->nUnits > 0 || $this->nUnitsOnTheMove > 0) {
+        if ($n > 0 || $this->nUnitsOnTheMove > 0) {
           $units = $units->merge($player->getUnitsInSection($i)->getPositions());
         }
       }
