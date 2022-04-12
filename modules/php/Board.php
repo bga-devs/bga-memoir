@@ -986,6 +986,19 @@ class Board
         return INFINITY;
       }
 
+      // Otherwise, ask the terrains about it and take the maximum of the costs to check INFINITY
+      $cost = 1;
+      foreach ($sourceCell['terrains'] as $terrain) {
+        $cost = max($cost, $terrain->getLeavingDeplacementCost($unit, $source, $target, $d, false));
+      }
+      foreach ($targetCell['terrains'] as $terrain) {
+        $cost = max($cost, $terrain->getEnteringDeplacementCost($unit, $source, $target, $d, false));
+      }
+
+      if ($cost == \INFINITY) {
+        return INFINITY;
+      }
+
       // Ignore all other terrains restriction
       return 1;
     });

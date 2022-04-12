@@ -29,6 +29,16 @@ class Mountain extends \M44\Models\Terrain
     $this->cantLeave = [\ARTILLERY];
   }
 
+  public function getLeavingDeplacementCost($unit, $source, $target, $d, $takeGround)
+  {
+    return Board::isHillCell($target) || Board::isMountainCell($target) ? 1 : \INFINITY;
+  }
+
+  public function getEnteringDeplacementCost($unit, $source, $target, $d, $takeGround)
+  {
+    return Board::isHillCell($source) || Board::isMountainCell($source) ? 1 : \INFINITY;
+  }
+
   public function isBlockingLineOfSight($unit, $target, $path)
   {
     $c = Board::getMountainComponents();
