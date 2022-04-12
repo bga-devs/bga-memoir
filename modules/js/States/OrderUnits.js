@@ -342,7 +342,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
     onEnteringStateArmorOverrun(args, excludeUnit = null) {
       this.onEnteringStateAttackUnits(args, excludeUnit, false);
-      this.addPrimaryActionButton('btnOverrunDone', _('Do not attack'), () => this.takeAction('actNextAttack'));
+      if (this.isCurrentPlayerActive()) {
+        this.addPrimaryActionButton('btnOverrunDone', _('Do not attack'), () => this.takeAction('actNextAttack'));
+      }
     },
 
     onEnteringStateDesertMove(args, excludeUnit = null) {
