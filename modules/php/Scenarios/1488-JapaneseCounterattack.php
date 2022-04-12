@@ -33,6 +33,10 @@ $scenarios[1488] = [
         'standard' => [],
       ],
     ],
+    'options' => [
+      'gung_ho' => true,
+      'night_visibility_rules' => true,
+    ],
   ],
   'board' => [
     'type' => 'STANDARD',
@@ -47,6 +51,7 @@ $scenarios[1488] = [
         'tags' => [
           0 => [
             'name' => 'medal1',
+            'permanent' => true,
           ],
         ],
       ],
@@ -573,6 +578,7 @@ $scenarios[1488] = [
         'tags' => [
           0 => [
             'name' => 'medal7',
+            'permanent' => true,
           ],
         ],
       ],
@@ -599,6 +605,7 @@ $scenarios[1488] = [
         'tags' => [
           0 => [
             'name' => 'medal7',
+            'permanent' => true,
           ],
         ],
       ],
@@ -626,6 +633,7 @@ $scenarios[1488] = [
         'tags' => [
           0 => [
             'name' => 'medal7',
+            'permanent' => true,
           ],
         ],
       ],
@@ -725,7 +733,7 @@ $scenarios[1488] = [
       'subtitle' => clienttranslate('Battle of Guam'),
       'historical' => clienttranslate('Lt. General Takeshi\'s counterattack plan called for a night attack on July 25/26. The goal was to split the 3rd Marines and target ammunition and supply dumps. The frontline of the 3rd Marines was stretched thin in the area and reserves were limited to a few engineer and tank units.
 
-The fighting went on all night as the Japanese units penetrated almost to the beach and successfully destroyed supplies and equipment. At dawn, the Allied tanks and artillery could finally see their enemy and soon threw the Japanese back. Early on the 26th, General Obata was forced to report the results of his failed attack back to Headquarters in Tokyo. 
+The fighting went on all night as the Japanese units penetrated almost to the beach and successfully destroyed supplies and equipment. At dawn, the Allied tanks and artillery could finally see their enemy and soon threw the Japanese back. Early on the 26th, General Obata was forced to report the results of his failed attack back to Headquarters in Tokyo.
 
 The stage is set, the battle lines are drawn, and you are in command. The rest is history.'),
       'description' => clienttranslate('Japanese Player: Take 5 Command cards.

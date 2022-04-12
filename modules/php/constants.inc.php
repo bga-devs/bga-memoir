@@ -241,6 +241,7 @@ const TERRAIN_CLASSES = [
   'hospital' => 'Hospital',
   'jungle' => 'Jungle',
   'pier' => 'Pier',
+  'rice' => 'RicePaddie',
 ];
 
 const TROOP_CLASSES = [

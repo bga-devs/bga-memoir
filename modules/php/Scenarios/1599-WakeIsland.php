@@ -33,6 +33,9 @@ $scenarios[1599] = [
         'standard' => [],
       ],
     ],
+    'options' => [
+      'gung_ho' => true,
+    ],
   ],
   'board' => [
     'type' => 'STANDARD',
@@ -105,6 +108,7 @@ $scenarios[1599] = [
         'col' => 6,
         'rect_terrain' => [
           'name' => 'pbunker',
+          'original_owner' => ALLIES,
         ],
       ],
       7 => [
@@ -363,7 +367,7 @@ $scenarios[1599] = [
       'subtitle' => clienttranslate('Pacific Theater'),
       'historical' => clienttranslate('A coral atoll lost in the vast expanse of the North Pacific, Wake Island was home to "PAAville", a small stop-over on Pan American Airways\' U.S.-China route during the 1930s. In the military build-up to the war, the US Navy began building an aero-naval base. By August of 1941, a small garrison composed of elements of the 1st Marine Defense Battalion was in place, although armed inadequately with old 5" cannons and 3" AA guns.
 
-On December 8, 1941, a day after Pearl Harbor, a flight of medium Japanese bombers took off from the Marshall islands, rapidly bombing the bulk of the Marine Corps VMF-211 fighter squadron located on Wake into the ground. Three days later, the garrison repulsed a first Japanese landing attempt by the South Seas Force. On December 23, a second Japanese attack wave, augmented with 1,500 Japanese Marines from the Special Naval Landing Forces, landed in the predawn darkness. Following the late night and morning of ferocious fighting the garrison was forced to surrender. 
+On December 8, 1941, a day after Pearl Harbor, a flight of medium Japanese bombers took off from the Marshall islands, rapidly bombing the bulk of the Marine Corps VMF-211 fighter squadron located on Wake into the ground. Three days later, the garrison repulsed a first Japanese landing attempt by the South Seas Force. On December 23, a second Japanese attack wave, augmented with 1,500 Japanese Marines from the Special Naval Landing Forces, landed in the predawn darkness. Following the late night and morning of ferocious fighting the garrison was forced to surrender.
 
 For their heroic defense, the men who defended Wake Island during those fateful two weeks would receive the Wake Island Device, a campaign clasp to the Marine Corps and Navy Expeditionary Medals.
 

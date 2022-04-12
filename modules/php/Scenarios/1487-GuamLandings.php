@@ -33,6 +33,9 @@ $scenarios[1487] = [
         'standard' => [],
       ],
     ],
+    'options' => [
+      'gung_ho' => true,
+    ],
   ],
   'board' => [
     'type' => 'STANDARD',
@@ -706,7 +709,7 @@ $scenarios[1487] = [
     'en' => [
       'name' => clienttranslate('Guam Landings'),
       'subtitle' => clienttranslate('Battle of Guam'),
-      'historical' => clienttranslate('On July 21st, the first wave to hit the northern landing beaches off the island of Guam in the Marianas, were amphibious tank units. Most of the Japanese infantry had pulled back from their beach defenses during the heavy naval bombardment that preceded. 
+      'historical' => clienttranslate('On July 21st, the first wave to hit the northern landing beaches off the island of Guam in the Marianas, were amphibious tank units. Most of the Japanese infantry had pulled back from their beach defenses during the heavy naval bombardment that preceded.
 
 But the rough terrain and broad rice paddies slowed the tanks\' advance. The 21st Marines cleared Asan Town and made some progress on the Japanese-infested ridges and jungle that overlooked the rice fields. Difficulties getting their artillery ashore and limited armor support placed the burden of establishing a beachhead squarely on the shoulders of the men of the 3rd Marine division.
 

@@ -32,6 +32,9 @@ $scenarios[1518] = [
       0 => [
         'standard' => [],
       ],
+      'options' => [
+        'gung_ho' => true,
+      ],
     ],
   ],
   'board' => [
@@ -322,7 +325,7 @@ $scenarios[1518] = [
 
 At times, the Marines were able to secure a hill top position only to later be driven off by Japanese forces attacking from other caves and a maze of tunnels.
 
-On May 19th, after seven days of fighting, the area was finally secured. 
+On May 19th, after seven days of fighting, the area was finally secured.
 
 The stage is set, the battle lines are drawn, and you are in command. The rest is history.'),
       'description' => clienttranslate('Japanese Player: Take 4 Command cards.
