@@ -152,7 +152,14 @@ $machinestates = [
     'type' => 'activeplayer',
     'args' => 'argsMoveUnits',
     'action' => 'stMoveUnits',
-    'possibleactions' => ['actRestart', 'actMoveUnit', 'actMoveUnitsDone', 'actHealUnit', 'actHealUnitHospital', 'actExitUnit'],
+    'possibleactions' => [
+      'actRestart',
+      'actMoveUnit',
+      'actMoveUnitsDone',
+      'actHealUnit',
+      'actHealUnitHospital',
+      'actExitUnit',
+    ],
     'transitions' => ['moveUnits' => ST_MOVE_UNITS, 'attackUnits' => ST_ATTACK],
   ],
 
@@ -163,7 +170,14 @@ $machinestates = [
     'type' => 'activeplayer',
     'action' => 'stAttackUnits',
     'args' => 'argsAttackUnit',
-    'possibleactions' => ['actRestart', 'actAttackUnit', 'actAttackUnitsDone', 'actRemoveWire', 'actRemoveRoadBlock', 'actSealCave'],
+    'possibleactions' => [
+      'actRestart',
+      'actAttackUnit',
+      'actAttackUnitsDone',
+      'actRemoveWire',
+      'actRemoveRoadBlock',
+      'actSealCave',
+    ],
     'transitions' => [
       'ambush' => ST_OPPONENT_AMBUSH,
       'attack' => ST_ATTACK,
@@ -410,8 +424,8 @@ $machinestates = [
 
   ST_MEDICS_TARGET => [
     'name' => 'targetMedics',
-    'description' => clienttranslate('${actplayer} may heal 1 unit'),
-    'descriptionmyturn' => clienttranslate('${you} may heal 1 unit'),
+    'description' => clienttranslate('${actplayer} may heal ${nTitle} unit(s)'),
+    'descriptionmyturn' => clienttranslate('${you} may heal  ${nTitle} unit(s)'),
     'type' => 'activeplayer',
     'args' => 'argsTargetMedics',
     'action' => 'stTargetMedics',

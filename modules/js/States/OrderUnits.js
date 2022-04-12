@@ -22,12 +22,14 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       this.updateOrderUnitsBtn();
     },
 
-    updateOrderUnitsBtn(){
+    updateOrderUnitsBtn() {
       dojo.destroy('btnConfirmOrder');
-      if(this._selectedUnits.length > 0){
+      if (this._selectedUnits.length > 0) {
         this.addPrimaryActionButton('btnConfirmOrder', _('Confirm orders'), () => this.onClickConfirmOrders());
       } else {
-        this.addDangerActionButton('btnConfirmOrder', _('Confirm no order and end your turn'), () => this.onClickConfirmOrders());
+        this.addDangerActionButton('btnConfirmOrder', _('Confirm no order and end your turn'), () =>
+          this.onClickConfirmOrders(),
+        );
       }
     },
 
@@ -410,9 +412,37 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     ///////////////////////////////////
 
     onEnteringStateTargetMedics(args) {
-      args.unitIds.forEach((unitId) =>
-        this.onClick(`unit-${unitId}`, () => this.takeAction('actTargetMedics', { unitId })),
+      this.removeClassNameOfCells('unselectableForAttacking');
+      this.makeUnitsSelectable(
+        args.units,
+        this.onClickUnitToOrder.bind(this),
+        this.isUnitSelectable.bind(this),
+        'activated',
+        this.updateOrderMedicsBtn.bind(this),
       );
+      this._selectedUnitsOnTheMove = [];
+
+      this.updateOrderMedicsBtn();
+      // args.unitIds.forEach((unitId) =>
+      //   this.onClick(`unit-${unitId}`, () => this.takeAction('actTargetMedics', { unitId })),
+      // );
+    },
+
+    updateOrderMedicsBtn() {
+      dojo.destroy('btnConfirmOrder');
+      if (this._selectedUnits.length > 0) {
+        this.addPrimaryActionButton('btnConfirmOrder', _('Confirm orders'), () => this.onClickConfirmMedicOrders());
+      } else {
+        this.addDangerActionButton('btnConfirmOrder', _('Confirm no order and end your turn'), () =>
+          this.onClickConfirmMedicOrders(),
+        );
+      }
+    },
+
+    onClickConfirmMedicOrders() {
+      this.takeAction('actTargetMedics', {
+        unitIds: this._selectedUnits.join(';'),
+      });
     },
 
     notif_healUnit(n) {

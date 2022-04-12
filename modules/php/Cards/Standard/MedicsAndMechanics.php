@@ -37,51 +37,65 @@ class MedicsAndMechanics extends \M44\Models\Card
     $units = $player->getUnits()->filter(function ($unit) {
       return $unit->isWounded();
     });
-
-    return ['unitIds' => $units->getIds()];
+    return [
+      'i18n' => ['desc'],
+      'n' => Globals::isMarineCommand() ? 2 : 1,
+      'nTitle' => Globals::isMarineCommand() ? 2 : 1,
+      'nOnTheMove' => 0,
+      'desc' => '',
+      'sections' => [\INFINITY, \INFINITY, \INFINITY],
+      'units' => $units,
+    ];
+    // return ['unitIds' => $units->getIds(), 'nUnits' => Globals::isMarineCommand() ? 2 : 1];
   }
 
   public function stTargetMedics()
   {
     $args = $this->argsTargetMedics();
-    if (empty($args['unitIds'])) {
+    if (empty($args['units'])) {
       Game::get()->nextState('draw');
-    } else if(count($args['unitIds']) == 1){
-      $this->actTargetMedics($args['unitIds'][0]);
+    } elseif (count($args['units']) == 1) {
+      $this->actTargetMedics($args['unitIds'][0]->getId());
     }
   }
 
-  public function actTargetMedics($unitId)
+  public function actTargetMedics($unitIds)
   {
     $player = $this->getPlayer();
     // check that Ids are ennemy
+    // throw new \feException(print_r($unitIds));
     $args = $this->argsTargetMedics();
-    if (!in_array($unitId, $args['unitIds'])) {
-      throw new \feException('This unit cannot be healed. Should not happen');
+    foreach ($unitIds as $unitId) {
+      if (!in_array($unitId, $args['units']->getIds())) {
+        throw new \feException('This unit cannot be healed. Should not happen');
+      }
     }
 
-    // Roll dice corresponding to number of cards
-    $unit = Units::get($unitId);
-    $nbCard = $player->countAllCards();
-    $results = Dice::roll($player, $nbCard, $unit->getPos());
+    foreach ($unitIds as $unitId) {
+      // Roll dice corresponding to number of cards
+      $unit = Units::get($unitId);
+      $nbCard = $player->countAllCards();
+      $results = Dice::roll($player, $nbCard, $unit->getPos());
+      $unitHealed = 0;
 
-    // Compute number of heal
-    $nHeal = $results[DICE_STAR] ?? 0;
-    if ($unit->getType() == \INFANTRY) {
-      $nHeal += $results[\DICE_INFANTRY] ?? 0;
-    }
-    if ($unit->getType() == \ARMOR) {
-      $nHeal += $results[\DICE_ARMOR] ?? 0;
-    }
+      // Compute number of heal
+      $nHeal = $results[DICE_STAR] ?? 0;
+      if ($unit->getType() == \INFANTRY) {
+        $nHeal += $results[\DICE_INFANTRY] ?? 0;
+      }
+      if ($unit->getType() == \ARMOR) {
+        $nHeal += $results[\DICE_ARMOR] ?? 0;
+      }
 
-    if ($nHeal > 0) {
-      // Heal and then order the unit
-      $nHealed = $unit->heal($nHeal);
-      Notifications::healUnit($player, $nHealed, $unit);
-      $unit->activate($this);
-      Notifications::orderUnits($player, Units::getMany([$unitId]), null);
+      if ($nHeal > 0) {
+        // Heal and then order the unit
+        $nHealed = $unit->heal($nHeal);
+        Notifications::healUnit($player, $nHealed, $unit);
+        $unit->activate($this);
+        Notifications::orderUnits($player, Units::getMany([$unitId]), null);
+        $unitHealed++;
+      }
     }
-
-    Game::get()->nextState($nHeal > 0 ? 'move' : 'draw');
+    Game::get()->nextState($unitHealed > 0 ? 'move' : 'draw');
   }
 }
