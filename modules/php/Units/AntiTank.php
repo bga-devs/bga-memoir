@@ -7,7 +7,7 @@ class AntiTank extends Infantry
   {
     parent::__construct($row);
     $this->name = clienttranslate('Anti Tank Gun');
-    $this->number = '2b';
+    $this->number = '2c';
     $this->movementAndAttackRadius = 0;
     $this->movementRadius = 2;
     $this->maxGrounds = 0; // unit with equipment cannot take ground
