@@ -658,17 +658,15 @@ class Board
         continue;
       }
 
-      // If the cell is blocked by a terrain that blocks everything
-      if (self::isBlockingLineOfAttack($unit, $target, $cell, $path)) {
-        return false;
-      }
-
       if (!$unit->mustSeeToAttack()) {
         continue;
       }
 
-      // If the cell is not blocking the line of sight, skip to the next one
-      if (!self::isBlockingLineOfSight($unit, $target, $cell, $path)) {
+      // If the cell is not blocking the line of sight, skip unless it's blocking the attack (some mountains for instance)
+      if (
+        !self::isBlockingLineOfSight($unit, $target, $cell, $path) &&
+        !self::isBlockingLineOfAttack($unit, $target, $cell, $path)
+      ) {
         continue;
       }
 
