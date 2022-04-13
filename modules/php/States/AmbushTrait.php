@@ -31,9 +31,26 @@ trait AmbushTrait
   {
     // check if ambush viable else pass
     $attack = $this->getCurrentAttack();
-
     if ($attack['distance'] != 1) {
       $this->actPassAmbush(true);
+      return;
+    }
+
+    // If the ambush card is in the discard => pass
+    $card = Cards::getByType(\CARD_AMBUSH)->first();
+    if($card->getLocation() == 'discard'){
+      $this->actPassAmbush(true);
+      return;
+    }
+
+
+    // If player has autoskip and no ambush in hand => pass
+    $player = Players::getActive();
+    if ($player->getPref(\OPTION_AUTO_PASS_ATTACK_REACT) == \OPTION_AUTO_ON) {
+      $args = $this->argsOpponentAmbush();
+      if (empty($args['_private']['active']['cards'])) {
+        $this->actPassAmbush(true);
+      }
     }
   }
 

@@ -1,6 +1,14 @@
 <?php
 
 /*
+ * Local user pref
+ */
+const OPTION_AUTO_PASS_ATTACK_REACT = 150;
+const OPTION_AUTO_OFF = 0;
+const OPTION_AUTO_ON = 1;
+
+
+/*
  * ST constants
  */
 const ST_GAME_SETUP = 1;

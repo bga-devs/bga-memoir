@@ -51,11 +51,6 @@ class BehindEnemyLines extends \M44\Models\Card
     }
   }
 
-  public function ignoreMovementRestrictions()
-  {
-    return true;
-  }
-
   public function getDiceModifier($unit, $cell)
   {
     $unit = $this->getActivatedUnit();

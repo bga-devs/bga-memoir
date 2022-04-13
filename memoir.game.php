@@ -106,6 +106,7 @@ class memoir extends Table
     $pId = $pId ?? self::getCurrentPId();
     $scenario = Scenario::get();
     return [
+      'localPrefs' => Preferences::getLocalPrefsData(),
       'prefs' => Preferences::getUiData($pId),
       'players' => Players::getUiData($pId),
       'board' => Board::getUiData(),

@@ -77,10 +77,7 @@ define(['dojo', 'dojo/_base/declare', 'ebg/core/gamegui'], (dojo, declare) => {
       dojo.place("<div id='restartAction' style='display:inline-block'></div>", $('customActions'), 'after');
 
       this.setupNotifications();
-      this.initPreferencesObserver();
-      if (!this.isReadOnly()) {
-        this.checkPreferencesConsistency(gamedatas.prefs);
-      }
+      this.initPreferences();
       dojo.connect(this.notifqueue, 'addToLog', () => {
         this.checkLogCancel(this._last_notif == null ? null : this._last_notif.msg.uid);
         this.addLogClass();
@@ -364,52 +361,117 @@ define(['dojo', 'dojo/_base/declare', 'ebg/core/gamegui'], (dojo, declare) => {
     /*
      * Preference polyfill
      */
-    setPreferenceValue(number, newValue) {
-      var optionSel = 'option[value="' + newValue + '"]';
-      dojo
-        .query(
-          '#preference_control_' + number + ' > ' + optionSel + ', #preference_fontrol_' + number + ' > ' + optionSel,
-        )
-        .attr('selected', true);
-      var select = $('preference_control_' + number);
-      if (dojo.isIE) {
-        select.fireEvent('onchange');
-      } else {
-        var event = document.createEvent('HTMLEvents');
-        event.initEvent('change', false, true);
-        select.dispatchEvent(event);
-      }
-    },
+     /*
+      * Preference polyfill
+      */
+     setPreferenceValue(number, newValue) {
+       var optionSel = 'option[value="' + newValue + '"]';
+       dojo
+         .query(
+           '#preference_control_' + number + ' > ' + optionSel + ', #preference_fontrol_' + number + ' > ' + optionSel,
+         )
+         .attr('selected', true);
+       var select = $('preference_control_' + number);
+       if (dojo.isIE) {
+         select.fireEvent('onchange');
+       } else {
+         var event = document.createEvent('HTMLEvents');
+         event.initEvent('change', false, true);
+         select.dispatchEvent(event);
+       }
+     },
 
-    initPreferencesObserver() {
-      dojo.query('.preference_control, preference_fontrol').on('change', (e) => {
-        var match = e.target.id.match(/^preference_[fc]ontrol_(\d+)$/);
-        if (!match) {
-          return;
-        }
-        var pref = match[1];
-        var newValue = e.target.value;
-        this.prefs[pref].value = newValue;
-        $('preference_control_' + pref).value = newValue;
-        $('preference_fontrol_' + pref).value = newValue;
+     initPreferencesObserver() {
+       dojo.query('.preference_control, preference_fontrol').on('change', (e) => {
+         var match = e.target.id.match(/^preference_[fc]ontrol_(\d+)$/);
+         if (!match) {
+           return;
+         }
+         var pref = match[1];
+         var newValue = e.target.value;
+         this.prefs[pref].value = newValue;
+         if (this.prefs[pref].attribute) {
+           $('ebd-body').setAttribute('data-' + this.prefs[pref].attribute, newValue);
+         }
 
-        data = { pref: pref, lock: false, value: newValue, player: this.player_id };
-        this.takeAction('actChangePref', data, false, false);
-        this.onPreferenceChange(pref, newValue);
-      });
-    },
+         $('preference_control_' + pref).value = newValue;
+         if ($('preference_fontrol_' + pref)) {
+           $('preference_fontrol_' + pref).value = newValue;
+         }
+         data = { pref: pref, lock: false, value: newValue, player: this.player_id };
+         this.takeAction('actChangePref', data, false, false);
+         this.onPreferenceChange(pref, newValue);
+       });
+     },
 
-    checkPreferencesConsistency(backPrefs) {
-      backPrefs.forEach((prefInfo) => {
-        let pref = prefInfo.pref_id;
-        if (this.prefs[pref] != undefined && this.prefs[pref].value != prefInfo.pref_value) {
-          data = { pref: pref, lock: false, value: this.prefs[pref].value, player: this.player_id };
-          this.takeAction('actChangePref', data, false, false);
-        }
-      });
-    },
+     checkPreferencesConsistency(backPrefs) {
+       backPrefs.forEach((prefInfo) => {
+         let pref = prefInfo.pref_id;
+         if (this.prefs[pref] != undefined && this.prefs[pref].value != prefInfo.pref_value) {
+           data = { pref: pref, lock: false, value: this.prefs[pref].value, player: this.player_id };
+           this.takeAction('actChangePref', data, false, false);
+         }
+       });
+     },
 
-    onPreferenceChange(pref, newValue) {},
+     onPreferenceChange(pref, newValue) {},
+
+     // Init preferences will setup local preference and put the corresponding data-attribute on overall-content div if needed
+     initPreferences() {
+       // Attach data attribute on overall-content div
+       Object.keys(this.prefs).forEach((prefId) => {
+         let pref = this.prefs[prefId];
+         if (pref.attribute) {
+           $('ebd-body').setAttribute('data-' + pref.attribute, pref.value);
+         }
+       });
+
+       if (!this.isReadOnly()) {
+         // Create local prefs
+         Object.keys(this.gamedatas.localPrefs).forEach((prefId) => {
+           let pref = this.gamedatas.localPrefs[prefId];
+           pref.id = prefId;
+           let selectedValue = this.gamedatas.prefs.find((pref2) => pref2.pref_id == pref.id).pref_value;
+           pref.value = selectedValue;
+           this.prefs[prefId] = pref;
+           if (pref.attribute) {
+             $('ebd-body').setAttribute('data-' + pref.attribute, pref.value);
+           }
+           this.place('tplPreferenceSelect', pref, 'local-prefs-container');
+         });
+       }
+
+       this.initPreferencesObserver();
+       if (!this.isReadOnly()) {
+         this.checkPreferencesConsistency(this.gamedatas.prefs);
+       }
+     },
+
+     tplPreferenceSelect(pref) {
+       let values = Object.keys(pref.values)
+         .map(
+           (val) =>
+             `<option value='${val}' ${pref.value == val ? 'selected="selected"' : ''}>${_(
+               pref.values[val].name,
+             )}</option>`,
+         )
+         .join('');
+
+       return `
+         <div class="preference_choice">
+           <div class="row-data row-data-large">
+             <div class="row-label">${_(pref.name)}</div>
+             <div class="row-value">
+               <select id="preference_control_${
+                 pref.id
+               }" class="preference_control game_local_preference_control" style="display: block;">
+                 ${values}
+               </select>
+             </div>
+           </div>
+         </div>
+       `;
+     },
 
     getScale(id) {
       let transform = dojo.style(id, 'transform');
