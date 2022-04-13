@@ -331,7 +331,8 @@ html {
       #m44-tokens-settings,
       #m44-labels-settings,
       #m44-coords-settings,
-      #m44-summary-settings {
+      #m44-summary-settings,
+      #m44-react-settings {
         width: 40px;
         padding: 6px 6px;
 
@@ -347,7 +348,8 @@ html {
       }
 
       #m44-coords-settings,
-      #m44-board-zoom-out {
+      #m44-board-zoom-out,
+      #m44-summary-settings {
         border-bottom: 1px solid #0f330a;
       }
     }
@@ -390,6 +392,13 @@ html {
       display: none;
     }
     #m44-board-wrapper[data-summary='2'] ~ #right-holder #m44-summary-settings svg:not(:last-of-type) {
+      display: none;
+    }
+
+    [data-auto-react='0'] & #right-holder #m44-react-settings svg:first-of-type {
+      display: none;
+    }
+    [data-auto-react='1'] & #right-holder #m44-react-settings svg:last-of-type {
       display: none;
     }
   }

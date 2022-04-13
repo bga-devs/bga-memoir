@@ -97,7 +97,10 @@ define([
      */
     setup(gamedatas) {
       debug('SETUP', gamedatas);
+      let container = $('pagesection_options').querySelector('.pagesection');
+      dojo.place('<div id="local-prefs-container"></div>', container);
       this.inherited(arguments);
+
 
       // Basic twist of UI
       dojo.place('<div id="title-content-wrapper"></div>', 'after-page-title', 'before');

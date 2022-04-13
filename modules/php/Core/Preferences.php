@@ -17,7 +17,16 @@ class Preferences extends \M44\Helpers\DB_Manager
 
   public static function getLocalPrefsData()
   {
-    return [];
+    return [
+      OPTION_AUTO_PASS_ATTACK_REACT => [
+        'name' => clienttranslate('Auto-pass react if no Ambush in hand'),
+        'attribute' => 'auto-react',
+        'values' => [
+          OPTION_AUTO_OFF => ['name' => clienttranslate('Disabled')],
+          OPTION_AUTO_ON => ['name' => clienttranslate('Enabled')],
+        ],
+      ],
+    ];
   }
 
   /*

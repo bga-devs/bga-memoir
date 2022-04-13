@@ -174,6 +174,12 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       this._summaryCardsBehavior = this.getConfig('m44summaryCards', this.isMobile() ? 2 : 1);
       $('m44-board-wrapper').dataset.summary = this._summaryCardsBehavior;
       dojo.connect($('m44-summary-settings'), 'click', () => this.changeSummaryCardsBehavior());
+
+      if (!this.isReadOnly()) {
+        dojo.connect($('m44-react-settings'), 'click', () => {
+          this.setPreferenceValue(150, 1 - this.prefs[150].value);
+        });
+      }
     },
 
     removeClassNameOfCells(className) {

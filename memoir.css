@@ -313,7 +313,8 @@ html {
       #m44-container #m44-central-part #right-holder #m44-tokens-settings,
       #m44-container #m44-central-part #right-holder #m44-labels-settings,
       #m44-container #m44-central-part #right-holder #m44-coords-settings,
-      #m44-container #m44-central-part #right-holder #m44-summary-settings {
+      #m44-container #m44-central-part #right-holder #m44-summary-settings,
+      #m44-container #m44-central-part #right-holder #m44-react-settings {
         width: 40px;
         padding: 6px 6px; }
         #m44-container #m44-central-part #right-holder #m44-board-zoom-in svg,
@@ -323,7 +324,8 @@ html {
         #m44-container #m44-central-part #right-holder #m44-tokens-settings svg,
         #m44-container #m44-central-part #right-holder #m44-labels-settings svg,
         #m44-container #m44-central-part #right-holder #m44-coords-settings svg,
-        #m44-container #m44-central-part #right-holder #m44-summary-settings svg {
+        #m44-container #m44-central-part #right-holder #m44-summary-settings svg,
+        #m44-container #m44-central-part #right-holder #m44-react-settings svg {
           width: 40px;
           height: 40px;
           cursor: pointer; }
@@ -334,11 +336,13 @@ html {
         #m44-container #m44-central-part #right-holder #m44-tokens-settings:hover svg,
         #m44-container #m44-central-part #right-holder #m44-labels-settings:hover svg,
         #m44-container #m44-central-part #right-holder #m44-coords-settings:hover svg,
-        #m44-container #m44-central-part #right-holder #m44-summary-settings:hover svg {
+        #m44-container #m44-central-part #right-holder #m44-summary-settings:hover svg,
+        #m44-container #m44-central-part #right-holder #m44-react-settings:hover svg {
           fill: white;
           color: white; }
       #m44-container #m44-central-part #right-holder #m44-coords-settings,
-      #m44-container #m44-central-part #right-holder #m44-board-zoom-out {
+      #m44-container #m44-central-part #right-holder #m44-board-zoom-out,
+      #m44-container #m44-central-part #right-holder #m44-summary-settings {
         border-bottom: 1px solid #0f330a; }
     #m44-container #m44-central-part #m44-board-wrapper[data-terrains='1'] ~ #right-holder #m44-terrains-settings svg:first-of-type {
       display: none; }
@@ -365,6 +369,10 @@ html {
     #m44-container #m44-central-part #m44-board-wrapper[data-summary='1'] ~ #right-holder #m44-summary-settings svg:not(:nth-of-type(2)) {
       display: none; }
     #m44-container #m44-central-part #m44-board-wrapper[data-summary='2'] ~ #right-holder #m44-summary-settings svg:not(:last-of-type) {
+      display: none; }
+    [data-auto-react='0'] #m44-container #m44-central-part #right-holder #m44-react-settings svg:first-of-type {
+      display: none; }
+    [data-auto-react='1'] #m44-container #m44-central-part #right-holder #m44-react-settings svg:last-of-type {
       display: none; }
   #m44-container #m44-bottom-container {
     position: relative;
