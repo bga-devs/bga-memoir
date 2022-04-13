@@ -101,6 +101,11 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
     return $this->cannotIgnoreFlags;
   }
 
+  public function isType($cardType)
+  {
+    return $this->getType() == $cardType;
+  }
+
   public function jsonSerialize()
   {
     return [
