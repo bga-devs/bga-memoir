@@ -13,6 +13,7 @@ class AntiTank extends Infantry
     $this->maxGrounds = 0; // unit with equipment cannot take ground
     $this->cannotBattleIfMoved = true;
     $this->applyPropertiesModifiers();
+    $this->desc[] = clienttranslate('Stars hit on Armor units');
   }
 
   public function getHitsOnTarget($type, $nb, $target)
