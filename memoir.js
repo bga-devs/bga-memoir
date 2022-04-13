@@ -146,14 +146,14 @@ define([
       dojo.empty('m44-board-units');
       dojo.empty('m44-board-labels');
 
-      dojo.empty('top-medals-slots');
-      dojo.empty('bottom-medals-slots');
+      dojo.empty('bottom-medals-container');
+      dojo.empty('top-medals-container');
 
       if (!partial) {
-        dojo.empty('bottom-medals-container');
+        dojo.empty('bottom-medals-slots');
         dojo.empty('bottom-team-players');
         dojo.empty('bottom-in-play');
-        dojo.empty('top-medals-container');
+        dojo.empty('top-medals-slots');
         dojo.empty('top-team-players');
         dojo.empty('top-in-play');
 
