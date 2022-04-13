@@ -118,6 +118,7 @@ class memoir extends Table
       'units' => Units::getStaticUiData(),
 
       'canceledNotifIds' => Log::getCanceledNotifIds(),
+      'visibility' => Globals::getNightVisibility(),
     ];
   }
 
