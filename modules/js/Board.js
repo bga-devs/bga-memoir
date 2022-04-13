@@ -166,19 +166,38 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       dojo.connect($('m44-board-zoom-in'), 'click', () => this.incBoardScale(0.1));
       dojo.connect($('m44-board-zoom-out'), 'click', () => this.incBoardScale(-0.1));
 
+      let buttonsTooltips = {
+        terrains: _('Show/hide the terrain hexes'),
+        units: _('Show/hide units'),
+        tokens: _('Show/hide tokens and medals'),
+        labels: _('Show/hide map labels'),
+        coords: _('Show/hide coordinate helpers'),
+      };
+
       ['terrains', 'units', 'tokens', 'labels', 'coords'].forEach((layer) => {
         this.toggleLayerVisibility(layer, this.getConfig('m44' + layer, 1));
         dojo.connect($(`m44-${layer}-settings`), 'click', () => this.toggleLayerVisibility(layer));
+        this.addTooltip(`m44-${layer}-settings`, '', buttonsTooltips[layer]);
       });
 
       this._summaryCardsBehavior = this.getConfig('m44summaryCards', this.isMobile() ? 2 : 1);
       $('m44-board-wrapper').dataset.summary = this._summaryCardsBehavior;
       dojo.connect($('m44-summary-settings'), 'click', () => this.changeSummaryCardsBehavior());
+      this.addTooltip(
+        `m44-summary-settings`,
+        '',
+        _('Enable/disable summary cards display when hovering/clicking the board cells'),
+      );
 
       if (!this.isReadOnly()) {
         dojo.connect($('m44-react-settings'), 'click', () => {
           this.setPreferenceValue(150, 1 - this.prefs[150].value);
         });
+        this.addTooltip(
+          `m44-react-settings`,
+          '',
+          _('Enable/disable auto-pass for reacting to close combat without any ambush card in hand'),
+        );
       }
     },
 
