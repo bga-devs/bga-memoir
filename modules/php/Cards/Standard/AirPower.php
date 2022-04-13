@@ -47,7 +47,7 @@ class AirPower extends \M44\Models\Card
     if (Globals::getNightVisibility() != \INFINITY) {
       return -1;
     }
-    parent::getHits($type, $nb);
+    return parent::getHits($type, $nb);
   }
 
   public function getArgsOrderUnits()

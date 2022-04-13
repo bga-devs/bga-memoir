@@ -55,7 +55,7 @@ class MedicsAndMechanics extends \M44\Models\Card
     if (empty($args['units'])) {
       Game::get()->nextState('draw');
     } elseif (count($args['units']) == 1) {
-      $this->actTargetMedics($args['units'][0]->getId());
+      $this->actTargetMedics([$args['units']->first()->getId()]);
     }
   }
 

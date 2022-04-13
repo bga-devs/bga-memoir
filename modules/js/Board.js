@@ -647,7 +647,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         unitData.movementRadius == unitData.movementAndAttackRadius
           ? _('Move 0-${maxBattle} and battle')
           : unitData.movementAndAttackRadius == 0
-          ? _('Move ${maxMove} or battle')
+          ? _('Move 0-${maxMove} or battle')
           : _('Move 0-${maxBattle} and battle or move ${maxMove} no battle'),
         { maxBattle: unitData.movementAndAttackRadius, maxMove: unitData.movementRadius },
       );
