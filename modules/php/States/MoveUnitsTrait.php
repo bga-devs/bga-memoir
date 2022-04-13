@@ -36,6 +36,7 @@ trait MoveUnitsTrait
     // Sanity checks
     self::checkAction('actMoveUnit');
     $player = Players::getCurrent();
+    $desertMove = $this->gamestate->state()['name'] == 'desertMove' ? true : false;
     if ($this->gamestate->state()['name'] == 'desertMove') {
       $args = $this->argsDesertMove();
     } else {
@@ -63,13 +64,16 @@ trait MoveUnitsTrait
         $unit->mustStop();
       }
 
-      $unit->incMoves($c['cost'] ?? 1);
+      if (!$desertMove) {
+        // do not inc moves if desert moves
+        $unit->incMoves($c['cost'] ?? 1);
+      }
       Notifications::moveUnit($player, $unit, $coordSource, $c);
       list($interrupted, $isWinning) = Board::moveUnit($unit, $c);
       if ($isWinning) {
         return;
       } elseif ($interrupted) {
-        if ($this->gamestate->state()['name'] == 'desertMove') {
+        if ($desertMove) {
           $this->nextState('overrun');
           return;
         }

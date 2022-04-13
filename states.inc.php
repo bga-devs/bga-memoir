@@ -288,6 +288,7 @@ $machinestates = [
     'descriptionmyturn' => clienttranslate('${you}  may move an additional hex (Desert rules)'),
     'type' => 'activeplayer',
     'args' => 'argsDesertMove',
+    'action' => 'stDesertMove',
     'possibleactions' => ['actMoveUnit', 'actMoveUnitsDone'],
     'transitions' => [
       'overrun' => ST_ARMOR_OVERRUN,
