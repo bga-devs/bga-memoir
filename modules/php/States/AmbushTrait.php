@@ -38,11 +38,10 @@ trait AmbushTrait
 
     // If the ambush card is in the discard => pass
     $card = Cards::getByType(\CARD_AMBUSH)->first();
-    if($card->getLocation() == 'discard'){
+    if ($card->getLocation() == 'discard') {
       $this->actPassAmbush(true);
       return;
     }
-
 
     // If player has autoskip and no ambush in hand => pass
     $player = Players::getActive();
@@ -90,7 +89,7 @@ trait AmbushTrait
 
     // $hits = $ambushedUnit->getHits($results);
     $hits = $this->calculateHits($unit, $ambushedUnit, null, $results);
-    $eliminated = $this->damageUnit($ambushedUnit, $hits, false, true);
+    $eliminated = $this->damageUnit($ambushedUnit, $player, $hits, false, true);
 
     if (Teams::checkVictory()) {
       return;

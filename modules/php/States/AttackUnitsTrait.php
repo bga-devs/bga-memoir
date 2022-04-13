@@ -159,7 +159,7 @@ trait AttackUnitsTrait
     $currentAttack = array_pop($stack);
     Globals::setAttackStack($stack);
     Globals::setUnitAttacker($currentAttack['unitId'] ?? null);
-    
+
     if ($transition) {
       if (empty($stack)) {
         // No more pending attack, jump to next attack
@@ -223,7 +223,7 @@ trait AttackUnitsTrait
 
     // $hits = $oppUnit->getHits($results);
     $hits = $this->calculateHits($unit, $oppUnit, $card, $results);
-    $eliminated = $this->damageUnit($oppUnit, $hits);
+    $eliminated = $this->damageUnit($oppUnit, $player, $hits);
     if (Teams::checkVictory()) {
       return;
     }
@@ -293,7 +293,7 @@ trait AttackUnitsTrait
   /**
    * Damage a unit and return whether it's eliminated or not
    */
-  public function damageUnit($unit, $hits, $cantRetreat = false, $ambush = false)
+  public function damageUnit($unit, $attacker, $hits, $cantRetreat = false, $ambush = false)
   {
     if ($hits == 0) {
       Notifications::miss($unit);
@@ -303,19 +303,20 @@ trait AttackUnitsTrait
     // Take the hits
     $realHits = $unit->takeDamage($hits);
     // Increase the stats
-    $attack = $this->getCurrentAttack();
-    if ($attack !== null) {
-      if (!$ambush) {
-        $attacker = $attack['player'];
-      } else {
-        $attacker = $attack['oppUnit']->getPlayer();
-      }
-    } else {
-      $attacker = $unit
-        ->getTeam()
-        ->getOpponent()
-        ->getCommander();
-    }
+
+    // $attack = $this->getCurrentAttack();
+    // if ($attack !== null) {
+    //   if (!$ambush) {
+    //     $attacker = $attack['player'];
+    //   } else {
+    //     $attacker = $attack['oppUnit']->getPlayer();
+    //   }
+    // } else {
+    //   $attacker = $unit
+    //     ->getTeam()
+    //     ->getOpponent()
+    //     ->getCommander();
+    // }
 
     $statName = 'inc' . $unit->getStatName() . 'FigRound' . Globals::getRound();
     Stats::$statName($attacker, $realHits);
@@ -496,7 +497,7 @@ trait AttackUnitsTrait
     $results = Dice::roll($player, 1, $oppUnit->getPos());
 
     $hits = $this->calculateHits(null, $oppUnit, null, $results);
-    $eliminated = $this->damageUnit($oppUnit, $hits);
+    $eliminated = $this->damageUnit($oppUnit, $player, $hits);
 
     if (Teams::checkVictory()) {
       return;

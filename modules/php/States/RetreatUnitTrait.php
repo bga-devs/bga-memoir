@@ -67,7 +67,11 @@ trait RetreatUnitTrait
     $args = $this->argsRetreatUnit();
     if ($args['hits'] > 0) {
       $unit = Units::get($args['unitId']);
-      $eliminated = $this->damageUnit($unit, $args['hits'], true);
+      $attacker = $unit
+        ->getTeam()
+        ->getOpponent()
+        ->getCommander();
+      $eliminated = $this->damageUnit($unit, $attacker, $args['hits'], true);
       $retreatInfo = Globals::getRetreat();
       $retreatInfo['min'] -= $args['hits'];
       if ($unit->isEliminated()) {

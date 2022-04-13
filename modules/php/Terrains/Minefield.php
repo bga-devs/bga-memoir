@@ -69,9 +69,12 @@ class Minefield extends \M44\Models\Terrain
     } else {
       $player = $unit->getPlayer();
       $results = Dice::roll($player, $value, $unit->getPos());
-
+      $attacker = $unit
+        ->getTeam()
+        ->getOpponent()
+        ->getCommander();
       $hits = Game::get()->calculateHits(null, $unit, null, $results);
-      return Game::get()->damageUnit($unit, $hits);
+      return Game::get()->damageUnit($unit, $attacker, $hits);
     }
   }
 

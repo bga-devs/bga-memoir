@@ -32,9 +32,13 @@ class FrozenRiver extends \M44\Models\Terrain
     }
 
     $player = $unit->getPlayer();
+    $attacker = $unit
+      ->getTeam()
+      ->getOpponent()
+      ->getCommander();
     $results = Dice::roll($player, 2, $unit->getPos());
 
     $hits = $results[\DICE_STAR] ?? 0;
-    return Game::get()->damageUnit($unit, $hits);
+    return Game::get()->damageUnit($unit, $attacker, $hits);
   }
 }
