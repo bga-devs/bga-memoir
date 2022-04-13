@@ -295,5 +295,9 @@ SQL;
         self::applyDbUpgradeToAllDB($sql);
       }
     }
+
+    if ($from_version <= 2204130041) {
+      Globals::setNightVisibility(INFINITY);
+    }
   }
 }
