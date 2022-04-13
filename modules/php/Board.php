@@ -230,7 +230,7 @@ class Board
     $maxDistance = $unit->getMovementRadius();
     $card = $unit->getActivationOCard();
     if ($card != null) {
-      if ($card->isType(CARD_BEHIND_LINES)) {
+      if ($card->isType(CARD_BEHIND_LINES) && $unit->getType() == INFANTRY) {
         $maxDistance = 3; // Units activated by "BehindEnemyLines" can moves up to 3 hexes
       } elseif ($card->isType(CARD_INFANTRY_ASSAULT) && $unit->getType() == INFANTRY) {
         $maxDistance++;
@@ -379,7 +379,6 @@ class Board
       }
     }
 
-
     // Ask the terrains about entering/leaving costs
     $cost = 1;
     foreach ($sourceCell['terrains'] as $terrain) {
@@ -389,10 +388,9 @@ class Board
       $cost = max($cost, $terrain->getEnteringDeplacementCost($unit, $source, $target, $d, $takeGround));
     }
 
-
     // Units activated by "BehindEnemyLines" card have no terrain restriction
-    if ($unit->getActivationOCard()->isType(CARD_BEHIND_LINES)) {
-      return ($cost == INFINITY)? INFINITY : 1;
+    if ($unit->getActivationOCard()->isType(CARD_BEHIND_LINES) && $unit->getType() == INFANTRY) {
+      return $cost == INFINITY ? INFINITY : 1;
     }
 
     // Check terrain restriction
@@ -410,7 +408,6 @@ class Board
       }
     }
 
-
     return $cost;
   }
 
@@ -420,7 +417,7 @@ class Board
   public static function isValidPath($unit, $cell, $path)
   {
     // All paths are valid for Behind ennemy lines
-    if ($unit->getActivationOCard()->isType(CARD_BEHIND_LINES)) {
+    if ($unit->getActivationOCard()->isType(CARD_BEHIND_LINES) && $unit->getType() == INFANTRY) {
       return true;
     }
 
@@ -523,7 +520,7 @@ class Board
     if ($card !== null) {
       if ($card->isType(CARD_INFANTRY_ASSAULT) && $unit->getType() == \INFANTRY) {
         $maxMoves++;
-      } elseif ($card->isType(CARD_BEHIND_LINES)) {
+      } elseif ($card->isType(CARD_BEHIND_LINES) && $unit->getType() == INFANTRY) {
         $maxMoves = INFINITY;
       }
     }
