@@ -157,4 +157,12 @@ trait TakeGroundTrait
       'lastUnitMoved' => $unit->getId(),
     ];
   }
+
+  public function stDesertMove()
+  {
+    $args = $this->argsDesertMove();
+    if (count($args['units'][$args['lastUnitMoved']]) == 0) {
+      $this->actMoveUnitsDone();
+    }
+  }
 }
