@@ -672,15 +672,8 @@ class Board
         continue;
       }
 
-      if (!$unit->mustSeeToAttack()) {
-        continue;
-      }
-
-      // If the cell is not blocking the line of sight, skip unless it's blocking the attack (some mountains for instance)
-      if (
-        !self::isBlockingLineOfSight($unit, $target, $cell, $path) &&
-        !self::isBlockingLineOfAttack($unit, $target, $cell, $path)
-      ) {
+      // If the cell is not blocking the line of sight, skip
+      if (!self::isBlockingLineOfSight($unit, $target, $cell, $path)) {
         continue;
       }
 
@@ -715,22 +708,6 @@ class Board
       }
 
       if ($unit->mustSeeToAttack() && $t->isBlockingLineOfSight($unit, $target, $path)) {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  /**
-   * Return whether a given cell is blocking line of attack
-   */
-  public static function isBlockingLineOfAttack($unit, $target, $cell, $path)
-  {
-    $t = self::$grid[$cell['x']][$cell['y']];
-
-    foreach ($t['terrains'] as $t) {
-      if ($t->isBlockingLineOfAttack($unit)) {
         return true;
       }
     }
