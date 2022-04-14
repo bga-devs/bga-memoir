@@ -7,7 +7,6 @@ const OPTION_AUTO_PASS_ATTACK_REACT = 150;
 const OPTION_AUTO_OFF = 0;
 const OPTION_AUTO_ON = 1;
 
-
 /*
  * ST constants
  */
@@ -275,6 +274,7 @@ const TROOP_CLASSES = [
   'inf2_30' => 'SkiTroop',
   'inf_30' => 'SkiTroop',
   'inf_37' => 'AntiTank',
+  'gun_35' => 'MobileArtillery',
 ];
 
 const TROOP_BADGE_MAPPING = ['FRENCH_RESISTANCE' => 'badge3'];
