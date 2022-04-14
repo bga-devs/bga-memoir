@@ -263,6 +263,18 @@ class Notifications
     );
   }
 
+  public static function discardHQCapture($player, $card)
+  {
+    self::notifyAll(
+      'discardCardItalianHighCommand',
+      clienttranslate('${player_name} discards ${card_name} due to capture of HQ'),
+      [
+        'player' => $player,
+        'card' => $card,
+      ]
+    );
+  }
+
   public static function discardCards($player, $cards)
   {
     if ($cards->count() == 1) {

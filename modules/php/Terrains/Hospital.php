@@ -11,10 +11,10 @@ class Hospital extends Oasis
 
   public function __construct($row)
   {
+    parent::__construct($row);
+
     $this->name = clienttranslate('Hospitals');
     $this->number = 55;
-
-    parent::__construct($row);
   }
 
   public function getPossibleMoveActions($unit)

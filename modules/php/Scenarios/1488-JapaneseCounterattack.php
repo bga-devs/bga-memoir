@@ -601,6 +601,7 @@ $scenarios[1488] = [
         'col' => 0,
         'terrain' => [
           'name' => 'pheadquarter',
+          'original_owner' => 'ALLIES',
         ],
         'tags' => [
           0 => [
@@ -629,6 +630,7 @@ $scenarios[1488] = [
         'col' => 8,
         'terrain' => [
           'name' => 'pheadquarter',
+          'original_owner' => 'ALLIES',
         ],
         'tags' => [
           0 => [

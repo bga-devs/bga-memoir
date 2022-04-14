@@ -234,6 +234,7 @@ $scenarios[4231] = [
         'col' => 14,
         'terrain' => [
           'name' => 'dcamp',
+          'original_owner' => 'ALLIES',
         ],
         'unit' => [
           'name' => 'infbrit',
