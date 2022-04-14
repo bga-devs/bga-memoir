@@ -297,6 +297,24 @@ class Notifications
     ]);
   }
 
+  public static function scoreSectionMedals($teamId, $medals)
+  {
+    self::notifyAll('scoreMedals', clienttranslate('${team_name} scores ${nb} medal(s) for empty section'), [
+      'teamId' => $teamId,
+      'nb' => $medals->count(),
+      'medals' => $medals->toArray(),
+    ]);
+  }
+
+  public static function removeSectionMedals($teamId, $medalIds)
+  {
+    self::notifyAll('removeSectionMedals', clienttranslate('${team_name} loses ${nb} medal(s)'), [
+      'teamId' => $teamId,
+      'nb' => count($medalIds),
+      'medalIds' => $medalIds,
+    ]);
+  }
+
   public static function addToken($token)
   {
     self::notifyAll('addToken', '', ['token' => $token]);

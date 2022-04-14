@@ -32,9 +32,10 @@ $scenarios[1518] = [
       0 => [
         'standard' => [],
       ],
-      'options' => [
-        'gung_ho' => true,
-      ],
+    ],
+    'options' => [
+      'gung_ho' => true,
+      'empty_section_medals' => ['sections' => [0, 1, 2], 'side' => ALLIES, 'count_for' => 1],
     ],
   ],
   'board' => [

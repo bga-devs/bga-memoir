@@ -65,6 +65,7 @@ define([
         ['reshuffle', 1000],
         ['scoreMedals', 1000],
         ['removeMedals', 1000],
+        ['removeSectionMedals', 1000],
         ['refreshInterface', 100],
         ['airDrop', 500],
         ['addToken', 1000],
@@ -100,7 +101,6 @@ define([
       let container = $('pagesection_options').querySelector('.pagesection');
       dojo.place('<div id="local-prefs-container"></div>', container);
       this.inherited(arguments);
-
 
       // Basic twist of UI
       dojo.place('<div id="title-content-wrapper"></div>', 'after-page-title', 'before');

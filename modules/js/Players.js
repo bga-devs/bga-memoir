@@ -174,6 +174,15 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       });
     },
 
+    notif_removeSectionMedals(n) {
+      debug('Notif: a team losed a medal for section', n);
+      n.args.medalIds.forEach((medalId) => {
+        this.slide('medal-' + medalId, 'cell-container-14-4', {
+          destroy: true,
+        });
+      });
+    },
+
     /////////////////////////////////
     //   ____              _
     //  / ___|__ _ _ __ __| |___

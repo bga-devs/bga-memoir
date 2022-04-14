@@ -165,6 +165,7 @@ const MEDAL_ELIMINATION = 1;
 const MEDAL_POSITION = 2;
 const MEDAL_SUDDEN_DEATH = 3;
 const MEDAL_DECOY = 4;
+const MEDAL_EMPTY_SECTION = 5;
 
 const TOKEN_MEDAL = 1;
 const TOKEN_MINE = 2;

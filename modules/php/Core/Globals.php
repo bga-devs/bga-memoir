@@ -46,6 +46,7 @@ class Globals extends \M44\Helpers\DB_Manager
     'britishCommand' => 'bool',
     'marineCommand' => 'bool',
     'nightVisibility' => 'int',
+    'emptySectionMedals' => 'obj',
   ];
 
   protected static $table = 'global_variables';

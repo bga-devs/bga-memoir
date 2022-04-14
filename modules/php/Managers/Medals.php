@@ -184,6 +184,65 @@ class Medals extends \M44\Helpers\DB_Manager
         }
       }
     }
+
+    if (!is_null(Globals::getEmptySectionMedals())) {
+      $data = Globals::getEmptySectionMedals();
+      $opponent = Teams::get($data['side'])
+        ->getOpponent()
+        ->getId();
+      $team = Teams::get($data['side']);
+      $empty = false;
+      foreach ($data['sections'] as $section) {
+        if (Units::getInSection($opponent, $section)->count() == 0) {
+          $empty = true;
+        }
+      }
+      // throw new \feException('titi');
+
+      $hasMedal =
+        self::DB()
+          ->where('type', MEDAL_EMPTY_SECTION)
+          ->where('team', $data['side'])
+          ->count() != 0;
+      if ($empty && !$hasMedal) {
+        $nMedals = $team->getMedals()->count();
+        $medalsObtained = $data['count_for'];
+        if ($nMedals + $medalsObtained > $team->getNVictory()) {
+          // Can't get more medals that winning condition
+          $medalsObtained = $team->getNVictory() - $nMedals;
+        }
+
+        $ids = [];
+
+        for ($i = 0; $i < $medalsObtained; $i++) {
+          $ids[] = self::DB()->insert([
+            'team' => $data['side'],
+            'type' => \MEDAL_EMPTY_SECTION,
+            'foreign_id' => null,
+            'sprite' => $data['side'] == ALLIES ? 'medal1' : 'medal2',
+          ]);
+        }
+        Notifications::scoreSectionMedals(
+          $team->getId(),
+          self::DB()
+            ->whereIn('id', $ids)
+            ->get()
+        );
+      } elseif (!$empty && $hasMedal) {
+        // remove medals
+        $ids = self::DB()
+          ->where('type', MEDAL_EMPTY_SECTION)
+          ->get()
+          ->getIds();
+
+        self::DB()
+          ->delete()
+          ->where('type', MEDAL_EMPTY_SECTION)
+          ->run();
+        $medals = is_array($ids) ? $ids : [$ids];
+        Notifications::removeSectionMedals($team->getId(), $medals);
+      }
+    }
   }
 
   public function addPositionMedals($team, $nMedals, $boardMedal)
