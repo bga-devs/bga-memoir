@@ -628,16 +628,8 @@ class Board
         $cardModifier = $unit->getActivationOCard()->getDiceModifier($unit, $cell);
       }
 
-      if (
-        !is_null($unit->getMaxMalus())
-        // && $cell['d'] == 1
-      ) {
-        $malus = $unit->getMaxMalus();
-        if ($offenseModifier <= $malus) {
-          $offenseModifier = $malus;
-          $malus = 0;
-        }
-        if ($defenseModifier <= $malus) {
+      if (!is_null($unit->getMaxMalus()) && $cell['d'] == 1) {
+        if ($defenseModifier <= $unit->getMaxMalus()) {
           $defenseModifier = $malus;
           $malus = 0;
         }
