@@ -627,6 +627,21 @@ class Board
       if ($unit->getActivationOCard() != null) {
         $cardModifier = $unit->getActivationOCard()->getDiceModifier($unit, $cell);
       }
+
+      if (
+        !is_null($unit->getMaxMalus())
+        // && $cell['d'] == 1
+      ) {
+        $malus = $unit->getMaxMalus();
+        if ($offenseModifier <= $malus) {
+          $offenseModifier = $malus;
+          $malus = 0;
+        }
+        if ($defenseModifier <= $malus) {
+          $defenseModifier = $malus;
+          $malus = 0;
+        }
+      }
       $cell['dice'] += $offenseModifier + $defenseModifier + $cardModifier;
     }
     // Keep only the cells with at least one attack dice
