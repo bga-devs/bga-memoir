@@ -16,6 +16,7 @@ class HillCave extends Hill
     $this->name = clienttranslate('Cave on a hill');
     $this->number = 52;
     $this->isCave = true;
+    $this->isImpassable = [ARMOR, \ARTILLERY];
   }
 
   public function getPossibleAttackActions($unit)
