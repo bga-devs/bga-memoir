@@ -490,6 +490,9 @@ define(['dojo', 'dojo/_base/declare', g_gamethemeurl + 'modules/js/vendor/nouisl
       Object.keys(this._settingsConfig).forEach((settingName) => {
         let config = this._settingsConfig[settingName];
         if (config.type == 'pref') {
+          if (config.local == true && this.isReadOnly()) {
+            return;
+          }
           // Pref type => just move the user pref around
           dojo.place($('preference_control_' + config.prefId).parentNode.parentNode, container);
           return;

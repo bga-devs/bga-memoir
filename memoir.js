@@ -147,7 +147,7 @@ define([
             },
           },
         },
-        autoPass: { type: 'pref', prefId: 150 },
+        autoPass: { type: 'pref', prefId: 150, local: true },
       };
     },
 
@@ -531,7 +531,7 @@ define([
     setupInfoPanel() {
       dojo.place(this.format_string(jstpl_configPlayerBoard, {}), 'player_boards', 'first');
 
-/*
+      /*
       let chk = $('help-mode-chk');
       dojo.connect(chk, 'onchange', () => this.toggleHelpMode(chk.checked));
       this.addTooltip('help-mode-switch', '', _('Toggle help/safe mode.'));
