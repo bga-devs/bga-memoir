@@ -132,9 +132,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           board.grid[col][row].tokens.forEach((token) => this.addToken(token));
 
           // Add tooltip listeners
-          cell.addEventListener('mouseenter', () => {
+          cell.addEventListener('mouseenter', (evt) => {
             if (this._summaryCardsBehavior == 1) {
-              this.openBoardTooltip(col, row);
+              this.openBoardTooltip(col, row, evt.clientX);
             }
           });
           cell.addEventListener('mouseleave', () => {
@@ -161,10 +161,6 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       dojo.place('<div id="lineOfSight"></div>', 'm44-board-units');
       dojo.place('<div id="diceContainer"></div>', 'm44-board-units');
       dojo.place('<div id="explosionContainer"></div>', 'm44-board-units');
-
-      this._boardScale = 1; // TODO localStorage
-      dojo.connect($('m44-board-zoom-in'), 'click', () => this.incBoardScale(0.1));
-      dojo.connect($('m44-board-zoom-out'), 'click', () => this.incBoardScale(-0.1));
 
       let buttonsTooltips = {
         terrains: _('Show/hide the terrain hexes'),
@@ -230,12 +226,6 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       if (val == 2 && !this.isMobile()) {
         this.changeSummaryCardsBehavior();
       }
-    },
-
-    incBoardScale(delta) {
-      this._boardScale += delta;
-      document.documentElement.style.setProperty('--memoirBoardScale', this._boardScale);
-      //TODO localStorage.setItem('agricolaCardScale', scale);
     },
 
     getBackgroundTile(face, dim, x, y) {
@@ -420,12 +410,23 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     //   |_|\___/ \___/|_|\__|_| .__/
     //                         |_|
     ////////////////////////////////////////
-    openBoardTooltip(col, row) {
+    openBoardTooltip(col, row, x) {
       let uid = col + '_' + row;
       if (this._boardTooltips[uid]) {
         // TODO
       } else {
         let cell = this._grid[col][row];
+
+        let w = 310;
+        let container = $('m44-central-part');
+        if (x > w) {
+          cell.openingPosition = 'left';
+        } else if (x < container.offsetWidth - w) {
+          cell.openingPosition = 'right';
+        } else {
+          return; // Not enough place to show them !
+        }
+
         if (
           (cell.terrains.length == 0 || this._terrainsVisibility == 0) &&
           (cell.unit == null || this._unitsVisibility == 0) &&
@@ -434,7 +435,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           return; // Nothing to show !
         }
 
-        let tooltip = this.place('tplBoardTooltip', cell, 'left-holder');
+        let tooltip = this.place('tplBoardTooltip', cell, container);
         tooltip.innerWidth;
         tooltip.classList.add('open');
         this._boardTooltips[uid] = tooltip;
@@ -455,7 +456,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       let tokenDivs = this._tokensVisibility == 0 ? [] : cell.tokens.map((token) => this.tplTokenSummary(token));
       let unitDiv = cell.unit && this._unitsVisibility == 1 ? this.tplUnitSummary(cell.unit) : '';
 
-      return `<div class='board-tooltip'>${unitDiv} ${terrainDivs.join('')} ${tokenDivs.join('')}</div>`;
+      return `<div class='board-tooltip' style='${cell.openingPosition}:0px'>${unitDiv} ${terrainDivs.join(
+        '',
+      )} ${tokenDivs.join('')}</div>`;
     },
 
     tplTerrainSummary(terrain) {

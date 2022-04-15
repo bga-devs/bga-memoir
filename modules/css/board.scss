@@ -352,7 +352,7 @@
 .board-tooltip {
   position: absolute;
   top: 0;
-  left: 0px;
+  z-index: 4;
   width: 310px;
   height: 100%;
   padding: 18px 0px;

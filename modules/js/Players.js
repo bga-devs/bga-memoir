@@ -17,6 +17,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       this.forEachPlayer((player) => {
         let pos = player.team == this._bottomTeam ? 'bottom' : 'top';
         this.place('tplPlayerPanel', player, pos + '-team-players');
+        dojo.place(`<div class="m44-team-name" data-team="${player.team}">${_(player.team)}</div><div id="player-panel-holder-${player.id}"></div>`, 'overall_player_board_' + player.id);
         dojo.place(`<div class='card-in-play' id='in-play-${player.id}'></div>`, pos + '-in-play');
         this._handCounters[player.id] = this.createCounter(`hand-count-${player.id}`, player.cardsCount);
 
@@ -35,6 +36,31 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
         if (player.isCommissar && player.id == this.player_id) {
           dojo.place('commissar-holder-' + player.id, 'm44-player-hand', 'first');
+        }
+      });
+    },
+
+    updateLayout(layout) {
+      $('m44-container').dataset.layout = layout;
+      if (layout == 1) {
+        dojo.place('m44-top-part', 'm44-top-container', 'first');
+        dojo.place('m44-bottom-part', 'm44-bottom-container', 'first');
+        dojo.place('top-medals', 'top-team', 'first');
+        dojo.place('bottom-medals', 'bottom-team', 'first');
+      } else if (layout == 0) {
+        dojo.place('m44-top-part', 'left-holder', 'first');
+        dojo.place('m44-bottom-part', 'left-holder', 'last');
+        dojo.place('top-team-name', 'm44-top-hrule');
+        dojo.place('bottom-team-name', 'm44-bottom-hrule');
+        dojo.place('top-medals', 'm44-top-hrule');
+        dojo.place('bottom-medals', 'm44-bottom-hrule');
+      }
+
+      this.forEachPlayer((player) => {
+        let container = (layout == 1 ? 'm44-player-pannel-' : 'player-panel-holder-') + player.id;
+        dojo.place(`hand-count-holder-${player.id}`, container);
+        if ($(`commissar-holder-${player.id}`)) {
+          dojo.place(`commissar-holder-${player.id}`, container);
         }
       });
     },
@@ -66,14 +92,14 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         </div>`
         : '';
 
-      return `<div class='m44-player-panel'>
+      return `<div class='m44-player-panel' id="m44-player-pannel-${player.id}">
         <div class='player-avatar'>
           <img src="${img.src}" alt="" class="avatar emblem" />
         </div>
         <div class='player-name' style='color:#${player.color}' data-commissar="${player.isCommissar ? 1 : 0}">${
         player.name
       }</div>
-        <div class='hand-count-holder'>
+        <div class='hand-count-holder' id='hand-count-holder-${player.id}'>
           <div class='hand-count-back'></div>
           <div class='hand-count' id="hand-count-${player.id}">${player.cardsCount}</div>
         </div>

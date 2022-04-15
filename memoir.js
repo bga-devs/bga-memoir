@@ -86,6 +86,69 @@ define([
 
       this._backCardIdCounter = -1; // Used to generate unique id for backCards
       this._boardTooltips = {}; // Used to store pending board tooltip element
+
+      this._settingsConfig = {
+        layout: {
+          default: 0,
+          name: _('Layout'),
+          attribute: 'layout',
+          type: 'select',
+          values: {
+            0: _('Compact'),
+            1: _('Standard'),
+          },
+        },
+        boardScale: {
+          default: 100,
+          name: _('Board scale'),
+          type: 'slider',
+          sliderConfig: {
+            step: 5,
+            padding: 10,
+            range: {
+              min: [50],
+              max: [200],
+            },
+          },
+        },
+        centralZone: {
+          default: 0,
+          name: _('Central zone behavior'),
+          attribute: 'centralZone',
+          type: 'select',
+          values: {
+            0: _('Fixed height (scrollable board)'),
+            1: _('Dynamic (no scroll)'),
+          },
+        },
+        centralZoneHeight: {
+          default: 600,
+          name: _('Central zone height'),
+          type: 'slider',
+          sliderConfig: {
+            step: 5,
+            padding: 10,
+            range: {
+              min: [500],
+              max: [1000],
+            },
+          },
+        },
+        cardScale: {
+          default: 70,
+          name: _('Card scale'),
+          type: 'slider',
+          sliderConfig: {
+            step: 5,
+            padding: 10,
+            range: {
+              min: [10],
+              max: [100],
+            },
+          },
+        },
+        autoPass: { type: 'pref', prefId: 150 },
+      };
     },
 
     /**
@@ -98,11 +161,9 @@ define([
      */
     setup(gamedatas) {
       debug('SETUP', gamedatas);
-      let container = $('pagesection_options').querySelector('.pagesection');
-      dojo.place('<div id="local-prefs-container"></div>', container);
-      this.inherited(arguments);
 
       // Basic twist of UI
+      this.setupInfoPanel();
       dojo.place('<div id="title-content-wrapper"></div>', 'after-page-title', 'before');
       [
         'after-page-title',
@@ -142,6 +203,10 @@ define([
       if (gamedatas.discard) {
         this.addCard(gamedatas.discard, 'discard');
       }
+
+      let container = $('pagesection_options').querySelector('.pagesection');
+      dojo.place('<div id="local-prefs-container"></div>', container);
+      this.inherited(arguments);
     },
 
     clearInterface(partial = false) {
@@ -358,6 +423,8 @@ define([
 
       this.addTooltip('clipboard-button', _('Show the scenario informations'), '');
       $('clipboard-button').addEventListener('click', () => dial.show());
+
+      $('scenario-name').innerHTML = _(this.gamedatas.scenario.name);
     },
 
     notif_updateVisibility(n) {
@@ -447,6 +514,44 @@ define([
         let scenario = JSON.parse(content);
         this.takeAction('actUploadScenario', { scenario: JSON.stringify(scenario), method: 'post' });
       });
+    },
+
+    //////////////////////////////////////////////////
+    //  ____       _   _   _
+    // / ___|  ___| |_| |_(_)_ __   __ _ ___
+    // \___ \ / _ \ __| __| | '_ \ / _` / __|
+    //  ___) |  __/ |_| |_| | | | | (_| \__ \
+    // |____/ \___|\__|\__|_|_| |_|\__, |___/
+    //                             |___/
+    //////////////////////////////////////////////////
+
+    setupInfoPanel() {
+      dojo.place(this.format_string(jstpl_configPlayerBoard, {}), 'player_boards', 'first');
+
+/*
+      let chk = $('help-mode-chk');
+      dojo.connect(chk, 'onchange', () => this.toggleHelpMode(chk.checked));
+      this.addTooltip('help-mode-switch', '', _('Toggle help/safe mode.'));
+*/
+    },
+
+    onChangeCardScaleSetting(scale) {
+      let elt = $('m44-player-hand');
+      if (elt) {
+        elt.style.setProperty('--memoirCardScale', (scale * 0.55) / 100);
+      }
+    },
+
+    onChangeBoardScaleSetting(scale) {
+      document.documentElement.style.setProperty('--memoirBoardScale', scale / 100);
+    },
+
+    onChangeCentralZoneHeightSetting(scale) {
+      document.documentElement.style.setProperty('--memoirCentralZone', scale);
+    },
+
+    onChangeLayoutSetting(layout) {
+      this.updateLayout(layout);
     },
   });
 });

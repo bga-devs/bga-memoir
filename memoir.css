@@ -54,8 +54,10 @@
   color: black; }
 
 html {
-  background: url("img/ui/background.jpg");
-  background-size: 75px; }
+  background: url("img/ui/background.jpg"); }
+
+:root {
+  --memoirCentralZone: 600; }
 
 #topbar {
   margin-bottom: 0px; }
@@ -141,7 +143,8 @@ html {
   #m44-container .m44-hrule {
     height: 11px;
     background: url("img/ui/h_rule.jpg");
-    background-repeat: repeat-x; }
+    background-repeat: repeat-x;
+    display: flex; }
   #m44-container #m44-top-container {
     height: 65px;
     position: relative;
@@ -150,6 +153,11 @@ html {
     flex-flow: column;
     justify-content: flex-end;
     box-shadow: 0px 2px 3px black; }
+  #m44-container[data-layout='0'] #m44-top-container {
+    height: 11px; }
+    #m44-container[data-layout='0'] #m44-top-container #top-medals {
+      left: 0px;
+      top: -10px; }
   #m44-container #m44-top-part {
     height: 54px;
     display: flex; }
@@ -161,27 +169,52 @@ html {
       #m44-container #m44-top-part #top-team #top-medals {
         position: absolute;
         bottom: -29px; }
+  #m44-container[data-layout='0'] #m44-central-part #left-holder {
+    width: 173px; }
+    #m44-container[data-layout='0'] #m44-central-part #left-holder .m44-team .m44-team-players {
+      display: none; }
+    #m44-container[data-layout='0'] #m44-central-part #left-holder .m44-team #m44-bottom-container {
+      border-left: none;
+      border-top: 1px solid #2f2f2f; }
+    #m44-container[data-layout='0'] #m44-central-part #left-holder .m44-team #m44-top-container {
+      border-left: none;
+      border-bottom: 1px solid #2f2f2f; }
   #m44-container #m44-central-part {
-    max-height: 600px;
-    min-height: 560px;
+    max-height: calc(var(--memoirCentralZone) * 1px);
+    min-height: calc(var(--memoirCentralZone) * 1px);
     display: flex;
     margin-top: 0px;
-    margin-bottom: 0px; }
+    margin-bottom: 0px;
+    overflow: hidden;
+    position: relative; }
+    [data-centralZone='1'] #m44-container #m44-central-part {
+      max-height: none;
+      min-height: auto; }
     #m44-container #m44-central-part #left-holder {
-      width: 122px;
+      width: 100px;
       flex-shrink: 0;
-      background: url("img/ui/game_left.png");
-      background-repeat: repeat-y;
+      background: url("img/ui/background.jpg");
       display: flex;
       flex-flow: column;
-      justify-content: center;
-      padding-left: 4px;
+      justify-content: space-between;
+      align-items: center;
       box-sizing: border-box;
-      row-gap: 5px;
       position: relative;
       z-index: 4;
-      margin-right: -8px;
-      padding: 18px 0px 18px 10px; }
+      margin-right: 20px; }
+      #m44-container #m44-central-part #left-holder::before {
+        content: '';
+        display: block;
+        position: absolute;
+        right: -20px;
+        width: 21px;
+        top: 0;
+        bottom: 0;
+        z-index: 10;
+        background-image: url("img/ui/game_left.jpg");
+        background-size: 100% auto;
+        background-repeat: repeat-y;
+        box-shadow: 2px 1px 3px black; }
       #m44-container #m44-central-part #left-holder #deck,
       #m44-container #m44-central-part #left-holder #discard,
       #m44-container #m44-central-part #left-holder #top-in-play,
@@ -294,43 +327,6 @@ html {
       background: #4a6632;
       box-shadow: -1px -1px 3px black;
       z-index: 4; }
-      #m44-container #m44-central-part #right-holder #scenario-informations {
-        display: flex;
-        flex-flow: column;
-        align-items: center;
-        border-bottom: 1px solid #0f330a; }
-        #m44-container #m44-central-part #right-holder #scenario-informations #clipboard-button {
-          width: 40px;
-          padding: 6px 6px;
-          display: flex;
-          justify-content: center;
-          align-items: center; }
-          #m44-container #m44-central-part #right-holder #scenario-informations #clipboard-button svg {
-            width: 80%;
-            cursor: pointer; }
-            #m44-container #m44-central-part #right-holder #scenario-informations #clipboard-button svg:hover {
-              fill: white; }
-        #m44-container #m44-central-part #right-holder #scenario-informations #night-visibility {
-          width: 40px;
-          height: 47px;
-          margin-bottom: 6px;
-          background-image: url("img/ui/visibility.jpg");
-          background-size: 600% 100%;
-          transition: background-position 500ms; }
-          #m44-container #m44-central-part #right-holder #scenario-informations #night-visibility[data-n='1'] {
-            background-position-x: 0%; }
-          #m44-container #m44-central-part #right-holder #scenario-informations #night-visibility[data-n='2'] {
-            background-position-x: 20%; }
-          #m44-container #m44-central-part #right-holder #scenario-informations #night-visibility[data-n='3'] {
-            background-position-x: 40%; }
-          #m44-container #m44-central-part #right-holder #scenario-informations #night-visibility[data-n='4'] {
-            background-position-x: 60%; }
-          #m44-container #m44-central-part #right-holder #scenario-informations #night-visibility[data-n='5'] {
-            background-position-x: 80%; }
-          #m44-container #m44-central-part #right-holder #scenario-informations #night-visibility[data-n='6'] {
-            background-position-x: 100%; }
-          #m44-container #m44-central-part #right-holder #scenario-informations #night-visibility[data-n='7'] {
-            background-position-x: 120%; }
       #m44-container #m44-central-part #right-holder #m44-board-zoom-in,
       #m44-container #m44-central-part #right-holder #m44-board-zoom-out,
       #m44-container #m44-central-part #right-holder #m44-terrains-settings,
@@ -366,7 +362,6 @@ html {
           fill: white;
           color: white; }
       #m44-container #m44-central-part #right-holder #m44-coords-settings,
-      #m44-container #m44-central-part #right-holder #m44-board-zoom-out,
       #m44-container #m44-central-part #right-holder #m44-summary-settings {
         border-bottom: 1px solid #0f330a; }
     #m44-container #m44-central-part #m44-board-wrapper[data-terrains='1'] ~ #right-holder #m44-terrains-settings svg:first-of-type {
@@ -409,6 +404,9 @@ html {
     background: url("img/ui/game_top.jpg");
     background-repeat: repeat;
     background-size: auto 180px; }
+  #m44-container[data-layout='0'] #m44-bottom-container #bottom-medals {
+    left: 0px;
+    top: -10px; }
   #m44-container #m44-bottom-part {
     height: 54px;
     display: flex; }
@@ -420,44 +418,31 @@ html {
       #m44-container #m44-bottom-part #bottom-team #bottom-medals {
         position: absolute;
         top: -29px; }
+  #m44-container[data-layout='0'] .m44-team-medals {
+    position: relative; }
+  #m44-container .m44-team-medals {
+    position: absolute;
+    z-index: 2; }
+    #m44-container .m44-team-medals .medals-slots-container,
+    #m44-container .m44-team-medals .medals-container {
+      height: 35px;
+      display: flex;
+      column-gap: 3px;
+      padding-left: 3px; }
+    #m44-container .m44-team-medals .medals-slots-container {
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      left: 0; }
+      #m44-container .m44-team-medals .medals-slots-container .m44-medal-slot {
+        width: 35px;
+        height: 35px;
+        background-image: url("img/ui/medalspot.png");
+        background-size: 100% 100%; }
   #m44-container .m44-team {
     display: flex;
     position: relative;
     width: 100%; }
-    #m44-container .m44-team .m44-team-medals {
-      position: absolute;
-      z-index: 2; }
-      #m44-container .m44-team .m44-team-medals .medals-slots-container,
-      #m44-container .m44-team .m44-team-medals .medals-container {
-        height: 35px;
-        display: flex;
-        column-gap: 3px;
-        padding-left: 3px; }
-      #m44-container .m44-team .m44-team-medals .medals-slots-container {
-        position: absolute;
-        z-index: -1;
-        top: 0;
-        left: 0; }
-        #m44-container .m44-team .m44-team-medals .medals-slots-container .m44-medal-slot {
-          width: 35px;
-          height: 35px;
-          background-image: url("img/ui/medalspot.png");
-          background-size: 100% 100%; }
-    #m44-container .m44-team .m44-team-name {
-      width: 90px;
-      color: white;
-      font-weight: bold;
-      font-family: Gunplay;
-      font-size: 24px;
-      display: flex;
-      justify-content: center;
-      align-items: center; }
-      #m44-container .m44-team .m44-team-name[data-team='AXIS'] {
-        background: radial-gradient(farthest-corner at 10% 95%, #b6291b, #dc672e);
-        border: 2px solid #b72c14; }
-      #m44-container .m44-team .m44-team-name[data-team='ALLIES'] {
-        background: radial-gradient(farthest-corner at 10% 95%, #77b3d2, #348eb1);
-        border: 2px solid #1d6f98; }
     #m44-container .m44-team .m44-team-players {
       display: flex;
       flex-grow: 1; }
@@ -466,12 +451,7 @@ html {
         display: flex;
         background: #ebd5bd;
         --memoirCardScale: 0.095;
-        border-right: 1px solid #2f2f2f;
-        /*
-        .card-in-play {
-          width: 65px;
-        }
-*/ }
+        border-right: 1px solid #2f2f2f; }
         #m44-container .m44-team .m44-team-players .m44-player-panel .player-avatar {
           display: flex;
           align-items: center;
@@ -481,43 +461,11 @@ html {
           min-width: 100px;
           padding: 5px 10px 5px 5px;
           border-right: 1px solid #2f2f2f; }
+        #m44-container .m44-team .m44-team-players .m44-player-panel .hand-count-holder {
+          background-color: #95612a3b; }
         #m44-container .m44-team .m44-team-players .m44-player-panel .commissar-holder {
-          display: flex;
-          padding: 2px 7px;
           background-color: #95612a3b;
           border-left: 1px solid #2f2f2f; }
-          #m44-container .m44-team .m44-team-players .m44-player-panel .commissar-holder .commissar-token {
-            width: 40px;
-            height: 40px;
-            background-image: url("img/ui/commissar.png");
-            background-size: 100% 100%;
-            margin-top: 2px; }
-          #m44-container .m44-team .m44-team-players .m44-player-panel .commissar-holder .commissar-slot {
-            position: relative;
-            width: 34px;
-            height: 48px;
-            margin-left: 3px; }
-            #m44-container .m44-team .m44-team-players .m44-player-panel .commissar-holder .commissar-slot .m44-card {
-              position: absolute; }
-        #m44-container .m44-team .m44-team-players .m44-player-panel .hand-count-holder {
-          display: flex;
-          padding: 2px 7px;
-          font-family: 'Gunplay';
-          font-size: 28px;
-          line-height: 52px;
-          background-color: #95612a3b; }
-          #m44-container .m44-team .m44-team-players .m44-player-panel .hand-count-holder .hand-count-back {
-            width: 34px;
-            height: 48px;
-            background-image: url("img/card_back.jpg");
-            background-size: auto 100%;
-            background-repeat: no-repeat;
-            background-position: center center; }
-          #m44-container .m44-team .m44-team-players .m44-player-panel .hand-count-holder .hand-count::before {
-            content: 'x';
-            margin: 0px 3px; }
-          #m44-container .m44-team .m44-team-players .m44-player-panel .hand-count-holder .m44-card {
-            position: absolute; }
     #m44-container .m44-team .m44-team-status {
       width: 172px;
       height: 52px;
@@ -540,13 +488,13 @@ html {
         background-position-x: 100%; }
   #m44-container #m44-player-hand {
     width: 100%;
-    height: 200px;
     --memoirCardScale: 0.38;
     display: flex;
     justify-content: center;
     align-items: center;
     column-gap: 10px;
-    z-index: 5; }
+    z-index: 5;
+    padding: 5px; }
     #m44-container #m44-player-hand .m44-card.choice {
       margin-top: -40px; }
     #m44-container #m44-player-hand .commissar-holder {
@@ -563,10 +511,74 @@ html {
         top: -10px;
         left: -10px; }
 
+.m44-team-name {
+  min-width: 60px;
+  height: 20px;
+  color: white;
+  font-weight: bold;
+  font-family: Gunplay;
+  font-size: 15px;
+  text-align: center;
+  line-height: 23px;
+  border: 1px solid white;
+  border-left: none;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  margin-top: -5px;
+  margin-right: 10px;
+  box-shadow: 1px 1px 3px black; }
+  .m44-team-name[data-team='AXIS'] {
+    background: radial-gradient(farthest-corner at 10% 95%, #b6291b, #dc672e); }
+  .m44-team-name[data-team='ALLIES'] {
+    background: radial-gradient(farthest-corner at 10% 95%, #77b3d2, #348eb1); }
+
+.player-board .m44-team-name {
+  position: absolute;
+  right: 3px;
+  top: 26px;
+  margin: 0;
+  box-shadow: 1px 1px 3px -1px black;
+  border-radius: 8px; }
+
+.hand-count-holder {
+  display: flex;
+  padding: 2px 7px;
+  font-family: 'Gunplay';
+  font-size: 28px;
+  line-height: 52px; }
+  .hand-count-holder .hand-count-back {
+    width: 34px;
+    height: 48px;
+    background-image: url("img/card_back.jpg");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: center center; }
+  .hand-count-holder .hand-count::before {
+    content: 'x';
+    margin: 0px 3px; }
+  .hand-count-holder .m44-card {
+    position: absolute; }
+
+.commissar-holder {
+  display: flex;
+  padding: 2px 7px; }
+  .commissar-holder .commissar-token {
+    width: 40px;
+    height: 40px;
+    background-image: url("img/ui/commissar.png");
+    background-size: 100% 100%;
+    margin-top: 2px; }
+  .commissar-holder .commissar-slot {
+    position: relative;
+    width: 34px;
+    height: 48px;
+    margin-left: 3px; }
+    .commissar-holder .commissar-slot .m44-card {
+      position: absolute; }
+
 /*
 
 
---memoirCardScale: 0.2;
 
 #top-player {
   position: relative;
@@ -590,7 +602,6 @@ html {
 
     &.inplay {
       max-height: none;
-      --memoirCardScale: 0.3;
     }
   }
 }
@@ -1398,7 +1409,7 @@ html {
 .board-tooltip {
   position: absolute;
   top: 0;
-  left: 0px;
+  z-index: 4;
   width: 310px;
   height: 100%;
   padding: 18px 0px;
@@ -4156,5 +4167,414 @@ span.m44-dice-result {
   width: 70px;
   height: 70px;
   clip-path: none; }
+
+/*! nouislider - 14.6.0 - 6/27/2020 */
+.noUi-target, .noUi-target * {
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -ms-touch-action: none;
+  touch-action: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.noUi-target {
+  position: relative; }
+
+.noUi-base, .noUi-connects {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1; }
+
+.noUi-connects {
+  overflow: hidden;
+  z-index: 0; }
+
+.noUi-connect, .noUi-origin {
+  will-change: transform;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  -ms-transform-origin: 0 0;
+  -webkit-transform-origin: 0 0;
+  -webkit-transform-style: preserve-3d;
+  transform-origin: 0 0;
+  transform-style: flat; }
+
+.noUi-connect {
+  height: 100%;
+  width: 100%; }
+
+.noUi-origin {
+  height: 10%;
+  width: 10%; }
+
+.noUi-txt-dir-rtl.noUi-horizontal .noUi-origin {
+  left: 0;
+  right: auto; }
+
+.noUi-vertical .noUi-origin {
+  width: 0; }
+
+.noUi-horizontal .noUi-origin {
+  height: 0; }
+
+.noUi-handle {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  position: absolute; }
+
+.noUi-touch-area {
+  height: 100%;
+  width: 100%; }
+
+.noUi-state-tap .noUi-connect, .noUi-state-tap .noUi-origin {
+  -webkit-transition: transform .3s;
+  transition: transform .3s; }
+
+.noUi-state-drag * {
+  cursor: inherit !important; }
+
+.noUi-horizontal {
+  height: 18px; }
+
+.noUi-horizontal .noUi-handle {
+  width: 34px;
+  height: 28px;
+  right: -17px;
+  top: -6px; }
+
+.noUi-vertical {
+  width: 18px; }
+
+.noUi-vertical .noUi-handle {
+  width: 28px;
+  height: 34px;
+  right: -6px;
+  top: -17px; }
+
+.noUi-txt-dir-rtl.noUi-horizontal .noUi-handle {
+  left: -17px;
+  right: auto; }
+
+.noUi-target {
+  background: #FAFAFA;
+  border-radius: 4px;
+  border: 1px solid #D3D3D3;
+  box-shadow: inset 0 1px 1px #F0F0F0,0 3px 6px -5px #BBB; }
+
+.noUi-connects {
+  border-radius: 3px; }
+
+.noUi-connect {
+  background: #3FB8AF; }
+
+.noUi-draggable {
+  cursor: ew-resize; }
+
+.noUi-vertical .noUi-draggable {
+  cursor: ns-resize; }
+
+.noUi-handle {
+  border: 1px solid #D9D9D9;
+  border-radius: 3px;
+  background: #FFF;
+  cursor: default;
+  box-shadow: inset 0 0 1px #FFF,inset 0 1px 7px #EBEBEB,0 3px 6px -3px #BBB; }
+
+.noUi-active {
+  box-shadow: inset 0 0 1px #FFF,inset 0 1px 7px #DDD,0 3px 6px -3px #BBB; }
+
+.noUi-handle:after, .noUi-handle:before {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 14px;
+  width: 1px;
+  background: #E8E7E6;
+  left: 14px;
+  top: 6px; }
+
+.noUi-handle:after {
+  left: 17px; }
+
+.noUi-vertical .noUi-handle:after, .noUi-vertical .noUi-handle:before {
+  width: 14px;
+  height: 1px;
+  left: 6px;
+  top: 14px; }
+
+.noUi-vertical .noUi-handle:after {
+  top: 17px; }
+
+[disabled] .noUi-connect {
+  background: #B8B8B8; }
+
+[disabled] .noUi-handle, [disabled].noUi-handle, [disabled].noUi-target {
+  cursor: not-allowed; }
+
+.noUi-pips, .noUi-pips * {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.noUi-pips {
+  position: absolute;
+  color: #999; }
+
+.noUi-value {
+  position: absolute;
+  white-space: nowrap;
+  text-align: center; }
+
+.noUi-value-sub {
+  color: #ccc;
+  font-size: 10px; }
+
+.noUi-marker {
+  position: absolute;
+  background: #CCC; }
+
+.noUi-marker-sub {
+  background: #AAA; }
+
+.noUi-marker-large {
+  background: #AAA; }
+
+.noUi-pips-horizontal {
+  padding: 10px 0;
+  height: 80px;
+  top: 100%;
+  left: 0;
+  width: 100%; }
+
+.noUi-value-horizontal {
+  -webkit-transform: translate(-50%, 50%);
+  transform: translate(-50%, 50%); }
+
+.noUi-rtl .noUi-value-horizontal {
+  -webkit-transform: translate(50%, 50%);
+  transform: translate(50%, 50%); }
+
+.noUi-marker-horizontal.noUi-marker {
+  margin-left: -1px;
+  width: 2px;
+  height: 5px; }
+
+.noUi-marker-horizontal.noUi-marker-sub {
+  height: 10px; }
+
+.noUi-marker-horizontal.noUi-marker-large {
+  height: 15px; }
+
+.noUi-pips-vertical {
+  padding: 0 10px;
+  height: 100%;
+  top: 0;
+  left: 100%; }
+
+.noUi-value-vertical {
+  -webkit-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  padding-left: 25px; }
+
+.noUi-rtl .noUi-value-vertical {
+  -webkit-transform: translate(0, 50%);
+  transform: translate(0, 50%); }
+
+.noUi-marker-vertical.noUi-marker {
+  width: 5px;
+  height: 2px;
+  margin-top: -1px; }
+
+.noUi-marker-vertical.noUi-marker-sub {
+  width: 10px; }
+
+.noUi-marker-vertical.noUi-marker-large {
+  width: 15px; }
+
+.noUi-tooltip {
+  display: block;
+  position: absolute;
+  border: 1px solid #D9D9D9;
+  border-radius: 3px;
+  background: #fff;
+  color: #000;
+  padding: 5px;
+  text-align: center;
+  white-space: nowrap; }
+
+.noUi-horizontal .noUi-tooltip {
+  -webkit-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+  left: 50%;
+  bottom: 120%; }
+
+.noUi-vertical .noUi-tooltip {
+  -webkit-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  top: 50%;
+  right: 120%; }
+
+.noUi-horizontal .noUi-origin > .noUi-tooltip {
+  -webkit-transform: translate(50%, 0);
+  transform: translate(50%, 0);
+  left: auto;
+  bottom: 10px; }
+
+.noUi-vertical .noUi-origin > .noUi-tooltip {
+  -webkit-transform: translate(0, -18px);
+  transform: translate(0, -18px);
+  top: auto;
+  right: 28px; }
+
+#scenario-informations {
+  display: flex;
+  align-items: center; }
+  #scenario-informations #clipboard-button {
+    width: 40px;
+    padding: 6px 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    #scenario-informations #clipboard-button svg {
+      width: 80%;
+      cursor: pointer; }
+      #scenario-informations #clipboard-button svg:hover {
+        fill: white; }
+  #scenario-informations #night-visibility {
+    width: 40px;
+    height: 47px;
+    margin-left: 10px;
+    background-image: url("img/ui/visibility.jpg");
+    background-size: 600% 100%;
+    border-radius: 4px;
+    transition: background-position 500ms; }
+    #scenario-informations #night-visibility[data-n='1'] {
+      background-position-x: 0%; }
+    #scenario-informations #night-visibility[data-n='2'] {
+      background-position-x: 20%; }
+    #scenario-informations #night-visibility[data-n='3'] {
+      background-position-x: 40%; }
+    #scenario-informations #night-visibility[data-n='4'] {
+      background-position-x: 60%; }
+    #scenario-informations #night-visibility[data-n='5'] {
+      background-position-x: 80%; }
+    #scenario-informations #night-visibility[data-n='6'] {
+      background-position-x: 100%; }
+    #scenario-informations #night-visibility[data-n='7'] {
+      background-position-x: 120%; }
+
+#player_config #scenario-name {
+  text-align: center;
+  font-family: 'Gunplay';
+  color: #9e0a0f;
+  font-size: 17px;
+  text-transform: uppercase;
+  margin: -5px -3px 0px;
+  background: #ffffffab;
+  padding: 8px 0px 4px;
+  border-bottom: 1px solid #8080808a;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px; }
+#player_config #player_info_row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 10px; }
+#player_config .player_config_row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 10px 0px; }
+#player_config #help-mode-switch {
+  visibility: hidden;
+  pointer-events: none; }
+  #player_config #help-mode-switch .checkbox {
+    display: none; }
+  #player_config #help-mode-switch .label {
+    background-color: #2c3037;
+    border-radius: 50px;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    height: 26px;
+    width: 50px; }
+  #player_config #help-mode-switch .label .ball {
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    height: 22px;
+    width: 22px;
+    transform: translateX(0px);
+    transition: transform 0.2s linear, color 0.7s linear; }
+  #player_config #help-mode-switch .checkbox:checked + .label .ball {
+    transform: translateX(24px); }
+  #player_config #help-mode-switch svg {
+    width: 27px; }
+#player_config #show-settings {
+  height: 40px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer; }
+  #player_config #show-settings:hover {
+    color: grey; }
+  #player_config #show-settings svg {
+    width: auto;
+    height: 40px; }
+#player_config #show-settings .fa-primary {
+  transform-origin: 216px 255px;
+  transition: transform 1s; }
+#player_config #show-settings:hover .fa-primary {
+  transform: rotate(180deg); }
+
+/*
+ * Controls in the top bar
+ */
+#settings-controls-container {
+  position: relative;
+  text-align: center;
+  border-top: 1px solid gray;
+  margin-top: 10px; }
+  #settings-controls-container.settingsControlsHidden {
+    display: none; }
+  #settings-controls-container .row-data {
+    border: none;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid gray; }
+    [data-centralZone='1'] #settings-controls-container .row-data[data-id='centralZoneHeight'] {
+      display: none; }
+    #settings-controls-container .row-data .row-label {
+      width: 100%;
+      float: none;
+      color: black;
+      padding-bottom: 0px;
+      text-overflow: initial;
+      white-space: normal;
+      padding: 2px 4px 0px; }
+    #settings-controls-container .row-data .row-value {
+      width: 85%;
+      margin: 0; }
+    #settings-controls-container .row-data #layout-control-card-animation {
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+      #settings-controls-container .row-data #layout-control-card-animation svg {
+        height: 30px;
+        width: auto; }
+      #settings-controls-container .row-data #layout-control-card-animation #layout-control-card-animation-speed {
+        flex-grow: 1;
+        margin: 5px; }
 
 /*# sourceMappingURL=memoir.css.map */
