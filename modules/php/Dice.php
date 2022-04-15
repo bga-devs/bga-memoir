@@ -19,7 +19,7 @@ class Dice
     }
 
     // debug
-    // $results = [DICE_FLAG, DICE_ARMOR, DICE_ARMOR];
+    // $results = [\DICE_STAR, \DICE_STAR,\DICE_STAR];
     // $results = [\DICE_FLAG, DICE_FLAG, DICE_STAR];
     // $results = [\DICE_INFANTRY, DICE_INFANTRY, DICE_INFANTRY];
 

@@ -152,6 +152,8 @@ define([
       dojo.empty('bottom-medals-container');
       dojo.empty('top-medals-container');
 
+      dojo.empy('scenario-informations');
+
       if (!partial) {
         dojo.empty('bottom-medals-slots');
         dojo.empty('bottom-team-players');
@@ -336,6 +338,11 @@ define([
         'scenario-informations',
       );
 
+      if (this.gamedatas.visibility <= 5) {
+        dojo.place(`<div id='night-visibility' data-n='${this.gamedatas.visibility}'></div>`, 'scenario-informations');
+        this.addTooltip($('night-visibility'), _('Current night visibility (Pacific Theater rules)'), '');
+      }
+
       var dial = new customgame.modal('showScenario', {
         class: 'memoir44_popin',
         closeIcon: 'fa-times',
@@ -351,6 +358,14 @@ define([
 
       this.addTooltip('clipboard-button', _('Show the scenario informations'), '');
       $('clipboard-button').addEventListener('click', () => dial.show());
+    },
+
+    notif_updateVisibility(n) {
+      debug('Notif: visibility update', n);
+      $('night-visibility').dataset.n = parseInt($('night-visibility').dataset.n) + n.args.star;
+      if ($('night-visibility').dataset.n == 6) {
+        setTimeout(() => dojo.destroy('night-visibility'), 800);
+      }
     },
 
     tplScenarioModal() {

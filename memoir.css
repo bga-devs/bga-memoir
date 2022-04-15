@@ -294,18 +294,43 @@ html {
       background: #4a6632;
       box-shadow: -1px -1px 3px black;
       z-index: 4; }
-      #m44-container #m44-central-part #right-holder #scenario-informations #clipboard-button {
-        width: 40px;
-        padding: 6px 6px;
+      #m44-container #m44-central-part #right-holder #scenario-informations {
         display: flex;
-        justify-content: center;
+        flex-flow: column;
         align-items: center;
         border-bottom: 1px solid #0f330a; }
-        #m44-container #m44-central-part #right-holder #scenario-informations #clipboard-button svg {
-          width: 80%;
-          cursor: pointer; }
-          #m44-container #m44-central-part #right-holder #scenario-informations #clipboard-button svg:hover {
-            fill: white; }
+        #m44-container #m44-central-part #right-holder #scenario-informations #clipboard-button {
+          width: 40px;
+          padding: 6px 6px;
+          display: flex;
+          justify-content: center;
+          align-items: center; }
+          #m44-container #m44-central-part #right-holder #scenario-informations #clipboard-button svg {
+            width: 80%;
+            cursor: pointer; }
+            #m44-container #m44-central-part #right-holder #scenario-informations #clipboard-button svg:hover {
+              fill: white; }
+        #m44-container #m44-central-part #right-holder #scenario-informations #night-visibility {
+          width: 40px;
+          height: 47px;
+          margin-bottom: 6px;
+          background-image: url("img/ui/visibility.jpg");
+          background-size: 600% 100%;
+          transition: background-position 500ms; }
+          #m44-container #m44-central-part #right-holder #scenario-informations #night-visibility[data-n='1'] {
+            background-position-x: 0%; }
+          #m44-container #m44-central-part #right-holder #scenario-informations #night-visibility[data-n='2'] {
+            background-position-x: 20%; }
+          #m44-container #m44-central-part #right-holder #scenario-informations #night-visibility[data-n='3'] {
+            background-position-x: 40%; }
+          #m44-container #m44-central-part #right-holder #scenario-informations #night-visibility[data-n='4'] {
+            background-position-x: 60%; }
+          #m44-container #m44-central-part #right-holder #scenario-informations #night-visibility[data-n='5'] {
+            background-position-x: 80%; }
+          #m44-container #m44-central-part #right-holder #scenario-informations #night-visibility[data-n='6'] {
+            background-position-x: 100%; }
+          #m44-container #m44-central-part #right-holder #scenario-informations #night-visibility[data-n='7'] {
+            background-position-x: 120%; }
       #m44-container #m44-central-part #right-holder #m44-board-zoom-in,
       #m44-container #m44-central-part #right-holder #m44-board-zoom-out,
       #m44-container #m44-central-part #right-holder #m44-terrains-settings,

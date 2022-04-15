@@ -306,19 +306,38 @@ html {
       z-index: 4;
 
       #scenario-informations {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        border-bottom: 1px solid #0f330a;
+
         #clipboard-button {
           width: 40px;
           padding: 6px 6px;
           display: flex;
           justify-content: center;
           align-items: center;
-          border-bottom: 1px solid #0f330a;
 
           svg {
             width: 80%;
             cursor: pointer;
             &:hover {
               fill: white;
+            }
+          }
+        }
+
+        #night-visibility {
+          width: 40px;
+          height: 47px;
+          margin-bottom: 6px;
+          background-image: url('img/ui/visibility.jpg');
+          background-size: 600% 100%;
+          transition: background-position 500ms;
+
+          @for $i from 1 through 7 {
+            &[data-n='#{$i}'] {
+              background-position-x: ($i - 1) * 100% / 5;
             }
           }
         }

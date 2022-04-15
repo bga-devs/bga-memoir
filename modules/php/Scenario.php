@@ -82,15 +82,16 @@ class Scenario extends \APP_DbObject
     $mode = self::getMode();
 
     // Init Globals
-    Globals::setBlitz($scenario['game_info']['options']['blitz_rules'] ?? false);
-    Globals::setCommissar($scenario['game_info']['options']['russian_commissar_rule'] ?? '');
-    Globals::setDesert($scenario['game_info']['options']['north_african_desert_rules'] ?? false);
-    Globals::setItalyRoyalArmy($scenario['game_info']['options']['italy_royal_army'] ?? false);
-    Globals::setItalyHighCommand($scenario['game_info']['options']['italy_high_command'] ?? false);
-    Globals::setBritishCommand($scenario['game_info']['options']['british_commonwealth'] ?? false);
-    Globals::setMarineCommand($scenario['game_info']['options']['gung_ho'] ?? false);
-    Globals::setNightVisibility($scenario['game_info']['options']['night_visibility_rules'] ?? false ? 1 : \INFINITY);
-    Globals::setEmptySectionMedals($scenario['game_info']['options']['empty_section_medals'] ?? null);
+    $options = $scenario['game_info']['options'];
+    Globals::setBlitz(['blitz_rules'] ?? false);
+    Globals::setCommissar($options['russian_commissar_rule'] ?? '');
+    Globals::setDesert($options['north_african_desert_rules'] ?? false);
+    Globals::setItalyRoyalArmy($options['italy_royal_army'] ?? false);
+    Globals::setItalyHighCommand($options['italy_high_command'] ?? false);
+    Globals::setBritishCommand($options['british_commonwealth'] ?? false);
+    Globals::setMarineCommand($options['gung_ho'] ?? false);
+    Globals::setNightVisibility($options['night_visibility_rules'] ?? false ? 1 : \INFINITY);
+    Globals::setEmptySectionMedals($options['empty_section_medals'] ?? null);
 
     // Create Teams
     Teams::loadScenario($scenario, $rematch);
@@ -125,6 +126,7 @@ class Scenario extends \APP_DbObject
       unset($datas['prefs']);
       unset($datas['discard']);
       unset($datas['canceledNotifIds']);
+      unset($datas['localPrefs']);
       Notifications::refreshInterface($datas);
     }
 

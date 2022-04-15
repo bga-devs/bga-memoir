@@ -46,17 +46,24 @@ trait TurnTrait
 
     $team = Teams::getTeamTurn();
     $player = $team->getMembers()->first();
-    if ($team->getId() == ALLIES && Globals::getNightVisibility() < \INFINITY) {
+
+    $visibility = Globals::getNightVisibility();
+    if ($team->getId() == ALLIES && $visibility < \INFINITY) {
       $results = Dice::roll($player, 4);
       $star = $results[DICE_STAR] ?? 0;
+
+      if ($star + $visibility > 6) {
+        $star = 6 - $visibility;
+      }
+      $visibility += $star;
 
       if ($star > 0) {
         Globals::incNightVisibility($star);
         Notifications::visibility($star);
       }
-      Notifications::message(clienttranslate('Night visibility is ${vis}'), ['vis' => Globals::getNightVisibility()]);
+      Notifications::message(clienttranslate('Night visibility is ${vis}'), ['vis' => $visibility]);
 
-      if (Globals::getNightVisibility() >= 6) {
+      if ($visibility >= 6) {
         Globals::setNightVisibility(\INFINITY);
       }
     }

@@ -332,8 +332,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     notif_drawCards(n) {
       debug('Notif: a player is drawing card(s)', n);
       if (this.player_id == n.args.player_id) {
-        this.notifqueue.setSynchronousDuration(1);
-        return;
+        return 1;
       }
 
       for (let i = 0; i < n.args.nb; i++) {
@@ -405,8 +404,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     notif_commissarCard(n) {
       debug('Notif: a player is putting his card under his commissar token', n);
       if (this.player_id == n.args.player_id) {
-        this.notifqueue.setSynchronousDuration(1);
-        return;
+        return 1;
       }
       let card = this.addCardBack(`hand-count-${n.args.player_id}`);
       this.slide(card, `commissar-${n.args.player_id}`);
