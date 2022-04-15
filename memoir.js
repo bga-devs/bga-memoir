@@ -217,7 +217,7 @@ define([
       dojo.empty('bottom-medals-container');
       dojo.empty('top-medals-container');
 
-      dojo.empy('scenario-informations');
+      dojo.empty('scenario-informations');
 
       if (!partial) {
         dojo.empty('bottom-medals-slots');
@@ -232,6 +232,8 @@ define([
 
         dojo.destroy('m44-player-hand');
         dojo.query('.card-in-play').empty();
+
+        dojo.query('.player-panel-wrapper').forEach(dojo.destroy);
 
         dojo.empty('discard');
         dojo.destroy('scenario-dropzone-container');
@@ -324,6 +326,7 @@ define([
       this.setupScenario();
       this.setupPlayers();
       this.setupTeams();
+      this.updateLayout(localStorage.getItem('memoirLayout'));
     },
 
     notif_smallRefreshInterface(n) {

@@ -158,11 +158,13 @@ html {
           display: none;
         }
 
-        #m44-bottom-container {
+        #bottom-team-status {
+          width: 173px;
           border-left: none;
           border-top: 1px solid #2f2f2f;
         }
-        #m44-top-container {
+        #top-team-status {
+          width: 173px;
           border-left: none;
           border-bottom: 1px solid #2f2f2f;
         }
@@ -176,7 +178,7 @@ html {
     display: flex;
     margin-top: 0px;
     margin-bottom: 0px;
-    overflow:hidden;
+    overflow: hidden;
     position: relative;
 
     [data-centralZone='1'] & {
@@ -508,6 +510,24 @@ html {
     display: flex;
     position: relative;
     width: 100%;
+
+    .m44-team-name {
+      width: 90px;
+      font-size: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0px;
+      border-radius: 0px;
+      height: auto;
+
+      &[data-team='AXIS'] {
+        border: 2px solid #b72c14;
+      }
+      &[data-team='ALLIES'] {
+        border: 2px solid #1d6f98;
+      }
+    }
 
     .m44-team-players {
       display: flex;

@@ -82,8 +82,8 @@ class Scenario extends \APP_DbObject
     $mode = self::getMode();
 
     // Init Globals
-    $options = $scenario['game_info']['options'];
-    Globals::setBlitz(['blitz_rules'] ?? false);
+    $options = $scenario['game_info']['options'] ?? [];
+    Globals::setBlitz($options['blitz_rules'] ?? false);
     Globals::setCommissar($options['russian_commissar_rule'] ?? '');
     Globals::setDesert($options['north_african_desert_rules'] ?? false);
     Globals::setItalyRoyalArmy($options['italy_royal_army'] ?? false);

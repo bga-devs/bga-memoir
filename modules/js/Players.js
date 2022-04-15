@@ -17,7 +17,14 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       this.forEachPlayer((player) => {
         let pos = player.team == this._bottomTeam ? 'bottom' : 'top';
         this.place('tplPlayerPanel', player, pos + '-team-players');
-        dojo.place(`<div class="m44-team-name" data-team="${player.team}">${_(player.team)}</div><div id="player-panel-holder-${player.id}"></div>`, 'overall_player_board_' + player.id);
+        dojo.place(
+          `
+          <div class='player-panel-wrapper'>
+            <div class="m44-team-name" data-team="${player.team}">${_(player.team)}</div>
+            <div id="player-panel-holder-${player.id}" class="player-panel-holder"></div>
+          </div>`,
+          'overall_player_board_' + player.id,
+        );
         dojo.place(`<div class='card-in-play' id='in-play-${player.id}'></div>`, pos + '-in-play');
         this._handCounters[player.id] = this.createCounter(`hand-count-${player.id}`, player.cardsCount);
 
@@ -47,6 +54,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         dojo.place('m44-bottom-part', 'm44-bottom-container', 'first');
         dojo.place('top-medals', 'top-team', 'first');
         dojo.place('bottom-medals', 'bottom-team', 'first');
+        dojo.place('top-team-name', 'top-team', 'first');
+        dojo.place('bottom-team-name', 'bottom-team', 'first');
       } else if (layout == 0) {
         dojo.place('m44-top-part', 'left-holder', 'first');
         dojo.place('m44-bottom-part', 'left-holder', 'last');

@@ -173,10 +173,12 @@ html {
     width: 173px; }
     #m44-container[data-layout='0'] #m44-central-part #left-holder .m44-team .m44-team-players {
       display: none; }
-    #m44-container[data-layout='0'] #m44-central-part #left-holder .m44-team #m44-bottom-container {
+    #m44-container[data-layout='0'] #m44-central-part #left-holder .m44-team #bottom-team-status {
+      width: 173px;
       border-left: none;
       border-top: 1px solid #2f2f2f; }
-    #m44-container[data-layout='0'] #m44-central-part #left-holder .m44-team #m44-top-container {
+    #m44-container[data-layout='0'] #m44-central-part #left-holder .m44-team #top-team-status {
+      width: 173px;
       border-left: none;
       border-bottom: 1px solid #2f2f2f; }
   #m44-container #m44-central-part {
@@ -443,6 +445,19 @@ html {
     display: flex;
     position: relative;
     width: 100%; }
+    #m44-container .m44-team .m44-team-name {
+      width: 90px;
+      font-size: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0px;
+      border-radius: 0px;
+      height: auto; }
+      #m44-container .m44-team .m44-team-name[data-team='AXIS'] {
+        border: 2px solid #b72c14; }
+      #m44-container .m44-team .m44-team-name[data-team='ALLIES'] {
+        border: 2px solid #1d6f98; }
     #m44-container .m44-team .m44-team-players {
       display: flex;
       flex-grow: 1; }
@@ -1532,10 +1547,10 @@ html {
     content: '';
     display: block;
     position: absolute;
-    top: 63%;
-    left: 32%;
-    width: 35%;
-    height: 35%;
+    top: 67%;
+    left: 34%;
+    width: 30%;
+    height: 30%;
     background-image: url("img/units_badges.png");
     background-size: 600% 800%; }
   .m44-unit[data-badge='0']::after {
@@ -1825,24 +1840,24 @@ html {
   top: 0; }
 
 .m44-unit[data-orientation='0'][data-type='1'][data-nation='ru'] .m44-unit-meeple {
-  width: 50%;
-  height: 58.49%;
+  width: 60%;
+  height: 70.188%;
   background-size: 966.038%;
   background-position: 0.108932% 35.3093%;
   background-color: transparent;
   border-radius: none; }
   .m44-unit[data-orientation='0'][data-type='1'][data-nation='ru'] .m44-unit-meeple:nth-of-type(1) {
-    left: 24%;
-    top: 3%; }
+    left: 17%;
+    top: -4%; }
   .m44-unit[data-orientation='0'][data-type='1'][data-nation='ru'] .m44-unit-meeple:nth-of-type(2) {
-    left: 52%;
-    top: 14%; }
+    left: 45%;
+    top: 7%; }
   .m44-unit[data-orientation='0'][data-type='1'][data-nation='ru'] .m44-unit-meeple:nth-of-type(3) {
-    left: 2%;
-    top: 24%; }
+    left: 0%;
+    top: 17%; }
   .m44-unit[data-orientation='0'][data-type='1'][data-nation='ru'] .m44-unit-meeple:nth-of-type(4) {
-    left: 33%;
-    top: 35%; }
+    left: 29%;
+    top: 29%; }
 
 .summary-tile
 .m44-unit[data-orientation='0'][data-type='1'][data-nation='ru']
@@ -1881,52 +1896,52 @@ html {
   top: 0; }
 
 .m44-unit[data-orientation='0'][data-type='1'][data-nation='jp'] .m44-unit-meeple {
-  width: 43%;
-  height: 73.014%;
+  width: 57%;
+  height: 66.6786%;
   background-size: 966.038%;
   background-position: 94.1176% 0.257732%;
   background-color: transparent;
   border-radius: none; }
   .m44-unit[data-orientation='0'][data-type='1'][data-nation='jp'] .m44-unit-meeple:nth-of-type(1) {
-    left: 22%;
-    top: -2%; }
+    left: 18%;
+    top: 0%; }
   .m44-unit[data-orientation='0'][data-type='1'][data-nation='jp'] .m44-unit-meeple:nth-of-type(2) {
-    left: 50%;
-    top: 11%; }
+    left: 45%;
+    top: 14%; }
   .m44-unit[data-orientation='0'][data-type='1'][data-nation='jp'] .m44-unit-meeple:nth-of-type(3) {
-    left: 3%;
-    top: 18%; }
+    left: 2%;
+    top: 23%; }
   .m44-unit[data-orientation='0'][data-type='1'][data-nation='jp'] .m44-unit-meeple:nth-of-type(4) {
-    left: 32%;
-    top: 28%; }
+    left: 29%;
+    top: 35%; }
 
 .summary-tile
 .m44-unit[data-orientation='0'][data-type='1'][data-nation='jp']
 .m44-unit-meeple {
   width: 100%;
-  height: 169.8%;
+  height: 116.98%;
   left: 0;
   top: 0; }
 
 .m44-unit[data-orientation='0'][data-type='2'][data-nation='ger'] .m44-unit-meeple {
-  width: 50%;
-  height: 50%;
+  width: 51%;
+  height: 51%;
   background-size: 1003.92%;
   background-position: 92.5163% 33.3333%;
   background-color: transparent;
   border-radius: none; }
   .m44-unit[data-orientation='0'][data-type='2'][data-nation='ger'] .m44-unit-meeple:nth-of-type(1) {
-    left: 23%;
-    top: -2%; }
+    left: 32%;
+    top: -7%; }
   .m44-unit[data-orientation='0'][data-type='2'][data-nation='ger'] .m44-unit-meeple:nth-of-type(2) {
-    left: 52%;
-    top: 14%; }
+    left: 2%;
+    top: 10%; }
   .m44-unit[data-orientation='0'][data-type='2'][data-nation='ger'] .m44-unit-meeple:nth-of-type(3) {
-    left: 4%;
-    top: 19%; }
+    left: 48%;
+    top: 41%; }
   .m44-unit[data-orientation='0'][data-type='2'][data-nation='ger'] .m44-unit-meeple:nth-of-type(4) {
-    left: 33%;
-    top: 33%; }
+    left: 9%;
+    top: 54%; }
 
 .summary-tile
 .m44-unit[data-orientation='0'][data-type='2'][data-nation='ger']
@@ -1950,8 +1965,8 @@ html {
     left: 49%;
     top: 11%; }
   .m44-unit[data-orientation='0'][data-type='2'][data-nation='us'] .m44-unit-meeple:nth-of-type(3) {
-    left: 3%;
-    top: 38%; }
+    left: 6%;
+    top: 39%; }
   .m44-unit[data-orientation='0'][data-type='2'][data-nation='us'] .m44-unit-meeple:nth-of-type(4) {
     left: 33%;
     top: 33%; }
@@ -1965,24 +1980,24 @@ html {
   top: 0; }
 
 .m44-unit[data-orientation='0'][data-type='2'][data-nation='ru'] .m44-unit-meeple {
-  width: 50%;
-  height: 44.69%;
+  width: 60%;
+  height: 53.628%;
   background-size: 906.195%;
   background-position: 11.416% 63.747%;
   background-color: transparent;
   border-radius: none; }
   .m44-unit[data-orientation='0'][data-type='2'][data-nation='ru'] .m44-unit-meeple:nth-of-type(1) {
-    left: 14%;
+    left: 9%;
     top: -5%; }
   .m44-unit[data-orientation='0'][data-type='2'][data-nation='ru'] .m44-unit-meeple:nth-of-type(2) {
-    left: 49%;
-    top: 11%; }
+    left: 46%;
+    top: 8%; }
   .m44-unit[data-orientation='0'][data-type='2'][data-nation='ru'] .m44-unit-meeple:nth-of-type(3) {
-    left: 3%;
+    left: 1%;
     top: 38%; }
   .m44-unit[data-orientation='0'][data-type='2'][data-nation='ru'] .m44-unit-meeple:nth-of-type(4) {
-    left: 33%;
-    top: 33%; }
+    left: 44%;
+    top: 47%; }
 
 .summary-tile
 .m44-unit[data-orientation='0'][data-type='2'][data-nation='ru']
@@ -2049,18 +2064,18 @@ html {
   top: 0; }
 
 .m44-unit[data-orientation='0'][data-type='3'][data-nation='ger'] .m44-unit-meeple {
-  width: 50%;
-  height: 58.18%;
+  width: 62%;
+  height: 72.1432%;
   background-size: 930.909%;
   background-position: 20.4595% 0.260417%;
   background-color: transparent;
   border-radius: none; }
   .m44-unit[data-orientation='0'][data-type='3'][data-nation='ger'] .m44-unit-meeple:nth-of-type(1) {
-    left: 23%;
-    top: -2%; }
+    left: 38%;
+    top: -8%; }
   .m44-unit[data-orientation='0'][data-type='3'][data-nation='ger'] .m44-unit-meeple:nth-of-type(2) {
-    left: 52%;
-    top: 14%; }
+    left: 15%;
+    top: 30%; }
 
 .summary-tile
 .m44-unit[data-orientation='0'][data-type='3'][data-nation='ger']
@@ -2071,18 +2086,18 @@ html {
   top: 0; }
 
 .m44-unit[data-orientation='0'][data-type='3'][data-nation='us'] .m44-unit-meeple {
-  width: 50%;
-  height: 61.165%;
+  width: 57%;
+  height: 69.7281%;
   background-size: 994.175%;
   background-position: 71.987% 0.259067%;
   background-color: transparent;
   border-radius: none; }
   .m44-unit[data-orientation='0'][data-type='3'][data-nation='us'] .m44-unit-meeple:nth-of-type(1) {
-    left: 12%;
+    left: 4%;
     top: -7%; }
   .m44-unit[data-orientation='0'][data-type='3'][data-nation='us'] .m44-unit-meeple:nth-of-type(2) {
-    left: 44%;
-    top: 29%; }
+    left: 37%;
+    top: 22%; }
 
 .summary-tile
 .m44-unit[data-orientation='0'][data-type='3'][data-nation='us']
@@ -2215,8 +2230,8 @@ html {
   top: 0; }
 
 .m44-unit[data-orientation='1'][data-type='1'][data-nation='ru'] .m44-unit-meeple {
-  width: 43%;
-  height: 50.3014%;
+  width: 60%;
+  height: 70.188%;
   background-size: 966.038%;
   background-position: 11.7647% 35.3093%;
   background-color: transparent;
@@ -2271,24 +2286,24 @@ html {
   top: 0; }
 
 .m44-unit[data-orientation='1'][data-type='1'][data-nation='jp'] .m44-unit-meeple {
-  width: 50%;
-  height: 50%;
+  width: 70%;
+  height: 70%;
   background-size: 930.909%;
   background-position: 81.1816% 34.0796%;
   background-color: transparent;
   border-radius: none; }
   .m44-unit[data-orientation='1'][data-type='1'][data-nation='jp'] .m44-unit-meeple:nth-of-type(1) {
-    left: 24%;
-    top: 3%; }
+    left: 15%;
+    top: 1%; }
   .m44-unit[data-orientation='1'][data-type='1'][data-nation='jp'] .m44-unit-meeple:nth-of-type(2) {
-    left: 52%;
-    top: 14%; }
+    left: 42%;
+    top: 13%; }
   .m44-unit[data-orientation='1'][data-type='1'][data-nation='jp'] .m44-unit-meeple:nth-of-type(3) {
-    left: 2%;
-    top: 24%; }
+    left: -5%;
+    top: 23%; }
   .m44-unit[data-orientation='1'][data-type='1'][data-nation='jp'] .m44-unit-meeple:nth-of-type(4) {
-    left: 33%;
-    top: 35%; }
+    left: 25%;
+    top: 34%; }
 
 .summary-tile
 .m44-unit[data-orientation='1'][data-type='1'][data-nation='jp']
@@ -2299,24 +2314,24 @@ html {
   top: 0; }
 
 .m44-unit[data-orientation='1'][data-type='2'][data-nation='ger'] .m44-unit-meeple {
-  width: 45%;
-  height: 45%;
+  width: 49%;
+  height: 49%;
   background-size: 1137.78%;
   background-position: 54.9251% 62.9808%;
   background-color: transparent;
   border-radius: none; }
   .m44-unit[data-orientation='1'][data-type='2'][data-nation='ger'] .m44-unit-meeple:nth-of-type(1) {
-    left: 23%;
+    left: 14%;
     top: -2%; }
   .m44-unit[data-orientation='1'][data-type='2'][data-nation='ger'] .m44-unit-meeple:nth-of-type(2) {
-    left: 52%;
-    top: 14%; }
+    left: 44%;
+    top: 8%; }
   .m44-unit[data-orientation='1'][data-type='2'][data-nation='ger'] .m44-unit-meeple:nth-of-type(3) {
-    left: 4%;
-    top: 19%; }
+    left: 7%;
+    top: 42%; }
   .m44-unit[data-orientation='1'][data-type='2'][data-nation='ger'] .m44-unit-meeple:nth-of-type(4) {
-    left: 33%;
-    top: 33%; }
+    left: 42%;
+    top: 45%; }
 
 .summary-tile
 .m44-unit[data-orientation='1'][data-type='2'][data-nation='ger']
@@ -2327,24 +2342,21 @@ html {
   top: 0; }
 
 .m44-unit[data-orientation='1'][data-type='2'][data-nation='us'] .m44-unit-meeple {
-  width: 50%;
-  height: 51.785%;
+  width: 53%;
+  height: 54.8921%;
   background-size: 1177.01%;
   background-position: 13.0203% 85.0467%;
   background-color: transparent;
   border-radius: none; }
   .m44-unit[data-orientation='1'][data-type='2'][data-nation='us'] .m44-unit-meeple:nth-of-type(1) {
-    left: 23%;
+    left: 20%;
     top: -2%; }
   .m44-unit[data-orientation='1'][data-type='2'][data-nation='us'] .m44-unit-meeple:nth-of-type(2) {
-    left: 52%;
-    top: 14%; }
+    left: 48%;
+    top: 38%; }
   .m44-unit[data-orientation='1'][data-type='2'][data-nation='us'] .m44-unit-meeple:nth-of-type(3) {
-    left: 4%;
-    top: 19%; }
-  .m44-unit[data-orientation='1'][data-type='2'][data-nation='us'] .m44-unit-meeple:nth-of-type(4) {
-    left: 33%;
-    top: 33%; }
+    left: 2%;
+    top: 35%; }
 
 .summary-tile
 .m44-unit[data-orientation='1'][data-type='2'][data-nation='us']
@@ -2355,24 +2367,24 @@ html {
   top: 0; }
 
 .m44-unit[data-orientation='1'][data-type='2'][data-nation='ru'] .m44-unit-meeple {
-  width: 50%;
-  height: 50%;
+  width: 54%;
+  height: 54%;
   background-size: 1077.89%;
   background-position: 74.8116% 62.8297%;
   background-color: transparent;
   border-radius: none; }
   .m44-unit[data-orientation='1'][data-type='2'][data-nation='ru'] .m44-unit-meeple:nth-of-type(1) {
-    left: 23%;
-    top: -2%; }
+    left: 31%;
+    top: -10%; }
   .m44-unit[data-orientation='1'][data-type='2'][data-nation='ru'] .m44-unit-meeple:nth-of-type(2) {
-    left: 52%;
-    top: 14%; }
+    left: 3%;
+    top: 11%; }
   .m44-unit[data-orientation='1'][data-type='2'][data-nation='ru'] .m44-unit-meeple:nth-of-type(3) {
-    left: 4%;
-    top: 19%; }
-  .m44-unit[data-orientation='1'][data-type='2'][data-nation='ru'] .m44-unit-meeple:nth-of-type(4) {
-    left: 33%;
+    left: 49%;
     top: 33%; }
+  .m44-unit[data-orientation='1'][data-type='2'][data-nation='ru'] .m44-unit-meeple:nth-of-type(4) {
+    left: 2%;
+    top: 47%; }
 
 .summary-tile
 .m44-unit[data-orientation='1'][data-type='2'][data-nation='ru']
@@ -2439,18 +2451,18 @@ html {
   top: 0; }
 
 .m44-unit[data-orientation='1'][data-type='3'][data-nation='ger'] .m44-unit-meeple {
-  width: 70%;
-  height: 54.313%;
+  width: 72%;
+  height: 55.8648%;
   background-size: 882.759%;
   background-position: 97.6872% 62.0853%;
   background-color: transparent;
   border-radius: none; }
   .m44-unit[data-orientation='1'][data-type='3'][data-nation='ger'] .m44-unit-meeple:nth-of-type(1) {
-    left: -4%;
-    top: 12%; }
+    left: -3%;
+    top: 7%; }
   .m44-unit[data-orientation='1'][data-type='3'][data-nation='ger'] .m44-unit-meeple:nth-of-type(2) {
-    left: 26%;
-    top: 44%; }
+    left: 23%;
+    top: 45%; }
 
 .summary-tile
 .m44-unit[data-orientation='1'][data-type='3'][data-nation='ger']
@@ -2468,11 +2480,11 @@ html {
   background-color: transparent;
   border-radius: none; }
   .m44-unit[data-orientation='1'][data-type='3'][data-nation='us'] .m44-unit-meeple:nth-of-type(1) {
-    left: -4%;
-    top: 12%; }
+    left: 17%;
+    top: -2%; }
   .m44-unit[data-orientation='1'][data-type='3'][data-nation='us'] .m44-unit-meeple:nth-of-type(2) {
-    left: 26%;
-    top: 44%; }
+    left: 4%;
+    top: 47%; }
 
 .summary-tile
 .m44-unit[data-orientation='1'][data-type='3'][data-nation='us']
@@ -4431,6 +4443,9 @@ span.m44-dice-result {
   transform: translate(0, -18px);
   top: auto;
   right: 28px; }
+
+.player-panel-holder {
+  display: flex; }
 
 #scenario-informations {
   display: flex;

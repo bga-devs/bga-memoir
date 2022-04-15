@@ -7,7 +7,7 @@ class Mountain extends \M44\Models\Terrain
   public static function isTileOfType($hex)
   {
     return in_array($hex['name'], ['mountain']) &&
-      (!isset($hex['behavior']) || in_array($hex['behavior'], ['MOUNTAIN']));
+      (!isset($hex['behavior']) || in_array($hex['behavior'], ['MOUNTAIN', 'IMPASSABLE_HILL']));
   }
 
   public function __construct($row)
