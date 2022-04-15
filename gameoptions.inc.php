@@ -242,41 +242,41 @@ $game_options = [
       //   'description' => clienttranslate('[Battle of the Bulge] German counter-attack at Chaumont [FFM44]'),
       // ],
 
-      // 1412 => [
-      //   'name' => clienttranslate('[PT] [1412] Matanikau River'),
-      //   'tmdisplay' => '[1412]',
-      //   'description' => clienttranslate('Matanikau River'),
-      // ],
-      // 1413 => [
-      //   'name' => clienttranslate('[PT] [1413] Slopes of Mount Austen'),
-      //   'tmdisplay' => '[1413]',
-      //   'description' => clienttranslate('Slopes of Mount Austen'),
-      // ],
-      // 1483 => [
-      //   'name' => clienttranslate('[PT] [1483] The Meat Grinder'),
-      //   'tmdisplay' => '[1483]',
-      //   'description' => clienttranslate('The Meat Grinder'),
-      // ],
-      // 1487 => [
-      //   'name' => clienttranslate('[PT] [1487] Guam Landings'),
-      //   'tmdisplay' => '[1487]',
-      //   'description' => clienttranslate('Guam Landings'),
-      // ],
-      // 1488 => [
-      //   'name' => clienttranslate('[PT] [1488] Japanese Counterattack'),
-      //   'tmdisplay' => '[1488]',
-      //   'description' => clienttranslate('Japanese Counterattack'),
-      // ],
-      // 1518 => [
-      //   'name' => clienttranslate('[PT] [1518] Sugar Loaf and Half Moon'),
-      //   'tmdisplay' => '[1518]',
-      //   'description' => clienttranslate('Sugar Loaf and Half Moon'),
-      // ],
-      // 1599 => [
-      //   'name' => clienttranslate('[PT] [1599] Wake Island'),
-      //   'tmdisplay' => '[1599]',
-      //   'description' => clienttranslate('Wake Island'),
-      // ],
+      1412 => [
+        'name' => clienttranslate('[PT] [1412] Matanikau River'),
+        'tmdisplay' => '[1412]',
+        'description' => clienttranslate('Matanikau River'),
+      ],
+      1413 => [
+        'name' => clienttranslate('[PT] [1413] Slopes of Mount Austen'),
+        'tmdisplay' => '[1413]',
+        'description' => clienttranslate('Slopes of Mount Austen'),
+      ],
+      1483 => [
+        'name' => clienttranslate('[PT] [1483] The Meat Grinder'),
+        'tmdisplay' => '[1483]',
+        'description' => clienttranslate('The Meat Grinder'),
+      ],
+      1487 => [
+        'name' => clienttranslate('[PT] [1487] Guam Landings'),
+        'tmdisplay' => '[1487]',
+        'description' => clienttranslate('Guam Landings'),
+      ],
+      1488 => [
+        'name' => clienttranslate('[PT] [1488] Japanese Counterattack'),
+        'tmdisplay' => '[1488]',
+        'description' => clienttranslate('Japanese Counterattack'),
+      ],
+      1518 => [
+        'name' => clienttranslate('[PT] [1518] Sugar Loaf and Half Moon'),
+        'tmdisplay' => '[1518]',
+        'description' => clienttranslate('Sugar Loaf and Half Moon'),
+      ],
+      1599 => [
+        'name' => clienttranslate('[PT] [1599] Wake Island'),
+        'tmdisplay' => '[1599]',
+        'description' => clienttranslate('Wake Island'),
+      ],
 
       1324 => [
         'name' => clienttranslate('[MT] [1324] Dug in at Sidi Omar'),
