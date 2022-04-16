@@ -630,10 +630,10 @@ class Board
 
       if (!is_null($unit->getMaxMalus()) && $cell['d'] == 1) {
         if ($defenseModifier <= $unit->getMaxMalus()) {
-          $defenseModifier = $malus;
-          $malus = 0;
+          $defenseModifier = $unit->getMaxMalus();
         }
       }
+
       $cell['dice'] += $offenseModifier + $defenseModifier + $cardModifier;
     }
     // Keep only the cells with at least one attack dice
