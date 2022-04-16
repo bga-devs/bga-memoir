@@ -630,10 +630,10 @@ class Board
 
       if (!is_null($unit->getMaxMalus()) && $cell['d'] == 1) {
         if ($defenseModifier <= $unit->getMaxMalus()) {
-          $defenseModifier = $malus;
-          $malus = 0;
+          $defenseModifier = $unit->getMaxMalus();
         }
       }
+
       $cell['dice'] += $offenseModifier + $defenseModifier + $cardModifier;
     }
     // Keep only the cells with at least one attack dice
@@ -698,7 +698,7 @@ class Board
   public static function isBlockingLineOfSight($unit, $target, $cell, $path)
   {
     $t = self::$grid[$cell['x']][$cell['y']];
-    if (!is_null($t['unit']) && $t['unit']->getId() != $unit->getId()) {
+    if ($unit->mustSeeToAttack() && !is_null($t['unit']) && $t['unit']->getId() != $unit->getId()) {
       return true;
     }
 

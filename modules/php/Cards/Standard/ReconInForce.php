@@ -12,7 +12,11 @@ class ReconInForce extends \M44\Models\SectionCard
     $this->text = [clienttranslate('Order 1 Unit in each section')];
     $this->nUnits = 3;
     $this->sections = [1, 1, 1];
-    $this->orderUnitsTitles = [clienttranslate('in each section')];
+    $this->orderUnitsTitles = [
+      clienttranslate('in each section'),
+      clienttranslate('in each section'),
+      clienttranslate('in each section'),
+    ];
   }
 
   public function getArgsOrderUnits()

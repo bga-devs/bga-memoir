@@ -211,8 +211,8 @@ class Medals extends \M44\Helpers\DB_Manager
     $medalIds = self::DB()
       ->where('type', MEDAL_EMPTY_SECTION)
       ->where('team', $data['side'])
-      ->getMany()
-      ->get();
+      ->get()
+      ->getIds();
     $hasMedal = !empty($medalIds);
 
     // If no medal yet and a section is cleared

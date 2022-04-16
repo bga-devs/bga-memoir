@@ -39,14 +39,13 @@ class MedicsAndMechanics extends \M44\Models\Card
     });
     return [
       'i18n' => ['desc'],
-      'n' => Globals::isMarineCommand() ? 2 : 1,
-      'nTitle' => Globals::isMarineCommand() ? 2 : 1,
+      'n' => $player->isMarineCommand() ? 2 : 1,
+      'nTitle' => $player->isMarineCommand() ? 2 : 1,
       'nOnTheMove' => 0,
       'desc' => '',
       'sections' => [\INFINITY, \INFINITY, \INFINITY],
       'units' => $units,
     ];
-    // return ['unitIds' => $units->getIds(), 'nUnits' => Globals::isMarineCommand() ? 2 : 1];
   }
 
   public function stTargetMedics()

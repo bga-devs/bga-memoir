@@ -86,7 +86,6 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           extra = true;
         }
       }
-      debug(minFilling, sections);
 
       // Allow one extra unit
       if(!extra && marineCommand){
