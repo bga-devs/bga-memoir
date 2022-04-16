@@ -7,6 +7,7 @@ use M44\Managers\Players;
 use M44\Managers\Teams;
 use M44\Managers\Units;
 use M44\Helpers\Utils;
+use M44\Helpers\Log;
 use M44\Board;
 
 trait RetreatUnitTrait
@@ -186,6 +187,8 @@ trait RetreatUnitTrait
     if ($minFlags > 0) {
       throw new \BgaUserException(clienttranslate('You did not retreat far enough. Should not happen.'));
     }
+
+    Log::checkpoint(); // Make undo invalid
 
     $attack = $this->getCurrentAttack();
     $oppUnit = $attack['oppUnit'];

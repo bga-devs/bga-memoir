@@ -7,6 +7,7 @@ use M44\Core\Notifications;
 use M44\Managers\Medals;
 use M44\Managers\Terrains;
 use M44\Managers\Teams;
+use M44\Helpers\Log;
 
 class Minefield extends \M44\Models\Terrain
 {
@@ -55,6 +56,7 @@ class Minefield extends \M44\Models\Terrain
       // Reveal the mine
       Notifications::revealMinefield($unit->getPlayer(), $this->id, $this->getPos(), $value);
       $this->setTile('mine' . $value);
+      Log::checkpoint(); // Make undo invalid
     }
 
     if ($value == 0) {
