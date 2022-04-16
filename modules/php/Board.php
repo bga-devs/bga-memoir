@@ -698,7 +698,7 @@ class Board
   public static function isBlockingLineOfSight($unit, $target, $cell, $path)
   {
     $t = self::$grid[$cell['x']][$cell['y']];
-    if (!is_null($t['unit']) && $t['unit']->getId() != $unit->getId()) {
+    if ($unit->mustSeeToAttack() && !is_null($t['unit']) && $t['unit']->getId() != $unit->getId()) {
       return true;
     }
 
