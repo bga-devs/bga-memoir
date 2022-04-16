@@ -13,14 +13,16 @@ trait TacticCardTrait
 {
   public function stDigIn()
   {
-    $card = Cards::getByType(\CARD_DIG_IN)->first();
+    $player = Players::getActive();
+    $card = $player->getCardInPlay();
     $card->stDigIn();
     $this->nextState('next');
   }
 
   public function stMoveAgain()
   {
-    $card = Cards::getByType(\CARD_BEHIND_LINES)->first();
+    $player = Players::getActive();
+    $card = $player->getCardInPlay();
     $card->stMoveAgain();
     $this->nextState('next');
   }

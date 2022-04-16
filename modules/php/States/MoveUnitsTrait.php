@@ -57,11 +57,17 @@ trait MoveUnitsTrait
     $unit = Units::get($unitId);
     $coordSource = $unit->getPos();
     $initMove = $unit->getMoves();
+
+    $card = $unit->getActivationOCard();
+    $skipRestrictions = $card != null && $card->isType(CARD_BEHIND_LINES) && $unit->getType() == INFANTRY;
+
     foreach ($path as $c) {
-      if (Board::mustStopWhenLeavingCell($coordSource, $unit)) {
-        $unit->mustStop();
-      } elseif (Board::mustStopWhenEnteringCell($c, $unit)) {
-        $unit->mustStop();
+      if (!$skipRestrictions) {
+        if (Board::mustStopWhenLeavingCell($coordSource, $unit)) {
+          $unit->mustStop();
+        } elseif (Board::mustStopWhenEnteringCell($c, $unit)) {
+          $unit->mustStop();
+        }
       }
 
       if (!$desertMove) {
