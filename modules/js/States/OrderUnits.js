@@ -82,13 +82,13 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           return true;
         }
 
-        if(minFilling[i] > sections[i]){
+        if (minFilling[i] > sections[i]) {
           extra = true;
         }
       }
 
       // Allow one extra unit
-      if(!extra && marineCommand){
+      if (!extra && marineCommand) {
         return true;
       }
 
@@ -113,6 +113,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     onEnteringStateMoveUnits(args, excludeUnit = null) {
       let nonEmptyUnits = [];
       this.removeClassNameOfCells('unselectableForAttacking');
+      this.removeClassNameOfCells('unselectableForMoving');
+
       // When a unit is clicked => prompt for the cell to move
       let callback = (unitId) => {
         let msg =

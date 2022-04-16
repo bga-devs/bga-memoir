@@ -66,8 +66,8 @@ trait RetreatUnitTrait
   {
     // Take the hits if any
     $args = $this->argsRetreatUnit();
+    $unit = Units::get($args['unitId']);
     if ($args['hits'] > 0) {
-      $unit = Units::get($args['unitId']);
       $attacker = $unit
         ->getTeam()
         ->getOpponent()
@@ -94,7 +94,7 @@ trait RetreatUnitTrait
       }
     }
     // If no more cells, auto-done
-    elseif (empty($args['cells'])) {
+    elseif (empty($args['cells']) || $unit->isEliminated()) {
       $this->actRetreatUnitDone(true);
     }
     // If only one cell, retreat to that
@@ -183,8 +183,8 @@ trait RetreatUnitTrait
       self::checkAction('actRetreatUnitDone');
     }
     // check that retreat = 0
-    list(, $minFlags, , $effect) = $this->getRetreatInfo();
-    if ($minFlags > 0) {
+    list($unit, $minFlags, , $effect) = $this->getRetreatInfo();
+    if (!$unit->isEliminated() && $minFlags > 0) {
       throw new \BgaUserException(clienttranslate('You did not retreat far enough. Should not happen.'));
     }
 
