@@ -13,7 +13,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
   // prettier-ignore
   const OBSTACLES_ROTATION = { bunker: 180,wbunker : 180,dbunker : 180,ford : 60,roadblock : 60,droadblock : 60,wroadblock : 60,pontoon : -30,wpontoon : -30,dragonteeth : 60,railbridge : -60,wrailbridge : -60,bridge : -30,pbridge : -30,brkbridge : -30,wbridge : -30,wagon : -60,loco : 60,abatis : 60,wire : 180,sand : 180};
 
-  const ALLIES_NATIONS = ['gb', 'us', 'ru'];
+  const ALLIES_NATIONS = ['brit', 'us', 'ru'];
 
   const TOKEN_MEDAL = 1;
   const TOKEN_MINE = 2;
