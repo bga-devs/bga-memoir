@@ -169,8 +169,8 @@ trait OrderUnitsTrait
     $team = $unit->getTeam();
     Notifications::exitUnit($player, $unit);
 
-    $medals = $team->addExitMedals($unit);
     Board::removeUnit($unit);
+    $medals = $team->addExitMedals($unit);
 
     Tokens::removeTargets($unit->getPos());
     Tokens::removeCamouflage($unit->getPos());
