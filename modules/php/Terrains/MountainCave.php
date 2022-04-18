@@ -16,6 +16,8 @@ class MountainCave extends Mountain
     $this->name = clienttranslate('Cave on mountains');
     $this->number = 53;
     $this->isCave = true;
+    $this->desc[] = clienttranslate('Japanese units must ignore all flags');
+    $this->desc[] = clienttranslate('Attack on Japanese unit is done at -2 (except for Artillery)');
   }
 
   public function getPossibleAttackActions($unit)
@@ -33,5 +35,26 @@ class MountainCave extends Mountain
     } else {
       return [];
     }
+  }
+
+  public function defense($unit)
+  {
+    $attackedUnit = Board::getUnitInCell($this->getPos());
+    if ($attackedUnit->getType() == \INFANTRY && $attackedUnit->getNation() == 'jp') {
+      if ($unit->getType() != \ARTILLERY) {
+        return -2;
+      } else {
+        return 0;
+      }
+    }
+    return parent::defense($unit);
+  }
+
+  public function mustIgnoreAllFlags($unit)
+  {
+    if ($unit->getNation() == 'jp') {
+      return true;
+    }
+    return false;
   }
 }
