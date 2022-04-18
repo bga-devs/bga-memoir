@@ -59,14 +59,20 @@ class BehindEnemyLines extends \M44\Models\Card
 
   public function nextStateAfterAttacks()
   {
-    $unit = $this->getActivatedUnit();
-    $transition = is_null($unit) || $unit->isEliminated() || $unit->getType() != \INFANTRY ? 'draw' : 'moveAgain';
-    return $transition;
+    $moveAgain = false;
+    foreach ($this->getActivatedUnits() as $unit) {
+      if (!$unit->isEliminated() && $unit->getType() == INFANTRY) {
+        $moveAgain = true;
+      }
+    }
+
+    return $moveAgain ? 'moveAgain' : 'draw';
   }
 
   public function stMoveAgain()
   {
-    $unit = $this->getActivatedUnit();
-    $unit->setMoves(0);
+    foreach ($this->getActivatedUnits() as $unit) {
+      $unit->setMoves(0);
+    }
   }
 }
