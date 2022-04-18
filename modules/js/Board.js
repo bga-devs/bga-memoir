@@ -119,7 +119,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
           // Units
           let cell = this.place('tplBoardCell', { x: col, y }, 'm44-board-units');
-          cell.style.gridArea = cellC.style.gridArea;
+          cell.style.gridRow = 3 * realY + 3 + ' / span 4';
+          cell.style.gridColumn = realX + 2 + ' / span 2';
 
           let unit = board.grid[col][row].unit;
           if (unit) {
