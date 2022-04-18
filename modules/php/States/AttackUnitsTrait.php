@@ -16,21 +16,27 @@ use M44\Managers\Tokens;
 
 trait AttackUnitsTrait
 {
-  public function stPreAttack()
+  /**
+   * Handle units that stopped on mines
+   */
+  public function stPreAttackUnits()
   {
     $args = $this->argsAttackUnit();
+    $nTargets = 0;
     foreach ($args['units'] as $uId => $targets) {
       $unit = Units::get($uId);
+
       // if Combat engineer doesn't move and is on a mine field, it must sweep it
-      if ($unit->mustSweep()) {
+      if ($unit->mustSweep() && $unit->getMoves() == 0) {
         foreach (Board::getTerrainsInCell($unit->getPos()) as $t) {
           if ($t instanceof \M44\Terrains\Minefield) {
             $t->onUnitEntering($unit, false);
+            $nTargets -= count($targets);
           }
         }
       }
 
-      // if unit moved and finished on a mine and there is a mine, it must explose
+      // if unit moved and finished on a mine with Infiltration and there is a mine, it must explose
       if ($unit->getActivationOCard()->getType() == CARD_BEHIND_LINES && $unit->getMoves() < 3) {
         foreach (Board::getTerrainsInCell($unit->getPos()) as $t) {
           if ($t instanceof \M44\Terrains\Minefield) {
@@ -40,7 +46,8 @@ trait AttackUnitsTrait
         }
       }
     }
-    $this->nextState('attack');
+
+    $this->nextState('');
   }
 
   /**
@@ -52,26 +59,6 @@ trait AttackUnitsTrait
     $nTargets = 0;
     foreach ($args['units'] as $uId => $targets) {
       $nTargets += count($targets);
-      // $unit = Units::get($uId);
-      // // if Combat engineer doesn't move and is on a mine field, it must sweep it
-      // if ($unit->mustSweep()) {
-      //   foreach (Board::getTerrainsInCell($unit->getPos()) as $t) {
-      //     if ($t instanceof \M44\Terrains\Minefield) {
-      //       $t->onUnitEntering($unit, false);
-      //       $nTargets -= count($targets);
-      //     }
-      //   }
-      // }
-      //
-      // // if unit moved and finished on a mine and there is a mine, it must explose
-      // if ($unit->getActivationOCard()->getType() == CARD_BEHIND_LINES && $unit->getMoves() < 3) {
-      //   foreach (Board::getTerrainsInCell($unit->getPos()) as $t) {
-      //     if ($t instanceof \M44\Terrains\Minefield) {
-      //       $unit->setMoves(3);
-      //       $t->onUnitEntering($unit, false);
-      //     }
-      //   }
-      // }
     }
     if ($nTargets == 0) {
       $this->actAttackUnitsDone(true);

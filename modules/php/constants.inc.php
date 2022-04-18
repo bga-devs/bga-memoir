@@ -20,6 +20,7 @@ const ST_PLAY_COMMISSAR = 10;
 const ST_PLAY_CARD = 11;
 const ST_ORDER_UNITS = 12;
 const ST_MOVE_UNITS = 13;
+const ST_PRE_ATTACK = 26;
 const ST_ATTACK = 14;
 const ST_OPPONENT_AMBUSH = 15;
 const ST_AMBUSH_RESOLVE = 16;
@@ -32,7 +33,6 @@ const ST_DRAW_CHOICE = 22;
 const ST_END_TURN = 23;
 const ST_DESERT_MOVE = 24; // desert rules
 const ST_BATTLE_BACK = 25; // British command
-const ST_PRE_ATTACK = 26;
 
 const ST_DIG_IN = 30;
 const ST_PRE_MOVE_AGAIN = 31; // Behind ennemy lines

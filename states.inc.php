@@ -164,12 +164,14 @@ $machinestates = [
   ],
 
   ST_PRE_ATTACK => [
-    'name' => 'preAttack',
+    'name' => 'preAttackUnits',
     'description' => '',
     'descriptionmyturn' => '',
-    'type' => 'activeplayer',
-    'action' => 'stPreAttack',
-    'transitions' => ['attack' => ST_ATTACK],
+    'type' => 'game',
+    'action' => 'stPreAttackUnits',
+    'transitions' => [
+      '' => ST_ATTACK,
+    ],
   ],
 
   ST_ATTACK => [
@@ -200,7 +202,7 @@ $machinestates = [
     'description' => '',
     'descriptionmyturn' => '',
     'type' => 'game',
-    'action' => 'stAttackThrow', // TODO: possible that attack not possible anymore
+    'action' => 'stAttackThrow',
     'transitions' => [
       'retreat' => ST_ATTACK_RETREAT,
       'nextAttack' => ST_ATTACK_THROW,

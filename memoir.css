@@ -1481,7 +1481,7 @@ html {
       width: 156px;
       bottom: 16px;
       padding-left: 18px;
-      font-size: 12px; }
+      font-size: 10px; }
       .board-tooltip .summary-card .summary-desc li::before {
         content: '\25CF';
         display: inline-block;
