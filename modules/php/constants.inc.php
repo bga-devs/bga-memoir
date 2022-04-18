@@ -20,6 +20,7 @@ const ST_PLAY_COMMISSAR = 10;
 const ST_PLAY_CARD = 11;
 const ST_ORDER_UNITS = 12;
 const ST_MOVE_UNITS = 13;
+const ST_PRE_ATTACK = 26;
 const ST_ATTACK = 14;
 const ST_OPPONENT_AMBUSH = 15;
 const ST_AMBUSH_RESOLVE = 16;

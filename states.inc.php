@@ -160,7 +160,18 @@ $machinestates = [
       'actHealUnitHospital',
       'actExitUnit',
     ],
-    'transitions' => ['moveUnits' => ST_MOVE_UNITS, 'attackUnits' => ST_ATTACK],
+    'transitions' => ['moveUnits' => ST_MOVE_UNITS, 'attackUnits' => ST_PRE_ATTACK],
+  ],
+
+  ST_PRE_ATTACK => [
+    'name' => 'preAttackUnits',
+    'description' => '',
+    'descriptionmyturn' => '',
+    'type' => 'game',
+    'action' => 'stPreAttackUnits',
+    'transitions' => [
+      '' => ST_ATTACK,
+    ],
   ],
 
   ST_ATTACK => [
@@ -191,7 +202,7 @@ $machinestates = [
     'description' => '',
     'descriptionmyturn' => '',
     'type' => 'game',
-    'action' => 'stAttackThrow', // TODO: possible that attack not possible anymore
+    'action' => 'stAttackThrow',
     'transitions' => [
       'retreat' => ST_ATTACK_RETREAT,
       'nextAttack' => ST_ATTACK_THROW,
