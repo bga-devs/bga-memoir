@@ -132,6 +132,12 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
     self::DB()->update(['extra_datas' => \addslashes(\json_encode($this->extraDatas))], $this->id);
   }
 
+  public function clearExtraDatas()
+  {
+    $this->extraDatas = [];
+    self::DB()->update(['extra_datas' => \addslashes(\json_encode([]))], $this->id);
+  }
+
   public function getDrawMethod()
   {
     return $this->draw;

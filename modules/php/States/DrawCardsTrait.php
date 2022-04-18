@@ -30,7 +30,7 @@ trait DrawCardsTrait
       Cards::discard($otherCard);
       Notifications::discardCard($owner, $otherCard);
 
-      $newCards = Cards::pickForLocation($oMethod['nDraw'], 'deck', ['hand', $owner->getId()]);
+      $newCards = Cards::draw($oMethod['nDraw'], ['hand', $owner->getId()]);
       Notifications::drawCards($owner, $newCards);
     }
 
@@ -46,14 +46,14 @@ trait DrawCardsTrait
     }
 
     if ($method['nKeep'] == $method['nDraw']) {
-      $cards = Cards::pickForLocation($method['nDraw'], 'deck', ['hand', $player->getId()]);
+      $cards = Cards::draw($method['nDraw'], ['hand', $player->getId()]);
       if (is_null($cards)) {
         return;
       }
       Notifications::drawCards($player, $cards);
       $this->nextState('endRound');
     } else {
-      $cards = Cards::pickForLocation($method['nDraw'], 'deck', ['choice', $player->getId()]);
+      $cards = Cards::draw($method['nDraw'], ['choice', $player->getId()]);
       if (is_null($cards)) {
         return;
       }

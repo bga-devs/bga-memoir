@@ -20,7 +20,7 @@ trait TurnTrait
     if (Scenario::getId() == 2 && Globals::getTurn() <= 4 && Globals::getTeamTurn() == AXIS) {
       // TODO : better handling of drawing for teams
       $player = Players::getActive();
-      $cards = Cards::pickForLocation(1, 'deck', ['hand', $player->getId()]);
+      $cards = Cards::draw(1, ['hand', $player->getId()]);
       Notifications::drawCards($player, $cards);
     }
 
