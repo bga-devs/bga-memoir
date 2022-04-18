@@ -17,6 +17,8 @@ class HillCave extends Hill
     $this->number = 52;
     $this->isCave = true;
     $this->isImpassable = [ARMOR, \ARTILLERY];
+    $this->desc[] = clienttranslate('Japanese units must ignore all flags');
+    $this->desc[] = clienttranslate('Attack on Japanese unit is done at -2 (except for Artillery)');
   }
 
   public function getPossibleAttackActions($unit)
@@ -34,5 +36,26 @@ class HillCave extends Hill
     } else {
       return [];
     }
+  }
+
+  public function defense($unit)
+  {
+    $attackedUnit = Board::getUnitInCell($this->getPos());
+    if ($attackedUnit->getType() == \INFANTRY && $attackedUnit->getNation() == 'jp') {
+      if ($unit->getType() != \ARTILLERY) {
+        return -2;
+      } else {
+        return 0;
+      }
+    }
+    return parent::defense($unit);
+  }
+
+  public function mustIgnoreAllFlags($unit)
+  {
+    if ($unit->getNation() == 'jp') {
+      return true;
+    }
+    return false;
   }
 }

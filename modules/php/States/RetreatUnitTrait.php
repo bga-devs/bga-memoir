@@ -38,12 +38,14 @@ trait RetreatUnitTrait
         $canIgnore1Flag = false;
       }
     }
+
+    $mustIgnoreAllFlags = Board::mustIgnoreAllFlagsCell($oppUnit->getPos(), $oppUnit);
     $attackedUnit = Units::get($attack['oppUnitId']);
     // TODO : compute the min/max flags
 
     Globals::setRetreat([
-      'min' => $canIgnoreAllFlags ? 0 : $dice[\DICE_FLAG] - ($canIgnore1Flag ? 1 : 0),
-      'max' => $dice[\DICE_FLAG] * $attackedUnit->getRetreatHex(),
+      'min' => $mustIgnoreAllFlags ? 0 : ($canIgnoreAllFlags ? 0 : $dice[\DICE_FLAG] - ($canIgnore1Flag ? 1 : 0)),
+      'max' => $mustIgnoreAllFlags ? 0 : $dice[\DICE_FLAG] * $attackedUnit->getRetreatHex(),
       'unit' => $attack['oppUnitId'],
       'effect' => $attack['effect'] ?? '',
     ]);
