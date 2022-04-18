@@ -160,7 +160,16 @@ $machinestates = [
       'actHealUnitHospital',
       'actExitUnit',
     ],
-    'transitions' => ['moveUnits' => ST_MOVE_UNITS, 'attackUnits' => ST_ATTACK],
+    'transitions' => ['moveUnits' => ST_MOVE_UNITS, 'attackUnits' => ST_PRE_ATTACK],
+  ],
+
+  ST_PRE_ATTACK => [
+    'name' => 'preAttack',
+    'description' => '',
+    'descriptionmyturn' => '',
+    'type' => 'activeplayer',
+    'action' => 'stPreAttack',
+    'transitions' => ['attack' => ST_ATTACK],
   ],
 
   ST_ATTACK => [
