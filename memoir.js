@@ -217,9 +217,9 @@ define([
       dojo.empty('bottom-medals-container');
       dojo.empty('top-medals-container');
 
-      dojo.empty('scenario-informations');
-
       if (!partial) {
+        dojo.empty('scenario-informations');
+
         dojo.empty('bottom-medals-slots');
         dojo.empty('bottom-team-players');
         dojo.empty('bottom-in-play');

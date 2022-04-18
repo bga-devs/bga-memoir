@@ -48,7 +48,7 @@ class HQ extends \M44\Models\Terrain
         $card
       );
     } elseif ($this->isOriginalOwner($unit) && $this->getExtraDatas('captured') == true) {
-      $cards = Cards::pickForLocation(1, 'deck', ['hand', $unit->getPlayer()->getId()]);
+      $cards = Cards::draw(1, ['hand', $unit->getPlayer()->getId()]);
       if (is_null($cards)) {
         return;
       }

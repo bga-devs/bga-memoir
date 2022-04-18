@@ -118,6 +118,18 @@ class Cards extends \M44\Helpers\Pieces
     return self::get($cardId);
   }
 
+  public static function draw($n, $location)
+  {
+    $cards = Cards::pickForLocation($n, 'deck', $location);
+    if (!is_null($cards)) {
+      foreach ($cards as $card) {
+        $card->clearExtraDatas();
+      }
+    }
+
+    return $cards;
+  }
+
   public static function discard($cardId)
   {
     $cardId = is_int($cardId) ? $cardId : $cardId->getId();
@@ -173,7 +185,7 @@ class Cards extends \M44\Helpers\Pieces
     if (true || $mode == STANDARD_DECK) {
       foreach (Players::getAll() as $pId => $player) {
         $team = $player->getTeam();
-        $cards = self::pickForLocation($team->getNCards(), 'deck', ['hand', $pId]);
+        $cards = self::draw($team->getNCards(), ['hand', $pId]);
         Notifications::drawCards(Players::get($pId), $cards);
       }
     }
