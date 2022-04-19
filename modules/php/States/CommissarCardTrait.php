@@ -6,6 +6,7 @@ use M44\Helpers\Utils;
 use M44\Managers\Cards;
 use M44\Managers\Players;
 use M44\Managers\Teams;
+use M44\Helpers\Log;
 
 trait CommissarCardTrait
 {
@@ -63,6 +64,7 @@ trait CommissarCardTrait
     Notifications::commissarCard($player, $card);
 
     if ($isInitial) {
+      Log::checkpoint();
       $team = Teams::getTeamTurn();
       $player = $team->getMembers()->first();
       $this->changeActivePlayerAndJumpTo($player, \ST_PLAY_CARD);
