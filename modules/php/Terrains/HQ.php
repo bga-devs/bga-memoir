@@ -15,13 +15,6 @@ class HQ extends \M44\Models\Terrain
   {
     $this->name = clienttranslate('HQ & Supply tents');
     $this->number = 56;
-
-    $this->desc = [
-      clienttranslate('No movement restriction'),
-      clienttranslate('No combat restriction'),
-      clienttranslate('Block line of sight'),
-    ];
-
     $this->isBlockingLineOfSight = true;
     parent::__construct($row);
   }
