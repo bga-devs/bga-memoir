@@ -29,9 +29,7 @@ trait RetreatUnitTrait
     if ($currentAttack['card']->cannotIgnoreFlags()) {
       $canIgnore1Flag = false;
       $canIgnoreAllFlags = false;
-    }
-
-    if ($oppUnit->getMustIgnore1Flag()) {
+    } elseif ($oppUnit->getMustIgnore1Flag()) {
       $dice[\DICE_FLAG]--;
       if ($canIgnore1Flag && $dice[\DICE_FLAG] != 0) {
         $dice[\DICE_FLAG]--;
