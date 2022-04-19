@@ -400,6 +400,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           unitIds: this._selectedUnits.join(';'),
         });
       });
+      this.clearSelectedUnits();
     },
 
     isUnitSelectableFinestHour(unitId, pos, selected, minFilling) {

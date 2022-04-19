@@ -72,13 +72,20 @@ class FinestHour extends \M44\Models\Card
 
   public function actOrderUnitsFinestHour($unitIds)
   {
-    // TODO : add sanity checks
-
+    $enabled = [0, 0, 0];
+    $results = $this->getResults();
     // Flag the units as activated by the corresponding card and notify
     $player = $this->getPlayer();
     if (!empty($unitIds)) {
       foreach ($unitIds as $unitId) {
-        Units::get($unitId)->activate($this);
+        $unit = Units::get($unitId);
+        $unit->activate($this);
+        $type = $unit->getType() - 1;
+        $enabled[$type]++;
+
+        if ($enabled[$type] + ($type == 2 ? 0 : $enabled[2]) > $results[$type] + ($type == 2 ? 0 : $results[2])) {
+          throw new \feException('Too many units enabled. Should not happen');
+        }
       }
       Notifications::orderUnits($player, Units::getMany($unitIds));
     }
