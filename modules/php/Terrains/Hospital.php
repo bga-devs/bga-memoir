@@ -2,7 +2,7 @@
 namespace M44\Terrains;
 use M44\Board;
 
-class Hospital extends Oasis
+class Hospital extends \M44\Models\Terrain
 {
   public static function isTileOfType($hex)
   {
@@ -15,6 +15,7 @@ class Hospital extends Oasis
 
     $this->name = clienttranslate('Hospitals');
     $this->number = 55;
+    $this->isBlockingLineOfSight = true;
   }
 
   public function getPossibleMoveActions($unit)
