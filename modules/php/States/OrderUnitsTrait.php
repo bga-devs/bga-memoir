@@ -115,7 +115,9 @@ trait OrderUnitsTrait
     $unit = Units::get($unitId);
     $moves = $unit->getPossibleMoves();
     Utils::filter($moves, function ($m) {
-      return isset($m['type']) && $m['type'] == 'action' && $m['action'] == 'actHealUnit';
+      return isset($m['type']) &&
+        $m['type'] == 'action' &&
+        in_array($m['action'], ['actHealUnit', 'actHealUnitHospital']);
     });
     if (count($moves) == 0) {
       throw new \feException('This unit cannot be healed. Should not happen');
