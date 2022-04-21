@@ -71,6 +71,10 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         if ($(`commissar-holder-${player.id}`)) {
           dojo.place(`commissar-holder-${player.id}`, container);
         }
+
+        if (player.isCommissar && player.id == this.player_id) {
+          dojo.place(`commissar-holder-${player.id}`, 'm44-player-hand', 'first');
+        }
       });
     },
 
