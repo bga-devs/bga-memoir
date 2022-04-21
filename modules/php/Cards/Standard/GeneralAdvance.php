@@ -12,7 +12,11 @@ class GeneralAdvance extends \M44\Models\SectionCard
     $this->text = [clienttranslate('Order 2 Units in each section')];
     $this->sections = [2, 2, 2];
     $this->nUnits = 6;
-    $this->orderUnitsTitles = [clienttranslate('in each section')];
+    $this->orderUnitsTitles = [
+      clienttranslate('in each section'),
+      clienttranslate('in each section'),
+      clienttranslate('in each section'),
+    ];
   }
 
   public function getArgsOrderUnits()
