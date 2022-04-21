@@ -31,6 +31,11 @@ class FrozenRiver extends \M44\Models\Terrain
       return;
     }
 
+    // FrozenRiver are not triggered with behind ennemy lines
+    if ($unit->getActivationOCard()->getType() == CARD_BEHIND_LINES) {
+      return false;
+    }
+
     $player = $unit->getPlayer();
     $attacker = $unit
       ->getTeam()
