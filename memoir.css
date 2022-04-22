@@ -819,6 +819,9 @@ html {
         #m44-board .hex-cell-container .hex-cell .dice-mini:nth-of-type(4) {
           bottom: -3%;
           right: 38%; }
+        #m44-board .hex-cell-container .hex-cell .dice-mini:nth-of-type(5) {
+          bottom: 36%;
+          right: -4%; }
   #m44-board .board-divider {
     margin-left: -1px;
     z-index: 2;

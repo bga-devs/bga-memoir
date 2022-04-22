@@ -25,6 +25,14 @@ class Jungle extends \M44\Models\Terrain
     parent::__construct($row);
   }
 
+  public function cannotBattle($unit, $moves)
+  {
+    $pos1 = $unit->getPos();
+    $pos2 = $this->getPos();
+    return $moves > 1 || abs($pos1['x'] - $pos2['x']) + 2 * abs($pos1['y'] - $pos2['y']) > 3;
+  }
+
+/*
   public function onUnitEntering($unit, $isRetreat)
   {
     if (!$isRetreat) {
@@ -34,4 +42,5 @@ class Jungle extends \M44\Models\Terrain
       }
     }
   }
+*/
 }

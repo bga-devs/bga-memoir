@@ -503,7 +503,6 @@ class Board
         return $cells;
       }
     }
-    $banzai = false;
 
     // Check whether the unit moved too much to attack
     // if unit moved on road, we need to remove one move linked to the bonus
@@ -517,23 +516,19 @@ class Board
 
     $maxMoves = $unit->getMovementAndAttackRadius();
     $card = $unit->getActivationOCard();
+    $banzai = false;
     if ($card !== null) {
       if ($card->isType(CARD_INFANTRY_ASSAULT) && $unit->getType() == \INFANTRY) {
         $maxMoves++;
       } elseif ($card->isType(CARD_BEHIND_LINES) && $unit->getType() == INFANTRY) {
         $maxMoves = INFINITY;
+      } elseif ($unit->getBanzai() === true && $m > $maxMoves) {
+        $banzai = true;
       }
     }
 
-    if ($unit->getBanzai() == true) {
-      $maxMoves = 2;
-      $banzai = true;
-    }
-
-    if ($m > $maxMoves) {
+    if ($m > $maxMoves && !$banzai) {
       return [];
-    } elseif ($m < $maxMoves && $banzai) {
-      $banzai = false;
     }
 
     $pos = $cell ?? $unit->getPos();
@@ -545,7 +540,7 @@ class Board
           return [];
         }
         // Check whether unit is in a cell that prevent attack
-        if ($terrain->cannotBattle($unit)) {
+        if ($terrain->cannotBattle($unit, $m)) {
           return [];
         }
       }
@@ -553,6 +548,9 @@ class Board
 
     // Compute cells at fire range
     $power = $unit->getAttackPower();
+    if ($banzai) {
+      $power = [$power[0]]; // if banzai, unit can only attack in close assault
+    }
     $range = count($power);
     list($cells, $markers) = self::getCellsAtDistance($pos, $range, function ($source, $target, $d) {
       // check to forbid caves teleportation
@@ -606,12 +604,6 @@ class Board
 
     // Compute shooting powers for the remaining cells
     foreach ($cells as &$cell) {
-      // if banzai, unit can only attack in close assault
-      if ($banzai && $cell['d'] >= 2) {
-        $cell['dice'] = 0;
-        continue;
-      }
-
       $cell['dice'] = $power[$cell['d'] - 1] + $unit->getAttackModifier($cell);
       $offenseModifier = self::getDiceModifier($unit, $pos, false);
       $defenseModifier = self::getDiceModifier($unit, $cell, true);
