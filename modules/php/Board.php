@@ -255,10 +255,17 @@ class Board
     }
 
     $startingCell = $unit->getPos();
-    list($cells, $markers) = self::getCellsAtDistance($startingCell, $d, function ($source, $target, $d) use ($unit) {
-      $cost = self::getDeplacementCost($unit, $source, $target, $d, false, false);
-      return min(INFINITY, $cost + (1 - $unit->getRoadBonus()));
-    });
+    list($cells, $markers) = self::getCellsAtDistance(
+      $startingCell,
+      $d,
+      function ($source, $target, $d) use ($unit) {
+        $cost = self::getDeplacementCost($unit, $source, $target, $d, false, false);
+        return min(INFINITY, $cost + (1 - $unit->getRoadBonus()));
+      },
+      function ($cell) use ($unit) {
+        return self::avoidIfPossibleCell($cell, $unit) ? 1 : 0;
+      }
+    );
 
     // Compute road paths with bonus of 1 move if starting pos is on road
     if (self::isRoadCell($startingCell, $unit) && $unit->stayedOnRoad()) {
@@ -275,7 +282,7 @@ class Board
           $cell['d'] -= $unit->getRoadBonus();
           foreach ($cell['paths'] as &$path) {
             if (!empty($path)) {
-              $path[0]['cost'] -= $unit->getRoadBonus();
+              $path['cells'][0]['cost'] -= $unit->getRoadBonus();
             }
           }
         }
@@ -422,11 +429,11 @@ class Board
     }
 
     // If I'm coming from a 'must stop when leaving' terrain, path should be of length 1
-    if (self::mustStopWhenLeavingCell($unit->getPos(), $unit) && count($path) > 1) {
+    if (self::mustStopWhenLeavingCell($unit->getPos(), $unit) && count($path['cells']) > 1) {
       return false;
     }
 
-    $totalPath = array_merge([$unit->getPos()], $path);
+    $totalPath = array_merge([$unit->getPos()], $path['cells']);
     foreach ($totalPath as $node) {
       $t = self::$grid[$node['x']][$node['y']];
       foreach ($t['terrains'] as $terrain) {
@@ -896,7 +903,7 @@ class Board
       $closure = [];
       foreach ($fCells as $cell) {
         foreach ($cell['paths'] as $path) {
-          foreach ($path as $node) {
+          foreach ($path['cells'] as $node) {
             if (!in_array($node, $closure)) {
               $closure[] = $node;
             }
@@ -924,61 +931,65 @@ class Board
 
     // Compute all cells reachable at distance $d in the good vertical direction
     $deltaY = $unit->getCampDirection();
-    list($cells, $markers) = self::getCellsAtDistance($unit->getPos(), $d, function ($source, $target, $d) use (
-      $unit,
-      $deltaY
-    ) {
-      // Check direction
-      if ($source['y'] + $deltaY != $target['y']) {
-        return \INFINITY;
-      }
+    list($cells, $markers) = self::getCellsAtDistance(
+      $unit->getPos(),
+      $d,
+      function ($source, $target, $d) use ($unit, $deltaY) {
+        // Check direction
+        if ($source['y'] + $deltaY != $target['y']) {
+          return \INFINITY;
+        }
 
-      $targetCell = self::$grid[$target['x']][$target['y']];
-      $sourceCell = self::$grid[$source['x']][$source['y']];
+        $targetCell = self::$grid[$target['x']][$target['y']];
+        $sourceCell = self::$grid[$source['x']][$source['y']];
 
-      // If there is a unit => can't retreat there
-      if (!is_null($targetCell['unit'])) {
-        return \INFINITY;
-      }
+        // If there is a unit => can't retreat there
+        if (!is_null($targetCell['unit'])) {
+          return \INFINITY;
+        }
 
-      // If there is an impassable terrain => can't retreat there
-      if (self::isImpassableCell($target, $unit) || self::isImpassableForRetreatCell($target, $unit)) {
-        return \INFINITY;
-      }
+        // If there is an impassable terrain => can't retreat there
+        if (self::isImpassableCell($target, $unit) || self::isImpassableForRetreatCell($target, $unit)) {
+          return \INFINITY;
+        }
 
-      // If the edge is not possible, return infinity
-      foreach ($sourceCell['terrains'] as $terrain) {
-        if ($terrain->isBlocked($target, $unit)) {
+        // If the edge is not possible, return infinity
+        foreach ($sourceCell['terrains'] as $terrain) {
+          if ($terrain->isBlocked($target, $unit)) {
+            return INFINITY;
+          }
+        }
+        foreach ($targetCell['terrains'] as $terrain) {
+          if ($terrain->isBlocked($source, $unit)) {
+            return INFINITY;
+          }
+        }
+
+        // check to forbid caves teleportation
+        if (!in_array(['x' => $target['x'], 'y' => $target['y']], self::getNeighbours($source))) {
           return INFINITY;
         }
-      }
-      foreach ($targetCell['terrains'] as $terrain) {
-        if ($terrain->isBlocked($source, $unit)) {
+
+        // Otherwise, ask the terrains about it and take the maximum of the costs to check INFINITY
+        $cost = 1;
+        foreach ($sourceCell['terrains'] as $terrain) {
+          $cost = max($cost, $terrain->getLeavingDeplacementCost($unit, $source, $target, $d, false));
+        }
+        foreach ($targetCell['terrains'] as $terrain) {
+          $cost = max($cost, $terrain->getEnteringDeplacementCost($unit, $source, $target, $d, false));
+        }
+
+        if ($cost == \INFINITY) {
           return INFINITY;
         }
-      }
 
-      // check to forbid caves teleportation
-      if (!in_array(['x' => $target['x'], 'y' => $target['y']], self::getNeighbours($source))) {
-        return INFINITY;
+        // Ignore all other terrains restriction
+        return 1;
+      },
+      function ($cell) use ($unit) {
+        return self::avoidIfPossibleCell($cell, $unit) ? 1 : 0;
       }
-
-      // Otherwise, ask the terrains about it and take the maximum of the costs to check INFINITY
-      $cost = 1;
-      foreach ($sourceCell['terrains'] as $terrain) {
-        $cost = max($cost, $terrain->getLeavingDeplacementCost($unit, $source, $target, $d, false));
-      }
-      foreach ($targetCell['terrains'] as $terrain) {
-        $cost = max($cost, $terrain->getEnteringDeplacementCost($unit, $source, $target, $d, false));
-      }
-
-      if ($cost == \INFINITY) {
-        return INFINITY;
-      }
-
-      // Ignore all other terrains restriction
-      return 1;
-    });
+    );
 
     return [$cells, $markers];
   }
@@ -1058,14 +1069,14 @@ class Board
    *   - $d : max distance we are looking for
    *   - $costCallback : function used to compute cost
    */
-  protected static function getCellsAtDistance($startingCell, $d, $costCallback)
+  protected static function getCellsAtDistance($startingCell, $d, $costCallback, $resistanceCallback = null)
   {
     $queue = new \SplPriorityQueue();
     $queue->setExtractFlags(\SplPriorityQueue::EXTR_BOTH);
     $queue->insert(
       [
         'cell' => $startingCell,
-        'paths' => [[]],
+        'paths' => [['resistance' => 0, 'cells' => []]],
       ],
       0
     );
@@ -1091,6 +1102,7 @@ class Board
       $neighbours = self::getNeighbours($pos);
       foreach ($neighbours as $nextCell) {
         $cost = $costCallback($cell, $nextCell, $d);
+        $resistance = is_null($resistanceCallback) ? 0 : $resistanceCallback($nextCell);
         $dist = $cell['d'] + $cost;
         $t = $markers[$nextCell['x']][$nextCell['y']];
         if ($t !== false) {
@@ -1102,8 +1114,11 @@ class Board
           $queue->insert(
             [
               'cell' => $nextCell,
-              'paths' => array_map(function ($path) use ($nextCell) {
-                return array_merge($path, [$nextCell]);
+              'paths' => array_map(function ($path) use ($nextCell, $resistance) {
+                return [
+                  'resistance' => $path['resistance'] + $resistance,
+                  'cells' => array_merge($path['cells'], [$nextCell]),
+                ];
               }, $markers[$pos['x']][$pos['y']]['paths']),
             ],
             -$dist
@@ -1130,7 +1145,10 @@ class Board
               [
                 'cell' => $cave,
                 'paths' => array_map(function ($path) use ($cave) {
-                  return array_merge($path, [$cave]);
+                  return [
+                    'resistance' => $path['resistance'],
+                    'cells' => array_merge($path['cells'], [$cave]),
+                  ];
                 }, $markers[$pos['x']][$pos['y']]['paths']),
               ],
               -$dist

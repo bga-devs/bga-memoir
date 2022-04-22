@@ -53,7 +53,10 @@ trait MoveUnitsTrait
 
     // Move the unit
     $cell = $cells[$k];
-    $path = $cell['paths'][0]; // Take the first path
+    usort($cell['paths'], function($path1, $path2){
+      return $path1['resistance'] - $path2['resistance'];
+    });
+    $path = $cell['paths'][0]; // Take the least resistance path
     $unit = Units::get($unitId);
     $coordSource = $unit->getPos();
     $initMove = $unit->getMoves();
@@ -61,7 +64,7 @@ trait MoveUnitsTrait
     $card = $unit->getActivationOCard();
     $skipRestrictions = $card != null && $card->isType(CARD_BEHIND_LINES) && $unit->getType() == INFANTRY;
 
-    foreach ($path as $c) {
+    foreach ($path['cells'] as $c) {
       if (!$skipRestrictions) {
         if (Board::mustStopWhenLeavingCell($coordSource, $unit)) {
           $unit->mustStop();

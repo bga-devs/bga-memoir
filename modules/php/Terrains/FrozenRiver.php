@@ -23,6 +23,7 @@ class FrozenRiver extends \M44\Models\Terrain
     ];
 
     parent::__construct($row);
+    $this->avoidIfPossible = true;
   }
 
   public function onUnitEntering($unit, $isRetreat)

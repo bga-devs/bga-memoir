@@ -59,6 +59,7 @@ class Terrain extends \M44\Helpers\DB_Model
     'hill317',
     'cannotArmorOverrun',
     'canRecover',
+    'avoidIfPossible',
 
     'isHill',
     'isBunker',

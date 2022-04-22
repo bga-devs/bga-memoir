@@ -146,11 +146,14 @@ trait RetreatUnitTrait
     // Move the unit
     $cell = $cells[$k];
     $dist = $cell['d'];
-    $path = $cell['paths'][0]; // Take the first path
+    usort($cell['paths'], function($path1, $path2){
+      return $path1['resistance'] - $path2['resistance'];
+    });
+    $path = $cell['paths'][0]; // Take the least resistance path
     $unitId = $args['unitId'];
     $unit = Units::get($unitId);
     $coordSource = $unit->getPos();
-    foreach ($path as $c) {
+    foreach ($path['cells'] as $c) {
       Notifications::retreatUnit($player, $unit, $coordSource, $c);
       list($interrupted, $isWinning) = Board::moveUnit($unit, $c, true);
       if ($isWinning) {
