@@ -163,30 +163,30 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       dojo.place('<div id="diceContainer"></div>', 'm44-board-units');
       dojo.place('<div id="explosionContainer"></div>', 'm44-board-units');
 
-      let buttonsTooltips = {
-        terrains: _('Show/hide the terrain hexes'),
-        units: _('Show/hide units'),
-        tokens: _('Show/hide tokens and medals'),
-        labels: _('Show/hide map labels'),
-        coords: _('Show/hide coordinate helpers'),
-      };
+      if (this.tooltips['m44-labels-settings'] == undefined) {
+        let buttonsTooltips = {
+          terrains: _('Show/hide the terrain hexes'),
+          units: _('Show/hide units'),
+          tokens: _('Show/hide tokens and medals'),
+          labels: _('Show/hide map labels'),
+          coords: _('Show/hide coordinate helpers'),
+        };
 
-      ['terrains', 'units', 'tokens', 'labels', 'coords'].forEach((layer) => {
-        this.toggleLayerVisibility(layer, this.getConfig('m44' + layer, 1));
-        dojo.connect($(`m44-${layer}-settings`), 'click', () => this.toggleLayerVisibility(layer));
-        this.addTooltip(`m44-${layer}-settings`, '', buttonsTooltips[layer]);
-      });
+        ['terrains', 'units', 'tokens', 'labels', 'coords'].forEach((layer) => {
+          this.toggleLayerVisibility(layer, this.getConfig('m44' + layer, 1));
+          dojo.connect($(`m44-${layer}-settings`), 'click', () => this.toggleLayerVisibility(layer));
+          this.addTooltip(`m44-${layer}-settings`, '', buttonsTooltips[layer]);
+        });
 
-      this._summaryCardsBehavior = this.getConfig('m44summaryCards', this.isMobile() ? 2 : 1);
-      $('m44-board-wrapper').dataset.summary = this._summaryCardsBehavior;
-      dojo.connect($('m44-summary-settings'), 'click', () => this.changeSummaryCardsBehavior());
-      this.addTooltip(
-        `m44-summary-settings`,
-        '',
-        _('Enable/disable summary cards display when hovering/clicking the board cells'),
-      );
+        this._summaryCardsBehavior = this.getConfig('m44summaryCards', this.isMobile() ? 2 : 1);
+        $('m44-board-wrapper').dataset.summary = this._summaryCardsBehavior;
+        dojo.connect($('m44-summary-settings'), 'click', () => this.changeSummaryCardsBehavior());
+        this.addTooltip(
+          `m44-summary-settings`,
+          '',
+          _('Enable/disable summary cards display when hovering/clicking the board cells'),
+        );
 
-      if (!this.isReadOnly()) {
         dojo.connect($('m44-react-settings'), 'click', () => {
           this.setPreferenceValue(150, 1 - this.prefs[150].value);
         });
