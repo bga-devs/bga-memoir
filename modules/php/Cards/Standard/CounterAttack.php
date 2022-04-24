@@ -89,7 +89,7 @@ class CounterAttack extends \M44\Models\Card
 
   public function isType($cardType)
   {
-    return $this->getCopiedCard()->getType() == $cardType;
+    return $this->getCopiedCard()->isType($cardType);
   }
 
   public function getDrawMethod()
