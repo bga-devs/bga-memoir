@@ -120,9 +120,18 @@ $gameinfos = [
   // Each paragraph must be wrapped with totranslate() for translation and should not contain html (plain text without formatting).
   // A good length for this text is between 100 and 150 words (about 6 to 9 lines on a standard display)
   'presentation' => [
-    //    totranslate("This wonderful game is about geometric shapes!"),
-    //    totranslate("It was awarded best triangle game of the year in 2005 and nominated for the Spiel des Jahres."),
-    //    ...
+    totranslate(
+      "Published in collaboration with the Mission for the 60th Anniversary of the D-Day Landings & Liberation of France, Memoir '44 is a uniquely fun, simple and engaging game."
+    ),
+    totranslate(
+      "Memoir '44 is a unique historical game where players command a horde of little plastic Army men facing-off in dozens of WWII battles on an oversize hex game board."
+    ),
+    totranslate(
+      'Each battle scenario mimics the historical terrain, troop placements and objectives of each army. Deploying forces through a variety of Command cards, the smart commander uses the unique skills of his units - infantry, paratroopers, tanks, artillery, commandos and resistance fighters - to its greatest strength.'
+    ),
+    totranslate(
+      "Easy to learn and fast-paced, Memoir '44 requires strategic card play, timely dice rolling and an aggressive, yet flexible battle plan to achieve victory!"
+    ),
   ],
 
   // Games categories
