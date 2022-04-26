@@ -3,6 +3,7 @@ namespace M44\Core;
 use M44\Managers\Players;
 use M44\Helpers\Utils;
 use M44\Core\Globals;
+use M44\Core\Stats;
 
 class Notifications
 {
@@ -63,6 +64,11 @@ class Notifications
       'player' => $player,
       'notifIds' => $notifIds,
     ]);
+  }
+
+  public static function updateStats()
+  {
+    self::notifyAll('updateStats', '', ['stats' => Stats::getUiData()]);
   }
 
   public static function throwAttack($player, $unit, $nDice, $oppUnit)
@@ -297,6 +303,7 @@ class Notifications
       'medals' => $medals->toArray(),
       'cell' => $cell,
     ]);
+    self::updateStats();
   }
 
   public static function removeMedals($teamId, $medalIds, $medal)
@@ -307,6 +314,7 @@ class Notifications
       'medalIds' => $medalIds,
       'boardMedalId' => $medal['id'],
     ]);
+    self::updateStats();
   }
 
   public static function scoreSectionMedals($teamId, $medals)
@@ -316,6 +324,7 @@ class Notifications
       'nb' => $medals->count(),
       'medals' => $medals->toArray(),
     ]);
+    self::updateStats();
   }
 
   public static function removeSectionMedals($teamId, $medalIds)
@@ -325,6 +334,7 @@ class Notifications
       'nb' => count($medalIds),
       'medalIds' => $medalIds,
     ]);
+    self::updateStats();
   }
 
   public static function addToken($token)
@@ -354,6 +364,7 @@ class Notifications
       'hits' => $hits,
       'coordSource' => $oppUnit->getPos(),
     ]);
+    self::updateStats();
   }
 
   public static function exitUnit($player, $unit)
@@ -416,6 +427,8 @@ class Notifications
 
   public static function winRound($team, $round)
   {
+    self::updateStats();
+
     self::notifyAll('message', clienttranslate('${team_name} wins ${nb} round'), [
       'teamId' => $team->getId(),
       'nb' => $round,

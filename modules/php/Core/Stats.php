@@ -87,6 +87,11 @@ class Stats extends \M44\Helpers\DB_Manager
     }
   }
 
+  public static function getUiData()
+  {
+    return self::DB()->get();
+  }
+
   protected static function getFilteredQuery($id, $pId)
   {
     $query = self::DB()->where('stats_type', $id);
