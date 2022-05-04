@@ -79,6 +79,7 @@ define([
         ['smallRefreshInterface', 1],
         ['smallRefreshHand', 1],
         ['updateVisibility', 500],
+        ['updateStats', 1],
       ];
 
       // Fix mobile viewport (remove CSS zoom)
@@ -210,6 +211,7 @@ define([
     },
 
     clearInterface(partial = false) {
+      this.closeAllTooltips();
       dojo.empty('m44-board-terrains');
       dojo.empty('m44-board-units');
       dojo.empty('m44-board-labels');
@@ -319,6 +321,7 @@ define([
       this.gamedatas.terrains = n.args.terrains;
       this.gamedatas.units = n.args.units;
       this.gamedatas.scenario = n.args.scenario;
+      this.gamedatas.round = n.args.round;
       this._bottomTeam = this.gamedatas.players[this._pId].team;
       this._deckCounter.setValue(n.args.deckCount);
 
@@ -426,8 +429,17 @@ define([
 
       this.addTooltip('clipboard-button', _('Show the scenario informations'), '');
       $('clipboard-button').addEventListener('click', () => dial.show());
+      this.updateGameProgress();
+    },
 
-      $('scenario-name').innerHTML = _(this.gamedatas.scenario.name);
+    updateGameProgress() {
+      $('scenario-name').innerHTML =
+        _(this.gamedatas.scenario.name) +
+        '<span id="m44-progress">' +
+        this.gamedatas.round +
+        '/' +
+        this.gamedatas.duration +
+        '</span>';
     },
 
     notif_updateVisibility(n) {
@@ -536,6 +548,9 @@ define([
       dojo.connect(chk, 'onchange', () => this.toggleHelpMode(chk.checked));
       this.addTooltip('help-mode-switch', '', _('Toggle help/safe mode.'));
 */
+      let scoreBtn = $('show-scores');
+      dojo.connect(scoreBtn, 'click', () => this.openStatsModal());
+      this.addTooltip(scoreBtn, '', _('Show score details'));
     },
 
     onChangeCardScaleSetting(scale) {
@@ -555,6 +570,131 @@ define([
 
     onChangeLayoutSetting(layout) {
       this.updateLayout(layout);
+    },
+
+    //////////////////////////////
+    //  ____  _        _
+    // / ___|| |_ __ _| |_ ___
+    // \___ \| __/ _` | __/ __|
+    //  ___) | || (_| | |_\__ \
+    // |____/ \__\__,_|\__|___/
+    //
+    //////////////////////////////
+    openStatsModal() {
+      var modal = new customgame.modal('showStats', {
+        autoShow: true,
+        class: 'memoir44_popin',
+        closeIcon: 'fa-times',
+        openAnimation: true,
+        openAnimationTarget: 'show-scores',
+        contents: this.tplStatsModal(),
+        breakpoint: 800,
+        scale: 0.8,
+        title: _('Game statistics'),
+      });
+    },
+
+    tplStatsModal() {
+      let players = this.gamedatas.players;
+      let pIds = Object.keys(players);
+      let pId1 = pIds[0],
+        pId2 = pIds[1];
+
+      let statsLabels = [
+        [_('Played side'), 10, 30],
+        [_('Result'), 11, 31],
+        [_('Earned medals'), 12, 32],
+        [_('Killed infantry units'), 13, 33],
+        [_('Killed armor units'), 14, 34],
+        [_('Killed artillery units'), 15, 35],
+        [_('Killed infantry figures'), 16, 36],
+        [_('Killed armor figures'), 17, 37],
+        [_('Killed artillery figures'), 18, 38],
+      ];
+
+      let twoWays = this.gamedatas.duration == 2;
+      let getStat = (pId, type) => {
+        let v = this.gamedatas.stats.find((stat) => stat.type == type && stat.pId == pId);
+        return v ? v.value : 0;
+      };
+
+      let showStatus = ['changeOfRound', 'gameEnd'].includes(this.gamedatas.gamestate.name);
+      let teamNames = [_('Allies'), _('Axis')];
+      let statusNames = [_('Loser'), _('Winner')];
+      return (
+        `<table id='stats-holder'>
+        <thead>
+          <tr>
+            <th></th>
+            <th colspan="${twoWays ? 3 : 1}" style="color:#${players[pId1].color}">${players[pId1].name}</th>
+            <th colspan="${twoWays ? 3 : 1}" style="color:#${players[pId2].color}">${players[pId2].name}</th>
+          </tr>
+          ` +
+        (twoWays
+          ? `<tr>
+            <th></th>
+            <th>${_('Round 1')}</th>
+            <th>${_('Round 2')}</th>
+            <th>${_('Total')}</th>
+            <th>${_('Round 1')}</th>
+            <th>${_('Round 2')}</th>
+            <th>${_('Total')}</th>
+          </tr>`
+          : '') +
+        `
+        </thead>
+        <tbody>
+        ` +
+        statsLabels
+          .map((stat) => {
+            let cells = [`<th>${_(stat[0])}</th>`];
+            pIds.forEach((pId) => {
+              let v = getStat(pId, stat[1]);
+              if (stat[1] == 10) v = teamNames[v];
+              if (stat[1] == 11) {
+                v = this.gamedatas.round == 1 && !showStatus ? '-' : statusNames[v];
+              }
+
+              cells.push(`<td>${v}</td>`);
+              if (twoWays) {
+                let v2 = getStat(pId, stat[2]);
+                if (stat[1] == 10) v2 = teamNames[v2];
+                if (stat[1] == 11) {
+                  v2 = this.gamedatas.round <= 2 && !showStatus ? '-' : statusNames[v2];
+                }
+                cells.push(`<td>${this.gamedatas.round == 1 ? '-' : v2}</td>`);
+
+                let total = parseInt(v) + parseInt(v2);
+                if (stat[1] <= 11) total = '';
+                cells.push(`<td>${total}</td>`);
+              }
+            });
+
+            return '<tr>' + cells.join('') + '</tr>';
+          })
+          .join('') +
+        `
+        </tbody>
+      </table>`
+      );
+    },
+
+    notif_updateStats(n) {
+      debug('Notif: update stats', n);
+      this.gamedatas.stats = n.args.stats;
+    },
+
+    onEnteringStateChangeOfRound(args) {
+      if (this.isCurrentPlayerActive()) {
+        this.openStatsModal();
+        this.addPrimaryActionButton('btnProceed', _('Proceed to next round'), () => this.takeAction('actProceed'));
+      }
+    },
+
+    onUpdateActivityChangeOfRound(args, status) {
+      if (!status) {
+        dojo.destroy('btnProceed');
+      }
     },
   });
 });

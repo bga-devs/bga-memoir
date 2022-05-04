@@ -51,6 +51,9 @@ const ST_OVERLORD_ATTACK = 43;
 
 const ST_AIR_DROP = 50;
 
+const ST_END_OF_ROUND = 60;
+const ST_CHANGE_OF_ROUND = 61;
+
 const ST_CHANGE_ACTIVE_PLAYER = 95;
 
 const ST_END_OF_GAME = 98;

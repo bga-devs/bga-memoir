@@ -15,12 +15,6 @@ trait RoundTrait
   public function stNewRound($forceRefresh = false)
   {
     $round = Globals::incRound();
-    $maxRound = Globals::isTwoWaysGame() ? 2 : 1;
-    if ($round > $maxRound) {
-      $this->gamestate->jumpToState(\ST_END_OF_GAME);
-      return;
-    }
-
     $rematch = $round == 2;
     Scenario::setup($rematch, $forceRefresh);
     Globals::setUnitMoved(-1);
@@ -37,6 +31,38 @@ trait RoundTrait
     }
 
     $this->gamestate->jumpToState(\ST_PREPARE_TURN);
+  }
+
+  public function stEndOfRound()
+  {
+    $round = Globals::getRound();
+    $maxRound = Globals::isTwoWaysGame() ? 2 : 1;
+    if ($round == $maxRound) {
+      $this->gamestate->jumpToState(\ST_END_OF_GAME);
+    } else {
+      $this->gamestate->setAllPlayersMultiactive();
+      $this->gamestate->nextState('change');
+    }
+  }
+
+  public function argsChangeOfRound()
+  {
+    $teamNames = [
+      ALLIES => \clienttranslate('Allies'),
+      AXIS => \clienttranslate('Axis'),
+    ];
+    $team = Teams::getWinner();
+    return [
+      'i18n' => ['team'],
+      'team' => $teamNames[$team->getId()],
+    ];
+  }
+
+  public function actProceed()
+  {
+    self::checkAction('actProceed');
+    $pId = $this->getCurrentPId();
+    $this->gamestate->setPlayerNonMultiactive($pId, 'done');
   }
 
   public function stEndOfGame()

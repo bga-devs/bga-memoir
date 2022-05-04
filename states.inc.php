@@ -67,6 +67,26 @@ $machinestates = [
     ],
   ],
 
+  ST_END_OF_ROUND => [
+    'name' => 'endOfRound',
+    'description' => '',
+    'descriptionmyturn' => '',
+    'type' => 'game',
+    'action' => 'stEndOfRound',
+    'possibleactions' => [],
+    'transitions' => ['change' => ST_CHANGE_OF_ROUND, 'end' => ST_END_OF_GAME],
+  ],
+
+  ST_CHANGE_OF_ROUND => [
+    'name' => 'changeOfRound',
+    'description' => clienttranslate('Waiting for the other team to proceed to next round'),
+    'descriptionmyturn' => clienttranslate('Round 1 is over: ${team} wins!'),
+    'type' => 'multipleactiveplayer',
+    'possibleactions' => ['actProceed'],
+    'args' => 'argsChangeOfRound',
+    'transitions' => ['done' => ST_NEW_ROUND],
+  ],
+
   ///////////////////////////////////////////////////////
   //   ____            _        _____ _
   //  | __ )  __ _ ___(_) ___  |  ___| | _____      __

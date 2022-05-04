@@ -451,6 +451,13 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       delete this._boardTooltips[uid];
     },
 
+    closeAllTooltips() {
+      Object.keys(this._boardTooltips).forEach((uid) => {
+        this._boardTooltips[uid].remove();
+      });
+      this._boardTooltips = {};
+    },
+
     tplBoardTooltip(cell) {
       let terrainDivs =
         this._terrainsVisibility == 0 ? [] : cell.terrains.map((terrain) => this.tplTerrainSummary(terrain));

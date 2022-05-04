@@ -89,6 +89,14 @@ class Teams extends \M44\Helpers\DB_Manager
         }
       }
     }
+
+    // Update stats
+    foreach (self::getAll() as $team) {
+      foreach ($team->getMembers() as $member) {
+        $method = 'setTeamRound' . Globals::getRound();
+        Stats::$method($member->getId(), $team->getId() == ALLIES ? 0 : 1);
+      }
+    }
   }
 
   public function checkVictory()
@@ -112,11 +120,21 @@ class Teams extends \M44\Helpers\DB_Manager
         }
 
         Notifications::winRound($team, Globals::getRound());
-        Game::get()->gamestate->jumpToState(ST_NEW_ROUND);
+        Game::get()->gamestate->jumpToState(ST_END_OF_ROUND);
         return true;
       }
     }
 
     return false;
+  }
+
+  public function getWinner()
+  {
+    foreach (self::getAll() as $team) {
+      if ($team->getNVictory() <= $team->getMedals()->count()) {
+        return $team;
+      }
+    }
+    return null;
   }
 }

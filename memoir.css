@@ -4092,6 +4092,35 @@ span.m44-dice-result {
       #popin_showScenario #popin_showScenario_contents #scenario-bottom-container #scenario-brief {
         border-right: 2px solid #9e0a0f; }
 
+#popin_showStats {
+  width: 800px;
+  height: 400px; }
+  #popin_showStats h2 {
+    text-align: center;
+    font-family: 'Gunplay';
+    color: #9e0a0f;
+    font-size: 39px;
+    text-transform: uppercase;
+    margin: 0px;
+    background: #ffffffab;
+    padding: 14px 0px 7px;
+    border-bottom: 1px solid #8080808a; }
+  #popin_showStats #popin_showStats_contents table {
+    width: 100%; }
+    #popin_showStats #popin_showStats_contents table th,
+    #popin_showStats #popin_showStats_contents table td {
+      border: 1px solid black;
+      padding: 5px 10px; }
+    #popin_showStats #popin_showStats_contents table thead th {
+      background: rgba(255, 255, 255, 0.5);
+      text-align: center;
+      font-weight: bold; }
+    #popin_showStats #popin_showStats_contents table tbody th {
+      background: rgba(255, 255, 255, 0.3);
+      font-weight: bold; }
+    #popin_showStats #popin_showStats_contents table tbody td {
+      text-align: center; }
+
 .board-token {
   background-image: url("img/tokens.png");
   background-size: 300% 400%; }
@@ -4453,6 +4482,15 @@ span.m44-dice-result {
 .player-panel-holder {
   display: flex; }
 
+#show-scores {
+  width: 40px;
+  cursor: pointer; }
+  #show-scores:hover {
+    color: grey; }
+  #show-scores svg {
+    width: auto;
+    height: 40px; }
+
 #scenario-informations {
   display: flex;
   align-items: center; }
@@ -4501,7 +4539,15 @@ span.m44-dice-result {
   padding: 8px 0px 4px;
   border-bottom: 1px solid #8080808a;
   border-top-left-radius: 7px;
-  border-top-right-radius: 7px; }
+  border-top-right-radius: 7px;
+  display: block; }
+  #player_config #scenario-name span#m44-progress {
+    background: #9e0a0f;
+    color: white;
+    padding: 2px 5px 0px;
+    border-radius: 3px;
+    float: right;
+    margin-top: -3px; }
 #player_config #player_info_row {
   display: flex;
   justify-content: space-around;

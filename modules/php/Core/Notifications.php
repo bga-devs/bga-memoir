@@ -429,7 +429,7 @@ class Notifications
   {
     self::updateStats();
 
-    self::notifyAll('message', clienttranslate('${team_name} wins ${nb} round'), [
+    self::notifyAll('message', clienttranslate('${team_name} wins round n°${nb}'), [
       'teamId' => $team->getId(),
       'nb' => $round,
     ]);

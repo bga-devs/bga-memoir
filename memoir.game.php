@@ -115,6 +115,10 @@ class memoir extends Table
       'discard' => Cards::getTopOf('discard'),
       'scenario' => is_null($scenario) ? null : $scenario['text']['en'],
 
+      'duration' => 3 - Globals::getDuration(),
+      'round' => Globals::getRound(),
+      'stats' => Stats::getUiData(),
+
       'terrains' => Terrains::getStaticUiData(),
       'units' => Units::getStaticUiData(),
 

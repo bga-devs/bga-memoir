@@ -2,6 +2,20 @@
   display: flex;
 }
 
+#show-scores {
+  width: 40px;
+
+  &:hover {
+    color: grey;
+  }
+  cursor: pointer;
+
+  svg {
+    width: auto;
+    height: 40px;
+  }
+}
+
 #scenario-informations {
   display: flex;
   align-items: center;
@@ -52,6 +66,16 @@
     border-bottom: 1px solid #8080808a;
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
+    display: block;
+
+    span#m44-progress {
+      background: #9e0a0f;
+      color: white;
+      padding: 2px 5px 0px;
+      border-radius: 3px;
+      float: right;
+      margin-top: -3px;
+    }
   }
 
   #player_info_row {

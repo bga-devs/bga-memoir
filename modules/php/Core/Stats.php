@@ -89,7 +89,9 @@ class Stats extends \M44\Helpers\DB_Manager
 
   public static function getUiData()
   {
-    return self::DB()->get();
+    return self::DB()
+      ->get()
+      ->toArray();
   }
 
   protected static function getFilteredQuery($id, $pId)
@@ -153,9 +155,13 @@ class Stats extends \M44\Helpers\DB_Manager
           $value = $args[1];
         }
 
-        self::getFilteredQuery($id, $pId)
-          ->update(['stats_value' => $value])
-          ->run();
+        if (self::getFilteredQuery($id, $pId)->count() == 0) {
+          self::DB()->insert(['stats_type' => $id, 'stats_player_id' => $pId, 'stats_value' => $value]);
+        } else {
+          self::getFilteredQuery($id, $pId)
+            ->update(['stats_value' => $value])
+            ->run();
+        }
         return $value;
       } elseif ($match[1] == 'inc') {
         $id = null;

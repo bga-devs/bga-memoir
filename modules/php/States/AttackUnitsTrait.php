@@ -323,24 +323,15 @@ trait AttackUnitsTrait
 
     // Take the hits
     $realHits = $unit->takeDamage($hits);
+
     // Increase the stats
-
-    // $attack = $this->getCurrentAttack();
-    // if ($attack !== null) {
-    //   if (!$ambush) {
-    //     $attacker = $attack['player'];
-    //   } else {
-    //     $attacker = $attack['oppUnit']->getPlayer();
-    //   }
-    // } else {
-    //   $attacker = $unit
-    //     ->getTeam()
-    //     ->getOpponent()
-    //     ->getCommander();
-    // }
-
     $statName = 'inc' . $unit->getStatName() . 'FigRound' . Globals::getRound();
     Stats::$statName($attacker, $realHits);
+    if ($unit->isEliminated()) {
+      // Increse the stat now to make sure it's sent to the front
+      $statName = 'inc' . $unit->getStatName() . 'UnitRound' . Globals::getRound();
+      Stats::$statName($attacker, 1);
+    }
 
     // Notify
     $player = $unit->getPlayer();
@@ -352,10 +343,6 @@ trait AttackUnitsTrait
       $team = $attacker->getTeam();
       $team->addEliminationMedals($unit);
       Tokens::removeTargets($unit->getPos());
-
-      // Increse the stat
-      $statName = 'inc' . $unit->getStatName() . 'UnitRound' . Globals::getRound();
-      Stats::$statName($attacker, 1);
 
       if (
         Globals::isItalyHighCommand() &&
