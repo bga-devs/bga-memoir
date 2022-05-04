@@ -80,12 +80,12 @@ trait DrawCardsTrait
     ];
   }
 
-  public function actChooseCard($cardId)
+  public function actChooseCard($cardId, $choice)
   {
-    $this->actChooseCards([$cardId]);
+    $this->actChooseCards([$cardId], $choice);
   }
 
-  public function actChooseCards($cardIds)
+  public function actChooseCards($cardIds, $choice)
   {
     // keep the cards, remove the others
     self::checkAction('actChooseCard');
@@ -93,11 +93,17 @@ trait DrawCardsTrait
     $args = $this->argsDrawChoice();
 
     if (count($cardIds) != $args['keep']) {
+      // TODO : only handling recon 1/1 card here
       throw new \BgaVisibleSystemException('Number of cards to keep not consistent with rules. Should not happen');
     }
 
     if (count(array_diff($cardIds, $args['_private']['active']['cards']->getIds())) != 0) {
       throw new \BgaVisibleSystemException('Those cards cannot be selected. Should not happen');
+    }
+
+    // If choice is keep, discard the others
+    if ($choice == 0) {
+      $cardIds = array_diff($player->getCardsChoice()->getIds(), $cardIds);
     }
 
     // Move selected cards to discard

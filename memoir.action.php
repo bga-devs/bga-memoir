@@ -139,7 +139,8 @@ class action_memoir extends APP_GameAction
   {
     self::setAjaxMode();
     $cardId = self::getArg('cardId', AT_posint, false);
-    $this->game->actChooseCard($cardId);
+    $choice = self::getArg('choice', AT_posint, true);
+    $this->game->actChooseCard($cardId, $choice);
     self::ajaxResponse();
   }
 

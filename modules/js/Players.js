@@ -403,8 +403,21 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         }
 
         $('card-' + card.id).classList.add('choice');
-        this.onClick(`card-${card.id}`, () => this.takeAction('actChooseCard', { cardId: card.id }));
+        this.onClick(`card-${card.id}`, () =>
+          this.clientState('drawChoiceChoice', _('Keep it or discard it?'), { cardId: card.id }),
+        );
       });
+    },
+
+    onEnteringStateDrawChoiceChoice(args) {
+      this.addCancelStateBtn();
+      $('card-' + args.cardId).classList.add('choice');
+      this.addPrimaryActionButton('btnKeep', _('Keep'), () =>
+        this.takeAction('actChooseCard', { cardId: args.cardId, choice: 0 }),
+      );
+      this.addDangerActionButton('btnDiscard', _('Discard'), () =>
+        this.takeAction('actChooseCard', { cardId: args.cardId, choice: 1 }),
+      );
     },
 
     onEnteringStateCommissarCard(args) {
