@@ -138,7 +138,7 @@ trait AttackUnitsTrait
       'nDice' => $target['dice'],
       'distance' => $target['d'],
       'ambush' => false,
-      'bonusCloseAssault' => $unit->getBonusCloseAssault() == true && !$this->isWounded() && $target['d'] == 1,
+      'bonusCloseAssault' => $unit->getBonusCloseAssault() == true && !$unit->isWounded() && $target['d'] == 1,
     ];
     Globals::setAttackStack($stack);
 
@@ -229,7 +229,7 @@ trait AttackUnitsTrait
       }
 
       // recompute attack throw
-      if ($attack['bonusCloseAssault'] === true && $unit->isWounded()) {
+      if ($attack['bonusCloseAssault'] && $unit->isWounded()) {
         Notification::message(clienttranslate('Unit has been wounded and has lost its attack bonus'), []);
         $attack['nDice']--;
       }
