@@ -153,7 +153,7 @@ trait TakeGroundTrait
     $moves = $unit->getMoves();
 
     return [
-      'units' => [$unit->getId() => $unit->getPossibleMoves($moves + 1, $moves + 1, false, true)],
+      'units' => [$unit->getId() => $unit->getPossibleMoves($moves + 1, $moves + 1, true, true)],
       'lastUnitMoved' => $unit->getId(),
     ];
   }
