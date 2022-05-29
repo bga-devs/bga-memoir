@@ -184,8 +184,8 @@ class memoir extends Table
   function changeActivePlayerAndJumpTo($pId, $state)
   {
     if (Globals::getLogState() == -1) {
-      Log::clearAll();
       Globals::setLogState($state);
+      Log::clearAll();
     }
 
     Globals::setChangeActivePlayer([
