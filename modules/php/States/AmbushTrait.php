@@ -50,6 +50,8 @@ trait AmbushTrait
       if (empty($args['_private']['active']['cards'])) {
         $this->actPassAmbush(true);
       }
+    } else {
+      $this->giveExtraTime($player->getId(), 30);
     }
   }
 

@@ -75,6 +75,7 @@ trait TurnTrait
     // TODO : Overlord => branch here to distribute cards instead
     if (true) {
       $player = $team->getMembers()->first();
+      $this->giveExtraTime($player->getId());
       $transition = 'playCard';
       if ($player->isCommissar() && $player->getCommissarCard() != null) {
         $transition = 'commissar';

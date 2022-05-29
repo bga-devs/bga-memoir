@@ -101,6 +101,8 @@ trait RetreatUnitTrait
     elseif (count($args['cells']) == 1 && $args['min'] > 0) {
       $cell = reset($args['cells']);
       $this->actRetreatUnit($cell['x'], $cell['y'], true);
+    } else {
+      $this->giveExtraTime($unit->getPlayer()->getId(), 20);
     }
   }
 
@@ -146,7 +148,7 @@ trait RetreatUnitTrait
     // Move the unit
     $cell = $cells[$k];
     $dist = $cell['d'];
-    usort($cell['paths'], function($path1, $path2){
+    usort($cell['paths'], function ($path1, $path2) {
       return $path1['resistance'] - $path2['resistance'];
     });
     $path = $cell['paths'][0]; // Take the least resistance path
