@@ -278,6 +278,7 @@ $scenarios[1412] = [
         'terrain' => [
           'name' => 'pmouth',
           'orientation' => 1,
+          'behavior' => 'FORDABLE_STREAM',
         ],
       ],
       31 => [

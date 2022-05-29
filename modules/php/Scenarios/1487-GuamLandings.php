@@ -493,6 +493,7 @@ $scenarios[1487] = [
         'terrain' => [
           'name' => 'riverFR',
           'orientation' => 3,
+          'behavior' => 'FORDABLE_STREAM',
         ],
       ],
       49 => [

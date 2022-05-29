@@ -5,7 +5,7 @@ class Ford extends \M44\Models\Terrain
 {
   public static function isTileOfType($hex)
   {
-    return in_array($hex['name'], ['ford']);
+    return in_array($hex['name'], ['ford']) || (isset($hex['behavior']) && $hex['behavior'] == 'FORD');
   }
 
   public function __construct($row)
