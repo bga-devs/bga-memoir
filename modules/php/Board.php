@@ -699,6 +699,10 @@ class Board
    */
   public static function isBlockingLineOfSight($unit, $target, $cell, $path)
   {
+    if (!self::isValidCell($cell)) {
+      return true;
+    }
+
     $t = self::$grid[$cell['x']][$cell['y']];
     if ($unit->mustSeeToAttack() && !is_null($t['unit']) && $t['unit']->getId() != $unit->getId()) {
       return true;
@@ -740,9 +744,6 @@ class Board
     for ($x = $minX - $offsetX; $x <= $maxX + $offsetX; $x++) {
       for ($y = $minY - $offsetY; $y <= $maxY + $offsetY; $y++) {
         $cell = ['x' => $x, 'y' => $y];
-        if (!self::isValidCell($cell)) {
-          continue;
-        }
 
         // Compute the center and corners of that cell
         $center = [$x, -3 * $y];
