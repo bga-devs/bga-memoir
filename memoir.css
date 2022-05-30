@@ -576,7 +576,8 @@ html {
 
 .commissar-holder {
   display: flex;
-  padding: 2px 7px; }
+  padding: 2px 7px;
+  --memoirCardScale: 0.1; }
   .commissar-holder .commissar-token {
     width: 40px;
     height: 40px;
