@@ -407,7 +407,10 @@ class Board
     $notFirstMovement = $source['d'] > 0 || $source['x'] != $unit->getX() || $source['y'] != $unit->getY();
     if ($notFirstMovement || $hasMoved) {
       // If I'm coming from a 'must stop' terrain, can't go there unless dist = 0
-      if (self::mustStopWhenEnteringCell($source, $unit)) {
+      if (
+        self::mustStopWhenEnteringCell($source, $unit) ||
+        (self::mustStopMovingWhenEnteringCell($source, $unit) && !$takeGround)
+      ) {
         return \INFINITY;
       }
 
@@ -743,6 +746,9 @@ class Board
     $offsetY = $minY == $maxY ? 1 : 0;
     for ($x = $minX - $offsetX; $x <= $maxX + $offsetX; $x++) {
       for ($y = $minY - $offsetY; $y <= $maxY + $offsetY; $y++) {
+        if (($x + $y + 4) % 2 == 1) {
+          continue;
+        }
         $cell = ['x' => $x, 'y' => $y];
 
         // Compute the center and corners of that cell

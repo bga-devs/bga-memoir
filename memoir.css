@@ -1020,10 +1020,8 @@ html {
 
 .hex-grid-terrain {
   z-index: 2;
-  background-image: url("img/board_terrains.jpg");
-  background-size: 1000% 1100%;
-  clip-path: polygon(50% 0.6%, 99.4% 25.6%, 99.4% 74.4%, 50% 99.4%, 0.6% 74.4%, 0.6% 25.6%);
-  -webkit-clip-path: polygon(50% 0.6%, 99.4% 25.6%, 99.4% 74.4%, 50% 99.4%, 0.6% 74.4%, 0.6% 25.6%); }
+  background-image: url("img/board_terrains.png");
+  background-size: 1000% 1100%; }
   .hex-grid-terrain[data-tile='0'] {
     background-position-x: 0%;
     background-position-y: 0%; }

@@ -43,6 +43,7 @@ class Terrain extends \M44\Helpers\DB_Model
     'mustBeAdjacentToEnter',
     'mustBeAdjacentToBattle',
     'mustStopWhenEntering',
+    'mustStopMovingWhenEntering',
     'enteringCannotBattle',
     'leavingCannotBattle',
     'canIgnoreOneFlag',

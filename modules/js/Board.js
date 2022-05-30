@@ -485,6 +485,10 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           bool: _('To enter or take ground, unit must start its move from adjacent hex'),
           obj: _('To enter or take ground, ${units} must start its move from adjacent hex'),
         },
+        mustStopMovingWhenEntering: {
+          bool: _('Unit moving in must stop'),
+          obj: _('${units} moving in must stop'),
+        },
         mustStopWhenEntering: {
           bool: _('Unit moving in must stop and may move no further on that turn'),
           obj: _('${units} moving in must stop and may move no further on that turn'),
@@ -542,6 +546,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       let movementProperties = [
         'isImpassable',
         'mustBeAdjacentToEnter',
+        'mustStopMovingWhenEntering',
         'mustStopWhenEntering',
         'mustStopWhenLeaving',
         'cantLeave',

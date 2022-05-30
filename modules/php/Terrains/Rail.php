@@ -12,15 +12,11 @@ class Rail extends \M44\Models\Terrain
   {
     $this->name = clienttranslate('Railroads');
     $this->number = 38;
+    $this->mustStopMovingWhenEntering = [ARMOR, ARTILLERY];
     $this->desc = [
-      clienttranslate('No movement restrictions for Infantry'),
-      clienttranslate('Armor and Artillery moving onto must stop'),
-      clienttranslate('Road crossing a railroad plays as standard road'),
-      clienttranslate('No combat restrictions'),
       clienttranslate('Armor may Take ground and Overrun'),
-      clienttranslate('Do not block line of sight'),
+      clienttranslate('Road crossing a railroad plays as standard road'),
     ];
-    $this->mustStopWhenEntering = [ARMOR, \ARTILLERY];
     parent::__construct($row);
   }
 
