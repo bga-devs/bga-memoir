@@ -232,7 +232,9 @@ class Board
     if ($card != null) {
       if ($card->isType(CARD_BEHIND_LINES) && $unit->getType() == INFANTRY) {
         $maxDistance = 3; // Units activated by "BehindEnemyLines" can moves up to 3 hexes
-      } elseif ($card->isType(CARD_INFANTRY_ASSAULT) && $unit->getType() == INFANTRY) {
+      }
+      // Only effect on unit with a move radius of 2 or less
+      elseif ($card->isType(CARD_INFANTRY_ASSAULT) && $unit->getType() == INFANTRY && $unit->getMovementRadius() <= 2) {
         $maxDistance++;
       } elseif ($card->isType(CARD_ARTILLERY_BOMBARD) && $unit->getType() == \ARTILLERY) {
         $maxDistance = 3;
@@ -525,7 +527,8 @@ class Board
     $card = $unit->getActivationOCard();
     $banzai = false;
     if ($card !== null) {
-      if ($card->isType(CARD_INFANTRY_ASSAULT) && $unit->getType() == \INFANTRY) {
+      // only if movement and attack radius == 1
+      if ($card->isType(CARD_INFANTRY_ASSAULT) && $unit->getType() == \INFANTRY && $maxMoves == 1) {
         $maxMoves++;
       } elseif ($card->isType(CARD_BEHIND_LINES) && $unit->getType() == INFANTRY) {
         $maxMoves = INFINITY;
