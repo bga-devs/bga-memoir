@@ -44,6 +44,7 @@ trait TakeGroundTrait
 
     // To take ground, we must have the following:
     //   - attack at distance 1 and cost of deplacement of 1
+    //   - Unit is stopped (wire for example)
     //   - attacked cell is now empty (opp unit retreated or eliminated)
     //   - unit has not taken too many grounds already (1 for infantry, 2 for armors)
     //   - unit has not entered a mustStopWhenEntering terrain during the move phase
@@ -51,6 +52,7 @@ trait TakeGroundTrait
     if (
       $attack['distance'] != 1 ||
       is_null($unit) ||
+      $unit->isStopped() ||
       Board::getDeplacementCost($unit, $cell, $attack, 1, true) == \INFINITY ||
       $unit->getGrounds() >= $unit->getMaxGrounds() ||
       Board::getUnitInCell($attack['x'], $attack['y']) != null ||
