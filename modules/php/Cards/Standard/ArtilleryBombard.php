@@ -34,7 +34,7 @@ class ArtilleryBombard extends \M44\Models\Card
         'i18n' => ['desc'],
         'n' => $marineCommand ? 2 : 1,
         'nTitle' => $marineCommand ? 2 : 1,
-        'desc' => \clienttranslate('(because no armor units)'),
+        'desc' => \clienttranslate('(because no artillery units)'),
         'units' => $units->getPositions(),
       ];
     } else {
