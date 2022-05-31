@@ -25,10 +25,12 @@ trait RetreatUnitTrait
 
     $canIgnoreAllFlags = Board::canIgnoreAllFlagsCell($oppUnit->getPos(), $oppUnit);
     $currentAttack = $this->getCurrentAttack();
+    $mustIgnoreAllFlags = Board::mustIgnoreAllFlagsCell($oppUnit->getPos(), $oppUnit);
 
     if ($currentAttack['card']->cannotIgnoreFlags()) {
       $canIgnore1Flag = false;
       $canIgnoreAllFlags = false;
+      $mustIgnoreAllFlags = false;
     } elseif ($oppUnit->getMustIgnore1Flag()) {
       $dice[\DICE_FLAG]--;
       if ($canIgnore1Flag && $dice[\DICE_FLAG] != 0) {
@@ -37,7 +39,6 @@ trait RetreatUnitTrait
       }
     }
 
-    $mustIgnoreAllFlags = Board::mustIgnoreAllFlagsCell($oppUnit->getPos(), $oppUnit);
     $attackedUnit = Units::get($attack['oppUnitId']);
     // TODO : compute the min/max flags
 
