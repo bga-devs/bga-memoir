@@ -55,6 +55,17 @@ $scenarios[1599] = [
         'terrain' => [
           'name' => 'buildings',
         ],
+        'tags' => [
+          0 => [
+            'name' => 'medal7',
+            'group' => [],
+            'medal' => [
+              'permanent' => false,
+              'counts_for' => 1,
+              'nbr_hex' => 1,
+            ],
+          ],
+        ],
       ],
       2 => [
         'row' => 1,
@@ -95,12 +106,34 @@ $scenarios[1599] = [
         'unit' => [
           'name' => 'infus',
         ],
+        'tags' => [
+          0 => [
+            'name' => 'medal7',
+            'group' => [],
+            'medal' => [
+              'permanent' => false,
+              'counts_for' => 1,
+              'nbr_hex' => 1,
+            ],
+          ],
+        ],
       ],
       5 => [
         'row' => 1,
         'col' => 23,
         'terrain' => [
           'name' => 'buildings',
+        ],
+        'tags' => [
+          0 => [
+            'name' => 'medal7',
+            'group' => [],
+            'medal' => [
+              'permanent' => false,
+              'counts_for' => 1,
+              'nbr_hex' => 1,
+            ],
+          ],
         ],
       ],
       6 => [
@@ -109,6 +142,17 @@ $scenarios[1599] = [
         'rect_terrain' => [
           'name' => 'pbunker',
           'original_owner' => ALLIES,
+        ],
+        'tags' => [
+          0 => [
+            'name' => 'medal7',
+            'group' => [],
+            'medal' => [
+              'permanent' => false,
+              'counts_for' => 1,
+              'nbr_hex' => 1,
+            ],
+          ],
         ],
       ],
       7 => [
@@ -119,6 +163,17 @@ $scenarios[1599] = [
         ],
         'unit' => [
           'name' => 'infus',
+        ],
+        'tags' => [
+          0 => [
+            'name' => 'medal7',
+            'group' => [],
+            'medal' => [
+              'permanent' => false,
+              'counts_for' => 1,
+              'nbr_hex' => 1,
+            ],
+          ],
         ],
       ],
       8 => [
@@ -134,6 +189,17 @@ $scenarios[1599] = [
         'unit' => [
           'name' => 'infus',
         ],
+        'tags' => [
+          0 => [
+            'name' => 'medal7',
+            'group' => [],
+            'medal' => [
+              'permanent' => false,
+              'counts_for' => 1,
+              'nbr_hex' => 1,
+            ],
+          ],
+        ],
       ],
       9 => [
         'row' => 3,
@@ -143,6 +209,17 @@ $scenarios[1599] = [
         ],
         'unit' => [
           'name' => 'infus',
+        ],
+        'tags' => [
+          0 => [
+            'name' => 'medal7',
+            'group' => [],
+            'medal' => [
+              'permanent' => false,
+              'counts_for' => 1,
+              'nbr_hex' => 1,
+            ],
+          ],
         ],
       ],
       10 => [
@@ -155,12 +232,34 @@ $scenarios[1599] = [
         'unit' => [
           'name' => 'gunus',
         ],
+        'tags' => [
+          0 => [
+            'name' => 'medal7',
+            'group' => [],
+            'medal' => [
+              'permanent' => false,
+              'counts_for' => 1,
+              'nbr_hex' => 1,
+            ],
+          ],
+        ],
       ],
       11 => [
         'row' => 3,
         'col' => 23,
         'rect_terrain' => [
           'name' => 'pbunker',
+        ],
+        'tags' => [
+          0 => [
+            'name' => 'medal7',
+            'group' => [],
+            'medal' => [
+              'permanent' => false,
+              'counts_for' => 1,
+              'nbr_hex' => 1,
+            ],
+          ],
         ],
       ],
       12 => [
