@@ -101,6 +101,10 @@ $game_options = [
       ],
     ],
     'values' => [
+      0 => [
+        'name' => \clienttranslate('Random'),
+        'tmdisplay' => \clienttranslate('[Random]'),
+      ],
       2 => [
         'name' => clienttranslate('[BB] [2] Pegasus Bridge'),
         'tmdisplay' => '[2]',

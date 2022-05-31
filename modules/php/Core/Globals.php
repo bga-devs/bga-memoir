@@ -176,7 +176,14 @@ class Globals extends \M44\Helpers\DB_Manager
     Globals::setDuration($options[OPTION_DURATION]);
     Globals::setMode($options[OPTION_MODE]);
     Globals::setOfficialScenario($options[\OPTION_SCENARIO_TYPE] == \OPTION_SCENARIO_OFFICIAL);
-    Globals::setScenarioId(Globals::isOfficialScenario() ? $options[OPTION_MODE + 1 + $options[OPTION_MODE]] : -1);
+    $scenarioId = Globals::isOfficialScenario() ? $options[OPTION_MODE + 1 + $options[OPTION_MODE]] : -1;
+    if ($scenarioId == 0) {
+      include_once dirname(__FILE__) . '/../../../gameoptions.inc.php';
+      $ids = $game_options[OPTION_MODE + 1 + $options[OPTION_MODE]]['values'];
+      unset($ids[0]);
+      $scenarioId = array_rand($ids, 1);
+    }
+    Globals::setScenarioId($scenarioId);
     Globals::setUnitMoved(-1);
     Globals::setUnitAttacker(-1);
     Globals::setLastPlayedCards([]);
