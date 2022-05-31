@@ -231,6 +231,11 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
       ->count() != 0;
   }
 
+  public function canTarget($unit)
+  {
+    return $this->targets[$unit->getType()] ?? true;
+  }
+
   //////////////////////////////////////
   //    ___  ____  ____  _____ ____
   //   / _ \|  _ \|  _ \| ____|  _ \

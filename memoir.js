@@ -280,6 +280,7 @@ define([
         drawChoice: 'command',
         targetAirPower: 'attack',
         targetBarrage: 'attack',
+        opponentAmbush: 'command',
       };
 
       if (Object.keys(statusMapping).includes(stateName)) {

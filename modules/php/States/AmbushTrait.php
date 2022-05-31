@@ -15,14 +15,20 @@ trait AmbushTrait
   function argsOpponentAmbush()
   {
     $player = Players::getActive();
-    $cards = $player->getCards();
-    $cards = $cards
-      ->filter(function ($card) {
-        return $card->getType() == CARD_AMBUSH;
-      })
-      ->getIds();
+    $attack = $this->getCurrentAttack(false);
+    $canAttack = Units::get($attack['oppUnitId'])->canTarget(Units::get($attack['unitId']));
+    $cards = $canAttack
+      ? $player
+        ->getCards()
+        ->filter(function ($card) {
+          return $card->getType() == CARD_AMBUSH;
+        })
+        ->getIds()
+      : [];
+
     return [
-      'currentAttack' => $this->getCurrentAttack(false),
+      'canAttack' => $canAttack,
+      'currentAttack' => $attack,
       '_private' => ['active' => ['cards' => $cards]],
     ];
   }
@@ -43,10 +49,16 @@ trait AmbushTrait
       return;
     }
 
+    // If the player can't ambush current attacking unit => pass (sniper on Armor)
+    $args = $this->argsOpponentAmbush();
+    if (!$args['canAttack']) {
+      $this->actPassAmbush(true);
+      return;
+    }
+
     // If player has autoskip and no ambush in hand => pass
     $player = Players::getActive();
     if ($player->getPref(\OPTION_AUTO_PASS_ATTACK_REACT) == \OPTION_AUTO_ON) {
-      $args = $this->argsOpponentAmbush();
       if (empty($args['_private']['active']['cards'])) {
         $this->actPassAmbush(true);
       }

@@ -576,8 +576,7 @@ html {
 
 .commissar-holder {
   display: flex;
-  padding: 2px 7px;
-  --memoirCardScale: 0.1; }
+  padding: 2px 7px; }
   .commissar-holder .commissar-token {
     width: 40px;
     height: 40px;
@@ -591,6 +590,9 @@ html {
     margin-left: 3px; }
     .commissar-holder .commissar-slot .m44-card {
       position: absolute; }
+
+.player-panel-wrapper .commissar-holder {
+  --memoirCardScale: 0.1; }
 
 /*
 
@@ -865,8 +867,12 @@ html {
 
 .hex-grid-background, .hex-grid-terrain.background-terrain {
   z-index: 1;
-  background-image: url("img/board_backgrounds.jpg");
-  background-size: 600% 600%; }
+  background-image: url("img/board_backgrounds.png");
+  background-size: 600% 600%;
+  clip-path: none; }
+  #m44-board .hex-grid-item .hex-grid-background, #m44-board .hex-grid-item
+  .hex-grid-terrain.background-terrain {
+    clip-path: none; }
   .hex-grid-background[data-tile='0'],
   .hex-grid-terrain.background-terrain[data-tile='0'] {
     background-position-x: 0%;

@@ -692,7 +692,6 @@ html {
 .commissar-holder {
   display: flex;
   padding: 2px 7px;
-  --memoirCardScale: 0.1;
 
   .commissar-token {
     width: 40px;
@@ -712,6 +711,10 @@ html {
       position: absolute;
     }
   }
+}
+
+.player-panel-wrapper .commissar-holder {
+  --memoirCardScale: 0.1;
 }
 
 /*

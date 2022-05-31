@@ -294,8 +294,12 @@
 .hex-grid-background,
 .hex-grid-terrain.background-terrain {
   z-index: 1;
-  background-image: url('img/board_backgrounds.jpg');
+  background-image: url('img/board_backgrounds.png');
   background-size: 600% 600%;
+  clip-path: none;
+  #m44-board .hex-grid-item & {
+    clip-path: none;
+  }
 
   @for $i from 0 through 36 {
     &[data-tile='#{$i}'] {
@@ -313,8 +317,8 @@
   z-index: 2;
   background-image: url('img/board_terrains.png');
   background-size: 1000% 1100%;
-//  clip-path: polygon(50% 0.6%, 99.4% 25.6%, 99.4% 74.4%, 50% 99.4%, 0.6% 74.4%, 0.6% 25.6%);
-//  -webkit-clip-path: polygon(50% 0.6%, 99.4% 25.6%, 99.4% 74.4%, 50% 99.4%, 0.6% 74.4%, 0.6% 25.6%);
+  //  clip-path: polygon(50% 0.6%, 99.4% 25.6%, 99.4% 74.4%, 50% 99.4%, 0.6% 74.4%, 0.6% 25.6%);
+  //  -webkit-clip-path: polygon(50% 0.6%, 99.4% 25.6%, 99.4% 74.4%, 50% 99.4%, 0.6% 74.4%, 0.6% 25.6%);
 
   @for $i from 0 through 104 {
     &[data-tile='#{$i}'] {
