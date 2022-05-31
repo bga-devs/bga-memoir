@@ -12,11 +12,6 @@ class GeneralAdvance extends \M44\Models\SectionCard
     $this->text = [clienttranslate('Order 2 Units in each section')];
     $this->sections = [2, 2, 2];
     $this->nUnits = 6;
-    $this->orderUnitsTitles = [
-      clienttranslate('in each section'),
-      clienttranslate('in each section'),
-      clienttranslate('in each section'),
-    ];
   }
 
   public function getArgsOrderUnits()
@@ -24,5 +19,12 @@ class GeneralAdvance extends \M44\Models\SectionCard
     $data = parent::getArgsOrderUnits();
     $data['nTitle'] = 2;
     return $data;
+  }
+
+  public function getOrderUnitsTitle($val, $marineCommand)
+  {
+    return $marineCommand
+      ? clienttranslate('in each section plus one additional unit')
+      : clienttranslate('in each section');
   }
 }

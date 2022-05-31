@@ -24,6 +24,11 @@ class SectionCard extends Card
     return $this->texts[$this->value] ?? $this->text;
   }
 
+  public function getOrderUnitsTitle($val, $marineCommand)
+  {
+    return $this->orderUnitsTitles[$val] ?? '';
+  }
+
   public function getSections()
   {
     $sections = [0, 0, 0];
@@ -68,7 +73,7 @@ class SectionCard extends Card
       'n' => $nbUnits,
       'nTitle' => $nbUnits,
       'nOnTheMove' => $nbOnTheMove,
-      'desc' => $this->orderUnitsTitles[$val] ?? '',
+      'desc' => $this->getOrderUnitsTitle($val, $marineCommand),
       'sections' => $this->getSections(),
       'units' => $units,
       'marineCommand' => $marineCommand,
