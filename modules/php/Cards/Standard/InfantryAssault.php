@@ -70,11 +70,17 @@ class InfantryAssault extends \M44\Models\Card
         'units' => $units->getPositions(),
       ];
     } else {
+      $descs = [
+        clienttranslate('on the Left Flank (infantry units only)'),
+        clienttranslate('in the Center (infantry units only)'),
+        clienttranslate('on the Right Flank (infantry units only)'),
+      ];
+
       return [
-        'i18n' => ['desc'],
+        'i18n' => ['desc', 'nTitle'],
         'n' => \INFINITY,
-        'nTitle' => \INFINITY,
-        'desc' => \clienttranslate('(infantry units only)'),
+        'nTitle' => \clienttranslate('all'),
+        'desc' => $descs[$section],
         'units' => $infantry->getPositions(),
       ];
     }
