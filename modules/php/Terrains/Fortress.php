@@ -2,7 +2,7 @@
 namespace M44\Terrains;
 use M44\Board;
 
-class Fortress extends Bunker
+class Fortress extends \M44\Models\Terrain
 {
   public static function isTileOfType($hex)
   {
@@ -11,15 +11,12 @@ class Fortress extends Bunker
 
   public function __construct($row)
   {
-    parent::__construct($row);
     $this->name = clienttranslate('Fortresses');
     $this->number = 24;
+    $this->isImpassable = [ARMOR, \ARTILLERY];
+    $this->isBlockingLineOfSight = true;
     $this->canIgnoreAllFlags = true;
-    $this->desc[] = clienttranslate('Unit may ignore all flags');
-  }
-
-  public function isOriginalOwner($unit)
-  {
-    return false;
+    $this->defense = [\INFANTRY => -1, ARMOR => -2];
+    parent::__construct($row);
   }
 }

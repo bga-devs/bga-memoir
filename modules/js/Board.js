@@ -521,6 +521,10 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           bool: _('Unit may ignore 1 flag'),
           obj: _('${units} may ignore 1 flag'),
         },
+        canIgnoreAllFlags: {
+          bool: _('Unit may ignore all flags'),
+          obj: _('${units} may ignore all flags'),
+        },
         isBlockingLineOfSight: {
           bool: _('Block line of sight'),
           negbool: _('Do not block line of sight'),
@@ -615,6 +619,10 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           if (prop == 'isBlockingLineOfSight' && terrainData.isHill) {
             content = propDesc.hill;
           }
+        }
+
+        if(prop == 'canIgnoreOneFlag' && terrainData['canIgnoreAllFlags']){
+          return;
         }
 
         if (content != '') {
