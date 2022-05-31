@@ -26,6 +26,10 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     return String.fromCharCode(65 + (x % 2 == 0 ? 0 : 32) + parseInt(x / 2)) + (9 - y);
   }
 
+  const isObject = (obj) => {
+    return Object.prototype.toString.call(obj) === '[object Object]';
+  };
+
   return declare('memoir.board', null, {
     setupBoard() {
       this._grid = [];
@@ -542,6 +546,16 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         2: _('Armor'),
         3: _('Artillery'),
       };
+      let alliedUnitMap = {
+        1: _('Allied Infantry'),
+        2: _('Allied Armor'),
+        3: _('Allied Artillery'),
+      };
+      let axisUnitMap = {
+        1: _('Axis Infantry'),
+        2: _('Axis Armor'),
+        3: _('Axis Artillery'),
+      };
 
       let movementProperties = [
         'isImpassable',
@@ -568,7 +582,24 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
             combatRestriction = true;
           }
 
-          if (Array.isArray(terrainData[prop])) {
+          if (isObject(terrainData[prop])) {
+            let units = '';
+            if (terrainData[prop].ALLIES) {
+              units += Array.isArray(terrainData[prop].ALLIES)
+                ? terrainData[prop].ALLIES.map((unitId) => alliedUnitMap[unitId]).join(' & ')
+                : _('Allied Units');
+            }
+            if (terrainData[prop].AXIS) {
+              if (units != '') {
+                units += ' & ';
+              }
+              units += Array.isArray(terrainData[prop].AXIS)
+                ? terrainData[prop].AXIS.map((unitId) => axisUnitMap[unitId]).join(' & ')
+                : _('Axis Units');
+            }
+            content = dojo.string.substitute(propDesc.obj, { units });
+          }
+          else if (Array.isArray(terrainData[prop])) {
             let units = terrainData[prop].map((unitId) => unitMap[unitId]).join(' & ');
             content = dojo.string.substitute(propDesc.obj, { units });
           } else {

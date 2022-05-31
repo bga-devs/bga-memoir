@@ -135,13 +135,26 @@ class Terrain extends \M44\Helpers\DB_Model
 
     $isBoolean = !in_array($prop, ['offense', 'defense']);
     $defaultValue = $isBoolean ? false : null;
-    return isset($this->$prop)
-      ? (is_array($this->$prop)
-        ? ($isBoolean
-          ? in_array($unit->getType(), $this->$prop)
-          : $this->$prop[$unit->getType()] ?? $defaultValue)
-        : $this->$prop)
-      : $defaultValue;
+    // Prop not set => default value
+    if (!isset($this->$prop)) {
+      return $defaultValue;
+    }
+
+    // Prop is not an array => just use the value directly
+    if (!is_array($this->$prop)) {
+      return $this->$prop;
+    }
+    // Is it an SIDE assoc array ?
+    $t = $this->$prop;
+    if (isset($t[$unit->getTeamId()])) {
+      $t = $t[$unit->getTeamId()];
+
+      if (!is_array($t)) {
+        return $t;
+      }
+    }
+
+    return $isBoolean ? in_array($unit->getType(), $t) : $t[$unit->getType()] ?? $defaultValue;
   }
 
   public function __call($method, $args)

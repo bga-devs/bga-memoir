@@ -463,6 +463,12 @@ $scenarios[1340] = [
           'name' => 'river',
           'orientation' => 1,
           'behavior' => 'FORD',
+          'properties' => [
+            'isImpassable' => [
+              'AXIS' => true,
+              'ALLIES' => [2, 3],
+            ],
+          ],
         ],
       ],
       46 => [
@@ -472,6 +478,12 @@ $scenarios[1340] = [
           'name' => 'river',
           'orientation' => 1,
           'behavior' => 'FORD',
+          'properties' => [
+            'isImpassable' => [
+              'AXIS' => true,
+              'ALLIES' => [2, 3],
+            ],
+          ],
         ],
       ],
       47 => [
@@ -481,6 +493,12 @@ $scenarios[1340] = [
           'name' => 'river',
           'orientation' => 1,
           'behavior' => 'FORD',
+          'properties' => [
+            'isImpassable' => [
+              'AXIS' => true,
+              'ALLIES' => [2, 3],
+            ],
+          ],
         ],
       ],
       48 => [
@@ -490,6 +508,12 @@ $scenarios[1340] = [
           'name' => 'river',
           'orientation' => 1,
           'behavior' => 'FORD',
+          'properties' => [
+            'isImpassable' => [
+              'AXIS' => true,
+              'ALLIES' => [2, 3],
+            ],
+          ],
         ],
         'unit' => [
           'name' => 'infus',
@@ -502,6 +526,12 @@ $scenarios[1340] = [
           'name' => 'river',
           'orientation' => 1,
           'behavior' => 'FORD',
+          'properties' => [
+            'isImpassable' => [
+              'AXIS' => true,
+              'ALLIES' => [2, 3],
+            ],
+          ],
         ],
         'unit' => [
           'name' => 'infus',
@@ -514,6 +544,12 @@ $scenarios[1340] = [
           'name' => 'river',
           'orientation' => 1,
           'behavior' => 'FORD',
+          'properties' => [
+            'isImpassable' => [
+              'AXIS' => true,
+              'ALLIES' => [2, 3],
+            ],
+          ],
         ],
         'unit' => [
           'name' => 'infus',
@@ -526,6 +562,12 @@ $scenarios[1340] = [
           'name' => 'river',
           'orientation' => 1,
           'behavior' => 'FORD',
+          'properties' => [
+            'isImpassable' => [
+              'AXIS' => true,
+              'ALLIES' => [2, 3],
+            ],
+          ],
         ],
       ],
       52 => [
@@ -535,6 +577,12 @@ $scenarios[1340] = [
           'name' => 'river',
           'orientation' => 1,
           'behavior' => 'FORD',
+          'properties' => [
+            'isImpassable' => [
+              'AXIS' => true,
+              'ALLIES' => [2, 3],
+            ],
+          ],
         ],
       ],
       53 => [
@@ -544,6 +592,12 @@ $scenarios[1340] = [
           'name' => 'river',
           'orientation' => 1,
           'behavior' => 'FORD',
+          'properties' => [
+            'isImpassable' => [
+              'AXIS' => true,
+              'ALLIES' => [2, 3],
+            ],
+          ],
         ],
       ],
       54 => [
@@ -553,6 +607,12 @@ $scenarios[1340] = [
           'name' => 'river',
           'orientation' => 1,
           'behavior' => 'FORD',
+          'properties' => [
+            'isImpassable' => [
+              'AXIS' => true,
+              'ALLIES' => [2, 3],
+            ],
+          ],
         ],
       ],
       55 => [
@@ -562,6 +622,12 @@ $scenarios[1340] = [
           'name' => 'river',
           'orientation' => 1,
           'behavior' => 'FORD',
+          'properties' => [
+            'isImpassable' => [
+              'AXIS' => true,
+              'ALLIES' => [2, 3],
+            ],
+          ],
         ],
       ],
       56 => [
@@ -571,6 +637,12 @@ $scenarios[1340] = [
           'name' => 'river',
           'orientation' => 1,
           'behavior' => 'FORD',
+          'properties' => [
+            'isImpassable' => [
+              'AXIS' => true,
+              'ALLIES' => [2, 3],
+            ],
+          ],
         ],
       ],
       57 => [
@@ -580,6 +652,12 @@ $scenarios[1340] = [
           'name' => 'river',
           'orientation' => 1,
           'behavior' => 'FORD',
+          'properties' => [
+            'isImpassable' => [
+              'AXIS' => true,
+              'ALLIES' => [2, 3],
+            ],
+          ],
         ],
       ],
       58 => [
