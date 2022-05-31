@@ -21,14 +21,14 @@ trait DrawCardsTrait
     // Ambush card management
     $cards = Cards::getInPlayOfAll();
     foreach ($cards as $otherCard) {
-      if ($otherCard->getPlayer() == $player) {
+      $owner = $otherCard->getPlayer();
+      if ($owner == $player) {
         continue;
       }
 
-      $owner = $otherCard->getPlayer();
       $oMethod = $otherCard->getDrawMethod();
       Cards::discard($otherCard);
-      Notifications::discardCard($owner, $otherCard);
+      Notifications::discardCard($owner, $otherCard, false);
 
       $newCards = Cards::draw($oMethod['nDraw'], ['hand', $owner->getId()]);
       Notifications::drawCards($owner, $newCards);
