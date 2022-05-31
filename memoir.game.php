@@ -93,6 +93,7 @@ class memoir extends Table
     Globals::setupNewGame($players, $options);
     Preferences::setupNewGame($players, $options);
     Players::setupNewGame($players, $options);
+    Stats::checkExistence();
 
     $this->setGameStateInitialValue('logging', false);
     $this->activeNextPlayer();
