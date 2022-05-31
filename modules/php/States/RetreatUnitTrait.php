@@ -131,6 +131,22 @@ trait RetreatUnitTrait
     return $args;
   }
 
+  public function actIgnore1Flag()
+  {
+    self::checkAction('actIgnore1Flag');
+    $args = $this->argsRetreatUnit();
+    $player = Players::getCurrent();
+    if ($args['min'] == $args['max']) {
+      throw new \BgaVisibleSystemException('You cannot ignore 1 flag. Should not happen');
+    }
+
+    $r = Globals::getRetreat();
+    $r['max'] -= 1;
+    Globals::setRetreat($r);
+
+    $this->nextState('retreat');
+  }
+
   public function actRetreatUnit($x, $y, $auto = false)
   {
     // Sanity checks

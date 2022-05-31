@@ -331,6 +331,10 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           this.takeAction('actRetreatUnitDone'),
         );
       }
+
+      if (args.min < args.max) {
+        this.addPrimaryActionButton('btnRetreatIgnore1Flag', _('Ignore 1 Flag'), () => this.takeAction('actIgnore1Flag'));
+      }
     },
 
     ////////////////////////////////////////////////////////////////

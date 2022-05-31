@@ -296,6 +296,15 @@ class action_memoir extends APP_GameAction
     self::ajaxResponse();
   }
 
+  public function actIgnore1Flag()
+  {
+    self::setAjaxMode();
+    $this->game->actIgnore1Flag();
+    self::ajaxResponse();
+  }
+
+
+
   ////////////////////////////////////////////////////////////////
   //  _____     _           ____                           _
   // |_   _|_ _| | _____   / ___|_ __ ___  _   _ _ __   __| |
