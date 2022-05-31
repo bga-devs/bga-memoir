@@ -60,7 +60,7 @@ trait AttackUnitsTrait
     foreach ($args['units'] as $uId => $targets) {
       $nTargets += count($targets);
     }
-    if ($nTargets == 0 && false) {
+    if ($nTargets == 0) {
       $this->actAttackUnitsDone(true);
     }
   }
