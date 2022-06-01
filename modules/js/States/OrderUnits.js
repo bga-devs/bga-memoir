@@ -326,7 +326,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         this.onClick(oCell, () => this.takeAction('actRetreatUnit', { x: cell.x, y: cell.y }));
       });
 
-      if (args.titleSuffix == 'skippable') {
+      if (args.min == 0) {
         this.addPrimaryActionButton('btnRetreatUnitDone', _('End unit retreat'), () =>
           this.takeAction('actRetreatUnitDone'),
         );

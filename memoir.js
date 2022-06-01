@@ -285,6 +285,7 @@ define([
         targetAirPower: 'attack',
         targetBarrage: 'attack',
         opponentAmbush: 'command',
+        confirmTurn: 'command',
       };
 
       if (Object.keys(statusMapping).includes(stateName)) {
