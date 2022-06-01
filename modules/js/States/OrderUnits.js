@@ -142,7 +142,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         callback(nonEmptyUnits[0]);
       }
 
-      this.addPrimaryActionButton('btnMoveUnitsDone', _('Moves Done'), () => this.takeAction('actMoveUnitsDone'));
+      this.addPrimaryActionButton('btnMoveUnitsDone', _('End all unit movements'), () => this.takeAction('actMoveUnitsDone'));
 
       // Auto select if a unit was partially moved
       let unitId = args.lastUnitMoved;
@@ -222,7 +222,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       }
 
       if (btn == true) {
-        this.addPrimaryActionButton('btnAttackUnitsDone', _('Attacks Done'), () =>
+        this.addPrimaryActionButton('btnAttackUnitsDone', _('End all unit attacks'), () =>
           this.takeAction('actAttackUnitsDone'),
         );
       }
@@ -327,7 +327,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       });
 
       if (args.titleSuffix == 'skippable') {
-        this.addPrimaryActionButton('btnRetreatUnitDone', _('Retreat Done'), () =>
+        this.addPrimaryActionButton('btnRetreatUnitDone', _('End unit retreat'), () =>
           this.takeAction('actRetreatUnitDone'),
         );
       }
