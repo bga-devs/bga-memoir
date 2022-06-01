@@ -402,14 +402,34 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
     onEnteringStateOrderUnitsFinestHour(args) {
       this.removeClassNameOfCells('unselectableForAttacking');
-      this.makeUnitsSelectable(args.units, () => true, this.isUnitSelectableFinestHour.bind(this), 'activated');
-
-      this.addPrimaryActionButton('btnConfirmOrder', _('Confirm orders'), () => {
-        this.takeAction('actOrderUnitsFinestHour', {
-          unitIds: this._selectedUnits.join(';'),
-        });
-      });
+      this.makeUnitsSelectable(
+        args.units,
+        () => true,
+        this.isUnitSelectableFinestHour.bind(this),
+        'activated',
+        this.updateFinestHourOrderUnitsBtn.bind(this),
+      );
       this.clearSelectedUnits();
+      this.updateFinestHourOrderUnitsBtn();
+    },
+
+    updateFinestHourOrderUnitsBtn() {
+      dojo.destroy('btnConfirmOrder');
+      if (this._selectedUnits.length > 0) {
+        this.addPrimaryActionButton('btnConfirmOrder', _('Confirm orders'), () =>
+          this.onClickConfirmFinestHourOrders(),
+        );
+      } else {
+        this.addDangerActionButton('btnConfirmOrder', _('Confirm no order and end your turn'), () =>
+          this.onClickConfirmFinestHourOrders(),
+        );
+      }
+    },
+
+    onClickConfirmFinestHourOrders() {
+      this.takeAction('actOrderUnitsFinestHour', {
+        unitIds: this._selectedUnits.join(';'),
+      });
     },
 
     isUnitSelectableFinestHour(unitId, pos, selected, minFilling) {
