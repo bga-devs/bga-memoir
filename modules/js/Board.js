@@ -505,7 +505,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           bool: _('Unit may not retreat, must take loss instead'),
           obj: _('${units} may not retreat, must take loss instead'),
         },
-        cantRetreat: {
+        isImpassableForRetreat: {
           bool: _('Unit cannot retreat on that hex'),
           obj: _('${units} cannot retreat on that hex'),
         },
