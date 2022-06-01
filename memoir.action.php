@@ -44,6 +44,13 @@ class action_memoir extends APP_GameAction
     self::ajaxResponse();
   }
 
+  public function actConfirmTurn()
+  {
+    self::setAjaxMode();
+    $this->game->actConfirmTurn();
+    self::ajaxResponse();
+  }
+
   public function actRestart()
   {
     self::setAjaxMode();

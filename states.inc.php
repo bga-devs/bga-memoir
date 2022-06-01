@@ -212,7 +212,7 @@ $machinestates = [
     'transitions' => [
       'ambush' => ST_OPPONENT_AMBUSH,
       'attack' => ST_ATTACK,
-      'draw' => ST_DRAW,
+      'draw' => ST_CONFIRM_TURN,
       'moveAgain' => ST_PRE_MOVE_AGAIN,
     ],
   ],
@@ -261,6 +261,17 @@ $machinestates = [
       'takeGround' => ST_TAKING_GROUND,
       'battleBack' => ST_BATTLE_BACK,
     ],
+  ],
+
+  ST_CONFIRM_TURN => [
+    'name' => 'confirmTurn',
+    'description' => clienttranslate('${actplayer} must confirm or restart their turn'),
+    'descriptionmyturn' => clienttranslate('${you} must confirm or restart your turn'),
+    'type' => 'activeplayer',
+    'args' => 'argsConfirmTurn',
+    'action' => 'stConfirmTurn',
+    'possibleactions' => ['actConfirmTurn', 'actRestart'],
+    'transitions' => ['confirm' => ST_DRAW],
   ],
 
   ST_DRAW => [
@@ -477,7 +488,7 @@ $machinestates = [
       'airpower' => ST_AIRPOWER_TARGET,
       'barrage' => ST_BARRAGE_TARGET,
       'medics' => ST_MEDICS_TARGET,
-      'draw' => ST_DRAW,
+      'draw' => ST_CONFIRM_TURN,
       'counterAttack' => ST_COUNTER_ATTACK,
     ],
   ],

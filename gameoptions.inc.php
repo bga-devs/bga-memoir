@@ -407,4 +407,14 @@ $game_options = [
   ],
 ];
 
-$game_preferences = [];
+$game_preferences = [
+  103 => [
+    'name' => totranslate('Turn confirmation'),
+    'needReload' => false,
+    'values' => [
+      1 => ['name' => totranslate('Enabled with timer')],
+      2 => ['name' => totranslate('Enabled')],
+      0 => ['name' => totranslate('Disabled')],
+    ],
+  ],
+];

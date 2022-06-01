@@ -44,6 +44,7 @@ define([
         'targetAirPower',
         'targetBarrage',
         'airDrop',
+        'confirmTurn',
       ];
       this._notifications = [
         ['playCard', 1000],
@@ -89,6 +90,7 @@ define([
       this._boardTooltips = {}; // Used to store pending board tooltip element
 
       this._settingsConfig = {
+        confirmTurn: { type: 'pref', prefId: 103 },
         layout: {
           default: 0,
           name: _('Layout'),
@@ -354,6 +356,19 @@ define([
       dojo.query('#m44-player-hand .m44-card').forEach(dojo.destroy);
       this.gamedatas.players[this.player_id] = n.args.playerDatas;
       this.updateHand();
+    },
+
+    onEnteringStateConfirmTurn(args) {
+      this.addPrimaryActionButton('btnConfirmTurn', _('Confirm'), () => {
+        this.stopActionTimer();
+        this.takeAction('actConfirmTurn');
+      });
+
+      const OPTION_CONFIRM = 103;
+      //  let n = args.previousEngineChoices;
+      //  let timer = Math.min(10 + 2 * n, 20);
+      let timer = 10;
+      this.startActionTimer('btnConfirmTurn', timer, this.prefs[OPTION_CONFIRM].value);
     },
 
     clearPossible() {

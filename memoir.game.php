@@ -62,6 +62,7 @@ class memoir extends Table
   use M44\States\TacticCardTrait;
   use M44\States\AirDropTrait;
   use M44\States\CommissarCardTrait;
+  use M44\States\ConfirmRestartTrait;
 
   public static $instance = null;
   function __construct()
@@ -144,32 +145,6 @@ class memoir extends Table
   function actChangePreference($pref, $value)
   {
     Preferences::set($this->getCurrentPId(), $pref, $value);
-  }
-
-  public function actRestart()
-  {
-    self::checkAction('actRestart');
-    if (Log::getAll()->empty()) {
-      throw new \BgaVisibleSystemException('Nothing to undo');
-    }
-
-    Log::revertAll();
-    Globals::fetch();
-    Board::init();
-
-    // Refresh interface
-    $datas = $this->getAllDatas(-1);
-    unset($datas['prefs']);
-    unset($datas['discard']);
-    unset($datas['scenario']);
-    unset($datas['terrains']);
-    unset($datas['units']);
-    unset($datas['canceledNotifIds']);
-    Notifications::smallRefreshInterface($datas);
-    $player = Players::getCurrent();
-    Notifications::smallRefreshHand($player);
-
-    $this->gamestate->jumpToState(Globals::getLogState());
   }
 
   /**

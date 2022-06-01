@@ -494,7 +494,9 @@ define(['dojo', 'dojo/_base/declare', g_gamethemeurl + 'modules/js/vendor/nouisl
             return;
           }
           // Pref type => just move the user pref around
-          dojo.place($('preference_control_' + config.prefId).parentNode.parentNode, container);
+          if ($('preference_control_' + config.prefId)) {
+            dojo.place($('preference_control_' + config.prefId).parentNode.parentNode, container);
+          }
           return;
         }
 
