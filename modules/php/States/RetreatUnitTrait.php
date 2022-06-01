@@ -136,7 +136,7 @@ trait RetreatUnitTrait
             'args' => ['max' => $maxFlags],
           ],
       'i18n' => ['desc'],
-      'titleSuffix' => $effect == '' ? ($minFlags == 0 ? 'skippable' : false) : $effect,
+      'titleSuffix' => $effect . ($minFlags == 0 ? 'skippable' : ''),
     ]);
     Utils::clearPaths($args['units'], $clearPaths); // Remove paths, useless for UI
     return $args;

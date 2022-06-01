@@ -333,7 +333,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       }
 
       if (args.min < args.max) {
-        this.addPrimaryActionButton('btnRetreatIgnore1Flag', _('Ignore 1 Flag'), () => this.takeAction('actIgnore1Flag'));
+        this.addPrimaryActionButton('btnRetreatIgnore1Flag', _('Ignore 1 Flag'), () =>
+          this.takeAction('actIgnore1Flag'),
+        );
       }
     },
 
@@ -378,6 +380,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     onEnteringStateOpponentAmbush(args) {
       if (args['_private']['cards'].length != 0) {
         this.addActionButton('btnPlayAmbush', _('Ambush player'), () => this.takeAction('actAmbush'));
+        args['_private']['cards'].forEach((cardId) => {
+          this.onClick(`card-${cardId}`, () => this.takeAction('actAmbush'));
+        });
       }
 
       this.addDangerActionButton('btnPassAmbush', _('Pass'), () => this.takeAction('actPassAmbush'));

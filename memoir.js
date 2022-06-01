@@ -38,6 +38,7 @@ define([
         'orderUnits',
         'moveUnits',
         'opponentAmbush',
+        'ambushResolve',
         'battleBack',
         'drawChoice',
         'targetMedics',
