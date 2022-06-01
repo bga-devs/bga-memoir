@@ -7,26 +7,24 @@ class Mountain extends \M44\Models\Terrain
   public static function isTileOfType($hex)
   {
     return in_array($hex['name'], ['mountain']) &&
-      (!isset($hex['behavior']) || in_array($hex['behavior'], ['MOUNTAIN', 'IMPASSABLE_HILL']));
+      (!isset($hex['behavior']) || in_array($hex['behavior'], ['MOUNTAIN', 'IMPASSABLE_HILL', 'IMPASSABLE_BLOCKING_HILL']));
   }
 
   public function __construct($row)
   {
-    parent::__construct($row);
-
     $this->name = clienttranslate('Mountains');
     $this->number = 30;
     $this->isMountain = true;
     $this->desc = [
       clienttranslate(
-        'Infantry may only move up or retreat onto a mountain from an adjacent hill or mountain. Infantry may only move down or retreat from a mountain to an adjacent hill or mountain'
+        'Infantry may only move up, retreat onto (/ move down, retreat from) a mountain from (/ to) an adjacent hill or mountain.'
       ),
-      clienttranslate('Impassable by Armor & Artillery'),
       clienttranslate('Artillery set on a mountain fires at 3/3/2/2/1/1/1'),
       clienttranslate('Blocks line of sight (except from contiguous adjacent mountains)'),
     ];
     $this->isImpassable = [ARMOR, \ARTILLERY];
     $this->cantLeave = [\ARTILLERY];
+    parent::__construct($row);
   }
 
   public function getLeavingDeplacementCost($unit, $source, $target, $d, $takeGround)
