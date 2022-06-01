@@ -643,7 +643,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         Object.keys(unitMap).forEach((type) => {
           if (terrainData['defense'][type]) {
             defense.push(
-              this.strReplace(_('${unit} battles at ${nb}'), { unit: unitMap[type], nb: terrainData['defense'][type] }),
+              this.strReplace(_('${unit} battles in ${nb}'), { unit: unitMap[type], nb: terrainData['defense'][type] }),
             );
           }
         });
