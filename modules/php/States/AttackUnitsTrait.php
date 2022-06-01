@@ -230,7 +230,7 @@ trait AttackUnitsTrait
 
       // recompute attack throw
       if ($attack['bonusCloseAssault'] && $unit->isWounded()) {
-        Notification::message(clienttranslate('Unit has been wounded and has lost its attack bonus'), []);
+        Notifications::message(clienttranslate('Unit has been wounded and has lost its attack bonus'), []);
         $attack['nDice']--;
       }
     }

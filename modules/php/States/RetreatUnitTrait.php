@@ -231,6 +231,7 @@ trait RetreatUnitTrait
       Globals::isBritishCommand() &&
       $oppUnit->getNation() == 'brit' &&
       $attack['distance'] == 1 &&
+      !$attack['ambush'] &&
       $oppUnit->getNUnits() == 1 &&
       $oppUnit->getRetreats() == 0
     ) {

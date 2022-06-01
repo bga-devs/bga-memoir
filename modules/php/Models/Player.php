@@ -118,11 +118,11 @@ class Player extends \M44\Helpers\DB_Model
 
   public function canHill317()
   {
-    if (Globals::isBlitz() && self::getTeam()->getId() == \AXIS) {
+    if (Globals::isBlitz() && $this->team == \AXIS) {
       return true;
     }
 
-    if (self::getTeam()->getId() == \AXIS) {
+    if ($this->team == \AXIS) {
       return false;
     }
 

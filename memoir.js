@@ -279,6 +279,7 @@ define([
         playCard: 'command',
         orderUnits: 'order',
         moveUnits: 'move',
+        ambushResolve: 'move',
         attackUnits: 'attack',
         drawChoice: 'command',
         targetAirPower: 'attack',
