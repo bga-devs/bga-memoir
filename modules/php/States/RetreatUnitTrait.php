@@ -68,6 +68,11 @@ trait RetreatUnitTrait
     // Take the hits if any
     $args = $this->argsRetreatUnit();
     $unit = Units::get($args['unitId']);
+    $minDistCells = $args['cells'];
+    Utils::filter($minDistCells, function ($cell) use ($args) {
+      return $cell['d'] == $args['min'];
+    });
+
     if ($args['hits'] > 0) {
       $attacker = $unit
         ->getTeam()
@@ -101,6 +106,11 @@ trait RetreatUnitTrait
     // If only one cell, retreat to that
     elseif (count($args['cells']) == 1 && $args['min'] > 0) {
       $cell = reset($args['cells']);
+      $this->actRetreatUnit($cell['x'], $cell['y'], true);
+    }
+    // If only one cell at good distance, retreat to that
+    elseif (count($minDistCells) == 1) {
+      $cell = reset($minDistCells);
       $this->actRetreatUnit($cell['x'], $cell['y'], true);
     } else {
       $this->giveExtraTime($unit->getPlayer()->getId(), 20);
