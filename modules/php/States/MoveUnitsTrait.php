@@ -18,6 +18,7 @@ trait MoveUnitsTrait
     $args = $card->getArgsMoveUnits();
     Utils::clearPaths($args['units'], $clearPaths);
     $args['lastUnitMoved'] = Globals::getUnitMoved();
+    $args['actionCount'] = Globals::getActionCount();
 
     // Clear attack highlights for second move of BehindEnemyLines
     if ($this->gamestate->state_id() == \ST_MOVE_AGAIN) {
@@ -35,6 +36,7 @@ trait MoveUnitsTrait
   {
     // Sanity checks
     self::checkAction('actMoveUnit');
+    Globals::incActionCount();
     $player = Players::getCurrent();
     $desertMove = $this->gamestate->state()['name'] == 'desertMove' ? true : false;
     if ($this->gamestate->state()['name'] == 'desertMove') {
@@ -118,6 +120,7 @@ trait MoveUnitsTrait
   {
     if ($check) {
       self::checkAction('actMoveUnitsDone');
+      Globals::incActionCount();
     }
 
     if ($this->gamestate->state()['name'] == 'desertMove') {

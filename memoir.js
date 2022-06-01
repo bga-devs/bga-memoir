@@ -296,13 +296,14 @@ define([
 
       // Add restart button
       if (args.possibleactions && args.possibleactions.includes('actRestart') && this.isCurrentPlayerActive()) {
-        if (stateName == 'attackUnits' && args.args.lastUnitAttacker != -1) {
+        let actionCount = args.args && args.args.actionCount ? args.args.actionCount : 0;
+        if (actionCount == 0) {
           return;
         }
 
         this.addDangerActionButton(
           'btnRestartTurn',
-          _('Restart turn'),
+          _('Undo actions'),
           () => {
             this.takeAction('actRestart');
           },

@@ -21,6 +21,7 @@ trait AirDropTrait
     return [
       'nb' => $options['nbr_units'],
       'cells' => $cells,
+      'actionCount' => Globals::getActionCount(),
     ];
   }
 
@@ -28,6 +29,7 @@ trait AirDropTrait
   {
     // Sanity checks
     self::checkAction('actAirDrop');
+    Globals::incActionCount();
     $args = $this->argsAirDrop();
     $k = Utils::searchCell($args['cells'], $x, $y);
     if ($k === false) {

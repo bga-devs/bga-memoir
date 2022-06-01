@@ -52,14 +52,16 @@ trait ConfirmRestartTrait
   {
     // Check user preference to bypass if DISABLED is picked
     $pref = Players::getActive()->getPref(OPTION_CONFIRM);
-    if ($pref == OPTION_CONFIRM_DISABLED) {
-      $this->actConfirmTurn();
+    if ($pref == OPTION_CONFIRM_DISABLED || Globals::getActionCount() == 0) {
+      $this->actConfirmTurn(true);
     }
   }
 
-  public function actConfirmTurn()
+  public function actConfirmTurn($auto = false)
   {
-    self::checkAction('actConfirmTurn');
+    if (!$auto) {
+      self::checkAction('actConfirmTurn');
+    }
     $this->nextState('confirm');
   }
 }

@@ -1,6 +1,7 @@
 <?php
 namespace M44\States;
 
+use M44\Core\Globals;
 use M44\Core\Notifications;
 use M44\Helpers\Utils;
 use M44\Managers\Cards;
@@ -37,6 +38,7 @@ trait CommissarCardTrait
     $args = [
       'cards' => $cards,
       'playableCards' => $playableCards,
+      'actionCount' => Globals::getActionCount(),
     ];
     return $privatise ? Utils::privatise($args) : $args;
   }
@@ -45,6 +47,7 @@ trait CommissarCardTrait
   {
     // Sanity check
     $this->checkAction('actCommissarCard');
+    Globals::incActionCount();
     $player = Players::getCurrent();
     $args = $this->argsCommissarCard(false);
     $isInitial = $this->isInitialCommissar();
@@ -89,6 +92,7 @@ trait CommissarCardTrait
       'cardId' => $card->getId(),
       'sections' => $card->getAdditionalPlayConstraints(),
       'canHill317' => $player->canHill317() && $card->canHill317(),
+      'actionCount' => Globals::getActionCount(),
     ];
   }
 
@@ -97,6 +101,7 @@ trait CommissarCardTrait
     // Sanity check
     if ($check) {
       $this->checkAction('actPlayCommissarCard');
+      Globals::incActionCount();
     }
     $player = Players::getCurrent();
     $args = $this->argsPlayCommissarCard();

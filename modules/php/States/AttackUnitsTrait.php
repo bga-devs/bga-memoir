@@ -75,6 +75,7 @@ trait AttackUnitsTrait
     $args = $card->getArgsAttackUnits();
     Utils::clearPaths($args['units']);
     $args['lastUnitAttacker'] = Globals::getUnitAttacker();
+    $args['actionCount'] = Globals::getActionCount();
 
     return $args;
   }
@@ -86,6 +87,7 @@ trait AttackUnitsTrait
   {
     if (!$auto) {
       self::checkAction('actAttackUnitsDone');
+      Globals::incActionCount();
     }
     $player = Players::getActive();
     $card = $player->getCardInPlay();
@@ -100,6 +102,7 @@ trait AttackUnitsTrait
   {
     // Sanity checks
     self::checkAction('actAttackUnit');
+    Globals::incActionCount();
 
     $player = Players::getCurrent();
     $card = $player->getCardInPlay();
@@ -371,6 +374,7 @@ trait AttackUnitsTrait
   {
     // Sanity checks
     self::checkAction('actRemoveWire');
+    Globals::incActionCount();
 
     $player = Players::getCurrent();
     $args = $this->gamestate->state()['args'];
@@ -401,6 +405,7 @@ trait AttackUnitsTrait
   {
     // Sanity checks
     self::checkAction('actRemoveRoadBlock');
+    Globals::incActionCount();
 
     $player = Players::getCurrent();
     $args = $this->gamestate->state()['args'];
@@ -431,6 +436,7 @@ trait AttackUnitsTrait
   {
     // Sanity checks
     self::checkAction('actSealCave');
+    Globals::incActionCount();
 
     $player = Players::getCurrent();
     $args = $this->gamestate->state()['args'];
@@ -486,12 +492,14 @@ trait AttackUnitsTrait
       'unitId' => $attack['oppUnit']->getId(),
       'target' => $attack['unit']->getId(),
       'cell' => $attack['unit']->getPos(),
+      'actionCount' => Globals::getActionCount(),
     ];
   }
 
   public function actBattleBack()
   {
     self::checkAction('actBattleBack');
+    Globals::incActionCount();
     $attack = $this->getCurrentAttack();
 
     Notifications::message(clienttranslate('${player_name} battles back with 1 die'), [
@@ -533,6 +541,7 @@ trait AttackUnitsTrait
   public function actBattleBackPass()
   {
     self::checkAction('actBattleBackPass');
+    Globals::incActionCount();
 
     $attack = $this->getCurrentAttack();
 

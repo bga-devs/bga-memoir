@@ -89,6 +89,7 @@ trait DrawCardsTrait
   {
     // keep the cards, remove the others
     self::checkAction('actChooseCard');
+    Globals::incActionCount();
     $player = Players::getCurrent();
     $args = $this->argsDrawChoice();
 

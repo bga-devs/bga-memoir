@@ -71,6 +71,7 @@ trait AmbushTrait
   {
     // Sanity check
     $this->checkAction('actAmbush');
+    Globals::incActionCount();
     $player = Players::getCurrent();
     $args = $this->argsOpponentAmbush();
     if (count($args['_private']['active']['cards']) == 0) {
@@ -133,6 +134,7 @@ trait AmbushTrait
     if (!$silent) {
       // Sanity checks
       self::checkAction('actPassAmbush');
+      Globals::incActionCount();
       Notifications::message(clienttranslate('${player_name} does not react to the attack'), [
         'player' => Players::getActive(),
       ]);

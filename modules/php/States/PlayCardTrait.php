@@ -45,6 +45,7 @@ trait PlayCardTrait
     $args = [
       'cards' => $cards,
       'cardsHill317' => $cardsHill317,
+      'actionCount' => Globals::getActionCount(),
     ];
     return $singleActive ? Utils::privatise($args) : $args;
   }
@@ -53,6 +54,7 @@ trait PlayCardTrait
   {
     // Sanity check
     $this->checkAction('actPlayCard');
+    Globals::incActionCount();
     $player = Players::getCurrent();
     $args = $this->argsPlayCard($player);
 

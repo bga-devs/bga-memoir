@@ -17,7 +17,9 @@ trait OrderUnitsTrait
   {
     $player = $player ?? Players::getActive();
     $card = $player->getCardInPlay();
-    return $card->getArgsOrderUnits();
+    $args = $card->getArgsOrderUnits();
+    $args['actionCount'] = Globals::getActionCount();
+    return $args;
   }
 
   function stOrderUnits($player = null)
@@ -67,6 +69,7 @@ trait OrderUnitsTrait
     // Sanity checks
     if (!$auto) {
       $this->checkAction('actOrderUnits');
+      Globals::incActionCount();
     }
     $player = Players::getCurrent();
     $args = $this->argsOrderUnits($player);
@@ -110,6 +113,7 @@ trait OrderUnitsTrait
   public function actHealUnit($unitId, $nDice = null)
   {
     self::checkAction('actHealUnit');
+    Globals::incActionCount();
     $player = Players::getCurrent();
 
     $unit = Units::get($unitId);
@@ -158,6 +162,7 @@ trait OrderUnitsTrait
   public function actExitUnit($unitId)
   {
     self::checkAction('actExitUnit');
+    Globals::incActionCount();
     $player = Players::getCurrent();
     $args = $this->argsMoveUnits($player, false);
     if (!\array_key_exists($unitId, $args['units'])) {

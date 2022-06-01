@@ -161,6 +161,7 @@ class memoir extends Table
   {
     if (Globals::getLogState() == -1) {
       Globals::setLogState($state);
+      Globals::setActionCount(0);
       Log::clearAll();
     }
 
@@ -178,6 +179,7 @@ class memoir extends Table
 
     if (Globals::getLogState() == -1) {
       Globals::setLogState($st);
+      Globals::setActionCount(0);
       Log::clearAll();
     }
 

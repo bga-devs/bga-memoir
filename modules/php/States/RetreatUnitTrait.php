@@ -137,6 +137,7 @@ trait RetreatUnitTrait
           ],
       'i18n' => ['desc'],
       'titleSuffix' => $effect . ($minFlags == 0 ? 'skippable' : ''),
+      'actionCount' => Globals::getActionCount(),
     ]);
     Utils::clearPaths($args['units'], $clearPaths); // Remove paths, useless for UI
     return $args;
@@ -145,6 +146,7 @@ trait RetreatUnitTrait
   public function actIgnore1Flag()
   {
     self::checkAction('actIgnore1Flag');
+    Globals::incActionCount();
     $args = $this->argsRetreatUnit();
     $player = Players::getCurrent();
     if ($args['min'] == $args['max']) {
@@ -163,6 +165,7 @@ trait RetreatUnitTrait
     // Sanity checks
     if (!$auto) {
       self::checkAction('actRetreatUnit');
+      Globals::incActionCount();
     }
     $args = $this->argsRetreatUnit();
     $player = Players::getCurrent();
@@ -213,6 +216,7 @@ trait RetreatUnitTrait
     // Sanity checks
     if (!$auto) {
       self::checkAction('actRetreatUnitDone');
+      Globals::incActionCount();
     }
     // check that retreat = 0
     list($unit, $minFlags, , $effect) = $this->getRetreatInfo();

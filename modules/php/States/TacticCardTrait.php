@@ -50,6 +50,7 @@ trait TacticCardTrait
   public function actOrderUnitsFinestHour($unitIds)
   {
     self::checkAction('actOrderUnitsFinestHour');
+    Globals::incActionCount();
     $player = Players::getCurrent();
     $card = $player->getCardInPlay();
     return $card->actOrderUnitsFinestHour($unitIds);
@@ -60,12 +61,15 @@ trait TacticCardTrait
   {
     $player = Players::getActive();
     $card = $player->getCardInPlay();
-    return $card->argsTargetAirPower();
+    $args = $card->argsTargetAirPower();
+    $args['actionCount'] = Globals::getActionCount();
+    return $args;
   }
 
   public function actTargetAirPower($unitIds)
   {
     self::checkAction('actTargetAirPower');
+    Globals::incActionCount();
     $player = Players::getActive();
     $card = $player->getCardInPlay();
     return $card->actTargetAirPower($unitIds);
@@ -76,12 +80,15 @@ trait TacticCardTrait
   {
     $player = Players::getActive();
     $card = $player->getCardInPlay();
-    return $card->argsTargetBarrage();
+    $args = $card->argsTargetBarrage();
+    $args['actionCount'] = Globals::getActionCount();
+    return $args;
   }
 
   public function actTargetBarrage($unitId)
   {
     self::checkAction('actTargetBarrage');
+    Globals::incActionCount();
     $player = Players::getActive();
     $card = $player->getCardInPlay();
     return $card->actTargetBarrage($unitId);
@@ -92,7 +99,9 @@ trait TacticCardTrait
   {
     $player = Players::getActive();
     $card = $player->getCardInPlay();
-    return $card->argsTargetMedics();
+    $args = $card->argsTargetMedics();
+    $args['actionCount'] = Globals::getActionCount();
+    return $args;
   }
 
   public function stTargetMedics()
@@ -105,6 +114,7 @@ trait TacticCardTrait
   public function actTargetMedics($unitId)
   {
     self::checkAction('actTargetMedics');
+    Globals::incActionCount();
     $player = Players::getActive();
     $card = $player->getCardInPlay();
     return $card->actTargetMedics($unitId);

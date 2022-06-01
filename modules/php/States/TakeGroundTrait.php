@@ -50,6 +50,7 @@ trait TakeGroundTrait
         'x' => $attack['x'],
         'y' => $attack['y'],
       ],
+      'actionCount' => Globals::getActionCount(),
     ];
   }
 
@@ -57,6 +58,7 @@ trait TakeGroundTrait
   {
     // Sanity checks
     self::checkAction('actTakeGround');
+    Globals::incActionCount();
 
     $player = Players::getCurrent();
     $attack = $this->getCurrentAttack();
@@ -89,6 +91,7 @@ trait TakeGroundTrait
   {
     // Sanity checks
     self::checkAction('actPassTakeGround');
+    Globals::incActionCount();
     Notifications::message(\clienttranslate('${player_name} does not take ground'), [
       'player' => Players::getCurrent(),
     ]);
@@ -123,6 +126,7 @@ trait TakeGroundTrait
     $attack = $this->getCurrentAttack();
     $args = $card->getArgsArmorOverrun($attack['unitId']);
     Utils::clearPaths($args['units']);
+    $args['actionCount'] = Globals::getActionCount();
     return $args;
   }
 
@@ -135,6 +139,7 @@ trait TakeGroundTrait
     return [
       'units' => [$unit->getId() => $unit->getPossibleMoves($moves + 1, $moves + 1, true, true)],
       'lastUnitMoved' => $unit->getId(),
+      'actionCount' => Globals::getActionCount(),
     ];
   }
 
