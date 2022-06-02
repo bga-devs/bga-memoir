@@ -7,5 +7,6 @@ class AirPower extends \M44\Cards\Standard\AirPower
   {
     parent::__construct($row);
     $this->text[1] = clienttranslate('Roll 2 battle dice per hex, ignoring any terrain battle die reduction.');
+    $this->checkSide = false;
   }
 }

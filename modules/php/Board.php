@@ -496,6 +496,11 @@ class Board
    */
   public static function getTargetableCells($unit, $cell = null, $moves = null)
   {
+    // On the move => can't fight
+    if ($unit->isOnTheMove()) {
+      return [];
+    }
+
     // Already attacked before ?
     $uId = Globals::getUnitAttacker();
     if ($unit->getFights() > 0) {

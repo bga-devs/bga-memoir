@@ -42,11 +42,11 @@ $game_options = [
         'name' => clienttranslate('Standard'),
         'description' => clienttranslate('Standard 1v1 mode'),
       ],
-      // 2 => [
-      //   'name' => clienttranslate('Breakthrough'),
-      //   'tmdisplay' => clienttranslate('BKT'),
-      //   'description' => clienttranslate('Breakthrough scenario'),
-      // ],
+      2 => [
+        'name' => clienttranslate('Breakthrough'),
+        'tmdisplay' => clienttranslate('BKT'),
+        'description' => clienttranslate('Breakthrough scenario'),
+      ],
       // 3 => [
       //   'name' => clienttranslate('Overlord'),
       //   'tmpdisplay' => clienttranslate('Overlord'),

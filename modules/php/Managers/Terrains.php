@@ -93,6 +93,9 @@ class Terrains extends \M44\Helpers\Pieces
           $terrain = $hex[$key];
           $type = self::getTypeOfTile($terrain);
           if ($type == '') {
+            if($terrain['name'] == 'pdestroyer'){
+              continue; // It's a unit, not a terrain...
+            }
             throw new \BgaVisibleSystemException('Unsupported terrains' . \var_export($terrain, true));
           }
 

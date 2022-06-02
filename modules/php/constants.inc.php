@@ -170,6 +170,7 @@ const INFANTRY = 1;
 const ARMOR = 2;
 const ARTILLERY = 3;
 const ALL_UNITS = 4;
+const BOAT = 5;
 
 /*
  * Medals / Tokens

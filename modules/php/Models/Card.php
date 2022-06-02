@@ -157,7 +157,6 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
     return -1;
   }
 
-
   public function getActivatedUnits()
   {
     return Units::getActivatedByCard($this);
@@ -224,7 +223,9 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
   public function getArgsAttackUnits($overrideNbFights = null)
   {
     $player = $this->getPlayer();
-    $units = $this->getActivatedUnits();
+    $units = $this->getActivatedUnits()->filter(function ($unit) {
+      return !$unit->isOnTheMove();
+    });
 
     return [
       'units' => $units->map(function ($unit) use ($overrideNbFights) {

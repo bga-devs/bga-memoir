@@ -7,5 +7,6 @@ class Barrage extends \M44\Cards\Standard\Barrage
   {
     parent::__construct($row);
     $this->text[2] = clienttranslate("Score 1 hit for each die matching the unit's symbol or grenade, or star.");
+    $this->hitMap[DICE_STAR] = true;
   }
 }

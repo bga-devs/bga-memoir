@@ -118,7 +118,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
       'figures' => $this->nUnits,
       'badge' => $this->badge,
       'activationCard' => $this->activationCard,
-      'onTheMove' => $this->datas['onTheMove'] ?? false,
+      'onTheMove' => $this->extraDatas['onTheMove'] ?? false,
     ];
   }
 
@@ -219,7 +219,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
 
   public function cannotBattle()
   {
-    return $this->getExtraDatas('cannotBattle');
+    return $this->getExtraDatas('cannotBattle') || $this->isOnTheMove();
   }
 
   public function isCamouflaged()
@@ -234,6 +234,11 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
   public function canTarget($unit)
   {
     return $this->targets[$unit->getType()] ?? true;
+  }
+
+  public function isOnTheMove()
+  {
+    return $this->extraDatas['onTheMove'] ?? false;
   }
 
   //////////////////////////////////////

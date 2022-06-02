@@ -18,8 +18,8 @@ trait ConfirmRestartTrait
   public function argsConfirmTurn()
   {
     return [
-        //'previousEngineChoices' => Globals::getEngineChoices(),
-      ];
+      'actionCount' => Globals::getActionCount(),
+    ];
   }
 
   public function actRestart()

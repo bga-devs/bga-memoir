@@ -24,6 +24,7 @@ class AirPower extends \M44\Models\Card
     ];
     $this->cannotIgnoreFlags = true;
     $this->hitMap[DICE_STAR] = true;
+    $this->checkSide = true; // Useful for breakthrough
   }
 
   public function nextStateAfterPlay()
@@ -94,7 +95,7 @@ class AirPower extends \M44\Models\Card
 
     // Create all the corresponding attacks
     $player = $this->getPlayer();
-    $nDice = $player->getTeam()->getId() == ALLIES ? 2 : 1;
+    $nDice = !$this->checkSide || $player->getTeam()->getId() == ALLIES ? 2 : 1;
     $stack = Globals::getAttackStack();
     foreach (array_reverse($unitIds) as $unitId) {
       $stack[] = [
