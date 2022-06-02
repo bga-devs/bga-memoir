@@ -9,7 +9,7 @@ class Destroyer extends BigGun
   public function __construct($row)
   {
     parent::__construct($row);
-    $this->type = BOAT;
+    $this->type = DESTROYER;
     $this->name = clienttranslate('Destroyer');
     $this->number = 12;
     $this->maxUnits = 3;

@@ -191,7 +191,14 @@ class Terrains extends \M44\Helpers\Pieces
     // Handle beaches
     if ($board['face'] == 'BEACH') {
       foreach (Board::getListOfCells() as $cell) {
-        $map = [
+        $map = $board['type'] == BREAKTHROUGH_DECK ? [
+          11 => 2,
+          12 => 4,
+          13 => 6,
+          14 => 25,
+          15 => 27,
+          16 => 27,
+        ] : [
           4 => 2,
           5 => 4,
           6 => 6,
