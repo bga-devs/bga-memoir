@@ -68,6 +68,13 @@ class Medals extends \M44\Helpers\DB_Manager
       'foreign_id' => $terrain->getId(),
       'sprite' => $team == ALLIES ? 'medal8' : 'medal9',
     ]);
+    $team = Teams::get($team);
+
+    // Increase stats
+    $statName = 'incMedalRound' . Globals::getRound();
+    foreach ($team->getMembers() as $player) {
+      Stats::$statName($player, 1);
+    }
 
     return self::DB()
       ->whereIn('id', $ids)
