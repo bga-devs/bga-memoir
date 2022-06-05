@@ -144,57 +144,67 @@ class Units extends \M44\Helpers\Pieces
     $isBlitz = $scenario['game_info']['options']['blitz_rules'] ?? false;
     $isItalyRoyalArmy = Globals::isItalyRoyalArmy();
     $isPartialBlitz = $scenario['game_info']['options']['partial_blitz_rules'] ?? ''; // Affect only armor movement
+    $terrainUnits = ['pdestroyer'];
 
     foreach ($board['hexagons'] as &$hex) {
+      $data = null;
       if (isset($hex['unit'])) {
         if (isset($hex['unit']['behavior']) && isset(\TROOP_BADGE_MAPPING[$hex['unit']['behavior']])) {
           $hex['unit']['badge'] = \TROOP_BADGE_MAPPING[$hex['unit']['behavior']];
         }
         $data = self::getTypeAndNation($hex['unit']);
-        $unit = self::getInstance($data['type'], $data['badge']);
-        $data['figures'] = $unit->getMaxUnits();
-        $data['location'] = 'board';
-        $data['x'] = $hex['col'];
-        $data['y'] = $hex['row'];
-        $data['extra_datas'] = ['properties' => []];
-        if (isset($hex['unit']['behavior'])) {
-          $data['extra_datas']['behavior'] = $hex['unit']['behavior'];
-        }
-
-        if (isset($hex['unit']['nbr_units'])) {
-          $data['figures'] = $hex['unit']['nbr_units'];
-          $data['extra_datas']['properties']['maxUnits'] = $hex['unit']['nbr_units'];
-        }
-
-        if (
-          $unit->getType() == ARMOR &&
-          ((in_array($data['nation'], self::$nations[ALLIES]) && ($isPartialBlitz == ALLIES || $isBlitz)) ||
-            (in_array($data['nation'], self::$nations[AXIS]) && $isPartialBlitz == AXIS) ||
-            $isPartialBlitz == 'all')
-        ) {
-          $data['extra_datas']['properties']['movementRadius'] = 2;
-          $data['extra_datas']['properties']['movementAndAttackRadius'] = 2;
-        }
-
-        if ($isItalyRoyalArmy && (TROOP_NATION_MAPPING[$data['badge'] ?? ''] ?? $data['nation']) == 'it') {
-          // to exclude planes (later on)
-          if ($unit->getType() == \INFANTRY || $unit->getType() == \ARMOR || $unit->getType() == \ARTILLERY) {
-            $data['extra_datas']['properties']['retreatHex'] = 3;
-          }
-          if ($unit->getType() == \ARTILLERY) {
-            $data['extra_datas']['properties']['canIgnoreOneFlag'] = true;
-          }
-        }
-
-        if ($data['nation'] == 'jp') {
-          if ($unit->getType() == \INFANTRY) {
-            $data['extra_datas']['properties']['mustIgnore1Flag'] = true;
-            $data['extra_datas']['properties']['bonusCloseAssault'] = true;
-            $data['extra_datas']['properties']['banzai'] = true;
-          }
-        }
-        $units[] = $data;
+      } elseif (isset($hex['rect_terrain']) && in_array($hex['rect_terrain']['name'], $terrainUnits)) {
+        $nation = $scenario['game_info']['side_player2'] == ALLIES ? 'us' : 'ger';
+        $data = ['nation' => $nation, 'type' => $hex['rect_terrain']['name'], 'badge' => ''];
       }
+
+      if (is_null($data)) {
+        continue;
+      }
+      $unit = self::getInstance($data['type'], $data['badge']);
+
+      $data['figures'] = $unit->getMaxUnits();
+      $data['location'] = 'board';
+      $data['x'] = $hex['col'];
+      $data['y'] = $hex['row'];
+      $data['extra_datas'] = ['properties' => []];
+      if (isset($hex['unit']['behavior'])) {
+        $data['extra_datas']['behavior'] = $hex['unit']['behavior'];
+      }
+
+      if (isset($hex['unit']['nbr_units'])) {
+        $data['figures'] = $hex['unit']['nbr_units'];
+        $data['extra_datas']['properties']['maxUnits'] = $hex['unit']['nbr_units'];
+      }
+
+      if (
+        $unit->getType() == ARMOR &&
+        ((in_array($data['nation'], self::$nations[ALLIES]) && ($isPartialBlitz == ALLIES || $isBlitz)) ||
+          (in_array($data['nation'], self::$nations[AXIS]) && $isPartialBlitz == AXIS) ||
+          $isPartialBlitz == 'all')
+      ) {
+        $data['extra_datas']['properties']['movementRadius'] = 2;
+        $data['extra_datas']['properties']['movementAndAttackRadius'] = 2;
+      }
+
+      if ($isItalyRoyalArmy && (TROOP_NATION_MAPPING[$data['badge'] ?? ''] ?? $data['nation']) == 'it') {
+        // to exclude planes (later on)
+        if ($unit->getType() == \INFANTRY || $unit->getType() == \ARMOR || $unit->getType() == \ARTILLERY) {
+          $data['extra_datas']['properties']['retreatHex'] = 3;
+        }
+        if ($unit->getType() == \ARTILLERY) {
+          $data['extra_datas']['properties']['canIgnoreOneFlag'] = true;
+        }
+      }
+
+      if ($data['nation'] == 'jp') {
+        if ($unit->getType() == \INFANTRY) {
+          $data['extra_datas']['properties']['mustIgnore1Flag'] = true;
+          $data['extra_datas']['properties']['bonusCloseAssault'] = true;
+          $data['extra_datas']['properties']['banzai'] = true;
+        }
+      }
+      $units[] = $data;
     }
     self::create($units);
   }

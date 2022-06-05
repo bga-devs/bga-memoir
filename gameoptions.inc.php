@@ -340,6 +340,11 @@ $game_options = [
       ],
     ],
     'values' => [
+      6541 => [
+        'name' => clienttranslate('[6541] [BK] Breakthrough to the Beach'),
+        'tmdisplay' => '[6541]',
+        'description' => clienttranslate('[BK] Breakthrough to the Beach'),
+      ],
       18261 => [
         'name' => clienttranslate('[18261] [Ukraine] Soviet raid on Grigorevka'),
         'tmdisplay' => '[18261]',

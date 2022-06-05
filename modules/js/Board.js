@@ -243,6 +243,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         tile = 9 + (x % 4);
       } else if (face == 'beach') {
         let b = dim.y - y;
+        if (dim.y == 17) b -= 1;
         if (b < 2) tile = 27 + (x % 2);
         else if (b < 3) tile = 25 + (x % 2);
         else if (b < 4) tile = 6 + (x % 2);
@@ -602,8 +603,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
                 : _('Axis Units');
             }
             content = dojo.string.substitute(propDesc.obj, { units });
-          }
-          else if (Array.isArray(terrainData[prop])) {
+          } else if (Array.isArray(terrainData[prop])) {
             let units = terrainData[prop].map((unitId) => unitMap[unitId]).join(' & ');
             content = dojo.string.substitute(propDesc.obj, { units });
           } else {
@@ -621,7 +621,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           }
         }
 
-        if(prop == 'canIgnoreOneFlag' && terrainData['canIgnoreAllFlags']){
+        if (prop == 'canIgnoreOneFlag' && terrainData['canIgnoreAllFlags']) {
           return;
         }
 

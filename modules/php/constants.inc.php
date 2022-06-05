@@ -170,7 +170,8 @@ const INFANTRY = 1;
 const ARMOR = 2;
 const ARTILLERY = 3;
 const ALL_UNITS = 4;
-const BOAT = 5;
+
+const DESTROYER = 5;
 
 /*
  * Medals / Tokens
@@ -272,6 +273,7 @@ const TROOP_CLASSES = [
   'inf' => 'Infantry',
   'tank' => 'Armor',
   'gun' => 'Artillery',
+  'pdestroyer' => 'Destroyer',
   // type + badge number if non decorative
   'inf2_3' => 'FrenchResistance',
   'gun_5' => 'BigGun',
