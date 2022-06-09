@@ -70,12 +70,13 @@ class MedicsAndMechanics extends \M44\Models\Card
       }
     }
 
+    $unitHealed = 0;
+
     foreach ($unitIds as $unitId) {
       // Roll dice corresponding to number of cards
       $unit = Units::get($unitId);
       $nbCard = $player->countAllCards();
       $results = Dice::roll($player, $nbCard, $unit->getPos());
-      $unitHealed = 0;
 
       // Compute number of heal
       $nHeal = $results[DICE_STAR] ?? 0;
