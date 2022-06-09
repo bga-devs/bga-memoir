@@ -44,6 +44,9 @@ const ST_BARRAGE_TARGET = 36;
 const ST_MEDICS_TARGET = 37;
 const ST_COUNTER_ATTACK = 38;
 
+const ST_MEDICS_BT_ROLL = 45;
+const ST_MEDICS_BT_HEAL = 46;
+
 const ST_OVERLORD_PLAY_CARD = 40;
 const ST_OVERLORD_SELECT_UNIT = 41;
 const ST_OVERLORD_MOVE_UNIT = 42;
@@ -146,8 +149,6 @@ const OPTION_SCENARIO_BREAKTHROUGH = 104;
 const OPTION_SCENARIO_OVERLORD = 105;
 
 const OPTION_ONE_WAY_SIDE = 106;
-
-
 
 const OPTION_CONFIRM = 103;
 const OPTION_CONFIRM_TIMER = 1;
@@ -292,6 +293,7 @@ const TROOP_CLASSES = [
   'inf_30' => 'SkiTroop',
   'inf_37' => 'AntiTank',
   'gun_35' => 'MobileArtillery',
+  'gun_46' => 'HeavyAntiTankGun',
   'tank2_33' => 'FlameThrower',
 ];
 

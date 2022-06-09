@@ -716,6 +716,14 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         }'><div class="fire-power-handler">${power}</div></li>`,
       );
 
+      if (unitData.ignoreDefense) {
+        desc.push(
+          `<li class='${isModified('ignoreDefense') ? 'modified' : ''}'>${_(
+            'Ignore terrain battle restrictions',
+          )}</li>`,
+        );
+      }
+
       // Remove letter in number (used for bis/ter for some terrains)
       let number = String(unitData.number).replace(/\D/g, '');
 
@@ -780,6 +788,15 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           if (token.datas.majority) {
             desc.push('<li>' + _('Majority medal') + '</li>');
           }
+        }
+      } else {
+        tile = this.tplBoardToken(token);
+        if (token.type == TOKEN_CAMOUFLAGE) {
+          name = _('Camouflage');
+          desc = [
+            '<li>' + _('A camouflaged unit may only be targeted in a Close Assault') + '</li>',
+            '<li>' + _('A Camouflaged unit that moves or battles lose its Camouflage') + '</li>',
+          ];
         }
       }
 

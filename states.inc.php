@@ -151,6 +151,7 @@ $machinestates = [
       'medics' => ST_MEDICS_TARGET,
       'counterAttack' => ST_COUNTER_ATTACK,
       'commissar' => ST_COMMISSAR,
+      'medicsBT' => ST_MEDICS_BT_ROLL,
     ],
   ],
 
@@ -495,6 +496,28 @@ $machinestates = [
       'draw' => ST_CONFIRM_TURN,
       'counterAttack' => ST_COUNTER_ATTACK,
     ],
+  ],
+
+
+
+  // Medics BT
+  ST_MEDICS_BT_ROLL => [
+    'name' => 'medicsBTRoll',
+    'description' => '',
+    'type' => 'game',
+    'action' => 'stMedicsBTRoll',
+    'descriptionmyturn' => '',
+    'transitions' => ['healUnits' => ST_MEDICS_BT_HEAL],
+  ],
+
+  ST_MEDICS_BT_HEAL => [
+    'name' => 'medicsBTHeal',
+    'description' => clienttranslate('${actplayer} may heal ${unitDesc}'),
+    'descriptionmyturn' => clienttranslate('${you} may heal ${unitDesc}'),
+    'type' => 'activeplayer',
+    'args' => 'argsMedicsBTHeal',
+    'possibleactions' => ['actMedicsBTHeal'],
+    'transitions' => ['moveUnits' => ST_MOVE_UNITS],
   ],
 
   /////////////////////////////////////////////

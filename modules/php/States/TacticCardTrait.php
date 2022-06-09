@@ -127,4 +127,20 @@ trait TacticCardTrait
     $card = $player->getCardInPlay();
     return $card->stCounterAttack();
   }
+
+
+  /************* MEDICS BT ***************/
+  public function stMedicsBTRoll()
+  {
+    $player = Players::getActive();
+    $card = $player->getCardInPlay();
+    return $card->stMedicsBTRoll();
+  }
+
+  public function argsMedicsBTHeal()
+  {
+    $player = Players::getActive();
+    $card = $player->getCardInPlay();
+    return $card->argsMedicsBTHeal();
+  }
 }

@@ -5,7 +5,7 @@ class Rail extends \M44\Models\Terrain
 {
   public static function isTileOfType($hex)
   {
-    return in_array($hex['name'], ['rail', 'railcurve', 'railFL', 'railFR', 'railX']);
+    return in_array($hex['name'], ['rail', 'railcurve', 'railFL', 'railFR', 'railX', 'wrail', 'wrailcurve']);
   }
 
   public function __construct($row)

@@ -46,6 +46,7 @@ $game_options = [
         'name' => clienttranslate('Breakthrough'),
         'tmdisplay' => clienttranslate('BKT'),
         'description' => clienttranslate('Breakthrough scenario'),
+        'alpha' => true,
       ],
       // 3 => [
       //   'name' => clienttranslate('Overlord'),
@@ -82,6 +83,7 @@ $game_options = [
         'name' => clienttranslate('From the front'),
         'tmdisplay' => clienttranslate('[fan-made]'),
         'description' => clienttranslate('Loading a m44 scenario made with the editor'),
+        'alpha' => true,
       ],
     ],
   ],
@@ -340,16 +342,86 @@ $game_options = [
       ],
     ],
     'values' => [
-      6541 => [
-        'name' => clienttranslate('[6541] [BK] Breakthrough to the Beach'),
-        'tmdisplay' => '[6541]',
-        'description' => clienttranslate('[BK] Breakthrough to the Beach'),
+      3129 => [
+        'name' => clienttranslate('[3129] Operation Crusader'),
+        'tmdisplay' => '[3129]',
+        'description' => clienttranslate('Operation Crusader'),
       ],
-      18261 => [
-        'name' => clienttranslate('[18261] [Ukraine] Soviet raid on Grigorevka'),
-        'tmdisplay' => '[18261]',
-        'description' => clienttranslate('[Ukraine] Soviet raid on Grigorevka'),
+      4000 => [
+        'name' => clienttranslate('[4000] The Tatsinskaya Raid'),
+        'tmdisplay' => '[4000]',
+        'description' => clienttranslate('The Tatsinskaya Raid'),
       ],
+      4625 => [
+        'name' => clienttranslate('[4625] Coldstream Hill'),
+        'tmdisplay' => '[4625]',
+        'description' => clienttranslate('Coldstream Hill'),
+      ],
+      4643 => [
+        'name' => clienttranslate('[4643] Battle of Abbeville'),
+        'tmdisplay' => '[4643]',
+        'description' => clienttranslate('Battle of Abbeville'),
+      ],
+      // 4683 => [
+      //   'name' => clienttranslate('[4683] Manado Landings'),
+      //   'tmdisplay' => '[4683]',
+      //   'description' => clienttranslate('Manado Landings'),
+      // ],
+      // 4717 => [
+      //   'name' => clienttranslate('[4717] Nach Moskau!'),
+      //   'tmdisplay' => '[4717]',
+      //   'description' => clienttranslate('Nach Moskau!'),
+      // ],
+      5142 => [
+        'name' => clienttranslate('[5142] Counter-attack of the BEF'),
+        'tmdisplay' => '[5142]',
+        'description' => clienttranslate('Counter-attack of the BEF'),
+      ],
+      // 5841 => [
+      //   'name' => clienttranslate('[5841] The Surrender of Elster\'s column'),
+      //   'tmdisplay' => '[5841]',
+      //   'description' => clienttranslate('The Surrender of Elster\'s column'),
+      // ],
+      // 5913 => [
+      //   'name' => clienttranslate('[5913] Battle of Prokhorovka'),
+      //   'tmdisplay' => '[5913]',
+      //   'description' => clienttranslate('Battle of Prokhorovka'),
+      // ],
+      6367 => [
+        'name' => clienttranslate('[6367] Sword Beach'),
+        'tmdisplay' => '[6367]',
+        'description' => clienttranslate('Sword Beach'),
+      ],
+      // 6369 => [
+      //   'name' => clienttranslate('[6369] Operation Amherst'),
+      //   'tmdisplay' => '[6369]',
+      //   'description' => clienttranslate('Operation Amherst'),
+      // ],
+      6370 => [
+        'name' => clienttranslate('[6370] Battle of Alam el Halfa'),
+        'tmdisplay' => '[6370]',
+        'description' => clienttranslate('Battle of Alam el Halfa'),
+      ],
+      // 6380 => [
+      //   'name' => clienttranslate('[6380] Noville to Foy'),
+      //   'tmdisplay' => '[6380]',
+      //   'description' => clienttranslate('Noville to Foy'),
+      // ],
+      // 6433 => [
+      //   'name' => clienttranslate('[6433] Breakthrough at Mortain'),
+      //   'tmdisplay' => '[6433]',
+      //   'description' => clienttranslate('Breakthrough at Mortain'),
+      // ],
+      // 6541 => [
+      //   'name' => clienttranslate('[6541] Breakthrough to the Beach'),
+      //   'tmdisplay' => '[6541]',
+      //   'description' => clienttranslate('Breakthrough to the Beach'),
+      // ],
+      // 18261 => [
+      //   'name' => clienttranslate('[18261] [Ukraine] Soviet raid on Grigorevka'),
+      //   'tmdisplay' => '[18261]',
+      //   'description' => clienttranslate('[Ukraine] Soviet raid on Grigorevka'),
+      // ],
     ],
   ],
   105 => [

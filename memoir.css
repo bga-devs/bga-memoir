@@ -1499,13 +1499,13 @@ html {
         color: red; }
     .board-tooltip .summary-card.summary-token {
       background-position-y: 100%; }
-      .board-tooltip .summary-card.summary-token .board-medal {
+      .board-tooltip .summary-card.summary-token .board-medal, .board-tooltip .summary-card.summary-token .board-token {
         width: 70%;
         height: 52.3%; }
-        .board-tooltip .summary-card.summary-token .board-medal[data-sprite='both'] {
+        .board-tooltip .summary-card.summary-token .board-medal[data-sprite='both'], .board-tooltip .summary-card.summary-token .board-token[data-sprite='both'] {
           position: relative;
           top: 20%; }
-          .board-tooltip .summary-card.summary-token .board-medal[data-sprite='both']::after {
+          .board-tooltip .summary-card.summary-token .board-medal[data-sprite='both']::after, .board-tooltip .summary-card.summary-token .board-token[data-sprite='both']::after {
             left: 0;
             top: -68%; }
     .board-tooltip .summary-card.summary-unit {

@@ -15,5 +15,9 @@ class Attack extends \M44\Cards\Standard\Attack
       [clienttranslate('Order 3 Units in the Center'), $t],
       [clienttranslate('Order 3 Units on the Right Flank'), $t],
     ];
+    $this->orderUnitsTitles = [
+      $t, $t, $t,
+    ];
+
   }
 }

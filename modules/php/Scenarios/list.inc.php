@@ -53,8 +53,23 @@ $scenariosMap = [
   1599 => '1599-WakeIsland',
 
 
-  18261 => '18261-SovietRaidOnGrigorevka',
+  3129 => '3129-OperationCrusader',
+  4000 => '4000-TheTatsinskayaRaid',
+  4625 => '4625-ColdstreamHill',
+  4643 => '4643-BattleOfAbbeville',
+  4683 => '4683-ManadoLandings',
+  4717 => '4717-NachMoskau',
+  5142 => '5142-CounterattackOfTheBEF',
+  5841 => '5841-TheSurrenderOfElstersColumn',
+  5913 => '5913-BattleOfProkhorovka',
+  6367 => '6367-SwordBeach',
+  6369 => '6369-OperationAmherst',
+  6370 => '6370-BattleOfAlamElHalfa',
+  6380 => '6380-NovilleToFoy',
+  6433 => '6433-BreakthroughAtMortain',
   6541 => '6541-BreakthroughToTheBeach',
+  18261 => '18261-SovietRaidOnGrigorevka',
+
 
   23806 => '23806-GermanCounterattackAtChaumont',
 ];
