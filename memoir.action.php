@@ -168,6 +168,14 @@ class action_memoir extends APP_GameAction
     self::ajaxResponse();
   }
 
+  public function actMedicsBTHeal()
+  {
+    self::setAjaxMode();
+    $unitIds = $this->getNumberList('unitIds');
+    $this->game->actMedicsBTHeal($unitIds);
+    self::ajaxResponse();
+  }
+
   public function actSealCave()
   {
     self::setAjaxMode();

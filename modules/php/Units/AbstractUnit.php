@@ -212,6 +212,11 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     return $this->maxUnits != $this->nUnits;
   }
 
+  public function getWounds()
+  {
+    return $this->maxUnits - $this->nUnits;
+  }
+
   public function getAttackModifier($cell)
   {
     return 0;

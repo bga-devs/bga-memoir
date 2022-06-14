@@ -142,7 +142,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         callback(nonEmptyUnits[0]);
       }
 
-      this.addPrimaryActionButton('btnMoveUnitsDone', _('End all unit movements'), () => this.takeAction('actMoveUnitsDone'));
+      this.addPrimaryActionButton('btnMoveUnitsDone', _('End all unit movements'), () =>
+        this.takeAction('actMoveUnitsDone'),
+      );
 
       // Auto select if a unit was partially moved
       let unitId = args.lastUnitMoved;
@@ -573,6 +575,64 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         let oCell = $(`cell-${cell.x}-${cell.y}`);
         oCell.classList.add('forAirDrop');
         this.onClick(oCell, () => this.takeAction('actAirDrop', { x: cell.x, y: cell.y }));
+      });
+    },
+
+    /////////////////////////////////////////////////
+    //  __  __          _ _            ____ _____
+    // |  \/  | ___  __| (_) ___ ___  | __ )_   _|
+    // | |\/| |/ _ \/ _` | |/ __/ __| |  _ \ | |
+    // | |  | |  __/ (_| | | (__\__ \ | |_) || |
+    // |_|  |_|\___|\__,_|_|\___|___/ |____/ |_|
+    /////////////////////////////////////////////////
+    onEnteringStateMedicsBTHeal(args) {
+      this.makeUnitsSelectable(
+        args.units,
+        this.onClickUnitMedicsBTHeal.bind(this),
+        this.isUnitSelectableMedicsBTHeal.bind(this),
+        'activated',
+        this.updateMedicsBTHealUnitsBtn.bind(this),
+      );
+      this.clearSelectedUnits();
+      this.updateMedicsBTHealUnitsBtn();
+    },
+
+    isUnitSelectableMedicsBTHeal(unitId, pos, selected, minFilling) {
+      return this.isUnitSelectableFinestHour(unitId, pos, selected, minFilling);
+    },
+
+    onClickUnitMedicsBTHeal(unitId, pos, selected) {
+      if (!selected) return true;
+
+      let nSelected = this._selectedUnits.reduce((carry, unit2Id) => carry + (unitId == unit2Id ? 1 : 0), 0);
+      let maxN = this.getArgs().wounds[unitId];
+
+      if (nSelected + 1 <= maxN) {
+        this._selectedUnits.push(unitId);
+        $(`unit-${unitId}`).dataset.selected = nSelected + 1;
+      } else {
+        this._selectedUnits = this._selectedUnits.filter((unit2Id) => unitId != unit2Id);
+        $(`unit-${unitId}`).classList.remove('activated');
+        $(`unit-${unitId}`).dataset.selected = 0;
+      }
+
+      return false;
+    },
+
+    updateMedicsBTHealUnitsBtn() {
+      dojo.destroy('btnConfirmHeal');
+      if (this._selectedUnits.length > 0) {
+        this.addPrimaryActionButton('btnConfirmHeal', _('Confirm healing(s)'), () => this.onClickConfirmMedicsBTHeal());
+      } else {
+        this.addDangerActionButton('btnConfirmHeal', _('Confirm no healing and end your turn'), () =>
+          this.onClickConfirmMedicsBTHeal(),
+        );
+      }
+    },
+
+    onClickConfirmMedicsBTHeal() {
+      this.takeAction('actMedicsBTHeal', {
+        unitIds: this._selectedUnits.join(';'),
       });
     },
   });

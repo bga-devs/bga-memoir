@@ -143,4 +143,13 @@ trait TacticCardTrait
     $card = $player->getCardInPlay();
     return $card->argsMedicsBTHeal();
   }
+
+  public function actMedicsBTHeal($unitIds)
+  {
+    self::checkAction('actMedicsBTHeal');
+    Globals::incActionCount();
+    $player = Players::getCurrent();
+    $card = $player->getCardInPlay();
+    return $card->actMedicsBTHeal($unitIds);
+  }
 }

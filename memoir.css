@@ -1790,6 +1790,22 @@ html {
     background-image: url("img/hex_border_highlights.png");
     background-size: 400% 200%;
     background-position: 0% 0%; }
+  .m44-unit[data-selected]:not([data-selected='0'])::before {
+    content: attr(data-selected);
+    display: block;
+    position: absolute;
+    top: 23%;
+    left: 5%;
+    background: #3fc8f0;
+    width: 25%;
+    height: 25%;
+    border-radius: 50%;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    border: 1px solid black; }
 
 .m44-unit[data-orientation='0'][data-type='1'][data-nation='ger'] .m44-unit-meeple {
   width: 50%;

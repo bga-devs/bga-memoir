@@ -517,7 +517,7 @@ $machinestates = [
     'type' => 'activeplayer',
     'args' => 'argsMedicsBTHeal',
     'possibleactions' => ['actMedicsBTHeal'],
-    'transitions' => ['moveUnits' => ST_MOVE_UNITS],
+    'transitions' => ['move' => ST_MOVE_UNITS, 'draw' => ST_DRAW],
   ],
 
   /////////////////////////////////////////////
