@@ -32,9 +32,9 @@ define([
   return declare('bgagame.memoir', [customgame.game, memoir.board, memoir.players, memoir.orderUnits], {
     constructor() {
       this._activeStates = [
-        'playCard',
         'commissarCard',
         'playCommissarCard',
+        'playCard',
         'orderUnits',
         'moveUnits',
         'opponentAmbush',
@@ -44,6 +44,7 @@ define([
         'targetMedics',
         'targetAirPower',
         'targetBarrage',
+        'orderUnitsFinestHour',
         'airDrop',
         'confirmTurn',
       ];
