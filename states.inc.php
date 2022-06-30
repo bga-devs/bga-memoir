@@ -132,6 +132,7 @@ $machinestates = [
       'barrage' => ST_BARRAGE_TARGET,
       'medics' => ST_MEDICS_TARGET,
       'counterAttack' => ST_COUNTER_ATTACK,
+      'medicsBT' => ST_MEDICS_BT_ROLL,
     ],
   ],
 
