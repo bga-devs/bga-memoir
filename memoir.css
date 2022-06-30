@@ -53,6 +53,19 @@
 #logs .timestamp {
   color: black; }
 
+.help-marker-btn {
+  display: inline-block;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  z-index: 900;
+  border: 1px solid black;
+  border-radius: 50%; }
+  .help-marker-btn svg {
+    width: 20px;
+    height: 20px; }
+
 html {
   background: url("img/ui/background.jpg"); }
 

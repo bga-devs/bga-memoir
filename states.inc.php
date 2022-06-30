@@ -364,6 +364,7 @@ $machinestates = [
     'name' => 'opponentAmbush',
     'description' => clienttranslate('${actplayer} can react to the attack'),
     'descriptionmyturn' => clienttranslate('${you} can react to the attack'),
+    'descriptionmyturnnooption' => clienttranslate('${you} can\'t react to the attack'),
     'type' => 'activeplayer',
     'args' => 'argsOpponentAmbush',
     'action' => 'stAmbush',

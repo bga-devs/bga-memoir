@@ -946,7 +946,7 @@ define(['dojo', 'dojo/_base/declare', g_gamethemeurl + 'modules/js/vendor/nouisl
     /**
      * Tooltip to work with help mode
      */
-    addCustomTooltip(id, html, delay) {
+    addCustomTooltip(id, html, delay, toggleByClick = false) {
       if (this.tooltips[id]) {
         this.tooltips[id].destroy();
       }
@@ -961,17 +961,19 @@ define(['dojo', 'dojo/_base/declare', g_gamethemeurl + 'modules/js/vendor/nouisl
       });
       this.tooltips[id] = tooltip;
       dojo.addClass(id, 'tooltipable');
-      dojo.place(
-        `
-        <div class='help-marker'>
-          <svg><use href="#help-marker-svg" /></svg>
-        </div>
-      `,
-        id,
-      );
+      if(!toggleByClick){
+        dojo.place(
+          `
+          <div class='help-marker'>
+            <svg><use href="#help-marker-svg" /></svg>
+          </div>
+        `,
+          id,
+        );
+      }
 
       dojo.connect($(id), 'click', (evt) => {
-        if (!this._helpMode) {
+        if (!this._helpMode && !toggleByClick) {
           tooltip.close();
         } else {
           evt.stopPropagation();
@@ -988,7 +990,7 @@ define(['dojo', 'dojo/_base/declare', g_gamethemeurl + 'modules/js/vendor/nouisl
 
       tooltip.showTimeout = null;
       dojo.connect($(id), 'mouseenter', () => {
-        if (!this._helpMode && !this._dragndropMode) {
+        if (!this._helpMode && !this._dragndropMode && !toggleByClick) {
           if (tooltip.showTimeout != null) clearTimeout(tooltip.showTimeout);
 
           tooltip.showTimeout = setTimeout(() => tooltip.open($(id)), delay);
@@ -996,7 +998,7 @@ define(['dojo', 'dojo/_base/declare', g_gamethemeurl + 'modules/js/vendor/nouisl
       });
 
       dojo.connect($(id), 'mouseleave', () => {
-        if (!this._helpMode && !this._dragndropMode) {
+        if (!this._helpMode && !this._dragndropMode && !toggleByClick) {
           tooltip.close();
           if (tooltip.showTimeout != null) clearTimeout(tooltip.showTimeout);
         }

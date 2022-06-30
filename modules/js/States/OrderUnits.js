@@ -385,9 +385,28 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         args['_private']['cards'].forEach((cardId) => {
           this.onClick(`card-${cardId}`, () => this.takeAction('actAmbush'));
         });
+        this.addDangerActionButton('btnPassAmbush', _('Pass'), () => this.takeAction('actPassAmbush'));
+      } else {
+        this.changePageTitle('nooption');
+        this.addDangerActionButton('btnPassAmbush', _('Pass'), () => this.takeAction('actPassAmbush'));
+        this.addDangerActionButton('btnPassAmbushDontAskMeAgain', _('Auto-pass'), () => {
+          this.setPreferenceValue(150, 1);
+          this.takeAction('actPassAmbush');
+        });
+        this.addSecondaryActionButton(
+          'btnPassAmbushHelper',
+          `<div class='help-marker-btn'><svg><use href="#help-marker-svg" /></svg></div>`,
+          () => this.tooltips['btnPassAmbushHelper'].open($('btnPassAmbushHelper')),
+        );
+        this.addCustomTooltip(
+          'btnPassAmbushHelper',
+          _(
+            "Whenever a player is attacked in close combat, he might react to the attack if they have an Ambush card in hand. <br /> In order to not reveal any private information about the cards in your hand, you will be prompted every time you get in close combat even if you don't have that card in hand by default. You can change that by clicking the auto-pass button or in the settings available clicking on the gears next to your names.",
+          ),
+          400,
+          true,
+        );
       }
-
-      this.addDangerActionButton('btnPassAmbush', _('Pass'), () => this.takeAction('actPassAmbush'));
     },
 
     onEnteringStateAmbushResolve(args) {
