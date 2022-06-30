@@ -1,5 +1,6 @@
 <?php
 namespace M44\Helpers;
+use M44\Scenario;
 
 abstract class Utils extends \APP_DbObject
 {
@@ -105,17 +106,18 @@ abstract class Utils extends \APP_DbObject
       $x = ['x' => $x, 'y' => $y];
     }
 
+    $height = Scenario::getMode() == BREAKTHROUGH_DECK ? 17 : 9;
     // capital
     if ($x['x'] % 2 == 0) {
-      return strtoupper(alphabet[$x['x'] / 2]) . (9 - $x['y']);
+      return strtoupper(alphabet[$x['x'] / 2]) . ($height - $x['y']);
     } else {
-      return alphabet[($x['x'] - 1) / 2] . (9 - $x['y']);
+      return alphabet[($x['x'] - 1) / 2] . ($height - $x['y']);
     }
   }
 
   public static function revertCoords($coord)
   {
-    $xy = ['x' => substr($coord, 0, 1), 'y' => substr($coord, -1)];
+    $xy = ['x' => substr($coord, 0, 1), 'y' => substr($coord, 1)];
 
     $v = \array_search($xy['x'], alphabet);
     if ($v === false) {
@@ -125,14 +127,16 @@ abstract class Utils extends \APP_DbObject
       $xy['x'] = $v * 2 + 1;
     }
 
-    $xy['y'] = 9 - $xy['y'];
+
+    $height = Scenario::getMode() == BREAKTHROUGH_DECK ? 17 : 9;
+    $xy['y'] = $height - $xy['y'];
     return $xy;
 
     // capital
     if ($x['x'] % 2 == 0) {
-      return strtoupper(alphabet[$x['x'] / 2]) . (9 - $x['y']);
+      return strtoupper(alphabet[$x['x'] / 2]) . ($height - $x['y']);
     } else {
-      return alphabet[($x['x'] - 1) / 2] . (9 - $x['y']);
+      return alphabet[($x['x'] - 1) / 2] . ($height - $x['y']);
     }
   }
 }
