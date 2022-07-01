@@ -20,14 +20,19 @@ class Wire extends \M44\Models\Terrain
     parent::__construct($row);
   }
 
-  public function onUnitEntering($unit, $isRetreat)
+  public function onUnitEntering($unit, $isRetreat, $isTakeGround)
   {
     if ($unit->getType() == ARMOR && !$isRetreat) {
       $this->removeFromBoard();
       Notifications::message(\clienttranslate('Wire is removed by the Tank'), []);
       $unit->setMoves($unit->getMovementRadius());
       $unit->mustStop();
-      // Game::get()->nextState('moveUnits');
+      // bug #65828 - armor can remove wire and battle after take ground
+      // cannot do armor overrun
+      if ($isTakeGround) {
+        $unit->mustStop();
+        return false;
+      }
       return true;
     }
   }

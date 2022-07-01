@@ -454,7 +454,7 @@ class Board
   /**
    * moveUnit : move a unit to another hex
    */
-  public static function moveUnit($unit, $cell, $isRetreat = false)
+  public static function moveUnit($unit, $cell, $isRetreat = false, $isTakeGround = false)
   {
     $pos = $unit->getPos();
     $unit->moveTo($cell);
@@ -471,7 +471,7 @@ class Board
     Tokens::removeTargets($pos);
     Tokens::removeCamouflage($pos);
     foreach ($targetCell['terrains'] as $terrain) {
-      if ($terrain->onUnitEntering($unit, $isRetreat) === true) {
+      if ($terrain->onUnitEntering($unit, $isRetreat, $isTakeGround) === true) {
         $interrupted = true;
       }
     }

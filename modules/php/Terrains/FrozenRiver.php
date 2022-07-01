@@ -26,7 +26,7 @@ class FrozenRiver extends \M44\Models\Terrain
     $this->avoidIfPossible = true;
   }
 
-  public function onUnitEntering($unit, $isRetreat)
+  public function onUnitEntering($unit, $isRetreat, $isTakeGround)
   {
     if (Board::isBridgeCell(['x' => $this->x, 'y' => $this->y])) {
       return;

@@ -177,7 +177,7 @@ class Terrain extends \M44\Helpers\DB_Model
   {
   }
 
-  public function onUnitEntering($unit, $isRetreat)
+  public function onUnitEntering($unit, $isRetreat, $isTakeGround)
   {
   }
 
