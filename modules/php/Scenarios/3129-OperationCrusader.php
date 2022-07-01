@@ -48,11 +48,6 @@ $scenarios[3129] = [
         'terrain' => [
           'name' => 'bled',
         ],
-        'tags' => [
-          0 => [
-            'name' => 'medal4',
-          ],
-        ],
       ],
       2 => [
         'row' => 0,
@@ -892,7 +887,6 @@ $scenarios[3129] = [
   'text' => [
     'en' => [
       'name' => clienttranslate('Operation Crusader'),
-      'subtitle' => clienttranslate('			'),
       'description' => clienttranslate('Axis Player [Germany/Italy]
 Take 6 Command cards.
 
@@ -903,7 +897,7 @@ You move first.'),
 
 British Commonwealth Forces (Nation 5 - British Commonwealth Forces) and Italian Royal Army command rules (Nation 6 ? Italian Royal Army) are in effect.
 
-Oasis Recovery rules are in effect at Bir el Chleta, Bir el Gobi and Gabr Saleh (Actions 10 ? Oasis Recovery). Those rules also apply to each camp?s Campaign HQ.
+Oasis Recovery rules are in effect at Bir el Chleta, Bir el Gobi and Gabr Saleh (Actions 10 - Oasis Recovery). Those rules also apply to each camp?s Campaign HQ.
 
 Place a badge on the elite German infantry near Gambut (Troops 2 - Specialized Unit).
 
@@ -922,8 +916,6 @@ Air rules are optional. If used, give the Allied player one Air Sortie card and 
 
 The stage is set, the battle lines are drawn, and you are in command. The rest is history.'),
       'victory' => clienttranslate('12 Medals.
-
-The British Medal in Tobruk is a Permanent Medal Objective for British units starting on the Allied player side of the board only. Only a single medal can be won that way, regardless of how many British units reach Tobruk.
 
 The German Medal in the Campaign Headquarters on the Allied baseline is a Permanent Medal Objective for the Axis player.'),
     ],
