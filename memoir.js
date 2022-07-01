@@ -189,7 +189,7 @@ define([
 
       // WHich player point of vue are we going to take ?
       this._pId = this.isSpectator ? Object.keys(this.gamedatas.players)[0] : this.player_id;
-      this._bottomTeam = this.gamedatas.players[this._pId].team;
+      this.updateBottomTeam(this.gamedatas.players[this._pId].team);
 
       // Load board
       if (gamedatas.board) {
@@ -212,6 +212,11 @@ define([
       let container = $('pagesection_options').querySelector('.pagesection');
       dojo.place('<div id="local-prefs-container"></div>', container);
       this.inherited(arguments);
+    },
+
+    updateBottomTeam(team){
+      this._bottomTeam = this.gamedatas.players[this._pId].team;
+      $('ebd-body').dataset.bottomTeam = this._bottomTeam;
     },
 
     clearInterface(partial = false) {
@@ -330,7 +335,7 @@ define([
       this.gamedatas.units = n.args.units;
       this.gamedatas.scenario = n.args.scenario;
       this.gamedatas.round = n.args.round;
-      this._bottomTeam = this.gamedatas.players[this._pId].team;
+      this.updateBottomTeam(this.gamedatas.players[this._pId].team);
       this._deckCounter.setValue(n.args.deckCount);
 
       this.setupBoard();
@@ -348,7 +353,7 @@ define([
       this.gamedatas.players = n.args.players;
       this.gamedatas.board = n.args.board;
       this.gamedatas.teams = n.args.teams;
-      this._bottomTeam = this.gamedatas.players[this._pId].team;
+      this.updateBottomTeam(this.gamedatas.players[this._pId].team);
       this._deckCounter.setValue(n.args.deckCount);
 
       this.setupBoard();
