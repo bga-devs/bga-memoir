@@ -108,7 +108,12 @@ class Team extends \M44\Helpers\DB_Model
     $nMedals = $this->getMedals()->count();
     $marker = Tokens::getOnCoords('board', $unit->getPos(), \TOKEN_EXIT_MARKER)->first();
 
-    $medalsObtained = $marker['datas']['medals'];
+    if ($unit->getType() == \INFANTRY) {
+      $medalsObtained = $marker['datas']['medals'];
+    } else {
+      $medalsObtained = 1;
+    }
+
     if ($nMedals + $medalsObtained > $this->nVictory) {
       // Can't get more medals that winning condition
       $medalsObtained = $this->nVictory - $nMedals;
