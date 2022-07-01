@@ -671,6 +671,41 @@ html {
         left: -10px;
       }
     }
+
+    .m44-card {
+      &[data-type='0'],
+      &[data-type='3'],
+      &[data-type='6'],
+      &[data-type='12'] {
+        order: 1;
+      }
+
+      &[data-type='1'],
+      &[data-type='4'],
+      &[data-type='7'],
+      &[data-type='13'] {
+        order: 2;
+      }
+
+      &[data-type='2'],
+      &[data-type='5'],
+      &[data-type='8'],
+      &[data-type='14'] {
+        order: 3;
+      }
+
+      &[data-type='9'],
+      &[data-type='10'],
+      &[data-type='11'] {
+        order: 4;
+      }
+
+      @for $i from 15 to 40 {
+        &[data-type='#{$i}'] {
+          order: $i;
+        }
+      }
+    }
   }
 }
 

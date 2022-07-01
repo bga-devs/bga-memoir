@@ -574,6 +574,64 @@ html {
         z-index: 7;
         top: -10px;
         left: -10px; }
+    #m44-container #m44-player-hand .m44-card[data-type='0'], #m44-container #m44-player-hand .m44-card[data-type='3'], #m44-container #m44-player-hand .m44-card[data-type='6'], #m44-container #m44-player-hand .m44-card[data-type='12'] {
+      order: 1; }
+    #m44-container #m44-player-hand .m44-card[data-type='1'], #m44-container #m44-player-hand .m44-card[data-type='4'], #m44-container #m44-player-hand .m44-card[data-type='7'], #m44-container #m44-player-hand .m44-card[data-type='13'] {
+      order: 2; }
+    #m44-container #m44-player-hand .m44-card[data-type='2'], #m44-container #m44-player-hand .m44-card[data-type='5'], #m44-container #m44-player-hand .m44-card[data-type='8'], #m44-container #m44-player-hand .m44-card[data-type='14'] {
+      order: 3; }
+    #m44-container #m44-player-hand .m44-card[data-type='9'], #m44-container #m44-player-hand .m44-card[data-type='10'], #m44-container #m44-player-hand .m44-card[data-type='11'] {
+      order: 4; }
+    #m44-container #m44-player-hand .m44-card[data-type='15'] {
+      order: 15; }
+    #m44-container #m44-player-hand .m44-card[data-type='16'] {
+      order: 16; }
+    #m44-container #m44-player-hand .m44-card[data-type='17'] {
+      order: 17; }
+    #m44-container #m44-player-hand .m44-card[data-type='18'] {
+      order: 18; }
+    #m44-container #m44-player-hand .m44-card[data-type='19'] {
+      order: 19; }
+    #m44-container #m44-player-hand .m44-card[data-type='20'] {
+      order: 20; }
+    #m44-container #m44-player-hand .m44-card[data-type='21'] {
+      order: 21; }
+    #m44-container #m44-player-hand .m44-card[data-type='22'] {
+      order: 22; }
+    #m44-container #m44-player-hand .m44-card[data-type='23'] {
+      order: 23; }
+    #m44-container #m44-player-hand .m44-card[data-type='24'] {
+      order: 24; }
+    #m44-container #m44-player-hand .m44-card[data-type='25'] {
+      order: 25; }
+    #m44-container #m44-player-hand .m44-card[data-type='26'] {
+      order: 26; }
+    #m44-container #m44-player-hand .m44-card[data-type='27'] {
+      order: 27; }
+    #m44-container #m44-player-hand .m44-card[data-type='28'] {
+      order: 28; }
+    #m44-container #m44-player-hand .m44-card[data-type='29'] {
+      order: 29; }
+    #m44-container #m44-player-hand .m44-card[data-type='30'] {
+      order: 30; }
+    #m44-container #m44-player-hand .m44-card[data-type='31'] {
+      order: 31; }
+    #m44-container #m44-player-hand .m44-card[data-type='32'] {
+      order: 32; }
+    #m44-container #m44-player-hand .m44-card[data-type='33'] {
+      order: 33; }
+    #m44-container #m44-player-hand .m44-card[data-type='34'] {
+      order: 34; }
+    #m44-container #m44-player-hand .m44-card[data-type='35'] {
+      order: 35; }
+    #m44-container #m44-player-hand .m44-card[data-type='36'] {
+      order: 36; }
+    #m44-container #m44-player-hand .m44-card[data-type='37'] {
+      order: 37; }
+    #m44-container #m44-player-hand .m44-card[data-type='38'] {
+      order: 38; }
+    #m44-container #m44-player-hand .m44-card[data-type='39'] {
+      order: 39; }
 
 .m44-team-name {
   min-width: 60px;
