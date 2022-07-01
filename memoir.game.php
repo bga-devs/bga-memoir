@@ -115,7 +115,7 @@ class memoir extends Table
       'teams' => Teams::getAll()->toJsonArray(),
       'deckCount' => Cards::countInLocation('deck'),
       'discard' => Cards::getTopOf('discard'),
-      'scenario' => is_null($scenario) ? null : $scenario['text']['en'],
+      'scenario' => is_null($scenario) ? null : $scenario,
 
       'duration' => 3 - Globals::getDuration(),
       'round' => Globals::getRound(),

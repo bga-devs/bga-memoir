@@ -284,6 +284,36 @@ $units: (
   }
 }
 
-[data-units='0'] .hex-cell .m44-unit {
-  display: none;
+[data-bottom-team='AXIS'] {
+  [data-opponent-units='0'] .hex-cell .m44-unit {
+    &[data-nation='us'],
+    &[data-nation='ru'],
+    &[data-nation='brit'] {
+      display: none;
+    }
+  }
+
+  [data-own-units='0'] .hex-cell .m44-unit {
+    &[data-nation='ger'],
+    &[data-nation='jp'] {
+      display: none;
+    }
+  }
+}
+
+[data-bottom-team='ALLIES'] {
+  [data-opponent-units='0'] .hex-cell .m44-unit {
+    &[data-nation='ger'],
+    &[data-nation='jp'] {
+      display: none;
+    }
+  }
+
+  [data-own-units='0'] .hex-cell .m44-unit {
+    &[data-nation='us'],
+    &[data-nation='ru'],
+    &[data-nation='brit'] {
+      display: none;
+    }
+  }
 }

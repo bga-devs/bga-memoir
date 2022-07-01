@@ -341,11 +341,14 @@ html {
       flex-shrink: 0;
       background: #4a6632;
       box-shadow: -1px -1px 3px black;
-      z-index: 4; }
+      z-index: 4;
+      display: flex;
+      flex-flow: column; }
       #m44-container #m44-central-part #right-holder #m44-board-zoom-in,
       #m44-container #m44-central-part #right-holder #m44-board-zoom-out,
       #m44-container #m44-central-part #right-holder #m44-terrains-settings,
-      #m44-container #m44-central-part #right-holder #m44-units-settings,
+      #m44-container #m44-central-part #right-holder #m44-opponentUnits-settings,
+      #m44-container #m44-central-part #right-holder #m44-ownUnits-settings,
       #m44-container #m44-central-part #right-holder #m44-tokens-settings,
       #m44-container #m44-central-part #right-holder #m44-labels-settings,
       #m44-container #m44-central-part #right-holder #m44-coords-settings,
@@ -356,7 +359,8 @@ html {
         #m44-container #m44-central-part #right-holder #m44-board-zoom-in svg,
         #m44-container #m44-central-part #right-holder #m44-board-zoom-out svg,
         #m44-container #m44-central-part #right-holder #m44-terrains-settings svg,
-        #m44-container #m44-central-part #right-holder #m44-units-settings svg,
+        #m44-container #m44-central-part #right-holder #m44-opponentUnits-settings svg,
+        #m44-container #m44-central-part #right-holder #m44-ownUnits-settings svg,
         #m44-container #m44-central-part #right-holder #m44-tokens-settings svg,
         #m44-container #m44-central-part #right-holder #m44-labels-settings svg,
         #m44-container #m44-central-part #right-holder #m44-coords-settings svg,
@@ -368,7 +372,8 @@ html {
         #m44-container #m44-central-part #right-holder #m44-board-zoom-in:hover svg,
         #m44-container #m44-central-part #right-holder #m44-board-zoom-out:hover svg,
         #m44-container #m44-central-part #right-holder #m44-terrains-settings:hover svg,
-        #m44-container #m44-central-part #right-holder #m44-units-settings:hover svg,
+        #m44-container #m44-central-part #right-holder #m44-opponentUnits-settings:hover svg,
+        #m44-container #m44-central-part #right-holder #m44-ownUnits-settings:hover svg,
         #m44-container #m44-central-part #right-holder #m44-tokens-settings:hover svg,
         #m44-container #m44-central-part #right-holder #m44-labels-settings:hover svg,
         #m44-container #m44-central-part #right-holder #m44-coords-settings:hover svg,
@@ -376,16 +381,47 @@ html {
         #m44-container #m44-central-part #right-holder #m44-react-settings:hover svg {
           fill: white;
           color: white; }
+      #m44-container #m44-central-part #right-holder #m44-opponentUnits-settings,
       #m44-container #m44-central-part #right-holder #m44-coords-settings,
-      #m44-container #m44-central-part #right-holder #m44-summary-settings {
+      #m44-container #m44-central-part #right-holder #m44-summary-settings,
+      #m44-container #m44-central-part #right-holder #m44-react-settings {
         border-bottom: 1px solid #0f330a; }
+      #m44-container #m44-central-part #right-holder #m44-ownUnits-settings {
+        margin-top: auto;
+        border-top: 1px solid #0f330a; }
+      #m44-container #m44-central-part #right-holder #m44-ownUnits-settings,
+      #m44-container #m44-central-part #right-holder #m44-opponentUnits-settings {
+        position: relative; }
+        #m44-container #m44-central-part #right-holder #m44-ownUnits-settings::before,
+        #m44-container #m44-central-part #right-holder #m44-opponentUnits-settings::before {
+          content: '';
+          display: block;
+          width: 10px;
+          height: 10px;
+          position: absolute;
+          bottom: 21px;
+          right: 7px;
+          border-radius: 50%;
+          border: 1px solid black; }
+      [data-bottom-team='AXIS'] #m44-container #m44-central-part #right-holder #m44-opponentUnits-settings::before {
+        background: radial-gradient(farthest-corner at 10% 95%, #77b3d2, #348eb1); }
+      [data-bottom-team='AXIS'] #m44-container #m44-central-part #right-holder #m44-ownUnits-settings::before {
+        background: radial-gradient(farthest-corner at 10% 95%, #b6291b, #dc672e); }
+      [data-bottom-team='ALLIES'] #m44-container #m44-central-part #right-holder #m44-opponentUnits-settings::before {
+        background: radial-gradient(farthest-corner at 10% 95%, #b6291b, #dc672e); }
+      [data-bottom-team='ALLIES'] #m44-container #m44-central-part #right-holder #m44-ownUnits-settings::before {
+        background: radial-gradient(farthest-corner at 10% 95%, #77b3d2, #348eb1); }
+    #m44-container #m44-central-part #m44-board-wrapper[data-opponent-units='1'] ~ #right-holder #m44-opponentUnits-settings svg:first-of-type {
+      display: none; }
+    #m44-container #m44-central-part #m44-board-wrapper[data-opponent-units='0'] ~ #right-holder #m44-opponentUnits-settings svg:last-of-type {
+      display: none; }
+    #m44-container #m44-central-part #m44-board-wrapper[data-own-units='1'] ~ #right-holder #m44-ownUnits-settings svg:first-of-type {
+      display: none; }
+    #m44-container #m44-central-part #m44-board-wrapper[data-own-units='0'] ~ #right-holder #m44-ownUnits-settings svg:last-of-type {
+      display: none; }
     #m44-container #m44-central-part #m44-board-wrapper[data-terrains='1'] ~ #right-holder #m44-terrains-settings svg:first-of-type {
       display: none; }
     #m44-container #m44-central-part #m44-board-wrapper[data-terrains='0'] ~ #right-holder #m44-terrains-settings svg:last-of-type {
-      display: none; }
-    #m44-container #m44-central-part #m44-board-wrapper[data-units='1'] ~ #right-holder #m44-units-settings svg:first-of-type {
-      display: none; }
-    #m44-container #m44-central-part #m44-board-wrapper[data-units='0'] ~ #right-holder #m44-units-settings svg:last-of-type {
       display: none; }
     #m44-container #m44-central-part #m44-board-wrapper[data-tokens='1'] ~ #right-holder #m44-tokens-settings svg:first-of-type {
       display: none; }
@@ -538,6 +574,64 @@ html {
         z-index: 7;
         top: -10px;
         left: -10px; }
+    #m44-container #m44-player-hand .m44-card[data-type='0'], #m44-container #m44-player-hand .m44-card[data-type='3'], #m44-container #m44-player-hand .m44-card[data-type='6'], #m44-container #m44-player-hand .m44-card[data-type='12'] {
+      order: 1; }
+    #m44-container #m44-player-hand .m44-card[data-type='1'], #m44-container #m44-player-hand .m44-card[data-type='4'], #m44-container #m44-player-hand .m44-card[data-type='7'], #m44-container #m44-player-hand .m44-card[data-type='13'] {
+      order: 2; }
+    #m44-container #m44-player-hand .m44-card[data-type='2'], #m44-container #m44-player-hand .m44-card[data-type='5'], #m44-container #m44-player-hand .m44-card[data-type='8'], #m44-container #m44-player-hand .m44-card[data-type='14'] {
+      order: 3; }
+    #m44-container #m44-player-hand .m44-card[data-type='9'], #m44-container #m44-player-hand .m44-card[data-type='10'], #m44-container #m44-player-hand .m44-card[data-type='11'] {
+      order: 4; }
+    #m44-container #m44-player-hand .m44-card[data-type='15'] {
+      order: 15; }
+    #m44-container #m44-player-hand .m44-card[data-type='16'] {
+      order: 16; }
+    #m44-container #m44-player-hand .m44-card[data-type='17'] {
+      order: 17; }
+    #m44-container #m44-player-hand .m44-card[data-type='18'] {
+      order: 18; }
+    #m44-container #m44-player-hand .m44-card[data-type='19'] {
+      order: 19; }
+    #m44-container #m44-player-hand .m44-card[data-type='20'] {
+      order: 20; }
+    #m44-container #m44-player-hand .m44-card[data-type='21'] {
+      order: 21; }
+    #m44-container #m44-player-hand .m44-card[data-type='22'] {
+      order: 22; }
+    #m44-container #m44-player-hand .m44-card[data-type='23'] {
+      order: 23; }
+    #m44-container #m44-player-hand .m44-card[data-type='24'] {
+      order: 24; }
+    #m44-container #m44-player-hand .m44-card[data-type='25'] {
+      order: 25; }
+    #m44-container #m44-player-hand .m44-card[data-type='26'] {
+      order: 26; }
+    #m44-container #m44-player-hand .m44-card[data-type='27'] {
+      order: 27; }
+    #m44-container #m44-player-hand .m44-card[data-type='28'] {
+      order: 28; }
+    #m44-container #m44-player-hand .m44-card[data-type='29'] {
+      order: 29; }
+    #m44-container #m44-player-hand .m44-card[data-type='30'] {
+      order: 30; }
+    #m44-container #m44-player-hand .m44-card[data-type='31'] {
+      order: 31; }
+    #m44-container #m44-player-hand .m44-card[data-type='32'] {
+      order: 32; }
+    #m44-container #m44-player-hand .m44-card[data-type='33'] {
+      order: 33; }
+    #m44-container #m44-player-hand .m44-card[data-type='34'] {
+      order: 34; }
+    #m44-container #m44-player-hand .m44-card[data-type='35'] {
+      order: 35; }
+    #m44-container #m44-player-hand .m44-card[data-type='36'] {
+      order: 36; }
+    #m44-container #m44-player-hand .m44-card[data-type='37'] {
+      order: 37; }
+    #m44-container #m44-player-hand .m44-card[data-type='38'] {
+      order: 38; }
+    #m44-container #m44-player-hand .m44-card[data-type='39'] {
+      order: 39; }
 
 .m44-team-name {
   min-width: 60px;
@@ -2622,7 +2716,14 @@ html {
 .m44-unit[data-type='5'][data-figures='1'] .m44-unit-meeple:nth-of-type(3) {
   display: none; }
 
-[data-units='0'] .hex-cell .m44-unit {
+[data-bottom-team='AXIS'] [data-opponent-units='0'] .hex-cell .m44-unit[data-nation='us'], [data-bottom-team='AXIS'] [data-opponent-units='0'] .hex-cell .m44-unit[data-nation='ru'], [data-bottom-team='AXIS'] [data-opponent-units='0'] .hex-cell .m44-unit[data-nation='brit'] {
+  display: none; }
+[data-bottom-team='AXIS'] [data-own-units='0'] .hex-cell .m44-unit[data-nation='ger'], [data-bottom-team='AXIS'] [data-own-units='0'] .hex-cell .m44-unit[data-nation='jp'] {
+  display: none; }
+
+[data-bottom-team='ALLIES'] [data-opponent-units='0'] .hex-cell .m44-unit[data-nation='ger'], [data-bottom-team='ALLIES'] [data-opponent-units='0'] .hex-cell .m44-unit[data-nation='jp'] {
+  display: none; }
+[data-bottom-team='ALLIES'] [data-own-units='0'] .hex-cell .m44-unit[data-nation='us'], [data-bottom-team='ALLIES'] [data-own-units='0'] .hex-cell .m44-unit[data-nation='ru'], [data-bottom-team='ALLIES'] [data-own-units='0'] .hex-cell .m44-unit[data-nation='brit'] {
   display: none; }
 
 :root {
@@ -4136,6 +4237,9 @@ span.m44-dice-result {
       font-family: 'Gunplay';
       color: #c2602f;
       font-size: 23px; }
+    #popin_showScenario #popin_showScenario_contents #scenario-dates {
+      text-align: right;
+      font-size: 20px; }
     #popin_showScenario #popin_showScenario_contents #scenario-historical {
       font-family: 'Dax';
       text-align: justify; }

@@ -189,7 +189,7 @@ define([
 
       // WHich player point of vue are we going to take ?
       this._pId = this.isSpectator ? Object.keys(this.gamedatas.players)[0] : this.player_id;
-      this._bottomTeam = this.gamedatas.players[this._pId].team;
+      this.updateBottomTeam(this.gamedatas.players[this._pId].team);
 
       // Load board
       if (gamedatas.board) {
@@ -212,6 +212,11 @@ define([
       let container = $('pagesection_options').querySelector('.pagesection');
       dojo.place('<div id="local-prefs-container"></div>', container);
       this.inherited(arguments);
+    },
+
+    updateBottomTeam(team){
+      this._bottomTeam = this.gamedatas.players[this._pId].team;
+      $('ebd-body').dataset.bottomTeam = this._bottomTeam;
     },
 
     clearInterface(partial = false) {
@@ -330,7 +335,7 @@ define([
       this.gamedatas.units = n.args.units;
       this.gamedatas.scenario = n.args.scenario;
       this.gamedatas.round = n.args.round;
-      this._bottomTeam = this.gamedatas.players[this._pId].team;
+      this.updateBottomTeam(this.gamedatas.players[this._pId].team);
       this._deckCounter.setValue(n.args.deckCount);
 
       this.setupBoard();
@@ -348,7 +353,7 @@ define([
       this.gamedatas.players = n.args.players;
       this.gamedatas.board = n.args.board;
       this.gamedatas.teams = n.args.teams;
-      this._bottomTeam = this.gamedatas.players[this._pId].team;
+      this.updateBottomTeam(this.gamedatas.players[this._pId].team);
       this._deckCounter.setValue(n.args.deckCount);
 
       this.setupBoard();
@@ -445,7 +450,7 @@ define([
         closeAction: 'hide',
         verticalAlign: 'flex-begin',
         scale: 0.8,
-        title: _(this.gamedatas.scenario.name),
+        title: _(this.getScenarioTexts().name),
       });
 
       this.addTooltip('clipboard-button', _('Show the scenario informations'), '');
@@ -453,9 +458,19 @@ define([
       this.updateGameProgress();
     },
 
+    getScenarioTexts() {
+      let scenario = this.gamedatas.scenario;
+      if (scenario.text.en) {
+        return scenario.text.en;
+      } else {
+        let langs = Object.keys(scenario.text);
+        return scenario.text[langs[0]];
+      }
+    },
+
     updateGameProgress() {
       $('scenario-name').innerHTML =
-        _(this.gamedatas.scenario.name) +
+        _(this.getScenarioTexts().name) +
         '<span id="m44-progress">' +
         this.gamedatas.round +
         '/' +
@@ -473,27 +488,42 @@ define([
 
     tplScenarioModal() {
       let scenario = this.gamedatas.scenario;
+
+      // Compute start-end dates
+      let dateBegin = scenario.game_info.date_begin.split('-');
+      let dateEnd = scenario.game_info.date_end.split('-');
+      let begin = new Date(Date.UTC(dateBegin[0], dateBegin[1], dateBegin[2]));
+      let end = new Date(Date.UTC(dateEnd[0], dateEnd[1], dateEnd[2]));
+      let intervalFormat = new Intl.DateTimeFormat([], {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      });
+
       return (
         `
+      <div id='scenario-dates'>
+        ${intervalFormat.formatRange(begin, end)}
+      </div>
       <div id='scenario-historical'>
         <h5>${_('Historical Background')}</h5>
-        ${_(scenario.historical).replace(/\n/g, '<br />')}
+        ${_(this.getScenarioTexts().historical).replace(/\n/g, '<br />')}
       </div>
 
       <div id='scenario-bottom-container'>
         <div id='scenario-brief'>
           <h5>${_('Briefing')}</h5>
-          ${_(scenario.description).replace(/\n/g, '<br />')}
+          ${_(this.getScenarioTexts().description).replace(/\n/g, '<br />')}
         </div>
         <div id='scenario-conditions-rules'>
           <h5>${_('Conditions of Victory')}</h5>
-          ${_(scenario.victory).replace(/\n/g, '<br />')}
+          ${_(this.getScenarioTexts().victory).replace(/\n/g, '<br />')}
           ` +
-        (scenario.rules === undefined
+        (this.getScenarioTexts().rules === undefined
           ? ''
           : `
           <h5>${_('Special rules')}</h5>
-          ${_(scenario.rules).replace(/\n/g, '<br />')}
+          ${_(this.getScenarioTexts().rules).replace(/\n/g, '<br />')}
             `) +
         `
         </div>

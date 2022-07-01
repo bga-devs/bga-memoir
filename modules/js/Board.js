@@ -169,14 +169,15 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
       if (this.tooltips['m44-labels-settings'] == undefined) {
         let buttonsTooltips = {
+          opponentUnits: _('Show/hide opponents\' units'),
           terrains: _('Show/hide the terrain hexes'),
-          units: _('Show/hide units'),
           tokens: _('Show/hide tokens and medals'),
           labels: _('Show/hide map labels'),
           coords: _('Show/hide coordinate helpers'),
+          ownUnits: _('Show/hide my units'),
         };
 
-        ['terrains', 'units', 'tokens', 'labels', 'coords'].forEach((layer) => {
+        ['opponentUnits', 'terrains', 'tokens', 'labels', 'coords', 'ownUnits'].forEach((layer) => {
           this.toggleLayerVisibility(layer, this.getConfig('m44' + layer, 1));
           dojo.connect($(`m44-${layer}-settings`), 'click', () => this.toggleLayerVisibility(layer));
           this.addTooltip(`m44-${layer}-settings`, '', buttonsTooltips[layer]);
