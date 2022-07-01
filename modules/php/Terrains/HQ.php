@@ -20,7 +20,7 @@ class HQ extends \M44\Models\Terrain
   }
 
   // TODO: scenario specific / control with owner of HQ
-  public function onUnitEntering($unit, $isRetreat)
+  public function onUnitEntering($unit, $isRetreat, $isTakeGround)
   {
     // if capture done by ennemy
     if (!$this->isOriginalOwner($unit) && $this->getExtraDatas('captured') !== true) {

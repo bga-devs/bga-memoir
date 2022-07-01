@@ -40,7 +40,7 @@ trait DebugTrait
     // }
     // throw
     // throw new \feException('titi ' . Units::get(1086)->isCamouflaged() . ' toto');
-    $this->argsAttackUnit();
+    // $this->argsAttackUnit();
   }
 
   function tp($pId, $unitId, $min, $max)
@@ -64,5 +64,12 @@ trait DebugTrait
     $this->gamestate->setAllPlayersMultiactive();
 
     $this->gamestate->jumpToState(\ST_UPLOAD_SCENARIO);
+  }
+
+  function move($id, $x, $y)
+  {
+    $unit = Units::get($id);
+    $unit->moveTo(['x' => $x, 'y' => $y]);
+    Notifications::moveUnit(Players::getActive(), $unit, ['x' => $x, 'y' => $y], ['x' => $x, 'y' => $y]);
   }
 }

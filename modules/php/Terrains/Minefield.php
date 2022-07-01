@@ -26,7 +26,7 @@ class Minefield extends \M44\Models\Terrain
     parent::__construct($row);
   }
 
-  public function onUnitEntering($unit, $isRetreat)
+  public function onUnitEntering($unit, $isRetreat, $isTakeGround)
   {
     // A bit counter-intuitive but the side indicated by editor is the one that is affected by mines
     if ($isRetreat || !$this->isOriginalOwner($unit)) {

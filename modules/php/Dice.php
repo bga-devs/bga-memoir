@@ -22,7 +22,7 @@ class Dice
     // $results = [\DICE_STAR, \DICE_STAR,\DICE_STAR];
     // $results = [\DICE_FLAG, DICE_FLAG, DICE_FLAG];
     // $results = [\DICE_INFANTRY, DICE_INFANTRY, DICE_INFANTRY];
-    // $results = [\DICE_GRENADE, \DICE_GRENADE, \DICE_GRENADE, \DICE_GRENADE];
+    $results = [\DICE_GRENADE, \DICE_GRENADE, \DICE_GRENADE, \DICE_GRENADE];
 
     Log::checkpoint(); // Make undo invalid
     Notifications::rollDice($player, $nDice, $results, $cell);

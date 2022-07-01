@@ -33,7 +33,7 @@ class Jungle extends \M44\Models\Terrain
   }
 
 /*
-  public function onUnitEntering($unit, $isRetreat)
+  public function onUnitEntering($unit, $isRetreat, $isTakeGround)
   {
     if (!$isRetreat) {
       if ($unit->getMoves() != 1) {
