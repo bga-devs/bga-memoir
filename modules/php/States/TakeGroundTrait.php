@@ -30,7 +30,7 @@ trait TakeGroundTrait
     if (
       $attack['distance'] != 1 ||
       is_null($unit) ||
-      $unit->isStopped() ||
+      ($unit->isStopped() && !$unit->canTakeGround()) ||
       Board::getDeplacementCost($unit, $cell, $attack, 1, true) == \INFINITY ||
       $unit->getGrounds() >= $unit->getMaxGrounds() ||
       Board::getUnitInCell($attack['x'], $attack['y']) != null ||

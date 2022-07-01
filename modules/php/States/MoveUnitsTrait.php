@@ -55,7 +55,7 @@ trait MoveUnitsTrait
 
     // Move the unit
     $cell = $cells[$k];
-    usort($cell['paths'], function($path1, $path2){
+    usort($cell['paths'], function ($path1, $path2) {
       return $path1['resistance'] - $path2['resistance'];
     });
     $path = $cell['paths'][0]; // Take the least resistance path
@@ -70,6 +70,7 @@ trait MoveUnitsTrait
       if (!$skipRestrictions) {
         if (Board::mustStopWhenLeavingCell($coordSource, $unit)) {
           $unit->mustStop();
+          $unit->ableTakeGround();
         } elseif (Board::mustStopWhenEnteringCell($c, $unit)) {
           $unit->mustStop();
         }

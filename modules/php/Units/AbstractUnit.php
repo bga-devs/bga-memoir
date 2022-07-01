@@ -76,6 +76,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     'bonusCloseAssault', // Japanese
     'banzai', // can move up to 2 and still battle
     'maxMalus', // maximum malus for attack
+    'canTakeGround', // in case of mustStopWhenLeaving, it should not block taking ground
   ];
 
   protected $attackPower = [];
@@ -371,6 +372,16 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
   public function isStopped()
   {
     return $this->getExtraDatas('stopped') ?? false;
+  }
+
+  public function ableTakeGround()
+  {
+    return $this->setExtraDatas('canTakeGround', true);
+  }
+
+  public function canTakeGround()
+  {
+    return $this->getExtraDatas('canTakeGround') ?? false;
   }
 
   //////////////////////////////////////////

@@ -228,6 +228,7 @@ class Units extends \M44\Helpers\Pieces
       }
       $unit->setExtraDatas('cannotBattle', false);
       $unit->setExtraDatas('onTheMove', false);
+      $unit->setExtraDatas('canTakeGround', false);
     }
   }
 
