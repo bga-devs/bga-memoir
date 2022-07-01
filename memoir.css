@@ -4136,6 +4136,9 @@ span.m44-dice-result {
       font-family: 'Gunplay';
       color: #c2602f;
       font-size: 23px; }
+    #popin_showScenario #popin_showScenario_contents #scenario-dates {
+      text-align: right;
+      font-size: 20px; }
     #popin_showScenario #popin_showScenario_contents #scenario-historical {
       font-family: 'Dax';
       text-align: justify; }
