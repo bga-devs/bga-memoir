@@ -240,6 +240,12 @@ class Medals extends \M44\Helpers\DB_Manager
           'sprite' => $data['side'] == ALLIES ? 'medal1' : 'medal2',
         ]);
       }
+      // Increase stats
+      $statName = 'incMedalRound' . Globals::getRound();
+      foreach ($team->getMembers() as $player) {
+        Stats::$statName($player, $medalsObtained);
+      }
+
       Notifications::scoreSectionMedals(
         $team->getId(),
         self::DB()
@@ -252,6 +258,12 @@ class Medals extends \M44\Helpers\DB_Manager
       // remove medals - prettier-ignore
       self::DB()->delete()->whereIn('id', $medalIds)->run();
       Notifications::removeSectionMedals($team->getId(), $medalIds);
+
+      // Decrease stats
+      $statName = 'incMedalRound' . Globals::getRound();
+      foreach ($team->getMembers() as $player) {
+        Stats::$statName($player, -count($medalIds));
+      }
     }
   }
 
