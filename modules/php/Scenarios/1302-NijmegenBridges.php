@@ -412,7 +412,7 @@ $scenarios[1302] = [
         'row' => 7,
         'col' => 1,
         'unit' => [
-          'name' => 'inf2us',
+          'name' => 'infus',
         ],
         'tags' => [
           0 => [
@@ -424,7 +424,7 @@ $scenarios[1302] = [
         'row' => 7,
         'col' => 3,
         'unit' => [
-          'name' => 'inf2us',
+          'name' => 'infus',
         ],
         'tags' => [
           0 => [
@@ -436,7 +436,7 @@ $scenarios[1302] = [
         'row' => 7,
         'col' => 5,
         'unit' => [
-          'name' => 'inf2us',
+          'name' => 'infus',
         ],
         'tags' => [
           0 => [
