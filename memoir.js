@@ -214,7 +214,7 @@ define([
       this.inherited(arguments);
     },
 
-    updateBottomTeam(team){
+    updateBottomTeam(team) {
       this._bottomTeam = this.gamedatas.players[this._pId].team;
       $('ebd-body').dataset.bottomTeam = this._bottomTeam;
     },
@@ -488,17 +488,21 @@ define([
 
     tplScenarioModal() {
       let scenario = this.gamedatas.scenario;
-
-      // Compute start-end dates
-      let dateBegin = scenario.game_info.date_begin.split('-');
-      let dateEnd = scenario.game_info.date_end.split('-');
-      let begin = new Date(Date.UTC(dateBegin[0], dateBegin[1], dateBegin[2]));
-      let end = new Date(Date.UTC(dateEnd[0], dateEnd[1], dateEnd[2]));
       let intervalFormat = new Intl.DateTimeFormat([], {
         year: 'numeric',
         month: 'short',
         day: 'numeric',
       });
+
+      let begin = '';
+      let end = '';
+      // Compute start-end dates
+      if (scenario.game_info.hasOwnProperty('date_begin') && scenario.game_info.hasOwnProperty('date_end')) {
+        let dateBegin = scenario.game_info.date_begin.split('-');
+        let dateEnd = scenario.game_info.date_end.split('-');
+        begin = new Date(Date.UTC(dateBegin[0], dateBegin[1], dateBegin[2]));
+        end = new Date(Date.UTC(dateEnd[0], dateEnd[1], dateEnd[2]));
+      }
 
       return (
         `
