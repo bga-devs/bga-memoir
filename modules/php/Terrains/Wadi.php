@@ -18,7 +18,7 @@ class Wadi extends \M44\Models\Terrain
       \clienttranslate('Side slopes impassable, both in and out'),
       clienttranslate('No movement restrictions through open ends'),
       clienttranslate('Infantry or Armor battling in or out of Wadi or Gully must be adjacent to target'),
-      clienttranslate('Do not block line of sight. Unit in Wadi or Guli blocks line of sight as normal'),
+      // clienttranslate('Do not block line of sight. Unit in Wadi or Guli blocks line of sight as normal'),
     ];
     $this->defense = [INFANTRY => -1, ARMOR => -1, \ARTILLERY => -1];
     $this->mustBeAdjacentToBattle = true;
