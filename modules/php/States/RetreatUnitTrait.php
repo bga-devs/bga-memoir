@@ -73,7 +73,7 @@ trait RetreatUnitTrait
       return $cell['d'] == $args['min'];
     });
 
-    if ($args['hits'] > 0) {
+    if ($args['hits'] > 0 && !$unit->isEliminated()) {
       $attacker = $unit
         ->getTeam()
         ->getOpponent()
