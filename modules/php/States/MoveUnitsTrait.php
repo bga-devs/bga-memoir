@@ -85,6 +85,8 @@ trait MoveUnitsTrait
       if ($isWinning) {
         return;
       } elseif ($interrupted) {
+        Globals::setUnitMoved($unitId);
+
         if ($desertMove) {
           $this->nextState('overrun');
           return;
