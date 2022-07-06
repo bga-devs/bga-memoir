@@ -32,7 +32,18 @@ class Jungle extends \M44\Models\Terrain
     return $moves > 1 || abs($pos1['x'] - $pos2['x']) + 2 * abs($pos1['y'] - $pos2['y']) > 3;
   }
 
-/*
+  public function cantTakeGround($unit)
+  {
+    if ($unit->getType() != ARMOR) {
+      return false;
+    }
+
+    $pos1 = $unit->getPos();
+    $pos2 = $this->getPos();
+    return $unit->getMoves() >= 1 || abs($pos1['x'] - $pos2['x']) + 2 * abs($pos1['y'] - $pos2['y']) > 3;
+  }
+
+  /*
   public function onUnitEntering($unit, $isRetreat, $isTakeGround)
   {
     if (!$isRetreat) {
