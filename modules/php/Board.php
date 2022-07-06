@@ -356,9 +356,13 @@ class Board
     ) {
       foreach ($targetCell['terrains'] as $terrain) {
         if ($terrain->isCave($unit)) {
-          return $d - $source['d'];
+          return 1;
         }
       }
+    }
+
+    if (isset($source['teleportation']) && $source['teleportation'] == true) {
+      return INFINITY;
     }
 
     // check to forbid caves teleportation
