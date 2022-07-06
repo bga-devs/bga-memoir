@@ -436,7 +436,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
         if (
           (cell.terrains.length == 0 || this._terrainsVisibility == 0) &&
-          (cell.unit == null || this._unitsVisibility == 0) &&
+          !this.cellHasUnitTooltip(cell) &&
           (cell.tokens.length == 0 || this._tokensVisibility == 0)
         ) {
           return; // Nothing to show !
@@ -464,12 +464,19 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       this._boardTooltips = {};
     },
 
+    cellHasUnitTooltip(cell) {
+      if (!cell.unit) return false;
+      let myNations = this._bottomTeam == 'AXIS' ? ['ger', 'jp'] : ['us', 'ru', 'brit'];
+      let mySide = myNations.includes(cell.unit.nation);
+      let pref = mySide ? this._ownUnitsVisibility : this._opponentUnitsVisibility;
+      return pref == 1;
+    },
+
     tplBoardTooltip(cell) {
       let terrainDivs =
         this._terrainsVisibility == 0 ? [] : cell.terrains.map((terrain) => this.tplTerrainSummary(terrain));
       let tokenDivs = this._tokensVisibility == 0 ? [] : cell.tokens.map((token) => this.tplTokenSummary(token));
-      let unitDiv = cell.unit && this._unitsVisibility == 1 ? this.tplUnitSummary(cell.unit) : '';
-      // let unitDiv = cell.unit ? this.tplUnitSummary(cell.unit) : '';
+      let unitDiv = this.cellHasUnitTooltip(cell) ? this.tplUnitSummary(cell.unit) : '';
 
       return `<div class='board-tooltip' style='${cell.openingPosition}:0px'>${unitDiv} ${terrainDivs.join(
         '',
