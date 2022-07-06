@@ -436,7 +436,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
         if (
           (cell.terrains.length == 0 || this._terrainsVisibility == 0) &&
-          cell.unit == null && // || this._unitsVisibility == 0) &&
+          (cell.unit == null || this._unitsVisibility == 0) &&
           (cell.tokens.length == 0 || this._tokensVisibility == 0)
         ) {
           return; // Nothing to show !
@@ -468,8 +468,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       let terrainDivs =
         this._terrainsVisibility == 0 ? [] : cell.terrains.map((terrain) => this.tplTerrainSummary(terrain));
       let tokenDivs = this._tokensVisibility == 0 ? [] : cell.tokens.map((token) => this.tplTokenSummary(token));
-      // let unitDiv = cell.unit && this._unitsVisibility == 1 ? this.tplUnitSummary(cell.unit) : '';
-      let unitDiv = cell.unit ? this.tplUnitSummary(cell.unit) : '';
+      let unitDiv = cell.unit && this._unitsVisibility == 1 ? this.tplUnitSummary(cell.unit) : '';
+      // let unitDiv = cell.unit ? this.tplUnitSummary(cell.unit) : '';
 
       return `<div class='board-tooltip' style='${cell.openingPosition}:0px'>${unitDiv} ${terrainDivs.join(
         '',
