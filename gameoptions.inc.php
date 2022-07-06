@@ -31,6 +31,7 @@ $game_options = [
         'name' => clienttranslate('1 way'),
         'tmdisplay' => clienttranslate('[1 way]'),
         'description' => clienttranslate('The scenario will only be played once'),
+        'alpha' => true,
       ],
     ],
   ],
