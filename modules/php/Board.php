@@ -748,7 +748,18 @@ class Board
     $t = self::$grid[$cell['x']][$cell['y']];
 
     foreach ($t['terrains'] as $t) {
-      if ($t instanceof \M44\Terrains\Wadi && $unit->mustSeeToAttack() && $t->isBlockingWadi($unit, $target, $path)) {
+      if (
+        $t instanceof \M44\Terrains\Wadi &&
+        $unit->mustSeeToAttack() &&
+        $t->isBlockingWadi($unit, $target, $path, $cell)
+      ) {
+        return true;
+      }
+    }
+
+    $t = self::$grid[$target['x']][$target['y']];
+    foreach ($t['terrains'] as $t) {
+      if ($t instanceof \M44\Terrains\Wadi && $t->isBlockingWadi($unit, $target, $path, $cell)) {
         return true;
       }
     }

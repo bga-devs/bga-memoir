@@ -29,21 +29,6 @@ class Wadi extends \M44\Models\Terrain
     parent::__construct($row);
   }
 
-  // public function mustBeAdjacentToBattle($unit)
-  // {
-  //   if ($unit->getType() == \ARTILLERY) {
-  //     return false;
-  //   }
-  //
-  //   foreach (Board::getTerrainsInCell($unit->getPos()) as $t) {
-  //     if ($t instanceof \M44\Terrains\Wadi) {
-  //       return false;
-  //     }
-  //   }
-  //
-  //   return $this->mustBeAdjacentToBattle;
-  // }
-
   public function defense($unit)
   {
     foreach (Board::getTerrainsInCell($unit->getPos()) as $t) {
@@ -53,23 +38,6 @@ class Wadi extends \M44\Models\Terrain
     }
     return $this->getProperty('defense', $unit);
   }
-
-  // public function isBlockingLineOfSight($unit, $target, $path)
-  // {
-  //   // if ($unit->getType() == \ARTILLERY) {
-  //   //   return false;
-  //   // }
-  //
-  //   foreach ($path as $cell) {
-  //     foreach (Board::getTerrainsInCell($cell) as $terrain) {
-  //       if (!$terrain instanceof \M44\Terrains\Wadi) {
-  //         return true;
-  //       }
-  //     }
-  //   }
-  //
-  //   return count($path) <= 2;
-  // }
 
   public function isWadi($cell)
   {
@@ -81,20 +49,10 @@ class Wadi extends \M44\Models\Terrain
     return false;
   }
 
-  // Check in case of movement of the unit, to check "canAttack"
-  public function isBlockingLineOfSight($unit, $target, $path)
-  {
-    return self::isBlockingWadi($unit, $target, $path, false);
-  }
-
   // used to check the Wadi case at computation time
-  public function isBlockingWadi($unit, $target, $path, $force = true)
+  public function isBlockingWadi($unit, $target, $path, $cell, $force = true)
   {
-    $startWadi = self::isWadi($unit->getPos());
-    // added in case we start the movement, it's always true (as we check terrains of the unit)
-    if ($force) {
-      $startWadi = true;
-    }
+    $startWadi = self::isWadi($cell);
     $endWadi = self::isWadi($target);
 
     if (($startWadi && $endWadi) || (!$startWadi && !$endWadi)) {
