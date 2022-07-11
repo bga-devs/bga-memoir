@@ -680,6 +680,11 @@ class Board
     $blockedLeft = false;
     $blockedRight = false;
 
+    // Checking wadi effect
+    if (self::isBlockingWadi($unit, $target, $source, $path)) {
+      return false;
+    }
+
     foreach ($path as $cell) {
       // Starting and ending points are never blocking
       if (self::areSameCell($cell, $source) || self::areSameCell($cell, $target)) {
@@ -726,6 +731,24 @@ class Board
       }
 
       if ($unit->mustSeeToAttack() && $t->isBlockingLineOfSight($unit, $target, $path)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  // Checking that the path is not blocked with Wadis
+  public static function isBlockingWadi($unit, $target, $cell, $path)
+  {
+    if (!self::isValidCell($cell)) {
+      return true;
+    }
+
+    $t = self::$grid[$cell['x']][$cell['y']];
+
+    foreach ($t['terrains'] as $t) {
+      if ($t instanceof \M44\Terrains\Wadi && $unit->mustSeeToAttack() && $t->isBlockingWadi($unit, $target, $path)) {
         return true;
       }
     }
