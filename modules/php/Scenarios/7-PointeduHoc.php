@@ -403,13 +403,6 @@ $scenarios[7] = [
         'col' => 1,
         'text' => [],
       ],
-      2 => [
-        'row' => 5,
-        'col' => 13,
-        'text' => [
-          0 => clienttranslate(''),
-        ],
-      ],
     ],
   ],
   'text' => [

@@ -1133,7 +1133,6 @@ $scenarios[6541] = [
   'text' => [
     'en' => [
       'name' => clienttranslate('Breakthrough to the Beach'),
-      'subtitle' => clienttranslate(''),
       'historical' => clienttranslate('Sword Beach - 07:20, June 6, 1944 - The DD tanks of 13/18 Hussars and Flails of 22 Dragoons land, followed by the men of 2nd East Yorkshire Rgt on Queen Red and those of 1st South Lancashire Rgt on Queen White. In the space of a few minutes, 200 men fall in front of withering fire from strong-point Cod. But others keep moving, followed by the commandos, and by noon they\'ve seized all their objectives. The road to Caen is now open...
 
 That same day, on the outskirts of Caen. - The Germans muster the only sizeable unit within reach, the 21.Panzerdivision. Around 16:00 the division\'s kampfgruppen lead the charge. KG Rauch reaches the coast between Luc-sur-Mer and Lion-sur-Mer an cordons off the Brits on Sword Beach from their Canadian brethren on Juno. But the spectacular arrival of hundreds of British gliders over St Aubin d\'Arquenay puts a stop to the Germans, who are soon forced to retreat back to Caen.

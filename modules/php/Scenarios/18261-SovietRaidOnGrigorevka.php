@@ -590,26 +590,12 @@ $scenarios[18261] = [
           0 => clienttranslate('Hill 57.3'),
         ],
       ],
-      3 => [
-        'row' => 4,
-        'col' => 0,
-        'text' => [
-          0 => clienttranslate(''),
-        ],
-      ],
       4 => [
         'row' => 4,
         'col' => 8,
         'text' => [
           0 => clienttranslate('Romanian'),
           1 => clienttranslate('HQ'),
-        ],
-      ],
-      5 => [
-        'row' => 4,
-        'col' => 10,
-        'text' => [
-          0 => clienttranslate(''),
         ],
       ],
       6 => [
@@ -626,32 +612,11 @@ $scenarios[18261] = [
           0 => clienttranslate('Grigorevka'),
         ],
       ],
-      8 => [
-        'row' => 15,
-        'col' => 1,
-        'text' => [
-          0 => clienttranslate(''),
-        ],
-      ],
       9 => [
         'row' => 15,
         'col' => 9,
         'text' => [
           0 => clienttranslate('Black Sea'),
-        ],
-      ],
-      10 => [
-        'row' => 15,
-        'col' => 15,
-        'text' => [
-          0 => clienttranslate(''),
-        ],
-      ],
-      11 => [
-        'row' => 16,
-        'col' => 2,
-        'text' => [
-          0 => clienttranslate(''),
         ],
       ],
       12 => [
@@ -704,18 +669,18 @@ $scenarios[18261] = [
       'name' => clienttranslate('[Ukraine] Soviet raid on Grigorevka'),
       'subtitle' => clienttranslate('Assault of the 3rd Naval Infantry Regiment	'),
       'historical' => clienttranslate('In September 1941, the city of Odessa was on the front line, surrounded by the Romanian army and under heavy fire from the artillery batteries of the 15th Romanian division positioned near Grigorevka. In order to help the defenders of the city, the Black Sea Fleet ordered a raid to destroy those big guns.
-During the night of September 21st, 23 paratroopers led by Starshina Kuznetsov were dropped on the site. Then, the 3rd Naval Infantry Regiment, under the command of Captain Koren, landed in front of Grigorevka, supported by the destroyers Bojskij and Bezuprechnyj. 
+During the night of September 21st, 23 paratroopers led by Starshina Kuznetsov were dropped on the site. Then, the 3rd Naval Infantry Regiment, under the command of Captain Koren, landed in front of Grigorevka, supported by the destroyers Bojskij and Bezuprechnyj.
 The Soviet paratroopers managed to destroy a regimental HQ while the sea-landed troops captured the enemy batteries. Once their mission was complete, the naval infantrymen slipped back across the Soviet lines near Odessa.
 The stage is set, the battle lines are drawn, and you are in command. The rest is history.'),
       'description' => clienttranslate('Axis Player [Romania]
-Take 5 Command cards. 
+Take 5 Command cards.
 
 Allied Player [Soviet Union]
 Take 6 Command cards. You move first.'),
       'victory' => clienttranslate('12 medals.
 Each artillery battery destroyed is worth an additional permanent medal objective for the Allied player.
 The hex with the Romanian HQ is a temporary Medal Objective for the Allied player.'),
-      'rules' => clienttranslate('- Red Army rules (Nations 2) are in effect. 
+      'rules' => clienttranslate('- Red Army rules (Nations 2) are in effect.
 - All Allied Infantry units are Elite (Troops 2 - Specialized Units). Badges are not required.
 - Destroyer rules (Troops 12) are in effect.
 - Capture HQ/supply Tent rules (Actions 17) are in effect.

@@ -396,25 +396,11 @@ $scenarios[1096] = [
           0 => clienttranslate('Example J'),
         ],
       ],
-      9 => [
-        'row' => 4,
-        'col' => 18,
-        'text' => [
-          0 => clienttranslate(''),
-        ],
-      ],
       10 => [
         'row' => 4,
         'col' => 20,
         'text' => [
           0 => clienttranslate('No LoS'),
-        ],
-      ],
-      11 => [
-        'row' => 4,
-        'col' => 24,
-        'text' => [
-          0 => clienttranslate(''),
         ],
       ],
       12 => [

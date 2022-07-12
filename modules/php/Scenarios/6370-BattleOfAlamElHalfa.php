@@ -850,13 +850,6 @@ $scenarios[6370] = [
           0 => clienttranslate('El Alamein'),
         ],
       ],
-      3 => [
-        'row' => 14,
-        'col' => 12,
-        'text' => [
-          0 => clienttranslate(''),
-        ],
-      ],
     ],
   ],
   'text' => [

@@ -689,25 +689,11 @@ $scenarios[4643] = [
           0 => clienttranslate('Hill 104'),
         ],
       ],
-      6 => [
-        'row' => 6,
-        'col' => 20,
-        'text' => [
-          0 => clienttranslate(''),
-        ],
-      ],
       7 => [
         'row' => 7,
         'col' => 11,
         'text' => [
           0 => clienttranslate('Bienfay'),
-        ],
-      ],
-      8 => [
-        'row' => 7,
-        'col' => 17,
-        'text' => [
-          0 => clienttranslate(''),
         ],
       ],
       9 => [

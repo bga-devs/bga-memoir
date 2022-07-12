@@ -761,7 +761,6 @@ $scenarios[6369] = [
         'col' => 5,
         'text' => [
           0 => clienttranslate('Champs inondés'),
-          1 => clienttranslate(''),
         ],
       ],
       1 => [

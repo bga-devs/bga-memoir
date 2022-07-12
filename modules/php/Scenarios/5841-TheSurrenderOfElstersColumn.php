@@ -936,13 +936,6 @@ $scenarios[5841] = [
           0 => clienttranslate('Angoulême'),
         ],
       ],
-      9 => [
-        'row' => 9,
-        'col' => 19,
-        'text' => [
-          0 => clienttranslate(''),
-        ],
-      ],
       10 => [
         'row' => 12,
         'col' => 2,
