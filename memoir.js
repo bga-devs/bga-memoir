@@ -393,6 +393,7 @@ define([
         'forRetreat',
         'forAirDrop',
         'attacked',
+        'mayAttack',
       ].forEach((className) => {
         this.removeClassNameOfCells(className);
       });

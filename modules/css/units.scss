@@ -85,7 +85,7 @@
   &.airPowerTarget,
   &.attacked {
     background-image: url('img/hex_border_highlights.png');
-    background-size: 400% 200%;
+    background-size: 400% 300%;
   }
 
   &.activated {
@@ -94,25 +94,28 @@
     &.unselectableForAttacking {
       background-position: 100% 0%;
     }
+    &.mayAttack {
+      background-position: 0% 50%;
+    }
   }
   &.moving {
-    background-position: 33.333% 0%;
+    background-position: 66.6666% 50%;
     &.selected {
       transform: scale(0.8);
       background-image: none;
     }
   }
   &.attacking {
-    background-position: 0% 100%;
+    background-position: 33.3333% 50%;
   }
   &.retreating {
-    background-position: 66.666% 100%;
+    background-position: 100% 50%;
   }
   &.attacked {
-    background-position: 100% 100%;
+    background-position: 0% 100%;
   }
   &.airPowerTarget {
-    background-position: 100% 100%;
+    background-position: 0% 100%;
     &::before {
       content: attr(data-air-power-order);
       position: absolute;
@@ -130,18 +133,21 @@
     }
   }
 
-  &.onTheMove::before {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background-image: url('img/hex_border_highlights.png');
-    background-size: 400% 200%;
-    background-position: 0% 0%;
+  &.onTheMove {
+    background-position: 33.3333% 0%;
   }
+  // &.onTheMove::before {
+  //   content: '';
+  //   display: block;
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   bottom: 0;
+  //   right: 0;
+  //   background-image: url('img/hex_border_highlights.png');
+  //   background-size: 400% 200%;
+  //   background-position: 0% 0%;
+  // }
 
   &[data-selected]:not([data-selected='0'])::before {
     content: attr(data-selected);

@@ -124,6 +124,7 @@ trait RetreatUnitTrait
   {
     $player = Players::getActive();
     list($unit, $minFlags, $maxFlags, $effect) = $this->getRetreatInfo();
+    $attack = $this->getCurrentAttack();
     $args = array_merge(Board::getArgsRetreat($unit, $minFlags, $maxFlags), [
       'unitId' => $unit->getId(),
       'min' => $minFlags,
@@ -138,6 +139,8 @@ trait RetreatUnitTrait
       'i18n' => ['desc'],
       'titleSuffix' => $effect . ($minFlags == 0 ? 'skippable' : ''),
       'actionCount' => Globals::getActionCount(),
+      'attackingUnit' => $attack['unitId'],
+      'attackUnits' => $this->argsAttackUnit($attack['player'])['units'],
     ]);
     Utils::clearPaths($args['units'], $clearPaths); // Remove paths, useless for UI
     return $args;

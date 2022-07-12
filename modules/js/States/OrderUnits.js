@@ -130,8 +130,11 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
       Object.keys(args.units).forEach((unitId) => {
         if (excludeUnit == unitId) return;
-        if (args.units[unitId].length == 0) {
+        if (args.units[unitId].length <= 1) {
           $('unit-' + unitId).classList.add('unselectableForMoving');
+          if (args.units[unitId][0].canAttack) {
+            $('unit-' + unitId).classList.add('mayAttack');
+          }
           return;
         }
 
@@ -149,7 +152,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
       // Auto select if a unit was partially moved
       let unitId = args.lastUnitMoved;
-      if (excludeUnit == null && unitId != -1 && args.units[unitId] && args.units[unitId].length > 0) {
+      if (excludeUnit == null && unitId != -1 && args.units[unitId] && args.units[unitId].length > 1) {
         callback(unitId);
       }
     },
@@ -214,6 +217,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           unitId,
           cells: args.units[unitId],
           btn: btn,
+          actionCount: args.actionCount,
         });
       };
       Object.keys(args.units).forEach((unitId) => {
@@ -337,6 +341,19 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       }
 
       $('unit-' + args.unitId).classList.add('retreating');
+      if (args.attackingUnit != -1) {
+        $('unit-' + args.attackingUnit).classList.add('attacking');
+      }
+      Object.keys(args.attackUnits).forEach((unitId) => {
+        if (args.attackingUnit == unitId) return;
+
+        if (args.attackUnits[unitId].length == 0) {
+          $('unit-' + unitId).classList.add('unselectableForAttacking');
+        } else {
+          $('unit-' + unitId).classList.add('mayAttack');
+        }
+      });
+
       if (!this.isCurrentPlayerActive()) return;
 
       args.cells.forEach((cell) => {

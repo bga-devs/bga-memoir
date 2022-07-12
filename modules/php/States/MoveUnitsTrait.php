@@ -139,7 +139,7 @@ trait MoveUnitsTrait
     $player = Players::getActive();
     $args = $this->argsMoveUnits($player);
     foreach ($args['units'] as $unitId => $cells) {
-      if (!empty($cells)) {
+      if (count($cells) > 1) {
         return;
       }
     }

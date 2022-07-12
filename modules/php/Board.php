@@ -223,7 +223,7 @@ class Board
     // Already moved before ?
     $uId = Globals::getUnitMoved();
     if (!$force && ($unit->getMoves() > 0 || $unit->hasUsedRoadBonus()) && $uId != -1 && $uId != $unit->getId()) {
-      return [];
+      return [self::getCurrentPosAttackInfo($unit)];
     }
 
     // Compute remaining moves for the unit
@@ -245,6 +245,17 @@ class Board
     return self::getReachableCellsAtDistance($unit, $m);
   }
 
+  protected static function getCurrentPosAttackInfo($unit)
+  {
+    // Add current pos of unit
+    $startingCell = $unit->getPos();
+    if (!empty(self::getTargetableCells($unit, $startingCell, 0))) {
+      $startingCell['canAttack'] = true;
+    }
+    $startingCell['source'] = true;
+    return $startingCell;
+  }
+
   /**
    * getReachableCellsAtDistance: find all the cells reachable for movements
    *   - $unit : a Unit object, used to compute starting pos and movement costs
@@ -253,7 +264,7 @@ class Board
   public static function getReachableCellsAtDistance($unit, $d)
   {
     if ($unit->isStopped()) {
-      return [];
+      return [self::getCurrentPosAttackInfo($unit)];
     }
 
     $startingCell = $unit->getPos();
@@ -323,16 +334,7 @@ class Board
       }
     }
 
-    // Add current pos of unit
-    if (!empty($cells)) {
-      $startingCell = $unit->getPos();
-      if (!empty(self::getTargetableCells($unit, $startingCell, 0))) {
-        $startingCell['canAttack'] = true;
-      }
-      $startingCell['source'] = true;
-      $cells[] = $startingCell;
-    }
-
+    $cells[] = self::getCurrentPosAttackInfo($unit);
     return $cells;
   }
 
