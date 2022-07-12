@@ -124,6 +124,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         this.clientState('moveUnitsChooseTarget', msg, {
           unitId,
           cells: args.units[unitId],
+          actionCount: args.actionCount,
         });
       };
 
@@ -234,9 +235,15 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       }
 
       if (btn == true) {
-        this.addPrimaryActionButton('btnAttackUnitsDone', _('End all unit attacks'), () =>
-          this.takeAction('actAttackUnitsDone'),
-        );
+        this.addPrimaryActionButton('btnAttackUnitsDone', _('End all unit attacks'), () => {
+          if (nonEmptyUnits.length > 0) {
+            this.confirmationDialog(_('Are you sure you want to want to skip your remaining attacks?'), () => {
+              this.takeAction('actAttackUnitsDone');
+            });
+          } else {
+            this.takeAction('actAttackUnitsDone');
+          }
+        });
       }
 
       // Auto select if a unit was partially moved
