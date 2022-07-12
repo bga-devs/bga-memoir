@@ -143,27 +143,44 @@
       left: 0;
       width: 100%;
       height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
       &.selectable {
         cursor: pointer;
+      }
+      &.forMove,
+      &.forMoveAndAttack,
+      &.forAttack,
+      &.forRetreat {
+        background-image: url('img/hex_background_highlights.png');
+        background-size: 500% 100%;
+        background-position: 0% 0%;
+      }
+      &.forMove {
+        background-position-x: 25%;
+      }
+      &.forAttack {
+        background-position-x: 75%;
+      }
+      &.forRetreat {
+        background-position-x: 50%;
+      }
 
-        &.forMove,
-        &.forMoveAndAttack,
-        &.forAttack,
-        &.forRetreat {
-          background-image: url('img/hex_background_highlights.png');
-          background-size: 500% 100%;
-          background-position: 0% 0%;
-        }
-        &.forMove {
-          background-position-x: 25%;
-        }
-        &.forAttack {
-          background-position-x: 75%;
-        }
-        &.forRetreat {
-          background-position-x: 50%;
-        }
+      .mustStop {
+        width: 26%;
+        height: 36%;
+        background-image: url('img/icons/must-stop.png');
+        background-size: 100%;
+        background-repeat: no-repeat;
+      }
+      .cannotAttack {
+        width: 26%;
+        height: 36%;
+        background-image: url('img/icons/cannot-attack.png');
+        background-size: 100%;
+        background-repeat: no-repeat;
       }
 
       &.attacked,
@@ -445,7 +462,8 @@
     &.summary-token {
       background-position-y: 100%;
 
-      .board-medal, .board-token {
+      .board-medal,
+      .board-token {
         width: 70%;
         height: 52.3%;
 

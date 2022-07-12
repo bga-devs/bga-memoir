@@ -399,6 +399,8 @@ define([
       $('m44-board').classList.remove('displayLineOfSight', 'displayLineOfSightAttack');
       dojo.query('.choice').removeClass('choice');
       dojo.query('.dice-mini').forEach(dojo.destroy);
+      dojo.query('.mustStop').forEach(dojo.destroy);
+      dojo.query('.cannotAttack').forEach(dojo.destroy);
     },
 
     /* This enable to inject translatable styled things to logs or action bar */

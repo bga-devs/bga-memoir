@@ -97,6 +97,10 @@
   }
   &.moving {
     background-position: 33.333% 0%;
+    &.selected {
+      transform: scale(0.8);
+      background-image: none;
+    }
   }
   &.attacking {
     background-position: 0% 100%;

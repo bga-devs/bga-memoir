@@ -315,6 +315,22 @@ class Board
       if (!empty(self::getTargetableCells($unit, $cell, $cell['d']))) {
         $cell['canAttack'] = true;
       }
+      if (self::mustStopWhenEnteringCell($cell, $unit)) {
+        $cell['stop'] = true;
+      }
+      if (self::enteringCannotBattleCell($cell, $unit)) {
+        $cell['noAttack'] = true;
+      }
+    }
+
+    // Add current pos of unit
+    if (!empty($cells)) {
+      $startingCell = $unit->getPos();
+      if (!empty(self::getTargetableCells($unit, $startingCell, 0))) {
+        $startingCell['canAttack'] = true;
+      }
+      $startingCell['source'] = true;
+      $cells[] = $startingCell;
     }
 
     return $cells;

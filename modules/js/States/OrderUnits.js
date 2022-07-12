@@ -154,7 +154,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     },
 
     onEnteringStateMoveUnitsChooseTarget(args) {
-      $('unit-' + args.unitId).classList.add('moving');
+      $('unit-' + args.unitId).classList.add('moving', 'selected');
       args.cells.forEach((cell) => {
         // Mixed can either be a cell or an action (eg removing wire)
         if (cell.type && cell.type == 'action') {
@@ -163,8 +163,17 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           );
         } else {
           let oCell = $(`cell-${cell.x}-${cell.y}`);
-          this.onClick(oCell, () => this.takeAction('actMoveUnit', { unitId: args.unitId, x: cell.x, y: cell.y }));
+          if (!cell.source) {
+            this.onClick(oCell, () => this.takeAction('actMoveUnit', { unitId: args.unitId, x: cell.x, y: cell.y }));
+          }
           oCell.classList.add(cell.canAttack ? 'forMoveAndAttack' : 'forMove');
+
+          if (cell.stop) {
+            dojo.place(`<div class='mustStop'></div>`, oCell);
+          }
+          if (cell.noAttack) {
+            dojo.place(`<div class='cannotAttack'></div>`, oCell);
+          }
         }
       });
 
@@ -176,6 +185,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       debug('Notif: unit is moving', n);
       this.clearPossible();
       $('unit-' + n.args.unitId).classList.add('moving');
+      $('unit-' + n.args.unitId).classList.remove('selected');
       this.slide('unit-' + n.args.unitId, `cell-${n.args.x}-${n.args.y}`, { duration: 580, preserveSize: true });
       this._grid[n.args.x][n.args.y].unit = this._grid[n.args.fromX][n.args.fromY].unit;
       this._grid[n.args.fromX][n.args.fromY].unit = null;

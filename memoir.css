@@ -893,19 +893,34 @@ html {
       top: 0;
       left: 0;
       width: 100%;
-      height: 100%; }
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center; }
       #m44-board .hex-cell-container .hex-cell.selectable {
         cursor: pointer; }
-        #m44-board .hex-cell-container .hex-cell.selectable.forMove, #m44-board .hex-cell-container .hex-cell.selectable.forMoveAndAttack, #m44-board .hex-cell-container .hex-cell.selectable.forAttack, #m44-board .hex-cell-container .hex-cell.selectable.forRetreat {
-          background-image: url("img/hex_background_highlights.png");
-          background-size: 500% 100%;
-          background-position: 0% 0%; }
-        #m44-board .hex-cell-container .hex-cell.selectable.forMove {
-          background-position-x: 25%; }
-        #m44-board .hex-cell-container .hex-cell.selectable.forAttack {
-          background-position-x: 75%; }
-        #m44-board .hex-cell-container .hex-cell.selectable.forRetreat {
-          background-position-x: 50%; }
+      #m44-board .hex-cell-container .hex-cell.forMove, #m44-board .hex-cell-container .hex-cell.forMoveAndAttack, #m44-board .hex-cell-container .hex-cell.forAttack, #m44-board .hex-cell-container .hex-cell.forRetreat {
+        background-image: url("img/hex_background_highlights.png");
+        background-size: 500% 100%;
+        background-position: 0% 0%; }
+      #m44-board .hex-cell-container .hex-cell.forMove {
+        background-position-x: 25%; }
+      #m44-board .hex-cell-container .hex-cell.forAttack {
+        background-position-x: 75%; }
+      #m44-board .hex-cell-container .hex-cell.forRetreat {
+        background-position-x: 50%; }
+      #m44-board .hex-cell-container .hex-cell .mustStop {
+        width: 26%;
+        height: 36%;
+        background-image: url("img/icons/must-stop.png");
+        background-size: 100%;
+        background-repeat: no-repeat; }
+      #m44-board .hex-cell-container .hex-cell .cannotAttack {
+        width: 26%;
+        height: 36%;
+        background-image: url("img/icons/cannot-attack.png");
+        background-size: 100%;
+        background-repeat: no-repeat; }
       #m44-board .hex-cell-container .hex-cell.attacked, #m44-board .hex-cell-container .hex-cell.forAirDrop:hover {
         background-image: url("img/hex_background_highlights.png");
         background-size: 500% 100%;
@@ -1606,13 +1621,16 @@ html {
         color: red; }
     .board-tooltip .summary-card.summary-token {
       background-position-y: 100%; }
-      .board-tooltip .summary-card.summary-token .board-medal, .board-tooltip .summary-card.summary-token .board-token {
+      .board-tooltip .summary-card.summary-token .board-medal,
+      .board-tooltip .summary-card.summary-token .board-token {
         width: 70%;
         height: 52.3%; }
-        .board-tooltip .summary-card.summary-token .board-medal[data-sprite='both'], .board-tooltip .summary-card.summary-token .board-token[data-sprite='both'] {
+        .board-tooltip .summary-card.summary-token .board-medal[data-sprite='both'],
+        .board-tooltip .summary-card.summary-token .board-token[data-sprite='both'] {
           position: relative;
           top: 20%; }
-          .board-tooltip .summary-card.summary-token .board-medal[data-sprite='both']::after, .board-tooltip .summary-card.summary-token .board-token[data-sprite='both']::after {
+          .board-tooltip .summary-card.summary-token .board-medal[data-sprite='both']::after,
+          .board-tooltip .summary-card.summary-token .board-token[data-sprite='both']::after {
             left: 0;
             top: -68%; }
     .board-tooltip .summary-card.summary-unit {
@@ -1864,6 +1882,9 @@ html {
       background-position: 100% 0%; }
   .m44-unit.moving {
     background-position: 33.333% 0%; }
+    .m44-unit.moving.selected {
+      transform: scale(0.8);
+      background-image: none; }
   .m44-unit.attacking {
     background-position: 0% 100%; }
   .m44-unit.retreating {
