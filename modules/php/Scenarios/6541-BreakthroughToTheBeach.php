@@ -1165,30 +1165,6 @@ Reinforcements: As soon as a player reaches 5 medals, he may call reinforcements
 The Axis player lays out the minefields (Terrain 29 - Minefields).
 
 Air rules are not in effect. The Air Sortie cards are set aside and not used in this scenario. In addition, the Axis player cannot use the Air Power card. When drawn, he must immediately discard it and draw a new one.'),
-      'bibliography' => clienttranslate('BADGES
-German elite infantry
-Sniper
-Britsih Commandos
-Flame thrower tanks
-Mobile artillery
-Kieffer Commando
-
-LOGOS
-Breakthrough
-Extra base game
-Terrain Pack
-Pacific Theater
-Mediterranean Theater
-
-- Magazines Historica hors-série n°74 et 75 - Sword Beach.
-- Album Mémorial Overlord - Ed. Heimdal.
-- Carte IGN 1/50000 - Caen.
-- Album Historique - 21. Panzerdivision - Ed. Heimdal.
-
-NOTE: Les règles suivantes ont été mises de côté (en attente de confirmation)
-- Les unités de panzers et les fantassins du I/192. Panzergrenadier ne peuvent pas bouger tant qu\'aucune unité britannique (hormis le 2°OBLI à Pegasus Bridge) n\'a atteint la ligne d\'hexagones Colleville/Morris.
-- Dès que toutes les unités britanniques (hormis les destroyers) ont atteint le rivage, ajouter 6 unités d\'infanterie dont une unité de troupes spéciales (45°RM Cdo) et 2 unités de chars sur les hexagones mer (entre les 2 bateaux de guerre). Il s\'agit des renforts de la 3rd DI britannique qui vont faire la poussée vers Caen.
-- Les unités d\'artillerie allemandes du Wn12 et Morris sont fixes et doivent essuyer une perte plutôt que de se replier en cas de tirage d\'un drapeau aux dés.'),
     ],
   ],
 ];
