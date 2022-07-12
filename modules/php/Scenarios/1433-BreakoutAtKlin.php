@@ -241,6 +241,12 @@ $scenarios[1433] = [
         'tags' => [
           0 => [
             'name' => 'medal2',
+            'group' => ['a4'],
+            'medal' => [
+              'permanent' => false,
+              'counts_for' => 1,
+              'nbr_hex' => 2,
+            ],
           ],
         ],
       ],
@@ -301,11 +307,11 @@ $scenarios[1433] = [
         'terrain' => [
           'name' => 'whillvillage',
         ],
-        'tags' => [
-          0 => [
-            'name' => 'medal2',
-          ],
-        ],
+        // 'tags' => [
+        //   0 => [
+        //     'name' => 'medal2',
+        //   ],
+        // ],
       ],
       29 => [
         'row' => 5,
@@ -472,6 +478,12 @@ $scenarios[1433] = [
         'tags' => [
           0 => [
             'name' => 'medal2',
+            'group' => ['I1'],
+            'medal' => [
+              'permanent' => false,
+              'counts_for' => 1,
+              'nbr_hex' => 2,
+            ],
           ],
         ],
       ],
@@ -482,9 +494,9 @@ $scenarios[1433] = [
           'name' => 'wvillage',
         ],
         'tags' => [
-          0 => [
-            'name' => 'medal2',
-          ],
+          // 0 => [
+          //   'name' => 'medal2',
+          // ],
           1 => [
             'name' => 'tag5',
             'behavior' => 'EXIT_MARKER',
@@ -566,8 +578,7 @@ Russian Player: Take 4 Command cards.
 '),
       'victory' => clienttranslate('6 Medals
 
-The towns of Golyadia and Nekrasino count as a Victory Medal. Place an Objective Medal on each of these hexes. As long as the Axis unit remains on the hex, it continues to count toward the Axis victory. If the unit moves off or is eliminated, it no longer counts.
-
+The Towns of Golyadi (two hexes) and Nekrasino (two hexes) each count as one Victory Medal for the Axis player. Place one Objective Medal on each Town (in between the two hexes would be best). As long as both hexes of a Town are occupied by Axis units, the medal counts as one medal toward an Axis victory. If one or both units move off or one or both units are eliminated, it no longer counts.
 An Axis unit that crosses the frozen river and exits off the Russian side of the battlefield counts as one Victory Medal. The Axis unit is removed from play. Place one figure from this unit onto the Axis medal stand.'),
       'rules' => clienttranslate('The Axis Special Forces tank units have 4 figures. Place a Special Force badge in the same hex with these units to distinguish them from the other units.
 
