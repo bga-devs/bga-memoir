@@ -397,7 +397,7 @@ $machinestates = [
     // 'possibleactions' => ['actRetreat'],
     'args' => 'argsRetreatUnit',
     'action' => 'stRetreatUnit',
-    'possibleactions' => ['actRetreatUnit', 'actRetreatUnitDone'],
+    'possibleactions' => ['actRetreatUnit', 'actRetreatUnitDone', 'actIgnore1Flag'],
     'transitions' => ['takeGround' => ST_ATTACK_THROW, 'retreat' => ST_AMBUSH_RESOLVE], // to default go to attack resolution
   ],
 
