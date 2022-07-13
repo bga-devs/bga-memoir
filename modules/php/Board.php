@@ -674,7 +674,7 @@ class Board
     });
 
     // Add special actions that can replace attacks
-    if (is_null($moves)) {
+    if (is_null($moves) && !$banzai) {
       foreach (self::getTerrainsInCell($pos) as $terrain) {
         $actions = $terrain->getPossibleAttackActions($unit);
         foreach ($actions as $action) {
