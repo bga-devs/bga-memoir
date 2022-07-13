@@ -185,6 +185,12 @@ trait OrderUnitsTrait
       return;
     }
 
+    $desertMove = $this->gamestate->state()['name'] == 'desertMove' ? true : false;
+    if ($desertMove) {
+      // we need to close current attack as the unit exited
+      $this->closeCurrentAttack();
+      return;
+    }
     $this->nextState('moveUnits');
   }
 }
