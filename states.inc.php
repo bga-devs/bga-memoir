@@ -100,6 +100,7 @@ $machinestates = [
     'descriptionmyturn' => '',
     'type' => 'game',
     'action' => 'stPrepareTurn',
+    'updateGameProgression' => true,
     'transitions' => ['playCard' => ST_PLAY_CARD, 'commissar' => ST_COMMISSAR],
   ],
 
