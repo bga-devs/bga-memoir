@@ -415,6 +415,13 @@ define([
           if (args.dice_result !== undefined) {
             args.dice_face = `<span class='m44-dice-result' data-result='${args.dice_result}'></span>`;
           }
+
+          if(args.coordSource){
+            args.coordSource = `<span class='log-coordinate'>${args.coordSource}</span>`;
+          }
+          if(args.coordTarget){
+            args.coordTarget = `<span class='log-coordinate'>${args.coordTarget}</span>`;
+          }
         }
       } catch (e) {
         console.error(log, args, 'Exception thrown', e.stack);
