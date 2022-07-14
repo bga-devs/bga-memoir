@@ -95,7 +95,7 @@ trait AmbushTrait
     $cells = $unit->getTargetableUnits();
     $k = Utils::searchCell($cells, $ambushedUnit->getX(), $ambushedUnit->getY());
     if ($k === false) {
-      throw new \BgaVisibleSystemException('Issue in ambush. Should not happen');
+      throw new \BgaVisibleSystemException(clienttranslate('You cannot ambush the unit, not enough attack power'));
     }
     $target = $cells[$k];
 
