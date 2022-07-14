@@ -14,6 +14,7 @@ class FieldBunker extends Bunker
     parent::__construct($row);
     $this->name = clienttranslate('Field bunkers');
     $this->number = 22;
+    $this->desc = [clienttranslate('Protect any occupant'), clienttranslate('Bunkers have 360° arc of fire')];
   }
 
   public function isOriginalOwner($unit)
