@@ -114,7 +114,7 @@ $scenarios[1409] = [
         'row' => 1,
         'col' => 9,
         'terrain' => [
-          'name' => 'hills',
+          'name' => 'whill',
         ],
       ],
       9 => [
@@ -184,7 +184,7 @@ $scenarios[1409] = [
         'row' => 2,
         'col' => 8,
         'terrain' => [
-          'name' => 'hills',
+          'name' => 'whill',
         ],
       ],
       18 => [
@@ -199,7 +199,7 @@ $scenarios[1409] = [
         'row' => 2,
         'col' => 18,
         'terrain' => [
-          'name' => 'hills',
+          'name' => 'whill',
         ],
       ],
       20 => [
@@ -214,7 +214,7 @@ $scenarios[1409] = [
         'row' => 3,
         'col' => 15,
         'terrain' => [
-          'name' => 'hills',
+          'name' => 'whill',
         ],
       ],
       22 => [
@@ -228,7 +228,7 @@ $scenarios[1409] = [
         'row' => 3,
         'col' => 21,
         'terrain' => [
-          'name' => 'hills',
+          'name' => 'whill',
         ],
       ],
       24 => [
@@ -476,7 +476,7 @@ $scenarios[1409] = [
         'row' => 7,
         'col' => 13,
         'terrain' => [
-          'name' => 'hills',
+          'name' => 'whill',
         ],
       ],
       51 => [
@@ -544,7 +544,7 @@ $scenarios[1409] = [
         'row' => 8,
         'col' => 18,
         'terrain' => [
-          'name' => 'hills',
+          'name' => 'whill',
         ],
       ],
       60 => [
