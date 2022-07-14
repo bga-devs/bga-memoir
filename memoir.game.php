@@ -134,7 +134,14 @@ class memoir extends Table
    */
   function getGameProgression()
   {
-    return 50; // TODO
+    $progression = 0;
+    foreach (Teams::getAll() as $team) {
+      $progression = max(round(($team->getMedals()->count() / $team->getNVictory()) * 100), $progression);
+    }
+    if (Globals::getDuration() == OPTION_DURATION_TWO_WAYS && Globals::getRound() == 1) {
+      $progression = intdiv($progression, 2);
+    }
+    return $progression;
   }
 
   function startGame($c)

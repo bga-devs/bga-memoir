@@ -100,6 +100,7 @@ $machinestates = [
     'descriptionmyturn' => '',
     'type' => 'game',
     'action' => 'stPrepareTurn',
+    'updateGameProgression' => true,
     'transitions' => ['playCard' => ST_PLAY_CARD, 'commissar' => ST_COMMISSAR],
   ],
 
@@ -333,9 +334,10 @@ $machinestates = [
     'type' => 'activeplayer',
     'args' => 'argsDesertMove',
     'action' => 'stDesertMove',
-    'possibleactions' => ['actMoveUnit', 'actMoveUnitsDone'],
+    'possibleactions' => ['actMoveUnit', 'actMoveUnitsDone', 'actExitUnit'],
     'transitions' => [
       'overrun' => ST_ARMOR_OVERRUN,
+      'nextAttack' => ST_ATTACK_THROW,
     ],
   ],
 
@@ -379,16 +381,24 @@ $machinestates = [
     'descriptionmyturn' => clienttranslate('${you} must retreat the unit ${min} hex(es) ${desc} (Ambush effect)'),
     'descriptionskippable' => clienttranslate('${actplayer} may retreat the unit up to ${max} hex(es) (Ambush effect)'),
     'descriptionmyturnskippable' => clienttranslate('${you} may retreat the unit up to ${max} hex(es) (Ambush effect)'),
-    'descriptionbattleBack' => clienttranslate('${actplayer} must retreat the unit ${min} hex(es) ${desc} (Battle back effect)'),
-    'descriptionmyturnbattleBack' => clienttranslate('${you} must retreat the unit ${min} hex(es) ${desc} (Battle back effect)'),
-    'descriptionbattleBackskippable' => clienttranslate('${actplayer} may retreat the unit up to ${max} hex(es) (Battle back effect)'),
-    'descriptionmyturnbattleBackskippable' => clienttranslate('${you} may retreat the unit up to ${max} hex(es) (Battle back effect)'),
+    'descriptionbattleBack' => clienttranslate(
+      '${actplayer} must retreat the unit ${min} hex(es) ${desc} (Battle back effect)'
+    ),
+    'descriptionmyturnbattleBack' => clienttranslate(
+      '${you} must retreat the unit ${min} hex(es) ${desc} (Battle back effect)'
+    ),
+    'descriptionbattleBackskippable' => clienttranslate(
+      '${actplayer} may retreat the unit up to ${max} hex(es) (Battle back effect)'
+    ),
+    'descriptionmyturnbattleBackskippable' => clienttranslate(
+      '${you} may retreat the unit up to ${max} hex(es) (Battle back effect)'
+    ),
     'type' => 'activeplayer',
     // 'args' => 'argsAmbushResolve',
     // 'possibleactions' => ['actRetreat'],
     'args' => 'argsRetreatUnit',
     'action' => 'stRetreatUnit',
-    'possibleactions' => ['actRetreatUnit', 'actRetreatUnitDone'],
+    'possibleactions' => ['actRetreatUnit', 'actRetreatUnitDone', 'actIgnore1Flag'],
     'transitions' => ['takeGround' => ST_ATTACK_THROW, 'retreat' => ST_AMBUSH_RESOLVE], // to default go to attack resolution
   ],
 
@@ -499,8 +509,6 @@ $machinestates = [
       'counterAttack' => ST_COUNTER_ATTACK,
     ],
   ],
-
-
 
   // Medics BT
   ST_MEDICS_BT_ROLL => [

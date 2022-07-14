@@ -14,12 +14,6 @@ class RailStation extends Village
 
     $this->name = clienttranslate('Railroad station');
     $this->number = 39;
-    $this->desc = [
-      clienttranslate('Unit moving in must stop and may move no further on that turn'),
-      clienttranslate('Unit moving in cannot battle'),
-      clienttranslate('Armor battles out at -2 dice'),
-      clienttranslate('Block line of sight'),
-    ];
 
     $this->mustStopWhenEntering = true;
     $this->enteringCannotBattle = true;
