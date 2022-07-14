@@ -43,13 +43,24 @@ trait AirDropTrait
       $pos = Board::randomWalk(['x' => $x, 'y' => $y], $options['range']);
       $unit = Units::addInCell($options['unit'], $pos);
 
+      $fails = 0;
       if (is_null($pos) || Board::isImpassable($unit, $pos) || Board::getUnitInCell($pos) !== null) {
         // Unsafed landing => remove unit
         Units::remove($unit->getId());
+        $fails++;
       } else {
         // Notify about it
         Board::addUnit($unit);
         Notifications::airDrop($player, $unit);
+      }
+
+      if ($fails > 0) {
+        Notifications::message(
+          \clienttranslate('${player_name} unsuccessfully air drop ${n} unit(s)', [
+            'player' => $player,
+            'n' => $fails,
+          ])
+        );
       }
     }
 

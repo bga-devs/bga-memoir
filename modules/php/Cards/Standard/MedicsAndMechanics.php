@@ -61,8 +61,6 @@ class MedicsAndMechanics extends \M44\Models\Card
   public function actTargetMedics($unitIds)
   {
     $player = $this->getPlayer();
-    // check that Ids are ennemy
-    // throw new \feException(print_r($unitIds));
     $args = $this->argsTargetMedics();
     foreach ($unitIds as $unitId) {
       if (!in_array($unitId, $args['units']->getIds())) {
