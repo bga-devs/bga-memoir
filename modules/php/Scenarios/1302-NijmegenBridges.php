@@ -413,6 +413,7 @@ $scenarios[1302] = [
         'col' => 1,
         'unit' => [
           'name' => 'infus',
+          'equipment' => 'boat',
         ],
         'tags' => [
           0 => [
@@ -425,6 +426,7 @@ $scenarios[1302] = [
         'col' => 3,
         'unit' => [
           'name' => 'infus',
+          'equipment' => 'boat',
         ],
         'tags' => [
           0 => [
@@ -437,6 +439,7 @@ $scenarios[1302] = [
         'col' => 5,
         'unit' => [
           'name' => 'infus',
+          'equipment' => 'boat',
         ],
         'tags' => [
           0 => [
@@ -620,7 +623,7 @@ You move first.
       'victory' => clienttranslate('6 Medals
 
 An Allied unit that captures a bridge hex counts as one Victory Medal. Place an Objective Medal on each Bridge hex. As long as the Allied unit remains on the hex, it continues to count toward the Allied victory. If the unit moves off or is eliminated, it no longer counts.'),
-      'rules' => clienttranslate('The three Allied Infantry units on the left flank have collapsible, flat-bottom boats. Place a Battle Star token in the same hex with these units to distinguish them from the other units. See p. 8 to learn about Collapsible Boats.
+      'rules' => clienttranslate('The three Allied Infantry units on the left flank have collapsible, flat-bottom boats. A unit that enters a river hex must stop and may move no further on that turn. When on a river hex, reduce the number of battle dice the unit rolls by 1. A flag rolled against a unit in a boat on a river hex causes a loss of one figure instead of a retreat. Once the unit crosses the river, remove the unit’s Battle Star token; the unit has abandoned its boat, and may now no longer move onto a river hex..
 
 See p. 13 to learn how to use the Big Guns.'),
     ],

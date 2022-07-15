@@ -70,6 +70,7 @@ class Terrain extends \M44\Helpers\DB_Model
     'isMountain',
     'isRoad',
     'isCave',
+    'isRiver',
 
     'defense',
     'offense',
@@ -174,7 +175,7 @@ class Terrain extends \M44\Helpers\DB_Model
     Notifications::removeTerrain($this);
   }
 
-  public function onUnitLeaving($unit, $isRetreat)
+  public function onUnitLeaving($unit, $isRetreat, $cell)
   {
   }
 

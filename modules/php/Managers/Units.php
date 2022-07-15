@@ -177,6 +177,10 @@ class Units extends \M44\Helpers\Pieces
         $data['extra_datas']['properties']['maxUnits'] = $hex['unit']['nbr_units'];
       }
 
+      if (isset($hex['unit']['equipment'])) {
+        $data['extra_datas']['equipment'] = $hex['unit']['equipment'];
+      }
+
       if (
         $unit->getType() == ARMOR &&
         ((in_array($data['nation'], self::$nations[ALLIES]) && ($isPartialBlitz == ALLIES || $isBlitz)) ||

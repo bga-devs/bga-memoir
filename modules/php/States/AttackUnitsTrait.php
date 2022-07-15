@@ -262,7 +262,12 @@ trait AttackUnitsTrait
     }
 
     // Handle retreat
-    if (isset($results[DICE_FLAG]) && !$eliminated) {
+    if (
+      isset($results[DICE_FLAG]) &&
+      !$eliminated &&
+      // unit is not on a boat on a river
+      ($oppUnit->getEquipment() != 'boat' || !Board::isRiverCell($oppUnit->getPos()))
+    ) {
       $this->initRetreat($attack, $results);
       $this->nextState('retreat', $oppUnit->getPlayer());
     } elseif (
@@ -530,7 +535,12 @@ trait AttackUnitsTrait
       'effect' => 'battleBack',
     ];
 
-    if (isset($results[DICE_FLAG]) && !$eliminated) {
+    if (
+      isset($results[DICE_FLAG]) &&
+      !$eliminated &&
+      // unit is not on a boat on a river
+      ($oppUnit->getEquipment() != 'boat' || !Board::isRiverCell($oppUnit->getPos()))
+    ) {
       $this->initRetreat($attack, $results);
       $this->nextState('retreat', $oppPlayer);
     } else {

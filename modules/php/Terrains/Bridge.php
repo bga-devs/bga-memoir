@@ -1,5 +1,6 @@
 <?php
 namespace M44\Terrains;
+use M44\Board;
 
 class Bridge extends \M44\Models\Terrain
 {
@@ -17,5 +18,15 @@ class Bridge extends \M44\Models\Terrain
     $this->deltaAngle = -1;
 
     parent::__construct($row);
+  }
+
+  public function isImpassable($unit)
+  {
+    // Unit coming from a river cannot cross as it is on a boat
+    if (Board::isRiverCell($unit->getPos())) {
+      return true;
+    }
+
+    return false;
   }
 }

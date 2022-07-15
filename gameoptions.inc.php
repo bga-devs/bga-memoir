@@ -198,12 +198,13 @@ $game_options = [
         'description' => clienttranslate('Saverne Gap'),
         'premium' => true,
       ],
-      // 1302 => [
-      //   'name' => clienttranslate('[TP] [1302] Nijmegen Bridges'),
-      //   'tmdisplay' => '[1302]',
-      //   'description' => clienttranslate('Nijmegen Bridges'),
-      //   'premium' => true,
-      // ],
+      1302 => [
+        'name' => clienttranslate('[TP] [1302] Nijmegen Bridges'),
+        'tmdisplay' => '[1302]',
+        'description' => clienttranslate('Nijmegen Bridges'),
+        'premium' => true,
+        'alpha' => true,
+      ],
       // 1311 => [
       //   'name' => clienttranslate('[EF] [1311] Bug River'),
       //   'tmdisplay' => '[1311]',

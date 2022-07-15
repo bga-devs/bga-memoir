@@ -842,6 +842,12 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         );
       }
 
+      if (unitData.equipment != false) {
+        if (unitData.equipment == 'boat') {
+          desc.push(`<li>${_('has boat. Can cross the river once')}</li>`);
+        }
+      }
+
       // Remove letter in number (used for bis/ter for some terrains)
       let number = String(unitData.number).replace(/\D/g, '');
 

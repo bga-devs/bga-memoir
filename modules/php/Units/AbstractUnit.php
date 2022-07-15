@@ -120,6 +120,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
       'badge' => $this->badge,
       'activationCard' => $this->activationCard,
       'onTheMove' => $this->extraDatas['onTheMove'] ?? false,
+      'equipment' => $this->extraDatas['equipment'] ?? false,
     ];
   }
 
@@ -226,6 +227,11 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
   public function cannotBattle()
   {
     return $this->getExtraDatas('cannotBattle') || $this->isOnTheMove();
+  }
+
+  public function getEquipment()
+  {
+    return $this->getExtraDatas('equipment') ?? false;
   }
 
   public function isCamouflaged()

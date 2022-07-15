@@ -16,6 +16,7 @@ class River extends \M44\Models\Terrain
     $this->number = 8;
     $this->desc = [\clienttranslate('Impassable, except over bridges')];
     $this->isImpassable = -1;
+    $this->isRiver = true;
 
     parent::__construct($row);
   }
@@ -25,6 +26,31 @@ class River extends \M44\Models\Terrain
     if (Board::isBridgeCell(['x' => $this->x, 'y' => $this->y])) {
       return false;
     }
+    // boat management
+    if ($unit->getEquipment() == 'boat') {
+      return false;
+    }
+
     return true;
+  }
+
+  public function mustStopWhenEntering($unit)
+  {
+    if (Board::isBridgeCell(['x' => $this->x, 'y' => $this->y])) {
+      return false;
+    }
+    if (Board::isRiverCell($unit->getPos())) {
+      return false;
+    }
+
+    return true;
+  }
+
+  public function onUnitLeaving($unit, $isRetreat, $cell)
+  {
+    if (!Board::isRiverCell($cell) && $unit->getEquipment() == 'boat') {
+      $unit->setExtraDatas('equipment', false);
+      // Notifications::remove
+    }
   }
 }
