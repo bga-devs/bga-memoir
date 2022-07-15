@@ -144,7 +144,7 @@ class Units extends \M44\Helpers\Pieces
     $isBlitz = $scenario['game_info']['options']['blitz_rules'] ?? false;
     $isItalyRoyalArmy = Globals::isItalyRoyalArmy();
     $isPartialBlitz = $scenario['game_info']['options']['partial_blitz_rules'] ?? ''; // Affect only armor movement
-    $terrainUnits = ['pdestroyer'];
+    $terrainUnits = ['pdestroyer', 'loco', 'wagon'];
 
     foreach ($board['hexagons'] as &$hex) {
       $data = null;

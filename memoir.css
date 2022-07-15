@@ -2715,23 +2715,167 @@ html {
   content: '';
   display: block;
   position: absolute;
+  z-index: -1;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-image: url("img/board_obstacles.png");
-  background-size: 600% 500%;
-  background-position-x: 60%;
-  background-position-y: 50%; }
+  background-size: 600% 500%; }
 .m44-unit[data-type='5'] .m44-unit-meeple {
+  display: none;
   background: url("img/tokens.png");
   background-size: 300% 400%; }
-.m44-unit[data-type='5'][data-figures='3'] .m44-unit-meeple {
-  display: none; }
-.m44-unit[data-type='5'][data-figures='2'] .m44-unit-meeple ~ .m44-unit-meeple {
-  display: none; }
-.m44-unit[data-type='5'][data-figures='1'] .m44-unit-meeple:nth-of-type(3) {
-  display: none; }
+.m44-unit[data-type='5'][data-rotation='1']::after {
+  transform: rotate(30deg); }
+.m44-unit[data-type='5'][data-rotation='2']::after {
+  transform: rotate(60deg); }
+.m44-unit[data-type='5'][data-rotation='3']::after {
+  transform: rotate(90deg); }
+.m44-unit[data-type='5'][data-rotation='4']::after {
+  transform: rotate(120deg); }
+.m44-unit[data-type='5'][data-rotation='5']::after {
+  transform: rotate(150deg); }
+.m44-unit[data-type='5'][data-rotation='6']::after {
+  transform: rotate(180deg); }
+.m44-unit[data-type='5'][data-rotation='7']::after {
+  transform: rotate(210deg); }
+.m44-unit[data-type='5'][data-rotation='8']::after {
+  transform: rotate(240deg); }
+.m44-unit[data-type='5'][data-rotation='9']::after {
+  transform: rotate(270deg); }
+.m44-unit[data-type='5'][data-rotation='10']::after {
+  transform: rotate(300deg); }
+.m44-unit[data-type='5'][data-rotation='11']::after {
+  transform: rotate(330deg); }
+.m44-unit[data-type='5'][data-rotation='12']::after {
+  transform: rotate(360deg); }
+
+.m44-unit[data-type='6']::after {
+  content: '';
+  display: block;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("img/board_obstacles.png");
+  background-size: 600% 500%; }
+.m44-unit[data-type='6'] .m44-unit-meeple {
+  display: none;
+  background: url("img/tokens.png");
+  background-size: 300% 400%; }
+.m44-unit[data-type='6'][data-rotation='1']::after {
+  transform: rotate(30deg); }
+.m44-unit[data-type='6'][data-rotation='2']::after {
+  transform: rotate(60deg); }
+.m44-unit[data-type='6'][data-rotation='3']::after {
+  transform: rotate(90deg); }
+.m44-unit[data-type='6'][data-rotation='4']::after {
+  transform: rotate(120deg); }
+.m44-unit[data-type='6'][data-rotation='5']::after {
+  transform: rotate(150deg); }
+.m44-unit[data-type='6'][data-rotation='6']::after {
+  transform: rotate(180deg); }
+.m44-unit[data-type='6'][data-rotation='7']::after {
+  transform: rotate(210deg); }
+.m44-unit[data-type='6'][data-rotation='8']::after {
+  transform: rotate(240deg); }
+.m44-unit[data-type='6'][data-rotation='9']::after {
+  transform: rotate(270deg); }
+.m44-unit[data-type='6'][data-rotation='10']::after {
+  transform: rotate(300deg); }
+.m44-unit[data-type='6'][data-rotation='11']::after {
+  transform: rotate(330deg); }
+.m44-unit[data-type='6'][data-rotation='12']::after {
+  transform: rotate(360deg); }
+
+.m44-unit[data-type='7']::after {
+  content: '';
+  display: block;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("img/board_obstacles.png");
+  background-size: 600% 500%; }
+.m44-unit[data-type='7'] .m44-unit-meeple {
+  display: none;
+  background: url("img/tokens.png");
+  background-size: 300% 400%; }
+.m44-unit[data-type='7'][data-rotation='1']::after {
+  transform: rotate(30deg); }
+.m44-unit[data-type='7'][data-rotation='2']::after {
+  transform: rotate(60deg); }
+.m44-unit[data-type='7'][data-rotation='3']::after {
+  transform: rotate(90deg); }
+.m44-unit[data-type='7'][data-rotation='4']::after {
+  transform: rotate(120deg); }
+.m44-unit[data-type='7'][data-rotation='5']::after {
+  transform: rotate(150deg); }
+.m44-unit[data-type='7'][data-rotation='6']::after {
+  transform: rotate(180deg); }
+.m44-unit[data-type='7'][data-rotation='7']::after {
+  transform: rotate(210deg); }
+.m44-unit[data-type='7'][data-rotation='8']::after {
+  transform: rotate(240deg); }
+.m44-unit[data-type='7'][data-rotation='9']::after {
+  transform: rotate(270deg); }
+.m44-unit[data-type='7'][data-rotation='10']::after {
+  transform: rotate(300deg); }
+.m44-unit[data-type='7'][data-rotation='11']::after {
+  transform: rotate(330deg); }
+.m44-unit[data-type='7'][data-rotation='12']::after {
+  transform: rotate(360deg); }
+
+.m44-unit[data-type='5']::after {
+  background-position-x: 60%;
+  background-position-y: 50%; }
+
+.m44-unit[data-type='6']::after {
+  background-position-x: 100%;
+  background-position-y: 25%; }
+
+.m44-unit[data-type='7']::after {
+  background-position-x: 40%;
+  background-position-y: 75%; }
+
+.m44-unit[data-type='5'][data-figures='0'] .m44-unit-meeple:nth-child(1) {
+  display: block; }
+.m44-unit[data-type='5'][data-figures='0'] .m44-unit-meeple:nth-child(2) {
+  display: block; }
+.m44-unit[data-type='5'][data-figures='0'] .m44-unit-meeple:nth-child(3) {
+  display: block; }
+.m44-unit[data-type='5'][data-figures='1'] .m44-unit-meeple:nth-child(1) {
+  display: block; }
+.m44-unit[data-type='5'][data-figures='1'] .m44-unit-meeple:nth-child(2) {
+  display: block; }
+.m44-unit[data-type='5'][data-figures='2'] .m44-unit-meeple:nth-child(1) {
+  display: block; }
+
+.m44-unit[data-type='6'][data-figures='0'] .m44-unit-meeple:nth-child(1) {
+  display: block; }
+.m44-unit[data-type='6'][data-figures='0'] .m44-unit-meeple:nth-child(2) {
+  display: block; }
+.m44-unit[data-type='6'][data-figures='0'] .m44-unit-meeple:nth-child(3) {
+  display: block; }
+.m44-unit[data-type='6'][data-figures='0'] .m44-unit-meeple:nth-child(4) {
+  display: block; }
+.m44-unit[data-type='6'][data-figures='1'] .m44-unit-meeple:nth-child(1) {
+  display: block; }
+.m44-unit[data-type='6'][data-figures='1'] .m44-unit-meeple:nth-child(2) {
+  display: block; }
+.m44-unit[data-type='6'][data-figures='1'] .m44-unit-meeple:nth-child(3) {
+  display: block; }
+.m44-unit[data-type='6'][data-figures='2'] .m44-unit-meeple:nth-child(1) {
+  display: block; }
+.m44-unit[data-type='6'][data-figures='2'] .m44-unit-meeple:nth-child(2) {
+  display: block; }
+.m44-unit[data-type='6'][data-figures='3'] .m44-unit-meeple:nth-child(1) {
+  display: block; }
 
 [data-bottom-team='AXIS'] [data-opponent-units='0'] .hex-cell .m44-unit[data-nation='us'], [data-bottom-team='AXIS'] [data-opponent-units='0'] .hex-cell .m44-unit[data-nation='ru'], [data-bottom-team='AXIS'] [data-opponent-units='0'] .hex-cell .m44-unit[data-nation='brit'] {
   display: none; }

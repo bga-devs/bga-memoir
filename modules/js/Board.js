@@ -11,7 +11,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
   // prettier-ignore
   const OBSTACLES = ['abatis','barge','bridge','brkbridge','bunker','casemate','dbunker','dragonteeth','droadblock','ford','hedgehog','loco','pbridge','pbunker','pcarrier','pdestroyer','pontoon','railbridge','roadblock','sand','wagon','wbridge','wbunker','wire','wpontoon','wrailbridge','wroadblock'];
   // prettier-ignore
-  const OBSTACLES_ROTATION = { bunker: 180,wbunker : 180,dbunker : 180,ford : 60,roadblock : 60,droadblock : 60,wroadblock : 60,pontoon : -30,wpontoon : -30,dragonteeth : 60,railbridge : -60,wrailbridge : -60,bridge : -30,pbridge : -30,brkbridge : -30,wbridge : -30,wagon : -60,loco : 60,abatis : 60,wire : 180,sand : 180};
+  const OBSTACLES_ROTATION = { bunker: 180,wbunker : 180,dbunker : 180,ford : 60,roadblock : 60,droadblock : 60,wroadblock : 60,pontoon : -30,wpontoon : -30,dragonteeth : 60,railbridge : -60,wrailbridge : -60,bridge : -30,pbridge : -30,brkbridge : -30,wbridge : -30,abatis : 60,wire : 180,sand : 180};
+  // prettier-ignore
+  const UNITS_ROTATION = { 7 : -60, 6 : 60};
 
   const ALLIES_NATIONS = ['brit', 'us', 'ru'];
 
@@ -128,7 +130,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
           let unit = board.grid[col][row].unit;
           if (unit) {
-            unit.orientation = this._bottomTeam != (ALLIES_NATIONS.includes(unit.nation) ? 'ALLIES' : 'AXIS') ? 1 : 0;
+            unit.rotate = rotate;
             this._grid[col][row].unit = unit;
             this.place('tplUnit', unit, `cell-${col}-${y}`);
           }
@@ -834,11 +836,24 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       if (unit.activationCard > 0 && !tooltip) classNames.push('activated');
       if (unit.onTheMove && !tooltip) classNames.push('onTheMove');
 
+      const RECT_UNITS = [5, 6, 7];
+      unit.orientation = unit.rotate? 1 : 0;
+      let rotation = 0;
+      if(RECT_UNITS.includes(parseInt(unit.type))){
+        rotation = unit.rotate ? 6 : 0;
+        if (unit.orientation != 1) {
+          let angle = UNITS_ROTATION[unit.type] / -30;
+          rotation += (unit.orientation - 1) * angle + 12;
+        }
+        rotation = rotation % 12;
+      }
+
+
       return `
       <div id="unit-${unit.id}${tooltip ? '-tooltip' : ''}" class="m44-unit ${classNames.join(' ')}"
         data-figures="${tooltip ? 1 : unit.figures}"
         data-type="${unit.type}" data-nation="${unit.nation}" data-orientation="${unit.orientation}"
-        data-badge="${unit.badge}">
+        data-badge="${unit.badge}" data-rotation="${rotation}">
         <div class='m44-meeples-container'>
           <div class="m44-unit-meeple"></div>
           <div class="m44-unit-meeple"></div>

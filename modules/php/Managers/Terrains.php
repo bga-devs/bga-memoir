@@ -93,7 +93,7 @@ class Terrains extends \M44\Helpers\Pieces
           $terrain = $hex[$key];
           $type = self::getTypeOfTile($terrain);
           if ($type == '') {
-            if($terrain['name'] == 'pdestroyer'){
+            if (in_array($terrain['name'], ['pdestroyer', 'loco', 'wagon'])) {
               continue; // It's a unit, not a terrain...
             }
             throw new \BgaVisibleSystemException('Unsupported terrains' . \var_export($terrain, true));
@@ -191,20 +191,23 @@ class Terrains extends \M44\Helpers\Pieces
     // Handle beaches
     if ($board['face'] == 'BEACH') {
       foreach (Board::getListOfCells() as $cell) {
-        $map = $board['type'] == BREAKTHROUGH_DECK ? [
-          11 => 2,
-          12 => 4,
-          13 => 6,
-          14 => 25,
-          15 => 27,
-          16 => 27,
-        ] : [
-          4 => 2,
-          5 => 4,
-          6 => 6,
-          7 => 25,
-          8 => 27,
-        ];
+        $map =
+          $board['type'] == BREAKTHROUGH_DECK
+            ? [
+              11 => 2,
+              12 => 4,
+              13 => 6,
+              14 => 25,
+              15 => 27,
+              16 => 27,
+            ]
+            : [
+              4 => 2,
+              5 => 4,
+              6 => 6,
+              7 => 25,
+              8 => 27,
+            ];
         $tile = $map[$cell['y']] ?? null;
 
         if ($tile != null) {

@@ -173,6 +173,8 @@ const ARTILLERY = 3;
 const ALL_UNITS = 4;
 
 const DESTROYER = 5;
+const LOCOMOTIVE = 6;
+const WAGON = 7;
 
 /*
  * Medals / Tokens
@@ -275,6 +277,8 @@ const TROOP_CLASSES = [
   'tank' => 'Armor',
   'gun' => 'Artillery',
   'pdestroyer' => 'Destroyer',
+  'loco' => 'Locomotive',
+  'wagon' => 'Wagon',
   // type + badge number if non decorative
   'inf2_3' => 'FrenchResistance',
   'gun_5' => 'BigGun',
