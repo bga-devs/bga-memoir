@@ -140,13 +140,20 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
           // Add tooltip listeners
           cell.addEventListener('mouseenter', (evt) => {
-            if (this._summaryCardsBehavior == 1) {
+            if (this._summaryHover == 1) {
               this.openBoardTooltip(col, row, evt.clientX);
             }
           });
           cell.addEventListener('mouseleave', () => {
-            if (this._summaryCardsBehavior == 1) {
+            if (this._summaryHover == 1) {
               this.closeBoardTooltip(col, row);
+            }
+          });
+          cell.addEventListener('click', (evt) => {
+            if (this._summaryClick == 1 && this.openBoardTooltipModal(col, row)) {
+              evt.stopPropagation();
+              evt.stopImmediatePropagation();
+              return false;
             }
           });
         }
@@ -177,22 +184,28 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           labels: _('Show/hide map labels'),
           coords: _('Show/hide coordinate helpers'),
           ownUnits: _('Show/hide my units'),
+          summaryHover: _('Enable/disable summary cards when hover on hexes'),
+          summaryClick: _(
+            "Enable/disable summary cards when cliking on a hex. Warning: enabling this implies you won't be able to click on your units, don't forget to disable it once you are done examinating the board.",
+          ),
         };
 
         ['opponentUnits', 'terrains', 'tokens', 'labels', 'coords', 'ownUnits'].forEach((layer) => {
-          this.toggleLayerVisibility(layer, this.getConfig('m44' + layer, 1));
-          dojo.connect($(`m44-${layer}-settings`), 'click', () => this.toggleLayerVisibility(layer));
+          let name = '_' + layer + 'Visibility';
+          this.toggleSettings(layer, name, this.getConfig('m44' + layer, 1));
+          dojo.connect($(`m44-${layer}-settings`), 'click', () => this.toggleSettings(layer, name));
           this.addTooltip(`m44-${layer}-settings`, '', buttonsTooltips[layer]);
         });
 
-        this._summaryCardsBehavior = this.getConfig('m44summaryCards', this.isMobile() ? 2 : 1);
-        $('m44-board-wrapper').dataset.summary = this._summaryCardsBehavior;
-        dojo.connect($('m44-summary-settings'), 'click', () => this.changeSummaryCardsBehavior());
-        this.addTooltip(
-          `m44-summary-settings`,
-          '',
-          _('Enable/disable summary cards display when hovering/clicking the board cells'),
-        );
+        ['summaryHover', 'summaryClick'].forEach((setting) => {
+          let name = '_' + setting;
+          this.toggleSettings(setting, name, this.getConfig('m44' + setting, setting == 'summaryClick' ? 0 : 1));
+          dojo.connect($(`m44-${setting}-settings`), 'click', () => this.toggleSettings(setting, name));
+          this.addTooltip(`m44-${setting}-settings`, '', buttonsTooltips[setting]);
+        });
+
+        dojo.connect($('m44-summary-settings-showAll'), 'click', () => this.openAllTooltipModal());
+        this.addTooltip('m44-summary-settings-showAll', '', _('Show all the summary cards relevant to this scenario'));
 
         dojo.connect($('m44-react-settings'), 'click', () => {
           this.setPreferenceValue(150, 1 - this.prefs[150].value);
@@ -210,30 +223,15 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       cells.forEach((cell) => cell.classList.remove(className));
     },
 
-    toggleLayerVisibility(layer, value = null) {
-      let name = '_' + layer + 'Visibility';
+    toggleSettings(attribute, name, value = null) {
       if (value == null) {
         this[name] = 1 - this[name];
       } else {
         this[name] = value;
       }
 
-      $('m44-board-wrapper').dataset[layer] = this[name];
-      localStorage.setItem('m44' + layer, this[name]);
-    },
-
-    changeSummaryCardsBehavior() {
-      let val = parseInt(this._summaryCardsBehavior + 1) % 3;
-      this._summaryCardsBehavior = val;
-      $('m44-board-wrapper').dataset.summary = val;
-      localStorage.setItem('m44summaryCards', val);
-
-      if (val == 1 && this.isMobile()) {
-        this.changeSummaryCardsBehavior();
-      }
-      if (val == 2 && !this.isMobile()) {
-        this.changeSummaryCardsBehavior();
-      }
+      $('m44-board-wrapper').dataset[attribute] = this[name];
+      localStorage.setItem('m44' + attribute, this[name]);
     },
 
     getBackgroundTile(face, dim, x, y) {
@@ -464,6 +462,115 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         this._boardTooltips[uid].remove();
       });
       this._boardTooltips = {};
+    },
+
+    openBoardTooltipModal(col, row) {
+      let cell = this._grid[col][row];
+      if (
+        (cell.terrains.length == 0 || this._terrainsVisibility == 0) &&
+        !this.cellHasUnitTooltip(cell) &&
+        (cell.tokens.length == 0 || this._tokensVisibility == 0)
+      ) {
+        return false; // Nothing to show !
+      }
+
+      let modal = new customgame.modal('showHexInfo', {
+        class: 'memoir44_popin',
+        closeIcon: 'fa-times',
+        contents: '<div id="hex-info-modal"></div>',
+        breakpoint: 800,
+        scale: 0.8,
+        autoShow: true,
+      });
+
+      this.place('tplBoardTooltip', cell, 'hex-info-modal');
+      return true;
+    },
+
+    openAllTooltipModal() {
+      let modal = new customgame.modal('showAllSummary', {
+        class: 'memoir44_popin',
+        closeIcon: 'fa-times',
+        contents: '<div id="all-summary-modal" class="board-tooltip"></div>',
+        breakpoint: 800,
+        scale: 0.8,
+        verticalAlign: 'flexStart',
+        autoShow: true,
+      });
+
+      // TODO : special rules
+      let tooltips = [];
+      let terrainNumbers = [];
+      let unitNumbers = [];
+      Object.keys(this._grid).forEach((col) => {
+        Object.keys(this._grid[col]).forEach((row) => {
+          let cell = this._grid[col][row];
+
+          cell.terrains.forEach((terrain) => {
+            if (!terrainNumbers.includes(terrain.number)) {
+              tooltips.push({
+                tpl: 'tplTerrainSummary',
+                t: terrain,
+                n: terrain.number,
+              });
+              terrainNumbers.push(terrain.number);
+            }
+          });
+          cell.tokens.forEach((token) => {
+            if (!this.includesToken(tooltips, token)) {
+              tooltips.push({
+                tpl: 'tplTokenSummary',
+                t: token,
+                n: token.number,
+              });
+            }
+          });
+          if (cell.unit && !unitNumbers.includes(cell.unit.number)) {
+            tooltips.push({
+              tpl: 'tplUnitSummary',
+              t: cell.unit,
+              n: cell.unit.number,
+            });
+            unitNumbers.push(cell.unit.number);
+          }
+        });
+      });
+
+      // Sort
+      const TYPE_ORDER = {
+        tplUnitSummary: 1,
+        tplTerrainSummary: 2,
+        tplTokenSummary: 3,
+      };
+      tooltips.sort(function (x, y) {
+        let d = TYPE_ORDER[x.tpl] - TYPE_ORDER[y.tpl];
+        return d == 0 ? (x.n < y.n ? -1 : 1) : d;
+      });
+
+      tooltips.forEach((data) => {
+        this.place(data.tpl, data.t, 'all-summary-modal');
+      });
+    },
+
+    // Check whether we already have a similar token or not
+    includesToken(tooltips, token) {
+      let attributes = [];
+      if (token.type == TOKEN_MEDAL) {
+        attributes = ['counts_for', 'last_to_occupy', 'majority', 'nbr_hex', 'permanent', 'sole_control', 'turn_start'];
+      }
+
+      for (let i = 0; i < tooltips.length; i++) {
+        let obj = tooltips[i];
+        if (obj.tpl != 'tplTokenSummary') continue;
+        if (obj.t.type != token.type) continue;
+        if (obj.t.team != token.team) continue;
+
+        if (attributes.reduce((c, attr) => c && obj.t.datas[attr] == token.datas[attr], true)) {
+          return true;
+        }
+      }
+
+      return false;
     },
 
     cellHasUnitTooltip(cell) {
@@ -837,9 +944,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       if (unit.onTheMove && !tooltip) classNames.push('onTheMove');
 
       const RECT_UNITS = [5, 6, 7];
-      unit.orientation = unit.rotate? 1 : 0;
+      unit.orientation = unit.rotate ? 1 : 0;
       let rotation = 0;
-      if(RECT_UNITS.includes(parseInt(unit.type))){
+      if (RECT_UNITS.includes(parseInt(unit.type))) {
         rotation = unit.rotate ? 6 : 0;
         if (unit.orientation != 1) {
           let angle = UNITS_ROTATION[unit.type] / -30;
@@ -847,7 +954,6 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         }
         rotation = rotation % 12;
       }
-
 
       return `
       <div id="unit-${unit.id}${tooltip ? '-tooltip' : ''}" class="m44-unit ${classNames.join(' ')}"

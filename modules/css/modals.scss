@@ -149,3 +149,77 @@
     }
   }
 }
+
+#popin_showHexInfo,
+#popin_showAllSummary {
+  background-color: #ebd5bd;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px black;
+  position: relative;
+  width: 800px;
+
+  .memoir44_closeicon {
+    background-color: #a47a77;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -18px;
+    right: -18px;
+    font-size: 90%;
+    color: white !important;
+    border: 1px solid #dfbda8;
+
+    &:hover {
+      text-decoration: none;
+      color: #ccc !important;
+      transform: scale(1.1);
+    }
+
+    i {
+      margin-top: -2px;
+    }
+  }
+
+  &::before,
+  &::after {
+    display: none;
+  }
+
+  .board-tooltip {
+    position: initial;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    overflow: visible;
+    padding: 0;
+
+    .summary-card {
+      margin: 5px 10px;
+    }
+  }
+}
+
+#popin_showAllSummary_wrapper {
+  padding-top: 80px !important;
+  height: calc(100vh - 120px) !important;
+  min-height: calc(100vh - 120px) !important;
+}
+#popin_showAllSummary {
+  width: 80%;
+  #popin_showAllSummary_contents {
+    height: 100%;
+    #all-summary-modal {
+      height: 100%;
+      overflow: auto;
+    }
+  }
+}

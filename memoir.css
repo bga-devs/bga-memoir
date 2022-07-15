@@ -355,7 +355,9 @@ html {
       #m44-container #m44-central-part #right-holder #m44-tokens-settings,
       #m44-container #m44-central-part #right-holder #m44-labels-settings,
       #m44-container #m44-central-part #right-holder #m44-coords-settings,
-      #m44-container #m44-central-part #right-holder #m44-summary-settings,
+      #m44-container #m44-central-part #right-holder #m44-summaryHover-settings,
+      #m44-container #m44-central-part #right-holder #m44-summaryClick-settings,
+      #m44-container #m44-central-part #right-holder #m44-summary-settings-showAll,
       #m44-container #m44-central-part #right-holder #m44-react-settings {
         width: 40px;
         padding: 6px 6px; }
@@ -367,7 +369,9 @@ html {
         #m44-container #m44-central-part #right-holder #m44-tokens-settings svg,
         #m44-container #m44-central-part #right-holder #m44-labels-settings svg,
         #m44-container #m44-central-part #right-holder #m44-coords-settings svg,
-        #m44-container #m44-central-part #right-holder #m44-summary-settings svg,
+        #m44-container #m44-central-part #right-holder #m44-summaryHover-settings svg,
+        #m44-container #m44-central-part #right-holder #m44-summaryClick-settings svg,
+        #m44-container #m44-central-part #right-holder #m44-summary-settings-showAll svg,
         #m44-container #m44-central-part #right-holder #m44-react-settings svg {
           width: 40px;
           height: 40px;
@@ -380,13 +384,15 @@ html {
         #m44-container #m44-central-part #right-holder #m44-tokens-settings:hover svg,
         #m44-container #m44-central-part #right-holder #m44-labels-settings:hover svg,
         #m44-container #m44-central-part #right-holder #m44-coords-settings:hover svg,
-        #m44-container #m44-central-part #right-holder #m44-summary-settings:hover svg,
+        #m44-container #m44-central-part #right-holder #m44-summaryHover-settings:hover svg,
+        #m44-container #m44-central-part #right-holder #m44-summaryClick-settings:hover svg,
+        #m44-container #m44-central-part #right-holder #m44-summary-settings-showAll:hover svg,
         #m44-container #m44-central-part #right-holder #m44-react-settings:hover svg {
           fill: white;
           color: white; }
       #m44-container #m44-central-part #right-holder #m44-opponentUnits-settings,
       #m44-container #m44-central-part #right-holder #m44-coords-settings,
-      #m44-container #m44-central-part #right-holder #m44-summary-settings,
+      #m44-container #m44-central-part #right-holder #m44-summary-settings-showAll,
       #m44-container #m44-central-part #right-holder #m44-react-settings {
         border-bottom: 1px solid #0f330a; }
       #m44-container #m44-central-part #right-holder #m44-ownUnits-settings {
@@ -438,11 +444,15 @@ html {
       display: none; }
     #m44-container #m44-central-part #m44-board-wrapper[data-coords='0'] ~ #right-holder #m44-coords-settings svg:last-of-type {
       display: none; }
-    #m44-container #m44-central-part #m44-board-wrapper[data-summary='0'] ~ #right-holder #m44-summary-settings svg:not(:first-of-type) {
+    .mobile_version #m44-container #m44-central-part #m44-board-wrapper ~ #right-holder #m44-summaryHover-settings {
       display: none; }
-    #m44-container #m44-central-part #m44-board-wrapper[data-summary='1'] ~ #right-holder #m44-summary-settings svg:not(:nth-of-type(2)) {
+    #m44-container #m44-central-part #m44-board-wrapper[data-summary-hover='1'] ~ #right-holder #m44-summaryHover-settings svg:first-of-type {
       display: none; }
-    #m44-container #m44-central-part #m44-board-wrapper[data-summary='2'] ~ #right-holder #m44-summary-settings svg:not(:last-of-type) {
+    #m44-container #m44-central-part #m44-board-wrapper[data-summary-hover='0'] ~ #right-holder #m44-summaryHover-settings svg:last-of-type {
+      display: none; }
+    #m44-container #m44-central-part #m44-board-wrapper[data-summary-click='1'] ~ #right-holder #m44-summaryClick-settings svg:first-of-type {
+      display: none; }
+    #m44-container #m44-central-part #m44-board-wrapper[data-summary-click='0'] ~ #right-holder #m44-summaryClick-settings svg:last-of-type {
       display: none; }
     [data-auto-react='0'] #m44-container #m44-central-part #right-holder #m44-react-settings svg:first-of-type {
       display: none; }
@@ -1679,6 +1689,8 @@ html {
   width: 100%;
   height: 100%;
   position: relative; }
+  [data-summary-click="1"] .m44-unit {
+    pointer-events: none; }
   .m44-unit::after {
     content: '';
     display: block;
@@ -4441,6 +4453,70 @@ span.m44-dice-result {
       font-weight: bold; }
     #popin_showStats #popin_showStats_contents table tbody td {
       text-align: center; }
+
+#popin_showHexInfo,
+#popin_showAllSummary {
+  background-color: #ebd5bd;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px black;
+  position: relative;
+  width: 800px; }
+  #popin_showHexInfo .memoir44_closeicon,
+  #popin_showAllSummary .memoir44_closeicon {
+    background-color: #a47a77;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -18px;
+    right: -18px;
+    font-size: 90%;
+    color: white !important;
+    border: 1px solid #dfbda8; }
+    #popin_showHexInfo .memoir44_closeicon:hover,
+    #popin_showAllSummary .memoir44_closeicon:hover {
+      text-decoration: none;
+      color: #ccc !important;
+      transform: scale(1.1); }
+    #popin_showHexInfo .memoir44_closeicon i,
+    #popin_showAllSummary .memoir44_closeicon i {
+      margin-top: -2px; }
+  #popin_showHexInfo::before, #popin_showHexInfo::after,
+  #popin_showAllSummary::before,
+  #popin_showAllSummary::after {
+    display: none; }
+  #popin_showHexInfo .board-tooltip,
+  #popin_showAllSummary .board-tooltip {
+    position: initial;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    overflow: visible;
+    padding: 0; }
+    #popin_showHexInfo .board-tooltip .summary-card,
+    #popin_showAllSummary .board-tooltip .summary-card {
+      margin: 5px 10px; }
+
+#popin_showAllSummary_wrapper {
+  padding-top: 80px !important;
+  height: calc(100vh - 120px) !important;
+  min-height: calc(100vh - 120px) !important; }
+
+#popin_showAllSummary {
+  width: 80%; }
+  #popin_showAllSummary #popin_showAllSummary_contents {
+    height: 100%; }
+    #popin_showAllSummary #popin_showAllSummary_contents #all-summary-modal {
+      height: 100%;
+      overflow: auto; }
 
 .board-token {
   background-image: url("img/tokens.png");

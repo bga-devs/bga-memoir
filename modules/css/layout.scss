@@ -369,7 +369,9 @@ html {
       #m44-tokens-settings,
       #m44-labels-settings,
       #m44-coords-settings,
-      #m44-summary-settings,
+      #m44-summaryHover-settings,
+      #m44-summaryClick-settings,
+      #m44-summary-settings-showAll,
       #m44-react-settings {
         width: 40px;
         padding: 6px 6px;
@@ -387,7 +389,7 @@ html {
 
       #m44-opponentUnits-settings,
       #m44-coords-settings,
-      #m44-summary-settings,
+      #m44-summary-settings-showAll,
       #m44-react-settings {
         border-bottom: 1px solid #0f330a;
       }
@@ -464,13 +466,19 @@ html {
       display: none;
     }
 
-    #m44-board-wrapper[data-summary='0'] ~ #right-holder #m44-summary-settings svg:not(:first-of-type) {
+    .mobile_version & #m44-board-wrapper ~ #right-holder #m44-summaryHover-settings {
       display: none;
     }
-    #m44-board-wrapper[data-summary='1'] ~ #right-holder #m44-summary-settings svg:not(:nth-of-type(2)) {
+    #m44-board-wrapper[data-summary-hover='1'] ~ #right-holder #m44-summaryHover-settings svg:first-of-type {
       display: none;
     }
-    #m44-board-wrapper[data-summary='2'] ~ #right-holder #m44-summary-settings svg:not(:last-of-type) {
+    #m44-board-wrapper[data-summary-hover='0'] ~ #right-holder #m44-summaryHover-settings svg:last-of-type {
+      display: none;
+    }
+    #m44-board-wrapper[data-summary-click='1'] ~ #right-holder #m44-summaryClick-settings svg:first-of-type {
+      display: none;
+    }
+    #m44-board-wrapper[data-summary-click='0'] ~ #right-holder #m44-summaryClick-settings svg:last-of-type {
       display: none;
     }
 
