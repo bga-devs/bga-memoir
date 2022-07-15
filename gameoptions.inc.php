@@ -198,18 +198,18 @@ $game_options = [
         'description' => clienttranslate('Saverne Gap'),
         'premium' => true,
       ],
-      1302 => [
-        'name' => clienttranslate('[TP] [1302] Nijmegen Bridges'),
-        'tmdisplay' => '[1302]',
-        'description' => clienttranslate('Nijmegen Bridges'),
-        'premium' => true,
-      ],
-      1311 => [
-        'name' => clienttranslate('[EF] [1311] Bug River'),
-        'tmdisplay' => '[1311]',
-        'description' => clienttranslate('Bug River'),
-        'premium' => true,
-      ],
+      // 1302 => [
+      //   'name' => clienttranslate('[TP] [1302] Nijmegen Bridges'),
+      //   'tmdisplay' => '[1302]',
+      //   'description' => clienttranslate('Nijmegen Bridges'),
+      //   'premium' => true,
+      // ],
+      // 1311 => [
+      //   'name' => clienttranslate('[EF] [1311] Bug River'),
+      //   'tmdisplay' => '[1311]',
+      //   'description' => clienttranslate('Bug River'),
+      //   'premium' => true,
+      // ],
       1325 => [
         'name' => clienttranslate('[EF] [1325] Gates of Moscow'),
         'tmdisplay' => '[1325]',
@@ -246,12 +246,12 @@ $game_options = [
         'description' => clienttranslate('Suomussalmi'),
         'premium' => true,
       ],
-      1422 => [
-        'name' => clienttranslate('[TP] [1422] Schwammenauel Dam'),
-        'tmdisplay' => '[1422]',
-        'description' => clienttranslate('Schwammenauel Dam'),
-        'premium' => true,
-      ],
+      // 1422 => [
+      //   'name' => clienttranslate('[TP] [1422] Schwammenauel Dam'),
+      //   'tmdisplay' => '[1422]',
+      //   'description' => clienttranslate('Schwammenauel Dam'),
+      //   'premium' => true,
+      // ],
       1433 => [
         'name' => clienttranslate('[EF] [1433] Breakout at Klin'),
         'tmdisplay' => '[1433]',
