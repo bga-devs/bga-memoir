@@ -140,12 +140,12 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
           // Add tooltip listeners
           cell.addEventListener('mouseenter', (evt) => {
-            if (this._summaryHover == 1) {
+            if (this._summaryHover == 1 && !this.isMobile()) {
               this.openBoardTooltip(col, row, evt.clientX);
             }
           });
           cell.addEventListener('mouseleave', () => {
-            if (this._summaryHover == 1) {
+            if (this._summaryHover == 1 && !this.isMobile()) {
               this.closeBoardTooltip(col, row);
             }
           });
