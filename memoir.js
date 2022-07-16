@@ -83,6 +83,7 @@ define([
         ['smallRefreshHand', 1],
         ['updateVisibility', 500],
         ['updateStats', 1],
+        ['removeStarToken', 1],
       ];
 
       // Fix mobile viewport (remove CSS zoom)
@@ -318,6 +319,12 @@ define([
       }
     },
 
+    notif_removeStarToken(n) {
+      debug('Notif : removing star token of unit', n);
+      $(`board-token-unit-${n.args.id}`).remove();
+      this._grid[n.args.x][n.args.y].unit.equipment = false;
+    },
+
     notif_clearTurn(n) {
       debug('Notif: restarting turn', n);
       this.cancelLogs(n.args.notifIds);
@@ -416,10 +423,10 @@ define([
             args.dice_face = `<span class='m44-dice-result' data-result='${args.dice_result}'></span>`;
           }
 
-          if(args.coordSource){
+          if (args.coordSource) {
             args.coordSource = `<span class='log-coordinate'>${args.coordSource}</span>`;
           }
-          if(args.coordTarget){
+          if (args.coordTarget) {
             args.coordTarget = `<span class='log-coordinate'>${args.coordTarget}</span>`;
           }
         }

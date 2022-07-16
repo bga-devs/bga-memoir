@@ -961,7 +961,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         rotation = rotation % 12;
       }
 
-      return `
+      tpl = `
       <div id="unit-${unit.id}${tooltip ? '-tooltip' : ''}" class="m44-unit ${classNames.join(' ')}"
         data-figures="${tooltip ? 1 : unit.figures}"
         data-type="${unit.type}" data-nation="${unit.nation}" data-orientation="${unit.orientation}"
@@ -972,8 +972,11 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           <div class="m44-unit-meeple"></div>
           <div class="m44-unit-meeple"></div>
           <div class="m44-unit-meeple"></div>
-        </div>
-      </div>`;
+        </div>`;
+      if (unit.hasOwnProperty('equipment') && unit.equipment != false) {
+        tpl = tpl + `<div id="board-token-unit-${unit.id}" class="board-token" data-sprite="-1"></div>`;
+      }
+      return tpl + `</div>`;
     },
 
     makeUnitsSelectable(units, callback, checkCallback, className = 'selected', updateButtonCallback = null) {

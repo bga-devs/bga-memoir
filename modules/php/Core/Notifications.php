@@ -480,6 +480,15 @@ class Notifications
     );
   }
 
+  public static function removeStarToken($id, $x, $y)
+  {
+    self::notifyAll('removeStarToken', '', [
+      'id' => $id,
+      'x' => $x,
+      'y' => $y,
+    ]);
+  }
+
   /*********************
    **** UPDATE ARGS ****
    *********************/
