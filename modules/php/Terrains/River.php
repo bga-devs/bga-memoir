@@ -1,6 +1,7 @@
 <?php
 namespace M44\Terrains;
 use M44\Board;
+use M44\Core\Notifications;
 
 class River extends \M44\Models\Terrain
 {
@@ -50,7 +51,7 @@ class River extends \M44\Models\Terrain
   {
     if (!Board::isRiverCell($cell) && $unit->getEquipment() == 'boat') {
       $unit->setExtraDatas('equipment', false);
-      // Notifications::remove
+      Notifications::removeStarToken($unit->getId(), $unit->getX(), $unit->getY());
     }
   }
 }
