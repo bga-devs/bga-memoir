@@ -192,15 +192,15 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
         ['opponentUnits', 'terrains', 'tokens', 'labels', 'coords', 'ownUnits'].forEach((layer) => {
           let name = '_' + layer + 'Visibility';
-          this.toggleSettings(layer, name, this.getConfig('m44' + layer, 1));
-          dojo.connect($(`m44-${layer}-settings`), 'click', () => this.toggleSettings(layer, name));
+          this.toggleBoardSettings(layer, name, this.getConfig('m44' + layer, 1));
+          dojo.connect($(`m44-${layer}-settings`), 'click', () => this.toggleBoardSettings(layer, name));
           this.addTooltip(`m44-${layer}-settings`, '', buttonsTooltips[layer]);
         });
 
         ['summaryHover', 'summaryClick'].forEach((setting) => {
           let name = '_' + setting;
-          this.toggleSettings(setting, name, this.getConfig('m44' + setting, setting == 'summaryClick' ? 0 : 1));
-          dojo.connect($(`m44-${setting}-settings`), 'click', () => this.toggleSettings(setting, name));
+          this.toggleBoardSettings(setting, name, this.getConfig('m44' + setting, setting == 'summaryClick' ? 0 : 1));
+          dojo.connect($(`m44-${setting}-settings`), 'click', () => this.toggleBoardSettings(setting, name));
           this.addTooltip(`m44-${setting}-settings`, '', buttonsTooltips[setting]);
         });
 
@@ -223,7 +223,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       cells.forEach((cell) => cell.classList.remove(className));
     },
 
-    toggleSettings(attribute, name, value = null) {
+    toggleBoardSettings(attribute, name, value = null) {
       if (value == null) {
         this[name] = 1 - this[name];
       } else {
@@ -950,7 +950,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       if (unit.onTheMove && !tooltip) classNames.push('onTheMove');
 
       const RECT_UNITS = [5, 6, 7];
-      unit.orientation = unit.rotate ? 1 : 0;
+      unit.orientation = this._bottomTeam != (ALLIES_NATIONS.includes(unit.nation) ? 'ALLIES' : 'AXIS') ? 1 : 0;
       let rotation = 0;
       if (RECT_UNITS.includes(parseInt(unit.type))) {
         rotation = unit.rotate ? 6 : 0;

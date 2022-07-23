@@ -2,7 +2,7 @@
   [data-summary-click="1"] & {
     pointer-events: none;
   }
-  
+
   width: 100%;
   height: 100%;
   //background: rgba(255, 0, 0, 0.2);
@@ -231,6 +231,38 @@ $units: (
     ),
   ),
 );
+
+// .73-M44-BGA-Base_0004_Canon-Ally-Front {width: 187px; height: 215px; background-position: 0.00000% 0.00000%; background-size: 1095.19%; }
+// .73-M44-BGA-Base_0005_Canon-Ally-Back {width: 187px; height: 215px; background-position: 10.0484% 0.00000%; background-size: 1095.19%; }
+// .73-M44-BGA-Base_0006_Canon-Axis-Front {width: 187px; height: 215px; background-position: 20.0967% 0.00000%; background-size: 1095.19%; }
+// .73-M44-BGA-Base_0007_Canon-Axis-Back {width: 187px; height: 215px; background-position: 30.1451% 0.00000%; background-size: 1095.19%; }
+// .73-M44-BGA-Base_0008_Soldier-Ally-Back {width: 187px; height: 215px; background-position: 40.1934% 0.00000%; background-size: 1095.19%; }
+// .73-M44-BGA-Base_0009_Soldier-Ally-Front {width: 187px; height: 215px; background-position: 50.2418% 0.00000%; background-size: 1095.19%; }
+// .73-M44-BGA-Base_0010_Soldier-Axis-Back {width: 187px; height: 215px; background-position: 60.2902% 0.00000%; background-size: 1095.19%; }
+// .73-M44-BGA-Base_0011_Soldier-Axis-Front {width: 187px; height: 215px; background-position: 70.3385% 0.00000%; background-size: 1095.19%; }
+// .73-M44-BGA-Base_0012_Tank-Ally-Back {width: 187px; height: 215px; background-position: 80.3869% 0.00000%; background-size: 1095.19%; }
+// .73-M44-BGA-Base_0013_Tank-Ally-Front {width: 187px; height: 215px; background-position: 90.4352% 0.00000%; background-size: 1095.19%; }
+// .73-M44-BGA-Base_0014_Tank-Axis-Back {width: 187px; height: 215px; background-position: 0.00000% 26.5760%; background-size: 1095.19%; }
+// .73-M44-BGA-Base_0015_Tank-Axis-Front {width: 187px; height: 215px; background-position: 10.0484% 26.5760%; background-size: 1095.19%; }
+// .73-M44-BGA-Expansion-ArtilleryJapan-back {width: 187px; height: 215px; background-position: 40.1934% 26.5760%; background-size: 1095.19%; }
+// .73-M44-BGA-Expansion-ArtilleryJapan-front {width: 187px; height: 215px; background-position: 20.0967% 26.5760%; background-size: 1095.19%; }
+// .73-M44-BGA-Expansion-ArtillerySoviet-back {width: 187px; height: 215px; background-position: 50.2418% 26.5760%; background-size: 1095.19%; }
+// .73-M44-BGA-Expansion-ArtillerySoviet-front {width: 187px; height: 215px; background-position: 30.1451% 26.5760%; background-size: 1095.19%; }
+// .73-M44-BGA-Expansion-ArtilleryUK-back {width: 187px; height: 215px; background-position: 60.2902% 26.5760%; background-size: 1095.19%; }
+// .73-M44-BGA-Expansion-ArtilleryUK-front {width: 187px; height: 215px; background-position: 70.3385% 26.5760%; background-size: 1095.19%; }
+// .73-M44-BGA-Expansion-SoldierJapan-back {width: 187px; height: 215px; background-position: 80.3869% 26.5760%; background-size: 1095.19%; }
+// .73-M44-BGA-Expansion-SoldierJapan-front {width: 187px; height: 215px; background-position: 90.4352% 26.5760%; background-size: 1095.19%; }
+// .73-M44-BGA-Expansion-SoldierSoviet-back {width: 187px; height: 215px; background-position: 0.00000% 53.1520%; background-size: 1095.19%; }
+// .73-M44-BGA-Expansion-SoldierSoviet-front {width: 187px; height: 215px; background-position: 10.0484% 53.1520%; background-size: 1095.19%; }
+// .73-M44-BGA-Expansion-SoldierUK-back {width: 187px; height: 215px; background-position: 20.0967% 53.1520%; background-size: 1095.19%; }
+// .73-M44-BGA-Expansion-SoldierUK-front {width: 187px; height: 215px; background-position: 30.1451% 53.1520%; background-size: 1095.19%; }
+// .73-M44-BGA-Expansion-TankJapan-back {width: 187px; height: 215px; background-position: 40.1934% 53.1520%; background-size: 1095.19%; }
+// .73-M44-BGA-Expansion-TankJapan-front {width: 187px; height: 215px; background-position: 50.2418% 53.1520%; background-size: 1095.19%; }
+// .73-M44-BGA-Expansion-TankSoviet-back {width: 187px; height: 215px; background-position: 60.2902% 53.1520%; background-size: 1095.19%; }
+// .73-M44-BGA-Expansion-TankSoviet-front {width: 187px; height: 215px; background-position: 70.3385% 53.1520%; background-size: 1095.19%; }
+// .73-M44-BGA-Expansion-TankUK-back {width: 187px; height: 215px; background-position: 80.3869% 53.1520%; background-size: 1095.19%; }
+// .73-M44-BGA-Expansion-TankUK-front {width: 187px; height: 215px; background-position: 90.4352% 53.1520%; background-size: 1095.19%; }
+
 
 @each $orientation, $unitsData in $units {
   @each $type, $map in $unitsData {
