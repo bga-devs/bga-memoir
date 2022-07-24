@@ -498,8 +498,19 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         autoShow: true,
       });
 
-      // TODO : special rules
       let tooltips = [];
+      // Special rules
+      if (this.gamedatas.scenario && this.gamedatas.scenario.game_info && this.gamedatas.scenario.game_info.options) {
+        let options = this.gamedatas.scenario.game_info.options;
+        Object.keys(options).forEach((option) => {
+          tooltips.push({
+            tpl: 'tplSpecialRuleSummary',
+            t: { name: option, val: options[option] },
+            n: 0,
+          });
+        });
+      }
+
       let terrainNumbers = [];
       let unitNumbers = [];
       Object.keys(this._grid).forEach((col) => {
@@ -590,6 +601,80 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       return `<div class='board-tooltip' style='${cell.openingPosition}:0px'>${unitDiv} ${terrainDivs.join(
         '',
       )} ${tokenDivs.join('')}</div>`;
+    },
+
+    tplSpecialRuleSummary(rule) {
+      let name = '';
+      let tile = '';
+      let desc = [];
+
+      if (rule.name == 'russian_commissar_rule') {
+        name = _('Red Army (RKKA)');
+        tile = '<div class="commissar-token"></div>';
+        desc = [
+          '<li>' +
+            _(
+              'A command card cannot be played directly from hand. Instead, it must be placed under the commissar chip in preparation for a future turn.',
+            ) +
+            '</li>',
+          '<li>' +
+            _('Recon 1, Counter-attack and Ambush cards are exceptions; they may be played as normal.') +
+            '</li>',
+          '<li>' +
+            _(
+              "Otherwise, the Command card already under the commissar chip is the player's command card for the turn.",
+            ) +
+            '</li>',
+        ];
+      } else if (rule.name == 'blitz_rules') {
+        name = _('Blitz rules');
+        tile = '';
+        desc = [
+          '<li>' + _('Axis may play a Recon 1 card as an Air Power card in same section') + '</li>',
+          '<li>' + _('Allied Armor move 2 hexes max and Axis Armor move 3 hexes') + '</li>',
+        ];
+      } else if (rule.name == 'british_commonwealth') {
+        name = _('Commonwealth');
+        tile = '';
+        desc = [
+          '<li>' + _('A BCF ground unit that survives an ennemy\'s Close Assault combat without retreating and is down to a single figure may immediately battle that ennemy back with 1d') + '</li>',
+          '<li>' + _('A battle back ignores all terrain battle dice restrictions') + '</li>',
+          '<li>' + _('A battle back may occur even if the Close Assault is part of an Armor Overrun') + '</li>',
+          '<li>' + _('The unit cannot battle back during an Ambush') + '</li>',
+        ];
+      } else if (rule.name == 'italy_royal_army') {
+        name = _('Italian Royal Army');
+        tile = '';
+        desc = [
+          '<li>' + _('Start with 6 commands cards; discard one for each unit lost, but never go below 3') + '</li>',
+          '<li>' + _('All Italian ground units may retreat 1 to 3 hexes per flag') + '</li>',
+          '<li>' + _('All Italian Artillery units may ignore 1 flag') + '</li>',
+        ];
+      } else if (rule.name == 'north_african_desert_rules') {
+        name = _('Desert Rules');
+        tile = '';
+        desc = [
+          '<li>' + _('On successfull Close Assault, Armor may move into vacated hex and move 1 additional hex before battling again.') + '</li>',
+        ];
+      } else if (rule.name == 'partial_blitz_rules') {
+        name = _('Partial Blitz rules');
+        tile = '';
+        desc = [
+          '<li>' + _('Allied Armor move 2 hexes max and Axis Armor move 3 hexes') + '</li>',
+        ];
+      }
+
+
+
+      return `<div class='summary-card summary-rules'>
+        <div class='summary-name'>${name}</div>
+        <div class='summary-tile'>
+          ${tile}
+        </div>
+        <ul class='summary-desc'>
+          ${desc.join('')}
+        </ul>
+      </div>`;
     },
 
     tplTerrainSummary(terrain) {
@@ -920,6 +1005,13 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           desc = [
             '<li>' + _('A camouflaged unit may only be targeted in a Close Assault') + '</li>',
             '<li>' + _('A Camouflaged unit that moves or battles lose its Camouflage') + '</li>',
+          ];
+        } else if (token.type == TOKEN_EXIT_MARKER) {
+          name = _('Exit Markers');
+          desc = [
+            '<li>' +
+              _('Markers designate specific hex(es) through which a unit exiting the board earn a medal') +
+              '</li>',
           ];
         }
       }
