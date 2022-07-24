@@ -14,6 +14,11 @@ class PincerMove extends \M44\Models\SectionCard
     $this->nUnits = 4;
   }
 
+  public function getNotifString()
+  {
+    return null;
+  }
+
   public function getArgsOrderUnits()
   {
     $data = parent::getArgsOrderUnits();

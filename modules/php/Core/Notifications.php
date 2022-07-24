@@ -143,10 +143,20 @@ class Notifications
 
   public static function playCard($player, $card)
   {
-    self::notifyAll('playCard', clienttranslate('${player_name} plays ${card_name}'), [
-      'player' => $player,
-      'card' => $card,
-    ]);
+    $str = $card->getNotifString();
+    if (is_null($str)) {
+      self::notifyAll('playCard', clienttranslate('${player_name} plays ${card_name}'), [
+        'player' => $player,
+        'card' => $card,
+      ]);
+    } else {
+      self::notifyAll('playCard', clienttranslate('${player_name} plays ${card_name} on ${flank}'), [
+        'i18n' => ['flank'],
+        'player' => $player,
+        'card' => $card,
+        'flank' => $str,
+      ]);
+    }
   }
 
   public static function orderUnits($player, $units, $unitsOnTheMove = null)

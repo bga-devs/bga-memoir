@@ -106,6 +106,11 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
     return $this->getType() == $cardType;
   }
 
+  public function getNotifString()
+  {
+    return null;
+  }
+
   public function jsonSerialize()
   {
     return [

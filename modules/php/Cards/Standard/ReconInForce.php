@@ -14,6 +14,11 @@ class ReconInForce extends \M44\Models\SectionCard
     $this->sections = [1, 1, 1];
   }
 
+  public function getNotifString()
+  {
+    return null;
+  }
+
   public function getArgsOrderUnits()
   {
     $data = parent::getArgsOrderUnits();

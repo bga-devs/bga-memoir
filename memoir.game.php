@@ -138,8 +138,8 @@ class memoir extends Table
     foreach (Teams::getAll() as $team) {
       $progression = max(round(($team->getMedals()->count() / $team->getNVictory()) * 100), $progression);
     }
-    if (Globals::getDuration() == OPTION_DURATION_TWO_WAYS && Globals::getRound() == 1) {
-      $progression = intdiv($progression, 2);
+    if (Globals::getDuration() == OPTION_DURATION_TWO_WAYS) {
+      $progression = intdiv($progression, 2) + (Globals::getRound() == 1? 0 : 50);
     }
     return $progression;
   }

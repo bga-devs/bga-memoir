@@ -14,6 +14,11 @@ class GeneralAdvance extends \M44\Models\SectionCard
     $this->nUnits = 6;
   }
 
+  public function getNotifString()
+  {
+    return null;
+  }
+
   public function getArgsOrderUnits()
   {
     $data = parent::getArgsOrderUnits();

@@ -24,6 +24,17 @@ class SectionCard extends Card
     return $this->texts[$this->value] ?? $this->text;
   }
 
+  public function getNotifString()
+  {
+    $flanks = [
+      0 => \clienttranslate('the left flank'),
+      1 => \clienttranslate('the center'),
+      2 => \clienttranslate('the right flank'),
+    ];
+    return $flanks[$this->value];
+  }
+
+
   public function getOrderUnitsTitle($val, $marineCommand)
   {
     return $this->orderUnitsTitles[$val] ?? '';
