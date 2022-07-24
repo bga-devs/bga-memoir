@@ -364,6 +364,30 @@
   [data-terrains='0'] & {
     display: none;
   }
+
+  [data-unitSprite='0'] & {
+    &[data-tile='23'],
+    &[data-tile='19'],
+    &[data-tile='10'] {
+      background-image: url('img/board_terrains_new.png');
+      background-size: 400% 100%;
+    }
+
+    &[data-tile='19'] {
+      background-position: 100% 0%;
+    }
+    &[data-tile='23'] {
+      background-position: 0% 0%;
+      transform: none !important;
+    }
+    &[data-tile='10'] {
+      background-position: 33.3333% 0%;
+      &[data-rotation='6'] {
+        background-position: 66.66666% 0%;
+        transform: none !important;
+      }
+    }
+  }
 }
 
 ////////////////////////////////////////
