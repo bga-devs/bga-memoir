@@ -637,7 +637,11 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         name = _('Commonwealth');
         tile = '';
         desc = [
-          '<li>' + _('A BCF ground unit that survives an ennemy\'s Close Assault combat without retreating and is down to a single figure may immediately battle that ennemy back with 1d') + '</li>',
+          '<li>' +
+            _(
+              "A BCF ground unit that survives an ennemy's Close Assault combat without retreating and is down to a single figure may immediately battle that ennemy back with 1d",
+            ) +
+            '</li>',
           '<li>' + _('A battle back ignores all terrain battle dice restrictions') + '</li>',
           '<li>' + _('A battle back may occur even if the Close Assault is part of an Armor Overrun') + '</li>',
           '<li>' + _('The unit cannot battle back during an Ambush') + '</li>',
@@ -654,17 +658,17 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         name = _('Desert Rules');
         tile = '';
         desc = [
-          '<li>' + _('On successfull Close Assault, Armor may move into vacated hex and move 1 additional hex before battling again.') + '</li>',
+          '<li>' +
+            _(
+              'On successfull Close Assault, Armor may move into vacated hex and move 1 additional hex before battling again.',
+            ) +
+            '</li>',
         ];
       } else if (rule.name == 'partial_blitz_rules') {
         name = _('Partial Blitz rules');
         tile = '';
-        desc = [
-          '<li>' + _('Allied Armor move 2 hexes max and Axis Armor move 3 hexes') + '</li>',
-        ];
+        desc = ['<li>' + _('Allied Armor move 2 hexes max and Axis Armor move 3 hexes') + '</li>'];
       }
-
-
 
       return `<div class='summary-card summary-rules'>
         <div class='summary-name'>${name}</div>
@@ -900,7 +904,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         unitData.movementRadius == unitData.movementAndAttackRadius
           ? _('Move 0-${maxBattle} and battle')
           : unitData.movementAndAttackRadius == 0
-          ? _('Move 0-${maxMove} or battle')
+          ? unitData.movementRadius == 1
+            ? _('Move 1 or battle')
+            : _('Move 1-${maxMove} or battle')
           : _('Move 0-${maxBattle} and battle or move ${maxMove} no battle'),
         { maxBattle: unitData.movementAndAttackRadius, maxMove: unitData.movementRadius },
       );
