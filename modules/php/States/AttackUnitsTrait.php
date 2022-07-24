@@ -27,7 +27,7 @@ trait AttackUnitsTrait
       $unit = Units::get($uId);
 
       // if Combat engineer doesn't move and is on a mine field, it must sweep it
-      if ($unit->mustSweep() && $unit->getMoves() == 0) {
+      if ($unit->mustSweep() && $unit->getMoves() == 0 && !$unit->isOnTheMove()) {
         foreach (Board::getTerrainsInCell($unit->getPos()) as $t) {
           if ($t instanceof \M44\Terrains\Minefield) {
             $t->onUnitEntering($unit, false);
