@@ -111,9 +111,14 @@ class Cards extends \M44\Helpers\Pieces
   public static function play($player, $cardId, $sectionId)
   {
     self::move($cardId, ['inplay', $player->getId()]);
-    $last = Globals::getLastPlayedCards();
-    $last[$player->getId()] = $cardId;
-    Globals::setLastPlayedCards($last);
+    $last = Globals::getRawLastPlayedCards();
+    $last[$player->getId()] = self::DbQuery("SELECT * FROM `cards` WHERE `card_id` = $cardId");
+    Globals::setRawLastPlayedCards($last);
+
+    $last2 = Globals::getLastPlayedCards();
+    $last2[$player->getId()] = $cardId;
+    Globals::setLastPlayedCards($last2);
+
     self::get($cardId)->setExtraDatas('section', $sectionId);
     return self::get($cardId);
   }
@@ -156,9 +161,14 @@ class Cards extends \M44\Helpers\Pieces
       ->getId();
     self::move($cardId, ['inplay', $pId]);
 
-    $last = Globals::getLastPlayedCards();
-    $last[$player->getId()] = $cardId;
-    Globals::setLastPlayedCards($last);
+    $last = Globals::getRawLastPlayedCards();
+    $last[$player->getId()] = self::DbQuery("SELECT * FROM `cards` WHERE `card_id` = $cardId");
+    Globals::setRawLastPlayedCards($last);
+
+    $last2 = Globals::getLastPlayedCards();
+    $last2[$player->getId()] = $cardId;
+    Globals::setLastPlayedCards($last2);
+
     return self::get($cardId);
   }
 

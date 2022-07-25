@@ -20,6 +20,7 @@ trait RoundTrait
     Globals::setUnitMoved(-1);
     Globals::setUnitAttacker(-1);
     Globals::setLastPlayedCards([]);
+    Globals::setRawLastPlayedCards([]);
     Globals::setAttackStack([]);
 
     // Check for options

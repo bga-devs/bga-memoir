@@ -13,7 +13,7 @@ class Globals extends \M44\Helpers\DB_Manager
     'changeActivePlayer' => 'obj', // Used for the generic "changeActivePlayer" state
     'logState' => 'int', // Used to store state id when enabling the log
     'actionCount' => 'int',
-    
+
     // Game options
     'duration' => 'int', // 1 way, 2 ways
     'mode' => 'int', // Standard, Breakthrough, Overlord
@@ -35,6 +35,7 @@ class Globals extends \M44\Helpers\DB_Manager
     'retreat' => 'obj', // ['unit' => id, 'min' => min number of retreats hexes, 'max' => max number of retreat hexes]
 
     'lastPlayedCards' => 'obj', // Store information of who played what (overlord) [player_id]
+    'rawLastPlayedCards' => 'obj', // Store information (raw db dump) of who played what (overlord) [player_id]
 
     // Scenario option
     'deckReshuffle' => 'bool',
@@ -188,6 +189,7 @@ class Globals extends \M44\Helpers\DB_Manager
     Globals::setUnitMoved(-1);
     Globals::setUnitAttacker(-1);
     Globals::setLastPlayedCards([]);
+    Globals::setRawLastPlayedCards([]);
     Globals::setDeckReshuffle(true);
 
     // One way game : a player can pick his side
