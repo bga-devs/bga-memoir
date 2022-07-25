@@ -1968,779 +1968,720 @@ html {
     color: black;
     border: 1px solid black; }
 
-.m44-unit[data-orientation='0'][data-type='1'][data-nation='ger'] .m44-unit-meeple {
+[data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='1'][data-nation='ger'] .m44-unit-meeple {
   width: 50%;
   height: 66.665%;
   background-size: 1137.78%;
   background-position: 46.3597% 34.949%;
   background-color: transparent;
   border-radius: none; }
-  .m44-unit[data-orientation='0'][data-type='1'][data-nation='ger'] .m44-unit-meeple:nth-of-type(1) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='1'][data-nation='ger'] .m44-unit-meeple:nth-of-type(1) {
     left: 23%;
     top: -2%; }
-  .m44-unit[data-orientation='0'][data-type='1'][data-nation='ger'] .m44-unit-meeple:nth-of-type(2) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='1'][data-nation='ger'] .m44-unit-meeple:nth-of-type(2) {
     left: 52%;
     top: 14%; }
-  .m44-unit[data-orientation='0'][data-type='1'][data-nation='ger'] .m44-unit-meeple:nth-of-type(3) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='1'][data-nation='ger'] .m44-unit-meeple:nth-of-type(3) {
     left: 4%;
     top: 19%; }
-  .m44-unit[data-orientation='0'][data-type='1'][data-nation='ger'] .m44-unit-meeple:nth-of-type(4) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='1'][data-nation='ger'] .m44-unit-meeple:nth-of-type(4) {
     left: 33%;
     top: 33%; }
-
-.summary-tile
+[data-unitSprite='1'] .summary-tile
 .m44-unit[data-orientation='0'][data-type='1'][data-nation='ger']
 .m44-unit-meeple {
   width: 100%;
   height: 133.33%;
   left: 0;
   top: 0; }
-
-.m44-unit[data-orientation='0'][data-type='1'][data-nation='us'] .m44-unit-meeple {
+[data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='1'][data-nation='us'] .m44-unit-meeple {
   width: 50%;
   height: 70.315%;
   background-size: 1066.67%;
   background-position: 0.107759% 0.265252%;
   background-color: transparent;
   border-radius: none; }
-  .m44-unit[data-orientation='0'][data-type='1'][data-nation='us'] .m44-unit-meeple:nth-of-type(1) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='1'][data-nation='us'] .m44-unit-meeple:nth-of-type(1) {
     left: 24%;
     top: 3%; }
-  .m44-unit[data-orientation='0'][data-type='1'][data-nation='us'] .m44-unit-meeple:nth-of-type(2) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='1'][data-nation='us'] .m44-unit-meeple:nth-of-type(2) {
     left: 52%;
     top: 14%; }
-  .m44-unit[data-orientation='0'][data-type='1'][data-nation='us'] .m44-unit-meeple:nth-of-type(3) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='1'][data-nation='us'] .m44-unit-meeple:nth-of-type(3) {
     left: 2%;
     top: 24%; }
-  .m44-unit[data-orientation='0'][data-type='1'][data-nation='us'] .m44-unit-meeple:nth-of-type(4) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='1'][data-nation='us'] .m44-unit-meeple:nth-of-type(4) {
     left: 33%;
     top: 35%; }
-
-.summary-tile
+[data-unitSprite='1'] .summary-tile
 .m44-unit[data-orientation='0'][data-type='1'][data-nation='us']
 .m44-unit-meeple {
   width: 100%;
   height: 140.63%;
   left: 0;
   top: 0; }
-
-.m44-unit[data-orientation='0'][data-type='1'][data-nation='ru'] .m44-unit-meeple {
+[data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='1'][data-nation='ru'] .m44-unit-meeple {
   width: 60%;
   height: 70.188%;
   background-size: 966.038%;
   background-position: 0.108932% 35.3093%;
   background-color: transparent;
   border-radius: none; }
-  .m44-unit[data-orientation='0'][data-type='1'][data-nation='ru'] .m44-unit-meeple:nth-of-type(1) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='1'][data-nation='ru'] .m44-unit-meeple:nth-of-type(1) {
     left: 17%;
     top: -4%; }
-  .m44-unit[data-orientation='0'][data-type='1'][data-nation='ru'] .m44-unit-meeple:nth-of-type(2) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='1'][data-nation='ru'] .m44-unit-meeple:nth-of-type(2) {
     left: 45%;
     top: 7%; }
-  .m44-unit[data-orientation='0'][data-type='1'][data-nation='ru'] .m44-unit-meeple:nth-of-type(3) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='1'][data-nation='ru'] .m44-unit-meeple:nth-of-type(3) {
     left: 0%;
     top: 17%; }
-  .m44-unit[data-orientation='0'][data-type='1'][data-nation='ru'] .m44-unit-meeple:nth-of-type(4) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='1'][data-nation='ru'] .m44-unit-meeple:nth-of-type(4) {
     left: 29%;
     top: 29%; }
-
-.summary-tile
+[data-unitSprite='1'] .summary-tile
 .m44-unit[data-orientation='0'][data-type='1'][data-nation='ru']
 .m44-unit-meeple {
   width: 100%;
   height: 116.98%;
   left: 0;
   top: 0; }
-
-.m44-unit[data-orientation='0'][data-type='1'][data-nation='brit'] .m44-unit-meeple {
+[data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='1'][data-nation='brit'] .m44-unit-meeple {
   width: 50%;
   height: 65.105%;
   background-size: 1066.67%;
   background-position: 82.6509% 0.258398%;
   background-color: transparent;
   border-radius: none; }
-  .m44-unit[data-orientation='0'][data-type='1'][data-nation='brit'] .m44-unit-meeple:nth-of-type(1) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='1'][data-nation='brit'] .m44-unit-meeple:nth-of-type(1) {
     left: 24%;
     top: 3%; }
-  .m44-unit[data-orientation='0'][data-type='1'][data-nation='brit'] .m44-unit-meeple:nth-of-type(2) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='1'][data-nation='brit'] .m44-unit-meeple:nth-of-type(2) {
     left: 52%;
     top: 14%; }
-  .m44-unit[data-orientation='0'][data-type='1'][data-nation='brit'] .m44-unit-meeple:nth-of-type(3) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='1'][data-nation='brit'] .m44-unit-meeple:nth-of-type(3) {
     left: 2%;
     top: 24%; }
-  .m44-unit[data-orientation='0'][data-type='1'][data-nation='brit'] .m44-unit-meeple:nth-of-type(4) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='1'][data-nation='brit'] .m44-unit-meeple:nth-of-type(4) {
     left: 33%;
     top: 35%; }
-
-.summary-tile
+[data-unitSprite='1'] .summary-tile
 .m44-unit[data-orientation='0'][data-type='1'][data-nation='brit']
 .m44-unit-meeple {
   width: 100%;
   height: 130.21%;
   left: 0;
   top: 0; }
-
-.m44-unit[data-orientation='0'][data-type='1'][data-nation='jp'] .m44-unit-meeple {
+[data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='1'][data-nation='jp'] .m44-unit-meeple {
   width: 57%;
   height: 66.6786%;
   background-size: 966.038%;
   background-position: 94.1176% 0.257732%;
   background-color: transparent;
   border-radius: none; }
-  .m44-unit[data-orientation='0'][data-type='1'][data-nation='jp'] .m44-unit-meeple:nth-of-type(1) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='1'][data-nation='jp'] .m44-unit-meeple:nth-of-type(1) {
     left: 18%;
     top: 0%; }
-  .m44-unit[data-orientation='0'][data-type='1'][data-nation='jp'] .m44-unit-meeple:nth-of-type(2) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='1'][data-nation='jp'] .m44-unit-meeple:nth-of-type(2) {
     left: 45%;
     top: 14%; }
-  .m44-unit[data-orientation='0'][data-type='1'][data-nation='jp'] .m44-unit-meeple:nth-of-type(3) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='1'][data-nation='jp'] .m44-unit-meeple:nth-of-type(3) {
     left: 2%;
     top: 23%; }
-  .m44-unit[data-orientation='0'][data-type='1'][data-nation='jp'] .m44-unit-meeple:nth-of-type(4) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='1'][data-nation='jp'] .m44-unit-meeple:nth-of-type(4) {
     left: 29%;
     top: 35%; }
-
-.summary-tile
+[data-unitSprite='1'] .summary-tile
 .m44-unit[data-orientation='0'][data-type='1'][data-nation='jp']
 .m44-unit-meeple {
   width: 100%;
   height: 116.98%;
   left: 0;
   top: 0; }
-
-.m44-unit[data-orientation='0'][data-type='2'][data-nation='ger'] .m44-unit-meeple {
+[data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='2'][data-nation='ger'] .m44-unit-meeple {
   width: 51%;
   height: 51%;
   background-size: 1003.92%;
   background-position: 92.5163% 33.3333%;
   background-color: transparent;
   border-radius: none; }
-  .m44-unit[data-orientation='0'][data-type='2'][data-nation='ger'] .m44-unit-meeple:nth-of-type(1) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='2'][data-nation='ger'] .m44-unit-meeple:nth-of-type(1) {
     left: 32%;
     top: -7%; }
-  .m44-unit[data-orientation='0'][data-type='2'][data-nation='ger'] .m44-unit-meeple:nth-of-type(2) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='2'][data-nation='ger'] .m44-unit-meeple:nth-of-type(2) {
     left: 2%;
     top: 10%; }
-  .m44-unit[data-orientation='0'][data-type='2'][data-nation='ger'] .m44-unit-meeple:nth-of-type(3) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='2'][data-nation='ger'] .m44-unit-meeple:nth-of-type(3) {
     left: 48%;
     top: 41%; }
-  .m44-unit[data-orientation='0'][data-type='2'][data-nation='ger'] .m44-unit-meeple:nth-of-type(4) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='2'][data-nation='ger'] .m44-unit-meeple:nth-of-type(4) {
     left: 9%;
     top: 54%; }
-
-.summary-tile
+[data-unitSprite='1'] .summary-tile
 .m44-unit[data-orientation='0'][data-type='2'][data-nation='ger']
 .m44-unit-meeple {
   width: 100%;
   height: 100%;
   left: 0;
   top: 0; }
-
-.m44-unit[data-orientation='0'][data-type='2'][data-nation='us'] .m44-unit-meeple {
+[data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='2'][data-nation='us'] .m44-unit-meeple {
   width: 50%;
   height: 55.115%;
   background-size: 1163.64%;
   background-position: 45.2991% 63.1325%;
   background-color: transparent;
   border-radius: none; }
-  .m44-unit[data-orientation='0'][data-type='2'][data-nation='us'] .m44-unit-meeple:nth-of-type(1) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='2'][data-nation='us'] .m44-unit-meeple:nth-of-type(1) {
     left: 14%;
     top: -5%; }
-  .m44-unit[data-orientation='0'][data-type='2'][data-nation='us'] .m44-unit-meeple:nth-of-type(2) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='2'][data-nation='us'] .m44-unit-meeple:nth-of-type(2) {
     left: 49%;
     top: 11%; }
-  .m44-unit[data-orientation='0'][data-type='2'][data-nation='us'] .m44-unit-meeple:nth-of-type(3) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='2'][data-nation='us'] .m44-unit-meeple:nth-of-type(3) {
     left: 6%;
     top: 39%; }
-  .m44-unit[data-orientation='0'][data-type='2'][data-nation='us'] .m44-unit-meeple:nth-of-type(4) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='2'][data-nation='us'] .m44-unit-meeple:nth-of-type(4) {
     left: 33%;
     top: 33%; }
-
-.summary-tile
+[data-unitSprite='1'] .summary-tile
 .m44-unit[data-orientation='0'][data-type='2'][data-nation='us']
 .m44-unit-meeple {
   width: 100%;
   height: 110.23%;
   left: 0;
   top: 0; }
-
-.m44-unit[data-orientation='0'][data-type='2'][data-nation='ru'] .m44-unit-meeple {
+[data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='2'][data-nation='ru'] .m44-unit-meeple {
   width: 60%;
   height: 53.628%;
   background-size: 906.195%;
   background-position: 11.416% 63.747%;
   background-color: transparent;
   border-radius: none; }
-  .m44-unit[data-orientation='0'][data-type='2'][data-nation='ru'] .m44-unit-meeple:nth-of-type(1) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='2'][data-nation='ru'] .m44-unit-meeple:nth-of-type(1) {
     left: 9%;
     top: -5%; }
-  .m44-unit[data-orientation='0'][data-type='2'][data-nation='ru'] .m44-unit-meeple:nth-of-type(2) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='2'][data-nation='ru'] .m44-unit-meeple:nth-of-type(2) {
     left: 46%;
     top: 8%; }
-  .m44-unit[data-orientation='0'][data-type='2'][data-nation='ru'] .m44-unit-meeple:nth-of-type(3) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='2'][data-nation='ru'] .m44-unit-meeple:nth-of-type(3) {
     left: 1%;
     top: 38%; }
-  .m44-unit[data-orientation='0'][data-type='2'][data-nation='ru'] .m44-unit-meeple:nth-of-type(4) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='2'][data-nation='ru'] .m44-unit-meeple:nth-of-type(4) {
     left: 44%;
     top: 47%; }
-
-.summary-tile
+[data-unitSprite='1'] .summary-tile
 .m44-unit[data-orientation='0'][data-type='2'][data-nation='ru']
 .m44-unit-meeple {
   width: 100%;
   height: 89.38%;
   left: 0;
   top: 0; }
-
-.m44-unit[data-orientation='0'][data-type='2'][data-nation='brit'] .m44-unit-meeple {
+[data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='2'][data-nation='brit'] .m44-unit-meeple {
   width: 50%;
   height: 55.115%;
   background-size: 1163.64%;
   background-position: 35.7906% 63.1325%;
   background-color: transparent;
   border-radius: none; }
-  .m44-unit[data-orientation='0'][data-type='2'][data-nation='brit'] .m44-unit-meeple:nth-of-type(1) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='2'][data-nation='brit'] .m44-unit-meeple:nth-of-type(1) {
     left: 14%;
     top: -5%; }
-  .m44-unit[data-orientation='0'][data-type='2'][data-nation='brit'] .m44-unit-meeple:nth-of-type(2) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='2'][data-nation='brit'] .m44-unit-meeple:nth-of-type(2) {
     left: 49%;
     top: 11%; }
-  .m44-unit[data-orientation='0'][data-type='2'][data-nation='brit'] .m44-unit-meeple:nth-of-type(3) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='2'][data-nation='brit'] .m44-unit-meeple:nth-of-type(3) {
     left: 3%;
     top: 38%; }
-  .m44-unit[data-orientation='0'][data-type='2'][data-nation='brit'] .m44-unit-meeple:nth-of-type(4) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='2'][data-nation='brit'] .m44-unit-meeple:nth-of-type(4) {
     left: 42%;
     top: 49%; }
-
-.summary-tile
+[data-unitSprite='1'] .summary-tile
 .m44-unit[data-orientation='0'][data-type='2'][data-nation='brit']
 .m44-unit-meeple {
   width: 100%;
   height: 110.23%;
   left: 0;
   top: 0; }
-
-.m44-unit[data-orientation='0'][data-type='2'][data-nation='jp'] .m44-unit-meeple {
+[data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='2'][data-nation='jp'] .m44-unit-meeple {
   width: 60%;
   height: 60%;
   background-size: 1003.92%;
   background-position: 0.10846% 63.747%;
   background-color: transparent;
   border-radius: none; }
-  .m44-unit[data-orientation='0'][data-type='2'][data-nation='jp'] .m44-unit-meeple:nth-of-type(1) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='2'][data-nation='jp'] .m44-unit-meeple:nth-of-type(1) {
     left: 34%;
     top: -4%; }
-  .m44-unit[data-orientation='0'][data-type='2'][data-nation='jp'] .m44-unit-meeple:nth-of-type(2) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='2'][data-nation='jp'] .m44-unit-meeple:nth-of-type(2) {
     left: 2%;
     top: 14%; }
-  .m44-unit[data-orientation='0'][data-type='2'][data-nation='jp'] .m44-unit-meeple:nth-of-type(3) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='2'][data-nation='jp'] .m44-unit-meeple:nth-of-type(3) {
     left: 45%;
     top: 32%; }
-  .m44-unit[data-orientation='0'][data-type='2'][data-nation='jp'] .m44-unit-meeple:nth-of-type(4) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='2'][data-nation='jp'] .m44-unit-meeple:nth-of-type(4) {
     left: 4%;
     top: 44%; }
-
-.summary-tile
+[data-unitSprite='1'] .summary-tile
 .m44-unit[data-orientation='0'][data-type='2'][data-nation='jp']
 .m44-unit-meeple {
   width: 100%;
   height: 100%;
   left: 0;
   top: 0; }
-
-.m44-unit[data-orientation='0'][data-type='3'][data-nation='ger'] .m44-unit-meeple {
+[data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='3'][data-nation='ger'] .m44-unit-meeple {
   width: 62%;
   height: 72.1432%;
   background-size: 930.909%;
   background-position: 20.4595% 0.260417%;
   background-color: transparent;
   border-radius: none; }
-  .m44-unit[data-orientation='0'][data-type='3'][data-nation='ger'] .m44-unit-meeple:nth-of-type(1) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='3'][data-nation='ger'] .m44-unit-meeple:nth-of-type(1) {
     left: 38%;
     top: -8%; }
-  .m44-unit[data-orientation='0'][data-type='3'][data-nation='ger'] .m44-unit-meeple:nth-of-type(2) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='3'][data-nation='ger'] .m44-unit-meeple:nth-of-type(2) {
     left: 15%;
     top: 30%; }
-
-.summary-tile
+[data-unitSprite='1'] .summary-tile
 .m44-unit[data-orientation='0'][data-type='3'][data-nation='ger']
 .m44-unit-meeple {
   width: 100%;
   height: 116.36%;
   left: 0;
   top: 0; }
-
-.m44-unit[data-orientation='0'][data-type='3'][data-nation='us'] .m44-unit-meeple {
+[data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='3'][data-nation='us'] .m44-unit-meeple {
   width: 57%;
   height: 69.7281%;
   background-size: 994.175%;
   background-position: 71.987% 0.259067%;
   background-color: transparent;
   border-radius: none; }
-  .m44-unit[data-orientation='0'][data-type='3'][data-nation='us'] .m44-unit-meeple:nth-of-type(1) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='3'][data-nation='us'] .m44-unit-meeple:nth-of-type(1) {
     left: 4%;
     top: -7%; }
-  .m44-unit[data-orientation='0'][data-type='3'][data-nation='us'] .m44-unit-meeple:nth-of-type(2) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='3'][data-nation='us'] .m44-unit-meeple:nth-of-type(2) {
     left: 37%;
     top: 22%; }
-
-.summary-tile
+[data-unitSprite='1'] .summary-tile
 .m44-unit[data-orientation='0'][data-type='3'][data-nation='us']
 .m44-unit-meeple {
   width: 100%;
   height: 122.33%;
   left: 0;
   top: 0; }
-
-.m44-unit[data-orientation='0'][data-type='3'][data-nation='ru'] .m44-unit-meeple {
+[data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='3'][data-nation='ru'] .m44-unit-meeple {
   width: 70%;
   height: 70%;
   background-size: 812.698%;
   background-position: 59.6882% 0.259067%;
   background-color: transparent;
   border-radius: none; }
-  .m44-unit[data-orientation='0'][data-type='3'][data-nation='ru'] .m44-unit-meeple:nth-of-type(1) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='3'][data-nation='ru'] .m44-unit-meeple:nth-of-type(1) {
     left: -4%;
     top: -7%; }
-  .m44-unit[data-orientation='0'][data-type='3'][data-nation='ru'] .m44-unit-meeple:nth-of-type(2) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='3'][data-nation='ru'] .m44-unit-meeple:nth-of-type(2) {
     left: 31%;
     top: 21%; }
-
-.summary-tile
+[data-unitSprite='1'] .summary-tile
 .m44-unit[data-orientation='0'][data-type='3'][data-nation='ru']
 .m44-unit-meeple {
   width: 100%;
   height: 100%;
   left: 0;
   top: 0; }
-
-.m44-unit[data-orientation='0'][data-type='3'][data-nation='brit'] .m44-unit-meeple {
+[data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='3'][data-nation='brit'] .m44-unit-meeple {
   width: 70%;
   height: 70%;
   background-size: 812.698%;
   background-position: 45.5457% 0.259067%;
   background-color: transparent;
   border-radius: none; }
-  .m44-unit[data-orientation='0'][data-type='3'][data-nation='brit'] .m44-unit-meeple:nth-of-type(1) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='3'][data-nation='brit'] .m44-unit-meeple:nth-of-type(1) {
     left: 3%;
     top: -7%; }
-  .m44-unit[data-orientation='0'][data-type='3'][data-nation='brit'] .m44-unit-meeple:nth-of-type(2) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='3'][data-nation='brit'] .m44-unit-meeple:nth-of-type(2) {
     left: 36%;
     top: 20%; }
-
-.summary-tile
+[data-unitSprite='1'] .summary-tile
 .m44-unit[data-orientation='0'][data-type='3'][data-nation='brit']
 .m44-unit-meeple {
   width: 100%;
   height: 100%;
   left: 0;
   top: 0; }
-
-.m44-unit[data-orientation='0'][data-type='3'][data-nation='jp'] .m44-unit-meeple {
+[data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='3'][data-nation='jp'] .m44-unit-meeple {
   width: 65%;
   height: 75.634%;
   background-size: 930.909%;
   background-position: 32.6039% 0.260417%;
   background-color: transparent;
   border-radius: none; }
-  .m44-unit[data-orientation='0'][data-type='3'][data-nation='jp'] .m44-unit-meeple:nth-of-type(1) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='3'][data-nation='jp'] .m44-unit-meeple:nth-of-type(1) {
     left: 33%;
     top: -7%; }
-  .m44-unit[data-orientation='0'][data-type='3'][data-nation='jp'] .m44-unit-meeple:nth-of-type(2) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='0'][data-type='3'][data-nation='jp'] .m44-unit-meeple:nth-of-type(2) {
     left: 7%;
     top: 25%; }
-
-.summary-tile
+[data-unitSprite='1'] .summary-tile
 .m44-unit[data-orientation='0'][data-type='3'][data-nation='jp']
 .m44-unit-meeple {
   width: 100%;
   height: 116.36%;
   left: 0;
   top: 0; }
-
-.m44-unit[data-orientation='1'][data-type='1'][data-nation='ger'] .m44-unit-meeple {
+[data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='1'][data-nation='ger'] .m44-unit-meeple {
   width: 43%;
   height: 63.5239%;
   background-size: 1163.64%;
   background-position: 10.4701% 0.26178%;
   background-color: transparent;
   border-radius: none; }
-  .m44-unit[data-orientation='1'][data-type='1'][data-nation='ger'] .m44-unit-meeple:nth-of-type(1) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='1'][data-nation='ger'] .m44-unit-meeple:nth-of-type(1) {
     left: 22%;
     top: -2%; }
-  .m44-unit[data-orientation='1'][data-type='1'][data-nation='ger'] .m44-unit-meeple:nth-of-type(2) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='1'][data-nation='ger'] .m44-unit-meeple:nth-of-type(2) {
     left: 50%;
     top: 11%; }
-  .m44-unit[data-orientation='1'][data-type='1'][data-nation='ger'] .m44-unit-meeple:nth-of-type(3) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='1'][data-nation='ger'] .m44-unit-meeple:nth-of-type(3) {
     left: 3%;
     top: 18%; }
-  .m44-unit[data-orientation='1'][data-type='1'][data-nation='ger'] .m44-unit-meeple:nth-of-type(4) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='1'][data-nation='ger'] .m44-unit-meeple:nth-of-type(4) {
     left: 32%;
     top: 28%; }
-
-.summary-tile
+[data-unitSprite='1'] .summary-tile
 .m44-unit[data-orientation='1'][data-type='1'][data-nation='ger']
 .m44-unit-meeple {
   width: 100%;
   height: 147.73%;
   left: 0;
   top: 0; }
-
-.m44-unit[data-orientation='1'][data-type='1'][data-nation='us'] .m44-unit-meeple {
+[data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='1'][data-nation='us'] .m44-unit-meeple {
   width: 50%;
   height: 62.5%;
   background-size: 1066.67%;
   background-position: 69.5043% 34.949%;
   background-color: transparent;
   border-radius: none; }
-  .m44-unit[data-orientation='1'][data-type='1'][data-nation='us'] .m44-unit-meeple:nth-of-type(1) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='1'][data-nation='us'] .m44-unit-meeple:nth-of-type(1) {
     left: 22%;
     top: 2%; }
-  .m44-unit[data-orientation='1'][data-type='1'][data-nation='us'] .m44-unit-meeple:nth-of-type(2) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='1'][data-nation='us'] .m44-unit-meeple:nth-of-type(2) {
     left: 49%;
     top: 17%; }
-  .m44-unit[data-orientation='1'][data-type='1'][data-nation='us'] .m44-unit-meeple:nth-of-type(3) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='1'][data-nation='us'] .m44-unit-meeple:nth-of-type(3) {
     left: 7%;
     top: 23%; }
-  .m44-unit[data-orientation='1'][data-type='1'][data-nation='us'] .m44-unit-meeple:nth-of-type(4) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='1'][data-nation='us'] .m44-unit-meeple:nth-of-type(4) {
     left: 32%;
     top: 34%; }
-
-.summary-tile
+[data-unitSprite='1'] .summary-tile
 .m44-unit[data-orientation='1'][data-type='1'][data-nation='us']
 .m44-unit-meeple {
   width: 100%;
   height: 125%;
   left: 0;
   top: 0; }
-
-.m44-unit[data-orientation='1'][data-type='1'][data-nation='ru'] .m44-unit-meeple {
+[data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='1'][data-nation='ru'] .m44-unit-meeple {
   width: 60%;
   height: 70.188%;
   background-size: 966.038%;
   background-position: 11.7647% 35.3093%;
   background-color: transparent;
   border-radius: none; }
-  .m44-unit[data-orientation='1'][data-type='1'][data-nation='ru'] .m44-unit-meeple:nth-of-type(1) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='1'][data-nation='ru'] .m44-unit-meeple:nth-of-type(1) {
     left: 22%;
     top: -2%; }
-  .m44-unit[data-orientation='1'][data-type='1'][data-nation='ru'] .m44-unit-meeple:nth-of-type(2) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='1'][data-nation='ru'] .m44-unit-meeple:nth-of-type(2) {
     left: 50%;
     top: 11%; }
-  .m44-unit[data-orientation='1'][data-type='1'][data-nation='ru'] .m44-unit-meeple:nth-of-type(3) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='1'][data-nation='ru'] .m44-unit-meeple:nth-of-type(3) {
     left: 3%;
     top: 18%; }
-  .m44-unit[data-orientation='1'][data-type='1'][data-nation='ru'] .m44-unit-meeple:nth-of-type(4) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='1'][data-nation='ru'] .m44-unit-meeple:nth-of-type(4) {
     left: 32%;
     top: 28%; }
-
-.summary-tile
+[data-unitSprite='1'] .summary-tile
 .m44-unit[data-orientation='1'][data-type='1'][data-nation='ru']
 .m44-unit-meeple {
   width: 100%;
   height: 116.98%;
   left: 0;
   top: 0; }
-
-.m44-unit[data-orientation='1'][data-type='1'][data-nation='brit'] .m44-unit-meeple {
+[data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='1'][data-nation='brit'] .m44-unit-meeple {
   width: 54%;
   height: 67.5%;
   background-size: 1066.67%;
   background-position: 36.2069% 34.949%;
   background-color: transparent;
   border-radius: none; }
-  .m44-unit[data-orientation='1'][data-type='1'][data-nation='brit'] .m44-unit-meeple:nth-of-type(1) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='1'][data-nation='brit'] .m44-unit-meeple:nth-of-type(1) {
     left: 27%;
     top: -6%; }
-  .m44-unit[data-orientation='1'][data-type='1'][data-nation='brit'] .m44-unit-meeple:nth-of-type(2) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='1'][data-nation='brit'] .m44-unit-meeple:nth-of-type(2) {
     left: 53%;
     top: 11%; }
-  .m44-unit[data-orientation='1'][data-type='1'][data-nation='brit'] .m44-unit-meeple:nth-of-type(3) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='1'][data-nation='brit'] .m44-unit-meeple:nth-of-type(3) {
     left: 3%;
     top: 15%; }
-  .m44-unit[data-orientation='1'][data-type='1'][data-nation='brit'] .m44-unit-meeple:nth-of-type(4) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='1'][data-nation='brit'] .m44-unit-meeple:nth-of-type(4) {
     left: 32%;
     top: 30%; }
-
-.summary-tile
+[data-unitSprite='1'] .summary-tile
 .m44-unit[data-orientation='1'][data-type='1'][data-nation='brit']
 .m44-unit-meeple {
   width: 100%;
   height: 125%;
   left: 0;
   top: 0; }
-
-.m44-unit[data-orientation='1'][data-type='1'][data-nation='jp'] .m44-unit-meeple {
+[data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='1'][data-nation='jp'] .m44-unit-meeple {
   width: 70%;
   height: 70%;
   background-size: 930.909%;
   background-position: 81.1816% 34.0796%;
   background-color: transparent;
   border-radius: none; }
-  .m44-unit[data-orientation='1'][data-type='1'][data-nation='jp'] .m44-unit-meeple:nth-of-type(1) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='1'][data-nation='jp'] .m44-unit-meeple:nth-of-type(1) {
     left: 15%;
     top: 1%; }
-  .m44-unit[data-orientation='1'][data-type='1'][data-nation='jp'] .m44-unit-meeple:nth-of-type(2) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='1'][data-nation='jp'] .m44-unit-meeple:nth-of-type(2) {
     left: 42%;
     top: 13%; }
-  .m44-unit[data-orientation='1'][data-type='1'][data-nation='jp'] .m44-unit-meeple:nth-of-type(3) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='1'][data-nation='jp'] .m44-unit-meeple:nth-of-type(3) {
     left: -5%;
     top: 23%; }
-  .m44-unit[data-orientation='1'][data-type='1'][data-nation='jp'] .m44-unit-meeple:nth-of-type(4) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='1'][data-nation='jp'] .m44-unit-meeple:nth-of-type(4) {
     left: 25%;
     top: 34%; }
-
-.summary-tile
+[data-unitSprite='1'] .summary-tile
 .m44-unit[data-orientation='1'][data-type='1'][data-nation='jp']
 .m44-unit-meeple {
   width: 100%;
   height: 100%;
   left: 0;
   top: 0; }
-
-.m44-unit[data-orientation='1'][data-type='2'][data-nation='ger'] .m44-unit-meeple {
+[data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='2'][data-nation='ger'] .m44-unit-meeple {
   width: 49%;
   height: 49%;
   background-size: 1137.78%;
   background-position: 54.9251% 62.9808%;
   background-color: transparent;
   border-radius: none; }
-  .m44-unit[data-orientation='1'][data-type='2'][data-nation='ger'] .m44-unit-meeple:nth-of-type(1) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='2'][data-nation='ger'] .m44-unit-meeple:nth-of-type(1) {
     left: 14%;
     top: -2%; }
-  .m44-unit[data-orientation='1'][data-type='2'][data-nation='ger'] .m44-unit-meeple:nth-of-type(2) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='2'][data-nation='ger'] .m44-unit-meeple:nth-of-type(2) {
     left: 44%;
     top: 8%; }
-  .m44-unit[data-orientation='1'][data-type='2'][data-nation='ger'] .m44-unit-meeple:nth-of-type(3) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='2'][data-nation='ger'] .m44-unit-meeple:nth-of-type(3) {
     left: 7%;
     top: 42%; }
-  .m44-unit[data-orientation='1'][data-type='2'][data-nation='ger'] .m44-unit-meeple:nth-of-type(4) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='2'][data-nation='ger'] .m44-unit-meeple:nth-of-type(4) {
     left: 42%;
     top: 45%; }
-
-.summary-tile
+[data-unitSprite='1'] .summary-tile
 .m44-unit[data-orientation='1'][data-type='2'][data-nation='ger']
 .m44-unit-meeple {
   width: 100%;
   height: 100%;
   left: 0;
   top: 0; }
-
-.m44-unit[data-orientation='1'][data-type='2'][data-nation='us'] .m44-unit-meeple {
+[data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='2'][data-nation='us'] .m44-unit-meeple {
   width: 53%;
   height: 54.8921%;
   background-size: 1177.01%;
   background-position: 13.0203% 85.0467%;
   background-color: transparent;
   border-radius: none; }
-  .m44-unit[data-orientation='1'][data-type='2'][data-nation='us'] .m44-unit-meeple:nth-of-type(1) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='2'][data-nation='us'] .m44-unit-meeple:nth-of-type(1) {
     left: 33%;
     top: -7%; }
-  .m44-unit[data-orientation='1'][data-type='2'][data-nation='us'] .m44-unit-meeple:nth-of-type(2) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='2'][data-nation='us'] .m44-unit-meeple:nth-of-type(2) {
     left: 2%;
     top: 9%; }
-  .m44-unit[data-orientation='1'][data-type='2'][data-nation='us'] .m44-unit-meeple:nth-of-type(3) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='2'][data-nation='us'] .m44-unit-meeple:nth-of-type(3) {
     left: 48%;
     top: 39%; }
-  .m44-unit[data-orientation='1'][data-type='2'][data-nation='us'] .m44-unit-meeple:nth-of-type(4) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='2'][data-nation='us'] .m44-unit-meeple:nth-of-type(4) {
     left: 14%;
     top: 53%; }
-
-.summary-tile
+[data-unitSprite='1'] .summary-tile
 .m44-unit[data-orientation='1'][data-type='2'][data-nation='us']
 .m44-unit-meeple {
   width: 100%;
   height: 103.57%;
   left: 0;
   top: 0; }
-
-.m44-unit[data-orientation='1'][data-type='2'][data-nation='ru'] .m44-unit-meeple {
+[data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='2'][data-nation='ru'] .m44-unit-meeple {
   width: 54%;
   height: 54%;
   background-size: 1077.89%;
   background-position: 74.8116% 62.8297%;
   background-color: transparent;
   border-radius: none; }
-  .m44-unit[data-orientation='1'][data-type='2'][data-nation='ru'] .m44-unit-meeple:nth-of-type(1) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='2'][data-nation='ru'] .m44-unit-meeple:nth-of-type(1) {
     left: 31%;
     top: -10%; }
-  .m44-unit[data-orientation='1'][data-type='2'][data-nation='ru'] .m44-unit-meeple:nth-of-type(2) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='2'][data-nation='ru'] .m44-unit-meeple:nth-of-type(2) {
     left: 3%;
     top: 11%; }
-  .m44-unit[data-orientation='1'][data-type='2'][data-nation='ru'] .m44-unit-meeple:nth-of-type(3) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='2'][data-nation='ru'] .m44-unit-meeple:nth-of-type(3) {
     left: 49%;
     top: 33%; }
-  .m44-unit[data-orientation='1'][data-type='2'][data-nation='ru'] .m44-unit-meeple:nth-of-type(4) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='2'][data-nation='ru'] .m44-unit-meeple:nth-of-type(4) {
     left: 2%;
     top: 47%; }
-
-.summary-tile
+[data-unitSprite='1'] .summary-tile
 .m44-unit[data-orientation='1'][data-type='2'][data-nation='ru']
 .m44-unit-meeple {
   width: 100%;
   height: 100%;
   left: 0;
   top: 0; }
-
-.m44-unit[data-orientation='1'][data-type='2'][data-nation='brit'] .m44-unit-meeple {
+[data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='2'][data-nation='brit'] .m44-unit-meeple {
   width: 53%;
   height: 50.2122%;
   background-size: 1077.89%;
   background-position: 85.1453% 62.0853%;
   background-color: transparent;
   border-radius: none; }
-  .m44-unit[data-orientation='1'][data-type='2'][data-nation='brit'] .m44-unit-meeple:nth-of-type(1) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='2'][data-nation='brit'] .m44-unit-meeple:nth-of-type(1) {
     left: 31%;
     top: -4%; }
-  .m44-unit[data-orientation='1'][data-type='2'][data-nation='brit'] .m44-unit-meeple:nth-of-type(2) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='2'][data-nation='brit'] .m44-unit-meeple:nth-of-type(2) {
     left: 2%;
     top: 14%; }
-  .m44-unit[data-orientation='1'][data-type='2'][data-nation='brit'] .m44-unit-meeple:nth-of-type(3) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='2'][data-nation='brit'] .m44-unit-meeple:nth-of-type(3) {
     left: 46%;
     top: 44%; }
-  .m44-unit[data-orientation='1'][data-type='2'][data-nation='brit'] .m44-unit-meeple:nth-of-type(4) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='2'][data-nation='brit'] .m44-unit-meeple:nth-of-type(4) {
     left: 10%;
     top: 55%; }
-
-.summary-tile
+[data-unitSprite='1'] .summary-tile
 .m44-unit[data-orientation='1'][data-type='2'][data-nation='brit']
 .m44-unit-meeple {
   width: 100%;
   height: 94.74%;
   left: 0;
   top: 0; }
-
-.m44-unit[data-orientation='1'][data-type='2'][data-nation='jp'] .m44-unit-meeple {
+[data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='2'][data-nation='jp'] .m44-unit-meeple {
   width: 55%;
   height: 58.6685%;
   background-size: 1137.78%;
   background-position: 64.6681% 62.9808%;
   background-color: transparent;
   border-radius: none; }
-  .m44-unit[data-orientation='1'][data-type='2'][data-nation='jp'] .m44-unit-meeple:nth-of-type(1) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='2'][data-nation='jp'] .m44-unit-meeple:nth-of-type(1) {
     left: 19%;
     top: -9%; }
-  .m44-unit[data-orientation='1'][data-type='2'][data-nation='jp'] .m44-unit-meeple:nth-of-type(2) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='2'][data-nation='jp'] .m44-unit-meeple:nth-of-type(2) {
     left: 47%;
     top: 12%; }
-  .m44-unit[data-orientation='1'][data-type='2'][data-nation='jp'] .m44-unit-meeple:nth-of-type(3) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='2'][data-nation='jp'] .m44-unit-meeple:nth-of-type(3) {
     left: 0%;
     top: 32%; }
-  .m44-unit[data-orientation='1'][data-type='2'][data-nation='jp'] .m44-unit-meeple:nth-of-type(4) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='2'][data-nation='jp'] .m44-unit-meeple:nth-of-type(4) {
     left: 30%;
     top: 53%; }
-
-.summary-tile
+[data-unitSprite='1'] .summary-tile
 .m44-unit[data-orientation='1'][data-type='2'][data-nation='jp']
 .m44-unit-meeple {
   width: 100%;
   height: 106.67%;
   left: 0;
   top: 0; }
-
-.m44-unit[data-orientation='1'][data-type='3'][data-nation='ger'] .m44-unit-meeple {
+[data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='3'][data-nation='ger'] .m44-unit-meeple {
   width: 72%;
   height: 55.8648%;
   background-size: 882.759%;
   background-position: 97.6872% 62.0853%;
   background-color: transparent;
   border-radius: none; }
-  .m44-unit[data-orientation='1'][data-type='3'][data-nation='ger'] .m44-unit-meeple:nth-of-type(1) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='3'][data-nation='ger'] .m44-unit-meeple:nth-of-type(1) {
     left: -3%;
     top: 7%; }
-  .m44-unit[data-orientation='1'][data-type='3'][data-nation='ger'] .m44-unit-meeple:nth-of-type(2) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='3'][data-nation='ger'] .m44-unit-meeple:nth-of-type(2) {
     left: 23%;
     top: 45%; }
-
-.summary-tile
+[data-unitSprite='1'] .summary-tile
 .m44-unit[data-orientation='1'][data-type='3'][data-nation='ger']
 .m44-unit-meeple {
   width: 100%;
   height: 77.59%;
   left: 0;
   top: 0; }
-
-.m44-unit[data-orientation='1'][data-type='3'][data-nation='us'] .m44-unit-meeple {
+[data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='3'][data-nation='us'] .m44-unit-meeple {
   width: 70%;
   height: 50.169%;
   background-size: 853.333%;
   background-position: 0.110619% 85.446%;
   background-color: transparent;
   border-radius: none; }
-  .m44-unit[data-orientation='1'][data-type='3'][data-nation='us'] .m44-unit-meeple:nth-of-type(1) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='3'][data-nation='us'] .m44-unit-meeple:nth-of-type(1) {
     left: 17%;
     top: -2%; }
-  .m44-unit[data-orientation='1'][data-type='3'][data-nation='us'] .m44-unit-meeple:nth-of-type(2) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='3'][data-nation='us'] .m44-unit-meeple:nth-of-type(2) {
     left: 4%;
     top: 47%; }
-
-.summary-tile
+[data-unitSprite='1'] .summary-tile
 .m44-unit[data-orientation='1'][data-type='3'][data-nation='us']
 .m44-unit-meeple {
   width: 100%;
   height: 71.67%;
   left: 0;
   top: 0; }
-
-.m44-unit[data-orientation='1'][data-type='3'][data-nation='ru'] .m44-unit-meeple {
+[data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='3'][data-nation='ru'] .m44-unit-meeple {
   width: 70%;
   height: 70%;
   background-size: 853.333%;
   background-position: 57.9646% 34.949%;
   background-color: transparent;
   border-radius: none; }
-  .m44-unit[data-orientation='1'][data-type='3'][data-nation='ru'] .m44-unit-meeple:nth-of-type(1) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='3'][data-nation='ru'] .m44-unit-meeple:nth-of-type(1) {
     left: 18%;
     top: -5%; }
-  .m44-unit[data-orientation='1'][data-type='3'][data-nation='ru'] .m44-unit-meeple:nth-of-type(2) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='3'][data-nation='ru'] .m44-unit-meeple:nth-of-type(2) {
     left: 2%;
     top: 39%; }
-
-.summary-tile
+[data-unitSprite='1'] .summary-tile
 .m44-unit[data-orientation='1'][data-type='3'][data-nation='ru']
 .m44-unit-meeple {
   width: 100%;
   height: 100%;
   left: 0;
   top: 0; }
-
-.m44-unit[data-orientation='1'][data-type='3'][data-nation='brit'] .m44-unit-meeple {
+[data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='3'][data-nation='brit'] .m44-unit-meeple {
   width: 67%;
   height: 67%;
   background-size: 853.333%;
   background-position: 23.7832% 34.949%;
   background-color: transparent;
   border-radius: none; }
-  .m44-unit[data-orientation='1'][data-type='3'][data-nation='brit'] .m44-unit-meeple:nth-of-type(1) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='3'][data-nation='brit'] .m44-unit-meeple:nth-of-type(1) {
     left: 18%;
     top: -5%; }
-  .m44-unit[data-orientation='1'][data-type='3'][data-nation='brit'] .m44-unit-meeple:nth-of-type(2) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='3'][data-nation='brit'] .m44-unit-meeple:nth-of-type(2) {
     left: -2%;
     top: 35%; }
-
-.summary-tile
+[data-unitSprite='1'] .summary-tile
 .m44-unit[data-orientation='1'][data-type='3'][data-nation='brit']
 .m44-unit-meeple {
   width: 100%;
   height: 100%;
   left: 0;
   top: 0; }
-
-.m44-unit[data-orientation='1'][data-type='3'][data-nation='jp'] .m44-unit-meeple {
+[data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='3'][data-nation='jp'] .m44-unit-meeple {
   width: 70%;
   height: 60.347%;
   background-size: 930.909%;
   background-position: 32.6039% 0.260417%;
   background-color: transparent;
   border-radius: none; }
-  .m44-unit[data-orientation='1'][data-type='3'][data-nation='jp'] .m44-unit-meeple:nth-of-type(1) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='3'][data-nation='jp'] .m44-unit-meeple:nth-of-type(1) {
     left: 30%;
     top: -8%; }
-  .m44-unit[data-orientation='1'][data-type='3'][data-nation='jp'] .m44-unit-meeple:nth-of-type(2) {
+  [data-unitSprite='1'] .m44-unit[data-orientation='1'][data-type='3'][data-nation='jp'] .m44-unit-meeple:nth-of-type(2) {
     left: 1%;
     top: 25%; }
-
-.summary-tile
+[data-unitSprite='1'] .summary-tile
 .m44-unit[data-orientation='1'][data-type='3'][data-nation='jp']
 .m44-unit-meeple {
   width: 100%;

@@ -232,7 +232,7 @@ $units: (
   ),
 );
 
-//[data-unitSprite='1'] {
+[data-unitSprite='1'] {
   @each $orientation, $unitsData in $units {
     @each $type, $map in $unitsData {
       @each $nation, $width, $ratio, $bgSize, $bgPosX, $bgPosY, $positions in $map {
@@ -267,7 +267,7 @@ $units: (
       }
     }
   }
-//}
+}
 
 ///////////////////////////////////////////////////////////
 // _   _                 ____             _ _

@@ -154,16 +154,16 @@ define([
           },
         },
         autoPass: { type: 'pref', prefId: 150, local: true },
-        // unitSprite: {
-        //   default: 0,
-        //   name: _('Units sprite'),
-        //   attribute: 'unitSprite',
-        //   type: 'select',
-        //   values: {
-        //     0: _('New sprite'),
-        //     1: _('Old sprite (used on the OL)'),
-        //   },
-        // },
+        unitSprite: {
+          default: 0,
+          name: _('Units sprite'),
+          attribute: 'unitSprite',
+          type: 'select',
+          values: {
+            0: _('New sprite'),
+            1: _('Old sprite (used on the OL)'),
+          },
+        },
       };
     },
 
