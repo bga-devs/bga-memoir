@@ -55,12 +55,10 @@ trait AirDropTrait
       }
 
       if ($fails > 0) {
-        Notifications::message(
-          \clienttranslate('${player_name} unsuccessfully air drop ${n} unit(s)', [
-            'player' => $player,
-            'n' => $fails,
-          ])
-        );
+        Notifications::message(\clienttranslate('${player_name} unsuccessfully air drop ${n} unit(s)'), [
+          'player' => $player,
+          'n' => $fails,
+        ]);
       }
     }
 
