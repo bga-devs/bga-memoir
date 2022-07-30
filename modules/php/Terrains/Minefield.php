@@ -32,6 +32,11 @@ class Minefield extends \M44\Models\Terrain
     if ($isRetreat || !$this->isOriginalOwner($unit)) {
       return false;
     }
+    // mines are not triggered with behind ennemy lines
+    if ($unit->getActivationOCard()->getType() == CARD_BEHIND_LINES && $unit->getMoves() < 3) {
+      return false;
+    }
+
     if ($unit->mustSweep() && !$unit->isOnTheMove()) {
       if (
         $unit->getMoves() <= $unit->getMovementAndAttackRadius() ||
@@ -43,11 +48,6 @@ class Minefield extends \M44\Models\Terrain
         $unit->disable();
         return;
       }
-    }
-
-    // mines are not triggered with behind ennemy lines
-    if ($unit->getActivationOCard()->getType() == CARD_BEHIND_LINES && $unit->getMoves() < 3) {
-      return false;
     }
 
     $isHidden = $this->tile == 'mineX';
