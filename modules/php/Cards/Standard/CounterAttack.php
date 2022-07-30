@@ -30,6 +30,11 @@ class CounterAttack extends \M44\Models\Card
     return Players::getNextId($this->pId);
   }
 
+  public function onPlay()
+  {
+    $this->stCounterAttack(false);
+  }
+
   public function nextStateAfterPlay()
   {
     $card = $this->getCopiedCard();
@@ -49,13 +54,17 @@ class CounterAttack extends \M44\Models\Card
     return is_null($copiedCard) ? false : $copiedCard->canHill317();
   }
 
-  public function stCounterAttack()
+  // STATE SHOULD BE USELESS NOW => MOVE TO ONPLAY INSTEAD
+  public function stCounterAttack($shouldTransition = true)
   {
     // Compute and store the copied card
     $lastCards = Globals::getLastPlayedCards();
     $oppId = $this->getOpponentPId();
     $cardId = $lastCards[$oppId] ?? null;
     $this->setExtraDatas('cardId', $cardId);
+    $rawLastCards = Globals::getRawLastPlayedCards();
+    $rawCard = $rawLastCards[$oppId] ?? null;
+    $this->setExtraDatas('card', $rawCard);
 
     // Transition to next state depending on copied card
     $transition = 'draw';
@@ -64,17 +73,27 @@ class CounterAttack extends \M44\Models\Card
       $copiedCard->setExtraDatas('hill317', $this->getExtraDatas('hill317'));
       $transition = $copiedCard->nextStateAfterPlay();
     }
-    Game::get()->nextState($transition);
+
+    if ($shouldTransition) {
+      Game::get()->nextState($transition);
+    }
   }
 
   public function getCopiedCard($forceCard = null)
   {
-    $cardId = $this->getExtraDatas('cardId');
+    $cardId = $this->getExtraDatas('cardId', false);
     if (!is_null($forceCard) && is_null($cardId)) {
       $cardId = $forceCard;
     }
     if (!is_null($cardId)) {
-      $card = Cards::get($cardId);
+      $rawCard = $this->getExtraDatas('card', false);
+      if (false && !is_null($rawCard) && isset($rawCard['id'])) {
+        $locations = explode('_', $rawCard['location']);
+        $rawCard['player_id'] = $locations[1] ?? null;
+        $card = Cards::getInstance($rawCard['type'], $rawCard);
+      } else {
+        $card = Cards::get($cardId); // FALLBACK CODE => TO REMOVE
+      }
       $card->setCounterAttack($this->pId, $this->getId(), $this->isCounterAttackMirror);
       return $card;
     } else {
@@ -166,6 +185,11 @@ class CounterAttack extends \M44\Models\Card
   public function argsOrderUnitsFinestHour()
   {
     return $this->getCopiedCard()->argsOrderUnitsFinestHour();
+  }
+
+  public function stOrderUnitsFinestHour()
+  {
+    return $this->getCopiedCard()->stOrderUnitsFinestHour();
   }
 
   public function actOrderUnitsFinestHour($unitIds)

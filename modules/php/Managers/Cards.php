@@ -112,7 +112,7 @@ class Cards extends \M44\Helpers\Pieces
   {
     self::move($cardId, ['inplay', $player->getId()]);
     $last = Globals::getRawLastPlayedCards();
-    $last[$player->getId()] = self::DbQuery("SELECT * FROM `cards` WHERE `card_id` = $cardId");
+    $last[$player->getId()] = self::getObjectFromDB("SELECT `card_id` AS id, `card_state` AS state, `card_location` AS location, type, value, extra_datas FROM `cards` WHERE `card_id` = $cardId");
     Globals::setRawLastPlayedCards($last);
 
     $last2 = Globals::getLastPlayedCards();
@@ -161,7 +161,7 @@ class Cards extends \M44\Helpers\Pieces
       ->getId();
     self::move($cardId, ['inplay', $pId]);
 
-    $last = Globals::getRawLastPlayedCards();
+    $last = Globals::getRawLastPlayedCards();!
     $last[$player->getId()] = self::DbQuery("SELECT * FROM `cards` WHERE `card_id` = $cardId");
     Globals::setRawLastPlayedCards($last);
 

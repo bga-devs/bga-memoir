@@ -2,6 +2,7 @@
 namespace M44\Models;
 use M44\Managers\Players;
 use M44\Managers\Units;
+use M44\Managers\Cards;
 use M44\Core\Game;
 
 class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
@@ -111,6 +112,10 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
     return null;
   }
 
+  public function onPlay()
+  {
+  }
+
   public function jsonSerialize()
   {
     return [
@@ -126,13 +131,21 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
     ];
   }
 
-  public function getExtraDatas($variable)
+  public function getExtraDatas($variable, $recurseIfCopied = true)
   {
+    if ($recurseIfCopied && !is_null($this->counterAttackCardId)) {
+      return Cards::get($this->counterAttackCardId)->getExtraDatas($variable);
+    }
+
     return $this->extraDatas[$variable] ?? null;
   }
 
   public function setExtraDatas($variable, $value)
   {
+    if (!is_null($this->counterAttackCardId)) {
+      return Cards::get($this->counterAttackCardId)->setExtraDatas($variable, $value);
+    }
+
     $this->extraDatas[$variable] = $value;
     self::DB()->update(['extra_datas' => \addslashes(\json_encode($this->extraDatas))], $this->id);
   }

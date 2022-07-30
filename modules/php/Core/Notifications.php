@@ -143,19 +143,46 @@ class Notifications
 
   public static function playCard($player, $card)
   {
-    $str = $card->getNotifString();
-    if (is_null($str)) {
-      self::notifyAll('playCard', clienttranslate('${player_name} plays ${card_name}'), [
-        'player' => $player,
-        'card' => $card,
-      ]);
-    } else {
-      self::notifyAll('playCard', clienttranslate('${player_name} plays ${card_name} on ${flank}'), [
-        'i18n' => ['flank'],
-        'player' => $player,
-        'card' => $card,
-        'flank' => $str,
-      ]);
+    // COUNTER ATTACK
+    if ($card->getType() == \CARD_COUNTER_ATTACK && !is_null($card->getCopiedCard())) {
+      $str = $card->getCopiedCard()->getNotifString();
+      if (is_null($str)) {
+        self::notifyAll('playCard', clienttranslate('${player_name} plays ${card_name} as ${copied_card_name}'), [
+          'i18n' => ['copied_card_name'],
+          'player' => $player,
+          'card' => $card,
+          'copied_card_name' => $card->getCopiedCard()->getName(),
+        ]);
+      } else {
+        self::notifyAll(
+          'playCard',
+          clienttranslate('${player_name} plays ${card_name} as ${copied_card_name} on ${flank}'),
+          [
+            'i18n' => ['copied_card_name', 'flank'],
+            'player' => $player,
+            'card' => $card,
+            'copied_card_name' => $card->getCopiedCard()->getName(),
+            'flank' => $str,
+          ]
+        );
+      }
+    }
+    // NORMAL CASE
+    else {
+      $str = $card->getNotifString();
+      if (is_null($str)) {
+        self::notifyAll('playCard', clienttranslate('${player_name} plays ${card_name}'), [
+          'player' => $player,
+          'card' => $card,
+        ]);
+      } else {
+        self::notifyAll('playCard', clienttranslate('${player_name} plays ${card_name} on ${flank}'), [
+          'i18n' => ['flank'],
+          'player' => $player,
+          'card' => $card,
+          'flank' => $str,
+        ]);
+      }
     }
   }
 

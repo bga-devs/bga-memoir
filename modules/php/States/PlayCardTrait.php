@@ -85,6 +85,7 @@ trait PlayCardTrait
 
     // Play the card
     $card = Cards::play($player, $cardId, $sectionId);
+    $card->onPlay();
     Notifications::playCard($player, $card);
     $nextState = $card->nextStateAfterPlay();
 
