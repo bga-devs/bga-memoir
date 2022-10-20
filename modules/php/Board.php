@@ -64,7 +64,7 @@ class Board
     }
 
     // Add the labels
-    foreach ($scenario['board']['labels'] as $labels) {
+    foreach ($scenario['board']['labels'] ?? [] as $labels) {
       foreach ($labels['text'] as $label) {
         self::$grid[$labels['col']][$labels['row']]['labels'][] = $label;
       }

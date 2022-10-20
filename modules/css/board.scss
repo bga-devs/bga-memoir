@@ -23,7 +23,7 @@
     &#m44-board-labels {
       z-index: 2;
 
-      [data-labels='0'] & {
+      [data-labels="0"] & {
         display: none;
       }
     }
@@ -32,7 +32,7 @@
     }
   }
 
-  &[data-type='standard'] {
+  &[data-type="standard"] {
     width: calc(var(--memoirBoardScale) * 900px);
     height: calc(var(--memoirBoardScale) * 593.845991166px);
 
@@ -41,7 +41,7 @@
       grid-template-rows: repeat(32, 1fr);
     }
   }
-  &[data-type='overlord'] {
+  &[data-type="overlord"] {
     width: calc(var(--memoirBoardScale) * 1500px);
     height: calc(var(--memoirBoardScale) * 513.20023928px);
 
@@ -50,7 +50,7 @@
       grid-template-rows: repeat(32, 1fr);
     }
   }
-  &[data-type='brkthru'] {
+  &[data-type="brkthru"] {
     width: calc(var(--memoirBoardScale) * 800px);
     height: calc(var(--memoirBoardScale) * 923.760430703px);
 
@@ -74,13 +74,13 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: 'Oswald';
+      font-family: "Oswald";
       color: #ffffff;
       font-size: calc(var(--memoirBoardScale) * 21px);
       text-shadow: -1px -1px 0 #00000090, 1px -1px 0 #00000090, -1px 1px 0 #00000090, 1px 1px 0 #00000090;
       opacity: 0.3;
 
-      [data-coords='0'] & {
+      [data-coords="0"] & {
         visibility: hidden;
       }
     }
@@ -91,7 +91,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      clip-path: polygon(50% 0.7%, 99.3% 25%, 99.3% 75%, 50% 99.3%, 0.7% 75%, 0.7% 25%);
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
       -webkit-clip-path: polygon(50% 0.7%, 99.3% 25%, 99.3% 75%, 50% 99.3%, 0.7% 75%, 0.7% 25%);
       /*
       &.hex-grid-background {
@@ -101,7 +101,7 @@
       */
 
       @for $i from 1 through 12 {
-        &[data-rotation='#{$i}'] {
+        &[data-rotation="#{$i}"] {
           transform: rotate(30deg * $i);
         }
       }
@@ -154,7 +154,7 @@
       &.forMoveAndAttack,
       &.forAttack,
       &.forRetreat {
-        background-image: url('img/hex_background_highlights.png');
+        background-image: url("img/hex_background_highlights.png");
         background-size: 500% 100%;
         background-position: 0% 0%;
       }
@@ -171,21 +171,21 @@
       .mustStop {
         width: 26%;
         height: 36%;
-        background-image: url('img/icons/must-stop.png');
+        background-image: url("img/icons/must-stop.png");
         background-size: 100%;
         background-repeat: no-repeat;
       }
       .cannotAttack {
         width: 26%;
         height: 36%;
-        background-image: url('img/icons/cannot-attack.png');
+        background-image: url("img/icons/cannot-attack.png");
         background-size: 100%;
         background-repeat: no-repeat;
       }
 
       &.attacked,
       &.forAirDrop:hover {
-        background-image: url('img/hex_background_highlights.png');
+        background-image: url("img/hex_background_highlights.png");
         background-size: 500% 100%;
         background-position: 75% 0%;
       }
@@ -195,7 +195,7 @@
         display: block;
         width: 30%;
         height: 30%;
-        background-image: url('img/dice_others.png');
+        background-image: url("img/dice_others.png");
         background-size: 100% 700%;
         background-position: 0% 100%;
         bottom: 19%;
@@ -228,7 +228,7 @@
     background-image: linear-gradient(to bottom, #ac0202 75%, transparent 25%);
     background-size: 2px 16px;
   }
-  &[data-type='overlord'] .board-divider {
+  &[data-type="overlord"] .board-divider {
     &:nth-of-type(2n + 1) {
       background-image: linear-gradient(to bottom, #c62525a3 60%, transparent 40%);
     }
@@ -311,7 +311,7 @@
 .hex-grid-background,
 .hex-grid-terrain.background-terrain {
   z-index: 1;
-  background-image: url('img/board_backgrounds.png');
+  background-image: url("img/board_backgrounds.png");
   background-size: 600% 600%;
   clip-path: none;
   #m44-board .hex-grid-item & {
@@ -319,70 +319,70 @@
   }
 
   @for $i from 0 through 36 {
-    &[data-tile='#{$i}'] {
+    &[data-tile="#{$i}"] {
       background-position-x: ($i % 6) * 100% / 5;
       background-position-y: (($i - ($i % 6)) / 6) * 100% / 5;
     }
   }
 
-  [data-terrains='0'] & {
+  [data-terrains="0"] & {
     display: none;
   }
 }
 
 .hex-grid-terrain {
   z-index: 2;
-  background-image: url('img/board_terrains.png');
+  background-image: url("img/board_terrains.png");
   background-size: 1000% 1100%;
   //  clip-path: polygon(50% 0.6%, 99.4% 25.6%, 99.4% 74.4%, 50% 99.4%, 0.6% 74.4%, 0.6% 25.6%);
   //  -webkit-clip-path: polygon(50% 0.6%, 99.4% 25.6%, 99.4% 74.4%, 50% 99.4%, 0.6% 74.4%, 0.6% 25.6%);
 
   @for $i from 0 through 104 {
-    &[data-tile='#{$i}'] {
+    &[data-tile="#{$i}"] {
       background-position-x: ($i % 10) * 100% / 9;
       background-position-y: (($i - ($i % 10)) / 10) * 100% / 10;
     }
   }
 
-  [data-terrains='0'] & {
+  [data-terrains="0"] & {
     display: none;
   }
 }
 
 .hex-grid-obstacle {
   z-index: 3;
-  background-image: url('img/board_obstacles.png');
+  background-image: url("img/board_obstacles.png");
   background-size: 600% 500%;
 
   @for $i from 0 through 24 {
-    &[data-tile='#{$i}'] {
+    &[data-tile="#{$i}"] {
       background-position-x: ($i % 6) * 100% / 5;
       background-position-y: (($i - ($i % 6)) / 6) * 100% / 4;
     }
   }
 
-  [data-terrains='0'] & {
+  [data-terrains="0"] & {
     display: none;
   }
 
-  [data-unitSprite='0'] & {
-    &[data-tile='23'],
-    &[data-tile='19'],
-    &[data-tile='10'] {
-      background-image: url('img/board_terrains_new.png');
+  [data-unitSprite="0"] & {
+    &[data-tile="23"],
+    &[data-tile="19"],
+    &[data-tile="10"] {
+      background-image: url("img/board_terrains_new.png");
       background-size: 400% 100%;
     }
 
-    &[data-tile='19'] {
+    &[data-tile="19"] {
       background-position: 100% 0%;
     }
-    &[data-tile='23'] {
+    &[data-tile="23"] {
       background-position: 0% 0%;
       transform: none !important;
     }
-    &[data-tile='10'] {
+    &[data-tile="10"] {
       background-position: 33.3333% 0%;
-      &[data-rotation='6'] {
+      &[data-rotation="6"] {
         background-position: 66.66666% 0%;
         transform: none !important;
       }
@@ -416,7 +416,7 @@
     width: 303px;
     height: 190px;
     flex-shrink: 0;
-    background: url('img/summary_cards.jpg');
+    background: url("img/summary_cards.jpg");
     background-size: 100% 300%;
     border-radius: 14px;
     position: relative;
@@ -426,7 +426,7 @@
       top: 14px;
       left: 26px;
       color: white;
-      font-family: 'Gunplay';
+      font-family: "Gunplay";
       font-size: 20px;
       width: 25px;
       text-align: center;
@@ -435,7 +435,7 @@
       position: absolute;
       top: 14px;
       left: 52px;
-      font-family: 'Gunplay';
+      font-family: "Gunplay";
       text-transform: uppercase;
       width: 188px;
       text-align: center;
@@ -471,7 +471,7 @@
 
       li {
         &::before {
-          content: '\25CF';
+          content: "\25CF";
           display: inline-block;
           width: 1em;
           margin-left: -1em;
@@ -491,7 +491,7 @@
         width: 70%;
         height: 52.3%;
 
-        &[data-sprite='both'] {
+        &[data-sprite="both"] {
           position: relative;
           top: 20%;
           &::after {
@@ -508,7 +508,7 @@
       .commissar-token {
         width: 50px;
         height: 50px;
-        background-image: url('img/ui/commissar.png');
+        background-image: url("img/ui/commissar.png");
         background-size: 100% 100%;
       }
       .summary-tile {

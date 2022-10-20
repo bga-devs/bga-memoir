@@ -101,8 +101,13 @@ class Terrains extends \M44\Helpers\Pieces
 
           // Fallback code for bunker without original_owner flag
           if ($type == 'bunker' && !isset($terrain['original_owner'])) {
-            $data = Units::getTypeAndNation($hex['unit']);
-            $terrain['original_owner'] = in_array($data['nation'], Units::$nations[ALLIES]) ? ALLIES : AXIS;
+            // No unit on the hex ? => can't decide who is the owner
+            if (!isset($hex['unit'])) {
+              $type = 'fieldbunker';
+            } else {
+              $data = Units::getTypeAndNation($hex['unit']);
+              $terrain['original_owner'] = in_array($data['nation'], Units::$nations[ALLIES]) ? ALLIES : AXIS;
+            }
           }
 
           // Custom properties

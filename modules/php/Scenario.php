@@ -57,15 +57,39 @@ class Scenario extends \APP_DbObject
   function loadId($id)
   {
     require_once dirname(__FILE__) . '/Scenarios/list.inc.php';
+    $dir = 'Scenarios';
+
+    // Add FromTheFront scenarios
     if (!isset($scenariosMap[$id])) {
-      throw new \BgaVisibleSystemException('Invalid scenario id');
+      require_once dirname(__FILE__) . '/FromTheFront/list.inc.php';
+      foreach ($fromTheFront as $name) {
+        $scenarId = (int) explode('-', $name)[0];
+        $scenariosMap[$scenarId] = $name;
+      }
+
+      if (!isset($scenariosMap[$id])) {
+        throw new \BgaVisibleSystemException('Invalid scenario id');
+      }
+      $dir = 'FromTheFront';
     }
+
     $name = $scenariosMap[$id];
     $scenarios = [];
-    require_once dirname(__FILE__) . '/Scenarios/' . $name . '.php';
+    require_once dirname(__FILE__) . '/' . $dir . '/' . $name . '.php';
 
-    self::$scenario = $scenarios[$id];
-    Globals::setScenario($scenarios[$id]);
+    // Enforce uppercase for starting side
+    $scenario = $scenarios[$id];
+    uc($scenario['game_info']['side_player1']);
+    uc($scenario['game_info']['side_player2']);
+    uc($scenario['board']['type']);
+    uc($scenario['board']['face']);
+
+    if (isset($scenario['board']['hexagons']['item'])) {
+      $scenario['board']['hexagons'] = $scenario['board']['hexagons']['item'];
+    }
+
+    self::$scenario = $scenario;
+    Globals::setScenario($scenario);
   }
 
   /**
@@ -75,7 +99,7 @@ class Scenario extends \APP_DbObject
   {
     $scenario = self::get();
     if (is_null($scenario)) {
-      throw new BgaVisibleSystemException('No scenario loaded');
+      throw new \BgaVisibleSystemException('No scenario loaded');
     }
 
     // Game mode : standard, breakthrouh, overlord
@@ -135,10 +159,21 @@ class Scenario extends \APP_DbObject
 
     // Activate player
     $infos = $scenario['game_info'];
-    $startingTeam = $infos['side_' . \strtolower($infos['starting'])];
+    $starting = mb_strtolower($infos['starting']);
+    if (!in_array($starting, ['player1', 'player2'])) {
+      throw new \BgaVisibleSystemException(
+        '"starting = ' . $starting . '" field of scenario is not currently supported'
+      );
+    }
+    $startingTeam = $infos['side_' . $starting];
     Globals::setTeamTurn($startingTeam);
     Globals::setTurn(0);
 
     Medals::checkBoardMedals();
   }
+}
+
+function uc(&$str)
+{
+  $str = mb_strtoupper($str);
 }
