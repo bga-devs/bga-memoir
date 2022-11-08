@@ -43,6 +43,23 @@ trait DebugTrait
     // $this->argsAttackUnit();
   }
 
+  function val($scenario)
+  {
+    $scenarios = [];
+    require_once dirname(__FILE__) . '/FromTheFront/' . $scenario . '.php';
+    $scenarId = (int) explode('-', $scenario)[0];
+    $scenario = $scenarios[$scenarId];
+    uc($scenario['game_info']['side_player1']);
+    uc($scenario['game_info']['side_player2']);
+    uc($scenario['board']['type']);
+    uc($scenario['board']['face']);
+
+    if (isset($scenario['board']['hexagons']['item'])) {
+      $scenario['board']['hexagons'] = $scenario['board']['hexagons']['item'];
+    }
+    Scenario::validateScenario($scenario);
+  }
+
   function tp($pId, $unitId, $min, $max)
   {
     Globals::setRetreat([

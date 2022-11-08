@@ -171,6 +171,193 @@ class Scenario extends \APP_DbObject
 
     Medals::checkBoardMedals();
   }
+
+  function validateScenario($scenario)
+  {
+    // constants copied from globals
+    $TROOP_BADGE_MAPPING = ['FRENCH_RESISTANCE' => 'badge3'];
+
+    $board = $scenario['board'];
+    // Overlord is not managed yet
+    if ($board['type'] == 'OVERLORD') {
+      return false;
+    }
+
+    // Teams check
+    $info = $scenario['game_info'];
+    if (
+      !isset($info['side_player1']) ||
+      !isset($info['side_player2']) ||
+      !isset($info['cards_player1']) ||
+      !isset($info['cards_player2'])
+    ) {
+      return false;
+    }
+
+    // Terrain check
+    foreach ($board['hexagons'] as $hex) {
+      $keys = ['terrain', 'rect_terrain', 'obstacle'];
+      foreach ($keys as $key) {
+        if (isset($hex[$key])) {
+          $terrain = $hex[$key];
+          $type = $this->validateTerrain($terrain);
+          if (
+            $type === false &&
+            // those are units not terrain
+            !in_array($terrain['name'], ['pdestroyer', 'loco', 'wagon'])
+          ) {
+            return false;
+          }
+        }
+      }
+
+      // Unit validation
+      if (isset($hex['unit'])) {
+        if (isset($hex['unit']['behavior']) && isset($TROOP_BADGE_MAPPING[$hex['unit']['behavior']])) {
+          $hex['unit']['badge'] = $TROOP_BADGE_MAPPING[$hex['unit']['behavior']];
+        }
+        if ($this->validateUnit($hex['unit']) === false) {
+          return false;
+        }
+      }
+
+      // medal validation
+      $tags = $hex['tags'] ?? [];
+      foreach ($tags as $tag) {
+        // Medal
+        if (strpos($tag['name'], 'medal') === 0) {
+          continue;
+        }
+        // Mines
+        elseif (in_array($tag['behavior'] ?? null, ['MINE_FIELD'])) {
+          continue; // Handle in terrains instead
+        }
+        // Camouflage tags
+        elseif (in_array($tag['name'], ['tag14', 'tag15'])) {
+          continue;
+          // Exit markers
+        } elseif (($tag['behavior'] ?? null) == 'EXIT_MARKER') {
+          continue;
+        }
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function validateTerrain($terrain)
+  {
+    // prettier-ignore
+    if (
+      (in_array($hex['name'], ['airfieldX', 'airfield', 'dairfieldX', 'dairfield', 'pairfield', 'pairfieldX', 'wairfield'])) || // airfield
+      (in_array($hex['name'], ['barracks'])) || // barracks
+      (in_array($hex['name'], ['pbeach', 'beach'])) || // beach
+      (in_array($hex['name'], ['bridge', 'pbridge', 'railbridge', 'wbridge', 'wrailbridge']) && (!isset($hex['behavior']) || !in_array($hex['behavior'], ['BRIDGE_SECTION']))) || // bridge
+      (in_array($hex['name'], ['bridge']) && isset($hex['behavior']) && $hex['behavior'] == 'BRIDGE_SECTION') || // bridge section
+      (in_array($hex['name'], ['bunker'])) || // Bunker
+      (in_array($hex['name'], ['cemetery'])) || // Cemetery
+      (in_array($hex['name'], ['church'])) || // Church
+      (in_array($hex['name'], ['hills', 'whill']) && isset($hex['behavior']) && $hex['behavior'] == 'CLIFF') || // cliff
+      (in_array($hex['name'], ['coast', 'coastcurve'])) || // coastline
+      (in_array($hex['name'], ['dam']))|| // Dam
+      (in_array($hex['name'], ['dragonteeth'])) || // DragonTeeth
+      (in_array($hex['name'], ['dridge'])) || //Erg
+      (in_array($hex['name'], ['descarpment'])) || // Escarpment
+      (in_array($hex['name'], ['factory', 'wfactory'])) || // factory Complex
+      (in_array($hex['name'], ['casemate', 'wbunker', 'dbunker', 'pbunker'])) || // Field bunker
+      (in_array($hex['name'], ['ford']) || (isset($hex['behavior']) && $hex['behavior'] == 'FORD')) || // Ford
+      (in_array($hex['name'], ['river', 'riverFL', 'riverFR', 'riverY', 'curve', 'pond', 'pmouth']) && isset($hex['behavior']) && $hex['behavior'] == 'FORDABLE_STREAM') || // FordableStream
+      (in_array($hex['name'], ['woods', 'wforest'])) || // Forest
+      (in_array($hex['name'], ['fortress'])) || // Fortress
+      (in_array($hex['name'], ['wriver', 'wriverFR', 'wcurved'])) || // Frozen river
+      (in_array($hex['name'], ['hedgehog'])) || // Hedgehog
+      (in_array($hex['name'], ['hedgerow'])) || // Hedgerow
+      (in_array($hex['name'], ['highground'])) || // High Ground
+      (in_array($hex['name'], ['hills', 'whill', 'dhill']) && (!isset($hex['behavior']) || in_array($hex['behavior'], ['HILL', 'IMPASSABLE_HILL', 'IMPASSABLE_BLOCKING_HILL']))) || // Hill
+      (in_array($hex['name'], ['pcave'])) || // HillCave
+      (in_array($hex['name'], ['whillforest'])) || // HillForest
+      (in_array($hex['name'], ['whillvillage'])) ||// HillVillage
+      (in_array($hex['name'], ['phospital'])) || // Hospital
+      (in_array($hex['name'], ['dcamp', 'pheadquarter'])) || // HQ
+      (in_array($hex['name'], ['pjungle'])) || // Jungle
+      (in_array($hex['name'], ['lakeA', 'lakeB', 'lakeC'])) || // lake
+      (in_array($hex['name'], ['lighthouse'])) || // Lighthouse
+      (in_array($hex['name'], ['marshes', 'wmarshes'])) || // Marshes
+      (in_array($hex['name'], ['mountain']) && (!isset($hex['behavior']) || in_array($hex['behavior'], ['MOUNTAIN', 'IMPASSABLE_HILL', 'IMPASSABLE_BLOCKING_HILL']))) || // Mountain
+      (in_array($hex['name'], ['pmcave'])) ||// MountainCave
+      (in_array($hex['name'], ['oasis'])) || // Oasis
+      (in_array($hex['name'], ['palmtrees'])) || // PalmForest
+      (in_array($hex['name'], ['ppier'])) || // Pier
+      (in_array($hex['name'], ['pontoon'])) || // pontoon
+      (in_array($hex['name'], ['powerplant'])) || // Powerplant
+      (in_array($hex['name'], ['camp'])) || // Prison camp
+      (in_array($hex['name'], ['radar'])) || // RadarStation
+      (in_array($hex['name'], ['rail', 'railcurve', 'railFL', 'railFR', 'railX', 'wrail', 'wrailcurve'])) || // Rail
+      (in_array($hex['name'], ['railbridge'])) || // RailroadBridge
+      (in_array($hex['name'], ['station'])) || // RailStation
+      (in_array($hex['name'], ['wravine'])) || // ravine
+      (in_array($hex['name'], ['price'])) || // Rice paddles
+      (in_array($hex['name'], ['river', 'riverFL', 'riverFR', 'riverY', 'curve', 'pond', 'pmouth']) && (!isset($hex['behavior']) || $hex['behavior'] == 'WIDE_RIVER')) || // River
+      (in_array($hex['name'], ['road', 'roadcurve', 'roadFL', 'roadFR', 'roadX', 'roadY', 'droad', 'droadX', 'droadcurve', 'droadFL', 'droadFR', 'wroad', 'wroadcurve', 'wroadFL', 'wroadFR', 'wroadX','wroadY',])) || // Road
+      (in_array($hex['name'], ['roadblock', 'droadblock'])) || // RoadBlock
+      (in_array($hex['name'], ['hillroad', 'hillcurve'])) || // roadhill
+      (in_array($hex['name'], ['wruins'])) || // ruins
+      (in_array($hex['name'], ['sand']) && !isset($hex['behavior'])) || // Sandbag
+      ($hex['name'] == 'hills' && isset($hex['behavior']) && $hex['behavior'] == 'BLUFF') || // SeaBluff
+      (in_array($hex['name'], ['sand']) && isset($hex['behavior']) && $hex['behavior'] == 'SEAWALL') || // SeaWall
+      ($hex['name'] == 'hills' && isset($hex['behavior']) && $hex['behavior'] == 'STEEP_HILL') || // SteepHill
+      (in_array($hex['name'], ['depot'])) || // supplydepot
+      (in_array($hex['name'], ['wtrenches', 'ptrenches'])) || // Trenches
+      (in_array($hex['name'], ['buildings', 'bled', 'wvillage', 'pvillage'])) || // Village
+      (in_array($hex['name'], ['wadi', 'wcurve'])) || // Wadi
+      (in_array($hex['name'], ['wire'])) // Wire
+    ) {
+      return true;
+    }
+
+    return false;
+  }
+
+  function validateUnit($unit)
+  {
+    $TROOP_CLASSES = [
+      'inf2' => 'SpecialForces',
+      'tank2' => 'EliteArmor',
+      'inf' => 'Infantry',
+      'tank' => 'Armor',
+      'gun' => 'Artillery',
+      'pdestroyer' => 'Destroyer',
+      'loco' => 'Locomotive',
+      'wagon' => 'Wagon',
+      // type + badge number if non decorative
+      'inf2_3' => 'FrenchResistance',
+      'gun_5' => 'BigGun',
+      'inf2_6' => 'CombatEngineer',
+      'inf2_8' => 'CombatEngineer',
+      'inf2_12' => 'CombatEngineer',
+      'inf2_28' => 'CombatEngineer',
+      'inf_6' => 'CombatEngineer',
+      'inf_8' => 'CombatEngineer',
+      'inf_12' => 'CombatEngineer',
+      'inf_28' => 'CombatEngineer',
+      'inf_26' => 'Sniper',
+      'inf_27' => 'Sniper',
+      'inf_29' => 'Cavalry',
+      'inf2_30' => 'SkiTroop',
+      'inf_30' => 'SkiTroop',
+      'inf_37' => 'AntiTank',
+      'gun_35' => 'MobileArtillery',
+      'gun_46' => 'HeavyAntiTankGun',
+      'tank2_33' => 'FlameThrower',
+    ];
+    $name = $unit['name'];
+    foreach (array_keys($TROOP_CLASSES) as $t) {
+      if (stripos($name, $t) !== false) {
+        return true;
+      }
+    }
+    return false;
+  }
 }
 
 function uc(&$str)
