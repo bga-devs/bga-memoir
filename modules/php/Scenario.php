@@ -51,6 +51,44 @@ class Scenario extends \APP_DbObject
     return is_null($scenario) ? null : $scenario['game_info']['options'] ?? [];
   }
 
+  function getMetadataFromTheFront($type = null, $filters = [], $idName = false)
+  {
+    $scenarios = [];
+    $ids = [];
+    require_once dirname(__FILE__) . '/FromTheFront/list.inc.php';
+    foreach ($fromTheFront as $name) {
+      $scenarId = (int) explode('-', $name)[0];
+      require_once dirname(__FILE__) . '/FromTheFront/' . $name . '.php';
+      if (!is_null($type) && $scenarios[$scenarId]['board']['type'] != $type) {
+        unset($scenarios[$scenarId]);
+        continue;
+      }
+
+      // filters
+      if (isset($filters['front']) && $scenarios[$scenarId]['game_info']['front'] != filters['front']) {
+        unset($scenarios[$scenarId]);
+        continue;
+      }
+
+      if (self::validateScenario($scenarios[$scenarId])) {
+        unset($scenarios[$scenarId]);
+        continue;
+      }
+
+      $scenarios[$scenarId]['name'] = $scenarios[$scenarId]['text']['en']['name'] ?? 'not defined';
+      $ids[$scenarId] = $scenarios[$scenarId]['name'];
+      unset($scenarios[$scenarId]['text']);
+      unset($scenarios[$scenarId]['board']);
+      unset($scenarios[$scenarId]['meta_data']);
+      unset($scenarios[$scenarId]['equipment_packs']);
+    }
+    if ($idName === false) {
+      return $scenarios;
+    } else {
+      return $ids;
+    }
+  }
+
   /**
    * Load a scenario from a file and store it into a global
    */
@@ -178,6 +216,11 @@ class Scenario extends \APP_DbObject
     $TROOP_BADGE_MAPPING = ['FRENCH_RESISTANCE' => 'badge3'];
 
     $board = $scenario['board'];
+
+    if (!isset($board['hexagons'])) {
+      return false;
+    }
+
     // Overlord is not managed yet
     if ($board['type'] == 'OVERLORD') {
       return false;
