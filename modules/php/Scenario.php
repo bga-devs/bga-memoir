@@ -183,6 +183,12 @@ class Scenario extends \APP_DbObject
       return false;
     }
 
+    $infos = $scenario['game_info'];
+    $starting = mb_strtolower($infos['starting']);
+    if (!in_array($starting, ['player1', 'player2'])) {
+      return false;
+    }
+
     // Teams check
     $info = $scenario['game_info'];
     if (
@@ -200,7 +206,7 @@ class Scenario extends \APP_DbObject
       foreach ($keys as $key) {
         if (isset($hex[$key])) {
           $terrain = $hex[$key];
-          $type = $this->validateTerrain($terrain);
+          $type = self::validateTerrain($terrain);
           if (
             $type === false &&
             // those are units not terrain
@@ -216,7 +222,7 @@ class Scenario extends \APP_DbObject
         if (isset($hex['unit']['behavior']) && isset($TROOP_BADGE_MAPPING[$hex['unit']['behavior']])) {
           $hex['unit']['badge'] = $TROOP_BADGE_MAPPING[$hex['unit']['behavior']];
         }
-        if ($this->validateUnit($hex['unit']) === false) {
+        if (self::validateUnit($hex['unit']) === false) {
           return false;
         }
       }
@@ -245,7 +251,7 @@ class Scenario extends \APP_DbObject
     return true;
   }
 
-  function validateTerrain($terrain)
+  function validateTerrain($hex)
   {
     // prettier-ignore
     if (

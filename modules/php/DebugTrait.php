@@ -57,7 +57,12 @@ trait DebugTrait
     if (isset($scenario['board']['hexagons']['item'])) {
       $scenario['board']['hexagons'] = $scenario['board']['hexagons']['item'];
     }
-    Scenario::validateScenario($scenario);
+    $valid = Scenario::validateScenario($scenario);
+    if ($valid === true) {
+      throw new \feException('Valid');
+    } else {
+      throw new \feException('KO');
+    }
   }
 
   function tp($pId, $unitId, $min, $max)
