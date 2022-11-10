@@ -25,6 +25,36 @@ trait LoadScenarioTrait
     }
   }
 
+  public function actGetScenarios($filters)
+  {
+    $type = Globals::getMode();
+    if ($type == \OPTION_MODE_STANDARD) {
+      $type = 'STANDARD';
+    } elseif ($type == \OPTION_MODE_BREAKTHROUGH) {
+      $type = 'BRKTHRU';
+    } else {
+      $type = 'OVERLORD';
+    }
+    // filters = ['front', 'name', 'id', 'author' ]
+
+    return Scenario::getMetadataFromTheFront($type, $filters);
+  }
+
+  public function actGetScenarioInfo($id)
+  {
+    return Scenario::getFromTheFront($id);
+  }
+
+  public function actProposeScenario($id)
+  {
+    // TODO
+  }
+
+  public function actValidateScenario($valid)
+  {
+    // TODO
+  }
+
   public function actUploadScenario($scenario)
   {
     Globals::setRound(0);

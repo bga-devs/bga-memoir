@@ -65,6 +65,41 @@ class action_memoir extends APP_GameAction
     self::ajaxResponse();
   }
 
+  public function actGetScenarios()
+  {
+    self::setAjaxMode();
+    $args = self::getArg('filters', AT_json, true);
+
+    $result = $this->game->actGetScenarios($args);
+    self::ajaxResponseWithResult($result);
+  }
+
+  public function actGetScenarioInfo()
+  {
+    self::setAjaxMode();
+    $args = self::getArg('id', AT_int, true);
+
+    $result = $this->game->actGetScenarioInfo($args);
+    self::ajaxResponseWithResult($result);
+  }
+
+  public function actProposeScenario($id)
+  {
+    self::setAjaxMode();
+    $args = self::getArg('id', AT_int, true);
+
+    $this->game->actProposeScenario($args);
+    self::ajaxResponse();
+  }
+
+  public function actValidateScenario()
+  {
+    self::setAjaxMode();
+    $args = self::getArg('accept', AT_bool, true);
+
+    $this->game->actValidateScenario($args);
+    self::ajaxResponse();
+  }
 
   public function actUploadScenario()
   {
@@ -317,8 +352,6 @@ class action_memoir extends APP_GameAction
     $this->game->actIgnore1Flag();
     self::ajaxResponse();
   }
-
-
 
   ////////////////////////////////////////////////////////////////
   //  _____     _           ____                           _

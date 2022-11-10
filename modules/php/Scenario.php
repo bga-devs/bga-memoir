@@ -51,6 +51,17 @@ class Scenario extends \APP_DbObject
     return is_null($scenario) ? null : $scenario['game_info']['options'] ?? [];
   }
 
+  function getFromTheFront($id)
+  {
+    require_once dirname(__FILE__) . '/FromTheFront/list.inc.php';
+    if (!isset($fromTheFront[$id])) {
+      throw new \BgaVisibleSystemException('Scenario doesn\'t exist or is not valid. Should not happen');
+    }
+
+    require_once dirname(__FILE__) . '/FromTheFront/' . $fromTheFront[$id]['file'] . '.php';
+    return $scenarios[$id];
+  }
+
   function getMetadataFromTheFront($type = null, $filters = [], $idName = false)
   {
     $scenarios = [];
@@ -64,23 +75,57 @@ class Scenario extends \APP_DbObject
         continue;
       }
 
+      $scenarios[$scenarId]['name'] = $scenarios[$scenarId]['text']['en']['name'] ?? 'not defined';
+      $ids[$scenarId] = $scenarios[$scenarId]['name'];
+
       // filters
-      if (isset($filters['front']) && $scenarios[$scenarId]['game_info']['front'] != filters['front']) {
+      if (
+        isset($filters['front']) &&
+        !is_null($filters['front']) &&
+        \strtoupper($scenarios[$scenarId]['game_info']['front']) != \strtoupper(filters['front'])
+      ) {
         unset($scenarios[$scenarId]);
         continue;
       }
 
+      if (isset($filters['id']) && !is_null($filters['id']) && $scenarId != $filters['id']) {
+        unset($scenarios[$scenarId]);
+        continue;
+      }
+
+      if (
+        isset($filters['author']) &&
+        !is_null($filters['author']) &&
+        stripos(
+          \strtoupper($scenarios[$scenarId]['meta_data']['owner']['login'] ?? ''),
+          \strtoupper($filters['author'])
+        ) === false
+      ) {
+        unset($scenarios[$scenarId]);
+        continue;
+      }
+
+      if (
+        isset($filters['name']) &&
+        !is_null($filters['name']) &&
+        stripos(\strtoupper($scenarios[$scenarId]['name']), \strtoupper($filters['name'])) === false
+      ) {
+        unset($scenarios[$scenarId]);
+        continue;
+      }
+
+      // TODO: remove when Greg has put the fonction in place
       if (self::validateScenario($scenarios[$scenarId])) {
         unset($scenarios[$scenarId]);
         continue;
       }
 
-      $scenarios[$scenarId]['name'] = $scenarios[$scenarId]['text']['en']['name'] ?? 'not defined';
-      $ids[$scenarId] = $scenarios[$scenarId]['name'];
       unset($scenarios[$scenarId]['text']);
       unset($scenarios[$scenarId]['board']);
-      unset($scenarios[$scenarId]['meta_data']);
-      unset($scenarios[$scenarId]['equipment_packs']);
+
+      // unset($scenarios[$scenarId]['equipment_packs']);
+
+      // unset($scenarios[$scenarId]['meta_data']);
     }
     if ($idName === false) {
       return $scenarios;

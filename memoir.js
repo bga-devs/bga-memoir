@@ -327,6 +327,12 @@ define([
           'restartAction',
         );
       }
+
+      filters = { filters: JSON.stringify({ front: null, id: null, name: 'Battle' }), lock: false };
+      this.addDangerActionButton('btnFilter', _('getScenario'), () => {
+        ret = this.takeAction('actGetScenarios', filters);
+        debug('scenario info', ret);
+      });
     },
 
     notif_removeStarToken(n) {
