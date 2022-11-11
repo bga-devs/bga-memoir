@@ -84,6 +84,7 @@ define([
         ['updateVisibility', 500],
         ['updateStats', 1],
         ['removeStarToken', 1],
+        ['proposeScenario', 1],
       ];
 
       // Fix mobile viewport (remove CSS zoom)
@@ -770,6 +771,11 @@ define([
     notif_updateStats(n) {
       debug('Notif: update stats', n);
       this.gamedatas.stats = n.args.stats;
+    },
+
+    notif_proposeScenario(n) {
+      debug('Notif: propose scenario', n);
+      // TODO
     },
 
     onEnteringStateChangeOfRound(args) {

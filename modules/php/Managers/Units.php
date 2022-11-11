@@ -96,7 +96,7 @@ class Units extends \M44\Helpers\Pieces
 
   public static function addTeamClause(&$q, $side)
   {
-    $q = $q->whereIn('nation', self::$nations[$side]);
+    $q = $q->whereIn('nation', self::$nations[\strtoupper($side)]);
   }
 
   public static function getOfTeam($side)

@@ -58,6 +58,20 @@ class Notifications
     ]);
   }
 
+  public static function proposeScenario($player, $scenario, $counter = false)
+  {
+    if ($counter === true) {
+      $msg = clienttranslate('${player_name} counter-proposes ${scenario_name}');
+    } else {
+      $msg = clienttranslate('${player_name} proposes ${scenario_name}');
+    }
+    self::notifyAll('proposeScenario', $msg, [
+      'player' => $player,
+      'scenario' => $scenario,
+      'scenario_name' => $scenario['text']['en']['name'] ?? ($scenario['text']['fr']['name'] ?? 'not defined'),
+    ]);
+  }
+
   public static function clearTurn($player, $notifIds)
   {
     self::notifyAll('clearTurn', clienttranslate('${player_name} restart their turn'), [

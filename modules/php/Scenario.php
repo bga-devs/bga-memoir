@@ -42,7 +42,7 @@ class Scenario extends \APP_DbObject
   public function getTopTeam()
   {
     $scenario = self::get();
-    return is_null($scenario) ? null : $scenario['game_info']['side_player1'];
+    return is_null($scenario) ? null : \strtoupper($scenario['game_info']['side_player1']);
   }
 
   public function getOptions()
@@ -53,12 +53,12 @@ class Scenario extends \APP_DbObject
 
   function getFromTheFront($id)
   {
-    require_once dirname(__FILE__) . '/FromTheFront/list.inc.php';
+    require dirname(__FILE__) . '/FromTheFront/list.inc.php';
     if (!isset($fromTheFront[$id])) {
       throw new \BgaVisibleSystemException('Scenario doesn\'t exist or is not valid. Should not happen');
     }
 
-    require_once dirname(__FILE__) . '/FromTheFront/' . $fromTheFront[$id]['file'] . '.php';
+    require dirname(__FILE__) . '/FromTheFront/' . $fromTheFront[$id]['file'] . '.php';
     return $scenarios[$id];
   }
 

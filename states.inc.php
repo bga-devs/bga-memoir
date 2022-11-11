@@ -38,16 +38,38 @@ $machinestates = [
     'name' => 'uploadScenario',
     'description' => clienttranslate('You must upload a m44 scenario'),
     'descriptionmyturn' => clienttranslate('${you} must upload a m44 scenario'),
-    'type' => 'multipleactiveplayer',
+    'type' => 'activeplayer',
     'possibleactions' => [
-      'actUploadScenario',
+      // 'actUploadScenario',
       'actGetScenarios',
       'actGetScenarioInfo',
       'actProposeScenario',
-      'actValidateScenario',
     ],
     'transitions' => [
-      '' => ST_NEW_ROUND,
+      'counter' => ST_PROPOSE_CHANGE,
+    ],
+  ],
+
+  ST_PROPOSE_CHANGE => [
+    'name' => 'proposeChange',
+    'description' => '',
+    'descriptionmyturn' => '',
+    'type' => 'game',
+    'action' => 'stProposeChange',
+    'transitions' => ['' => ST_PROPOSE_SCENARIO],
+  ],
+
+  ST_PROPOSE_SCENARIO => [
+    'name' => 'proposScenario',
+    'description' => clienttranslate('${actplayer} must accept or propose another scenario'),
+    'descriptionmyturn' => clienttranslate('${you} must accept or propose another scenario'),
+    'type' => 'activeplayer',
+    'args' => 'argsProposeScenario',
+    'possibleactions' => ['actGetScenarios', 'actGetScenarioInfo', 'actProposeScenario', 'actValidateScenario'],
+    'transitions' => [
+      'counter' => ST_PROPOSE_CHANGE,
+      'accept' => ST_NEW_ROUND,
+      'reject' => ST_END_GAME,
     ],
   ],
 

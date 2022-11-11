@@ -83,7 +83,7 @@ class action_memoir extends APP_GameAction
     self::ajaxResponseWithResult($result);
   }
 
-  public function actProposeScenario($id)
+  public function actProposeScenario()
   {
     self::setAjaxMode();
     $args = self::getArg('id', AT_int, true);

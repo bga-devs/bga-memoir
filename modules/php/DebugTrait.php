@@ -41,12 +41,13 @@ trait DebugTrait
     // throw
     // throw new \feException('titi ' . Units::get(1086)->isCamouflaged() . ' toto');
     // $this->argsAttackUnit();
-    $before = memory_get_usage();
-    $toto = Scenario::getMetadataFromTheFront('STANDARD', [], false);
-    // throw new \feException(count($toto));
-    $after = memory_get_usage();
-    // throw new \feException(print_r(reset($toto)));
-    throw new \feException($after - $before);
+    $this->actValidateScenario(false);
+    // $before = memory_get_usage();
+    // $toto = Scenario::getMetadataFromTheFront('STANDARD', [], false);
+    // // throw new \feException(count($toto));
+    // $after = memory_get_usage();
+    // // throw new \feException(print_r(reset($toto)));
+    // throw new \feException($after - $before);
   }
 
   function val($scenario)
