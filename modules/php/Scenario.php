@@ -66,10 +66,13 @@ class Scenario extends \APP_DbObject
   {
     $scenarios = [];
     $ids = [];
-    require_once dirname(__FILE__) . '/FromTheFront/list.inc.php';
+    require dirname(__FILE__) . '/FromTheFront/list.inc.php';
+    // TODO: update when we have Greg files :)
+    // foreach ($fromTheFront as $id => $infos) {
     foreach ($fromTheFront as $name) {
+      // Todo replace $scenarios[$scenarId] by $infos
       $scenarId = (int) explode('-', $name)[0];
-      require_once dirname(__FILE__) . '/FromTheFront/' . $name . '.php';
+      require dirname(__FILE__) . '/FromTheFront/' . $name . '.php';
       if (!is_null($type) && $scenarios[$scenarId]['board']['type'] != $type) {
         unset($scenarios[$scenarId]);
         continue;
