@@ -20,6 +20,7 @@ class Globals extends \M44\Helpers\DB_Manager
     'officialScenario' => 'bool', // Official VS custom
     'scenarioId' => 'int', // Used to store the scenario id
     'scenario' => 'obj', // Used to store the scenario
+    'scenarioSource' => 'int', // From DoW database or m44 file ?
     'forcedTeam' => 'obj', // Used for one-way game to let a player pick the side he will play
 
     'round' => 'int',
@@ -186,6 +187,7 @@ class Globals extends \M44\Helpers\DB_Manager
       $scenarioId = array_rand($ids, 1);
     }
     Globals::setScenarioId($scenarioId);
+    Globals::setScenarioSource($options[\OPTION_SCENARIO_SOURCE]);
     Globals::setUnitMoved(-1);
     Globals::setUnitAttacker(-1);
     Globals::setLastPlayedCards([]);

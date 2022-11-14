@@ -85,7 +85,7 @@ class Scenario extends \APP_DbObject
       if (
         isset($filters['front']) &&
         !is_null($filters['front']) &&
-        \strtoupper($scenarios[$scenarId]['game_info']['front']) != \strtoupper(filters['front'])
+        \strtoupper($scenarios[$scenarId]['game_info']['front']) != \strtoupper($filters['front'])
       ) {
         unset($scenarios[$scenarId]);
         continue;

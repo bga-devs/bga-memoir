@@ -20,10 +20,39 @@ trait LoadScenarioTrait
       Scenario::loadId($scenarioId);
       $this->gamestate->jumpToState(\ST_NEW_ROUND);
     } else {
-      $this->activeNextPlayer();
-      $this->gamestate->nextState('upload');
+      if (Globals::getScenarioSource() == OPTION_SCENARIO_SOURCE_DOW) {
+        $this->gamestate->setAllPlayersMultiactive();
+        $this->gamestate->nextState('lobby');
+      } else {
+        $this->activeNextPlayer();
+        $this->gamestate->nextState('upload');
+      }
     }
   }
+
+  //////////////////////////////////////////
+  //  _   _       _                 _
+  // | | | |_ __ | | ___   __ _  __| |
+  // | | | | '_ \| |/ _ \ / _` |/ _` |
+  // | |_| | |_) | | (_) | (_| | (_| |
+  //  \___/| .__/|_|\___/ \__,_|\__,_|
+  //       |_|
+  //////////////////////////////////////////
+  public function actUploadScenario($scenario)
+  {
+    Globals::setRound(0);
+    Globals::setScenario($scenario);
+    $this->stNewRound(true);
+  }
+
+  ////////////////////////////////////
+  //  _          _     _
+  // | |    ___ | |__ | |__  _   _
+  // | |   / _ \| '_ \| '_ \| | | |
+  // | |__| (_) | |_) | |_) | |_| |
+  // |_____\___/|_.__/|_.__/ \__, |
+  //                         |___/
+  ////////////////////////////////////
 
   public function actGetScenarios($filters)
   {
@@ -90,12 +119,5 @@ trait LoadScenarioTrait
   {
     $this->activeNextPlayer();
     $this->gamestate->nextState('');
-  }
-
-  public function actUploadScenario($scenario)
-  {
-    Globals::setRound(0);
-    Globals::setScenario($scenario);
-    $this->stNewRound(true);
   }
 }

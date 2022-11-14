@@ -92,8 +92,10 @@ define([
 
       this._backCardIdCounter = -1; // Used to generate unique id for backCards
       this._boardTooltips = {}; // Used to store pending board tooltip element
+    },
 
-      this._settingsConfig = {
+    getSettingsConfig() {
+      return {
         confirmTurn: { type: 'pref', prefId: 103 },
         layout: {
           default: 0,
@@ -202,6 +204,8 @@ define([
       // WHich player point of vue are we going to take ?
       this._pId = this.isSpectator ? Object.keys(this.gamedatas.players)[0] : this.player_id;
       this.updateBottomTeam(this.gamedatas.players[this._pId].team);
+
+      this.setupBoardButtonsTooltips();
 
       // Load board
       if (gamedatas.board) {
@@ -328,12 +332,6 @@ define([
           'restartAction',
         );
       }
-
-      filters = { filters: JSON.stringify({ front: null, id: null, name: 'Battle' }), lock: false };
-      this.addDangerActionButton('btnFilter', _('getScenario'), () => {
-        ret = this.takeAction('actGetScenarios', filters);
-        debug('scenario info', ret);
-      });
     },
 
     notif_removeStarToken(n) {
@@ -617,6 +615,116 @@ define([
         let content = e.target.result;
         let scenario = JSON.parse(content);
         this.takeAction('actUploadScenario', { scenario: JSON.stringify(scenario), method: 'post' });
+      });
+    },
+
+    ////////////////////////////////////
+    //  _          _     _
+    // | |    ___ | |__ | |__  _   _
+    // | |   / _ \| '_ \| '_ \| | | |
+    // | |__| (_) | |_) | |_) | |_| |
+    // |_____\___/|_.__/|_.__/ \__, |
+    //                         |___/
+    ////////////////////////////////////
+
+    onEnteringStateLobbyProposeScenario() {
+      this.clearInterface();
+      dojo.place(
+        `<div id="scenario-lobby">
+          <div id="scenario-lobby-filters">
+            <form id='form-lobby'>
+              <div class='input-group'>
+                ${_('ID:')}
+                <input type='number' id='filter-id' />
+              </div>
+
+              <div class='input-group'>
+                ${_('Front:')}
+                <select id='filter-front'>
+                  <option value=''>${_('All')}</option>
+                  <option value='western'>${_('Western Front')}</option>
+                  <option value='eastern'>${_('Eastern Front')}</option>
+                  <option value='pacific'>${_('Pacific Theater')}</option>
+                  <option value='mediterranean'>${_('Mediterranean Theater')}</option>
+                </select>
+              </div>
+
+              <div class='input-group'>
+                ${_('Name:')}
+                <input type='text' id='filter-name' />
+              </div>
+
+              <div class='input-group'>
+                ${_('Author:')}
+                <input type='text' id='filter-author' />
+              </div>
+
+              <div class='input-group'>
+                ${_('# per page')}
+                <select id='filter-pagination'>
+                  <option value='10'>10</option>
+                  <option value='20'>50</option>
+                  <option value='50'>50</option>
+                </select>
+              </div>
+
+              <div class='input-group'>
+                <button class='action-button bgabutton bgabutton_blue' type="submit">${_('GO')}</button>
+              </div>
+            </form>
+          </div>
+          <div id="scenario-lobby-list">
+            <table>
+              <thead>
+                <tr>
+                  <th>${_('ID')}</th>
+                  <th>${_('Title')}</th>
+                  <th>${_('Operation')}</th>
+                  <th>${_('Front')}</th>
+                  <th>${_('Author')}</th>
+                  <th>${_('Scenario Info')}</th>
+                </tr>
+              </thead>
+              <tbody id="scenario-lobby-table"></tbody>
+            </table>
+          </div>
+      </div>`,
+        'm44-board-wrapper',
+      );
+
+      $('form-lobby').addEventListener('submit', (evt) => {
+        evt.preventDefault();
+        let filters = {
+          front: $('filter-front').value,
+          id: $('filter-id').value,
+          name: $('filter-name').value,
+          author: $('filter-author').value,
+          pagination: $('filter-pagination').value,
+        };
+        for (let key in filters) {
+          if (filters[key] === '') filters[key] = null;
+        }
+        debug(filters);
+
+        this.takeAction('actGetScenarios', { filters: JSON.stringify(filters), lock: false }).then((response) => {
+          let data = response.data;
+
+          $(`scenario-lobby-table`).innerHTML = '';
+          for (let scenarioId in data) {
+            let scenario = data[scenarioId];
+            $('scenario-lobby-table').insertAdjacentHTML(
+              'beforeend',
+              `<tr>
+              <td>${scenarioId}</td>
+              <td>${_(scenario.name)}</td>
+              <td>${scenario.game_info.operation.name}</td>
+              <td>${scenario.game_info.front}</td>
+              <td>${scenario.meta_data.author.login}</td>
+              <td></td>
+            </tr>`,
+            );
+          }
+        });
       });
     },
 

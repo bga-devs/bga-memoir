@@ -1,5 +1,5 @@
 html {
-  background: url('img/ui/background.jpg');
+  background: url("img/ui/background.jpg");
 }
 :root {
   --memoirCentralZone: 600;
@@ -17,7 +17,7 @@ html {
 
 .mobile_version #right-side {
   padding-left: 0px;
-  background: url('img/ui/game_top.jpg');
+  background: url("img/ui/game_top.jpg");
   background-repeat: repeat-x;
   background-size: auto 100%;
   background-position: bottom center;
@@ -62,14 +62,14 @@ html {
 
 #title-content-wrapper {
   position: relative;
-  background: url('img/ui/game_top.jpg');
+  background: url("img/ui/game_top.jpg");
   background-repeat: repeat-x;
   background-size: auto 185px;
   background-position: top center;
   padding-top: 5px;
 
   &::before {
-    content: '';
+    content: "";
     display: block;
     position: absolute;
     right: -18px;
@@ -77,7 +77,7 @@ html {
     top: 0;
     bottom: 0;
     z-index: 10;
-    background-image: url('img/ui/game_right.jpg');
+    background-image: url("img/ui/game_right.jpg");
     background-size: 100% auto;
     background-repeat: repeat-y;
     box-shadow: -1px -1px 3px black;
@@ -85,7 +85,7 @@ html {
   }
 
   &::after {
-    content: '';
+    content: "";
     display: block;
     position: absolute;
     height: 19px;
@@ -93,7 +93,7 @@ html {
     right: 0;
     bottom: 0px;
     z-index: 11;
-    background: url('img/ui/game_bottom.jpg');
+    background: url("img/ui/game_bottom.jpg");
     background-size: auto 100%;
     background-repeat: repeat-x;
     background-position: right top;
@@ -107,7 +107,7 @@ html {
 
   .m44-hrule {
     height: 11px;
-    background: url('img/ui/h_rule.jpg');
+    background: url("img/ui/h_rule.jpg");
     background-repeat: repeat-x;
 
     display: flex;
@@ -122,7 +122,7 @@ html {
     justify-content: flex-end;
     box-shadow: 0px 2px 3px black;
   }
-  &[data-layout='0'] #m44-top-container {
+  &[data-layout="0"] #m44-top-container {
     height: 11px;
 
     #top-medals {
@@ -149,7 +149,7 @@ html {
     }
   }
 
-  &[data-layout='0'] #m44-central-part {
+  &[data-layout="0"] #m44-central-part {
     #left-holder {
       width: 173px;
 
@@ -181,7 +181,7 @@ html {
     overflow: hidden;
     position: relative;
 
-    [data-centralZone='1'] & {
+    [data-centralZone="1"] & {
       max-height: none;
       min-height: auto;
     }
@@ -189,7 +189,7 @@ html {
     #left-holder {
       width: 100px;
       flex-shrink: 0;
-      background: url('img/ui/background.jpg');
+      background: url("img/ui/background.jpg");
       display: flex;
       flex-flow: column;
       justify-content: space-between;
@@ -200,7 +200,7 @@ html {
       margin-right: 20px;
 
       &::before {
-        content: '';
+        content: "";
         display: block;
         position: absolute;
         right: -20px;
@@ -208,7 +208,7 @@ html {
         top: 0;
         bottom: 0;
         z-index: 10;
-        background-image: url('img/ui/game_left.jpg');
+        background-image: url("img/ui/game_left.jpg");
         background-size: 100% auto;
         background-repeat: repeat-y;
         box-shadow: 2px 1px 3px black;
@@ -233,7 +233,7 @@ html {
       }
 
       #deck {
-        background-image: url('img/card_back.jpg');
+        background-image: url("img/card_back.jpg");
         background-size: 100% 100%;
         border-radius: 7px;
         position: relative;
@@ -265,7 +265,7 @@ html {
       position: relative;
       overflow: hidden;
       min-height: 420px;
-      background-image: url('img/ui/background_center.jpg');
+      background-image: url("img/ui/background_center.jpg");
       background-size: cover;
       background-position: center center;
 
@@ -308,7 +308,7 @@ html {
             width: 100px;
           }
 
-          [type='file'] {
+          [type="file"] {
             border: 0;
             clip: rect(0, 0, 0, 0);
             height: 1px;
@@ -319,7 +319,7 @@ html {
             width: 1px;
           }
 
-          [type='file'] + label {
+          [type="file"] + label {
             margin-top: 1rem;
             background-color: #0d6efd;
             border-radius: 4rem;
@@ -329,24 +329,90 @@ html {
             padding: 0.7rem 1rem;
             text-align: center;
             user-select: none;
-            font-family: 'Gunplay';
+            font-family: "Gunplay";
             font-size: 25px;
           }
 
-          [type='file']:focus + label,
-          [type='file'] + label:hover {
+          [type="file"]:focus + label,
+          [type="file"] + label:hover {
             background-color: #0a58ca;
             color: #fff;
           }
 
-          [type='file']:focus + label {
+          [type="file"]:focus + label {
             outline: 1px dotted #fff;
           }
 
           h5 {
-            font-family: 'Gunplay';
+            font-family: "Gunplay";
             font-size: 25px;
             margin-top: 30px;
+          }
+        }
+      }
+    }
+
+    #scenario-lobby {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #ddd;
+      z-index: 3;
+      display: flex;
+      flex-flow: column;
+
+      #scenario-lobby-filters {
+        width: 100%;
+        border-bottom: 1px solid black;
+        padding-top: 5px;
+
+        form {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-wrap: wrap;
+
+          .input-group {
+            display: flex;
+            flex-flow: column;
+            margin: 5px 10px;
+            height: 50px;
+          }
+        }
+      }
+
+      #scenario-lobby-list {
+        width: 100%;
+        flex-grow: 1;
+        background: #ffffff;
+
+        table {
+          border-collapse: separate;
+          border-spacing: 3px;
+          padding: 0px 3px;
+          width: 100%;
+
+          thead th {
+            background: #6e9243;
+            color: white;
+            text-align: center;
+            vertical-align: middle;
+            padding: 5px 10px;
+          }
+
+          tbody {
+            tr:nth-child(2n) {
+              background: #e8ecdd;
+            }
+            tr:nth-child(2n + 1) {
+              background: #fbfaf7;
+            }
+
+            td {
+              padding: 2px 5px;
+            }
           }
         }
       }
@@ -403,7 +469,7 @@ html {
       #m44-opponentUnits-settings {
         position: relative;
         &::before {
-          content: '';
+          content: "";
           display: block;
           width: 10px;
           height: 10px;
@@ -415,77 +481,77 @@ html {
         }
       }
 
-      [data-bottom-team='AXIS'] & #m44-opponentUnits-settings::before {
+      [data-bottom-team="AXIS"] & #m44-opponentUnits-settings::before {
         background: radial-gradient(farthest-corner at 10% 95%, #77b3d2, #348eb1);
       }
-      [data-bottom-team='AXIS'] & #m44-ownUnits-settings::before {
+      [data-bottom-team="AXIS"] & #m44-ownUnits-settings::before {
         background: radial-gradient(farthest-corner at 10% 95%, #b6291b, #dc672e);
       }
-      [data-bottom-team='ALLIES'] & #m44-opponentUnits-settings::before {
+      [data-bottom-team="ALLIES"] & #m44-opponentUnits-settings::before {
         background: radial-gradient(farthest-corner at 10% 95%, #b6291b, #dc672e);
       }
-      [data-bottom-team='ALLIES'] & #m44-ownUnits-settings::before {
+      [data-bottom-team="ALLIES"] & #m44-ownUnits-settings::before {
         background: radial-gradient(farthest-corner at 10% 95%, #77b3d2, #348eb1);
       }
     }
 
-    #m44-board-wrapper[data-opponent-units='1'] ~ #right-holder #m44-opponentUnits-settings svg:first-of-type {
+    #m44-board-wrapper[data-opponent-units="1"] ~ #right-holder #m44-opponentUnits-settings svg:first-of-type {
       display: none;
     }
-    #m44-board-wrapper[data-opponent-units='0'] ~ #right-holder #m44-opponentUnits-settings svg:last-of-type {
+    #m44-board-wrapper[data-opponent-units="0"] ~ #right-holder #m44-opponentUnits-settings svg:last-of-type {
       display: none;
     }
-    #m44-board-wrapper[data-own-units='1'] ~ #right-holder #m44-ownUnits-settings svg:first-of-type {
+    #m44-board-wrapper[data-own-units="1"] ~ #right-holder #m44-ownUnits-settings svg:first-of-type {
       display: none;
     }
-    #m44-board-wrapper[data-own-units='0'] ~ #right-holder #m44-ownUnits-settings svg:last-of-type {
+    #m44-board-wrapper[data-own-units="0"] ~ #right-holder #m44-ownUnits-settings svg:last-of-type {
       display: none;
     }
-    #m44-board-wrapper[data-terrains='1'] ~ #right-holder #m44-terrains-settings svg:first-of-type {
+    #m44-board-wrapper[data-terrains="1"] ~ #right-holder #m44-terrains-settings svg:first-of-type {
       display: none;
     }
-    #m44-board-wrapper[data-terrains='0'] ~ #right-holder #m44-terrains-settings svg:last-of-type {
+    #m44-board-wrapper[data-terrains="0"] ~ #right-holder #m44-terrains-settings svg:last-of-type {
       display: none;
     }
-    #m44-board-wrapper[data-tokens='1'] ~ #right-holder #m44-tokens-settings svg:first-of-type {
+    #m44-board-wrapper[data-tokens="1"] ~ #right-holder #m44-tokens-settings svg:first-of-type {
       display: none;
     }
-    #m44-board-wrapper[data-tokens='0'] ~ #right-holder #m44-tokens-settings svg:last-of-type {
+    #m44-board-wrapper[data-tokens="0"] ~ #right-holder #m44-tokens-settings svg:last-of-type {
       display: none;
     }
-    #m44-board-wrapper[data-labels='1'] ~ #right-holder #m44-labels-settings svg:first-of-type {
+    #m44-board-wrapper[data-labels="1"] ~ #right-holder #m44-labels-settings svg:first-of-type {
       display: none;
     }
-    #m44-board-wrapper[data-labels='0'] ~ #right-holder #m44-labels-settings svg:last-of-type {
+    #m44-board-wrapper[data-labels="0"] ~ #right-holder #m44-labels-settings svg:last-of-type {
       display: none;
     }
-    #m44-board-wrapper[data-coords='1'] ~ #right-holder #m44-coords-settings svg:first-of-type {
+    #m44-board-wrapper[data-coords="1"] ~ #right-holder #m44-coords-settings svg:first-of-type {
       display: none;
     }
-    #m44-board-wrapper[data-coords='0'] ~ #right-holder #m44-coords-settings svg:last-of-type {
+    #m44-board-wrapper[data-coords="0"] ~ #right-holder #m44-coords-settings svg:last-of-type {
       display: none;
     }
 
     .mobile_version & #m44-board-wrapper ~ #right-holder #m44-summaryHover-settings {
       display: none;
     }
-    #m44-board-wrapper[data-summary-hover='1'] ~ #right-holder #m44-summaryHover-settings svg:first-of-type {
+    #m44-board-wrapper[data-summary-hover="1"] ~ #right-holder #m44-summaryHover-settings svg:first-of-type {
       display: none;
     }
-    #m44-board-wrapper[data-summary-hover='0'] ~ #right-holder #m44-summaryHover-settings svg:last-of-type {
+    #m44-board-wrapper[data-summary-hover="0"] ~ #right-holder #m44-summaryHover-settings svg:last-of-type {
       display: none;
     }
-    #m44-board-wrapper[data-summary-click='1'] ~ #right-holder #m44-summaryClick-settings svg:first-of-type {
+    #m44-board-wrapper[data-summary-click="1"] ~ #right-holder #m44-summaryClick-settings svg:first-of-type {
       display: none;
     }
-    #m44-board-wrapper[data-summary-click='0'] ~ #right-holder #m44-summaryClick-settings svg:last-of-type {
+    #m44-board-wrapper[data-summary-click="0"] ~ #right-holder #m44-summaryClick-settings svg:last-of-type {
       display: none;
     }
 
-    [data-auto-react='0'] & #right-holder #m44-react-settings svg:first-of-type {
+    [data-auto-react="0"] & #right-holder #m44-react-settings svg:first-of-type {
       display: none;
     }
-    [data-auto-react='1'] & #right-holder #m44-react-settings svg:last-of-type {
+    [data-auto-react="1"] & #right-holder #m44-react-settings svg:last-of-type {
       display: none;
     }
   }
@@ -498,12 +564,12 @@ html {
     justify-content: flex-end;
     box-shadow: 0px -2px 3px -1px black;
 
-    background: url('img/ui/game_top.jpg');
+    background: url("img/ui/game_top.jpg");
     background-repeat: repeat;
     background-size: auto 180px;
   }
 
-  &[data-layout='0'] #m44-bottom-container {
+  &[data-layout="0"] #m44-bottom-container {
     #bottom-medals {
       //      left: 180px;
       left: 0px;
@@ -528,7 +594,7 @@ html {
     }
   }
 
-  &[data-layout='0'] .m44-team-medals {
+  &[data-layout="0"] .m44-team-medals {
     position: relative;
   }
 
@@ -553,7 +619,7 @@ html {
       .m44-medal-slot {
         width: 35px;
         height: 35px;
-        background-image: url('img/ui/medalspot.png');
+        background-image: url("img/ui/medalspot.png");
         background-size: 100% 100%;
       }
     }
@@ -574,10 +640,10 @@ html {
       border-radius: 0px;
       height: auto;
 
-      &[data-team='AXIS'] {
+      &[data-team="AXIS"] {
         border: 2px solid #b72c14;
       }
-      &[data-team='ALLIES'] {
+      &[data-team="ALLIES"] {
         border: 2px solid #1d6f98;
       }
     }
@@ -620,29 +686,29 @@ html {
     .m44-team-status {
       width: 172px;
       height: 52px;
-      background-image: url('img/ui/phases.jpg');
+      background-image: url("img/ui/phases.jpg");
       background-size: 700% 200%;
       border-left: 1px solid #2f2f2f;
 
-      &[data-status='order'] {
+      &[data-status="order"] {
         background-position-x: 0;
       }
-      &[data-status='para'] {
+      &[data-status="para"] {
         background-position-x: 1 * 100% / 6;
       }
-      &[data-status='attack'] {
+      &[data-status="attack"] {
         background-position-x: 2 * 100% / 6;
       }
-      &[data-status='command'] {
+      &[data-status="command"] {
         background-position-x: 3 * 100% / 6;
       }
-      &[data-status='move'] {
+      &[data-status="move"] {
         background-position-x: 4 * 100% / 6;
       }
-      &[data-status='idle'] {
+      &[data-status="idle"] {
         background-position-x: 5 * 100% / 6;
       }
-      &[data-status='commissar'] {
+      &[data-status="commissar"] {
         background-position-x: 6 * 100% / 6;
       }
     }
@@ -671,7 +737,7 @@ html {
       .commissar-token {
         width: 50px;
         height: 50px;
-        background-image: url('img/ui/commissar.png');
+        background-image: url("img/ui/commissar.png");
         background-size: 100% 100%;
         position: absolute;
         z-index: 7;
@@ -681,35 +747,35 @@ html {
     }
 
     .m44-card {
-      &[data-type='0'],
-      &[data-type='3'],
-      &[data-type='6'],
-      &[data-type='12'] {
+      &[data-type="0"],
+      &[data-type="3"],
+      &[data-type="6"],
+      &[data-type="12"] {
         order: 1;
       }
 
-      &[data-type='1'],
-      &[data-type='4'],
-      &[data-type='7'],
-      &[data-type='13'] {
+      &[data-type="1"],
+      &[data-type="4"],
+      &[data-type="7"],
+      &[data-type="13"] {
         order: 2;
       }
 
-      &[data-type='2'],
-      &[data-type='5'],
-      &[data-type='8'],
-      &[data-type='14'] {
+      &[data-type="2"],
+      &[data-type="5"],
+      &[data-type="8"],
+      &[data-type="14"] {
         order: 3;
       }
 
-      &[data-type='9'],
-      &[data-type='10'],
-      &[data-type='11'] {
+      &[data-type="9"],
+      &[data-type="10"],
+      &[data-type="11"] {
         order: 4;
       }
 
       @for $i from 15 to 40 {
-        &[data-type='#{$i}'] {
+        &[data-type="#{$i}"] {
           order: $i;
         }
       }
@@ -734,10 +800,10 @@ html {
   margin-right: 10px;
   box-shadow: 1px 1px 3px black;
 
-  &[data-team='AXIS'] {
+  &[data-team="AXIS"] {
     background: radial-gradient(farthest-corner at 10% 95%, #b6291b, #dc672e);
   }
-  &[data-team='ALLIES'] {
+  &[data-team="ALLIES"] {
     background: radial-gradient(farthest-corner at 10% 95%, #77b3d2, #348eb1);
   }
 }
@@ -754,21 +820,21 @@ html {
 .hand-count-holder {
   display: flex;
   padding: 2px 7px;
-  font-family: 'Gunplay';
+  font-family: "Gunplay";
   font-size: 28px;
   line-height: 52px;
 
   .hand-count-back {
     width: 34px;
     height: 48px;
-    background-image: url('img/card_back.jpg');
+    background-image: url("img/card_back.jpg");
     background-size: auto 100%;
     background-repeat: no-repeat;
     background-position: center center;
   }
 
   .hand-count::before {
-    content: 'x';
+    content: "x";
     margin: 0px 3px;
   }
 
@@ -784,7 +850,7 @@ html {
   .commissar-token {
     width: 40px;
     height: 40px;
-    background-image: url('img/ui/commissar.png');
+    background-image: url("img/ui/commissar.png");
     background-size: 100% 100%;
     margin-top: 2px;
   }

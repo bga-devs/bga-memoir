@@ -487,6 +487,7 @@ define(['dojo', 'dojo/_base/declare', g_gamethemeurl + 'modules/js/vendor/nouisl
       let container = $('settings-controls-container');
 
       this.settings = {};
+      this._settingsConfig = this.getSettingsConfig();
       Object.keys(this._settingsConfig).forEach((settingName) => {
         let config = this._settingsConfig[settingName];
         if (config.type == 'pref') {
@@ -961,7 +962,7 @@ define(['dojo', 'dojo/_base/declare', g_gamethemeurl + 'modules/js/vendor/nouisl
       });
       this.tooltips[id] = tooltip;
       dojo.addClass(id, 'tooltipable');
-      if(!toggleByClick){
+      if (!toggleByClick) {
         dojo.place(
           `
           <div class='help-marker'>

@@ -516,6 +516,28 @@ $game_options = [
     ],
   ],
 
+  107 => [
+    'name' => \clienttranslate('Scenario source'),
+    'displaycondition' => [
+      0 => [
+        'type' => 'otheroption',
+        'id' => 102,
+        'value' => 2,
+      ],
+    ],
+    'values' => [
+      0 => [
+        'name' => clienttranslate('Days of Wonders database'),
+        'description' => clienttranslate('Days of Wonders database'),
+      ],
+      1 => [
+        'name' => clienttranslate('M44 file'),
+        'tmdisplay' => '[m44]',
+        'description' => clienttranslate('Uploading a m44 file made with the editor'),
+      ],
+    ],
+  ],
+
   106 => [
     'name' => clienttranslate('Side of the first player at the table'),
     'displaycondition' => [

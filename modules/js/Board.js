@@ -175,7 +175,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       dojo.place('<div id="lineOfSight"></div>', 'm44-board-units');
       dojo.place('<div id="diceContainer"></div>', 'm44-board-units');
       dojo.place('<div id="explosionContainer"></div>', 'm44-board-units');
+    },
 
+    setupBoardButtonsTooltips() {
       if (this.tooltips['m44-labels-settings'] == undefined) {
         let buttonsTooltips = {
           opponentUnits: _("Show/hide opponents' units"),

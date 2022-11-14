@@ -31,7 +31,10 @@ $machinestates = [
     'type' => 'game',
     'action' => 'stStartTable',
     'possibleactions' => [],
-    'transitions' => ['upload' => ST_UPLOAD_SCENARIO],
+    'transitions' => [
+      'upload' => ST_UPLOAD_SCENARIO,
+      'lobby' => ST_LOBBY_MAKE_FIRST_PROPOSAL,
+    ],
   ],
 
   ST_UPLOAD_SCENARIO => [
@@ -39,35 +42,53 @@ $machinestates = [
     'description' => clienttranslate('You must upload a m44 scenario'),
     'descriptionmyturn' => clienttranslate('${you} must upload a m44 scenario'),
     'type' => 'activeplayer',
-    'possibleactions' => [
-      // 'actUploadScenario',
-      'actGetScenarios',
-      'actGetScenarioInfo',
-      'actProposeScenario',
-    ],
+    'possibleactions' => ['actUploadScenario'],
+  ],
+
+  ST_LOBBY_MAKE_FIRST_PROPOSAL => [
+    'name' => 'lobbyProposeScenario',
+    'description' => clienttranslate('Waiting for a scenario proposal'),
+    'descriptionmyturn' => clienttranslate('${you} can propose a scenario'),
+    'type' => 'multipleactiveplayer',
+    'possibleactions' => ['actGetScenarios', 'actGetScenarioInfo', 'actProposeScenario'],
     'transitions' => [
-      'counter' => ST_PROPOSE_CHANGE,
+      'next' => ST_LOBBY_NEXT_PLAYER,
     ],
   ],
 
-  ST_PROPOSE_CHANGE => [
-    'name' => 'proposeChange',
+  ST_LOBBY_NEXT_PLAYER => [
+    'name' => 'lobbyNextPlayer',
     'description' => '',
     'descriptionmyturn' => '',
     'type' => 'game',
-    'action' => 'stProposeChange',
-    'transitions' => ['' => ST_PROPOSE_SCENARIO],
+    'action' => 'stLobbyNextPlayer',
+    'transitions' => [
+      'second' => ST_LOBBY_APPROVE_OR_SECOND_PROPOSAL,
+      'final' => ST_LOBBY_FINAL_APPROVE,
+    ],
   ],
 
-  ST_PROPOSE_SCENARIO => [
-    'name' => 'proposScenario',
-    'description' => clienttranslate('${actplayer} must accept or propose another scenario'),
-    'descriptionmyturn' => clienttranslate('${you} must accept or propose another scenario'),
+  ST_LOBBY_APPROVE_OR_SECOND_PROPOSAL => [
+    'name' => 'lobbyApproveProposeScenario',
+    'descriptioncounter' => clienttranslate('${actplayer} must accept or propose another scenario'),
+    'descriptionmyturncounter' => clienttranslate('${you} must accept or propose another scenario'),
     'type' => 'activeplayer',
     'args' => 'argsProposeScenario',
     'possibleactions' => ['actGetScenarios', 'actGetScenarioInfo', 'actProposeScenario', 'actValidateScenario'],
     'transitions' => [
-      'counter' => ST_PROPOSE_CHANGE,
+      'next' => ST_LOBBY_NEXT_PLAYER,
+      'accept' => ST_NEW_ROUND,
+    ],
+  ],
+
+  ST_LOBBY_FINAL_APPROVE => [
+    'name' => 'lobbyFinalApprove',
+    'descriptioncounter' => clienttranslate('${actplayer} must accept or propose another scenario'),
+    'descriptionmyturncounter' => clienttranslate('${you} must accept or propose another scenario'),
+    'type' => 'activeplayer',
+    'args' => 'argsProposeScenario',
+    'possibleactions' => ['actValidateScenario'],
+    'transitions' => [
       'accept' => ST_NEW_ROUND,
       'reject' => ST_END_GAME,
     ],
