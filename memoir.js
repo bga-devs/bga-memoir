@@ -663,7 +663,7 @@ define([
                 ${_('# per page')}
                 <select id='filter-pagination'>
                   <option value='10'>10</option>
-                  <option value='20'>50</option>
+                  <option value='20'>20</option>
                   <option value='50'>50</option>
                 </select>
               </div>
@@ -711,6 +711,9 @@ define([
 
           $(`scenario-lobby-table`).innerHTML = '';
           for (let scenarioId in data) {
+            if (scenarioId == 'numPages') {
+              continue;
+            }
             let scenario = data[scenarioId];
             $('scenario-lobby-table').insertAdjacentHTML(
               'beforeend',

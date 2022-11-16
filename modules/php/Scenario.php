@@ -58,83 +58,80 @@ class Scenario extends \APP_DbObject
       throw new \BgaVisibleSystemException('Scenario doesn\'t exist or is not valid. Should not happen');
     }
 
-    require dirname(__FILE__) . '/FromTheFront/' . $fromTheFront[$id]['file'] . '.php';
+    require dirname(__FILE__) . '/FromTheFront/' . $fromTheFront[$id]['file'];
     return $scenarios[$id];
   }
 
-  function getMetadataFromTheFront($type = null, $filters = [], $idName = false)
+  function getPaginatedScenarios($pageNumber = 1, $type = null, $filters = [], $pageSize = 10)
+  {
+    $valid = self::getMetadataFromTheFront($type, $filters);
+    $toGet = array_slice($valid, ($pageNumber - 1) * $pageSize, $pageNumber * $pageSize);
+    $toSend = [];
+    foreach ($toGet as $infos) {
+      require dirname(__FILE__) . '/FromTheFront/' . $infos['file'];
+      $toSend[$infos['id']] = $scenarios[$infos['id']];
+      $toSend[$infos['id']]['name'] = $infos['name'];
+    }
+    $toSend['numPages'] = intdiv(count($valid), $pageSize);
+    return $toSend;
+  }
+
+  function getMetadataFromTheFront($type = null, $filters = [])
   {
     $scenarios = [];
-    $ids = [];
     require dirname(__FILE__) . '/FromTheFront/list.inc.php';
     // TODO: update when we have Greg files :)
-    // foreach ($fromTheFront as $id => $infos) {
-    foreach ($fromTheFront as $name) {
+    foreach ($fromTheFront as $id => $infos) {
       // Todo replace $scenarios[$scenarId] by $infos
-      $scenarId = (int) explode('-', $name)[0];
-      require dirname(__FILE__) . '/FromTheFront/' . $name . '.php';
-      if (!is_null($type) && $scenarios[$scenarId]['board']['type'] != $type) {
-        unset($scenarios[$scenarId]);
-        continue;
-      }
+      $scenarId = $id;
+      $fromTheFront[$id]['id'] = $id;
 
-      $scenarios[$scenarId]['name'] = $scenarios[$scenarId]['text']['en']['name'] ?? 'not defined';
-      $ids[$scenarId] = $scenarios[$scenarId]['name'];
+      // TODO: uncomment with new version of Greg
+      // if (!is_null($type) && $infos['type'] != $type) {
+      //   unset($fromTheFront[$scenarId]);
+      //   continue;
+      // }
 
       // filters
       if (
         isset($filters['front']) &&
         !is_null($filters['front']) &&
-        \strtoupper($scenarios[$scenarId]['game_info']['front']) != \strtoupper($filters['front'])
+        \strtoupper($infos['front']) != \strtoupper($filters['front'])
       ) {
-        unset($scenarios[$scenarId]);
+        unset($fromTheFront[$scenarId]);
         continue;
       }
 
       if (isset($filters['id']) && !is_null($filters['id']) && $scenarId != $filters['id']) {
-        unset($scenarios[$scenarId]);
+        unset($fromTheFront[$scenarId]);
         continue;
       }
 
       if (
         isset($filters['author']) &&
         !is_null($filters['author']) &&
-        stripos(
-          \strtoupper($scenarios[$scenarId]['meta_data']['owner']['login'] ?? ''),
-          \strtoupper($filters['author'])
-        ) === false
+        stripos(\strtoupper($infos['author'] ?? ''), \strtoupper($filters['author'])) === false
       ) {
-        unset($scenarios[$scenarId]);
+        unset($fromTheFront[$scenarId]);
         continue;
       }
 
       if (
         isset($filters['name']) &&
         !is_null($filters['name']) &&
-        stripos(\strtoupper($scenarios[$scenarId]['name']), \strtoupper($filters['name'])) === false
+        stripos(\strtoupper($infos['name']), \strtoupper($filters['name'])) === false
       ) {
-        unset($scenarios[$scenarId]);
+        unset($fromTheFront[$scenarId]);
         continue;
       }
 
-      // TODO: remove when Greg has put the fonction in place
-      if (self::validateScenario($scenarios[$scenarId])) {
-        unset($scenarios[$scenarId]);
-        continue;
-      }
-
-      unset($scenarios[$scenarId]['text']);
-      unset($scenarios[$scenarId]['board']);
-
-      // unset($scenarios[$scenarId]['equipment_packs']);
-
-      // unset($scenarios[$scenarId]['meta_data']);
+      // removed as BGA check it at get time
+      // if (self::validateScenario($scenarios[$scenarId])) {
+      //   unset($fromTheFront[$scenarId]);
+      //   continue;
+      // }
     }
-    if ($idName === false) {
-      return $scenarios;
-    } else {
-      return $ids;
-    }
+    return $fromTheFront;
   }
 
   /**
@@ -147,13 +144,9 @@ class Scenario extends \APP_DbObject
 
     // Add FromTheFront scenarios
     if (!isset($scenariosMap[$id])) {
-      require_once dirname(__FILE__) . '/FromTheFront/list.inc.php';
-      foreach ($fromTheFront as $name) {
-        $scenarId = (int) explode('-', $name)[0];
-        $scenariosMap[$scenarId] = $name;
-      }
+      require dirname(__FILE__) . '/FromTheFront/list.inc.php';
 
-      if (!isset($scenariosMap[$id])) {
+      if (!isset($frontTheFront[$id])) {
         throw new \BgaVisibleSystemException('Invalid scenario id');
       }
       $dir = 'FromTheFront';
@@ -161,7 +154,8 @@ class Scenario extends \APP_DbObject
 
     $name = $scenariosMap[$id];
     $scenarios = [];
-    require_once dirname(__FILE__) . '/' . $dir . '/' . $name . '.php';
+
+    require_once dirname(__FILE__) . '/' . $dir . '/' . $name . $dir == 'FromTheFront' ? '' : '.php';
 
     // Enforce uppercase for starting side
     $scenario = $scenarios[$id];

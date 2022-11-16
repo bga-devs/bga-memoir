@@ -66,7 +66,7 @@ trait LoadScenarioTrait
     }
     // filters = ['front', 'name', 'id', 'author' ]
 
-    return Scenario::getMetadataFromTheFront($type, $filters);
+    return Scenario::getPaginatedScenarios($filters['page'] ?? 1, $type, $filters, $filters['pagination']);
   }
 
   public function actGetScenarioInfo($id)
