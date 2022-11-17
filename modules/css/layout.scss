@@ -386,6 +386,7 @@ html {
       #scenario-lobby-list {
         width: 100%;
         flex-grow: 1;
+        overflow: auto;
         background: #ffffff;
 
         table {
@@ -397,9 +398,23 @@ html {
           thead th {
             background: #6e9243;
             color: white;
-            text-align: center;
             vertical-align: middle;
             padding: 5px 10px;
+            text-align: center;
+
+            div {
+              display: flex;
+              justify-content: space-between;
+
+              span {
+                color: #ffffff7d;
+                cursor: pointer;
+
+                &.active {
+                  color: white;
+                }
+              }
+            }
           }
 
           tbody {
@@ -412,6 +427,30 @@ html {
 
             td {
               padding: 2px 5px;
+            }
+          }
+        }
+      }
+
+      #scenario-lobby-pagination {
+        width: 100%;
+        border-top: 1px solid black;
+        padding-bottom: 10px;
+        padding-top: 5px;
+        text-align: center;
+
+        #lobby-pagination {
+          span {
+            display: inline-block;
+            padding: 0px 3px;
+            cursor: pointer;
+
+            &:hover {
+              text-decoration: underline;
+            }
+
+            &.current {
+              font-weight: bold;
             }
           }
         }

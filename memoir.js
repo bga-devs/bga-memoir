@@ -627,7 +627,7 @@ define([
     //                         |___/
     ////////////////////////////////////
 
-    onEnteringStateLobbyProposeScenario() {
+    onEnteringStateLobbyProposeScenario(args) {
       this.clearInterface();
       dojo.place(
         `<div id="scenario-lobby">
@@ -664,6 +664,8 @@ define([
                 <select id='filter-pagination'>
                   <option value='10'>10</option>
                   <option value='20'>20</option>
+                  <option value='30'>30</option>
+                  <option value='40'>40</option>
                   <option value='50'>50</option>
                 </select>
               </div>
@@ -677,58 +679,160 @@ define([
             <table>
               <thead>
                 <tr>
-                  <th>${_('ID')}</th>
-                  <th>${_('Title')}</th>
-                  <th>${_('Operation')}</th>
-                  <th>${_('Front')}</th>
-                  <th>${_('Author')}</th>
+                  <th><div><span id='sort-id-inc'>▼</span>${_('ID')}<span id='sort-id-desc'>▲</span></div></th>
+                  <th><div><span id='sort-name-inc'>▼</span>${_('Title')}<span id='sort-name-desc'>▲</span></div></th>
+                  <th><div><span id='sort-operation-inc'>▼</span>${_(
+                    'Operation',
+                  )}<span id='sort-operation-desc'>▲</span></div></th>
+                  <th><div><span id='sort-front-inc'>▼</span>${_('Front')}<span id='sort-front-desc'>▲</span></div></th>
+                  <th><div><span id='sort-author-inc'>▼</span>${_(
+                    'Author',
+                  )}<span id='sort-author-desc'>▲</span></div></th>
                   <th>${_('Scenario Info')}</th>
                 </tr>
               </thead>
               <tbody id="scenario-lobby-table"></tbody>
             </table>
           </div>
+          <div id="scenario-lobby-pagination"></div>
       </div>`,
         'm44-board-wrapper',
       );
 
       $('form-lobby').addEventListener('submit', (evt) => {
         evt.preventDefault();
-        let filters = {
-          front: $('filter-front').value,
-          id: $('filter-id').value,
-          name: $('filter-name').value,
-          author: $('filter-author').value,
-          pagination: $('filter-pagination').value,
-        };
-        for (let key in filters) {
-          if (filters[key] === '') filters[key] = null;
-        }
-        debug(filters);
+        let query = this.lobbyGetFilters();
+        query.order = this._lobbyCurrentQuery.order;
+        this.lobbyFetchResult(query);
+      });
 
-        this.takeAction('actGetScenarios', { filters: JSON.stringify(filters), lock: false }).then((response) => {
-          let data = response.data;
-
-          $(`scenario-lobby-table`).innerHTML = '';
-          for (let scenarioId in data) {
-            if (scenarioId == 'numPages') {
-              continue;
-            }
-            let scenario = data[scenarioId];
-            $('scenario-lobby-table').insertAdjacentHTML(
-              'beforeend',
-              `<tr>
-              <td>${scenarioId}</td>
-              <td>${_(scenario.name)}</td>
-              <td>${scenario.game_info.operation.name}</td>
-              <td>${scenario.game_info.front}</td>
-              <td>${scenario.meta_data.author.login}</td>
-              <td></td>
-            </tr>`,
-            );
-          }
+      ['id', 'name', 'operation', 'front', 'author'].forEach((orderField) => {
+        ['inc', 'desc'].forEach((order) => {
+          this.onClick(`sort-${orderField}-${order}`, () => {
+            this._lobbyCurrentQuery.order = [orderField, order];
+            this._lobbyCurrentQuery.page = 1;
+            this.lobbyFetchResult(this._lobbyCurrentQuery);
+          });
         });
       });
+
+      this.lobbyDisplayScenarioList(args.result);
+    },
+
+    lobbyGetFilters() {
+      let filters = {
+        front: $('filter-front').value,
+        id: $('filter-id').value,
+        name: $('filter-name').value,
+        author: $('filter-author').value,
+        pagination: $('filter-pagination').value,
+      };
+      for (let key in filters) {
+        if (filters[key] === '') filters[key] = null;
+      }
+      return filters;
+    },
+
+    lobbyFetchResult(filters) {
+      this.takeAction('actGetScenarios', { filters: JSON.stringify(filters), lock: false }).then((response) => {
+        let data = response.data;
+        this.lobbyDisplayScenarioList(data);
+      });
+    },
+
+    lobbyDisplayScenarioList(result) {
+      debug(result);
+      this._lobbyCurrentQuery = result.query;
+
+      // Make sure filters are kept synced
+      ['id', 'front', 'name', 'author', 'pagination'].forEach((filter) => {
+        $(`filter-${filter}`).value = result.query[filter] ?? '';
+      });
+      let o = $('scenario-lobby-list').querySelector('table thead tr th div span.active');
+      if (o) {
+        o.classList.remove('active');
+      }
+      $(`sort-${result.query.order[0]}-${result.query.order[1]}`).classList.add('active');
+
+      // Scenario list
+      $(`scenario-lobby-table`).innerHTML = '';
+      if (result.scenarios.length) {
+        result.scenarios.forEach((scenario) => {
+          $('scenario-lobby-table').insertAdjacentHTML(
+            'beforeend',
+            `<tr id='scenario-${scenario.id}'>
+            <td>${scenario.id}</td>
+            <td id='scenario-name-${scenario.id}'>${_(scenario.name)}</td>
+            <td>${scenario.game_info.operation.name ?? ''}</td>
+            <td>${scenario.game_info.front}</td>
+            <td>${scenario.meta_data.author.login ?? ''}</td>
+            <td></td>
+          </tr>`,
+          );
+
+          this.addCustomTooltip(
+            `scenario-name-${scenario.id}`,
+            `<img src='https://www.daysofwonder.com/memoir44/fr/memoire_board/?id=${scenario.id}' width="386" height="272" />`,
+          );
+        });
+      } else {
+        $('scenario-lobby-table').insertAdjacentHTML(
+          'beforeend',
+          `<tr><td colspan="6" style="text-align:center">${_('Sorry, no result could be found')}</td></tr>`,
+        );
+      }
+
+      // Pagination
+      $('scenario-lobby-pagination').innerHTML = '';
+      $('scenario-lobby-pagination').insertAdjacentHTML(
+        'beforeend',
+        `${_('Pages')} (${result.numPages}) [<span id='lobby-pagination'></span>]`,
+      );
+      let currentPage = result.currentPage;
+
+      if (currentPage != 1) {
+        $('lobby-pagination').insertAdjacentHTML(
+          'beforeend',
+          "<span id='lobby-pagination-first'>«</span><span id='lobby-pagination-prev'>&lt;</span>",
+        );
+        this.onClick(`lobby-pagination-first`, () => {
+          result.query.page = 1;
+          this.lobbyFetchResult(result.query);
+        });
+        this.onClick(`lobby-pagination-prev`, () => {
+          result.query.page = parseInt(currentPage) - 1;
+          this.lobbyFetchResult(result.query);
+        });
+      }
+
+      let minPageDisplayed = Math.max(1, currentPage - 5);
+      let maxPageDisplayed = Math.min(result.numPages, minPageDisplayed + 10);
+      for (let i = minPageDisplayed; i <= maxPageDisplayed; i++) {
+        $('lobby-pagination').insertAdjacentHTML(
+          'beforeend',
+          `<span id='lobby-pagination-goto-${i}' class='${i == currentPage ? 'current' : ''}'>${i}</span>`,
+        );
+        let page = i;
+        this.onClick(`lobby-pagination-goto-${i}`, () => {
+          result.query.page = page;
+          this.lobbyFetchResult(result.query);
+        });
+      }
+
+      if (currentPage < result.numPages) {
+        $('lobby-pagination').insertAdjacentHTML(
+          'beforeend',
+          "<span id='lobby-pagination-next'>&gt;</span><span id='lobby-pagination-last'>»</span>",
+        );
+        this.onClick(`lobby-pagination-last`, () => {
+          result.query.page = result.numPages;
+          this.lobbyFetchResult(result.query);
+        });
+        this.onClick(`lobby-pagination-next`, () => {
+          result.query.page = parseInt(currentPage) + 1;
+          this.lobbyFetchResult(result.query);
+        });
+      }
     },
 
     //////////////////////////////////////////////////

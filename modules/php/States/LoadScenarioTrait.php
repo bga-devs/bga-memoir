@@ -54,19 +54,18 @@ trait LoadScenarioTrait
   //                         |___/
   ////////////////////////////////////
 
-  public function actGetScenarios($filters)
+  public function actGetScenarios($query = [])
   {
-    $type = Globals::getMode();
-    if ($type == \OPTION_MODE_STANDARD) {
-      $type = 'STANDARD';
-    } elseif ($type == \OPTION_MODE_BREAKTHROUGH) {
-      $type = 'BRKTHRU';
-    } else {
-      $type = 'OVERLORD';
+    if (!isset($query['type'])) {
+      $map = [
+        \OPTION_MODE_STANDARD => 'STANDARD',
+        \OPTION_MODE_BREAKTHROUGH => 'BRKTHRU',
+        \OPTION_MODE_OVERLORD => 'OVERLORD',
+      ];
+      $query['type'] = $map[Globals::getMode()];
     }
-    // filters = ['front', 'name', 'id', 'author' ]
 
-    return Scenario::getPaginatedScenarios($filters['page'] ?? 1, $type, $filters, $filters['pagination']);
+    return Scenario::getPaginatedScenarios($query);
   }
 
   public function actGetScenarioInfo($id)
@@ -76,7 +75,11 @@ trait LoadScenarioTrait
 
   public function argsProposeScenario()
   {
-    return ['scenario' => Scenario::getFromTheFront(Globals::getScenarioId())];
+    $id = Globals::getScenarioId();
+    return [
+      'result' => $this->actGetScenarios(),
+      'scenarioProposed' => $id == -1 ? null : $this->actGetScenarioInfo($id),
+    ];
   }
 
   public function actProposeScenario($id)

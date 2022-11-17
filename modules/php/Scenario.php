@@ -62,76 +62,78 @@ class Scenario extends \APP_DbObject
     return $scenarios[$id];
   }
 
-  function getPaginatedScenarios($pageNumber = 1, $type = null, $filters = [], $pageSize = 10)
+  function getPaginatedScenarios($query)
   {
-    $valid = self::getMetadataFromTheFront($type, $filters);
-    $toGet = array_slice($valid, ($pageNumber - 1) * $pageSize, $pageNumber * $pageSize);
+    $query['page'] = $query['page'] ?? 1; // Keep it sync with frontend
+    $query['pagination'] = $query['pagination'] ?? 20;
+    $query['order'] = $query['order'] ?? ['id', 'inc'];
+
+    // Get ordered scenario matching filters
+    $valid = self::getMetadataFromTheFront($query);
+    // Keep some of them according to pagination
+    $pageNumber = $query['page'];
+    $pageSize = $query['pagination'];
+    $toGet = array_slice($valid, ($pageNumber - 1) * $pageSize, $pageSize);
+
+    // Get the scenarios data
     $toSend = [];
     foreach ($toGet as $infos) {
       require dirname(__FILE__) . '/FromTheFront/' . $infos['file'];
-      $toSend[$infos['id']] = $scenarios[$infos['id']];
-      $toSend[$infos['id']]['name'] = $infos['name'];
+      $scenario = $scenarios[$infos['id']];
+      unset($scenario['board']);
+      $scenario['id'] = $infos['id'];
+      $scenario['name'] = $infos['name'];
+      $toSend[] = $scenario;
     }
-    $toSend['numPages'] = intdiv(count($valid), $pageSize);
-    return $toSend;
+
+    return [
+      'scenarios' => $toSend,
+      'query' => $query,
+      'currentPage' => $pageNumber,
+      'numPages' => intdiv(count($valid), $pageSize),
+    ];
   }
 
-  function getMetadataFromTheFront($type = null, $filters = [])
+  function getMetadataFromTheFront($query)
   {
-    $scenarios = [];
     require dirname(__FILE__) . '/FromTheFront/list.inc.php';
-    // TODO: update when we have Greg files :)
+    $scenarios = [];
     foreach ($fromTheFront as $id => $infos) {
-      // Todo replace $scenarios[$scenarId] by $infos
-      $scenarId = $id;
-      $fromTheFront[$id]['id'] = $id;
-
-      // TODO: uncomment with new version of Greg
-      // if (!is_null($type) && $infos['type'] != $type) {
-      //   unset($fromTheFront[$scenarId]);
-      //   continue;
-      // }
-
-      // filters
-      if (
-        isset($filters['front']) &&
-        !is_null($filters['front']) &&
-        \strtoupper($infos['front']) != \strtoupper($filters['front'])
-      ) {
-        unset($fromTheFront[$scenarId]);
-        continue;
+      $infos['id'] = $id;
+      if(self::isSatisfyingFilters($infos, $query)){
+        $scenarios[] = $infos;
       }
-
-      if (isset($filters['id']) && !is_null($filters['id']) && $scenarId != $filters['id']) {
-        unset($fromTheFront[$scenarId]);
-        continue;
-      }
-
-      if (
-        isset($filters['author']) &&
-        !is_null($filters['author']) &&
-        stripos(\strtoupper($infos['author'] ?? ''), \strtoupper($filters['author'])) === false
-      ) {
-        unset($fromTheFront[$scenarId]);
-        continue;
-      }
-
-      if (
-        isset($filters['name']) &&
-        !is_null($filters['name']) &&
-        stripos(\strtoupper($infos['name']), \strtoupper($filters['name'])) === false
-      ) {
-        unset($fromTheFront[$scenarId]);
-        continue;
-      }
-
-      // removed as BGA check it at get time
-      // if (self::validateScenario($scenarios[$scenarId])) {
-      //   unset($fromTheFront[$scenarId]);
-      //   continue;
-      // }
     }
-    return $fromTheFront;
+
+    $order = $query['order'];
+    usort($scenarios, function($s1, $s2) use ($order){
+      $o = $order[0];
+      $s = $order[1] == 'inc'? 1 : -1;
+      if($o == 'id'){
+        return $s * ((int) $s1['id'] - $s2['id']);
+      } else if($o == 'operation'){
+        return $s * strcmp($s1[$o]['name'], $s2[$o]['name']);
+      } else {
+        return $s* strcmp($s1[$o], $s2[$o]);
+      }
+    });
+
+    return $scenarios;
+  }
+
+  function isSatisfyingFilters($infos, $filters){
+    foreach(['type', 'id', 'front', 'author', 'name'] as $filter){
+      if(is_null($filters[$filter] ?? null)){
+        continue;
+      }
+
+      $f = strtoupper($filters[$filter]);
+      $v = strtoupper($infos[$filter] ?? '');
+      if(stripos($v, $f) === false){
+        return false;
+      }
+    }
+    return true;
   }
 
   /**

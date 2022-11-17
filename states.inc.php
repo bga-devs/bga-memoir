@@ -50,6 +50,7 @@ $machinestates = [
     'description' => clienttranslate('Waiting for a scenario proposal'),
     'descriptionmyturn' => clienttranslate('${you} can propose a scenario'),
     'type' => 'multipleactiveplayer',
+    'args' => 'argsProposeScenario',
     'possibleactions' => ['actGetScenarios', 'actGetScenarioInfo', 'actProposeScenario'],
     'transitions' => [
       'next' => ST_LOBBY_NEXT_PLAYER,

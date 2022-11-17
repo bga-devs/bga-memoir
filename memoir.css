@@ -14,25 +14,25 @@
  *
  */
 @font-face {
-  font-family: 'Army';
+  font-family: "Army";
   src: url("img/fonts/Army.woff2") format("woff2"), url("img/fonts/Army.woff") format("woff"), url("img/fonts/Army.ttf") format("truetype");
   font-weight: 100;
   font-style: normal;
   font-display: swap; }
 @font-face {
-  font-family: 'Gunplay';
+  font-family: "Gunplay";
   src: url("img/fonts/Gunplay.woff2") format("woff2"), url("img/fonts/Gunplay.woff") format("woff"), url("img/fonts/Gunplay.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap; }
 @font-face {
-  font-family: 'Oswald';
+  font-family: "Oswald";
   src: url("img/fonts/Oswald-Regular.woff2") format("woff2"), url("img/fonts/Oswald-Regular.woff") format("woff"), url("img/fonts/Oswald-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap; }
 @font-face {
-  font-family: 'Dax';
+  font-family: "Dax";
   src: url("img/fonts/DaxLight.woff2") format("woff2"), url("img/fonts/DaxLight.woff") format("woff"), url("img/fonts/DaxLight.ttf") format("truetype");
   font-weight: 300;
   font-style: normal;
@@ -68,6 +68,9 @@
   .help-marker-btn svg {
     width: 20px;
     height: 20px; }
+
+.help-marker {
+  display: none; }
 
 html {
   background: url("img/ui/background.jpg"); }
@@ -366,6 +369,7 @@ html {
       #m44-container #m44-central-part #scenario-lobby #scenario-lobby-list {
         width: 100%;
         flex-grow: 1;
+        overflow: auto;
         background: #ffffff; }
         #m44-container #m44-central-part #scenario-lobby #scenario-lobby-list table {
           border-collapse: separate;
@@ -375,15 +379,37 @@ html {
           #m44-container #m44-central-part #scenario-lobby #scenario-lobby-list table thead th {
             background: #6e9243;
             color: white;
-            text-align: center;
             vertical-align: middle;
-            padding: 5px 10px; }
+            padding: 5px 10px;
+            text-align: center; }
+            #m44-container #m44-central-part #scenario-lobby #scenario-lobby-list table thead th div {
+              display: flex;
+              justify-content: space-between; }
+              #m44-container #m44-central-part #scenario-lobby #scenario-lobby-list table thead th div span {
+                color: #ffffff7d;
+                cursor: pointer; }
+                #m44-container #m44-central-part #scenario-lobby #scenario-lobby-list table thead th div span.active {
+                  color: white; }
           #m44-container #m44-central-part #scenario-lobby #scenario-lobby-list table tbody tr:nth-child(2n) {
             background: #e8ecdd; }
           #m44-container #m44-central-part #scenario-lobby #scenario-lobby-list table tbody tr:nth-child(2n + 1) {
             background: #fbfaf7; }
           #m44-container #m44-central-part #scenario-lobby #scenario-lobby-list table tbody td {
             padding: 2px 5px; }
+      #m44-container #m44-central-part #scenario-lobby #scenario-lobby-pagination {
+        width: 100%;
+        border-top: 1px solid black;
+        padding-bottom: 10px;
+        padding-top: 5px;
+        text-align: center; }
+        #m44-container #m44-central-part #scenario-lobby #scenario-lobby-pagination #lobby-pagination span {
+          display: inline-block;
+          padding: 0px 3px;
+          cursor: pointer; }
+          #m44-container #m44-central-part #scenario-lobby #scenario-lobby-pagination #lobby-pagination span:hover {
+            text-decoration: underline; }
+          #m44-container #m44-central-part #scenario-lobby #scenario-lobby-pagination #lobby-pagination span.current {
+            font-weight: bold; }
     #m44-container #m44-central-part #right-holder {
       width: 52px;
       flex-shrink: 0;

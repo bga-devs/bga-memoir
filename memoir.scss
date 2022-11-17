@@ -14,34 +14,34 @@
  */
 
 @font-face {
-  font-family: 'Army';
-  src: url('img/fonts/Army.woff2') format('woff2'), url('img/fonts/Army.woff') format('woff'),
-    url('img/fonts/Army.ttf') format('truetype');
+  font-family: "Army";
+  src: url("img/fonts/Army.woff2") format("woff2"), url("img/fonts/Army.woff") format("woff"),
+    url("img/fonts/Army.ttf") format("truetype");
   font-weight: 100;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Gunplay';
-  src: url('img/fonts/Gunplay.woff2') format('woff2'), url('img/fonts/Gunplay.woff') format('woff'),
-    url('img/fonts/Gunplay.ttf') format('truetype');
+  font-family: "Gunplay";
+  src: url("img/fonts/Gunplay.woff2") format("woff2"), url("img/fonts/Gunplay.woff") format("woff"),
+    url("img/fonts/Gunplay.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: 'Oswald';
-  src: url('img/fonts/Oswald-Regular.woff2') format('woff2'), url('img/fonts/Oswald-Regular.woff') format('woff'),
-    url('img/fonts/Oswald-Regular.ttf') format('truetype');
+  font-family: "Oswald";
+  src: url("img/fonts/Oswald-Regular.woff2") format("woff2"), url("img/fonts/Oswald-Regular.woff") format("woff"),
+    url("img/fonts/Oswald-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: 'Dax';
-  src: url('img/fonts/DaxLight.woff2') format('woff2'), url('img/fonts/DaxLight.woff') format('woff'),
-    url('img/fonts/DaxLight.ttf') format('truetype');
+  font-family: "Dax";
+  src: url("img/fonts/DaxLight.woff2") format("woff2"), url("img/fonts/DaxLight.woff") format("woff"),
+    url("img/fonts/DaxLight.ttf") format("truetype");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -85,16 +85,19 @@
   }
 }
 
+.help-marker {
+  display: none;
+}
 
-@import 'modules/css/layout';
-@import 'modules/css/board';
-@import 'modules/css/units';
-@import 'modules/css/cards';
-@import 'modules/css/medals';
-@import 'modules/css/dice';
-@import 'modules/css/flip';
-@import 'modules/css/explosion';
-@import 'modules/css/modals';
-@import 'modules/css/tokens';
-@import 'modules/css/nouislider';
-@import 'modules/css/settings';
+@import "modules/css/layout";
+@import "modules/css/board";
+@import "modules/css/units";
+@import "modules/css/cards";
+@import "modules/css/medals";
+@import "modules/css/dice";
+@import "modules/css/flip";
+@import "modules/css/explosion";
+@import "modules/css/modals";
+@import "modules/css/tokens";
+@import "modules/css/nouislider";
+@import "modules/css/settings";
