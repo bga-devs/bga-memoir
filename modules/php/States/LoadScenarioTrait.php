@@ -77,6 +77,7 @@ trait LoadScenarioTrait
   {
     $id = Globals::getScenarioId();
     return [
+      'canPropose' => Globals::getActionCount() <= 2,
       'result' => $this->actGetScenarios(),
       'scenarioProposed' => $id == -1 ? null : $this->actGetScenarioInfo($id),
     ];
@@ -85,42 +86,44 @@ trait LoadScenarioTrait
   public function actProposeScenario($id)
   {
     self::checkAction('actProposeScenario');
-
-    if (Globals::getActionCount() == 1) {
+    $player = Players::getCurrent();
+    if (Globals::getActionCount() == 2) {
       throw new \BgaVisibleSystemException('Cannot counter counter a choice of scenario');
     }
     $previousId = Globals::getScenarioId();
     $id = (int) $id;
     $scenario = Scenario::getFromTheFront($id);
-    if ($previousId !== null) {
-      Globals::setActionCount(1);
-    }
+    Globals::incActionCount();
     Globals::setScenarioId($id);
+    Globals::setLobbyProposalPId($player->getId());
     Globals::setOfficialScenario(false);
 
-    Notifications::proposeScenario(Players::getActive(), $scenario, $previousId != null);
-    $this->gamestate->nextState('counter');
+    Notifications::proposeScenario($player, $scenario, Globals::getActionCount() == 2);
+    $this->gamestate->nextState('next');
   }
 
-  public function actValidateScenario($valid)
+  public function stLobbyNextPlayer()
+  {
+    $pId = Globals::getLobbyProposalPId();
+    $this->gamestate->changeActivePlayer(Players::getNextId($pId));
+    $this->gamestate->nextState(Globals::getActionCount() == 1 ? 'second' : 'final');
+  }
+
+  public function actValidateScenario($accept)
   {
     self::checkAction('actValidateScenario');
-    if ($valid === false) {
-      Notifications::message(clienttranslate('Players do not agree on the scenario. Ending the game'), []);
-      $this->gamestate->nextState('reject');
-    } else {
+    if ($accept) {
       Notifications::message(clienttranslate('Players agree on a senario. Setup in progress'));
       Scenario::validateScenario(Scenario::getFromTheFront(Globals::getScenarioId()));
       Globals::setScenario(Scenario::getFromTheFront(Globals::getScenarioId()));
       Globals::setRound(0);
       Globals::setActionCount(0);
       $this->stNewRound(true);
+    } else {
+      Notifications::message(clienttranslate('Players do not agree on the scenario. Ending the game'), []);
+      self::DbQuery("UPDATE player SET player_score='0', player_score_aux='-4242'");
+      self::reloadPlayersBasicInfos();
+      $this->gamestate->nextState('reject');
     }
-  }
-
-  public function stProposeChange()
-  {
-    $this->activeNextPlayer();
-    $this->gamestate->nextState('');
   }
 }

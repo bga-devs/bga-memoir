@@ -12,7 +12,9 @@ class Globals extends \M44\Helpers\DB_Manager
   protected static $variables = [
     'changeActivePlayer' => 'obj', // Used for the generic "changeActivePlayer" state
     'logState' => 'int', // Used to store state id when enabling the log
+
     'actionCount' => 'int',
+    'lobbyProposalPId' => 'int', // Used for lobby
 
     // Game options
     'duration' => 'int', // 1 way, 2 ways

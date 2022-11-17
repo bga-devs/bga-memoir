@@ -5030,7 +5030,7 @@ span.m44-dice-result {
   width: 80%;
   position: relative; }
   .memoir44_popin::before, .memoir44_popin::after {
-    content: '';
+    content: "";
     display: block;
     position: absolute;
     width: 100%;
@@ -5066,11 +5066,13 @@ span.m44-dice-result {
     .memoir44_popin .memoir44_popin_closeicon i {
       margin-top: -2px; }
 
-#popin_showScenario {
+#popin_showScenario,
+#popin_showScenarioLobby {
   width: 1000px; }
-  #popin_showScenario h2 {
+  #popin_showScenario h2,
+  #popin_showScenarioLobby h2 {
     text-align: center;
-    font-family: 'Gunplay';
+    font-family: "Gunplay";
     color: #9e0a0f;
     font-size: 39px;
     text-transform: uppercase;
@@ -5078,35 +5080,84 @@ span.m44-dice-result {
     background: #ffffffab;
     padding: 14px 0px 7px;
     border-bottom: 1px solid #8080808a; }
-  #popin_showScenario #popin_showScenario_contents {
+  #popin_showScenario #popin_showScenario_contents,
+  #popin_showScenario #popin_showScenarioLobby_contents,
+  #popin_showScenarioLobby #popin_showScenario_contents,
+  #popin_showScenarioLobby #popin_showScenarioLobby_contents {
     display: flex;
     flex-flow: column;
     padding: 10px 15px; }
-    #popin_showScenario #popin_showScenario_contents h5 {
-      font-family: 'Gunplay';
+    #popin_showScenario #popin_showScenario_contents h5,
+    #popin_showScenario #popin_showScenarioLobby_contents h5,
+    #popin_showScenarioLobby #popin_showScenario_contents h5,
+    #popin_showScenarioLobby #popin_showScenarioLobby_contents h5 {
+      font-family: "Gunplay";
       color: #c2602f;
       font-size: 23px; }
-    #popin_showScenario #popin_showScenario_contents #scenario-dates {
+    #popin_showScenario #popin_showScenario_contents #scenario-dates,
+    #popin_showScenario #popin_showScenarioLobby_contents #scenario-dates,
+    #popin_showScenarioLobby #popin_showScenario_contents #scenario-dates,
+    #popin_showScenarioLobby #popin_showScenarioLobby_contents #scenario-dates {
       text-align: right;
       font-size: 20px; }
-    #popin_showScenario #popin_showScenario_contents #scenario-historical {
-      font-family: 'Dax';
+    #popin_showScenario #popin_showScenario_contents #scenario-historical,
+    #popin_showScenario #popin_showScenarioLobby_contents #scenario-historical,
+    #popin_showScenarioLobby #popin_showScenario_contents #scenario-historical,
+    #popin_showScenarioLobby #popin_showScenarioLobby_contents #scenario-historical {
+      font-family: "Dax";
       text-align: justify; }
-    #popin_showScenario #popin_showScenario_contents #scenario-bottom-container {
+    #popin_showScenario #popin_showScenario_contents #scenario-bottom-container,
+    #popin_showScenario #popin_showScenarioLobby_contents #scenario-bottom-container,
+    #popin_showScenarioLobby #popin_showScenario_contents #scenario-bottom-container,
+    #popin_showScenarioLobby #popin_showScenarioLobby_contents #scenario-bottom-container {
       display: flex;
       margin-top: 20px;
       justify-content: space-between; }
-      #popin_showScenario #popin_showScenario_contents #scenario-bottom-container > div {
+      #popin_showScenario #popin_showScenario_contents #scenario-bottom-container > div,
+      #popin_showScenario #popin_showScenarioLobby_contents #scenario-bottom-container > div,
+      #popin_showScenarioLobby #popin_showScenario_contents #scenario-bottom-container > div,
+      #popin_showScenarioLobby #popin_showScenarioLobby_contents #scenario-bottom-container > div {
         width: 49%; }
-      #popin_showScenario #popin_showScenario_contents #scenario-bottom-container #scenario-brief {
+      #popin_showScenario #popin_showScenario_contents #scenario-bottom-container #scenario-brief,
+      #popin_showScenario #popin_showScenarioLobby_contents #scenario-bottom-container #scenario-brief,
+      #popin_showScenarioLobby #popin_showScenario_contents #scenario-bottom-container #scenario-brief,
+      #popin_showScenarioLobby #popin_showScenarioLobby_contents #scenario-bottom-container #scenario-brief {
         border-right: 2px solid #9e0a0f; }
+
+#popin_showScenarioLobby #popin_showScenarioLobby_contents #scenario-image-brief {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px; }
+  #popin_showScenarioLobby #popin_showScenarioLobby_contents #scenario-image-brief img {
+    flex-grow: 1; }
+  #popin_showScenarioLobby #popin_showScenarioLobby_contents #scenario-image-brief #scenario-brief {
+    border-right: none;
+    margin-left: 20px;
+    display: flex;
+    flex-flow: column; }
+    #popin_showScenarioLobby #popin_showScenarioLobby_contents #scenario-image-brief #scenario-brief #lobby-button-container {
+      flex-grow: 1;
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+      align-items: center; }
+      #popin_showScenarioLobby #popin_showScenarioLobby_contents #scenario-image-brief #scenario-brief #lobby-button-container .bgabutton {
+        font-size: 25px; }
+#popin_showScenarioLobby #popin_showScenarioLobby_contents #scenario-dates {
+  float: right;
+  font-size: 16px;
+  font-family: Roboto, Arial, sans-serif; }
+#popin_showScenarioLobby #popin_showScenarioLobby_contents #scenario-historical {
+  margin-bottom: 10px; }
+#popin_showScenarioLobby #popin_showScenarioLobby_contents #scenario-conditions-rules {
+  font-size: 14px; }
 
 #popin_showStats {
   width: 800px;
   height: 400px; }
   #popin_showStats h2 {
     text-align: center;
-    font-family: 'Gunplay';
+    font-family: "Gunplay";
     color: #9e0a0f;
     font-size: 39px;
     text-transform: uppercase;

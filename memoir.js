@@ -264,6 +264,7 @@ define([
 
         dojo.empty('discard');
         dojo.destroy('scenario-dropzone-container');
+        dojo.destroy('scenario-lobby');
 
         this.updateTeamStatus('ALLIES', 'idle');
         this.forEachPlayer((player) => {
@@ -460,6 +461,10 @@ define([
     // |_|  |_|\___/ \__,_|\__,_|_|
     ////////////////////////////////////
     setupScenario() {
+      if ($('popin_showScenarioLobby_container')) {
+        $('popin_showScenarioLobby_container').remove();
+      }
+
       dojo.place(
         `<div id='clipboard-button'>
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M336 64h-53.88C268.9 26.8 233.7 0 192 0S115.1 26.8 101.9 64H48C21.5 64 0 85.48 0 112v352C0 490.5 21.5 512 48 512h288c26.5 0 48-21.48 48-48v-352C384 85.48 362.5 64 336 64zM192 64c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S160 113.7 160 96C160 78.33 174.3 64 192 64zM272 224h-160C103.2 224 96 216.8 96 208C96 199.2 103.2 192 112 192h160C280.8 192 288 199.2 288 208S280.8 224 272 224z"/></svg>
@@ -490,8 +495,8 @@ define([
       this.updateGameProgress();
     },
 
-    getScenarioTexts() {
-      let scenario = this.gamedatas.scenario;
+    getScenarioTexts(scenario = null) {
+      scenario = scenario || this.gamedatas.scenario;
       if (scenario.text.en) {
         return scenario.text.en;
       } else {
@@ -518,8 +523,8 @@ define([
       }
     },
 
-    tplScenarioModal() {
-      let scenario = this.gamedatas.scenario;
+    tplScenarioModal(scenario = null, lobby = false) {
+      scenario = scenario || this.gamedatas.scenario;
       let intervalFormat = new Intl.DateTimeFormat([], {
         year: 'numeric',
         month: 'short',
@@ -529,43 +534,89 @@ define([
       let begin = '';
       let end = '';
       // Compute start-end dates
-      if (scenario.game_info.hasOwnProperty('date_begin') && scenario.game_info.hasOwnProperty('date_end')) {
+      if (
+        scenario.game_info.hasOwnProperty('date_begin') &&
+        scenario.game_info.hasOwnProperty('date_end') &&
+        scenario.game_info.date_begin !== null &&
+        scenario.game_info.date_end !== null
+      ) {
         let dateBegin = scenario.game_info.date_begin.split('-');
         let dateEnd = scenario.game_info.date_end.split('-');
         begin = new Date(Date.UTC(dateBegin[0], dateBegin[1], dateBegin[2]));
         end = new Date(Date.UTC(dateEnd[0], dateEnd[1], dateEnd[2]));
       }
 
-      return (
-        `
+      if (!lobby) {
+        return (
+          `
       <div id='scenario-dates'>
         ${intervalFormat.formatRange(begin, end)}
       </div>
       <div id='scenario-historical'>
         <h5>${_('Historical Background')}</h5>
-        ${_(this.getScenarioTexts().historical).replace(/\n/g, '<br />')}
+        ${_(this.getScenarioTexts(scenario).historical).replace(/\n/g, '<br />')}
       </div>
 
       <div id='scenario-bottom-container'>
         <div id='scenario-brief'>
           <h5>${_('Briefing')}</h5>
-          ${_(this.getScenarioTexts().description).replace(/\n/g, '<br />')}
+          ${_(this.getScenarioTexts(scenario).description).replace(/\n/g, '<br />')}
         </div>
         <div id='scenario-conditions-rules'>
           <h5>${_('Conditions of Victory')}</h5>
-          ${_(this.getScenarioTexts().victory).replace(/\n/g, '<br />')}
+          ${_(this.getScenarioTexts(scenario).victory).replace(/\n/g, '<br />')}
           ` +
-        (this.getScenarioTexts().rules === undefined
-          ? ''
-          : `
+          (this.getScenarioTexts(scenario).rules === undefined
+            ? ''
+            : `
           <h5>${_('Special rules')}</h5>
-          ${_(this.getScenarioTexts().rules).replace(/\n/g, '<br />')}
+          ${_(this.getScenarioTexts(scenario).rules).replace(/\n/g, '<br />')}
             `) +
-        `
+          `
         </div>
       </div>
     `
-      );
+        );
+      } else {
+        return (
+          `
+        <div id='scenario-image-brief'>
+          <img src='https://www.daysofwonder.com/memoir44/fr/memoire_board/?id=${
+            scenario.id || scenario.meta_data.id
+          }' />
+
+          <div id='scenario-brief'>
+            <h5>${_('Briefing')}</h5>
+            <p>
+              ${_(this.getScenarioTexts(scenario).description).replace(/\n/g, '<br />')}
+            </p>
+            <div id='lobby-button-container'></div>
+          </div>
+        </div>
+
+          <div id='scenario-historical'>
+            <div id='scenario-dates'>
+              ${intervalFormat.formatRange(begin, end)}
+            </div>
+            <h5>${_('Historical Background')}</h5>
+              ${_(this.getScenarioTexts(scenario).historical).replace(/\n/g, '<br />')}
+          </div>
+  
+          <div id='scenario-conditions-rules'>
+            <h5>${_('Conditions of Victory')}</h5>
+            ${_(this.getScenarioTexts(scenario).victory).replace(/\n/g, '<br />')}
+            ` +
+          (this.getScenarioTexts(scenario).rules === undefined
+            ? ''
+            : `
+            <h5>${_('Special rules')}</h5>
+            ${_(this.getScenarioTexts(scenario).rules).replace(/\n/g, '<br />')}
+              `) +
+          `
+        </div>
+      `
+        );
+      }
     },
 
     ////////////////////////////////////////////
@@ -626,6 +677,63 @@ define([
     // |_____\___/|_.__/|_.__/ \__, |
     //                         |___/
     ////////////////////////////////////
+    onEnteringStateLobbyFinalApprove(args) {
+      this.onEnteringStateLobbyApproveProposeScenario(args, true);
+    },
+
+    onEnteringStateLobbyApproveProposeScenario(args, final = false) {
+      if ($('lobby-button-container')) {
+        $('lobby-button-container').innerHTML = '';
+      }
+
+      let showDetails = () => {
+        var dial = new customgame.modal('showScenarioLobby', {
+          class: 'memoir44_popin',
+          closeIcon: 'fa-times',
+          contents: this.tplScenarioModal(args.scenarioProposed, true),
+          breakpoint: 800,
+          autoShow: true,
+          verticalAlign: 'flex-begin',
+          scale: 0.8,
+          title: _(this.getScenarioTexts(args.scenarioProposed).name),
+        });
+
+        if (this.isCurrentPlayerActive()) {
+          this.addPrimaryActionButton(
+            `btnAccept`,
+            _('Accept'),
+            () => {
+              this.takeAction('actValidateScenario', { accept: true });
+            },
+            $('lobby-button-container'),
+          );
+
+          if (!final) {
+            // Propose another one
+            $('lobby-button-container').insertAdjacentHTML(
+              'beforeend',
+              _('Or browse the scenarios to propose another one'),
+            );
+          } else {
+            this.addDangerActionButton(
+              `btnRefuse`,
+              _('Refuse'),
+              () => {
+                this.takeAction('actValidateScenario', { accept: false });
+              },
+              $('lobby-button-container'),
+            );
+          }
+        }
+      };
+
+      this.addPrimaryActionButton('showScenarioDetails', _('Show proposed scenario'), showDetails);
+      if (this.isCurrentPlayerActive()) {
+        showDetails();
+      }
+
+      this.onEnteringStateLobbyProposeScenario(args);
+    },
 
     onEnteringStateLobbyProposeScenario(args) {
       this.clearInterface();
@@ -688,7 +796,6 @@ define([
                   <th><div><span id='sort-author-inc'>▼</span>${_(
                     'Author',
                   )}<span id='sort-author-desc'>▲</span></div></th>
-                  <th>${_('Scenario Info')}</th>
                 </tr>
               </thead>
               <tbody id="scenario-lobby-table"></tbody>
@@ -766,7 +873,6 @@ define([
             <td>${scenario.game_info.operation.name ?? ''}</td>
             <td>${scenario.game_info.front}</td>
             <td>${scenario.meta_data.author.login ?? ''}</td>
-            <td></td>
           </tr>`,
           );
 
@@ -774,11 +880,35 @@ define([
             `scenario-name-${scenario.id}`,
             `<img src='https://www.daysofwonder.com/memoir44/fr/memoire_board/?id=${scenario.id}' width="386" height="272" />`,
           );
+
+          this.onClick(`scenario-${scenario.id}`, () => {
+            var dial = new customgame.modal('showScenarioLobby', {
+              class: 'memoir44_popin',
+              closeIcon: 'fa-times',
+              contents: this.tplScenarioModal(scenario, true),
+              breakpoint: 800,
+              autoShow: true,
+              verticalAlign: 'flex-begin',
+              scale: 0.8,
+              title: _(this.getScenarioTexts(scenario).name),
+            });
+
+            if (this.isCurrentPlayerActive()) {
+              this.addPrimaryActionButton(
+                `btnProposeScenario${scenario.id}`,
+                _('Propose'),
+                () => {
+                  this.takeAction('actProposeScenario', { id: scenario.id });
+                },
+                $('lobby-button-container'),
+              );
+            }
+          });
         });
       } else {
         $('scenario-lobby-table').insertAdjacentHTML(
           'beforeend',
-          `<tr><td colspan="6" style="text-align:center">${_('Sorry, no result could be found')}</td></tr>`,
+          `<tr><td colspan="5" style="text-align:center">${_('Sorry, no result could be found')}</td></tr>`,
         );
       }
 
@@ -832,6 +962,24 @@ define([
           result.query.page = parseInt(currentPage) + 1;
           this.lobbyFetchResult(result.query);
         });
+      }
+    },
+
+    notif_proposeScenario(n) {
+      debug('Notif: propose scenario', n);
+      // TODO
+    },
+
+    onEnteringStateChangeOfRound(args) {
+      if (this.isCurrentPlayerActive()) {
+        this.openStatsModal();
+        this.addPrimaryActionButton('btnProceed', _('Proceed to next round'), () => this.takeAction('actProceed'));
+      }
+    },
+
+    onUpdateActivityChangeOfRound(args, status) {
+      if (!status) {
+        dojo.destroy('btnProceed');
       }
     },
 
@@ -986,24 +1134,6 @@ define([
     notif_updateStats(n) {
       debug('Notif: update stats', n);
       this.gamedatas.stats = n.args.stats;
-    },
-
-    notif_proposeScenario(n) {
-      debug('Notif: propose scenario', n);
-      // TODO
-    },
-
-    onEnteringStateChangeOfRound(args) {
-      if (this.isCurrentPlayerActive()) {
-        this.openStatsModal();
-        this.addPrimaryActionButton('btnProceed', _('Proceed to next round'), () => this.takeAction('actProceed'));
-      }
-    },
-
-    onUpdateActivityChangeOfRound(args, status) {
-      if (!status) {
-        dojo.destroy('btnProceed');
-      }
     },
   });
 });

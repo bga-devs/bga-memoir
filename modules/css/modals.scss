@@ -4,14 +4,14 @@
 
   &::before,
   &::after {
-    content: '';
+    content: "";
     display: block;
     position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
-    background-image: url('img/ui/dialog-texture.jpg');
+    background-image: url("img/ui/dialog-texture.jpg");
     box-shadow: 5px 5px 3px 0px rgba(20, 20, 20, 0.6), -5px 5px 3px 0px rgba(20, 20, 20, 0.6),
       -5px -5px 3px 0px rgba(20, 20, 20, 0.5);
     z-index: -1;
@@ -51,12 +51,13 @@
   }
 }
 
-#popin_showScenario {
+#popin_showScenario,
+#popin_showScenarioLobby {
   width: 1000px;
 
   h2 {
     text-align: center;
-    font-family: 'Gunplay';
+    font-family: "Gunplay";
     color: #9e0a0f;
     font-size: 39px;
     text-transform: uppercase;
@@ -66,13 +67,14 @@
     border-bottom: 1px solid #8080808a;
   }
 
-  #popin_showScenario_contents {
+  #popin_showScenario_contents,
+  #popin_showScenarioLobby_contents {
     display: flex;
     flex-flow: column;
     padding: 10px 15px;
 
     h5 {
-      font-family: 'Gunplay';
+      font-family: "Gunplay";
       color: #c2602f;
       font-size: 23px;
     }
@@ -83,7 +85,7 @@
     }
 
     #scenario-historical {
-      font-family: 'Dax';
+      font-family: "Dax";
       text-align: justify;
     }
 
@@ -103,13 +105,59 @@
   }
 }
 
+#popin_showScenarioLobby {
+  #popin_showScenarioLobby_contents {
+    #scenario-image-brief {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+
+      img {
+        flex-grow: 1;
+      }
+      #scenario-brief {
+        border-right: none;
+        margin-left: 20px;
+        display: flex;
+        flex-flow: column;
+
+        #lobby-button-container {
+          flex-grow: 1;
+          display: flex;
+          flex-flow: column;
+          justify-content: center;
+          align-items: center;
+
+          .bgabutton {
+            font-size: 25px;
+          }
+        }
+      }
+    }
+
+    #scenario-dates {
+      float: right;
+      font-size: 16px;
+      font-family: Roboto, Arial, sans-serif;
+    }
+
+    #scenario-historical {
+      margin-bottom: 10px;
+    }
+
+    #scenario-conditions-rules {
+      font-size: 14px;
+    }
+  }
+}
+
 #popin_showStats {
   width: 800px;
   height: 400px;
 
   h2 {
     text-align: center;
-    font-family: 'Gunplay';
+    font-family: "Gunplay";
     color: #9e0a0f;
     font-size: 39px;
     text-transform: uppercase;

@@ -71,8 +71,8 @@ $machinestates = [
 
   ST_LOBBY_APPROVE_OR_SECOND_PROPOSAL => [
     'name' => 'lobbyApproveProposeScenario',
-    'descriptioncounter' => clienttranslate('${actplayer} must accept or propose another scenario'),
-    'descriptionmyturncounter' => clienttranslate('${you} must accept or propose another scenario'),
+    'description' => clienttranslate('${actplayer} must accept or propose another scenario'),
+    'descriptionmyturn' => clienttranslate('${you} must accept or propose another scenario'),
     'type' => 'activeplayer',
     'args' => 'argsProposeScenario',
     'possibleactions' => ['actGetScenarios', 'actGetScenarioInfo', 'actProposeScenario', 'actValidateScenario'],
@@ -84,8 +84,8 @@ $machinestates = [
 
   ST_LOBBY_FINAL_APPROVE => [
     'name' => 'lobbyFinalApprove',
-    'descriptioncounter' => clienttranslate('${actplayer} must accept or propose another scenario'),
-    'descriptionmyturncounter' => clienttranslate('${you} must accept or propose another scenario'),
+    'description' => clienttranslate('${actplayer} must accept or end the table'),
+    'descriptionmyturn' => clienttranslate('${you} must accept or end the table'),
     'type' => 'activeplayer',
     'args' => 'argsProposeScenario',
     'possibleactions' => ['actValidateScenario'],
