@@ -30,13 +30,13 @@ class Scenario extends \APP_DbObject
   public function getId()
   {
     $scenario = self::get();
-    return is_null($scenario) ? null : $scenario['meta_data']['scenario_id'];
+    return is_null($scenario) ? null : $scenario['meta_data']['scenario_id'] ?? $scenario['meta_data']['id'];
   }
 
   public function getMode()
   {
     $scenario = self::get();
-    return is_null($scenario) ? null : $scenario['board']['type'];
+    return is_null($scenario) ? null : strtoupper($scenario['board']['type']);
   }
 
   public function getTopTeam()
@@ -59,6 +59,18 @@ class Scenario extends \APP_DbObject
     }
 
     require dirname(__FILE__) . '/FromTheFront/' . $fromTheFront[$id]['file'];
+    $scenarios[$id]['game_info']['side_player1'] = strtoupper($scenarios[$id]['game_info']['side_player1']);
+    $scenarios[$id]['game_info']['side_player2'] = strtoupper($scenarios[$id]['game_info']['side_player2']);
+    $scenarios[$id]['board']['face'] = strtoupper($scenarios[$id]['board']['face']);
+    $scenarios[$id]['board']['type'] = strtoupper($scenarios[$id]['board']['type']);
+
+    if (isset($scenarios[$id]['board']['hexagons']['item'])) {
+      $scenarios[$id]['board']['hexagons'] = $scenarios[$id]['board']['hexagons']['item'];
+    }
+    if (isset($scenarios[$id]['board']['labels']['item'])) {
+      $scenarios[$id]['board']['labels'] = $scenarios[$id]['board']['labels']['item'];
+    }
+
     return $scenarios[$id];
   }
 
@@ -100,36 +112,37 @@ class Scenario extends \APP_DbObject
     $scenarios = [];
     foreach ($fromTheFront as $id => $infos) {
       $infos['id'] = $id;
-      if(self::isSatisfyingFilters($infos, $query)){
+      if (self::isSatisfyingFilters($infos, $query)) {
         $scenarios[] = $infos;
       }
     }
 
     $order = $query['order'];
-    usort($scenarios, function($s1, $s2) use ($order){
+    usort($scenarios, function ($s1, $s2) use ($order) {
       $o = $order[0];
-      $s = $order[1] == 'inc'? 1 : -1;
-      if($o == 'id'){
+      $s = $order[1] == 'inc' ? 1 : -1;
+      if ($o == 'id') {
         return $s * ((int) $s1['id'] - $s2['id']);
-      } else if($o == 'operation'){
+      } elseif ($o == 'operation') {
         return $s * strcmp($s1[$o]['name'], $s2[$o]['name']);
       } else {
-        return $s* strcmp($s1[$o], $s2[$o]);
+        return $s * strcmp($s1[$o], $s2[$o]);
       }
     });
 
     return $scenarios;
   }
 
-  function isSatisfyingFilters($infos, $filters){
-    foreach(['type', 'id', 'front', 'author', 'name'] as $filter){
-      if(is_null($filters[$filter] ?? null)){
+  function isSatisfyingFilters($infos, $filters)
+  {
+    foreach (['type', 'id', 'front', 'author', 'name'] as $filter) {
+      if (is_null($filters[$filter] ?? null)) {
         continue;
       }
 
       $f = strtoupper($filters[$filter]);
       $v = strtoupper($infos[$filter] ?? '');
-      if(stripos($v, $f) === false){
+      if (stripos($v, $f) === false) {
         return false;
       }
     }
