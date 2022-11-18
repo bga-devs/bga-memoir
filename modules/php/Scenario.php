@@ -142,22 +142,20 @@ class Scenario extends \APP_DbObject
   function loadId($id)
   {
     require_once dirname(__FILE__) . '/Scenarios/list.inc.php';
-    $dir = 'Scenarios';
+    $scenarios = [];
 
-    // Add FromTheFront scenarios
-    if (!isset($scenariosMap[$id])) {
+    if (isset($scenariosMap[$id])) {
+      $name = $scenariosMap[$id];
+      require_once dirname(__FILE__) . '/Scenarios/' . $name . '.php';
+    } else {
+      // Add FromTheFront scenarios
       require dirname(__FILE__) . '/FromTheFront/list.inc.php';
-
       if (!isset($frontTheFront[$id])) {
         throw new \BgaVisibleSystemException('Invalid scenario id');
       }
-      $dir = 'FromTheFront';
+      $file = $fromTheFront[$id]['file'];
+      require_once dirname(__FILE__) . '/FromTheFront/' . $file;
     }
-
-    $name = $scenariosMap[$id];
-    $scenarios = [];
-
-    require_once dirname(__FILE__) . '/' . $dir . '/' . $name . $dir == 'FromTheFront' ? '' : '.php';
 
     // Enforce uppercase for starting side
     $scenario = $scenarios[$id];

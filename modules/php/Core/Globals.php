@@ -189,7 +189,7 @@ class Globals extends \M44\Helpers\DB_Manager
       $scenarioId = array_rand($ids, 1);
     }
     Globals::setScenarioId($scenarioId);
-    Globals::setScenarioSource($options[\OPTION_SCENARIO_SOURCE]);
+    Globals::setScenarioSource($options[\OPTION_SCENARIO_SOURCE] ?? 0);
     Globals::setUnitMoved(-1);
     Globals::setUnitAttacker(-1);
     Globals::setLastPlayedCards([]);
