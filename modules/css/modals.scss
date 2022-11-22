@@ -237,6 +237,36 @@
     display: none;
   }
 
+  h2 {
+    text-align: center;
+    font-family: "Gunplay";
+    color: #9e0a0f;
+    font-size: 30px;
+    text-transform: uppercase;
+    margin: 0px;
+    background: #ffffffab;
+    padding: 8px 0px 3px;
+    border-bottom: 1px solid #8080808a;
+  }
+
+  h4 {
+    text-align: center;
+    color: #312929;
+    font-size: 16px;
+    background: #ffffffcc;
+    padding: 5px 6px;
+    border-top: 1px solid #8080808a;
+    margin: 0;
+    font-weight: normal;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+
+    svg {
+      width: 30px;
+      height: 25px;
+    }
+  }
+
   .board-tooltip {
     position: initial;
     width: auto;
