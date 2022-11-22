@@ -37,7 +37,7 @@ class Minefield extends \M44\Models\Terrain
       return false;
     }
 
-    if ($unit->mustSweep() && !$unit->isOnTheMove()) {
+    if ($unit->mustSweep() && !$unit->isOnTheMove() && !$isTakeGround) {
       if (
         $unit->getMoves() <= $unit->getMovementAndAttackRadius() ||
         ($unit->getActivationOCard()->getType() == \CARD_BEHIND_LINES && $unit->getMoves() == 3)
