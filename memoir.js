@@ -487,7 +487,7 @@ define([
         closeAction: 'hide',
         verticalAlign: 'flex-begin',
         scale: 0.8,
-        title: _(this.getScenarioTexts().name),
+        title: _(this.getScenarioTexts().name ?? ''),
       });
 
       this.addTooltip('clipboard-button', _('Show the scenario informations'), '');
@@ -554,23 +554,23 @@ define([
       </div>
       <div id='scenario-historical'>
         <h5>${_('Historical Background')}</h5>
-        ${_(this.getScenarioTexts(scenario).historical).replace(/\n/g, '<br />')}
+        ${_(this.getScenarioTexts(scenario).historical ?? '').replace(/\n/g, '<br />')}
       </div>
 
       <div id='scenario-bottom-container'>
         <div id='scenario-brief'>
           <h5>${_('Briefing')}</h5>
-          ${_(this.getScenarioTexts(scenario).description).replace(/\n/g, '<br />')}
+          ${_(this.getScenarioTexts(scenario).description ?? '').replace(/\n/g, '<br />')}
         </div>
         <div id='scenario-conditions-rules'>
           <h5>${_('Conditions of Victory')}</h5>
-          ${_(this.getScenarioTexts(scenario).victory).replace(/\n/g, '<br />')}
+          ${_(this.getScenarioTexts(scenario).victory ?? '').replace(/\n/g, '<br />')}
           ` +
           (this.getScenarioTexts(scenario).rules === undefined
             ? ''
             : `
           <h5>${_('Special rules')}</h5>
-          ${_(this.getScenarioTexts(scenario).rules).replace(/\n/g, '<br />')}
+          ${_(this.getScenarioTexts(scenario).rules ?? '').replace(/\n/g, '<br />')}
             `) +
           `
         </div>
@@ -588,7 +588,7 @@ define([
           <div id='scenario-brief'>
             <h5>${_('Briefing')}</h5>
             <p>
-              ${_(this.getScenarioTexts(scenario).description).replace(/\n/g, '<br />')}
+              ${_(this.getScenarioTexts(scenario).description ?? '').replace(/\n/g, '<br />')}
             </p>
             <div id='lobby-button-container'></div>
           </div>
@@ -599,18 +599,18 @@ define([
               ${intervalFormat.formatRange(begin, end)}
             </div>
             <h5>${_('Historical Background')}</h5>
-              ${_(this.getScenarioTexts(scenario).historical).replace(/\n/g, '<br />')}
+              ${_(this.getScenarioTexts(scenario).historical ?? '').replace(/\n/g, '<br />')}
           </div>
-  
+
           <div id='scenario-conditions-rules'>
             <h5>${_('Conditions of Victory')}</h5>
-            ${_(this.getScenarioTexts(scenario).victory).replace(/\n/g, '<br />')}
+            ${_(this.getScenarioTexts(scenario).victory ?? '').replace(/\n/g, '<br />')}
             ` +
           (this.getScenarioTexts(scenario).rules === undefined
             ? ''
             : `
             <h5>${_('Special rules')}</h5>
-            ${_(this.getScenarioTexts(scenario).rules).replace(/\n/g, '<br />')}
+            ${_(this.getScenarioTexts(scenario).rules ?? '').replace(/\n/g, '<br />')}
               `) +
           `
         </div>
@@ -695,7 +695,7 @@ define([
           autoShow: true,
           verticalAlign: 'flex-begin',
           scale: 0.8,
-          title: _(this.getScenarioTexts(args.scenarioProposed).name),
+          title: _(this.getScenarioTexts(args.scenarioProposed).name ?? ''),
         });
 
         if (this.isCurrentPlayerActive()) {
@@ -890,7 +890,7 @@ define([
               autoShow: true,
               verticalAlign: 'flex-begin',
               scale: 0.8,
-              title: _(this.getScenarioTexts(scenario).name),
+              title: _(this.getScenarioTexts(scenario).name ?? ''),
             });
 
             if (this.isCurrentPlayerActive()) {
