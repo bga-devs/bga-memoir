@@ -660,7 +660,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       let nSelected = this._selectedUnits.reduce((carry, unit2Id) => carry + (unitId == unit2Id ? 1 : 0), 0);
       let maxN = this.getArgs().wounds[unitId];
 
-      if (nSelected + 1 <= maxN) {
+      if (nSelected + 1 <= maxN && this.isUnitSelectableFinestHour(unitId, null, false, null)) {
         this._selectedUnits.push(unitId);
         $(`unit-${unitId}`).dataset.selected = nSelected + 1;
       } else {
