@@ -81,6 +81,23 @@ class Medals extends \M44\Helpers\DB_Manager
       ->get();
   }
 
+  public function addSuddenDeathMedals($team, $nMedals)
+  {
+    $ids = [];
+    for ($i = 0; $i < $nMedals; $i++) {
+      $ids[] = self::DB()->insert([
+        'team' => $team,
+        'type' => \MEDAL_SUDDEN_DEATH,
+        'foreign_id' => 0,
+        'sprite' => $team == ALLIES ? 'medal8' : 'medal9',
+      ]);
+    }
+
+    return self::DB()
+      ->whereIn('id', $ids)
+      ->get();
+  }
+
   /**
    * Load a scenario
    */

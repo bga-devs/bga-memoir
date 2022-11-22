@@ -24,6 +24,11 @@ trait TurnTrait
       Notifications::drawCards($player, $cards);
     }
 
+    if (Cards::countInLocation('deck') == 0 && Globals::getDefaultWinner() != null) {
+      Cards::reshuffleListener();
+      return;
+    }
+
     // Change team
     Teams::changeTeamTurn();
 
