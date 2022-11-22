@@ -165,6 +165,12 @@ $machinestates = [
       'play' => ST_PLAY_COMMISSAR,
       'selectUnits' => ST_ORDER_UNITS,
       'counterAttack' => ST_COUNTER_ATTACK,
+
+      'finestHour' => ST_FINEST_HOUR_ROLL,
+      'airpower' => ST_AIRPOWER_TARGET,
+      'barrage' => ST_BARRAGE_TARGET,
+      'medics' => ST_MEDICS_TARGET,
+      'medicsBT' => ST_MEDICS_BT_ROLL,
     ],
   ],
 
