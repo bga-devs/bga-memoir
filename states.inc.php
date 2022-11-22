@@ -563,6 +563,7 @@ $machinestates = [
       'medics' => ST_MEDICS_TARGET,
       'draw' => ST_CONFIRM_TURN,
       'counterAttack' => ST_COUNTER_ATTACK,
+      'medicsBT' => ST_MEDICS_BT_ROLL,
     ],
   ],
 
