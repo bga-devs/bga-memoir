@@ -42,9 +42,17 @@ trait AmbushTrait
       return;
     }
 
-    // If the ambush card is in the discard => pass
-    $card = Cards::getByType(\CARD_AMBUSH)->first();
-    if ($card->getLocation() == 'discard') {
+    // If ALL the ambush cards are in the discard => pass
+    $locations = array_values(
+      array_unique(
+        Cards::getByType(\CARD_AMBUSH)
+          ->map(function ($card) {
+            return $card->getLocation();
+          })
+          ->toArray()
+      )
+    );
+    if (count($locations) == 1 && $locations[0] == 'discard') {
       $this->actPassAmbush(true);
       return;
     }
