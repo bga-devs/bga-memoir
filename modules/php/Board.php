@@ -1144,14 +1144,10 @@ class Board
   {
     $queue = new \SplPriorityQueue();
     $queue->setExtractFlags(\SplPriorityQueue::EXTR_BOTH);
-    $queue->insert(
-      [
-        'cell' => $startingCell,
-        'paths' => [['resistance' => 0, 'cells' => []]],
-      ],
-      0
-    );
+    $queue->insert(['cell' => $startingCell], 0);
     $markers = self::createGrid(false);
+    $paths = self::createGrid(false);
+    $paths[$startingCell['x']][$startingCell['y']] = [['resistance' => 0, 'cells' => []]];
 
     while (!$queue->isEmpty()) {
       // Extract the top node and adds it to the result
@@ -1161,12 +1157,8 @@ class Board
       $pos = ['x' => $cell['x'], 'y' => $cell['y']];
       $mark = $markers[$pos['x']][$pos['y']];
       if ($mark !== false) {
-        if ($mark['d'] == $cell['d']) {
-          $markers[$pos['x']][$pos['y']]['paths'] = array_merge($mark['paths'], $node['data']['paths']);
-        }
         continue;
       }
-      $cell['paths'] = $node['data']['paths'];
       $markers[$pos['x']][$pos['y']] = $cell;
 
       // Look at neighbours
@@ -1182,18 +1174,15 @@ class Board
 
         if ($dist <= $d) {
           $nextCell['cost'] = $cost;
-          $queue->insert(
-            [
-              'cell' => $nextCell,
-              'paths' => array_map(function ($path) use ($nextCell, $resistance) {
-                return [
-                  'resistance' => $path['resistance'] + $resistance,
-                  'cells' => array_merge($path['cells'], [$nextCell]),
-                ];
-              }, $markers[$pos['x']][$pos['y']]['paths']),
-            ],
-            -$dist
-          );
+          $queue->insert(['cell' => $nextCell], -$dist);
+
+          $newPaths = array_map(function ($path) use ($nextCell, $resistance) {
+            return [
+              'resistance' => $path['resistance'] + $resistance,
+              'cells' => array_merge($path['cells'], [$nextCell]),
+            ];
+          }, $paths[$pos['x']][$pos['y']]);
+          $paths[$nextCell['x']][$nextCell['y']] = array_merge($paths[$nextCell['x']][$nextCell['y']] ?: [], $newPaths);
         }
       }
 
@@ -1212,18 +1201,15 @@ class Board
           if ($dist <= $d) {
             $cave['cost'] = $cost;
             $cave['teleportation'] = true;
-            $queue->insert(
-              [
-                'cell' => $cave,
-                'paths' => array_map(function ($path) use ($cave) {
-                  return [
-                    'resistance' => $path['resistance'],
-                    'cells' => array_merge($path['cells'], [$cave]),
-                  ];
-                }, $markers[$pos['x']][$pos['y']]['paths']),
-              ],
-              -$dist
-            );
+            $queue->insert(['cell' => $cave], -$dist);
+
+            $newPaths = array_map(function ($path) use ($cave) {
+              return [
+                'resistance' => $path['resistance'],
+                'cells' => array_merge($path['cells'], [$cave]),
+              ];
+            }, $paths[$pos['x']][$pos['y']]);
+            $paths[$cave['x']][$cave['y']] = array_merge($paths[$cave['x']][$cave['y']] ?: [], $newPaths);
           }
         }
       }
@@ -1234,6 +1220,7 @@ class Board
     foreach ($markers as $col) {
       foreach ($col as $cell) {
         if ($cell !== false && $cell['d'] > 0) {
+          $cell['paths'] = $paths[$cell['x']][$cell['y']];
           $cells[] = $cell;
         }
       }
