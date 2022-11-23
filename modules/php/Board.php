@@ -65,7 +65,7 @@ class Board
 
     // Add the labels
     foreach ($scenario['board']['labels'] ?? [] as $labels) {
-      foreach ($labels['text'] as $label) {
+      foreach ($labels['text'] ?? [] as $label) {
         self::$grid[$labels['col']][$labels['row']]['labels'][] = $label;
       }
     }
@@ -592,13 +592,19 @@ class Board
       $power = [$power[0]]; // if banzai, unit can only attack in close assault
     }
     $range = count($power);
-    list($cells, $markers) = self::getCellsAtDistance($pos, $range, function ($source, $target, $d) {
-      // check to forbid caves teleportation
-      if (!in_array(['x' => $target['x'], 'y' => $target['y']], self::getNeighbours($source))) {
-        return INFINITY;
-      }
-      return 1;
-    });
+    list($cells, $markers) = self::getCellsAtDistance(
+      $pos,
+      $range,
+      function ($source, $target, $d) {
+        // check to forbid caves teleportation
+        if (!in_array(['x' => $target['x'], 'y' => $target['y']], self::getNeighbours($source))) {
+          return INFINITY;
+        }
+        return 1;
+      },
+      null,
+      false
+    );
 
     // Keep only the ones where an enemy stands
     // remove units that are camouflage where not close assault
@@ -1140,14 +1146,21 @@ class Board
    *   - $d : max distance we are looking for
    *   - $costCallback : function used to compute cost
    */
-  protected static function getCellsAtDistance($startingCell, $d, $costCallback, $resistanceCallback = null)
-  {
+  protected static function getCellsAtDistance(
+    $startingCell,
+    $d,
+    $costCallback,
+    $resistanceCallback = null,
+    $computePaths = true
+  ) {
     $queue = new \SplPriorityQueue();
     $queue->setExtractFlags(\SplPriorityQueue::EXTR_BOTH);
     $queue->insert(['cell' => $startingCell], 0);
     $markers = self::createGrid(false);
-    $paths = self::createGrid(false);
-    $paths[$startingCell['x']][$startingCell['y']] = [['resistance' => 0, 'cells' => []]];
+    if ($computePaths) {
+      $paths = self::createGrid(false);
+      $paths[$startingCell['x']][$startingCell['y']] = [['resistance' => 0, 'cells' => []]];
+    }
 
     while (!$queue->isEmpty()) {
       // Extract the top node and adds it to the result
@@ -1176,13 +1189,18 @@ class Board
           $nextCell['cost'] = $cost;
           $queue->insert(['cell' => $nextCell], -$dist);
 
-          $newPaths = array_map(function ($path) use ($nextCell, $resistance) {
-            return [
-              'resistance' => $path['resistance'] + $resistance,
-              'cells' => array_merge($path['cells'], [$nextCell]),
-            ];
-          }, $paths[$pos['x']][$pos['y']]);
-          $paths[$nextCell['x']][$nextCell['y']] = array_merge($paths[$nextCell['x']][$nextCell['y']] ?: [], $newPaths);
+          if ($computePaths) {
+            $newPaths = array_map(function ($path) use ($nextCell, $resistance) {
+              return [
+                'resistance' => $path['resistance'] + $resistance,
+                'cells' => array_merge($path['cells'], [$nextCell]),
+              ];
+            }, $paths[$pos['x']][$pos['y']]);
+            $paths[$nextCell['x']][$nextCell['y']] = array_merge(
+              $paths[$nextCell['x']][$nextCell['y']] ?: [],
+              $newPaths
+            );
+          }
         }
       }
 
@@ -1203,13 +1221,15 @@ class Board
             $cave['teleportation'] = true;
             $queue->insert(['cell' => $cave], -$dist);
 
-            $newPaths = array_map(function ($path) use ($cave) {
-              return [
-                'resistance' => $path['resistance'],
-                'cells' => array_merge($path['cells'], [$cave]),
-              ];
-            }, $paths[$pos['x']][$pos['y']]);
-            $paths[$cave['x']][$cave['y']] = array_merge($paths[$cave['x']][$cave['y']] ?: [], $newPaths);
+            if ($computePaths) {
+              $newPaths = array_map(function ($path) use ($cave) {
+                return [
+                  'resistance' => $path['resistance'],
+                  'cells' => array_merge($path['cells'], [$cave]),
+                ];
+              }, $paths[$pos['x']][$pos['y']]);
+              $paths[$cave['x']][$cave['y']] = array_merge($paths[$cave['x']][$cave['y']] ?: [], $newPaths);
+            }
           }
         }
       }
@@ -1220,7 +1240,9 @@ class Board
     foreach ($markers as $col) {
       foreach ($col as $cell) {
         if ($cell !== false && $cell['d'] > 0) {
-          $cell['paths'] = $paths[$cell['x']][$cell['y']];
+          if ($computePaths) {
+            $cell['paths'] = $paths[$cell['x']][$cell['y']];
+          }
           $cells[] = $cell;
         }
       }

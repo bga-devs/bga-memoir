@@ -30,7 +30,7 @@ trait AttackUnitsTrait
       if ($unit->mustSweep() && $unit->getMoves() == 0 && !$unit->isOnTheMove()) {
         foreach (Board::getTerrainsInCell($unit->getPos()) as $t) {
           if ($t instanceof \M44\Terrains\Minefield) {
-            $t->onUnitEntering($unit, false);
+            $t->onUnitEntering($unit, false, false);
             $nTargets -= count($targets);
           }
         }
