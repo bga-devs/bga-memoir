@@ -32,4 +32,9 @@ class Beach extends \M44\Models\Terrain
 
     return !$mustCheck || $unit->getMoves() + count($path) - 1 <= 2;
   }
+
+  public function mustStopWhenLeaving($unit)
+  {
+    return $unit->getMoves() >= 1;
+  }
 }
