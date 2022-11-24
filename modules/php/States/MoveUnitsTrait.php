@@ -11,7 +11,7 @@ use M44\Board;
 
 trait MoveUnitsTrait
 {
-  public function argsMoveUnits($player = null, $clearPaths = false)
+  public function argsMoveUnits($player = null, $clearPaths = true)
   {
     $player = $player ?? Players::getActive();
     $card = $player->getCardInPlay();
