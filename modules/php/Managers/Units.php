@@ -208,6 +208,11 @@ class Units extends \M44\Helpers\Pieces
           $data['extra_datas']['properties']['banzai'] = true;
         }
       }
+
+      if ($data['nation'] == 'brit') {
+        // TODO : temporary fix because you cant add british command in the editor currently...
+        Globals::setBritishCommand(true);
+      }
       $units[] = $data;
     }
     self::create($units);
