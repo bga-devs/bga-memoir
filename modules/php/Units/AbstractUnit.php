@@ -372,6 +372,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
 
   public function mustStop()
   {
+    $this->setExtraDatas('canTakeGround', false);
     return $this->setExtraDatas('stopped', true);
   }
 
