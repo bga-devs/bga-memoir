@@ -24,7 +24,7 @@ trait LoadScenarioTrait
         $this->gamestate->setAllPlayersMultiactive();
         $this->gamestate->nextState('lobby');
       } else {
-        $this->activeNextPlayer();
+        $this->gamestate->setAllPlayersMultiactive();
         $this->gamestate->nextState('upload');
       }
     }
