@@ -121,12 +121,11 @@ abstract class Utils extends \APP_DbObject
 
     $v = \array_search($xy['x'], alphabet);
     if ($v === false) {
-      $v = \array_search(strtolower($xy['x']), alphabet);
+      $v = \array_search(mb_strtolower($xy['x']), alphabet);
       $xy['x'] = $v * 2;
     } else {
       $xy['x'] = $v * 2 + 1;
     }
-
 
     $height = Scenario::getMode() == BREAKTHROUGH_DECK ? 17 : 9;
     $xy['y'] = $height - $xy['y'];

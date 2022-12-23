@@ -114,7 +114,7 @@ class Stats extends \M44\Helpers\DB_Manager
       $stats = Game::get()->getStatTypes();
 
       // Sanity check : does the name correspond to a declared variable ?
-      $name = strtolower($match[2]) . $match[3];
+      $name = mb_strtolower($match[2]) . $match[3];
       $isTableStat = \array_key_exists($name, $stats['table']);
       $isPlayerStat = \array_key_exists($name, $stats['player']);
       if (!$isTableStat && !$isPlayerStat) {
