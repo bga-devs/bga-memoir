@@ -72,6 +72,9 @@ class AirPower extends \M44\Models\Card
       ->getTeam()
       ->getOpponent()
       ->getUnits()
+      ->filter(function ($unit) {
+        return !$unit->isCamouflaged();
+      })
       ->map(function ($unit) {
         return $unit->getPos();
       });

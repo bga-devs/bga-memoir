@@ -59,7 +59,10 @@ class Barrage extends \M44\Models\Card
     $units = $this->getPlayer()
       ->getTeam()
       ->getOpponent()
-      ->getUnits();
+      ->getUnits()
+      ->filter(function ($unit) {
+        return !$unit->isCamouflaged();
+      });
 
     return ['unitIds' => $units->getIds()];
   }
