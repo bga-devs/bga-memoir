@@ -203,10 +203,6 @@ class memoir extends Table
     }
   }
  
-  function st_MultiPlayerInit() {
-    $this->gamestate->setAllPlayersMultiactive();
-  }
-
   /////////////////////////////////////////////////////////////
   // Exposing protected methods, please use at your own risk //
   /////////////////////////////////////////////////////////////
