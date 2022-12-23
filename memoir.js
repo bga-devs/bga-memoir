@@ -358,6 +358,7 @@ define([
       this.gamedatas.units = n.args.units;
       this.gamedatas.scenario = n.args.scenario;
       this.gamedatas.round = n.args.round;
+      this.gamedatas.visibility = n.args.visibility;
       this.updateBottomTeam(this.gamedatas.players[this._pId].team);
       this._deckCounter.setValue(n.args.deckCount);
 
