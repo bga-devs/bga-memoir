@@ -42,7 +42,6 @@ $machinestates = [
     'description' => clienttranslate('You must upload a m44 scenario'),
     'descriptionmyturn' => clienttranslate('${you} must upload a m44 scenario'),
     'type' => 'multipleactiveplayer',
-    'action' => 'st_MultiPlayerInit',
     'possibleactions' => ['actUploadScenario'],
   ],
 
