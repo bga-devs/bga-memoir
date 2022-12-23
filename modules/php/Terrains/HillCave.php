@@ -26,7 +26,12 @@ class HillCave extends Hill
     // only an INFANTRY United States
     // with no adjacent ennemy
     // can try to seal the cave
-    if ($unit->getType() == \INFANTRY && $unit->getTeamId() == ALLIES && !Board::isAdjacentToEnnemy($unit)) {
+    if (
+      $unit->getFights() == 0 &&
+      $unit->getType() == \INFANTRY &&
+      $unit->getTeamId() == ALLIES &&
+      !Board::isAdjacentToEnnemy($unit)
+    ) {
       return [
         [
           'desc' => \clienttranslate('Attempt to seal the cave'),
