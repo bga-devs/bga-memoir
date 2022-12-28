@@ -55,6 +55,11 @@ trait MoveUnitsTrait
 
     // Move the unit
     $cell = $cells[$k];
+    if (is_null($cell['paths'])) {
+      throw new \BgaVisibleSystemException(
+        'Should not happen. Please create a bug report at this exact point in the game with details on what you were trying to do'
+      );
+    }
     usort($cell['paths'], function ($path1, $path2) {
       return $path1['resistance'] - $path2['resistance'];
     });

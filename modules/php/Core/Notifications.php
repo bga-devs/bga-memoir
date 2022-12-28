@@ -87,6 +87,12 @@ class Notifications
 
   public static function throwAttack($player, $unit, $nDice, $oppUnit)
   {
+    if (is_null($oppUnit)) {
+      throw new \BgaVisibleSystemException(
+        'Should not happen. Please create a bug report at this exact point in the game with details on what you were trying to do'
+      );
+    }
+
     $data = [
       'player' => $player,
       'coordTarget' => $oppUnit->getPos(),

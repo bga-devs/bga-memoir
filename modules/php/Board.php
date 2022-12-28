@@ -1159,7 +1159,7 @@ class Board
     $markers = self::createGrid(false);
     if ($computePaths) {
       $paths = self::createGrid(false);
-      $paths[$startingCell['x']][$startingCell['y']] = [['resistance' => 0, 'cells' => []]];
+      $paths[$startingCell['x']][$startingCell['y']] = [['resistance' => 0, 'cells' => [], 'd' => 0]];
     }
 
     while (!$queue->isEmpty()) {
@@ -1190,12 +1190,16 @@ class Board
           $queue->insert(['cell' => $nextCell], -$dist);
 
           if ($computePaths) {
-            $newPaths = array_map(function ($path) use ($nextCell, $resistance) {
+            $newPaths = array_map(function ($path) use ($nextCell, $resistance, $cost) {
               return [
                 'resistance' => $path['resistance'] + $resistance,
                 'cells' => array_merge($path['cells'], [$nextCell]),
+                'd' => $path['d'] + $cost,
               ];
             }, $paths[$pos['x']][$pos['y']]);
+            Utils::filter($newPaths, function ($path) use ($d) {
+              return $path['d'] <= $d;
+            });
             $paths[$nextCell['x']][$nextCell['y']] = array_merge(
               $paths[$nextCell['x']][$nextCell['y']] ?: [],
               $newPaths
