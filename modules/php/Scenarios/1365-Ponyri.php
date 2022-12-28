@@ -483,7 +483,7 @@ $scenarios[1365] = [
     'en' => [
       'name' => clienttranslate('Ponyri'),
       'subtitle' => clienttranslate('Kursk'),
-      'historical' => clienttranslate('The village of Ponyri was the focal point of General Walther Model\'s planned breakthrough in the area north of Kursk. Three German infantry division were ordered to assault the village, while elements of two Panzer divisions supported the attack. Soviet minefields, intense fire from dug-in tanks and artillery threw the armor back while the village itselve witnessed some of the most bitter hand-to-hand combat of the war.
+      'historical' => clienttranslate('The village of Ponyri was the focal point of General Walther Model\'s planned breakthrough in the area north of Kursk. Three German infantry division were ordered to assault the village, while elements of two Panzer divisions supported the attack. Soviet minefields, intense fire from dug-in tanks and artillery threw the armor back while the village itself witnessed some of the most bitter hand-to-hand combat of the war.
 
 Hill 253.3 was finally taken and although the German push gained much of the village, the Soviet defense remained strong. The German force was eventually \'bled white\' in the days of fighting that followed and an effective breakthrough was never achieved.
 
