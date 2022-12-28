@@ -14,6 +14,7 @@ class Ford extends \M44\Models\Terrain
     $this->number = 41;
     $this->isBridge = true;
     $this->mustStopWhenEntering = true;
+    $this->isBlockingSandbag = true;
     $this->offense = [\INFANTRY => -1, ARMOR => -1, \ARTILLERY => -1];
 
     parent::__construct($row);
