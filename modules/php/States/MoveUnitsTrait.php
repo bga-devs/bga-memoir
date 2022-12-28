@@ -73,7 +73,7 @@ trait MoveUnitsTrait
 
     foreach ($path['cells'] as $c) {
       if (!$skipRestrictions) {
-        if (Board::mustStopWhenLeavingCell($coordSource, $unit)) {
+        if (Board::mustStopWhenLeavingCell($coordSource, $unit) || Board::mustStopMovingWhenEnteringCell($c, $unit)) {
           $unit->mustStop();
           $unit->ableTakeGround();
         } elseif (Board::mustStopWhenEnteringCell($c, $unit)) {

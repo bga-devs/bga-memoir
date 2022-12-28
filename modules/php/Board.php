@@ -326,7 +326,7 @@ class Board
       if (!empty(self::getTargetableCells($unit, $cell, $cell['d']))) {
         $cell['canAttack'] = true;
       }
-      if (self::mustStopWhenEnteringCell($cell, $unit)) {
+      if (self::mustStopWhenEnteringCell($cell, $unit) || self::mustStopMovingWhenEnteringCell($cell, $unit)) {
         $cell['stop'] = true;
       }
       if (self::enteringCannotBattleCell($cell, $unit)) {

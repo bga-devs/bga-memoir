@@ -14,8 +14,7 @@ class FordableStream extends \M44\Models\Terrain
   {
     $this->name = clienttranslate('Fordable rivers');
     $this->number = '61';
-    $this->mustStopWhenEntering = true;
-    // $this->offense = [\INFANTRY => -1, ARMOR => -1, \ARTILLERY => -1];
+    $this->mustStopMovingWhenEntering = true;
 
     parent::__construct($row);
   }
