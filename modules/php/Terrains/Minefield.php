@@ -40,7 +40,8 @@ class Minefield extends \M44\Models\Terrain
     if ($unit->mustSweep() && !$unit->isOnTheMove() && !$isTakeGround) {
       if (
         $unit->getMoves() <= $unit->getMovementAndAttackRadius() ||
-        ($unit->getActivationOCard()->getType() == \CARD_BEHIND_LINES && $unit->getMoves() == 3)
+        ($unit->getActivationOCard()->getType() == \CARD_BEHIND_LINES && $unit->getMoves() == 3) ||
+        ($unit->getActivationOCard()->getType() == \CARD_INFANTRY_ASSAULT && $unit->getMoves() == 2)
       ) {
         // Sweep the mine
         Notifications::message(clienttranslate('Combat engineer sweeps the mine instead of battling'), []);
