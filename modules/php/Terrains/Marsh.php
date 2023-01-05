@@ -1,6 +1,7 @@
 <?php
 namespace M44\Terrains;
 use M44\Board;
+use M44\Core\Notifications;
 
 class Marsh extends \M44\Models\Terrain
 {
@@ -34,6 +35,17 @@ class Marsh extends \M44\Models\Terrain
   {
     if (!$isRetreat && $this->leavingCannotBattle($unit)) {
       $unit->setExtraDatas('cannotBattle', true);
+    }
+  }
+  
+  public function onUnitEntering($unit, $isRetreat, $isTakeGround)
+  {
+    if ($isTakeGround && $unit->getType() == ARMOR) {
+      Notifications::message(clienttranslate('Armor cannot overrun in marsh'), []);
+      $unit->setExtraDatas('cannotBattle', true);
+      $unit->setExtraDatas('cannotArmorOverrun', true);
+      $unit->disable();
+      return;
     }
   }
 }
