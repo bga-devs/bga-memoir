@@ -83,7 +83,12 @@ trait TakeGroundTrait
       if (Globals::isDesert() && $unit->getType() == ARMOR) {
         $this->nextState('desertMove');
       } else {
-        $this->nextState('overrun');
+        if ($unit->getExtraDatas('cannotArmorOverrun') ) {
+          $this->closeCurrentAttack();
+        }
+        else {
+          $this->nextState('overrun');
+        }
       }
     }
   }
