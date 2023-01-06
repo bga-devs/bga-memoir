@@ -15,5 +15,12 @@ class RicePaddie extends Marsh
 
     $this->name = clienttranslate('Rice Paddies');
     $this->number = 60;
+    $this->desc = [
+      clienttranslate('Infantry moving in or out does not have any combat restrictions'),
+      clienttranslate('Armor moving in/out cannot battle'),
+      clienttranslate(
+        'Armor that makes successfull combat against a unit on Rice paddies may Take Ground, but not Armor overrun.'
+      ),
+    ];
   }
 }
