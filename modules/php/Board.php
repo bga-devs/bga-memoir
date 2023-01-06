@@ -218,7 +218,10 @@ class Board
   // |_|  |_|\___/  \_/  |_____|
   /////////////////////////////////
 
-  public static function getReachableCells($unit, $force = false)
+  /**
+   * $realMove : useful for "desert rule" that is kind of move but not really
+   */
+  public static function getReachableCells($unit, $force = false, $realMove = true)
   {
     // Already moved before ?
     $uId = Globals::getUnitMoved();
@@ -242,7 +245,7 @@ class Board
     }
 
     $m = $maxDistance - $unit->getMoves();
-    return self::getReachableCellsAtDistance($unit, $m);
+    return self::getReachableCellsAtDistance($unit, $m, $realMove);
   }
 
   protected static function getCurrentPosAttackInfo($unit)
@@ -261,7 +264,7 @@ class Board
    *   - $unit : a Unit object, used to compute starting pos and movement costs
    *   - $d : max distance we are looking for
    */
-  public static function getReachableCellsAtDistance($unit, $d)
+  public static function getReachableCellsAtDistance($unit, $d, $realMove = true)
   {
     if ($unit->isStopped()) {
       return [self::getCurrentPosAttackInfo($unit)];
@@ -271,9 +274,9 @@ class Board
     list($cells, $markers) = self::getCellsAtDistance(
       $startingCell,
       $d,
-      function ($source, $target, $d) use ($unit) {
+      function ($source, $target, $d) use ($unit, $realMove) {
         $cost = self::getDeplacementCost($unit, $source, $target, $d, false, false);
-        return min(INFINITY, $cost + (1 - $unit->getRoadBonus()));
+        return min(INFINITY, $cost + ($realMove ? 1 - $unit->getRoadBonus() : 0));
       },
       function ($cell) use ($unit) {
         return self::avoidIfPossibleCell($cell, $unit) ? 1 : 0;
@@ -281,7 +284,7 @@ class Board
     );
 
     // Compute road paths with bonus of 1 move if starting pos is on road
-    if (self::isRoadCell($startingCell, $unit) && $unit->stayedOnRoad()) {
+    if ($realMove && self::isRoadCell($startingCell, $unit) && $unit->stayedOnRoad()) {
       $d2 = $d + $unit->getRoadBonus();
       list($cells2, $markers2) = self::getCellsAtDistance($startingCell, $d2, function ($source, $target, $d) use (
         $unit

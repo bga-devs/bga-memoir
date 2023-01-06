@@ -291,8 +291,17 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
   // |_|  |_|\___/  \_/  |_____|
   /////////////////////////////////
 
-  public function getPossibleMoves($maxMove = null, $maxMoveAttack = null, $additionalAction = true, $force = false)
-  {
+  /**
+   * $force : force the computation even if another unit is currently moving
+   * $realMove : allow to change the computation for "desert rule" that is kind of a move but not really
+   */
+  public function getPossibleMoves(
+    $maxMove = null,
+    $maxMoveAttack = null,
+    $additionalAction = true,
+    $force = false,
+    $realMove = true
+  ) {
     if (!is_null($maxMove)) {
       $this->movementRadius = $maxMove;
     }
@@ -336,7 +345,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
       }
     }
 
-    return array_merge(Board::getReachableCells($this, $force), $pAction);
+    return array_merge(Board::getReachableCells($this, $force, $realMove), $pAction);
   }
 
   public function moveTo($cell)

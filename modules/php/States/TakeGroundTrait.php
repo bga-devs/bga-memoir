@@ -83,13 +83,12 @@ trait TakeGroundTrait
       if (Globals::isDesert() && $unit->getType() == ARMOR) {
         $this->nextState('desertMove');
       } else {
-        if ($unit->getExtraDatas('cannotArmorOverrun') ) {
+        if ($unit->getExtraDatas('cannotArmorOverrun')) {
           $this->closeCurrentAttack();
-          // set back cannotArmorOverrun to false at the end of Take traitground 
+          // set back cannotArmorOverrun to false at the end of Take traitground
           // to offer another overrun  during next turns
           $unit->setExtraDatas('cannotArmorOverrun', false);
-        }
-        else {
+        } else {
           $this->nextState('overrun');
         }
       }
@@ -146,7 +145,7 @@ trait TakeGroundTrait
     $moves = $unit->getMoves();
 
     return [
-      'units' => [$unit->getId() => $unit->getPossibleMoves($moves + 1, $moves + 1, true, true)],
+      'units' => [$unit->getId() => $unit->getPossibleMoves($moves + 1, $moves + 1, true, true, false)],
       'lastUnitMoved' => $unit->getId(),
       'actionCount' => Globals::getActionCount(),
     ];
