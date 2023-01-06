@@ -1,5 +1,6 @@
 <?php
 namespace M44\Cards\Breakthrough;
+use M44\Managers\Units;
 
 class DigIn extends \M44\Cards\Standard\DigIn
 {

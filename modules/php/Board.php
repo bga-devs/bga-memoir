@@ -1226,12 +1226,16 @@ class Board
             $queue->insert(['cell' => $cave], -$dist);
 
             if ($computePaths) {
-              $newPaths = array_map(function ($path) use ($cave) {
+              $newPaths = array_map(function ($path) use ($cave, $cost) {
                 return [
                   'resistance' => $path['resistance'],
                   'cells' => array_merge($path['cells'], [$cave]),
+                  'd' => $path['d'] + $cost,
                 ];
               }, $paths[$pos['x']][$pos['y']]);
+              Utils::filter($newPaths, function ($path) use ($d) {
+                return $path['d'] <= $d;
+              });
               $paths[$cave['x']][$cave['y']] = array_merge($paths[$cave['x']][$cave['y']] ?: [], $newPaths);
             }
           }
