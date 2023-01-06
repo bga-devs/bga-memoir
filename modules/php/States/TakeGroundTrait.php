@@ -85,6 +85,9 @@ trait TakeGroundTrait
       } else {
         if ($unit->getExtraDatas('cannotArmorOverrun') ) {
           $this->closeCurrentAttack();
+          // set back cannotArmorOverrun to false at the end of Take traitground 
+          // to offer another overrun  during next turns
+          $unit->setExtraDatas('cannotArmorOverrun', false);
         }
         else {
           $this->nextState('overrun');
