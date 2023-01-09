@@ -517,7 +517,7 @@ trait AttackUnitsTrait
     $player = $unit->getPlayer();
     $results = Dice::roll($player, 1, $oppUnit->getPos());
 
-    $hits = $this->calculateHits(null, $oppUnit, null, $results);
+    $hits = $this->calculateHits($unit, $oppUnit, null, $results);
     $eliminated = $this->damageUnit($oppUnit, $player, $hits);
 
     if (Teams::checkVictory()) {
