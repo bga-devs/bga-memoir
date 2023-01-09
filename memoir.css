@@ -1632,6 +1632,12 @@ html {
   .hex-grid-obstacle[data-tile="24"] {
     background-position-x: 0%;
     background-position-y: 100%; }
+  .hex-grid-obstacle[data-tile="25"] {
+    background-position-x: 20%;
+    background-position-y: 100%; }
+  .hex-grid-obstacle[data-tile="26"] {
+    background-position-x: 40%;
+    background-position-y: 100%; }
   [data-terrains="0"] .hex-grid-obstacle {
     display: none; }
   [data-unitSprite="0"] .hex-grid-obstacle[data-tile="23"], [data-unitSprite="0"] .hex-grid-obstacle[data-tile="19"], [data-unitSprite="0"] .hex-grid-obstacle[data-tile="10"] {

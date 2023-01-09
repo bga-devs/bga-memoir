@@ -354,7 +354,7 @@
   background-image: url("img/board_obstacles.png");
   background-size: 600% 500%;
 
-  @for $i from 0 through 24 {
+  @for $i from 0 through 26 {
     &[data-tile="#{$i}"] {
       background-position-x: ($i % 6) * 100% / 5;
       background-position-y: (($i - ($i % 6)) / 6) * 100% / 4;
