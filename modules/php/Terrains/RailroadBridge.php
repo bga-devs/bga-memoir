@@ -5,7 +5,7 @@ class RailroadBridge extends \M44\Models\Terrain
 {
   public static function isTileOfType($hex)
   {
-    return in_array($hex['name'], ['railbridge']);
+    return in_array($hex['name'], ['railbridge','wrailbridge']);
   }
 
   public function __construct($row)
