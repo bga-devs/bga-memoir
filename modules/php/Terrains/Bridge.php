@@ -6,7 +6,7 @@ class Bridge extends \M44\Models\Terrain
 {
   public static function isTileOfType($hex)
   {
-    return in_array($hex['name'], ['bridge', 'pbridge', 'railbridge', 'wbridge', 'wrailbridge']) &&
+    return in_array($hex['name'], ['bridge', 'pbridge', 'wbridge']) &&
       (!isset($hex['behavior']) || !in_array($hex['behavior'], ['BRIDGE_SECTION']));
   }
 
