@@ -275,8 +275,8 @@ class Board
       $startingCell,
       $d,
       function ($source, $target, $d) use ($unit, $realMove) {
-        $cost = self::getDeplacementCost($unit, $source, $target, $d, false, false);
-        return min(INFINITY, $cost + ($realMove ? 1 - $unit->getRoadBonus() : 0));
+        $cost = self::getDeplacementCost($unit, $source, $target, $d, false, false, $realMove);
+        return min(INFINITY, $cost);
       },
       function ($cell) use ($unit) {
         return self::avoidIfPossibleCell($cell, $unit) ? 1 : 0;
@@ -345,14 +345,21 @@ class Board
    * getDeplacementCost: return the cost for a unit to move from $source to an adjacent $target,
    *    given the fact that the unit can move at most $d hexes
    */
-  public static function getDeplacementCost($unit, $source, $target, $d, $takeGround = false, $roadOnly = false)
-  {
+  public static function getDeplacementCost(
+    $unit,
+    $source,
+    $target,
+    $d,
+    $takeGround = false,
+    $roadOnly = false,
+    $realMove = true
+  ) {
     // Get corresponding cells
     $sourceCell = self::$grid[$source['x']][$source['y']];
     $targetCell = self::$grid[$target['x']][$target['y']];
 
     // If we are computing ROAD only and target is not a road, abort
-    if ($roadOnly) {
+    if ($roadOnly && $realMove) {
       if (!self::isRoadCell($target, $unit)) {
         return \INFINITY;
       }
@@ -424,7 +431,7 @@ class Board
 
     // Units activated by "BehindEnemyLines" card have no terrain restriction
     if ($unit->getActivationOCard()->isType(CARD_BEHIND_LINES) && $unit->getType() == INFANTRY) {
-      return $cost == INFINITY ? INFINITY : 1;
+      return $cost == INFINITY ? INFINITY : ($realMove ? 1 - $unit->getRoadBonus() : 1);
     }
 
     // Check terrain restriction
@@ -445,7 +452,7 @@ class Board
       }
     }
 
-    return $cost;
+    return min(INFINITY, $cost + ($realMove ? 1 - $unit->getRoadBonus() : 0));
   }
 
   /**
