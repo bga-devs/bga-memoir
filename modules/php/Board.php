@@ -431,7 +431,7 @@ class Board
 
     // Units activated by "BehindEnemyLines" card have no terrain restriction
     if ($unit->getActivationOCard()->isType(CARD_BEHIND_LINES) && $unit->getType() == INFANTRY) {
-      return $cost == INFINITY ? INFINITY : ($realMove ? 1 - $unit->getRoadBonus() : 1);
+      return $cost == INFINITY ? INFINITY : ($realMove ? 2 - $unit->getRoadBonus() : 1);
     }
 
     // Check terrain restriction
