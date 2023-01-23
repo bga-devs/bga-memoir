@@ -384,7 +384,7 @@ class Board
     ) {
       foreach ($targetCell['terrains'] as $terrain) {
         if ($terrain->isCave($unit)) {
-          return 1;
+          return $d;
         }
       }
     }
