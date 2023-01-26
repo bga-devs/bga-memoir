@@ -5,7 +5,7 @@ class FordableStream extends \M44\Models\Terrain
 {
   public static function isTileOfType($hex)
   {
-    return in_array($hex['name'], ['river', 'riverFL', 'riverFR', 'riverY', 'curve', 'pond', 'pmouth']) &&
+    return in_array($hex['name'], ['river', 'riverFL', 'riverFR', 'riverY', 'curve', 'pond']) &&
       isset($hex['behavior']) &&
       $hex['behavior'] == 'FORDABLE_STREAM';
   }
