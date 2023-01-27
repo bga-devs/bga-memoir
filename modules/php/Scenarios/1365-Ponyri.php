@@ -499,7 +499,7 @@ Control of Ponyri counts as two Victory Medals. To control Ponyri, you must occu
 '),
       'rules' => clienttranslate('The Axis Special Forces Tank units have 4 figures. Place a Special Forces Badge in the same hex with these units to distinguish them from the other units.
 
-Minefields are explained on p.4.'),
+Allies (Russian) player lays the mines. Minefields are explained on p.4.'),
     ],
   ],
 ];
