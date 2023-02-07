@@ -370,7 +370,7 @@ class Scenario extends \APP_DbObject
       (in_array($hex['name'], ['factory', 'wfactory'])) || // factory Complex
       (in_array($hex['name'], ['casemate', 'wbunker', 'dbunker', 'pbunker'])) || // Field bunker
       (in_array($hex['name'], ['ford']) || (isset($hex['behavior']) && $hex['behavior'] == 'FORD')) || // Ford
-      (in_array($hex['name'], ['river', 'riverFL', 'riverFR', 'riverY', 'curve', 'pond', 'pmouth']) && isset($hex['behavior']) && $hex['behavior'] == 'FORDABLE_STREAM') || // FordableStream
+      (in_array($hex['name'], ['river', 'riverFL', 'riverFR', 'riverY', 'curve', 'pond']) && isset($hex['behavior']) && $hex['behavior'] == 'FORDABLE_STREAM') || // FordableStream
       (in_array($hex['name'], ['woods', 'wforest'])) || // Forest
       (in_array($hex['name'], ['fortress'])) || // Fortress
       (in_array($hex['name'], ['wriver', 'wriverFR', 'wcurved'])) || // Frozen river
