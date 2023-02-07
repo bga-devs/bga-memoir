@@ -323,13 +323,14 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
 
       // exit markers
       if (
+        $this->isStopped() &&
         $this->getMoves() <
-        $this->getMovementRadius() +
-          (($this->getActivationOCard()->isType(CARD_BEHIND_LINES) ||
-            $this->getActivationOCard()->isType(\CARD_INFANTRY_ASSAULT)) &&
-          $this->getType() == \INFANTRY
-            ? 1
-            : 0)
+          $this->getMovementRadius() +
+            (($this->getActivationOCard()->isType(CARD_BEHIND_LINES) ||
+              $this->getActivationOCard()->isType(\CARD_INFANTRY_ASSAULT)) &&
+            $this->getType() == \INFANTRY
+              ? 1
+              : 0)
       ) {
         $tokens = Tokens::getOnCoords('board', $this->getPos(), \TOKEN_EXIT_MARKER);
         $team = $this->getTeamId();

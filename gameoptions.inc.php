@@ -364,6 +364,138 @@ $game_options = [
         'description' => clienttranslate('Sidi Rezegh Airfield'),
         'premium' => true,
       ],
+
+      // OTHER OFFICIAL SCENARIOS
+      42 => [
+        'name' => clienttranslate('[EX] [42] Utah Beach'),
+        'tmdisplay' => '[42]',
+        'description' => clienttranslate('Utah Beach'),
+      ],
+      1290 => [
+        'name' => clienttranslate('[EX] [1290] Counter-Attack at Arras'),
+        'tmdisplay' => '[1290]',
+        'description' => clienttranslate('Counter-Attack at Arras'),
+      ],
+      1312 => [
+        'name' => clienttranslate('[EX] [1312] Lipovec'),
+        'tmdisplay' => '[1312]',
+        'description' => clienttranslate('Lipovec'),
+      ],
+      3465 => [
+        'name' => clienttranslate('[EX] [3465] Bloody Ridge'),
+        'tmdisplay' => '[3465]',
+        'description' => clienttranslate('Bloody Ridge'),
+      ],
+      6749 => [
+        'name' => clienttranslate('[EX] [6749] Juno Beach'),
+        'tmdisplay' => '[6749]',
+        'description' => clienttranslate('Juno Beach'),
+      ],
+      7269 => [
+        'name' => clienttranslate('[EX] [7269] Gallabat & Metemma'),
+        'tmdisplay' => '[7269]',
+        'description' => clienttranslate('Gallabat & Metemma'),
+      ],
+      7271 => [
+        'name' => clienttranslate('[EX] [7271] Twin Villages'),
+        'tmdisplay' => '[7271]',
+        'description' => clienttranslate('Twin Villages'),
+      ],
+      7272 => [
+        'name' => clienttranslate('[EX] [7272] Tunisia'),
+        'tmdisplay' => '[7272]',
+        'description' => clienttranslate('Tunisia'),
+      ],
+      8043 => [
+        'name' => clienttranslate('[EX] [8043] Battle of Warsaw'),
+        'tmdisplay' => '[8043]',
+        'description' => clienttranslate('Battle of Warsaw'),
+      ],
+      8044 => [
+        'name' => clienttranslate('[EX] [8044] Rzhev'),
+        'tmdisplay' => '[8044]',
+        'description' => clienttranslate('Rzhev'),
+      ],
+      8708 => [
+        'name' => clienttranslate('[EX] [8708] Operation Spring'),
+        'tmdisplay' => '[8708]',
+        'description' => clienttranslate('Operation Spring'),
+      ],
+      9579 => [
+        'name' => clienttranslate('[EX] [9579] Operation Goodwood'),
+        'tmdisplay' => '[9579]',
+        'description' => clienttranslate('Operation Goodwood'),
+      ],
+      9596 => [
+        'name' => clienttranslate('[EX] [9596] Gold Beach'),
+        'tmdisplay' => '[9596]',
+        'description' => clienttranslate('Gold Beach'),
+      ],
+      9956 => [
+        'name' => clienttranslate('[EX] [9956] Braskir Offensive'),
+        'tmdisplay' => '[9956]',
+        'description' => clienttranslate('Braskir Offensive'),
+      ],
+      12449 => [
+        'name' => clienttranslate('[EX] [12449] Rzhev, The Meat Grinder'),
+        'tmdisplay' => '[12449]',
+        'description' => clienttranslate('Rzhev, The Meat Grinder'),
+      ],
+      12493 => [
+        'name' => clienttranslate('[EX] [12493] Bastogne Corridor East'),
+        'tmdisplay' => '[12493]',
+        'description' => clienttranslate('Bastogne Corridor East'),
+      ],
+      12494 => [
+        'name' => clienttranslate('[EX] [12494] Bastogne Corridor West'),
+        'tmdisplay' => '[12494]',
+        'description' => clienttranslate('Bastogne Corridor West'),
+      ],
+      12496 => [
+        'name' => clienttranslate('[EX] [12496] Battle of Kalatch'),
+        'tmdisplay' => '[12496]',
+        'description' => clienttranslate('Battle of Kalatch'),
+      ],
+      12498 => [
+        'name' => clienttranslate('[EX] [12498] [Normandy] Bretel Wood'),
+        'tmdisplay' => '[12498]',
+        'description' => clienttranslate('[Normandy] Bretel Wood'),
+      ],
+      12500 => [
+        'name' => clienttranslate('[EX] [12500] Clearing Matanikau River'),
+        'tmdisplay' => '[12500]',
+        'description' => clienttranslate('Clearing Matanikau River'),
+      ],
+      12504 => [
+        'name' => clienttranslate('[EX] [12504] Mignano Monte Lungo'),
+        'tmdisplay' => '[12504]',
+        'description' => clienttranslate('Mignano Monte Lungo'),
+      ],
+      12505 => [
+        'name' => clienttranslate('[EX] [12505] Moyland Wood'),
+        'tmdisplay' => '[12505]',
+        'description' => clienttranslate('Moyland Wood'),
+      ],
+      12506 => [
+        'name' => clienttranslate('[EX] [12506] Russian Breakout'),
+        'tmdisplay' => '[12506]',
+        'description' => clienttranslate('Russian Breakout'),
+      ],
+      12507 => [
+        'name' => clienttranslate('[EX] [12507] Strasbourg'),
+        'tmdisplay' => '[12507]',
+        'description' => clienttranslate('Strasbourg'),
+      ],
+      12508 => [
+        'name' => clienttranslate('[EX] [12508] Tenaru'),
+        'tmdisplay' => '[12508]',
+        'description' => clienttranslate('Tenaru'),
+      ],
+      12509 => [
+        'name' => clienttranslate('[EX] [12509] [Normandy] Vaumicel Manor'),
+        'tmdisplay' => '[12509]',
+        'description' => clienttranslate('[Normandy] Vaumicel Manor'),
+      ],
     ],
   ],
   104 => [

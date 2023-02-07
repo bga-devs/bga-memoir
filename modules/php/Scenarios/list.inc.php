@@ -72,4 +72,33 @@ $scenariosMap = [
 
 
   23806 => '23806-GermanCounterattackAtChaumont',
+
+	// Other scenarios flagged as "official" in DoW database
+  42 => '42-UtahBeach',
+  1312 => '1312-Lipovec',
+  3465 => '3465-BloodyRidge',
+  6749 => '6749-JunoBeach',
+  7269 => '7269-GallabatMetemma',
+  7271 => '7271-TwinVillages',
+  7272 => '7272-Tunisia',
+  8043 => '8043-BattleOfWarsaw',
+  8044 => '8044-Rzhev',
+  8708 => '8708-OperationSpring',
+  8709 => '8709-Knightsbridge',
+  9579 => '9579-OperationGoodwood',
+  9596 => '9596-GoldBeach',
+  9956 => '9956-BraskirOffensive',
+  12449 => '12449-RzhevTheMeatGrinder',
+  12493 => '12493-BastogneCorridorEast',
+  12494 => '12494-BastogneCorridorWest',
+  12496 => '12496-BattleOfKalatch',
+  12498 => '12498-BretelWood',
+  12500 => '12500-ClearingMatanikauRiver',
+  12504 => '12504-MignanoMonteLungo',
+  12505 => '12505-MoylandWood',
+  12506 => '12506-RussianBreakout',
+  12507 => '12507-Strasbourg',
+  12508 => '12508-Tenaru',
+  12509 => '12509-VaumicelManor',
+  1290 => '1290-CounterAttackAtArras',
 ];
