@@ -543,8 +543,8 @@ define([
       ) {
         let dateBegin = scenario.game_info.date_begin.split('-');
         let dateEnd = scenario.game_info.date_end.split('-');
-        begin = new Date(Date.UTC(dateBegin[0], dateBegin[1], dateBegin[2]));
-        end = new Date(Date.UTC(dateEnd[0], dateEnd[1], dateEnd[2]));
+        begin = new Date(Date.UTC(dateBegin[0], parseInt(dateBegin[1]) - 1, parseInt(dateBegin[2])));
+        end = new Date(Date.UTC(dateEnd[0], parseInt(dateEnd[1]) - 1, parseInt(dateEnd[2])));
       }
 
       if (!lobby) {
