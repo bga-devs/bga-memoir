@@ -8,6 +8,7 @@ $scenarios[9956] = [
   ],
   'game_info' => [
     'date_begin' => '1944-12-17',
+    'date_end' => '1944-12-17',
     'front' => 'EASTERN',
     'type' => 'FICTIONAL',
     'starting' => 'PLAYER2',
@@ -268,10 +269,7 @@ $scenarios[9956] = [
         ],
         'tags' => [
           0 => [
-            'name' => 'medal1',
-          ],
-          1 => [
-            'name' => 'medal2',
+            'name' => 'medal0',
           ],
         ],
       ],
@@ -292,10 +290,7 @@ $scenarios[9956] = [
         ],
         'tags' => [
           0 => [
-            'name' => 'medal1',
-          ],
-          1 => [
-            'name' => 'medal2',
+            'name' => 'medal0',
           ],
         ],
       ],
@@ -307,10 +302,7 @@ $scenarios[9956] = [
         ],
         'tags' => [
           0 => [
-            'name' => 'medal1',
-          ],
-          1 => [
-            'name' => 'medal2',
+            'name' => 'medal0',
           ],
         ],
       ],
