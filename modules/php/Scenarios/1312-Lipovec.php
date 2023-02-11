@@ -23,6 +23,10 @@ $scenarios[1312] = [
     'cards_player2' => '5',
     'victory_player1' => '6',
     'victory_player2' => '6',
+    'options' => [
+      'russian_commissar_rule' => 'ALLIES',
+      'blitz_rules' => true,
+    ],
   ],
   'board' => [
     'type' => 'STANDARD',
@@ -253,6 +257,7 @@ $scenarios[1312] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
+          'behavior' => 'FORDABLE_STREAM',
         ],
       ],
       28 => [
@@ -261,6 +266,7 @@ $scenarios[1312] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
+          'behavior' => 'FORDABLE_STREAM',
         ],
       ],
       29 => [
@@ -269,6 +275,7 @@ $scenarios[1312] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
+          'behavior' => 'FORDABLE_STREAM',
         ],
       ],
       30 => [
@@ -277,6 +284,7 @@ $scenarios[1312] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
+          'behavior' => 'FORDABLE_STREAM',
         ],
       ],
       31 => [
@@ -285,6 +293,7 @@ $scenarios[1312] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
+          'behavior' => 'FORDABLE_STREAM',
         ],
       ],
       32 => [
@@ -293,6 +302,7 @@ $scenarios[1312] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
+          'behavior' => 'FORDABLE_STREAM',
         ],
       ],
       33 => [
@@ -301,6 +311,7 @@ $scenarios[1312] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
+          'behavior' => 'FORDABLE_STREAM',
         ],
       ],
       34 => [
@@ -309,6 +320,7 @@ $scenarios[1312] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
+          'behavior' => 'FORDABLE_STREAM',
         ],
       ],
       35 => [
@@ -317,6 +329,7 @@ $scenarios[1312] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
+          'behavior' => 'FORDABLE_STREAM',
         ],
         'rect_terrain' => [
           'name' => 'bridge',
@@ -329,6 +342,7 @@ $scenarios[1312] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
+          'behavior' => 'FORDABLE_STREAM',
         ],
       ],
       37 => [
@@ -337,6 +351,7 @@ $scenarios[1312] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
+          'behavior' => 'FORDABLE_STREAM',
         ],
       ],
       38 => [
@@ -345,6 +360,7 @@ $scenarios[1312] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
+          'behavior' => 'FORDABLE_STREAM',
         ],
       ],
       39 => [

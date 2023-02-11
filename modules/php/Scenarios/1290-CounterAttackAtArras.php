@@ -23,6 +23,9 @@ $scenarios[1290] = [
     'cards_player2' => '4',
     'victory_player1' => '6',
     'victory_player2' => '6',
+    'options' => [
+      'blitz_rules' => true,
+    ],
   ],
   'board' => [
     'type' => 'STANDARD',
@@ -284,28 +287,28 @@ $scenarios[1290] = [
         'row' => 6,
         'col' => 18,
         'unit' => [
-          'name' => 'tankus',
+          'name' => 'tankbrit',
         ],
       ],
       37 => [
         'row' => 6,
         'col' => 20,
         'unit' => [
-          'name' => 'infus',
+          'name' => 'infbrit',
         ],
       ],
       38 => [
         'row' => 6,
         'col' => 22,
         'unit' => [
-          'name' => 'infus',
+          'name' => 'infbrit',
         ],
       ],
       39 => [
         'row' => 6,
         'col' => 24,
         'unit' => [
-          'name' => 'tankus',
+          'name' => 'tankbrit',
         ],
       ],
       40 => [
@@ -354,7 +357,7 @@ $scenarios[1290] = [
         'row' => 7,
         'col' => 17,
         'unit' => [
-          'name' => 'tankus',
+          'name' => 'tankbrit',
         ],
       ],
       47 => [
@@ -371,49 +374,49 @@ $scenarios[1290] = [
           'name' => 'hills',
         ],
         'unit' => [
-          'name' => 'infus',
+          'name' => 'infbrit',
         ],
       ],
       49 => [
         'row' => 8,
         'col' => 4,
         'unit' => [
-          'name' => 'infus',
+          'name' => 'infbrit',
         ],
       ],
       50 => [
         'row' => 8,
         'col' => 6,
         'unit' => [
-          'name' => 'tankus',
+          'name' => 'tankbrit',
         ],
       ],
       51 => [
         'row' => 8,
         'col' => 8,
         'unit' => [
-          'name' => 'tankus',
+          'name' => 'tankbrit',
         ],
       ],
       52 => [
         'row' => 8,
         'col' => 10,
         'unit' => [
-          'name' => 'infus',
+          'name' => 'infbrit',
         ],
       ],
       53 => [
         'row' => 8,
         'col' => 12,
         'unit' => [
-          'name' => 'infus',
+          'name' => 'infbrit',
         ],
       ],
       54 => [
         'row' => 8,
         'col' => 14,
         'unit' => [
-          'name' => 'gunus',
+          'name' => 'gunbrit',
         ],
       ],
     ],

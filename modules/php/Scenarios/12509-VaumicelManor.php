@@ -11,6 +11,7 @@ $scenarios[12509] = [
     'front' => 'WESTERN',
     'operationID' => '92',
     'date_begin' => '1944-06-06',
+    'date_end' => '1944-06-06',
     'type' => 'HISTORICAL',
     'starting' => 'PLAYER1',
     'side_player1' => 'AXIS',
@@ -578,57 +579,5 @@ Magazines Historica hors-série n° 68 & 69 - Omaha la sanglante.
 
 Carte IGN 1:50 000  n° 1411 - Grandcamp-Maisy.'),
     ],
-  ],
-  'equipment_packs' => [
-    'allies_pack' => [
-      0 => [
-        'image' => [
-          'weapon' => 'WEAPON_INFANTRY',
-          'badge' => 'BADGE12',
-        ],
-        'caption' => 'Engineers',
-        'cost' => 0,
-        'compulsory' => true,
-      ],
-      1 => [
-        'image' => [
-          'weapon' => 'WEAPON_INFANTRY',
-          'badge' => 'BADGE2',
-        ],
-        'caption' => '2nd Rangers',
-        'cost' => 0,
-        'compulsory' => true,
-      ],
-      2 => [
-        'image' => [
-          'weapon' => 'WEAPON_INFANTRY',
-          'badge' => 'BADGE2',
-        ],
-        'caption' => '5th Rangers',
-        'cost' => 0,
-        'compulsory' => true,
-      ],
-    ],
-    'axis_pack' => [
-      0 => [
-        'image' => [
-          'weapon' => 'WEAPON_INFANTRY',
-          'badge' => 'BADGE6',
-        ],
-        'caption' => 'Engineers',
-        'cost' => 0,
-        'compulsory' => true,
-      ],
-      1 => [
-        'image' => [
-          'weapon' => 'WEAPON_INFANTRY',
-          'badge' => 'BADGE4',
-        ],
-        'caption' => '352th Infantry',
-        'cost' => 0,
-        'compulsory' => true,
-      ],
-    ],
-    'base_cost' => 2,
   ],
 ];

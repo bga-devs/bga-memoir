@@ -22,6 +22,9 @@ $scenarios[3465] = [
     'cards_player2' => '5',
     'victory_player1' => '6',
     'victory_player2' => '6',
+    'options' => [
+      'gung_ho' => true,
+    ],
   ],
   'board' => [
     'type' => 'STANDARD',
@@ -564,9 +567,6 @@ The Lunga River is impassable terrain.'),
       'victory' => clienttranslate('6 Medals
 
 The two Hill hexes on the Marine\'s baseline (as indicated on the map) count as a Japanese Victory Medal. Place a Japanese Objective Medal on these two hexes. As long as the Japanese unit remains on the hex, it continues to count toward the Japanese victory. If the unit moves off or is eliminated, it no longer counts.'),
-      'bibliography' => clienttranslate(''),
-      'mod_date' => clienttranslate('2008-04-07T17:51:22'),
-      'ownerID' => clienttranslate('6'),
     ],
   ],
 ];
