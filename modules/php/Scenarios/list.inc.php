@@ -11,6 +11,7 @@ $scenariosMap = [
   13 => '13-OmahaBeachOverlord',
   15 => '15-OperationCobra',
   16 => '16-CounterattackOnMortain',
+  17 => '17-VillersBocage',
   18 => '18-Montelimar',
   19 => '19-Vassieux',
   20 => '20-StVith',
