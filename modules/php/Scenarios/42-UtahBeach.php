@@ -420,22 +420,28 @@ $scenarios[42] = [
       49 => [
         'row' => 0,
         'col' => 0,
-        'tag' => [
-          'name' => 'tag4',
+        'tags' => [
+          0 => [
+            'name' => 'tag4',
+          ],
         ],
       ],
       50 => [
         'row' => 0,
         'col' => 8,
-        'tag' => [
-          'name' => 'tag4',
+        'tags' => [
+          0 => [
+            'name' => 'tag4',
+          ],
         ],
       ],
       51 => [
         'row' => 0,
         'col' => 18,
-        'tag' => [
-          'name' => 'tag4',
+        'tags' => [
+          0 => [
+            'name' => 'tag4',
+          ],
         ],
       ],
     ],
