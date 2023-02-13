@@ -423,6 +423,9 @@ $scenarios[42] = [
         'tags' => [
           0 => [
             'name' => 'tag4',
+            'behavior' => 'EXIT_MARKER',
+            'group' => [],
+            'side' => \ALLIES,
           ],
         ],
       ],
@@ -432,6 +435,9 @@ $scenarios[42] = [
         'tags' => [
           0 => [
             'name' => 'tag4',
+            'behavior' => 'EXIT_MARKER',
+            'group' => [],
+            'side' => \ALLIES,
           ],
         ],
       ],
@@ -441,6 +447,9 @@ $scenarios[42] = [
         'tags' => [
           0 => [
             'name' => 'tag4',
+            'behavior' => 'EXIT_MARKER',
+            'group' => [],
+            'side' => \ALLIES,
           ],
         ],
       ],
