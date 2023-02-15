@@ -21,6 +21,9 @@ $scenarios[7272] = [
     'victory_player1' => 6,
     'victory_player2' => 6,
   ],
+  'options' => [
+    'partial_blitz_rules' => ALLIES,
+  ],
   'board' => [
     'type' => 'STANDARD',
     'face' => 'COUNTRY',
