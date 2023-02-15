@@ -10,6 +10,7 @@ $scenarios[12498] = [
   'game_info' => [
     'front' => 'WESTERN',
     'date_begin' => '1944-07-11',
+    'date_end' => '1944-07-11',
     'type' => 'HISTORICAL',
     'starting' => 'PLAYER1',
     'side_player1' => 'AXIS',
