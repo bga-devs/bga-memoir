@@ -181,6 +181,12 @@ class Units extends \M44\Helpers\Pieces
         $data['extra_datas']['equipment'] = $hex['unit']['equipment'];
       }
 
+      $behavior = $hex['unit']['behavior'] ?? null;
+      if (in_array($behavior, ['ARMOR_MOVE_TWO', 'ELITE_ARMOR_MOVE_TWO'])) {
+        $data['extra_datas']['properties']['movementRadius'] = 2;
+        $data['extra_datas']['properties']['movementAndAttackRadius'] = 2;
+      }
+
       if (
         $unit->getType() == ARMOR &&
         ((in_array($data['nation'], self::$nations[ALLIES]) && ($isPartialBlitz == ALLIES || $isBlitz)) ||

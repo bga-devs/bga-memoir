@@ -106,7 +106,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
 
   public function jsonSerialize()
   {
-    return [
+    $datas = [
       'id' => $this->id,
       'x' => $this->x,
       'y' => $this->y,
@@ -122,6 +122,13 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
       'onTheMove' => $this->extraDatas['onTheMove'] ?? false,
       'equipment' => $this->extraDatas['equipment'] ?? false,
     ];
+
+    $prop = $this->getExtraDatas('properties') ?? [];
+    if (!empty($prop)) {
+      $datas['properties'] = $prop;
+    }
+
+    return $datas;
   }
 
   public function getStaticUiData()
