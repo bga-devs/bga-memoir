@@ -61,13 +61,6 @@ $scenarios[12506] = [
       1 => [
         'row' => 0,
         'col' => 24,
-        'tags' => [
-          0 => [
-            'name' => 'tag5',
-            'behavior' => 'EXIT_MARKER',
-            'side' => 'ALLIES',
-          ],
-        ],
       ],
       2 => [
         'row' => 1,
