@@ -228,7 +228,7 @@ class Tokens extends \M44\Helpers\Pieces
     ];
     $origin = ['x' => $hex['col'], 'y' => $hex['row']];
 
-    foreach ($tag['group'] as $g) {
+    foreach ($tag['group'] ?? [] as $g) {
       $calc = Utils::revertCoords($g);
       if ($calc == $origin) {
         continue;
