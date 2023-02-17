@@ -22,7 +22,7 @@ $scenarios[12449] = [
     'options' => [
       'deck_name' => 'AIR_POWER_AS_ARTILLERY_BOMBARD_DECK',
       'night_visibility_rules' => true,
-      'blitz_rules' => true,
+      'partial_blitz_rules' => ALLIES,
     ],
     'date_end' => '1942-12-20',
   ],
