@@ -323,7 +323,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
 
       // exit markers
       if (
-        $this->isStopped() &&
+        !$this->isStopped() &&
         $this->getMoves() <
           $this->getMovementRadius() +
             (($this->getActivationOCard()->isType(CARD_BEHIND_LINES) ||
