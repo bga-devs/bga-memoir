@@ -206,7 +206,7 @@ trait AttackUnitsTrait
     $oppUnit = $attack['oppUnit'];
     $player = $attack['player'];
     $card = $attack['card'];
-
+    
     // Check if ambush was played and successfull
     if ($attack['ambush']) {
       if (is_null($unit)) {
@@ -246,11 +246,31 @@ trait AttackUnitsTrait
     $coord = $oppUnit->getPos();
 
     // $hits = $oppUnit->getHits($results);
-    $hits = $this->calculateHits($unit, $oppUnit, $card, $results);
-    $eliminated = $this->damageUnit($oppUnit, $player, $hits);
-    if (Teams::checkVictory()) {
-      return;
+    // if tiger is attacked double roll check for damages
+    if ($oppUnit->getNumber() == '16') {
+      $hits = $this->calculateHits($unit, $oppUnit, $card, $results);
+      // Second roll dice if hits >0 (armor and grenade)
+      if ($hits > 0) {
+        Notifications::message(clienttranslate('Tiger second roll'), []);
+        $results2 = Dice::roll($player, $hits, $oppUnit->getPos());
+        $hits2 = $this->calculateHitsTiger2ndRoll($results2);
+        $eliminated = $this->damageUnit($oppUnit, $player, $hits2);
+        if (Teams::checkVictory()) {
+          return;
+          } 
+        } else {
+          $eliminated = false;
+      }
     }
+    else { // Standard case else than tigers
+      $hits = $this->calculateHits($unit, $oppUnit, $card, $results);
+      $eliminated = $this->damageUnit($oppUnit, $player, $hits);
+      if (Teams::checkVictory()) {
+        return;
+      }
+      
+    }
+    
 
     // Call listener for attacking unit (eg. to remove Wire for armors)
     if ($unit !== null) {
@@ -315,6 +335,27 @@ trait AttackUnitsTrait
       }
 
       $hits += $hit;
+    }
+    return $hits;
+  }
+
+  /**
+   * Calculate hits for tigers on the second dice roll (only Grenade hits)
+   *
+   **/
+  public function calculateHitsTiger2ndRoll($results)
+  {
+    $hits = 0;
+
+    foreach ($results as $type => $nb) {
+      $hit = 0;
+
+      // check hits of targeted Tiger for 2nd roll
+      //$hit = $target->getHits($type, $nb); 
+      // getHits Not used in this case as 1st roll is like std armor & 2nd is hit only on Grenade
+      if ($type == \DICE_GRENADE) {
+        $hits += 1;
+      }
     }
     return $hits;
   }
@@ -517,11 +558,30 @@ trait AttackUnitsTrait
     $player = $unit->getPlayer();
     $results = Dice::roll($player, 1, $oppUnit->getPos());
 
-    $hits = $this->calculateHits($unit, $oppUnit, null, $results);
-    $eliminated = $this->damageUnit($oppUnit, $player, $hits);
+    // if tiger is battlebacked second roll check for damages
+    if ($oppUnit->getNumber() == '16') {
+      $hits = $this->calculateHits($unit, $oppUnit, null, $results);
+      // Second roll dice if hits >0 (armor and grenade)
+      if ($hits > 0) {
+        Notifications::message(clienttranslate('Tiger second roll'), []);
+        $results2 = Dice::roll($player, $hits, $oppUnit->getPos());
+        $hits2 = $this->calculateHitsTiger2ndRoll($results2);
+        $eliminated = $this->damageUnit($oppUnit, $player, $hits2);
+        if (Teams::checkVictory()) {
+          return;
+          } 
+        } else {
+          $eliminated = false;
+      }
+    } else { // standard unit else than a tiger battlebacked
 
-    if (Teams::checkVictory()) {
-      return;
+      $hits = $this->calculateHits($unit, $oppUnit, null, $results);
+      $eliminated = $this->damageUnit($oppUnit, $player, $hits);
+    
+
+      if (Teams::checkVictory()) {
+        return;
+      }
     }
 
     $attack = [

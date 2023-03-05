@@ -109,14 +109,35 @@ trait AmbushTrait
 
     // Launch dice
     $results = Dice::roll($player, $target['dice'], $ambushedUnit->getPos());
+    
+    // if tiger is ambushed double roll check for damages
+    if ($ambushedUnit->getNumber() == '16') {
+      $hits = $this->calculateHits($unit, $ambushedUnit, null, $results);
+      // Second roll dice if hits >0 (armor and grenade)
+      if ($hits > 0) {
+        Notifications::message(clienttranslate('Tiger second roll'), []);
+        $results2 = Dice::roll($player, $hits, $ambushedUnit->getPos());
+        $hits2 = $this->calculateHitsTiger2ndRoll($results2);
+        $eliminated = $this->damageUnit($ambushedUnit, $player, $hits2);
+        if (Teams::checkVictory()) {
+          return;
+          } 
+        } else {
+          $eliminated = false;
+      }
+    } else { // standard unit else than a tiger
+      // $hits = $ambushedUnit->getHits($results);
+      $hits = $this->calculateHits($unit, $ambushedUnit, null, $results);
+      $eliminated = $this->damageUnit($ambushedUnit, $player, $hits, false, true);
 
-    // $hits = $ambushedUnit->getHits($results);
-    $hits = $this->calculateHits($unit, $ambushedUnit, null, $results);
-    $eliminated = $this->damageUnit($ambushedUnit, $player, $hits, false, true);
-
-    if (Teams::checkVictory()) {
-      return;
+      if (Teams::checkVictory()) {
+        return;
+      }
     }
+
+
+
+    
 
     $attack = [
       'pId' => $player->getId(),

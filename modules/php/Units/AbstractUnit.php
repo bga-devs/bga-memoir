@@ -178,6 +178,12 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     ];
   }
 
+  //public function getType()
+  //{
+    //return [
+      //'type' => $this->type];
+  //}
+
   public function getTeamId()
   {
     return in_array($this->nation, Units::$nations[AXIS]) ? AXIS : ALLIES;

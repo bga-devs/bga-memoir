@@ -32,7 +32,7 @@ $scenarios[17] = [
 					'name'=> 'woods'
 				],
 				'unit'=> [
-					'name'=> 'tiger',
+					'name'=> 'tigerger',
 					'nbr_units'=> '1'
 				]
 			],
@@ -80,7 +80,7 @@ $scenarios[17] = [
 					'name'=> 'woods'
 				],
 				'unit'=> [
-					'name'=> 'tiger',
+					'name'=> 'tigerger',
 					'nbr_units'=> '1'
 				],
 				'tags'=> [
@@ -115,7 +115,7 @@ $scenarios[17] = [
 				'row'=> 2,
 				'col'=> 6,
 				'unit'=> [
-					'name'=> 'tiger',
+					'name'=> 'tigerger',
 					'nbr_units'=> '1'
 				]
 			],
@@ -162,7 +162,7 @@ $scenarios[17] = [
 					'name'=> 'woods'
 				],
 				'unit'=> [
-					'name'=> 'tiger',
+					'name'=> 'tigerger',
 					'nbr_units'=> '1'
 				]
 			],
@@ -173,7 +173,7 @@ $scenarios[17] = [
 					'name'=> 'woods'
 				],
 				'unit'=> [
-					'name'=> 'tiger',
+					'name'=> 'tigerger',
 					'nbr_units'=> '1'
 				]
 			],

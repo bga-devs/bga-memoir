@@ -453,6 +453,7 @@ class Scenario extends \APP_DbObject
       'gun_35' => 'MobileArtillery',
       'gun_46' => 'HeavyAntiTankGun',
       'tank2_33' => 'FlameThrower',
+      'tiger'=> 'Tiger',
     ];
     $name = $unit['name'];
     foreach (array_keys($TROOP_CLASSES) as $t) {
