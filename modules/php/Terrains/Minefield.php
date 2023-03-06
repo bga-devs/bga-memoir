@@ -8,6 +8,7 @@ use M44\Managers\Medals;
 use M44\Managers\Terrains;
 use M44\Managers\Teams;
 use M44\Helpers\Log;
+use M44\States\AttackUnitsTrait;
 
 class Minefield extends \M44\Models\Terrain
 {
@@ -76,8 +77,20 @@ class Minefield extends \M44\Models\Terrain
         ->getTeam()
         ->getOpponent()
         ->getCommander();
+      // case tiger on mine - double roll check for damages
+      if ($unit->getNumber() == '16') {
+        $hits = Game::get()->calculateHits(null, $unit, null, $results);
+        // Second roll dice if hits >0 (armor and grenade)
+        if ($hits > 0) {
+          Notifications::message(clienttranslate('Tiger second roll'), []);
+          $results2 = Dice::roll($player, $hits, $unit->getPos());
+          $hits2 = AttackUnitsTrait::calculateHitsTiger2ndRoll($results2);
+          return Game::get()->damageUnit($unit, $attacker, $hits2);
+        }
+      } else { // not a tiger - standard units
       $hits = Game::get()->calculateHits(null, $unit, null, $results);
       return Game::get()->damageUnit($unit, $attacker, $hits);
+      }
     }
   }
 
