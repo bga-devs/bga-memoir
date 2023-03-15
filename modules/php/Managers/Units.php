@@ -148,8 +148,14 @@ class Units extends \M44\Helpers\Pieces
 
     foreach ($board['hexagons'] as &$hex) {
       $data = null;
+      // special case unit is tiger if tank elite german and nb units == 1
       if (isset($hex['unit'])) {
-        if (isset($hex['unit']['behavior']) && isset(\TROOP_BADGE_MAPPING[$hex['unit']['behavior']])) {
+                if ($hex['unit']['name']=='tank2ger' && ($hex['unit']['nbr_units'])==1) {
+          $hex['unit']['name'] = 'tigerger';
+          $hex['unit']['badge'] = 'badge13';
+
+        }
+        elseif (isset($hex['unit']['behavior']) && isset(\TROOP_BADGE_MAPPING[$hex['unit']['behavior']])) {
           $hex['unit']['badge'] = \TROOP_BADGE_MAPPING[$hex['unit']['behavior']];
         }
         $data = self::getTypeAndNation($hex['unit']);
