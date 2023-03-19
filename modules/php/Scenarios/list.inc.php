@@ -11,7 +11,6 @@ $scenariosMap = [
   13 => '13-OmahaBeachOverlord',
   15 => '15-OperationCobra',
   16 => '16-CounterattackOnMortain',
-  17 => '17-VillersBocage',
   18 => '18-Montelimar',
   19 => '19-Vassieux',
   20 => '20-StVith',
@@ -75,6 +74,7 @@ $scenariosMap = [
   23806 => '23806-GermanCounterattackAtChaumont',
 
 	// Other scenarios flagged as "official" in DoW database
+  17 => '17-VillersBocage', // Tiger scenario
   42 => '42-UtahBeach',
   1312 => '1312-Lipovec',
   3465 => '3465-BloodyRidge',

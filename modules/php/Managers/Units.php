@@ -152,7 +152,7 @@ class Units extends \M44\Helpers\Pieces
       if (isset($hex['unit'])) {
                 if ($hex['unit']['name']=='tank2ger' && ($hex['unit']['nbr_units'])==1) {
           $hex['unit']['name'] = 'tigerger';
-          $hex['unit']['badge'] = 'badge13';
+          $hex['unit']['badge'] = 'badge4';
 
         }
         elseif (isset($hex['unit']['behavior']) && isset(\TROOP_BADGE_MAPPING[$hex['unit']['behavior']])) {

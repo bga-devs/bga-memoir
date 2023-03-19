@@ -13,4 +13,10 @@ class Tiger extends EliteArmor
     $this->maxUnits = 1;
     $this->applyPropertiesModifiers();
   }
+
+  public function getAttackModifier($target)
+  { 
+    return ($this-> getExtraDatas('behavior') == 'IS_WITTMANN' && $this-> getMoves() == 0 && $this-> getGrounds() == 0) ? 1 : 0;
+  }
+
 }

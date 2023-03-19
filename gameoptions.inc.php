@@ -152,6 +152,11 @@ $game_options = [
         'tmdisplay' => '[16]',
         'description' => clienttranslate('Counter-attack on Mortain'),
       ],
+      17 => [
+        'name' => clienttranslate('[BB] [17] Villers-Bocage'),
+        'tmdisplay' => '[17]',
+        'description' => clienttranslate('Villers-Bocage'),
+      ],
       18 => [
         'name' => clienttranslate('[BB] [18] Montélimar'),
         'tmdisplay' => '[18]',
