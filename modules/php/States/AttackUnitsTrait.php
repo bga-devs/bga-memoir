@@ -206,7 +206,12 @@ trait AttackUnitsTrait
     $oppUnit = $attack['oppUnit'];
     $player = $attack['player'];
     $card = $attack['card'];
-    
+
+    // if unit attack is camoufled, remove camouflage
+    if ($unit->isCamouflaged()) {
+      Tokens::removeCamouflage($unit->getpos());
+    }
+        
     // Check if ambush was played and successfull
     if ($attack['ambush']) {
       if (is_null($unit)) {
