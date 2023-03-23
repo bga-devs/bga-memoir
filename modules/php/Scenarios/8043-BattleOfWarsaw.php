@@ -199,12 +199,12 @@ $scenarios[8043] = [
         'tags' => [
           0 => [
             'name' => 'medal2',
-            //'behavior' => 'HEX_MAJORITY_MEDAL',
+            //'behavior' => 'HEX_MAJORITY_MEDAL', not applicable for this scenario
             'group' => [
               0 => 'b2',
               1 => 'i4',
-              2 => 'f6',
-              3 => 'd4',
+              //2 => 'f6', // medal already present intresenqly in f6 otherwise will be counted twice
+              2 => 'd4',
             ],
             'side' => 'AXIS',
             'medal' => [
