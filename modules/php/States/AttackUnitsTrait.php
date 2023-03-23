@@ -208,7 +208,7 @@ trait AttackUnitsTrait
     $card = $attack['card'];
 
     // if unit attack is camoufled, remove camouflage
-    if ($unit->isCamouflaged()) {
+    if ($unit->isCamouflaged() && $unit != null) {
       Tokens::removeCamouflage($unit->getpos());
     }
         
