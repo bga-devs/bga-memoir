@@ -56,9 +56,15 @@ $scenarios[17] = [
 					'name'=> 'tankbrit'
 				],
 				'tags'=> [
-					[
-						'name'=> 'medal2'
-					]
+					0 => [
+						'name' => 'medal2',
+						'group' => [],
+            			'medal' => [
+              				'permanent' => true,
+              				'counts_for' => 1,
+              				'nbr_hex' => 1,
+            			],
+					],
 				]
 			],
 			[
@@ -255,9 +261,15 @@ $scenarios[17] = [
 					'name'=> 'tankbrit'
 				],
 				'tags'=> [
-					[
-						'name'=> 'medal2'
-					]
+					0 => [
+						'name' => 'medal2',
+						'group' => [],
+            			'medal' => [
+              				'permanent' => true,
+              				'counts_for' => 1,
+              				'nbr_hex' => 1,
+            			],
+					],
 				]
 			],
 			[
