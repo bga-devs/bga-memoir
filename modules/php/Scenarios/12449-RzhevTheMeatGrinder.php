@@ -291,27 +291,27 @@ $scenarios[12449] = [
           0 => [
             'name' => 'medal2',
             'group' => [
-              0 => 'd6',
-              1 => 'E5',
-              2 => 'D5',
+              //0 => 'd6',
+              0 => 'E5',
+              1 => 'D5',
             ],
             'medal' => [
               'permanent' => false,
               'counts_for' => 1,
-              'nbr_hex' => 3,
+              'nbr_hex' => 1,
             ],
           ],
           1 => [
             'name' => 'medal6',
             'group' => [
-              0 => 'd6',
-              1 => 'E5',
-              2 => 'D5',
+              //0 => 'd6',
+              0 => 'E5',
+              1 => 'D5',
             ],
             'medal' => [
               'permanent' => false,
               'counts_for' => 1,
-              'nbr_hex' => 3,
+              'nbr_hex' => 1,
             ],
           ],
         ],
@@ -330,27 +330,27 @@ $scenarios[12449] = [
           0 => [
             'name' => 'medal2',
             'group' => [
-              0 => 'i6',
-              1 => 'J5',
-              2 => 'K5',
+              //0 => 'i6',
+              0 => 'J5',
+              1 => 'K5',
             ],
             'medal' => [
               'permanent' => false,
               'counts_for' => 2,
-              'nbr_hex' => 3,
+              'nbr_hex' => 1,
             ],
           ],
           1 => [
             'name' => 'medal6',
             'group' => [
-              0 => 'i6',
-              1 => 'J5',
-              2 => 'K5',
+              //0 => 'i6',
+              0 => 'J5',
+              1 => 'K5',
             ],
             'medal' => [
               'permanent' => false,
               'counts_for' => 2,
-              'nbr_hex' => 3,
+              'nbr_hex' => 1,
             ],
           ],
         ],
