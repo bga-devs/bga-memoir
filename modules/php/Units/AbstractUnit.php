@@ -77,6 +77,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     'banzai', // can move up to 2 and still battle
     'maxMalus', // maximum malus for attack
     'canTakeGround', // in case of mustStopWhenLeaving, it should not block taking ground
+    'cannotHeal', // for units who canno be healed
   ];
 
   protected $attackPower = [];
@@ -85,7 +86,8 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
   protected $medalsWorth = 1;
   protected $retreatHex = 1;
   protected $ignoreCannotBattle = false;
-  protected $targets = [\INFANTRY => true, ARMOR => true, ARTILLERY => true];
+  protected $cannotHeal = false;
+  protected $targets = [\INFANTRY => true, ARMOR => true, ARTILLERY => true, DESTROYER => true];
 
   public function __construct($row)
   {

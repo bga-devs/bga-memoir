@@ -589,11 +589,13 @@ class Notifications
       \INFANTRY => 0,
       \ARMOR => 0,
       \ARTILLERY => 0,
+      \DESTROYER => 0,
     ];
     $names = [
       \INFANTRY => \clienttranslate('Infantry'),
       \ARMOR => \clienttranslate('Armor'),
       \ARTILLERY => \clienttranslate('Artillery'),
+      \DESTROYER => \clienttranslate('Destroyer'),
     ];
 
     foreach ($units as $unit) {
