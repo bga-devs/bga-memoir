@@ -35,7 +35,7 @@ class MedicsAndMechanics extends \M44\Models\Card
   {
     $player = $this->getPlayer();
     $units = $player->getUnits()->filter(function ($unit) {
-      return $unit->isWounded();
+      return $unit->isWounded() && !$unit->cannotHeal();
     });
     return [
       'i18n' => ['desc'],
