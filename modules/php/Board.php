@@ -176,6 +176,20 @@ class Board
     return false;
   }
 
+  public function isAdjacentToBeach($cell)
+  {
+    $isbeach = false;
+    $neighbours = self::getNeighbours($cell); // Not accessible from Ocean.php as protected 
+          //var_dump($neighbours);
+          foreach ($neighbours as &$neigh) {
+            if(self::isBeachCell($neigh)) {
+              $isbeach = true;
+            }
+          }
+          unset($neigh);
+          return !$isbeach; 
+  }
+
   /**
    * Do a generic OR on a given property of all terrains on the cell
    */
@@ -316,7 +330,12 @@ class Board
     // Filter out paths if needed
     foreach ($cells as &$cell) {
       Utils::filter($cell['paths'], function ($path) use ($unit, $cell) {
-        return self::isValidPath($unit, $cell, $path);
+        if($unit->getType() == DESTROYER) { // specific unit in ocean cannot move to adjacent hexes to beach
+          return self::isAdjacentToBeach($cell); 
+        }
+        else {
+          return self::isValidPath($unit, $cell, $path);;
+        }
       });
     }
     // Filter out cells without paths

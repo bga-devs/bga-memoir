@@ -602,12 +602,12 @@ $game_options = [
       //   'description' => clienttranslate('Breakthrough at Mortain'),
       //   'premium' => true,
       // ],
-      // 6541 => [
-      //   'name' => clienttranslate('[6541] Breakthrough to the Beach'),
-      //   'tmdisplay' => '[6541]',
-      //   'description' => clienttranslate('Breakthrough to the Beach'),
-      //   'premium' => true,
-      // ],
+      6541 => [
+         'name' => clienttranslate('[6541] Breakthrough to the Beach'),
+         'tmdisplay' => '[6541]',
+         'description' => clienttranslate('Breakthrough to the Beach'),
+         'premium' => true,
+       ],
       // 18261 => [
       //   'name' => clienttranslate('[18261] [Ukraine] Soviet raid on Grigorevka'),
       //   'tmdisplay' => '[18261]',

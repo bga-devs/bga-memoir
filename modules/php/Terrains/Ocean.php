@@ -1,6 +1,8 @@
 <?php
 namespace M44\Terrains;
 
+use M44\Board;
+
 
 class Ocean extends \M44\Models\Terrain
 {
@@ -21,17 +23,5 @@ class Ocean extends \M44\Models\Terrain
 
     parent::__construct($row);
   }
-
-  public function isValidPath($unit, $cell, $path)
-  {
-    // destroyer can only move on row 8 with high water
-    if($unit->getType() == DESTROYER) {
-      return $this->getPos()['y'] == 8;
-    }
-    else {
-      return true;
-    }
-  }
-
 }
 
