@@ -29,7 +29,8 @@ class Hospital extends \M44\Models\Terrain
       $unit->getType() == \INFANTRY &&
       $unit->isWounded() &&
       $unit->getMoves() == 0 &&
-      !Board::isAdjacentToEnnemy($unit)
+      !Board::isAdjacentToEnnemy($unit) &&
+      $unit->cannotHeal()
     ) {
       return [
         [
