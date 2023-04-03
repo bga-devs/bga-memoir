@@ -16,6 +16,7 @@ class Armor extends AbstractUnit
     $this->mustSeeToAttack = true;
     $this->maxGrounds = 2;
     $this->canOverrun = true;
+    $this->cannotHeal = false;
     parent::__construct($row);
   }
 }

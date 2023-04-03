@@ -11,6 +11,7 @@ class Tiger extends EliteArmor
     $this->statName = 'Armor';
     $this->name = clienttranslate('Tiger');
     $this->maxUnits = 1;
+    $this->cannotHeal = true;
     $this->applyPropertiesModifiers();
   }
 

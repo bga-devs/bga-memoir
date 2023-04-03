@@ -16,6 +16,7 @@ class Infantry extends AbstractUnit
     $this->attackPower = [3, 2, 1];
     $this->mustSeeToAttack = true;
     $this->maxGrounds = 1;
+    $this->cannotHeal = false;
     parent::__construct($row);
   }
 

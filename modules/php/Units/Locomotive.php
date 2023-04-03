@@ -13,6 +13,7 @@ class Locomotive extends AbstractUnit
     $this->movementRadius = 3;
     $this->movementAndAttackRadius = 0;
     $this->attackPower = [];
+    $this->cannotHeal = true;
     parent::__construct($row);
   }
 }

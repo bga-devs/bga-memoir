@@ -16,6 +16,7 @@ class Artillery extends AbstractUnit
     $this->attackPower = [3, 3, 2, 2, 1, 1];
     $this->mustSeeToAttack = false;
     $this->cannotBattleIfMoved = true;
+    $this->cannotHeal = false;
     parent::__construct($row);
   }
 
