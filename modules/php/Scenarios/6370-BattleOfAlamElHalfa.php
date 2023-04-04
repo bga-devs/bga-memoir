@@ -37,7 +37,7 @@ $scenarios[6370] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'AXIS',
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -170,7 +170,7 @@ $scenarios[6370] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'AXIS',
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -195,7 +195,7 @@ $scenarios[6370] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'AXIS',
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -206,7 +206,7 @@ $scenarios[6370] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'AXIS',
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -217,7 +217,7 @@ $scenarios[6370] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'AXIS',
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -228,7 +228,7 @@ $scenarios[6370] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'AXIS',
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -239,7 +239,7 @@ $scenarios[6370] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'AXIS',
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -250,7 +250,7 @@ $scenarios[6370] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'AXIS',
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -303,7 +303,7 @@ $scenarios[6370] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'AXIS',
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -377,7 +377,7 @@ $scenarios[6370] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'AXIS',
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -412,7 +412,7 @@ $scenarios[6370] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'AXIS',
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -430,7 +430,7 @@ $scenarios[6370] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'AXIS',
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -441,7 +441,7 @@ $scenarios[6370] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'AXIS',
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -452,7 +452,7 @@ $scenarios[6370] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'AXIS',
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -540,7 +540,7 @@ $scenarios[6370] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'AXIS',
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -572,7 +572,7 @@ $scenarios[6370] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'AXIS',
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -597,7 +597,7 @@ $scenarios[6370] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'AXIS',
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -622,7 +622,7 @@ $scenarios[6370] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'AXIS',
+            'side' => 'ALLIES',
           ],
         ],
       ],

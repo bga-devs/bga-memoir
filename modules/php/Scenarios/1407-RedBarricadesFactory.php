@@ -323,7 +323,7 @@ $scenarios[1407] = [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
             'group' => [],
-            'side' => 'AXIS',
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -335,7 +335,7 @@ $scenarios[1407] = [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
             'group' => [],
-            'side' => 'AXIS',
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -401,7 +401,7 @@ $scenarios[1407] = [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
             'group' => [],
-            'side' => 'AXIS',
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -438,7 +438,7 @@ $scenarios[1407] = [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
             'group' => [],
-            'side' => 'AXIS',
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -450,7 +450,7 @@ $scenarios[1407] = [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
             'group' => [],
-            'side' => 'AXIS',
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -704,7 +704,7 @@ An Embankment hex has the same effect as a hill.
 
 A Hedgehog obstacle hexes represent piles of debris and has the same effect as a Hedgehog.
 
-Minefields are explained on p.4.
+Minefields are explained on p.4. Russians lay the mines
 
 Snipers are described on p.5.'),
     ],

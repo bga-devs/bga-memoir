@@ -29,8 +29,15 @@ class Minefield extends \M44\Models\Terrain
 
   public function onUnitEntering($unit, $isRetreat, $isTakeGround)
   {
-    // A bit counter-intuitive but the side indicated by editor is the one that is affected by mines
-    if ($isRetreat || !$this->isOriginalOwner($unit)) {
+    // Note from Scenario Editor 1.2 that created confusion previously :
+    /*Important note: 
+     * "Only Allies" means that mines are placed by Allies (original ) and will hit Axis.
+     * "Only Axis" means that mines are placed by Axis and will hit Allies.
+     * "No/Any Side" does not have owner and will hit any side that enters minefield.
+     * Notice that this last option is not supported by official M44 rules but can be beneficial for custom scenarios. 
+     * Make sure you tell players about Minefields in 'Special rules' section to avoid confusion!
+     */
+    if ($isRetreat || $this->isOriginalOwner($unit)) {
       return false;
     }
     // mines are not triggered with behind ennemy lines

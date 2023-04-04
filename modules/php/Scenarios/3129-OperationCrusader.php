@@ -75,7 +75,7 @@ $scenarios[3129] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'AXIS',
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -126,7 +126,7 @@ $scenarios[3129] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'AXIS',
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -173,7 +173,7 @@ $scenarios[3129] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'AXIS',
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -220,7 +220,7 @@ $scenarios[3129] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'AXIS',
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -231,7 +231,7 @@ $scenarios[3129] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'AXIS',
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -242,7 +242,7 @@ $scenarios[3129] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'AXIS',
+            'side' => 'ALLIES',
           ],
         ],
       ],
@@ -443,7 +443,7 @@ $scenarios[3129] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'ALLIES',
+            'side' => 'AXIS',
           ],
         ],
       ],
@@ -470,7 +470,7 @@ $scenarios[3129] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'ALLIES',
+            'side' => 'AXIS',
           ],
         ],
       ],
@@ -510,7 +510,7 @@ $scenarios[3129] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'ALLIES',
+            'side' => 'AXIS',
           ],
         ],
       ],
@@ -521,7 +521,7 @@ $scenarios[3129] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'ALLIES',
+            'side' => 'AXIS',
           ],
         ],
       ],
@@ -581,7 +581,7 @@ $scenarios[3129] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'ALLIES',
+            'side' => 'AXIS',
           ],
         ],
       ],
@@ -621,7 +621,7 @@ $scenarios[3129] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'ALLIES',
+            'side' => 'AXIS',
           ],
         ],
       ],
@@ -705,7 +705,7 @@ $scenarios[3129] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'ALLIES',
+            'side' => 'AXIS',
           ],
         ],
       ],
@@ -716,7 +716,7 @@ $scenarios[3129] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'ALLIES',
+            'side' => 'AXIS',
           ],
         ],
       ],
@@ -730,7 +730,7 @@ $scenarios[3129] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'ALLIES',
+            'side' => 'AXIS',
           ],
         ],
       ],
@@ -741,7 +741,7 @@ $scenarios[3129] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'ALLIES',
+            'side' => 'AXIS',
           ],
         ],
       ],

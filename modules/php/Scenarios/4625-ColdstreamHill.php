@@ -420,7 +420,7 @@ $scenarios[4625] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'ALLIES',
+            'side' => 'AXIS',
           ],
         ],
       ],
@@ -431,7 +431,7 @@ $scenarios[4625] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'ALLIES',
+            'side' => 'AXIS',
           ],
         ],
       ],
@@ -442,7 +442,7 @@ $scenarios[4625] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'ALLIES',
+            'side' => 'AXIS',
           ],
         ],
       ],
@@ -467,7 +467,7 @@ $scenarios[4625] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'ALLIES',
+            'side' => 'AXIS',
           ],
         ],
       ],
@@ -478,7 +478,7 @@ $scenarios[4625] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'ALLIES',
+            'side' => 'AXIS',
           ],
         ],
       ],
@@ -496,7 +496,7 @@ $scenarios[4625] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'ALLIES',
+            'side' => 'AXIS',
           ],
         ],
       ],
@@ -507,7 +507,7 @@ $scenarios[4625] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'ALLIES',
+            'side' => 'AXIS',
           ],
         ],
       ],
@@ -525,7 +525,7 @@ $scenarios[4625] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'ALLIES',
+            'side' => 'AXIS',
           ],
         ],
       ],
@@ -536,7 +536,7 @@ $scenarios[4625] = [
           0 => [
             'name' => 'tag3',
             'behavior' => 'MINE_FIELD',
-            'side' => 'ALLIES',
+            'side' => 'AXIS',
           ],
         ],
       ],

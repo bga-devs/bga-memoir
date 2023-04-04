@@ -492,7 +492,7 @@ The hex of Chaumont is a Temporary Medal Objective worth 1 medal for the Axis pl
 The hex of Grandru is a Temporary Medal Objective worth 1 medal for the Allied player.'),
       'rules' => clienttranslate('- Special Weapon Asset rules (SWAs 1) are in effect for units equipped with antitank weapons (SWAs 2).
 - The Axis player lays out the minefields (Terrains 29).
-- Use "Mobile Artillery" rules (Troops 14) for the US artillery unit.
+- Use "Mobile Artillery" rules (Troops 14) for the US artillery unit. 
 - Use "Winter Weather" rules (Actions 26).'),
       'bibliography' => clienttranslate('39-45 Magazine n°365 - Article on Bastogne.'),
     ],
