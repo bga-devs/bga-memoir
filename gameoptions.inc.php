@@ -607,13 +607,13 @@ $game_options = [
          'tmdisplay' => '[6541]',
          'description' => clienttranslate('Breakthrough to the Beach'),
          'premium' => true,
-       ],
-      // 18261 => [
-      //   'name' => clienttranslate('[18261] [Ukraine] Soviet raid on Grigorevka'),
-      //   'tmdisplay' => '[18261]',
-      //   'description' => clienttranslate('[Ukraine] Soviet raid on Grigorevka'),
-      //   'premium' => true,
-      // ],
+      ],
+      18261 => [
+         'name' => clienttranslate('[18261] [Ukraine] Soviet raid on Grigorevka'),
+         'tmdisplay' => '[18261]',
+         'description' => clienttranslate('[Ukraine] Soviet raid on Grigorevka'),
+         'premium' => true,
+      ],
     ],
   ],
   105 => [

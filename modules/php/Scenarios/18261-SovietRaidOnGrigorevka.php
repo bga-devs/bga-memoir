@@ -15,6 +15,7 @@ $scenarios[18261] = [
   ],
   'game_info' => [
     'date_begin' => '1941-09-22',
+    'date_end' => '1941-09-22',
     'front' => 'EASTERN',
     'type' => 'HISTORICAL',
     'starting' => 'PLAYER2',
@@ -26,6 +27,26 @@ $scenarios[18261] = [
     'cards_player2' => 6,
     'victory_player1' => 12,
     'victory_player2' => 12,
+    'victory_conditions' => [
+      0 => [
+        'standard' => [],
+      ],
+    ],
+    'expert_mode' => 0,
+    'options' => [
+      'russian_commissar_rule' => 'ALLIES',
+      'night_visibility_rules' => true,
+      'airdrop' => [
+        'side' => 'ALLIES',
+        'range' => 4,
+        'nbr_units' => 6,
+        'center' => 'G5',
+        'unit' => [
+          'name' => 'inf2ru',
+          'badge' => 'badge25'
+        ],
+      ],
+    ],
   ],
   'board' => [
     'type' => 'BRKTHRU',
@@ -165,6 +186,7 @@ $scenarios[18261] = [
         'col' => 10,
         'terrain' => [
           'name' => 'pheadquarter',
+          'original_owner' => 'AXIS',
         ],
         'obstacle' => [
           'name' => 'sand',
@@ -276,11 +298,17 @@ $scenarios[18261] = [
         'unit' => [
           'name' => 'gunger',
         ],
-        'tags' => [
-          0 => [
-            'name' => 'medal6',
-          ],
-        ],
+        'tags'=> [
+					0 => [
+						'name' => 'medal6',
+						'group' => [],
+            			'medal' => [
+              				'permanent' => true,
+              				'counts_for' => 1,
+              				'nbr_hex' => 1,
+            			],
+					],
+				]
       ],
       29 => [
         'row' => 7,
@@ -299,11 +327,17 @@ $scenarios[18261] = [
         'unit' => [
           'name' => 'gunger',
         ],
-        'tags' => [
-          0 => [
-            'name' => 'medal6',
-          ],
-        ],
+        'tags'=> [
+					0 => [
+						'name' => 'medal6',
+						'group' => [],
+            			'medal' => [
+              				'permanent' => true,
+              				'counts_for' => 1,
+              				'nbr_hex' => 1,
+            			],
+					],
+				]
       ],
       31 => [
         'row' => 8,
@@ -347,11 +381,17 @@ $scenarios[18261] = [
         'unit' => [
           'name' => 'gunger',
         ],
-        'tags' => [
-          0 => [
-            'name' => 'medal6',
-          ],
-        ],
+        'tags'=> [
+					0 => [
+						'name' => 'medal6',
+						'group' => [],
+            			'medal' => [
+              				'permanent' => true,
+              				'counts_for' => 1,
+              				'nbr_hex' => 1,
+            			],
+					],
+				]
       ],
       35 => [
         'row' => 9,

@@ -16,6 +16,7 @@ class Sniper extends Infantry
     $this->ignoreCannotBattle = true;
     $this->ignoreDefense = true;
     $this->targets[ARMOR] = false;
+    $this->targets[DESTROYER] = false;
     $this->desc = [
       clienttranslate('Retreat up to 3 hex/flag'),
       clienttranslate('Move onto any terrain and may still battle, but must obey terrain movement restrictions'),
