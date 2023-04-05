@@ -72,6 +72,8 @@ class BehindEnemyLines extends \M44\Models\Card
   public function stMoveAgain()
   {
     foreach ($this->getActivatedUnits() as $unit) {
+      $unit->setExtraDatas('stayedOnRoad', null);
+      $unit->setExtraDatas('roadBonus', null);
       $unit->setMoves(0);
     }
   }
