@@ -329,7 +329,7 @@ $scenarios[1312] = [
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
-          'behavior' => 'FORDABLE_STREAM',
+          //'behavior' => 'FORDABLE_STREAM',  // removed as there is a bridge and must not stop
         ],
         'rect_terrain' => [
           'name' => 'bridge',
