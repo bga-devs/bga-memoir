@@ -307,6 +307,7 @@ const TROOP_CLASSES = [
   'gun_35' => 'MobileArtillery',
   'gun_46' => 'HeavyAntiTankGun',
   'tank2_33' => 'FlameThrower',
+  'tank_33' => 'FlameThrower',
   'inf2_31' => 'CombatEngineer',
   'inf_31' => 'CombatEngineer',
   'tiger' => 'Tiger',
