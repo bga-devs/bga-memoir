@@ -179,15 +179,15 @@ class Board
   public function isAdjacentToBeach($cell)
   {
     $isbeach = false;
-    $neighbours = self::getNeighbours($cell); // Not accessible from Ocean.php as protected 
-          //var_dump($neighbours);
-          foreach ($neighbours as &$neigh) {
-            if(self::isBeachCell($neigh)) {
-              $isbeach = true;
-            }
-          }
-          unset($neigh);
-          return !$isbeach; 
+    $neighbours = self::getNeighbours($cell); // Not accessible from Ocean.php as protected
+    //var_dump($neighbours);
+    foreach ($neighbours as &$neigh) {
+      if (self::isBeachCell($neigh)) {
+        $isbeach = true;
+      }
+    }
+    unset($neigh);
+    return !$isbeach;
   }
 
   /**
@@ -330,11 +330,11 @@ class Board
     // Filter out paths if needed
     foreach ($cells as &$cell) {
       Utils::filter($cell['paths'], function ($path) use ($unit, $cell) {
-        if($unit->getType() == DESTROYER) { // specific unit in ocean cannot move to adjacent hexes to beach
-          return self::isAdjacentToBeach($cell); 
-        }
-        else {
-          return self::isValidPath($unit, $cell, $path);;
+        if ($unit->getType() == DESTROYER) {
+          // specific unit in ocean cannot move to adjacent hexes to beach
+          return self::isAdjacentToBeach($cell);
+        } else {
+          return self::isValidPath($unit, $cell, $path);
         }
       });
     }
@@ -878,7 +878,7 @@ class Board
         if (count($pos) > 0 && count($neg) > 0) {
           $cell['type'] = LINE_INTERSECTION;
         } elseif (count($zeros) == 1) {
-          $cell['type'] = LINE_CORNER;
+          $cell['type'] = empty($pos) ? LINE_TANGENT_LEFT : LINE_TANGENT_RIGHT; // Treat corner the same as border
         } elseif (count($zeros) == 2) {
           $cell['type'] = empty($pos) ? LINE_TANGENT_LEFT : LINE_TANGENT_RIGHT;
         } else {
