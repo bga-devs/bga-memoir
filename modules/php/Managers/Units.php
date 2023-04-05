@@ -197,6 +197,10 @@ class Units extends \M44\Helpers\Pieces
         $data['extra_datas']['properties']['movementRadius'] = 2;
         $data['extra_datas']['properties']['movementAndAttackRadius'] = 2;
       }
+      if (in_array($behavior, ['CAN_IGNORE_ONE_FLAG'])) {
+        $data['extra_datas']['properties']['canIgnoreOneFlag'] = true;
+      }
+
 
       if (
         $unit->getType() == ARMOR &&
@@ -230,6 +234,16 @@ class Units extends \M44\Helpers\Pieces
         // TODO : temporary fix because you cant add british command in the editor currently...
         Globals::setBritishCommand(true);
       }
+
+      // special behaviors case
+      //example Wittmann Tiger ace can ignore 1 flag as behavior set in 17 Villers Bocage scenario
+      /*if(isset($hex['unit']['behavior'])){   
+
+        if($hex['unit']['behavior']=='CAN_IGNORE_ONE_FLAG'){
+          $data['extra_datas']['properties']['canIgnoreOneFlag'] = true;
+        }
+      }*/
+
       $units[] = $data;
     }
     self::create($units);

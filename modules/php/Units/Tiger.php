@@ -17,7 +17,7 @@ class Tiger extends EliteArmor
 
   public function getAttackModifier($target)
   { 
-    return ($this-> getExtraDatas('behavior') == 'IS_WITTMANN' && $this-> getMoves() == 0 && $this-> getGrounds() == 0) ? 1 : 0;
+    return ($this-> getExtraDatas('equipment') == 'wittmann' && $this-> getMoves() == 0 && $this-> getGrounds() == 0) ? 1 : 0;
   }
 
 }

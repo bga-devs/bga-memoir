@@ -8,6 +8,7 @@ $scenarios[17] = [
 	],
 	'game_info'=> [
 		'date_begin'=> '1944-06-12',
+		'date_end'=> '1944-06-12',
 		'front'=> 'WESTERN',
 		'type'=> 'HISTORICAL',
 		'starting'=> 'PLAYER1',
@@ -93,11 +94,12 @@ $scenarios[17] = [
 					'name'=> 'tank2ger',
 					'nbr_units'=> '1',
 					'equipment' => 'wittmann',
-					'behavior' => 'IS_WITTMANN'
+					'behavior'=> 'CAN_IGNORE_ONE_FLAG',
 				],
 				'tags' => [
 					[
 					  'name' => 'tag1',
+					  'behavior' => 'IS_WITTMANN',
 					],
 				],
 			],
