@@ -3,6 +3,7 @@ namespace M44\Terrains;
 use M44\Board;
 use M44\Dice;
 use M44\Core\Game;
+use M44\Models\Card;
 
 class FrozenRiver extends \M44\Models\Terrain
 {
@@ -32,8 +33,12 @@ class FrozenRiver extends \M44\Models\Terrain
       return;
     }
 
-    // FrozenRiver are not triggered with behind ennemy lines
-    if (!$isRetreat && $unit->getActivationOCard()->getType() == CARD_BEHIND_LINES) {
+    // FrozenRiver are not triggered with behind ennemy lines (or counter attack after BEL)
+    $activationcard = $unit->getActivationOCard();
+    if (!$isRetreat && 
+    ($activationcard->getType() == CARD_BEHIND_LINES ||
+      ($activationcard->getType() == CARD_COUNTER_ATTACK) && 
+      $activationcard->getExtraDatas('card')['type'] == CARD_BEHIND_LINES)) {
       return false;
     }
 

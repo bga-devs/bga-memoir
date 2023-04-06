@@ -9,6 +9,7 @@ use M44\Managers\Terrains;
 use M44\Managers\Teams;
 use M44\Helpers\Log;
 use M44\States\AttackUnitsTrait;
+use M44\Models\Card;
 
 class Minefield extends \M44\Models\Terrain
 {
@@ -40,16 +41,24 @@ class Minefield extends \M44\Models\Terrain
     if ($isRetreat || $this->isOriginalOwner($unit)) {
       return false;
     }
-    // mines are not triggered with behind ennemy lines
-    if ($unit->getActivationOCard()->getType() == CARD_BEHIND_LINES && $unit->getMoves() < 3) {
+    // mines are not triggered with behind ennemy lines (and counter attack BEL)
+    $activationcard = $unit->getActivationOCard();
+    if (($activationcard->getType() == CARD_BEHIND_LINES ||
+      ($activationcard->getType() == CARD_COUNTER_ATTACK) && 
+      $activationcard->getExtraDatas('card')['type'] == CARD_BEHIND_LINES)
+      && $unit->getMoves() < 3) {
       return false;
     }
-
+    
     if ($unit->mustSweep() && !$unit->isOnTheMove() && !$isTakeGround) {
       if (
         $unit->getMoves() <= $unit->getMovementAndAttackRadius() ||
-        ($unit->getActivationOCard()->getType() == \CARD_BEHIND_LINES && $unit->getMoves() == 3) ||
-        ($unit->getActivationOCard()->getType() == \CARD_INFANTRY_ASSAULT && $unit->getMoves() == 2)
+          (($activationcard->getType() == CARD_BEHIND_LINES ||
+            ($activationcard->getType() == CARD_COUNTER_ATTACK) && 
+            $activationcard->getExtraDatas('card')['type'] == CARD_BEHIND_LINES) && $unit->getMoves() == 3) ||
+          (($activationcard->getType() == CARD_INFANTRY_ASSAULT ||
+          ($activationcard->getType() == CARD_COUNTER_ATTACK) && 
+          $activationcard->getExtraDatas('card')['type'] == CARD_INFANTRY_ASSAULT) && $unit->getMoves() == 2)
       ) {
         // Sweep the mine
         Notifications::message(clienttranslate('Combat engineer sweeps the mine instead of battling'), []);

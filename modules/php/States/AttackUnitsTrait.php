@@ -37,7 +37,10 @@ trait AttackUnitsTrait
       }
 
       // if unit moved and finished on a mine with Infiltration and there is a mine, it must explose
-      if ($unit->getActivationOCard()->getType() == CARD_BEHIND_LINES && $unit->getMoves() < 3) {
+      $activationcard = $unit->getActivationOCard();
+      if (($activationcard->getType() == CARD_BEHIND_LINES ||
+          ($activationcard->getType() == CARD_COUNTER_ATTACK) && 
+          $activationcard->getExtraDatas('card')['type'] == CARD_BEHIND_LINES) && $unit->getMoves() < 3) {
         foreach (Board::getTerrainsInCell($unit->getPos()) as $t) {
           if ($t instanceof \M44\Terrains\Minefield) {
             $unit->setMoves(3);
