@@ -22,6 +22,7 @@ class Destroyer extends BigGun
     $this->maxGrounds = 0;
     $this->maxTarget = 3;
     $this->cannotHeal = true;
+    $this->ignoreDefense = true;
     $this->desc = [
       clienttranslate(
         'Place a cross-hair marker when a target is hit on the hex. Until moved or destroyed, zeroed-in unit take fire at +1 on future rounds'
