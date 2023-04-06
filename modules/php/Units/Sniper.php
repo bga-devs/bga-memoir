@@ -17,6 +17,7 @@ class Sniper extends Infantry
     $this->ignoreDefense = true;
     $this->targets[ARMOR] = false;
     $this->targets[DESTROYER] = false;
+    $this->cannotBattleBack = true; // ex british (and other nations as well) snipers cannot battleback
     $this->desc = [
       clienttranslate('Retreat up to 3 hex/flag'),
       clienttranslate('Move onto any terrain and may still battle, but must obey terrain movement restrictions'),

@@ -78,6 +78,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     'maxMalus', // maximum malus for attack
     'canTakeGround', // in case of mustStopWhenLeaving, it should not block taking ground
     'cannotHeal', // for units who cannot be healed
+    'cannotBattleBack',
   ];
 
   protected $attackPower = [];

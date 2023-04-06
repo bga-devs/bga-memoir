@@ -223,7 +223,7 @@ class Units extends \M44\Helpers\Pieces
       }
 
       if ($data['nation'] == 'jp') {
-        if ($unit->getType() == \INFANTRY) {
+        if ($unit->getType() == \INFANTRY && !($unit instanceof \M44\Units\Sniper)) {
           $data['extra_datas']['properties']['mustIgnore1Flag'] = true;
           $data['extra_datas']['properties']['bonusCloseAssault'] = true;
           $data['extra_datas']['properties']['banzai'] = true;
@@ -234,15 +234,6 @@ class Units extends \M44\Helpers\Pieces
         // TODO : temporary fix because you cant add british command in the editor currently...
         Globals::setBritishCommand(true);
       }
-
-      // special behaviors case
-      //example Wittmann Tiger ace can ignore 1 flag as behavior set in 17 Villers Bocage scenario
-      /*if(isset($hex['unit']['behavior'])){   
-
-        if($hex['unit']['behavior']=='CAN_IGNORE_ONE_FLAG'){
-          $data['extra_datas']['properties']['canIgnoreOneFlag'] = true;
-        }
-      }*/
 
       $units[] = $data;
     }

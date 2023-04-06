@@ -240,7 +240,8 @@ trait RetreatUnitTrait
       $attack['distance'] == 1 &&
       !$attack['ambush'] &&
       $oppUnit->getNUnits() == 1 &&
-      $oppUnit->getRetreats() == 0
+      $oppUnit->getRetreats() == 0 &&
+      !$oppUnit->cannotBattleBack() // ex Sniper do not benefit from british nation battle back
     ) {
       $this->nextState('battleBack', $oppUnit->getPlayer());
     } else {
