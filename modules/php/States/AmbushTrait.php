@@ -8,6 +8,8 @@ use M44\Managers\Cards;
 use M44\Managers\Units;
 use M44\Core\Notifications;
 use M44\Helpers\Utils;
+use M44\Board;
+
 use M44\Dice;
 
 trait AmbushTrait
@@ -113,6 +115,13 @@ trait AmbushTrait
     // if tiger is ambushed double roll check for damages
     if ($ambushedUnit->getNumber() == '16') {
       $hits = $this->calculateHits($unit, $ambushedUnit, null, $results);
+      // Count all FLAGS and if Tiger would be blocked to retreat to add to hits for second roll 
+      // (remove all related flags from 1st in this case results)
+      if (isset($results[DICE_FLAG])) {
+        $hitflag = $this->calculateTigerFlagsHits($currentAttack,$results,$ambushedUnit);
+        $hits += $hitflag;
+        $results[DICE_FLAG] -= $hitflag;
+      }
       // Second roll dice if hits >0 (armor and grenade)
       if ($hits > 0) {
         Notifications::message(clienttranslate('Tiger second roll'), []);
@@ -135,9 +144,6 @@ trait AmbushTrait
       }
     }
 
-
-
-    
 
     $attack = [
       'pId' => $player->getId(),
@@ -172,4 +178,5 @@ trait AmbushTrait
     $attack = $this->getCurrentAttack();
     $this->nextState('pass', $attack['pId']);
   }
+
 }

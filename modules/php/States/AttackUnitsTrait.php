@@ -10,6 +10,7 @@ use M44\Managers\Units;
 use M44\Managers\Terrains;
 use M44\Managers\Cards;
 use M44\Helpers\Utils;
+use M44\Helpers\Pieces;
 use M44\Board;
 use M44\Dice;
 use M44\Managers\Tokens;
@@ -260,6 +261,14 @@ trait AttackUnitsTrait
     // if tiger is attacked double roll check for damages
     if ($oppUnit->getNumber() == '16') {
       $hits = $this->calculateHits($unit, $oppUnit, $card, $results);
+      // Count all FLAGS and if Tiger would be blocked to retreat to add to hits for second roll 
+      // (remove all related flags from 1st in this case results)
+      if (isset($results[DICE_FLAG])) {
+        $hitflag = $this->calculateTigerFlagsHits($attack,$results,$oppUnit);
+        $hits += $hitflag;
+        $results[DICE_FLAG] -= $hitflag;
+      }
+
       // Second roll dice if hits >0 (armor and grenade)
       if ($hits > 0) {
         Notifications::message(clienttranslate('Tiger second roll'), []);
@@ -573,6 +582,13 @@ trait AttackUnitsTrait
     // if tiger is battlebacked second roll check for damages
     if ($oppUnit->getNumber() == '16') {
       $hits = $this->calculateHits($unit, $oppUnit, null, $results);
+      // Count all FLAGS and if Tiger would be blocked to retreat to add to hits for second roll 
+      // (remove all related flags from 1st in this case results)
+      if (isset($results[DICE_FLAG])) {
+        $hitflag = $this->calculateTigerFlagsHits($attack,$results,$oppUnit);
+        $hits += $hitflag;
+        $results[DICE_FLAG] -= $hitflag;
+        }
       // Second roll dice if hits >0 (armor and grenade)
       if ($hits > 0) {
         Notifications::message(clienttranslate('Tiger second roll'), []);
@@ -631,5 +647,76 @@ trait AttackUnitsTrait
       'player' => $attack['oppUnit']->getPlayer(),
     ]);
     $this->closeCurrentAttack();
+  }
+
+  public function initTigerRetreat($attack, $dice, $targetUnit)
+  {
+    $canIgnore1Flag = Board::canIgnoreOneFlag($targetUnit);
+    if (!$canIgnore1Flag) {
+      $canIgnore1Flag = $targetUnit->canIgnoreOneFlag();
+    }
+
+    $canIgnoreAllFlags = Board::canIgnoreAllFlagsCell($targetUnit->getPos(), $targetUnit);
+    $currentAttack = $this->getCurrentAttack();
+    $mustIgnoreAllFlags = Board::mustIgnoreAllFlagsCell($targetUnit->getPos(), $targetUnit);
+
+    if ($currentAttack['card']->cannotIgnoreFlags()) {
+      $canIgnore1Flag = false;
+      $canIgnoreAllFlags = false;
+      $mustIgnoreAllFlags = false;
+    } elseif ($targetUnit->getMustIgnore1Flag()) {
+      $dice[\DICE_FLAG]--;
+      if ($canIgnore1Flag && $dice[\DICE_FLAG] != 0) {
+        $dice[\DICE_FLAG]--;
+        $canIgnore1Flag = false;
+      }
+    } 
+        
+    Globals::setRetreat([
+      'min' => $mustIgnoreAllFlags ? 0 : ($canIgnoreAllFlags ? 0 : $dice[\DICE_FLAG] - ($canIgnore1Flag ? 1 : 0)),
+      'max' => $mustIgnoreAllFlags ? 0 : $dice[\DICE_FLAG] * $targetUnit->getRetreatHex(),
+      'unit' => $targetUnit->getId(),
+      'effect' => $attack['effect'] ?? '',
+    ]);
+  }
+
+
+  public function argsRetreatTigerUnit($unit, $clearPaths = false)
+  {
+    list($unit, $minFlags, $maxFlags, $effect) = $this->getTigerRetreatInfo();
+    $attack = $this->getCurrentAttack();
+    $args = array_merge(Board::getArgsRetreat($unit, $minFlags, $maxFlags), [
+      'unitId' => $unit->getId(),
+      'min' => $minFlags,
+      'max' => $maxFlags,
+      'desc' =>
+        $minFlags == $maxFlags
+          ? ''
+          : [
+            'log' => \clienttranslate('(up to ${max} cells)'),
+            'args' => ['max' => $maxFlags],
+          ],
+      'i18n' => ['desc'],
+      'titleSuffix' => $effect . ($minFlags == 0 ? 'skippable' : ''),
+      'actionCount' => Globals::getActionCount(),
+      'attackingUnit' => $attack['unitId'],
+      'attackUnits' => $this->argsAttackUnit($attack['player'])['units'],
+    ]);
+    Utils::clearPaths($args['units'], $clearPaths); // Remove paths, useless for UI
+    return $args;
+  }
+
+  public function getTigerRetreatInfo()
+  {
+    $data = Globals::getRetreat();
+    
+    return [Units::get($data['unit']), $data['min'], $data['max'], $data['effect']];
+  }
+
+  public function calculateTigerFlagsHits($attack,$results1,$targetunit) 
+  {
+    $this->initTigerRetreat($attack, $results1, $targetunit);
+    $args = $this->argsRetreatTigerUnit($targetunit);
+    return $args['hits'];
   }
 }
