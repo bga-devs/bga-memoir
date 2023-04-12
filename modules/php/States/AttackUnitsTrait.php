@@ -523,7 +523,7 @@ trait AttackUnitsTrait
     $unit = Units::get($unitId);
     $unit->incFights(1);
     // throw dice
-    $results = Dice::roll($player, $unit->getAttackPower()[0], $unit->getPos());
+    $results = Dice::roll($player, $unit->getAttackPower($info)[0], $unit->getPos());
 
     // Compute number of heal
     $seal = $results[DICE_STAR] ?? 0 ? true : false;

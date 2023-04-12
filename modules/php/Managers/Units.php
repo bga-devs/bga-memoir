@@ -148,9 +148,10 @@ class Units extends \M44\Helpers\Pieces
 
     foreach ($board['hexagons'] as &$hex) {
       $data = null;
-      // special case unit is tiger if tank elite german and nb units == 1
-      if (isset($hex['unit'])) { 
-          // nbr_units not necessarly defined by default in any scenario
+      
+      if (isset($hex['unit'])) {
+        // special case unit is tiger if tank elite german and nb units == 1
+        // nbr_units not necessarly defined by default in any scenario
         if (isset($hex['unit']['nbr_units'])) {
           if ($hex['unit']['name']=='tank2ger' && ($hex['unit']['nbr_units'])==1) {
             $hex['unit']['name'] = 'tigerger';
@@ -172,6 +173,19 @@ class Units extends \M44\Helpers\Pieces
       if (is_null($data)) {
         continue;
       }
+      // Late or Early war SWA condition
+      //TODO get date and if >1942 Late War else EarlyWar
+      $date= Globals::getBeginDate();
+      $year= substr($date,0,4);
+      if(isset($data['badge']))
+      {
+        if(in_array($data['badge'], ['37','41','45']) && strval($year) > '1942') {
+          $data['badge'] =  $data['badge'] . 'lw';
+        }
+      }
+      
+      
+      //Create instance of the unit class
       $unit = self::getInstance($data['type'], $data['badge']);
 
       $data['figures'] = $unit->getMaxUnits();
@@ -223,10 +237,14 @@ class Units extends \M44\Helpers\Pieces
       }
 
       if ($data['nation'] == 'jp') {
-        if ($unit->getType() == \INFANTRY && !($unit instanceof \M44\Units\Sniper)) {
+        if ($unit->getType() == \INFANTRY && 
+        !($unit instanceof \M44\Units\Sniper)
+        ) {
           $data['extra_datas']['properties']['mustIgnore1Flag'] = true;
           $data['extra_datas']['properties']['bonusCloseAssault'] = true;
-          $data['extra_datas']['properties']['banzai'] = true;
+          if(!$unit->isSWAEquipped()) { // if SWA (Early War) is equipped banzai does not apply (it apply for later war SWA)
+            $data['extra_datas']['properties']['banzai'] = true; 
+          }
         }
       }
 

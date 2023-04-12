@@ -52,6 +52,9 @@ class Globals extends \M44\Helpers\DB_Manager
     'marineCommand' => 'bool',
     'nightVisibility' => 'int',
     'emptySectionMedals' => 'obj',
+
+    // scenario game_info
+    'beginDate' => 'str',
   ];
 
   protected static $table = 'global_variables';

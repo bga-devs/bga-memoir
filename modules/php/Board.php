@@ -616,7 +616,7 @@ class Board
     }
 
     // Compute cells at fire range
-    $power = $unit->getAttackPower();
+    $power = $unit->getAttackPower($pos);
     if ($banzai) {
       $power = [$power[0]]; // if banzai, unit can only attack in close assault
     }

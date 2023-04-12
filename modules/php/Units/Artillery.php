@@ -20,7 +20,7 @@ class Artillery extends AbstractUnit
     parent::__construct($row);
   }
 
-  public function getAttackPower()
+  public function getAttackPower($cell)
   {
     $c = Board::getMountainComponents();
     if (isset($c[$this->x][$this->y]) && $c[$this->x][$this->y] == true) {

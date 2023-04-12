@@ -45,6 +45,12 @@ class Scenario extends \APP_DbObject
     return is_null($scenario) ? null : \strtoupper($scenario['game_info']['side_player1']);
   }
 
+  public function getDate()
+  {
+    $scenario = self::get();
+    return is_null($scenario) ? null : \strtoupper($scenario['game_info']['date_begin']);
+  }
+
   public function getOptions()
   {
     $scenario = self::get();
@@ -209,6 +215,9 @@ class Scenario extends \APP_DbObject
     Globals::setMarineCommand($options['gung_ho'] ?? false);
     Globals::setNightVisibility($options['night_visibility_rules'] ?? false ? 1 : \INFINITY);
     Globals::setEmptySectionMedals($options['empty_section_medals'] ?? null);
+    // Init date to get Late >1942 or Early War for SWA
+    Globals::setBeginDate($scenario['game_info']['date_begin'] ?? null);
+
 
     // Create Teams
     Teams::loadScenario($scenario, $rematch);
@@ -450,6 +459,8 @@ class Scenario extends \APP_DbObject
       'inf2_30' => 'SkiTroop',
       'inf_30' => 'SkiTroop',
       'inf_37' => 'AntiTank',
+      'inf_41' => 'MortarEarlyWar',
+      'inf_41lw' => 'MortarLateWar',
       'gun_35' => 'MobileArtillery',
       'gun_46' => 'HeavyAntiTankGun',
       'tank2_33' => 'FlameThrower',

@@ -79,6 +79,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     'canTakeGround', // in case of mustStopWhenLeaving, it should not block taking ground
     'cannotHeal', // for units who cannot be healed
     'cannotBattleBack',
+    'isSWAEquipped', // for unit who are supporting Special Weapon Assets
   ];
 
   protected $attackPower = [];
