@@ -461,6 +461,8 @@ class Scenario extends \APP_DbObject
       'inf_37' => 'AntiTank',
       'inf_41' => 'MortarEarlyWar',
       'inf_41lw' => 'MortarLateWar',
+      'inf_45' => 'MachineGunEarlyWar',
+      'inf_45lw' => 'MachineGunLateWar',
       'gun_35' => 'MobileArtillery',
       'gun_46' => 'HeavyAntiTankGun',
       'tank2_33' => 'FlameThrower',
