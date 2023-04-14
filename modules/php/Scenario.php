@@ -459,6 +459,7 @@ class Scenario extends \APP_DbObject
       'inf2_30' => 'SkiTroop',
       'inf_30' => 'SkiTroop',
       'inf_37' => 'AntiTank',
+      'inf_37lw' => 'AntiTankLateWar',
       'inf_41' => 'MortarEarlyWar',
       'inf_41lw' => 'MortarLateWar',
       'inf_45' => 'MachineGunEarlyWar',
