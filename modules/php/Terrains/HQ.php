@@ -3,6 +3,7 @@ namespace M44\Terrains;
 
 use M44\Managers\Cards;
 use M44\Core\Notifications;
+use M44\Core\Game;
 
 class HQ extends \M44\Models\Terrain
 {
@@ -40,6 +41,9 @@ class HQ extends \M44\Models\Terrain
           ->getCommander(),
         $card
       );
+      $datas = Game::get()->getAllDatas();
+      Notifications::smallRefreshInterface($datas);
+      Notifications::smallRefreshHand($unit->getTeam()->getOpponent()->getCommander());
     } elseif ($this->isOriginalOwner($unit) && $this->getExtraDatas('captured') == true) {
       $cards = Cards::draw(1, ['hand', $unit->getPlayer()->getId()]);
       if (is_null($cards)) {
@@ -47,6 +51,9 @@ class HQ extends \M44\Models\Terrain
       }
       Notifications::drawCards($unit->getPlayer(), $cards);
       $this->setExtraDatas('captured', false);
+      $datas = Game::get()->getAllDatas();
+      Notifications::smallRefreshInterface($datas);
+      Notifications::smallRefreshHand($unit->getPlayer());
     }
   }
 }
