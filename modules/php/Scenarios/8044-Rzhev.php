@@ -70,6 +70,7 @@ $scenarios[8044] = [
         'tags' => [
           0 => [
             'name' => 'tag5',
+            'behavior' => 'EXIT_MARKER',
             'group' => [
               0 => 'E9',
               1 => 'F9',
@@ -118,12 +119,7 @@ $scenarios[8044] = [
         'terrain' => [
           'name' => 'wforest',
         ],
-        'tags' => [
-          0 => [
-            'name' => 'tag5',
-            'side' => 'ALLIES',
-          ],
-        ],
+
       ],
       8 => [
         'row' => 1,
