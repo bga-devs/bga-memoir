@@ -118,7 +118,7 @@ class Player extends \M44\Helpers\DB_Model
 
   public function canHill317()
   {
-    if (Globals::isBlitz() && $this->team == \AXIS) {
+    if (Globals::isBlitz() && $this->team == \AXIS && Globals::getNightVisibility() == \INFINITY) {
       return true;
     }
 
