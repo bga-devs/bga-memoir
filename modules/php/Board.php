@@ -1,5 +1,7 @@
 <?php
 namespace M44;
+
+use M44\Cards\Breakthrough\InfantryAssault;
 use M44\Core\Globals;
 use M44\Core\Notifications;
 use M44\Core\Preferences;
@@ -403,7 +405,12 @@ class Board
     ) {
       foreach ($targetCell['terrains'] as $terrain) {
         if ($terrain->isCave($unit)) {
-          return $d;
+          if($unit->getActivationOcard()->isType(CARD_INFANTRY_ASSAULT)) {
+            return 2;
+          } else {
+            return 1;
+          }
+          
         }
       }
     }
