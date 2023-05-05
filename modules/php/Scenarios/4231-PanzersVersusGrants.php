@@ -247,6 +247,7 @@ $scenarios[4231] = [
               'permanent' => true,
               'counts_for' => 1,
               'nbr_hex' => 1,
+              'turn_start' => true,
             ],
           ],
         ],

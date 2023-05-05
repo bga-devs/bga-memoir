@@ -10,6 +10,7 @@ use M44\Managers\Units;
 use M44\Board;
 use M44\Helpers\Utils;
 use M44\Managers\Tokens;
+use M44\Models\Terrain;
 
 /*
  * Medals manager
@@ -129,9 +130,13 @@ class Medals extends \M44\Helpers\DB_Manager
       if ($currentHolder != null && $datas['permanent']) {
         continue; // No need to check gained permanent medals
       }
-      if (($datas['turn_start'] ?? false) && !$startOfTurn) {
+      // Manage turn start for Panzer versus Grants next start turn medal rule (for AXIS team in this specific scenario)
+      if ((($datas['turn_start'] ?? false) && !$startOfTurn)
+      || (($datas['turn_start'] ?? false) && $startOfTurn && (Globals::getTeamTurn() != $medal['team']))) {
         continue; // No need to check startOfTurn medals if not at start of turn
       }
+      
+
 
       // Compute the nbr of hexes owned by each nation
       $nHexes = [ALLIES => 0, AXIS => 0];
@@ -205,6 +210,15 @@ class Medals extends \M44\Helpers\DB_Manager
           // Create medals and notify them
           $medals = self::addPositionMedals($newHolder, $nMedals, $medal);
           Notifications::scoreMedals($newHolder, $medals);
+          
+          // For Panzer versus Grants next start turn also remove Terrain (HQ)
+          if ($datas['turn_start'] ?? false) {
+            foreach(Board::getTerrainsInCell($medal['x'], $medal['y']) as $t) {
+              if($t instanceof \M44\Terrains\HQ){
+                $t->removeFromBoard();
+              }
+            }
+          } 
         }
       }
     }
