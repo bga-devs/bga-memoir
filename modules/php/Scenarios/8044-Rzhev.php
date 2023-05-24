@@ -43,8 +43,12 @@ $scenarios[8044] = [
         'tags' => [
           0 => [
             'name' => 'medal6',
-            'behavior' => 'PERMANENT_MEDAL_ALLIES',
-            'side' => 'ALLIES',
+            'group' => [],
+            'medal' => [
+              'permanent' => true,
+              'counts_for' => 1,
+              'nbr_hex' => 1,
+            ],
           ],
         ],
         'unit' => [
@@ -570,7 +574,12 @@ $scenarios[8044] = [
         'tags' => [
           0 => [
             'name' => 'medal2',
-            'behavior' => 'PERMANENT_MEDAL_AXIS',
+            'group' => [],
+            'medal' => [
+              'permanent' => true,
+              'counts_for' => 1,
+              'nbr_hex' => 1,
+            ],
           ],
         ],
         'unit' => [
