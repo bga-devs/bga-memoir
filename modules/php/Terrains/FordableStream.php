@@ -12,7 +12,7 @@ class FordableStream extends \M44\Models\Terrain
 
   public function __construct($row)
   {
-    $this->name = clienttranslate('Fordable rivers');
+    $this->name = clienttranslate('Fordable stream');
     $this->number = '61';
     $this->mustStopMovingWhenEntering = true;
 
