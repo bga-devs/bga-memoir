@@ -609,7 +609,7 @@ $scenarios[4643] = [
         'col' => 10,
         'unit' => [
           'name' => 'inf2us',
-          'badge' => 'badge3',
+          'badge' => 'badge22',
         ],
       ],
       71 => [
@@ -626,7 +626,7 @@ $scenarios[4643] = [
         'col' => 14,
         'unit' => [
           'name' => 'inf2us',
-          'badge' => 'badge3',
+          'badge' => 'badge22',
         ],
       ],
       73 => [
