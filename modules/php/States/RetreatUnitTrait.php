@@ -189,7 +189,7 @@ trait RetreatUnitTrait
     $unit = Units::get($unitId);
     $coordSource = $unit->getPos();
     foreach ($path['cells'] as $c) {
-      Notifications::retreatUnit($player, $unit, $coordSource, $c);
+      Notifications::retreatUnit($unit->getPlayer(), $unit, $coordSource, $c);
       list($interrupted, $isWinning) = Board::moveUnit($unit, $c, true);
       if ($isWinning) {
         return;
