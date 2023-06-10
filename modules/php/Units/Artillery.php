@@ -29,4 +29,13 @@ class Artillery extends AbstractUnit
       return parent::getAttackPower();
     }
   }
+
+ // added for Grigorevka where some artilleries count for 2
+  public function getMedalsWorth()
+  {
+    if ($this->getExtraDatas('behavior') == 'GERMAN_2VICTANK') {
+      return 2;
+    }
+    return 1;
+  }
 }

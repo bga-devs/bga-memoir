@@ -297,8 +297,9 @@ $scenarios[18261] = [
         ],
         'unit' => [
           'name' => 'gunger',
+          'behavior' => 'GERMAN_2VICTANK',
         ],
-        'tags'=> [
+        /*'tags'=> [
 					0 => [
 						'name' => 'medal6',
 						'group' => [],
@@ -308,7 +309,7 @@ $scenarios[18261] = [
               				'nbr_hex' => 1,
             			],
 					],
-				]
+				]*/
       ],
       29 => [
         'row' => 7,
@@ -326,8 +327,9 @@ $scenarios[18261] = [
         ],
         'unit' => [
           'name' => 'gunger',
+          'behavior' => 'GERMAN_2VICTANK',
         ],
-        'tags'=> [
+        /*'tags'=> [
 					0 => [
 						'name' => 'medal6',
 						'group' => [],
@@ -337,7 +339,7 @@ $scenarios[18261] = [
               				'nbr_hex' => 1,
             			],
 					],
-				]
+				]*/
       ],
       31 => [
         'row' => 8,
@@ -380,8 +382,9 @@ $scenarios[18261] = [
         ],
         'unit' => [
           'name' => 'gunger',
+          'behavior' => 'GERMAN_2VICTANK',
         ],
-        'tags'=> [
+        /*'tags'=> [
 					0 => [
 						'name' => 'medal6',
 						'group' => [],
@@ -391,7 +394,7 @@ $scenarios[18261] = [
               				'nbr_hex' => 1,
             			],
 					],
-				]
+				]*/
       ],
       35 => [
         'row' => 9,
