@@ -157,6 +157,11 @@ trait AmbushTrait
 
     // Handle retreat
     if (isset($results[DICE_FLAG]) && !$eliminated) {
+      // add condition if artillery ambushed activated by Bombard and retreat, add 1 fight in order to be at max attack
+      if($ambushedUnit->getType() == \ARTILLERY 
+        && $ambushedUnit->getActivationOCard()->isType(CARD_ARTILLERY_BOMBARD)) {
+        $ambushedUnit->incFights(1);
+      }
       $this->initRetreat($attack, $results);
       $this->nextState('retreat', $ambushedUnit->getPlayer());
     } else {
