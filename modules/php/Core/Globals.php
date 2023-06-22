@@ -52,6 +52,7 @@ class Globals extends \M44\Helpers\DB_Manager
     'marineCommand' => 'bool',
     'nightVisibility' => 'int',
     'emptySectionMedals' => 'obj',
+    'airDrops' => 'int',
 
     // scenario game_info
     'beginDate' => 'str',

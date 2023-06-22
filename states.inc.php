@@ -107,8 +107,8 @@ $machinestates = [
 
   ST_AIR_DROP => [
     'name' => 'airDrop',
-    'description' => clienttranslate('${actplayer} must choose where to air drop ${nb} units'),
-    'descriptionmyturn' => clienttranslate('${you} must choose where to air drop ${nb} units'),
+    'description' => clienttranslate('${actplayer} must choose where to air drop ${nb} units in ${nb_drops} different air drop(s)'),
+    'descriptionmyturn' => clienttranslate('${you} must choose where to air drop ${nb} units in ${nb_drops} different air drop(s)'),
     'type' => 'activeplayer',
     'args' => 'argsAirDrop',
     'possibleactions' => ['actAirDrop'],

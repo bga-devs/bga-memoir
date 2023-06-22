@@ -18,11 +18,22 @@ trait AirDropTrait
     $options = Scenario::getOptions()['airdrop'];
     $cells = Board::getListOfCells();
 
-    return [
-      'nb' => $options['nbr_units'],
+    if(isset($options['behavior']) && isset($options['nbr_drops'])) {
+      return [
+        'nb' => $options['nbr_units'],
+        'cells' => $cells,
+        'actionCount' => Globals::getActionCount(),
+        'behavior' => $options['behavior'],
+        'nb_drops' => $options['nbr_drops'],
+      ];
+    } else {
+      return [
+      'nb'=> $options['nbr_units'],
       'cells' => $cells,
       'actionCount' => Globals::getActionCount(),
-    ];
+      'nb_drops' => 1,
+      ];}
+    
   }
 
   public function actAirDrop($x, $y)
@@ -39,7 +50,16 @@ trait AirDropTrait
     // Simulate random walks
     $player = Players::getCurrent();
     $options = Scenario::getOptions()['airdrop'];
-    for ($i = 0; $i < $args['nb']; $i++) {
+    Globals::incAirDrops();
+    $dropNumber = Globals::getAirDrops();
+    if($args['nb_drops'] == 1) {
+      $maxi = $args['nb'];
+    } else {
+      $maxi = $args['nb'][$dropNumber-1];
+    }
+   
+    
+    for ($i = 0; $i < $maxi; $i++) {
       $pos = Board::randomWalk(['x' => $x, 'y' => $y], $options['range']);
       $unit = Units::addInCell($options['unit'], $pos);
 
@@ -61,7 +81,12 @@ trait AirDropTrait
         ]);
       }
     }
-
-    $this->gamestate->jumpToState(ST_PREPARE_TURN);
+    if (Globals::getActionCount()>= $args['nb_drops']) {
+      $this->gamestate->jumpToState(ST_PREPARE_TURN);
+      Globals::setAirDrops(0);
+    } else {
+      $this->gamestate->jumpToState(ST_AIR_DROP);
+    }
+    
   }
 }
