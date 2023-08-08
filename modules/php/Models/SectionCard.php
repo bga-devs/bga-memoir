@@ -62,15 +62,26 @@ class SectionCard extends Card
     if ($this->isCounterAttackMirror) {
       $sectionId = $this->mirrorSection($sectionId);
     }
-
+    
     if ($sectionId != null) {
       if ($n > 0 || $this->nUnitsOnTheMove > 0) {
-        $units = $units->merge($player->getUnitsInSection($sectionId)->getPositions());
-      }
+        // Filter units that cannot be activated before turn 'until turn' 
+        $unitstmp = $player->getUnitsInSection($sectionId);
+        $unitstmp = $unitstmp->filter(function ($unit) {
+          return (!($unit -> getExtraDatas('cannotBeActivatedUntilTurn') >= Globals::getTurn()));
+        });        
+      $units = $units->merge($unitstmp->getPositions());
+      } 
     } else {
       foreach ($this->getSections() as $i => $n) {
         if ($n > 0 || $this->nUnitsOnTheMove > 0) {
-          $units = $units->merge($player->getUnitsInSection($i)->getPositions());
+          // Filter units that cannot be activated before turn 'until turn' 
+          $unitstmp = $player->getUnitsInSection($i);
+          $unitstmp = $unitstmp->filter(function ($unit) {
+            return (!($unit -> getExtraDatas('cannotBeActivatedUntilTurn') >= Globals::getTurn()));
+        });
+       
+        $units = $units->merge($unitstmp->getPositions());
         }
       }
     }

@@ -52,19 +52,20 @@ trait AirDropTrait
     $options = Scenario::getOptions()['airdrop'];
     Globals::incAirDrops();
     $dropNumber = Globals::getAirDrops();
-    if($args['nb_drops'] == 1) {
-      $maxi = $args['nb'];
-    } else {
-      $maxi = $args['nb'][$dropNumber-1];
-    }
+    $maxi = ($args['nb_drops'] == 1) ?  $args['nb'] : $args['nb'][$dropNumber-1] ;
    
     
     for ($i = 0; $i < $maxi; $i++) {
       $pos = Board::randomWalk(['x' => $x, 'y' => $y], $options['range']);
       $unit = Units::addInCell($options['unit'], $pos);
+      if (isset($options['unit']['behavior']) 
+      && $options['unit']['behavior'] == 'CANNOT_BE_ACTIVATED_TILL_TURN') {
+        //$unit -> setExtraDatas('cannotBeActivated', true);
+        $unit -> setExtraDatas('cannotBeActivatedUntilTurn', $options['unit']['turn']);
+      }
 
       $fails = 0;
-      if (is_null($pos) || Board::isImpassable($unit, $pos) || Board::getUnitInCell($pos) !== null) {
+      if (is_null($pos) || Board::isImpassableCell($pos, $unit) || Board::getUnitInCell($pos) !== null) {
         // Unsafed landing => remove unit
         Units::remove($unit->getId());
         $fails++;

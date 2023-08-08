@@ -45,7 +45,9 @@ $scenarios[18261] = [
         'nbr_drops' => 6, // nbr of drops 'nbr_units' at a time
         'unit' => [
           'name' => 'inf2ru',
-          'badge' => 'badge25'
+          'badge' => 'badge25',
+          'behavior' => 'CANNOT_BE_ACTIVATED_TILL_TURN',
+          'turn' => 1, // eg. Cannot be activated until turn 1 and on 1st after landing
         ],
       ],
     ],
@@ -730,7 +732,7 @@ The hex with the Romanian HQ is a temporary Medal Objective for the Allied playe
 - Destroyer rules (Troops 12) are in effect.
 - Capture HQ/supply Tent rules (Actions 17) are in effect.
 - Night Attacks rules (Actions 19) are in effect.
-- Use the Paradrop rules (Actions 20): on the first turn, the Allied player drops 6 Elite Infantry units on the board, one at a time.'),
+- Use the Paradrop rules (Actions 20): on the first turn, the Allied player drops 6 Elite Infantry units on the board, one at a time. Unit may not move or battle the turn it lands'),
       'bibliography' => clienttranslate('- English.Battlefield.Ru.
 Remember, see the two memorials about this battle at Grigorevka.'),
     ],

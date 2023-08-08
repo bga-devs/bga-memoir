@@ -80,6 +80,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     'cannotHeal', // for units who cannot be healed
     'cannotBattleBack',
     'isSWAEquipped', // for unit who are supporting Special Weapon Assets
+    'cannotBeActivatedUntilTurn', // example for units who just drops or cannot be actived until n turns
   ];
 
   protected $attackPower = [];
