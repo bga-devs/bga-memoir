@@ -5,6 +5,7 @@ use M44\Core\Notifications;
 use M44\Managers\Units;
 use M44\Dice;
 use M44\Helpers\Log;
+use M44\Core\Globals;
 
 class FinestHour extends \M44\Models\Card
 {
@@ -57,22 +58,27 @@ class FinestHour extends \M44\Models\Card
   public function argsOrderUnitsFinestHour()
   {
     $units = $this->getPlayer()
-      ->getUnits()
+      ->getUnits();
+    $unitstmp = $units->filter(function ($unit) {
+      return (!($unit -> getExtraDatas('cannotBeActivatedUntilTurn') >= Globals::getTurn()));
+   });
+    $unitstmp2 = $unitstmp
       ->map(function ($unit) {
         return $unit->getType();
       });
+    
 
     return [
       'i18n' => ['unitDesc'],
       'results' => $this->getResults(),
-      'units' => $units,
+      'units' => $unitstmp2,
       'unitDesc' => $this->computeUnitsDesc(),
     ];
   }
 
   public function actOrderUnitsFinestHour($unitIds)
   {
-    $enabled = [0, 0, 0];
+    $enabled = [0, 0, 0, 0, 0, 0];
     $results = $this->getResults();
     // Flag the units as activated by the corresponding card and notify
     $player = $this->getPlayer();
@@ -81,6 +87,10 @@ class FinestHour extends \M44\Models\Card
         $unit = Units::get($unitId);
         $unit->activate($this);
         $type = $unit->getType() - 1;
+        // to deal DESTROYER, AIRCRAFT CARRIER, TRAIN as other units
+        if($type > 2) {
+          $type = 2;
+        }
         $enabled[$type]++;
 
         if ($enabled[$type] + ($type == 2 ? 0 : $enabled[2]) > $results[$type] + ($type == 2 ? 0 : $results[2])) {

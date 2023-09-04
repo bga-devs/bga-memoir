@@ -2,6 +2,7 @@
 namespace M44\Cards\Standard;
 
 use M44\Managers\Units;
+use M44\Core\Globals;
 
 class InfantryAssault extends \M44\Models\Card
 {
@@ -62,12 +63,15 @@ class InfantryAssault extends \M44\Models\Card
 
     if ($infantry->empty()) {
       // No infantry => 1 unit of your choice
+      $unitstmp = $units->filter(function ($unit) {
+        return (!($unit -> getExtraDatas('cannotBeActivatedUntilTurn') >= Globals::getTurn()));
+      });
       return [
         'i18n' => ['desc'],
         'n' => $marineCommand ? 2 : 1,
         'nTitle' => $marineCommand ? 2 : 1,
         'desc' => \clienttranslate('(because no infantry units)'),
-        'units' => $units->getPositions(),
+        'units' => $unitstmp->getPositions(),
       ];
     } else {
       $descs = [
@@ -75,13 +79,16 @@ class InfantryAssault extends \M44\Models\Card
         clienttranslate('in the Center (infantry units only)'),
         clienttranslate('on the Right Flank (infantry units only)'),
       ];
+      $infantrytmp = $infantry->filter(function ($unit) {
+        return (!($unit -> getExtraDatas('cannotBeActivatedUntilTurn') >= Globals::getTurn()));
+      });
 
       return [
         'i18n' => ['desc', 'nTitle'],
         'n' => \INFINITY,
         'nTitle' => \clienttranslate('all'),
         'desc' => $descs[$section],
-        'units' => $infantry->getPositions(),
+        'units' => $infantrytmp->getPositions(),
       ];
     }
   }

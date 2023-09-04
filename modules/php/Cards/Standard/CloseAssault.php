@@ -3,6 +3,7 @@ namespace M44\Cards\Standard;
 use M44\Board;
 use M44\Helpers\Collection;
 use M44\Helpers\Utils;
+use M44\Core\Globals;
 
 class CloseAssault extends \M44\Models\Card
 {
@@ -25,12 +26,16 @@ class CloseAssault extends \M44\Models\Card
     $units = $player->getUnits()->filter(function ($unit) {
       return in_array($unit->getType(), [INFANTRY, ARMOR]) && Board::isAdjacentToEnnemy($unit);
     });
+    $unitstmp = $units->filter(function ($unit) {
+      return (!($unit -> getExtraDatas('cannotBeActivatedUntilTurn') >= Globals::getTurn()));
+    });
+
 
     return [
       'n' => \INFINITY,
       'nTitle' => '',
       'desc' => '',
-      'units' => $units->getPositions(),
+      'units' => $unitstmp->getPositions(),
     ];
   }
 

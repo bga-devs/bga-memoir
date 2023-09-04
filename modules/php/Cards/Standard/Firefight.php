@@ -2,6 +2,7 @@
 namespace M44\Cards\Standard;
 use M44\Board;
 use M44\Managers\Units;
+use M44\Core\Globals;
 
 class Firefight extends \M44\Models\Card
 {
@@ -22,7 +23,8 @@ class Firefight extends \M44\Models\Card
     $player = $this->getPlayer();
     $marineCommand = $player->isMarineCommand();
     $units = $player->getUnits()->filter(function ($unit) {
-      return !Board::isAdjacentToEnnemy($unit);
+      return !Board::isAdjacentToEnnemy($unit) && 
+      !($unit -> getExtraDatas('cannotBeActivatedUntilTurn') >= Globals::getTurn());
     });
 
     return [

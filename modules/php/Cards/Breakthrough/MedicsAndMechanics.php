@@ -42,7 +42,8 @@ class MedicsAndMechanics extends \M44\Cards\Standard\MedicsAndMechanics
   {
     $player = $this->getPlayer();
     $units = $player->getUnits()->filter(function ($unit) {
-      return $unit->isWounded() && !$unit->cannotHeal();
+      return $unit->isWounded() && !$unit->cannotHeal() 
+      && !($unit -> getExtraDatas('cannotBeActivatedUntilTurn') >= Globals::getTurn());
     });
 
     return [

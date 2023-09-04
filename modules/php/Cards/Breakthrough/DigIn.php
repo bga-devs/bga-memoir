@@ -1,6 +1,7 @@
 <?php
 namespace M44\Cards\Breakthrough;
 use M44\Managers\Units;
+use M44\Core\Globals;
 
 class DigIn extends \M44\Cards\Standard\DigIn
 {
@@ -29,12 +30,15 @@ class DigIn extends \M44\Cards\Standard\DigIn
 
     if ($validUnits->empty()) {
       // No infantry => 1 unit of your choice
+      $unitstmp = $units->filter(function ($unit) {
+        return (!($unit -> getExtraDatas('cannotBeActivatedUntilTurn') >= Globals::getTurn()));
+      });
       return [
         'i18n' => ['desc'],
         'n' => $marineCommand ? 2 : 1,
         'nTitle' => $marineCommand ? 2 : 1,
         'desc' => \clienttranslate('(because no infantry nor artillery units)'),
-        'units' => $units,
+        'units' => $unitstmp,
       ];
     } else {
       return [

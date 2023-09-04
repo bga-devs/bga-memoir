@@ -43,14 +43,16 @@ class Barrage extends \M44\Models\Card
   {
     $player = $this->getPlayer();
     $marineCommand = $player->isMarineCommand();
-    $units = $player->getUnits()->getPositions();
+    $units = $player->getUnits()->filter(function ($unit) {
+      return (!($unit -> getExtraDatas('cannotBeActivatedUntilTurn') >= Globals::getTurn()));
+   });
     return [
       'n' => $marineCommand ? 2 : 1,
       'nTitle' => $marineCommand ? 2 : 1,
       'nOnTheMove' => 0,
       'desc' => '',
       'sections' => [\INFINITY, \INFINITY, INFINITY],
-      'units' => $units,
+      'units' => $units->getPositions(),
     ];
   }
 

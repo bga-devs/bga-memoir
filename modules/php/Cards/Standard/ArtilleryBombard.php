@@ -1,6 +1,6 @@
 <?php
 namespace M44\Cards\Standard;
-
+use M44\Core\Globals;
 use M44\Managers\Units;
 
 class ArtilleryBombard extends \M44\Models\Card
@@ -30,20 +30,26 @@ class ArtilleryBombard extends \M44\Models\Card
 
     if ($artillery->empty()) {
       // No armor => 1 unit of your choice
+      $unitstmp = $units->filter(function ($unit) {
+        return (!($unit -> getExtraDatas('cannotBeActivatedUntilTurn') >= Globals::getTurn()));
+      });
       return [
         'i18n' => ['desc'],
         'n' => $marineCommand ? 2 : 1,
         'nTitle' => $marineCommand ? 2 : 1,
         'desc' => \clienttranslate('(because no artillery units)'),
-        'units' => $units->getPositions(),
+        'units' => $unitstmp->getPositions(),
       ];
     } else {
+      $artillerytmp = $artillery->filter(function ($unit) {
+        return (!($unit -> getExtraDatas('cannotBeActivatedUntilTurn') >= Globals::getTurn()));
+      });
       return [
         'i18n' => ['desc'],
         'n' => \INFINITY,
         'nTitle' => \INFINITY,
         'desc' => \clienttranslate('(artillery units only)'),
-        'units' => $artillery->getPositions(),
+        'units' => $artillerytmp->getPositions(),
       ];
     }
   }

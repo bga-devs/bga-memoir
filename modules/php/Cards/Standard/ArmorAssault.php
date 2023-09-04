@@ -1,5 +1,6 @@
 <?php
 namespace M44\Cards\Standard;
+use M44\Core\Globals;
 
 class ArmorAssault extends \M44\Models\Card
 {
@@ -30,20 +31,26 @@ class ArmorAssault extends \M44\Models\Card
 
     if ($armors->empty()) {
       // No armor => 1 unit of your choice
+      $unitstmp = $units->filter(function ($unit) {
+        return (!($unit -> getExtraDatas('cannotBeActivatedUntilTurn') >= Globals::getTurn()));
+      });
       return [
         'i18n' => ['desc'],
         'n' => $marineCommand ? 2 : 1,
         'nTitle' => $marineCommand ? 2 : 1,
         'desc' => \clienttranslate('(because no armor units)'),
-        'units' => $units->getPositions(),
+        'units' => $unitstmp->getPositions(),
       ];
     } else {
+      $armorstmp = $armors->filter(function ($unit) {
+        return (!($unit -> getExtraDatas('cannotBeActivatedUntilTurn') >= Globals::getTurn()));
+      });
       return [
         'i18n' => ['desc'],
         'n' => $marineCommand ? 5 : 4,
         'nTitle' => $marineCommand ? 5 : 4,
         'desc' => \clienttranslate('(armor units only)'),
-        'units' => $armors->getPositions(),
+        'units' => $armorstmp->getPositions(),
       ];
     }
   }

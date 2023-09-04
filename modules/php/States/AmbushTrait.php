@@ -18,7 +18,8 @@ trait AmbushTrait
   {
     $player = Players::getActive();
     $attack = $this->getCurrentAttack(false);
-    $canAttack = Units::get($attack['oppUnitId'])->canTarget(Units::get($attack['unitId']));
+    $canAttack = (Units::get($attack['oppUnitId'])->canTarget(Units::get($attack['unitId']))) 
+      && !(Units::get($attack['oppUnitId'])-> getExtraDatas('cannotBeActivatedUntilTurn') >= Globals::getTurn());
     $cards = $canAttack
       ? $player
         ->getCards()
@@ -62,6 +63,7 @@ trait AmbushTrait
     // If the player can't ambush current attacking unit => pass (sniper on Armor)
     $args = $this->argsOpponentAmbush();
     if (!$args['canAttack']) {
+      Notifications::message(clienttranslate('Unit attacked can not battle nor ambush'));
       $this->actPassAmbush(true);
       return;
     }

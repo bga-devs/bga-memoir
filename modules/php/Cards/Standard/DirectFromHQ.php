@@ -1,5 +1,6 @@
 <?php
 namespace M44\Cards\Standard;
+use M44\Core\Globals;
 
 class DirectFromHQ extends \M44\Models\Card
 {
@@ -15,7 +16,10 @@ class DirectFromHQ extends \M44\Models\Card
   {
     $player = $this->getPlayer();
     $marineCommand = $player->isMarineCommand();
-    $units = $player->getUnits()->getPositions();
+    $units = $player->getUnits();
+    $unitstmp = $units->filter(function ($unit) {
+      return (!($unit -> getExtraDatas('cannotBeActivatedUntilTurn') >= Globals::getTurn()));
+    });
 
     return [
       'n' => $marineCommand ? 5 : 4,
@@ -23,7 +27,7 @@ class DirectFromHQ extends \M44\Models\Card
       'nOnTheMove' => 0,
       'desc' => '',
       'sections' => [\INFINITY, \INFINITY, INFINITY],
-      'units' => $units,
+      'units' => $unitstmp->getPositions(),
     ];
   }
 }
