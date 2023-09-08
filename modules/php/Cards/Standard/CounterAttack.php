@@ -94,6 +94,12 @@ class CounterAttack extends \M44\Models\Card
       } else {
         $card = Cards::get($cardId); // FALLBACK CODE => TO REMOVE
       }
+      $this->setExtraDatas('CopiedCardType',$card->getExtraDatas('CopiedCardType'));
+      if ($card->getType() == \CARD_COUNTER_ATTACK) {
+        $this->setExtraDatas('CopiedCardType',$this->getExtraDatas('CopiedCardType')); 
+      } else {
+        $this->setExtraDatas('CopiedCardType', $card->getType());
+      }
       $card->setCounterAttack($this->pId, $this->getId(), $this->isCounterAttackMirror);
       return $card;
     } else {

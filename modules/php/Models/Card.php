@@ -185,6 +185,11 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
     return $this->getActivatedUnits()->first();
   }
 
+  public function getCopiedCard()
+  {
+    return $this;
+  }
+
   //////////////////////////////////////////////////////
   //  _____ _                    _
   // |  ___| | _____      __    / \   _ __ __ _ ___
