@@ -4,6 +4,8 @@ namespace M44\Terrains;
 use M44\Managers\Cards;
 use M44\Core\Notifications;
 use M44\Core\Game;
+use M44\Helpers\Log;
+
 
 class HQ extends \M44\Models\Terrain
 {
@@ -33,6 +35,7 @@ class HQ extends \M44\Models\Terrain
         ->getCards()
         ->rand();
       Cards::discard($card);
+      Log::checkpoint(); // Make undo invalid 96601 fix
       $this->setExtraDatas('captured', true);
       Notifications::discardHQCapture(
         $unit
@@ -50,6 +53,7 @@ class HQ extends \M44\Models\Terrain
         return;
       }
       Notifications::drawCards($unit->getPlayer(), $cards);
+      Log::checkpoint(); // Make undo invalid 96601 fix
       $this->setExtraDatas('captured', false);
       $datas = Game::get()->getAllDatas();
       Notifications::smallRefreshInterface($datas);
