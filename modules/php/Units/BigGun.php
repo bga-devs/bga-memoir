@@ -55,4 +55,27 @@ class BigGun extends Artillery
   {
     $this->afterAttack($coords, $hits, $eliminated);
   }
+
+  // 97993 Remove TOKEN TARGET if this Big Gun move also apply to destroyer by extension
+  public function moveTo($cell)
+  {
+    $this->setX($cell['x']);
+    $this->setY($cell['y']);
+
+    // TO DO REMOVE TOKEN TARGET ASSOCIATED TO THIS
+    $tokens = $this->getTargetTokens();
+    foreach ($tokens as $t) {
+      Tokens::DB()->delete($t['id']);
+      Notifications::removeToken($t);
+    }
+  }
+
+  public function getTargetTokens() {
+    $tokens = Tokens::getSelectQuery()
+      ->where('type', \TOKEN_TARGET)
+      ->where('token_location', 'target_' . $this->id)
+      ->get();
+    return $tokens;
+  }
+
 }
