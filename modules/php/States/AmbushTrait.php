@@ -11,6 +11,7 @@ use M44\Helpers\Utils;
 use M44\Board;
 
 use M44\Dice;
+use M44\Models\Terrain;
 
 trait AmbushTrait
 {
@@ -18,8 +19,20 @@ trait AmbushTrait
   {
     $player = Players::getActive();
     $attack = $this->getCurrentAttack(false);
-    $canAttack = (Units::get($attack['oppUnitId'])->canTarget(Units::get($attack['unitId']))) 
-      && !(Units::get($attack['oppUnitId'])-> getExtraDatas('cannotBeActivatedUntilTurn') >= Globals::getTurn());
+    // add terrain cannot battle condition 93490
+    $ambushedUnit = Units::get($attack['oppUnitId']);
+    $terrains = Board::getTerrainsInCell($ambushedUnit->getPos());
+    $cannotBattleFromTerrain = false;
+    foreach ($terrains as $t) {
+      if (!$cannotBattleFromTerrain) {
+        $cannotBattleFromTerrain = $t->cannotBattle($ambushedUnit, 0);
+      }
+    }
+
+    $canAttack = ($ambushedUnit->canTarget(Units::get($attack['unitId']))) 
+      && !($ambushedUnit-> getExtraDatas('cannotBeActivatedUntilTurn') >= Globals::getTurn()) 
+      && !$cannotBattleFromTerrain;
+   
     $cards = $canAttack
       ? $player
         ->getCards()
@@ -28,7 +41,7 @@ trait AmbushTrait
         })
         ->getIds()
       : [];
-
+    
     return [
       'canAttack' => $canAttack,
       'currentAttack' => $attack,
@@ -60,7 +73,7 @@ trait AmbushTrait
       return;
     }
 
-    // If the player can't ambush current attacking unit => pass (sniper on Armor)
+    // If the player can't ambush current attacking unit due to attack restriction => pass (sniper on Armor)
     $args = $this->argsOpponentAmbush();
     if (!$args['canAttack']) {
       Notifications::message(clienttranslate('Unit attacked can not battle nor ambush'));
