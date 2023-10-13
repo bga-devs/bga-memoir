@@ -47,6 +47,8 @@ define([
         'orderUnitsFinestHour',
         'airDrop',
         'confirmTurn',
+        'targetBridge',
+        //'blowBridge',
       ];
       this._notifications = [
         ['playCard', 1000],
@@ -309,6 +311,8 @@ define([
         targetBarrage: 'attack',
         opponentAmbush: 'command',
         confirmTurn: 'command',
+        targetBridge: 'order',
+        blowBridge: 'attack',
       };
 
       if (Object.keys(statusMapping).includes(stateName)) {

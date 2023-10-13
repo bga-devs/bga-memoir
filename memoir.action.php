@@ -115,7 +115,8 @@ class action_memoir extends APP_GameAction
     $cardId = self::getArg('cardId', AT_posint, true);
     $section = self::getArg('section', AT_posint, false);
     $hill = self::getArg('hill317', AT_bool, false);
-    $this->game->actPlayCard($cardId, $section, $hill);
+    $blowbridge = self::getArg('blowbridge',AT_bool, false);
+    $this->game->actPlayCard($cardId, $section, $hill, $blowbridge);
     self::ajaxResponse();
   }
 
@@ -307,6 +308,24 @@ class action_memoir extends APP_GameAction
     $this->game->actRemoveRoadBlock($unitId);
     self::ajaxResponse();
   }
+
+  public function actTargetbridge()
+  {
+    self::setAjaxMode();
+    $bridgeIds = $this->getNumberList('terrainsIds');
+    $this->game->actblowbridge($bridgeIds);
+    self::ajaxResponse();
+  }
+  // To be tested if necessary
+  public function actBlowBridge()
+  {
+    self::setAjaxMode();
+    $bridgeIds = self::getArg('terrainsIds', AT_posint, false);
+    $this->game->actBlowBridge($bridgeIds);
+    self::ajaxResponse();
+  }
+
+
 
   public function actBattleBack()
   {

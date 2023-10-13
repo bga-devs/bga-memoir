@@ -238,6 +238,11 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
     return false;
   }
 
+  public function canBlowBridge()
+  {
+    return false;
+  }
+
   /**
    *
    * @param $overrideNbFights = [UNIT_TYPE => maxFights]]

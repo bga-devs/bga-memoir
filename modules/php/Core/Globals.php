@@ -53,6 +53,7 @@ class Globals extends \M44\Helpers\DB_Manager
     'nightVisibility' => 'int',
     'emptySectionMedals' => 'obj',
     'airDrops' => 'int',
+    'blowBridgeOpt2' => 'obj',
 
     // scenario game_info
     'beginDate' => 'str',

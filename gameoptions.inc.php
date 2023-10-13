@@ -590,6 +590,12 @@ $game_options = [
         'description' => clienttranslate('Battle of Alam el Halfa'),
         'premium' => true,
       ],
+      6687 => [
+        'name' => clienttranslate('[6687] Drop in the night 82nd'),
+        'tmdisplay' => '[6370]',
+        'description' => clienttranslate('Drop in the night 82nd'),
+        'premium' => true,
+      ],
       // 6380 => [
       //   'name' => clienttranslate('[6380] Noville to Foy'),
       //   'tmdisplay' => '[6380]',

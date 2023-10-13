@@ -210,6 +210,7 @@ $machinestates = [
       'counterAttack' => ST_COUNTER_ATTACK,
       'commissar' => ST_COMMISSAR,
       'medicsBT' => ST_MEDICS_BT_ROLL,
+      'blowbridgeopt2' => ST_BRIDGE_TARGET,
     ],
   ],
 
@@ -585,6 +586,26 @@ $machinestates = [
     'args' => 'argsMedicsBTHeal',
     'possibleactions' => ['actMedicsBTHeal'],
     'transitions' => ['move' => ST_MOVE_UNITS, 'draw' => ST_DRAW],
+  ],
+
+  ST_BRIDGE_TARGET => [
+    'name' => 'targetBridge',
+    'description' => clienttranslate('${actplayer} may try to blow one bridge'),
+    'descriptionmyturn' => clienttranslate('${you} may try to blow one bridge'),
+    'type' => 'activeplayer',
+    'args' => 'argsblowbridge',
+    'possibleactions' => ['actRestart','actBlowBridge'],
+    'transitions' => ['draw' => ST_DRAW],
+  ],
+  // TODO try to remove Not sure to keep 
+  ST_BLOW_BRIDGE => [
+    'name' => 'blowBridge',
+    'description' => clienttranslate('${actplayer} is blowing one bridge'),
+    'descriptionmyturn' => clienttranslate('${you} are blowing one bridge'),
+    'type' => 'activeplayer',
+    'action' => 'stBlowBridge',
+    'args' => 'argsblowbridge2',
+    'transitions' => ['draw' => ST_DRAW],
   ],
 
   /////////////////////////////////////////////

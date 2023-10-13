@@ -688,5 +688,97 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         unitIds: this._selectedUnits.join(';'),
       });
     },
+
+// Blowbridge
+    /////////////////////////////////////////////
+    //  ____
+    // | __ ) 
+    // |  _ \ 
+    // | |_) | 
+    // |____/ 
+    //                             
+    /////////////////////////////////////////////
+
+    onEnteringStateTargetBridge(args) {
+      //$('terrains-' + args.terrainId).classList.add('selectable');
+      console.log('Entering state TargetBlowbridge JD', args.terrains);
+      this._selectedTerrains = [];
+      this._selectableTerrains = args.terrains;
+      
+      Object.keys(this._selectableTerrains).forEach((tId) => {
+        const terrainId = this._selectableTerrains[tId]['id'];
+        let x = this._selectableTerrains[tId]['x'];
+        let y = this._selectableTerrains[tId]['y'];
+        // obtenir la cell qui contient le terrain
+        let oCell = $(`cell-${x}-${y}`);
+        this.onClick(oCell, () => {
+          console.log(oCell, x, y);
+          this._selectedTerrains.push(this._selectableTerrains[tId]);
+          console.log(this._selectedTerrains, this._selectedTerrains[0]['id']);
+          this.takeAction('actBlowBridge', { terrainsIds: this._selectedTerrains[0]['id']});
+        })
+      })
+
+    
+
+     
+      /*  if (!cell.source) {
+            this.onClick(oCell, () => this.takeAction('actMoveUnit', { unitId: args.unitId, x: cell.x, y: cell.y }));
+          }*/
+      /*this.makeTerrainsSelectable(  
+        args.terrains,
+        this.onClickTargetBridge.bind(this),
+        this.isSelectableTargetBridge.bind(this),
+        'targetBridge',
+      );*/
+      
+      //console.log('selected terrains ', this._selectedTerrains);
+      //this.addPrimaryActionButton('btnConfirmBlowBridge', _('Confirm bridge target'), () =>
+      //  this.takeAction('actblowbridge', { terrainsIds: this._selectedTerrains.join(';') }), // to do
+      //);
+      this.addDangerActionButton('btnRestartTurn', _('Undo actions'), () => {
+          this.takeAction('actRestart');
+        },
+        'restartAction',
+      );
+    },
+
+
+    onEnteringStateBlowBridge(args) {
+      console.log('Entering Blow Bridge Action JD ');
+    },
+
+
+    onClickTargetBridge(terrainId, pos, selected) {
+      console.log('On ClickBlowbridge JD selected terrains ', this._selectedTerrains, terrainId);
+      // Add a number on the bridge
+      if (!selected) {
+        $(`terrain-${terrainId}`).dataset.blowBridgeOrder = this._selectedTerrains.length + 1;
+      }
+
+      dojo.destroy('btnClearSelectedUnits');
+      if (this._selectedTerrains.length - (selected ? 1 : 0) > 0) {
+        this.addSecondaryActionButton('btnClearSelectedUnits', _('Clear'), () => this.clearSelectedTerrains());
+      }
+      return true;
+    },
+
+    isSelectableTargetBridge(terrainId, pos, selected, minFilling) {
+      console.log('Is selected terrains JD', this._selectedTerrains);
+      // If no selected terrain yet, can select any terrain
+      if (this._selectedTerrains.length == 0) return true;
+      let lastTerrainId = this._selectedTerrains[this._selectedTerrains.length - 1];
+      // A selected unit can only be unselected if it's the last one
+      if (selected) return terrainId == lastTerrainId;
+      // No more than 1 bridge
+      if (this._selectedTerrains.length == 1) return false;
+      // Otherwise, it must be adjacent to the last selected unit
+      //let lastTerrainPos = this.getArgs()['terrains'][lastTerrainId];
+      //return Math.abs(pos.x - lastTerrainPos.x) + 2 * Math.abs(pos.y - lastTerrainPos.y) <= 3;
+    },
+
+
+
+
   });
 });

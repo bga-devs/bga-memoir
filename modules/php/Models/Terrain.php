@@ -2,6 +2,8 @@
 namespace M44\Models;
 use M44\Board;
 use M44\Core\Notifications;
+use M44\Managers\Units;
+use M44\Scenario;
 
 class Terrain extends \M44\Helpers\DB_Model
 {
@@ -274,5 +276,19 @@ class Terrain extends \M44\Helpers\DB_Model
       ['x' => $cell['x'], 'y' => $cell['y']],
       $this->getNeighboursInDirections($unit, $this->linkedDirections)
     );
+  }
+
+  public function getSections($side)
+  {
+    $mode = Scenario::getMode();
+    $flipped = ($side == Scenario::getTopTeam());
+    $sections = Units::$sections[$mode];
+    $sections_results = [];
+    for ($i = 0; $i < 3; $i++) {
+      if ($sections[$i] <= $this->getPos()['x'] && $this->getPos()['x'] <= $sections[$i + 1]) {
+        $sections_results[] = $flipped ? 2 - $i : $i;
+      }
+    }
+    return $sections_results;
   }
 }

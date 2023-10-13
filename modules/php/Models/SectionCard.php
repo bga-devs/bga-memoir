@@ -101,4 +101,20 @@ class SectionCard extends Card
       'marineCommand' => $marineCommand,
     ];
   }
+
+  public function nextStateAfterPlay()
+  {
+   if ($this->getExtraDatas('canblowbridge') === true) {
+      return 'blowbridgeopt2'; // 'blowbridgeopt2'
+    } else {
+      return parent::nextStateAfterPlay();
+    }
+  }
+
+  public function canBlowBridge()
+  { // TO DO filter cards that contain sections with blowable bridges
+    $blowbridge = Globals::getBlowBridgeOpt2();
+    return !is_null($blowbridge) && $blowbridge['side'] == Globals::getTeamTurn();
+  }
+
 }

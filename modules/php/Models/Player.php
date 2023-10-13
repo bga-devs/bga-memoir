@@ -134,6 +134,11 @@ class Player extends \M44\Helpers\DB_Model
     return false;
   }
 
+  public function canBlowBridge() {
+    $blowbridge = Globals::getBlowBridgeOpt2();
+    return !is_null($blowbridge) && $blowbridge['side'] == Globals::getTeamTurn();
+  }
+
   /**************
    * Commissar
    *************/

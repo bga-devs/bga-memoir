@@ -42,15 +42,26 @@ trait PlayCardTrait
         ->getIds();
     }
 
+    $cardBlowBridge = [];
+    if ($player->canBlowBridge()) {
+      $cardBlowBridge = $player
+        ->getCards()
+        ->filter(function ($card) {
+          return $card->canBlowBridge();
+        })
+        ->getIds();
+    }
+
     $args = [
       'cards' => $cards,
       'cardsHill317' => $cardsHill317,
+      'cardsBlowBridge' => $cardBlowBridge,
       'actionCount' => Globals::getActionCount(),
     ];
     return $singleActive ? Utils::privatise($args) : $args;
   }
 
-  function actPlayCard($cardId, $sectionId = null, $hill317 = false)
+  function actPlayCard($cardId, $sectionId = null, $hill317 = false, $canBlowbridge = false)
   {
     // Sanity check
     $this->checkAction('actPlayCard');
@@ -81,6 +92,11 @@ trait PlayCardTrait
     if ($hill317) {
       $card = Cards::get($cardId);
       $card->setExtraDatas('hill317', true);
+    }
+
+    if ($canBlowbridge) {
+      $card = Cards::get($cardId);
+      $card->setExtraDatas('canblowbridge', true);
     }
 
     // Play the card
