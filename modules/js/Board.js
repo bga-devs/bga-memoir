@@ -1225,8 +1225,17 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         });
         fillings = t;
       });
+
       // Keep only compatible fillings
       let sections = this.getArgs().sections;
+      // For Pincer Move and standard game, remove fillings in center section
+      const pincer_move = [2, 0, 2];
+      if (sections.toString() == pincer_move.toString()) {
+        fillings = fillings.filter(
+          (filling) => (filling[1] == 0)
+        );
+      }
+
       let marineCommand = this.getArgs().marineCommand || false;
       if (sections) {
         fillings = fillings.filter(
