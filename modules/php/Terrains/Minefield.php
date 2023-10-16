@@ -46,7 +46,7 @@ class Minefield extends \M44\Models\Terrain
     if (($activationcard->getType() == CARD_BEHIND_LINES ||
       ($activationcard->getType() == CARD_COUNTER_ATTACK) && 
       $activationcard->getExtraDatas('card')['type'] == CARD_BEHIND_LINES)
-      && $unit->getMoves() < 3) {
+      && $unit->getMoves() <= 3) {
       return false;
     }
     
