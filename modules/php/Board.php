@@ -182,7 +182,6 @@ class Board
   {
     $isbeach = false;
     $neighbours = self::getNeighbours($cell); // Not accessible from Ocean.php as protected
-    //var_dump($neighbours);
     foreach ($neighbours as &$neigh) {
       if (self::isBeachCell($neigh)) {
         $isbeach = true;
@@ -1152,7 +1151,7 @@ class Board
     return $cell1['x'] == $cell2['x'] && $cell1['y'] == $cell2['y'];
   }
 
-  protected function getNeighbours($cell, $onlyValidOnes = true)
+  public static function getNeighbours($cell, $onlyValidOnes = true)
   {
     $directions = [
       ['x' => -2, 'y' => 0],

@@ -16,6 +16,8 @@ class Bridge extends \M44\Models\Terrain
     $this->number = 9;
     $this->isBridge = true;
     $this->deltaAngle = -1;
+    $this->canBeBlown = false;
+    $this->oneMedalIfBlown = false;
 
     parent::__construct($row);
   }

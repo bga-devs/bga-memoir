@@ -9,7 +9,10 @@ use M44\Managers\Cards;
 use M44\Helpers\Utils;
 use M44\Board;
 use M44\Dice;
+use M44\Managers\Medals;
 use M44\Managers\Terrains;
+use M44\Core\Stats;
+use M44\Models\Player;
 
 trait TacticCardTrait
 {
@@ -167,18 +170,7 @@ trait TacticCardTrait
   {
     $player = Players::getActive();
     $card = $player->getCardInPlay();
-    $cardsections = $card->getSections();
-    $side = Globals::getTeamTurn();
-    // TODO option : if an allied unit should be close to the bridge
-    $terrains = Terrains::getAll(); //OK
-    $bridges = $terrains->filter(function ($t) {
-      return $t instanceof \M44\Terrains\Bridge
-      || $t instanceof \M44\Terrains\RailroadBridge;
-    });
-    $bridges = array_filter($bridges->toArray(), fn($t) => 
-      $this->isTerrainInCardSections($t, $cardsections, $side)
-    );
-    return ['terrains' => $bridges] ;
+    return $card->blowBridgeFilters($card);
   }
 
   public function isTerrainInCardSections($terrain, $cardsections, $side) {
@@ -198,38 +190,62 @@ trait TacticCardTrait
 
     $args = self::argsblowbridge();
    
-    // TO DO get terrain by Id $terrain->getId() ou direct DB DB()->delete($terrainId);
     $selectedBridge = Terrains::get($terrainId);
-    var_dump($terrainId);
-
     $player = Players::getCurrent();
+    $teamId = $player->getTeam()->getId();
 
     // Roll 2 dices, on star, destroy bridge
+    $bonusmedal = Board::oneMedalIfBlownCell($selectedBridge->getPos());
     $results = Dice::roll($player, 2);
     if (isset($results[DICE_STAR])) {
       Notifications::message(clienttranslate('Bridge blown successfull'));
-      //Notifications::removeTerrain($selectedBridge);
-      //Terrains::remove($terrainid);
-     //Terrains::DB()->delete($terrainId);
-
-      //ou bien
       $selectedBridge->removeFromBoard();
-      // remove from Database in order not to select it again
+      // remove bridge from Database in order not to select it again
       Terrains::remove($selectedBridge);
-      // TO DO priorty 2 : add broken bridge  and units on it
+
       // if units on it, destroy it and give asociated medal
-      // gain medals if applicable 
+      // get pos of selected bridge 
+      $bridge_cell = $selectedBridge->getPos();
+
+      // check if unit on this cell, if so eliminate it and add related medals
+      $unitOnBridge = Board::getUnitInCell($bridge_cell['x'], $bridge_cell['y']);
+      
+      if(isset($unitOnBridge)) {
+        $playerOppUnit_tmp = Players::getOfTeam($unitOnBridge->getPlayer()->getTeam()->getOpponent()->getId());
+        $playerOppUnit_tmp2 = $playerOppUnit_tmp->toArray();
+        $playerOppUnit = array_shift($playerOppUnit_tmp2);
+        $eliminated = AttackUnitsTrait::damageUnit($unitOnBridge, $playerOppUnit, 4);
+        if (Teams::checkVictory()) {
+          return;
+        }
+      }
+
+      // gain medals related to bridge blown objectives scenario 'behavior2' == 'ONE_MEDAL_IF_BLOWN' if applicable
+      if($bonusmedal) {
+        // Increase stats
+        $statName = 'incMedalRound' . Globals::getRound();
+        foreach ($player->getTeam()->getMembers() as $p) {
+          Stats::$statName($p, 1);
+        }
+
+        // Create medals and notify them (will refresh previous stats)
+        $medals = Medals::addDestroyedTerrainMedals($teamId, 1);
+        Notifications::scoreMedals($teamId, $medals);       
+
+        if (Teams::checkVictory()) {
+          return;
+        }
+      }
+
+      // TO DO priority 2 : add broken bridge tile
+
+      
 
     } else {
       Notifications::message(clienttranslate('Bridge blown unsuccessfull'));
-      // TO DO remove return still Debug
-      return;
     }
-        
-    //$card = $player->getCardInPlay();
-    
-    // TODO replace with $this->nextState('draw'); keep return until end of Debug
-    return ;
+
+    $this->nextState('draw');
   }
 
 }

@@ -590,8 +590,8 @@ $machinestates = [
 
   ST_BRIDGE_TARGET => [
     'name' => 'targetBridge',
-    'description' => clienttranslate('${actplayer} may try to blow one bridge'),
-    'descriptionmyturn' => clienttranslate('${you} may try to blow one bridge'),
+    'description' => clienttranslate('${actplayer} may select one bridge to blow up'),
+    'descriptionmyturn' => clienttranslate('${you} may select one bridge to blow up'),
     'type' => 'activeplayer',
     'args' => 'argsblowbridge',
     'possibleactions' => ['actRestart','actBlowBridge'],

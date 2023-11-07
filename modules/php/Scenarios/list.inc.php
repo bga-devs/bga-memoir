@@ -68,6 +68,7 @@ $scenariosMap = [
   6380 => '6380-NovilleToFoy',
   6433 => '6433-BreakthroughAtMortain',
   6541 => '6541-BreakthroughToTheBeach',
+  6687 => '6687-DropInTheNight82nd',
   18261 => '18261-SovietRaidOnGrigorevka',
 
 

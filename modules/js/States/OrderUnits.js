@@ -712,30 +712,12 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         // obtenir la cell qui contient le terrain
         let oCell = $(`cell-${x}-${y}`);
         this.onClick(oCell, () => {
-          console.log(oCell, x, y);
+          dojo.destroy('btnRestartTurn');
           this._selectedTerrains.push(this._selectableTerrains[tId]);
-          console.log(this._selectedTerrains, this._selectedTerrains[0]['id']);
           this.takeAction('actBlowBridge', { terrainsIds: this._selectedTerrains[0]['id']});
         })
       })
 
-    
-
-     
-      /*  if (!cell.source) {
-            this.onClick(oCell, () => this.takeAction('actMoveUnit', { unitId: args.unitId, x: cell.x, y: cell.y }));
-          }*/
-      /*this.makeTerrainsSelectable(  
-        args.terrains,
-        this.onClickTargetBridge.bind(this),
-        this.isSelectableTargetBridge.bind(this),
-        'targetBridge',
-      );*/
-      
-      //console.log('selected terrains ', this._selectedTerrains);
-      //this.addPrimaryActionButton('btnConfirmBlowBridge', _('Confirm bridge target'), () =>
-      //  this.takeAction('actblowbridge', { terrainsIds: this._selectedTerrains.join(';') }), // to do
-      //);
       this.addDangerActionButton('btnRestartTurn', _('Undo actions'), () => {
           this.takeAction('actRestart');
         },

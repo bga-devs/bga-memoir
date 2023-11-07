@@ -113,6 +113,7 @@ class Terrains extends \M44\Helpers\Pieces
           // Custom properties
           $properties = $terrain['properties'] ?? [];
           $behavior = $terrain['behavior'] ?? null;
+          $behavior2 = $terrain['behavior2'] ?? null;
           if ($behavior == 'IMPASSABLE_HILL') {
             $properties['isImpassable'] = true;
           } elseif ($behavior == 'IMPASSABLE_BLOCKING_HILL') {
@@ -125,6 +126,11 @@ class Terrains extends \M44\Helpers\Pieces
             $properties['isBlockingLineOfSight'] = [\INFANTRY];
           } elseif ($behavior == 'OASIS_RECOVERY') {
             $properties['canRecover'] = true;
+          } elseif ($behavior == 'CAN_BE_BLOWN') {
+            $properties['canBeBlown'] = true;
+          }
+          if ($behavior2 == 'ONE_MEDAL_IF_BLOWN') {
+            $properties['oneMedalIfBlown'] = true;
           }
 
           if (isset($options['hill317'])) {

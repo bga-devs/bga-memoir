@@ -4,6 +4,9 @@ use M44\Managers\Players;
 use M44\Managers\Units;
 use M44\Helpers\Collection;
 use M44\Core\Globals;
+use M44\States\TacticCardTrait;
+use M44\Board;
+use M44\Managers\Terrains;
 
 class SectionCard extends Card
 {
@@ -114,7 +117,71 @@ class SectionCard extends Card
   public function canBlowBridge()
   { // TO DO filter cards that contain sections with blowable bridges
     $blowbridge = Globals::getBlowBridgeOpt2();
-    return !is_null($blowbridge) && $blowbridge['side'] == Globals::getTeamTurn();
+    return !is_null($blowbridge) && $blowbridge['side'] == Globals::getTeamTurn()
+    && !empty(self::blowBridgeFilters($this)['terrains']);
+  }
+
+  public function blowBridgeFilters($card) 
+  {
+    $cardsections = $card->getSections();
+    $side = Globals::getTeamTurn();
+    $terrains = Terrains::getAll();
+    $bridges = $terrains->filter(function ($t) {
+      return $t instanceof \M44\Terrains\Bridge
+      || $t instanceof \M44\Terrains\RailroadBridge;
+    });
+    // filter based on behavior 'CAN_BE_BLOWN'
+    if (!empty($bridges->toArray()))
+    {
+      $bridgesblowable = array_filter($bridges->toArray(), fn($t) => 
+      Board::canBeBlownCell($t->getPos())
+    );
+    } else {
+      $bridgesblowable = [];
+    }
+    
+    // filter based on section of the card
+    if (!empty($bridgesblowable))
+    {
+      $selectablebridges = array_filter($bridgesblowable, fn($t) => 
+      TacticCardTrait::isTerrainInCardSections($t, $cardsections, $side)
+    );
+    } else {
+      $selectablebridges = [];
+    }
+    
+    // option filter based if a a unit of the active player is neighbour to the bridge
+    $selectablebridges2 = [];
+    if (!empty($selectablebridges)) 
+    {
+      $blowbridgeoptions = Globals::getBlowBridgeOpt2();
+      if(isset($blowbridgeoptions['option']) && $blowbridgeoptions['option'] == 'NEED_NEIGHBOUR_UNIT') {
+        $selectablebridges2 = array_filter($selectablebridges, function ($t) {
+          return self::hasNeighbourAlliedUnit($t);
+        });
+      }
+    }
+
+
+    return  ['terrains' => $selectablebridges2];
+  }
+  
+
+  public function hasNeighbourAlliedUnit ($terrain) {
+    $isNeighbourAlliedUnit = false;
+    $neighbours = array();
+    $neighbours = Board::getNeighbours($terrain->getPos());
+    if (isset($neighbours)) {
+      foreach($neighbours as $c) {
+        $cellunit = Board::getUnitInCell($c);
+        if(!is_null($cellunit) && $cellunit->getTeam()->getId() == Globals::getTeamTurn()) {
+          $isNeighbourAlliedUnit = true;
+          return $isNeighbourAlliedUnit;
+        }
+      }
+    } else {
+        return $isNeighbourAlliedUnit;
+    }
   }
 
 }

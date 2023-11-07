@@ -26,6 +26,7 @@ $scenarios[6687] =[
       'night_visibility_rules' => true,
       'blowbridge_opt2' => [
         'side' => 'ALLIES',
+        'option' => 'NEED_NEIGHBOUR_UNIT',
       ],
       'airdrop' => [
          'side' => 'ALLIES',
@@ -87,6 +88,8 @@ $scenarios[6687] =[
         'rect_terrain' => [
           'name' => 'bridge',
           'orientation' => 5,
+          'behavior' => 'CAN_BE_BLOWN',
+          'behavior2' => 'ONE_MEDAL_IF_BLOWN',
         ],
       ],
       4 => [
@@ -218,6 +221,8 @@ $scenarios[6687] =[
         'rect_terrain' => [
           'name' => 'bridge',
           'orientation' => 3,
+          'behavior' => 'CAN_BE_BLOWN',
+          'behavior2' => 'ONE_MEDAL_IF_BLOWN',
         ],
       ],
       17 => [
