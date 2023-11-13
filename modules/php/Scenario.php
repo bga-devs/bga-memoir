@@ -368,6 +368,7 @@ class Scenario extends \APP_DbObject
       (in_array($hex['name'], ['pbeach', 'beach'])) || // beach
       (in_array($hex['name'], ['bridge', 'pbridge', 'railbridge', 'wbridge', 'wrailbridge']) && (!isset($hex['behavior']) || !in_array($hex['behavior'], ['BRIDGE_SECTION']))) || // bridge
       (in_array($hex['name'], ['bridge']) && isset($hex['behavior']) && $hex['behavior'] == 'BRIDGE_SECTION') || // bridge section
+      (in_array($hex['name'], ['brkbridge']) && (!isset($hex['behavior']) || !in_array($hex['behavior'], ['BRIDGE_SECTION']))) || //broken bridge
       (in_array($hex['name'], ['bunker'])) || // Bunker
       (in_array($hex['name'], ['cemetery'])) || // Cemetery
       (in_array($hex['name'], ['church'])) || // Church

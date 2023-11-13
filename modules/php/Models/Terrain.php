@@ -133,6 +133,11 @@ class Terrain extends \M44\Helpers\DB_Model
     return ['x' => $this->x, 'y' => $this->y];
   }
 
+  public function getOrientation()
+  {
+    return $this->orientation;
+  }
+
   public function getProperty($prop, $unit)
   {
     if (!in_array($prop, $this->properties)) {

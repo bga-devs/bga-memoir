@@ -203,6 +203,21 @@ trait TacticCardTrait
       // remove bridge from Database in order not to select it again
       Terrains::remove($selectedBridge);
 
+      // add broken bridge tile
+      $brokenbridge = Terrains::add([
+        'type' => 'brokenbridge',
+        'tile' => 'brkbridge',
+        'x' => $selectedBridge->getPos()['x'],
+        'y' => $selectedBridge->getPos()['y'],
+        'orientation' => $selectedBridge->getOrientation(),
+      ]);
+      
+      Notifications::addTerrain(
+        $player,
+        $brokenbridge,
+        ''
+      );
+
       // if units on it, destroy it and give asociated medal
       // get pos of selected bridge 
       $bridge_cell = $selectedBridge->getPos();
@@ -236,8 +251,6 @@ trait TacticCardTrait
           return;
         }
       }
-
-      // TO DO priority 2 : add broken bridge tile
 
       
 

@@ -222,6 +222,7 @@ const TERRAIN_CLASSES = [
   'river' => 'River',
   'bridge' => 'Bridge',
   'bridgesection' => 'BridgeSection',
+  'brokenbridge' => 'BrokenBridge',
   'sand' => 'Sandbag',
   'cliff' => 'Cliff',
   'bluff' => 'SeaBluff',
