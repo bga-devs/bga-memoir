@@ -77,6 +77,23 @@ trait TurnTrait
     Log::checkpoint();
     Log::clearAll();
 
+    // TODO : Option Airdrop2 check if airdrop2 conditions (eg option if night visibility is full)
+    // if current player side is airdrop2 side
+    // Check for options
+    $options = Scenario::getOptions();
+    $AirDrop2Done = Globals::getAirDrop2Done();
+    
+    if (isset($options['airdrop2']) && $options['airdrop2']['side'] == $team->getId() && !$AirDrop2Done) {
+      if (isset($options['airdrop2']['option']) 
+      && $options['airdrop2']['option'] == 'NEED_FULL_DAY_VISIBILITY') { 
+        if (Globals::getNightVisibility() >= 6 ) {
+          Globals::setAirDrop2Done(true);
+          $this->nextState('airDrop2', $player->getId());
+          return;
+        }
+      }
+    }
+
     // TODO : Overlord => branch here to distribute cards instead
     if (true) {
       $player = $team->getMembers()->first();

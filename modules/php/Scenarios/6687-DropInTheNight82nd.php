@@ -39,6 +39,20 @@ $scenarios[6687] =[
            'name' => 'inf2us',
          ],
        ],
+       'airdrop2' => [
+        'side' => 'ALLIES',
+        'option' => 'NEED_FULL_DAY_VISIBILITY',
+        'option2' => 'TARGET_DROP_CENTER',
+        'range' => 4,
+        'nbr_units' => 3, // nbr units for each drop
+        'center' => 'C6 (Les Forges)', // Les Forges
+        'nbr_drops' => 1, // nbr of drops 'nbr_units' at a time
+        'unit' => [
+          'name' => 'inf2us',
+          'behavior' => 'CANNOT_BE_ACTIVATED_TILL_TURN',
+          'turn' => 1, // eg. Cannot be activated on the turn just after landing
+        ],
+      ],
     ],
   ],
   'board' => [

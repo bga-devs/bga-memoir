@@ -631,6 +631,14 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       });
     },
 
+    onEnteringStateAirDrop2(args) {
+      args.cells.forEach((cell) => {
+        let oCell = $(`cell-${cell.x}-${cell.y}`);
+        oCell.classList.add('forAirDrop');
+        this.onClick(oCell, () => this.takeAction('actAirDrop2', { x: cell.x, y: cell.y }));
+      });
+    },
+
     /////////////////////////////////////////////////
     //  __  __          _ _            ____ _____
     // |  \/  | ___  __| (_) ___ ___  | __ )_   _|

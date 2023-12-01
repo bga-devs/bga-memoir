@@ -117,6 +117,18 @@ $machinestates = [
     ],
   ],
 
+  ST_AIR_DROP2 => [
+    'name' => 'airDrop2',
+    'description' => clienttranslate('${actplayer} must choose where to air drop ${nb} units in ${nb_drops} different air drop(s)'),
+    'descriptionmyturn' => clienttranslate('${you} must choose where to air drop ${nb} units in ${nb_drops} different air drop(s)'),
+    'descriptiondropcentertarget' => clienttranslate('${actplayer} must choose where to air drop ${nb} units in ${nb_drops} different air drop(s) centered on ${targetcenter}'),
+    'descriptionmyturndropcentertarget' => clienttranslate('${you} must choose where to air drop ${nb} units in ${nb_drops} different air drop(s) centered on ${targetcenter}'),
+    'type' => 'activeplayer',
+    'args' => 'argsAirDrop2',
+    'possibleactions' => ['actAirDrop2'],
+    'transitions' => ['playCard' => ST_PLAY_CARD, 'commissar' => ST_COMMISSAR],
+  ],
+
   ST_END_OF_ROUND => [
     'name' => 'endOfRound',
     'description' => '',
@@ -151,7 +163,7 @@ $machinestates = [
     'type' => 'game',
     'action' => 'stPrepareTurn',
     'updateGameProgression' => true,
-    'transitions' => ['playCard' => ST_PLAY_CARD, 'commissar' => ST_COMMISSAR],
+    'transitions' => ['playCard' => ST_PLAY_CARD, 'commissar' => ST_COMMISSAR, 'airDrop2' => ST_AIR_DROP2],
   ],
 
   ST_COMMISSAR => [

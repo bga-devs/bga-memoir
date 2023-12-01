@@ -196,6 +196,15 @@ class action_memoir extends APP_GameAction
     self::ajaxResponse();
   }
 
+  public function actAirDrop2()
+  {
+    self::setAjaxMode();
+    $x = self::getArg('x', AT_posint, false);
+    $y = self::getArg('y', AT_posint, false);
+    $this->game->actAirDrop2($x, $y);
+    self::ajaxResponse();
+  }
+
   public function actHealUnit()
   {
     self::setAjaxMode();

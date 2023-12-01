@@ -46,6 +46,7 @@ define([
         'targetBarrage',
         'orderUnitsFinestHour',
         'airDrop',
+        'airDrop2',
         'confirmTurn',
         'targetBridge',
         //'blowBridge',
@@ -73,6 +74,7 @@ define([
         ['removeSectionMedals', 1000],
         ['refreshInterface', 100],
         ['airDrop', 500],
+        ['airDrop2', 500],
         ['addToken', 1000],
         ['removeToken', 1000],
         ['revealMinefield', 100],
@@ -299,6 +301,7 @@ define([
       // Update team status
       let statusMapping = {
         airDrop: 'para',
+        airDrop2: 'para',
         commissarCard: 'commissar',
         playCommissarCard: 'command',
         playCard: 'command',

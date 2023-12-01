@@ -56,6 +56,7 @@ const ST_OVERLORD_MOVE_UNIT = 42;
 const ST_OVERLORD_ATTACK = 43;
 
 const ST_AIR_DROP = 50;
+const ST_AIR_DROP2 = 51;
 
 const ST_CONFIRM_TURN = 59;
 
