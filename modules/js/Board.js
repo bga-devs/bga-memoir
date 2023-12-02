@@ -381,7 +381,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
     tplBoardToken(token) {
       // prettier-ignore
-      const SPRITES = ['star', 'tag4', 'tag5', 'mine0', 'mine1', 'mine2', 'mine3', 'mine4', 'mineX', 'tag14', 'tag15', 'target'];
+      const SPRITES = ['tag1', 'tag4', 'tag5', 'mine0', 'mine1', 'mine2', 'mine3', 'mine4', 'mineX', 'tag14', 'tag15', 'target'];
       let sprite = SPRITES.findIndex((t) => t == token.sprite);
 
       return `<div id='board-token-${token.id}' class="board-token" data-sprite="${sprite}"></div>`;

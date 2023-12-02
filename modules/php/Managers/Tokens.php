@@ -98,6 +98,10 @@ class Tokens extends \M44\Helpers\Pieces
           // at least the hex on the marker.
           self::addExitTokensData($tokens, $tag, $hex, $exitMedals);
         }
+        elseif (in_array($tag['name'], ['tag1'])) {
+          $baseDatas['type'] = TOKEN_STAR;
+          $tokens[] = $baseDatas;
+        }
       }
     }
 

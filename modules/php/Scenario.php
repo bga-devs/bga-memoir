@@ -353,6 +353,10 @@ class Scenario extends \APP_DbObject
         } elseif (($tag['behavior'] ?? null) == 'EXIT_MARKER') {
           continue;
         }
+        // other star token ex. for air drop target
+        elseif (in_array($tag['name'], ['tag1'])) {
+          continue;
+        }
         return false;
       }
     }

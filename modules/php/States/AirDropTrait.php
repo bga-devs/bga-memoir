@@ -17,6 +17,7 @@ trait AirDropTrait
   {
     $options = Scenario::getOptions()['airdrop'];
     $cells = Board::getListOfCells();
+    $dropcenter = isset($options['option2']) ? $options['option2'] == 'TARGET_DROP_CENTER' : false;
 
     if(isset($options['behavior']) && isset($options['nbr_drops'])) {
       return [
@@ -25,6 +26,8 @@ trait AirDropTrait
         'actionCount' => Globals::getActionCount(),
         'behavior' => $options['behavior'],
         'nb_drops' => $options['nbr_drops'],
+        'titleSuffix' => ($dropcenter ? 'dropcentertarget' : ''),
+        'targetcenter' => $options['center'],
       ];
     } else {
       return [
@@ -32,6 +35,8 @@ trait AirDropTrait
       'cells' => $cells,
       'actionCount' => Globals::getActionCount(),
       'nb_drops' => 1,
+      'titleSuffix' => ($dropcenter ? 'dropcentertarget' : ''),
+      'targetcenter' => $options['center'],
       ];}
     
   }
@@ -155,7 +160,6 @@ trait AirDropTrait
       if (isset($options['unit']['behavior']) 
       && $options['unit']['behavior'] == 'CANNOT_BE_ACTIVATED_TILL_TURN') {
         //$unit -> setExtraDatas('cannotBeActivated', true);
-        var_dump($options['unit']['turn'] + $currentTurn);
         $unit -> setExtraDatas('cannotBeActivatedUntilTurn', $options['unit']['turn'] + $currentTurn);
       }
 

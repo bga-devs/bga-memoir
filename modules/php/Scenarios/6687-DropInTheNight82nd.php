@@ -30,9 +30,10 @@ $scenarios[6687] =[
       ],
       'airdrop' => [
          'side' => 'ALLIES',
+         'option2' => 'TARGET_DROP_CENTER',
          'range' => 4,
          'nbr_units' => [3,3,3], // nbr units for each drop
-         'center' => 'G5',
+         'center' => 'F14, I12, J6 (stars tokens)',
          'behavior' => 'ONE_AT_TIME',
          'nbr_drops' => 3, // nbr of drops 'nbr_units' at a time
          'unit' => [

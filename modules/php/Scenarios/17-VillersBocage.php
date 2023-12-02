@@ -4,7 +4,8 @@ namespace M44\Scenarios;
 $scenarios[17] = [
     'meta_data'=> [
 		'status'=> 'PRIVATE',
-		'software'=> 'sed 1.2'
+		'software'=> 'sed 1.2',
+		'scenario_id' => '17'
 	],
 	'game_info'=> [
 		'date_begin'=> '1944-06-12',
