@@ -524,6 +524,12 @@ $game_options = [
         'description' => clienttranslate('Operation Crusader'),
         'premium' => true,
       ],
+      3496 => [
+        'name' => clienttranslate('[3496] Breakthrough to Gembloux'),
+        'tmdisplay' => '[3496]',
+        'description' => clienttranslate('Breakthrough to Gembloux'),
+        'premium' => true,
+      ],
       4000 => [
         'name' => clienttranslate('[4000] The Tatsinskaya Raid'),
         'tmdisplay' => '[4000]',

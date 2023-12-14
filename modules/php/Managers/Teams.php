@@ -100,9 +100,18 @@ class Teams extends \M44\Helpers\DB_Manager
   }
 
   public function checkVictory()
-  {
+  { 
     foreach (self::getAll() as $team) {
-      if ($team->getNVictory() <= $team->getMedals()->count()) {
+      $must_have_exit = Globals::getMustHaveExitUnit();
+      $nb_medal_exit = $team->getMedals()->filter(function ($m) {
+        return $m['type'] == MEDAL_EXIT ;
+      })->count();
+
+      $victory_condition = !is_null($must_have_exit) && $must_have_exit['side'] == $team->getId() ?
+      $team->getNVictory() <= $team->getMedals()->count() && $must_have_exit['min_nbr_units'] <= $nb_medal_exit // add && nb medals exit >= $must_have_exit['min_nbr_units']
+      : $team->getNVictory() <= $team->getMedals()->count();
+
+      if ($victory_condition) {
         foreach ($team->getMembers() as $member) {
           // log victory
           $method = 'setStatusRound' . Globals::getRound();
@@ -123,6 +132,14 @@ class Teams extends \M44\Helpers\DB_Manager
         Game::get()->gamestate->jumpToState(ST_END_OF_ROUND);
         return true;
       }
+      // Condition if the nb of medals are obtained but no exit medal
+      if (!is_null($must_have_exit) 
+        && $must_have_exit['side'] == $team->getId() 
+        && $team->getNVictory() <= $team->getMedals()->count()
+        && $must_have_exit['min_nbr_units'] > $nb_medal_exit ) {
+          $txt = $team->getId() . '  player must have at least ' . $must_have_exit['min_nbr_units']. 'unit exit to win';
+          Notifications::message($txt);
+        }
     }
 
     return false;

@@ -218,6 +218,7 @@ class Scenario extends \APP_DbObject
     // Init date to get Late >1942 or Early War for SWA
     Globals::setBeginDate($scenario['game_info']['date_begin'] ?? null);
     Globals::setBlowBridgeOpt2($options['blowbridge_opt2'] ?? null);
+    Globals::setMustHaveExitUnit($options['must_have_unit_exit'] ?? null);
 
 
     // Create Teams

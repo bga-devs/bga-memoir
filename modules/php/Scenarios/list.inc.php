@@ -54,6 +54,7 @@ $scenariosMap = [
 
 
   3129 => '3129-OperationCrusader',
+  3496 => '3496-BreakthroughToGembloux',
   4000 => '4000-TheTatsinskayaRaid',
   4625 => '4625-ColdstreamHill',
   4643 => '4643-BattleOfAbbeville',

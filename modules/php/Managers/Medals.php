@@ -21,7 +21,8 @@ class Medals extends \M44\Helpers\DB_Manager
   protected static $primary = 'id';
   protected static function cast($row)
   {
-    if ($row['type'] == \MEDAL_ELIMINATION && isset($row['foreign_id'])) {
+    if (($row['type'] == \MEDAL_ELIMINATION && isset($row['foreign_id']))
+    || ($row['type'] == \MEDAL_EXIT && isset($row['foreign_id']))) {
       $unit = Units::get($row['foreign_id']);
       $row['unit_type'] = $unit->getType();
       $row['unit_nation'] = $unit->getNation();
@@ -49,6 +50,23 @@ class Medals extends \M44\Helpers\DB_Manager
       $ids[] = self::DB()->insert([
         'team' => $team,
         'type' => MEDAL_ELIMINATION,
+        'foreign_id' => $unit->getId(),
+        'sprite' => $team == ALLIES ? 'medal8' : 'medal9',
+      ]);
+    }
+
+    return self::DB()
+      ->whereIn('id', $ids)
+      ->get();
+  }
+
+  public function addExitMedals($team, $nMedals, $unit)
+  {
+    $ids = [];
+    for ($i = 0; $i < $nMedals; $i++) {
+      $ids[] = self::DB()->insert([
+        'team' => $team,
+        'type' => MEDAL_EXIT,
         'foreign_id' => $unit->getId(),
         'sprite' => $team == ALLIES ? 'medal8' : 'medal9',
       ]);

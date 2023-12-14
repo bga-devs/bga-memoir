@@ -129,9 +129,12 @@ class Team extends \M44\Helpers\DB_Model
       $medalsObtained = 1;
     }
 
+    $must_have_exit = Globals::getMustHaveExitUnit();
+    $medal_bonus = !is_null($must_have_exit) && $must_have_exit['side'] == $unit->getTeam()->getId() ?
+      $must_have_exit['min_nbr_units'] : 0;
     if ($nMedals + $medalsObtained > $this->nVictory) {
-      // Can't get more medals that winning condition
-      $medalsObtained = $this->nVictory - $nMedals;
+      // Can't get more medals that winning condition (except if must have exit option)
+      $medalsObtained = $this->nVictory + $medal_bonus - $nMedals;
     }
 
     if ($medalsObtained == 0) {
@@ -145,7 +148,7 @@ class Team extends \M44\Helpers\DB_Model
       Stats::$statName($player, $medalsObtained);
     }
 
-    $medals = Medals::addEliminationMedals($this->id, $medalsObtained, $unit);
+    $medals = Medals::addExitMedals($this->id, $medalsObtained, $unit);
     Notifications::scoreMedals($this->id, $medals, $unit->getPos());
   }
 }

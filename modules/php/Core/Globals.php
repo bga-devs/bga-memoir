@@ -55,6 +55,7 @@ class Globals extends \M44\Helpers\DB_Manager
     'airDrops' => 'int',
     'airDrop2Done' => 'bool', // used if second air drop was performed
     'blowBridgeOpt2' => 'obj',
+    'mustHaveExitUnit' => 'obj', // used for victory condition must have n medals from EXIT
 
     // scenario game_info
     'beginDate' => 'str',
