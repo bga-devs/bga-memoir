@@ -184,7 +184,7 @@ class Terrain extends \M44\Helpers\DB_Model
     Notifications::removeTerrain($this);
   }
 
-  public function onUnitLeaving($unit, $isRetreat, $cell)
+  public function onUnitLeaving($unit, $isRetreat, $cell, $sourceCell = null)
   {
   }
 

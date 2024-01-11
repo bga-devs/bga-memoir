@@ -523,7 +523,7 @@ class Board
     $sourceCell = self::$grid[$pos['x']][$pos['y']];
     $targetCell = self::$grid[$cell['x']][$cell['y']];
     foreach ($sourceCell['terrains'] as $terrain) {
-      $terrain->onUnitLeaving($unit, $isRetreat, $cell);
+      $terrain->onUnitLeaving($unit, $isRetreat, $cell, $pos);
     }
     Tokens::removeTargets($pos);
     Tokens::removeCamouflage($pos);

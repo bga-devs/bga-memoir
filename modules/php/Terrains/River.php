@@ -47,9 +47,9 @@ class River extends \M44\Models\Terrain
     return true;
   }
 
-  public function onUnitLeaving($unit, $isRetreat, $cell)
+  public function onUnitLeaving($unit, $isRetreat, $cell, $sourceCell = null)
   {
-    if (!Board::isRiverCell($cell) && $unit->getEquipment() == 'boat') {
+    if (!Board::isRiverCell($cell) && $unit->getEquipment() == 'boat' && !Board::isBridgeCell($sourceCell)) {
       $unit->setExtraDatas('equipment', false);
       Notifications::removeStarToken($unit->getId(), $unit->getX(), $unit->getY());
     }

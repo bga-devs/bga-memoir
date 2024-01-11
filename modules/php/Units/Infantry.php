@@ -27,8 +27,10 @@ class Infantry extends AbstractUnit
       return 1;
     }
 
-    // if unit is on a boat & on a river, malus of 1
-    if ($this->getEquipment() == 'boat' && Board::isRiverCell(['x' => $this->x, 'y' => $this->y])) {
+    // if unit is on a boat & on a river, malus of 1 but not on a bridge
+    if ($this->getEquipment() == 'boat' 
+      && Board::isRiverCell(['x' => $this->x, 'y' => $this->y])
+      && !Board::isBridgeCell(['x' => $this->x, 'y' => $this->y])) {
       return -1;
     }
     return 0;
@@ -37,11 +39,12 @@ class Infantry extends AbstractUnit
   public function getHits($type, $nb)
   {
     $hits = parent::getHits($type, $nb);
-    // if the unit is in a boat on a river
+    // if the unit is in a boat on a river but not on a bridge
     if (
-      $this->getEquipment() == 'boat' &&
-      Board::isRiverCell(['x' => $this->x, 'y' => $this->y]) &&
-      $type == \DICE_FLAG
+      $this->getEquipment() == 'boat' 
+      && Board::isRiverCell(['x' => $this->x, 'y' => $this->y]) 
+      && !Board::isBridgeCell(['x' => $this->x, 'y' => $this->y])
+      && $type == \DICE_FLAG
     ) {
       $hits += $nb;
     }

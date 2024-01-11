@@ -305,8 +305,10 @@ trait AttackUnitsTrait
     if (
       isset($results[DICE_FLAG]) &&
       !$eliminated &&
-      // unit is not on a boat on a river
-      ($oppUnit->getEquipment() != 'boat' || !Board::isRiverCell($oppUnit->getPos()))
+      // unit is not on a boat on a river without a bridge
+      ($oppUnit->getEquipment() != 'boat' 
+      || !Board::isRiverCell($oppUnit->getPos())
+      || Board::isBridgeCell($oppUnit->getPos()))
     ) {
       $this->initRetreat($attack, $results);
       $this->nextState('retreat', $oppUnit->getPlayer());
@@ -627,7 +629,9 @@ trait AttackUnitsTrait
       isset($results[DICE_FLAG]) &&
       !$eliminated &&
       // unit is not on a boat on a river
-      ($oppUnit->getEquipment() != 'boat' || !Board::isRiverCell($oppUnit->getPos()))
+      ($oppUnit->getEquipment() != 'boat' 
+      || !Board::isRiverCell($oppUnit->getPos())
+      || Board::isBridgeCell($oppUnit->getPos()))
     ) {
       $this->initRetreat($attack, $results);
       $this->nextState('retreat', $oppPlayer);
