@@ -142,10 +142,12 @@ class Team extends \M44\Helpers\DB_Model
       return;
     }
 
-    // Increase stats
-    $statName = 'incMedalRound' . Globals::getRound();
-    foreach ($this->getMembers() as $player) {
-      Stats::$statName($player, $medalsObtained);
+    if ($nMedals + $medalsObtained <= $this->nVictory) {
+      // Increase stats
+      $statName = 'incMedalRound' . Globals::getRound();
+      foreach ($this->getMembers() as $player) {
+        Stats::$statName($player, $medalsObtained);
+      }
     }
 
     $medals = Medals::addExitMedals($this->id, $medalsObtained, $unit);

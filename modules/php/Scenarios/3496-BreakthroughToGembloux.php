@@ -209,6 +209,12 @@ $scenarios[3496] = [
         ],
         'unit' => [
           'name' => 'inf2us',
+          'equipment' => 'motorized',
+        ],
+        'tags' => [
+          0 => [
+            'name' => 'tag1',
+          ],
         ],
       ],
       23 => [
@@ -223,6 +229,12 @@ $scenarios[3496] = [
         ],
         'unit' => [
           'name' => 'inf2us',
+          'equipment' => 'motorized',
+        ],
+        'tags' => [
+          0 => [
+            'name' => 'tag1',
+          ],
         ],
       ],
       24 => [
@@ -237,6 +249,12 @@ $scenarios[3496] = [
         ],
         'unit' => [
           'name' => 'inf2us',
+          'equipment' => 'motorized',
+        ],
+        'tags' => [
+          0 => [
+            'name' => 'tag1',
+          ],
         ],
       ],
       25 => [
@@ -267,6 +285,12 @@ $scenarios[3496] = [
         ],
         'unit' => [
           'name' => 'inf2us',
+          'equipment' => 'motorized',
+        ],
+        'tags' => [
+          0 => [
+            'name' => 'tag1',
+          ],
         ],
       ],
       28 => [
@@ -302,6 +326,12 @@ $scenarios[3496] = [
         ],
         'unit' => [
           'name' => 'inf2us',
+          'equipment' => 'motorized',
+        ],
+        'tags' => [
+          0 => [
+            'name' => 'tag1',
+          ],
         ],
       ],
       31 => [
@@ -482,6 +512,12 @@ $scenarios[3496] = [
         ],
         'unit' => [
           'name' => 'inf2us',
+          'equipment' => 'motorized',
+        ],
+        'tags' => [
+          0 => [
+            'name' => 'tag1',
+          ],
         ],
       ],
       55 => [
@@ -593,6 +629,12 @@ $scenarios[3496] = [
         ],
         'unit' => [
           'name' => 'inf2us',
+          'equipment' => 'motorized',
+        ],
+        'tags' => [
+          0 => [
+            'name' => 'tag1',
+          ],
         ],
       ],
       69 => [
@@ -839,9 +881,9 @@ $scenarios[3496] = [
       'subtitle' => clienttranslate('General Prioux\'s Cavalry corps faces the Panzers'),
       'description' => clienttranslate('Axis player (Germany): Take 6 Command cards. You move first.
 Allied player (France): Take 5 Command cards.'),
-      'rules' => clienttranslate('- The Air Sortie card is unusable by the French player.
+      'rules' => clienttranslate('- If Air Pack rules are in effect, the Air Sortie card is unusable by the French player.
     Discard it and draw a new Command card instead.
-    - Most of the French infantry units are motorized ; play them like Special Forces infantry (Troops 2 - Specialized Units).'),
+    - Most of the French infantry units are motorized (marked with a star) except the 2 infantry units at the rear in Saint-Trond and Grand Leez ; play them like Special Forces infantry (Troops 2 - Specialized Units).'),
       'historical' => clienttranslate('Hannut, Belgium - May 12, 1940. Adopting the Dyle Plan, the cavalry corps of Gen. Prioux moves into Belgium, ahead of Gen. Blanchard\'s 1st Army to confront the German invaders. Near Hannut, French scout units find themselves facing incoming fire from frontline German units. From there on, their mission is to hold back or at least delay the Germans - hoping to gain time for the slower Allied corps elements deploying along the Dyle. The two light motorized divisions (DLM) of Gen. Prioux bear the brunt of the assault, facing two formidable Panzer divisions and five supporting infantry divisions. Despite this unequal match of forces, the 2nd and 3rd DLM manage to hold the Germans back for two days, saving the Dyle Plan. On May 14, decimated but their mission accomplished, the DLMs withdraw to the rear. The stage is set, the battle lines are drawn, and you are in command. The rest is history.'),
       'victory' => clienttranslate('Axis player: 12 Medals, with at least one collected by a German unit exiting the board through the Exit hex toward Gembloux.
         Allied player: 12 Medals.'),
