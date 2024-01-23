@@ -137,7 +137,7 @@ class Teams extends \M44\Helpers\DB_Manager
         && $must_have_exit['side'] == $team->getId() 
         && $team->getNVictory() <= $team->getMedals()->count()
         && $must_have_exit['min_nbr_units'] > $nb_medal_exit ) {
-          $txt = $team->getId() . '  player must have at least ' . $must_have_exit['min_nbr_units']. 'unit exit to win';
+          $txt = $team->getId() . clienttranslate('  player must have at least ') . $must_have_exit['min_nbr_units']. clienttranslate('unit exit to win');
           Notifications::message($txt);
         }
     }

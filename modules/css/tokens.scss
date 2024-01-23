@@ -28,6 +28,14 @@
     top: 32%;
     pointer-events: none;
   }
+
+  // Target
+  &[data-sprite='2'] {
+    right: 33%;
+    top: 16%;
+    z-index: 2;
+  }
+
 }
 
 .hex-grid-terrain[data-tile^='mine'] {

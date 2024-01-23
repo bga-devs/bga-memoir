@@ -2075,12 +2075,6 @@ html {
   background-position: 66.66666% 0%;
   transform: none !important;
 }
-.hex-grid-obstacle.selectable {
-  cursor: pointer;
-}
-.hex-grid-obstacle.unselectable {
-  cursor: default;
-}
 
 .board-tooltip {
   position: absolute;
@@ -6449,6 +6443,11 @@ span.m44-dice-result[data-result="4"] {
   right: 33%;
   top: 32%;
   pointer-events: none;
+}
+.hex-grid-item .board-token[data-sprite="2"] {
+  right: 33%;
+  top: 16%;
+  z-index: 2;
 }
 
 .hex-grid-terrain[data-tile^=mine] {
