@@ -4,6 +4,7 @@ use M44\Managers\Players;
 use M44\Helpers\Utils;
 use M44\Core\Globals;
 use M44\Core\Stats;
+use M44\Managers\Cards;
 
 class Notifications
 {
@@ -165,13 +166,15 @@ class Notifications
   {
     // COUNTER ATTACK
     if ($card->getType() == \CARD_COUNTER_ATTACK && !is_null($card->getCopiedCard())) {
-      $str = $card->getCopiedCard()->getNotifString();
+      $copiedCard = Cards::getInstance($card->getExtraDatas('copiedCardType'));
+      $str = $copiedCard->getNotifString();  
+
       if (is_null($str)) {
         self::notifyAll('playCard', clienttranslate('${player_name} plays ${card_name} as ${copied_card_name}'), [
           'i18n' => ['copied_card_name'],
           'player' => $player,
           'card' => $card,
-          'copied_card_name' => $card->getCopiedCard()->getName(),
+          'copied_card_name' => $copiedCard->getName(),
         ]);
       } else {
         self::notifyAll(
@@ -181,7 +184,7 @@ class Notifications
             'i18n' => ['copied_card_name', 'flank'],
             'player' => $player,
             'card' => $card,
-            'copied_card_name' => $card->getCopiedCard()->getName(),
+            'copied_card_name' => $copiedCard->getName(),
             'flank' => $str,
           ]
         );

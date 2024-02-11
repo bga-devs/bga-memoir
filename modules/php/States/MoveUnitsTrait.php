@@ -69,7 +69,12 @@ trait MoveUnitsTrait
     $initMove = $unit->getMoves();
 
     $card = $unit->getActivationOCard();
-    $skipRestrictions = $card != null && $card->isType(CARD_BEHIND_LINES) && $unit->getType() == INFANTRY;
+    $skipRestrictions = 
+      $card != null 
+      && ($card->isType(CARD_BEHIND_LINES) 
+      || $card->isType(\CARD_COUNTER_ATTACK)
+      && $card->getExtraDatas('copiedCardType') == \CARD_BEHIND_LINES)
+      && $unit->getType() == INFANTRY;
 
     foreach ($path['cells'] as $c) {
       if (!$skipRestrictions) {

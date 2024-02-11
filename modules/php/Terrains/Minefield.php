@@ -45,20 +45,21 @@ class Minefield extends \M44\Models\Terrain
     $activationcard = $unit->getActivationOCard();
     if (($activationcard->getType() == CARD_BEHIND_LINES ||
       ($activationcard->getType() == CARD_COUNTER_ATTACK) && 
-      $activationcard->getExtraDatas('card')['type'] == CARD_BEHIND_LINES)
-      && $unit->getMoves() <= 3) {
+      $activationcard->getExtraDatas('copiedCardType') == \CARD_BEHIND_LINES)
+      && $unit->getMoves() < 3) {
       return false;
     }
     
     if ($unit->mustSweep() && !$unit->isOnTheMove() && !$isTakeGround) {
       if (
-        $unit->getMoves() <= $unit->getMovementAndAttackRadius() ||
+        ($unit->getMoves() <= $unit->getMovementAndAttackRadius() ||
           (($activationcard->getType() == CARD_BEHIND_LINES ||
             ($activationcard->getType() == CARD_COUNTER_ATTACK) && 
-            $activationcard->getExtraDatas('card')['type'] == CARD_BEHIND_LINES) && $unit->getMoves() == 3) ||
-          (($activationcard->getType() == CARD_INFANTRY_ASSAULT ||
-          ($activationcard->getType() == CARD_COUNTER_ATTACK) && 
-          $activationcard->getExtraDatas('card')['type'] == CARD_INFANTRY_ASSAULT) && $unit->getMoves() == 2)
+            $activationcard->getExtraDatas('copiedCardType') == \CARD_BEHIND_LINES)) && $unit->getMoves() == 3)
+            ||
+            (($activationcard->getType() == CARD_INFANTRY_ASSAULT ||
+            ($activationcard->getType() == CARD_COUNTER_ATTACK) && 
+            $activationcard->getExtraDatas('copiedCardType') == CARD_INFANTRY_ASSAULT) && $unit->getMoves() == 2)
       ) {
         // Sweep the mine
         Notifications::message(clienttranslate('Combat engineer sweeps the mine instead of battling'), []);

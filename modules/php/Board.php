@@ -248,7 +248,10 @@ class Board
     $maxDistance = $unit->getMovementRadius();
     $card = $unit->getActivationOCard();
     if ($card != null) {
-      if ($card->isType(CARD_BEHIND_LINES) && $unit->getType() == INFANTRY) {
+      if (($card->isType(CARD_BEHIND_LINES)
+      || $card->isType(\CARD_COUNTER_ATTACK)
+        && $card->getExtraDatas('copiedCardType') == \CARD_BEHIND_LINES)
+        && $unit->getType() == INFANTRY) {
         $maxDistance = 3; // Units activated by "BehindEnemyLines" can moves up to 3 hexes
       }
       // Only effect on unit with a move radius of 2 or less
@@ -455,7 +458,11 @@ class Board
     }
 
     // Units activated by "BehindEnemyLines" card have no terrain restriction
-    if ($unit->getActivationOCard()->isType(CARD_BEHIND_LINES) && $unit->getType() == INFANTRY) {
+    $card = $unit->getActivationOCard();
+    if (($card->isType(CARD_BEHIND_LINES)
+      || $card->isType(\CARD_COUNTER_ATTACK)
+        && $card->getExtraDatas('copiedCardType') == \CARD_BEHIND_LINES)
+        && $unit->getType() == INFANTRY) {
       return $cost == INFINITY ? INFINITY : ($realMove ? 2 - $unit->getRoadBonus() : 1);
     }
 
@@ -486,7 +493,11 @@ class Board
   public static function isValidPath($unit, $cell, $path)
   {
     // All paths are valid for Behind ennemy lines
-    if ($unit->getActivationOCard()->isType(CARD_BEHIND_LINES) && $unit->getType() == INFANTRY) {
+    $card = $unit->getActivationOCard();
+    if (($unit->getActivationOCard()->isType(CARD_BEHIND_LINES)
+      || $card->isType(\CARD_COUNTER_ATTACK)
+      && $card->getExtraDatas('copiedCardType') == \CARD_BEHIND_LINES)
+      && $unit->getType() == INFANTRY) {
       return true;
     }
 
@@ -595,7 +606,10 @@ class Board
       // only if movement and attack radius == 1
       if ($card->isType(CARD_INFANTRY_ASSAULT) && $unit->getType() == \INFANTRY && $maxMoves == 1) {
         $maxMoves++;
-      } elseif ($card->isType(CARD_BEHIND_LINES) && $unit->getType() == INFANTRY) {
+      } elseif (($card->isType(CARD_BEHIND_LINES) 
+        || $card->isType(\CARD_COUNTER_ATTACK)
+        && $card->getExtraDatas('copiedCardType') == \CARD_BEHIND_LINES) 
+        && $unit->getType() == INFANTRY) {
         $maxMoves = INFINITY;
       } elseif ($unit->getBanzai() === true && $m > $maxMoves) {
         $banzai = true;

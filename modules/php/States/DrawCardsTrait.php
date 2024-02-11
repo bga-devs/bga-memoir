@@ -40,7 +40,7 @@ trait DrawCardsTrait
     Notifications::discardCard($player, $card, false);
 
     if (($card->getType() == \CARD_FINEST_HOUR ||
-      $card->getType() == \CARD_COUNTER_ATTACK && $card->getExtraDatas('CopiedCardType') == \CARD_FINEST_HOUR )
+      $card->getType() == \CARD_COUNTER_ATTACK && $card->getExtraDatas('copiedCardType') == \CARD_FINEST_HOUR )
       && Globals::getDeckReshuffle()) {
       $n = Cards::reshuffle();
       Notifications::reshuffle($n);
