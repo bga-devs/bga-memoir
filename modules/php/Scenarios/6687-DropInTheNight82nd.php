@@ -20,8 +20,8 @@ $scenarios[6687] =[
     'country_player2' => 'US',
     'cards_player1' => 5,
     'cards_player2' => 5,
-    'victory_player1' => 10,
-    'victory_player2' => 10,
+    'victory_player1' => 8,
+    'victory_player2' => 8,
     'operationID' => '10',
     'options' => [
       'night_visibility_rules' => true,
@@ -814,7 +814,7 @@ Once in full daylight, the Allied player can drop up to 3 additional Infantry un
 By the morning of June 6, US reinforcements arrived, with Force "B" gliders landing near Les Forges. Operation Boston was a success.
 
 The stage is set, the battle lines are drawn, and you are in command. The rest is history.'),
-      'victory' => clienttranslate('10 medals.
+      'victory' => clienttranslate('8 medals.
 
 Sainte-Mère-Eglise and the bridges of la Fière and Chef-du-Pont are Temporary Medal Objectives for the Allied forces.
 
