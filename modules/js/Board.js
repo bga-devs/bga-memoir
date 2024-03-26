@@ -13,7 +13,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
   // prettier-ignore
   const OBSTACLES_ROTATION = { bunker: 180,wbunker : 180,dbunker : 180,ford : 60,roadblock : 60,droadblock : 60,wroadblock : 60,pontoon : -30,wpontoon : -30,dragonteeth : 60,railbridge : -60,wrailbridge : -60,bridge : -30,pbridge : -30,brkbridge : -30,wbridge : -30,abatis : 60,wire : 180,sand : 180};
   // prettier-ignore
-  const UNITS_ROTATION = { 7 : -60, 6 : 60};
+  const UNITS_ROTATION = { 7 : 60, 6 : 60};
 
   const ALLIES_NATIONS = ['brit', 'us', 'ru'];
 
@@ -342,6 +342,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       }
 
       let rotation = terrain.rotate ? 6 : 0;
+      //console.log('terrain.orientation' + terrain.id + terrain.orientation);
       if (terrain.orientation != 1) {
         let nbrRotation = 3;
         if (TERRAINS_ROTATIONS[6].includes(terrain.tile)) nbrRotation = -6;
@@ -1061,15 +1062,20 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       if (unit.onTheMove && !tooltip) classNames.push('onTheMove');
 
       const RECT_UNITS = [5, 6, 7];
-      unit.orientation = this._bottomTeam != (ALLIES_NATIONS.includes(unit.nation) ? 'ALLIES' : 'AXIS') ? 1 : 0;
+      unit.side = this._bottomTeam != (ALLIES_NATIONS.includes(unit.nation) ? 'ALLIES' : 'AXIS') ? 1 : 0;
       let rotation = 0;
       if (RECT_UNITS.includes(parseInt(unit.type))) {
         rotation = unit.rotate ? 6 : 0;
-        if (unit.orientation != 1) {
-          let angle = UNITS_ROTATION[unit.type] / -30;
+        console.log('rotation ' + rotation + ' unit.orientation ' + unit.orientation + ' unit.side ' + unit.side);
+        if (unit.side != 1) {
+          let angle = UNITS_ROTATION[unit.type] / 30;
           rotation += (unit.orientation - 1) * angle + 12;
+          console.log('case unit.side not 1 : rotation ' + rotation + ' angle ' + angle);
         }
         rotation = rotation % 12;
+        console.log('final rotation ' + rotation);
+      } else {
+        unit.orientation = this._bottomTeam != (ALLIES_NATIONS.includes(unit.nation) ? 'ALLIES' : 'AXIS') ? 1 : 0;
       }
 
       tpl = `

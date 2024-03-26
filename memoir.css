@@ -4130,7 +4130,7 @@ html {
   top: 0;
 }
 
-.m44-unit[data-type="5"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="5"]::after {
   content: "";
   display: block;
   position: absolute;
@@ -4142,49 +4142,51 @@ html {
   background-image: url("img/board_obstacles.png");
   background-size: 600% 500%;
 }
-.m44-unit[data-type="5"] .m44-unit-meeple {
+[data-unitSprite="0"] .m44-unit[data-type="5"] .m44-unit-meeple {
   display: none;
-  background: url("img/tokens.png");
+  background-image: url("img/tokens.png");
   background-size: 300% 400%;
+  background-position-x: 0%;
+  background-position-y: 0%;
 }
-.m44-unit[data-type="5"][data-rotation="1"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="5"][data-rotation="1"]::after {
   transform: rotate(30deg);
 }
-.m44-unit[data-type="5"][data-rotation="2"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="5"][data-rotation="2"]::after {
   transform: rotate(60deg);
 }
-.m44-unit[data-type="5"][data-rotation="3"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="5"][data-rotation="3"]::after {
   transform: rotate(90deg);
 }
-.m44-unit[data-type="5"][data-rotation="4"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="5"][data-rotation="4"]::after {
   transform: rotate(120deg);
 }
-.m44-unit[data-type="5"][data-rotation="5"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="5"][data-rotation="5"]::after {
   transform: rotate(150deg);
 }
-.m44-unit[data-type="5"][data-rotation="6"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="5"][data-rotation="6"]::after {
   transform: rotate(180deg);
 }
-.m44-unit[data-type="5"][data-rotation="7"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="5"][data-rotation="7"]::after {
   transform: rotate(210deg);
 }
-.m44-unit[data-type="5"][data-rotation="8"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="5"][data-rotation="8"]::after {
   transform: rotate(240deg);
 }
-.m44-unit[data-type="5"][data-rotation="9"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="5"][data-rotation="9"]::after {
   transform: rotate(270deg);
 }
-.m44-unit[data-type="5"][data-rotation="10"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="5"][data-rotation="10"]::after {
   transform: rotate(300deg);
 }
-.m44-unit[data-type="5"][data-rotation="11"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="5"][data-rotation="11"]::after {
   transform: rotate(330deg);
 }
-.m44-unit[data-type="5"][data-rotation="12"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="5"][data-rotation="12"]::after {
   transform: rotate(360deg);
 }
 
-.m44-unit[data-type="6"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="6"]::after {
   content: "";
   display: block;
   position: absolute;
@@ -4196,49 +4198,51 @@ html {
   background-image: url("img/board_obstacles.png");
   background-size: 600% 500%;
 }
-.m44-unit[data-type="6"] .m44-unit-meeple {
+[data-unitSprite="0"] .m44-unit[data-type="6"] .m44-unit-meeple {
   display: none;
-  background: url("img/tokens.png");
+  background-image: url("img/tokens.png");
   background-size: 300% 400%;
+  background-position-x: 0%;
+  background-position-y: 0%;
 }
-.m44-unit[data-type="6"][data-rotation="1"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="6"][data-rotation="1"]::after {
   transform: rotate(30deg);
 }
-.m44-unit[data-type="6"][data-rotation="2"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="6"][data-rotation="2"]::after {
   transform: rotate(60deg);
 }
-.m44-unit[data-type="6"][data-rotation="3"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="6"][data-rotation="3"]::after {
   transform: rotate(90deg);
 }
-.m44-unit[data-type="6"][data-rotation="4"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="6"][data-rotation="4"]::after {
   transform: rotate(120deg);
 }
-.m44-unit[data-type="6"][data-rotation="5"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="6"][data-rotation="5"]::after {
   transform: rotate(150deg);
 }
-.m44-unit[data-type="6"][data-rotation="6"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="6"][data-rotation="6"]::after {
   transform: rotate(180deg);
 }
-.m44-unit[data-type="6"][data-rotation="7"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="6"][data-rotation="7"]::after {
   transform: rotate(210deg);
 }
-.m44-unit[data-type="6"][data-rotation="8"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="6"][data-rotation="8"]::after {
   transform: rotate(240deg);
 }
-.m44-unit[data-type="6"][data-rotation="9"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="6"][data-rotation="9"]::after {
   transform: rotate(270deg);
 }
-.m44-unit[data-type="6"][data-rotation="10"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="6"][data-rotation="10"]::after {
   transform: rotate(300deg);
 }
-.m44-unit[data-type="6"][data-rotation="11"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="6"][data-rotation="11"]::after {
   transform: rotate(330deg);
 }
-.m44-unit[data-type="6"][data-rotation="12"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="6"][data-rotation="12"]::after {
   transform: rotate(360deg);
 }
 
-.m44-unit[data-type="7"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="7"]::after {
   content: "";
   display: block;
   position: absolute;
@@ -4250,45 +4254,215 @@ html {
   background-image: url("img/board_obstacles.png");
   background-size: 600% 500%;
 }
-.m44-unit[data-type="7"] .m44-unit-meeple {
+[data-unitSprite="0"] .m44-unit[data-type="7"] .m44-unit-meeple {
   display: none;
-  background: url("img/tokens.png");
+  background-image: url("img/tokens.png");
   background-size: 300% 400%;
+  background-position-x: 0%;
+  background-position-y: 0%;
 }
-.m44-unit[data-type="7"][data-rotation="1"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="7"][data-rotation="1"]::after {
   transform: rotate(30deg);
 }
-.m44-unit[data-type="7"][data-rotation="2"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="7"][data-rotation="2"]::after {
   transform: rotate(60deg);
 }
-.m44-unit[data-type="7"][data-rotation="3"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="7"][data-rotation="3"]::after {
   transform: rotate(90deg);
 }
-.m44-unit[data-type="7"][data-rotation="4"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="7"][data-rotation="4"]::after {
   transform: rotate(120deg);
 }
-.m44-unit[data-type="7"][data-rotation="5"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="7"][data-rotation="5"]::after {
   transform: rotate(150deg);
 }
-.m44-unit[data-type="7"][data-rotation="6"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="7"][data-rotation="6"]::after {
   transform: rotate(180deg);
 }
-.m44-unit[data-type="7"][data-rotation="7"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="7"][data-rotation="7"]::after {
   transform: rotate(210deg);
 }
-.m44-unit[data-type="7"][data-rotation="8"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="7"][data-rotation="8"]::after {
   transform: rotate(240deg);
 }
-.m44-unit[data-type="7"][data-rotation="9"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="7"][data-rotation="9"]::after {
   transform: rotate(270deg);
 }
-.m44-unit[data-type="7"][data-rotation="10"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="7"][data-rotation="10"]::after {
   transform: rotate(300deg);
 }
-.m44-unit[data-type="7"][data-rotation="11"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="7"][data-rotation="11"]::after {
   transform: rotate(330deg);
 }
-.m44-unit[data-type="7"][data-rotation="12"]::after {
+[data-unitSprite="0"] .m44-unit[data-type="7"][data-rotation="12"]::after {
+  transform: rotate(360deg);
+}
+
+[data-unitSprite="1"] .m44-unit[data-type="5"]::after {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("img/board_obstacles.png");
+  background-size: 600% 500%;
+}
+[data-unitSprite="1"] .m44-unit[data-type="5"] .m44-unit-meeple {
+  display: none;
+  background-image: url("img/tokens.png");
+  background-size: 300% 400%;
+  background-position-x: 0%;
+  background-position-y: 0%;
+}
+[data-unitSprite="1"] .m44-unit[data-type="5"][data-rotation="1"]::after {
+  transform: rotate(30deg);
+}
+[data-unitSprite="1"] .m44-unit[data-type="5"][data-rotation="2"]::after {
+  transform: rotate(60deg);
+}
+[data-unitSprite="1"] .m44-unit[data-type="5"][data-rotation="3"]::after {
+  transform: rotate(90deg);
+}
+[data-unitSprite="1"] .m44-unit[data-type="5"][data-rotation="4"]::after {
+  transform: rotate(120deg);
+}
+[data-unitSprite="1"] .m44-unit[data-type="5"][data-rotation="5"]::after {
+  transform: rotate(150deg);
+}
+[data-unitSprite="1"] .m44-unit[data-type="5"][data-rotation="6"]::after {
+  transform: rotate(180deg);
+}
+[data-unitSprite="1"] .m44-unit[data-type="5"][data-rotation="7"]::after {
+  transform: rotate(210deg);
+}
+[data-unitSprite="1"] .m44-unit[data-type="5"][data-rotation="8"]::after {
+  transform: rotate(240deg);
+}
+[data-unitSprite="1"] .m44-unit[data-type="5"][data-rotation="9"]::after {
+  transform: rotate(270deg);
+}
+[data-unitSprite="1"] .m44-unit[data-type="5"][data-rotation="10"]::after {
+  transform: rotate(300deg);
+}
+[data-unitSprite="1"] .m44-unit[data-type="5"][data-rotation="11"]::after {
+  transform: rotate(330deg);
+}
+[data-unitSprite="1"] .m44-unit[data-type="5"][data-rotation="12"]::after {
+  transform: rotate(360deg);
+}
+
+[data-unitSprite="1"] .m44-unit[data-type="6"]::after {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("img/board_obstacles.png");
+  background-size: 600% 500%;
+}
+[data-unitSprite="1"] .m44-unit[data-type="6"] .m44-unit-meeple {
+  display: none;
+  background-image: url("img/tokens.png");
+  background-size: 300% 400%;
+  background-position-x: 0%;
+  background-position-y: 0%;
+}
+[data-unitSprite="1"] .m44-unit[data-type="6"][data-rotation="1"]::after {
+  transform: rotate(30deg);
+}
+[data-unitSprite="1"] .m44-unit[data-type="6"][data-rotation="2"]::after {
+  transform: rotate(60deg);
+}
+[data-unitSprite="1"] .m44-unit[data-type="6"][data-rotation="3"]::after {
+  transform: rotate(90deg);
+}
+[data-unitSprite="1"] .m44-unit[data-type="6"][data-rotation="4"]::after {
+  transform: rotate(120deg);
+}
+[data-unitSprite="1"] .m44-unit[data-type="6"][data-rotation="5"]::after {
+  transform: rotate(150deg);
+}
+[data-unitSprite="1"] .m44-unit[data-type="6"][data-rotation="6"]::after {
+  transform: rotate(180deg);
+}
+[data-unitSprite="1"] .m44-unit[data-type="6"][data-rotation="7"]::after {
+  transform: rotate(210deg);
+}
+[data-unitSprite="1"] .m44-unit[data-type="6"][data-rotation="8"]::after {
+  transform: rotate(240deg);
+}
+[data-unitSprite="1"] .m44-unit[data-type="6"][data-rotation="9"]::after {
+  transform: rotate(270deg);
+}
+[data-unitSprite="1"] .m44-unit[data-type="6"][data-rotation="10"]::after {
+  transform: rotate(300deg);
+}
+[data-unitSprite="1"] .m44-unit[data-type="6"][data-rotation="11"]::after {
+  transform: rotate(330deg);
+}
+[data-unitSprite="1"] .m44-unit[data-type="6"][data-rotation="12"]::after {
+  transform: rotate(360deg);
+}
+
+[data-unitSprite="1"] .m44-unit[data-type="7"]::after {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("img/board_obstacles.png");
+  background-size: 600% 500%;
+}
+[data-unitSprite="1"] .m44-unit[data-type="7"] .m44-unit-meeple {
+  display: none;
+  background-image: url("img/tokens.png");
+  background-size: 300% 400%;
+  background-position-x: 0%;
+  background-position-y: 0%;
+}
+[data-unitSprite="1"] .m44-unit[data-type="7"][data-rotation="1"]::after {
+  transform: rotate(30deg);
+}
+[data-unitSprite="1"] .m44-unit[data-type="7"][data-rotation="2"]::after {
+  transform: rotate(60deg);
+}
+[data-unitSprite="1"] .m44-unit[data-type="7"][data-rotation="3"]::after {
+  transform: rotate(90deg);
+}
+[data-unitSprite="1"] .m44-unit[data-type="7"][data-rotation="4"]::after {
+  transform: rotate(120deg);
+}
+[data-unitSprite="1"] .m44-unit[data-type="7"][data-rotation="5"]::after {
+  transform: rotate(150deg);
+}
+[data-unitSprite="1"] .m44-unit[data-type="7"][data-rotation="6"]::after {
+  transform: rotate(180deg);
+}
+[data-unitSprite="1"] .m44-unit[data-type="7"][data-rotation="7"]::after {
+  transform: rotate(210deg);
+}
+[data-unitSprite="1"] .m44-unit[data-type="7"][data-rotation="8"]::after {
+  transform: rotate(240deg);
+}
+[data-unitSprite="1"] .m44-unit[data-type="7"][data-rotation="9"]::after {
+  transform: rotate(270deg);
+}
+[data-unitSprite="1"] .m44-unit[data-type="7"][data-rotation="10"]::after {
+  transform: rotate(300deg);
+}
+[data-unitSprite="1"] .m44-unit[data-type="7"][data-rotation="11"]::after {
+  transform: rotate(330deg);
+}
+[data-unitSprite="1"] .m44-unit[data-type="7"][data-rotation="12"]::after {
   transform: rotate(360deg);
 }
 

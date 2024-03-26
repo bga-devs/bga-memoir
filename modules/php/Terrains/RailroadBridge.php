@@ -21,7 +21,7 @@ class RailroadBridge extends \M44\Models\Terrain
       clienttranslate('Armor may Take Ground and Overrun'),
       clienttranslate('Do not block line of sight'),
     ];
-
+    $this ->isRail = true;
     parent::__construct($row);
   }
 }

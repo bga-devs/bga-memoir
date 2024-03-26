@@ -8,6 +8,8 @@ use M44\Managers\Teams;
 use M44\Managers\Units;
 use M44\Helpers\Utils;
 use M44\Board;
+use M44\Core\Game;
+
 
 trait MoveUnitsTrait
 {
@@ -53,7 +55,21 @@ trait MoveUnitsTrait
       throw new \BgaVisibleSystemException('You cannot move this unit to this hex. Should not happen');
     }
 
+    // Train case
+    // move all train units at once forward from locomotive or backward from loco or wagon if it exists
+    $train = Units::getAll()->filter(function ($unit) {
+      return in_array($unit->getType(), [LOCOMOTIVE, WAGON]) && !$unit->isEliminated();
+    });
+    $trainIds = $train->getIds();
+    $trainCase = count($trainIds) > 1 && in_array($unitId, $trainIds);
+    if ($trainCase) {
+      $firstUnitId[] = $unitId;
+      $secondUnitToMoveId = array_diff($trainIds,$firstUnitId);
+    }
+
+
     // Move the unit
+
     $cell = $cells[$k];
     if (is_null($cell['paths'])) {
       throw new \BgaVisibleSystemException(
@@ -89,9 +105,22 @@ trait MoveUnitsTrait
       if (!$desertMove) {
         // do not inc moves if desert moves
         $unit->incMoves($c['cost'] ?? 1);
+        if ($trainCase) {
+          Units::get($secondUnitToMoveId)->incMoves($c['cost'] ?? 1);
+          $c2 = $c;
+          $c2['x'] = $coordSource['x'];
+          $c2['y'] = $coordSource['y'];
+        }
+
       }
       Notifications::moveUnit($player, $unit, $coordSource, $c);
       list($interrupted, $isWinning) = Board::moveUnit($unit, $c);
+      if ($trainCase) {
+        $secondUnitToMove = Units::get($secondUnitToMoveId);
+        $secondUnitPos = $secondUnitToMove->getPos();
+        Notifications::moveUnitNoMsg($player, $secondUnitToMove, $secondUnitPos, $c2);
+        $tmp = Board::moveUnit($secondUnitToMove, $c2);
+      }
       if ($isWinning) {
         return;
       } elseif ($interrupted) {

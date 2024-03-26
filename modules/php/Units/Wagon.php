@@ -7,5 +7,7 @@ class Wagon extends Locomotive
   {
     parent::__construct($row);
     $this->type = WAGON;
+    $this->maxUnits = 3;
+    $this->medalsWorth = 0;
   }
 }

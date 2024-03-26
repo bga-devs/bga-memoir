@@ -26,6 +26,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     'grounds' => ['grounds', 'int'],
     'activationCard' => 'activation_card',
     'extraDatas' => ['extra_datas', 'obj'],
+    'orientation' => ['orientation', 'int'],
   ];
 
   protected $id = null;
@@ -40,6 +41,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
   protected $moves = 0;
   protected $fights = 0;
   protected $grounds = 0;
+  protected $orientation = null;
 
   /*
    * STATIC INFORMATIONS
@@ -89,7 +91,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
   protected $medalsWorth = 1;
   protected $retreatHex = 1;
   protected $ignoreCannotBattle = false;
-  protected $targets = [\INFANTRY => true, ARMOR => true, ARTILLERY => true, DESTROYER => true];
+  protected $targets = [\INFANTRY => true, ARMOR => true, ARTILLERY => true, DESTROYER => true, LOCOMOTIVE => true, WAGON => true];
 
   public function __construct($row)
   {

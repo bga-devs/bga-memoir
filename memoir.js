@@ -88,6 +88,7 @@ define([
         ['updateVisibility', 500],
         ['updateStats', 1],
         ['removeStarToken', 1],
+        ['removeUnit', 1],
         ['proposeScenario', 1],
       ];
 
@@ -347,6 +348,13 @@ define([
       $(`board-token-unit-${n.args.id}`).remove();
       this._grid[n.args.x][n.args.y].unit.equipment = false;
     },
+
+    notif_removeUnit(n) {
+      debug('Notif : removing unit like wagon when eliminated', n);
+      $(`unit-${n.args.id}`).remove();
+      //this._grid[n.args.x][n.args.y].unit.equipment = false;
+    },
+
 
     notif_clearTurn(n) {
       debug('Notif: restarting turn', n);

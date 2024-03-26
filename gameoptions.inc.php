@@ -210,12 +210,12 @@ $game_options = [
         'premium' => true,
         'alpha' => true,
       ],
-      // 1311 => [
-      //   'name' => clienttranslate('[EF] [1311] Bug River'),
-      //   'tmdisplay' => '[1311]',
-      //   'description' => clienttranslate('Bug River'),
-      //   'premium' => true,
-      // ],
+      1311 => [
+        'name' => clienttranslate('[EF] [1311] Bug River'),
+        'tmdisplay' => '[1311]',
+        'description' => clienttranslate('Bug River'),
+        'premium' => true,
+      ],
       1325 => [
         'name' => clienttranslate('[EF] [1325] Gates of Moscow'),
         'tmdisplay' => '[1325]',

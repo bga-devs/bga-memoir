@@ -76,6 +76,11 @@ $stats_type = [
       'name' => totranslate('Round 1: killed artillery units'),
       'type' => 'int',
     ],
+    'otherUnitRound1' => [
+      'id' => STAT_OTHER_UNIT_FIRST_ROUND,
+      'name' => totranslate('Round 1: killed other units'),
+      'type' => 'int',
+    ],
     'infFigRound1' => [
       'id' => STAT_INF_FIG_FIRST_ROUND,
       'name' => totranslate('Round 1: killed infantry figures'),
@@ -89,6 +94,11 @@ $stats_type = [
     'artilleryFigRound1' => [
       'id' => STAT_ARTILLERY_FIG_FIRST_ROUND,
       'name' => totranslate('Round 1: killed artillery figures'),
+      'type' => 'int',
+    ],
+    'otherFigRound1' => [
+      'id' => STAT_OTHER_FIG_FIRST_ROUND,
+      'name' => totranslate('Round 1: killed other figures'),
       'type' => 'int',
     ],
 
@@ -122,6 +132,11 @@ $stats_type = [
       'name' => totranslate('Round 2: killed artillery units'),
       'type' => 'int',
     ],
+    'otherUnitRound1' => [
+      'id' => STAT_OTHER_UNIT_SECOND_ROUND,
+      'name' => totranslate('Round 2: killed other units'),
+      'type' => 'int',
+    ],
     'infFigRound2' => [
       'id' => STAT_INF_FIG_SECOND_ROUND,
       'name' => totranslate('Round 2: killed infantry figures'),
@@ -135,6 +150,11 @@ $stats_type = [
     'artilleryFigRound2' => [
       'id' => STAT_ARTILLERY_FIG_SECOND_ROUND,
       'name' => totranslate('Round 2: killed artillery figures'),
+      'type' => 'int',
+    ],
+    'otherFigRound2' => [
+      'id' => STAT_OTHER_FIG_SECOND_ROUND,
+      'name' => totranslate('Round 2: killed other figures'),
       'type' => 'int',
     ],
 

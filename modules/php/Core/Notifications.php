@@ -251,6 +251,25 @@ class Notifications
     );
   }
 
+  public static function moveUnitNoMsg($player, $unit, $coordSource, $coordTarget)
+  {
+    self::notifyAll(
+      'moveUnit',
+      '',
+      [
+        'player' => $player,
+        'unitId' => $unit->getId(),
+        'unit_desc' => self::computeUnitsDesc([$unit]),
+        'coordSource' => $coordSource,
+        'coordTarget' => $coordTarget,
+        'x' => $coordTarget['x'],
+        'y' => $coordTarget['y'],
+        'fromX' => $coordSource['x'],
+        'fromY' => $coordSource['y'],
+      ]
+    );
+  }
+
   public static function retreatUnit($player, $unit, $coordSource, $coordTarget)
   {
     self::notifyAll(
@@ -549,6 +568,15 @@ class Notifications
     ]);
   }
 
+  public static function removeUnitfromBoard($id)
+  {
+    self::notifyAll('removeUnit', '', [
+      'id' => $id,
+    ]);
+  }
+
+
+
   /*********************
    **** UPDATE ARGS ****
    *********************/
@@ -593,12 +621,16 @@ class Notifications
       \ARMOR => 0,
       \ARTILLERY => 0,
       \DESTROYER => 0,
+      \LOCOMOTIVE => 0,
+      \WAGON => 0,
     ];
     $names = [
       \INFANTRY => \clienttranslate('Infantry'),
       \ARMOR => \clienttranslate('Armor'),
       \ARTILLERY => \clienttranslate('Artillery'),
       \DESTROYER => \clienttranslate('Destroyer'),
+      \LOCOMOTIVE => \clienttranslate('Locomotive'),
+      \WAGON => \clienttranslate('Wagon'),
     ];
 
     foreach ($units as $unit) {

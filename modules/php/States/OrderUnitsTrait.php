@@ -73,14 +73,38 @@ trait OrderUnitsTrait
     }
     $player = Players::getCurrent();
     $args = $this->argsOrderUnits($player);
-    if (count($unitIds) > $args['n']) {
+    
+    // Case train if contain LOCO or WAGON add all LOCO and WAGON in $unitids and count them as a whole unit
+    /* $units = $this->getPlayer()
+      ->getTeam()
+      ->getOpponent()
+      ->getUnits()*/
+    $train = $player->getTeam()->getUnits()->filter(function ($unit) {
+      return in_array($unit->getType(), [LOCOMOTIVE, WAGON]) && !$unit->isEliminated();
+    });
+    $trainIds = $train->getIds();
+    
+    $trainSelectedIds = array_intersect($unitIds,$trainIds);
+    $countTrainModifier = count($train) > 1 && count($trainSelectedIds) > 0 ? 1 : 0;
+   
+    $selectableIds = $args['units']->getIds();
+    // If selected only one we add the others loco or wagons to selected and selectable units
+    $notSelectedTrainIds = array_diff($trainIds,$trainSelectedIds);
+
+    if (count($notSelectedTrainIds) == 1) {
+      $unitIds[] = implode($notSelectedTrainIds);
+      $selectableIds[] = implode($notSelectedTrainIds);
+
+      // TO DO : extend to Breakthrough onTheMove
+    }
+
+    if (count($unitIds) - $countTrainModifier > $args['n']) {
       throw new \BgaVisibleSystemException('More units than authorized. Should not happen');
     }
-    if (count($onTheMoveIds) > ($args['nOnTheMove'] ?? 0)) {
+    if (count($onTheMoveIds) - $countTrainModifier > ($args['nOnTheMove'] ?? 0)) {
       throw new \BgaVisibleSystemException('More on the move units than authorized. Should not happen');
     }
 
-    $selectableIds = $args['units']->getIds();
     if (count(array_diff($unitIds, $selectableIds)) != 0) {
       throw new \feException('You selected a unit that cannot be selected');
     }
@@ -94,7 +118,7 @@ trait OrderUnitsTrait
     // Flag the units as activated by the corresponding card
     $card = $player->getCardInPlay();
     foreach ($unitIds as $unitId) {
-      Units::get($unitId)->activate($card);
+      Units::get($unitId)->activate($card);    
     }
     foreach ($onTheMoveIds as $unitId) {
       Units::get($unitId)->activate($card, true);

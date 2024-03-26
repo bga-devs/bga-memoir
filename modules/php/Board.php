@@ -191,6 +191,20 @@ class Board
     return !$isbeach;
   }
 
+  public function hasFullRailPath($path)
+  {
+    $ispathrail = true;
+    $cells = $path['cells'];
+    
+    foreach ($cells as $c) {  
+      if ($ispathrail && !self::isRailCell($c) ) {
+        $ispathrail = false;
+      }
+    }
+    return $ispathrail;
+  }
+
+
   /**
    * Do a generic OR on a given property of all terrains on the cell
    */
@@ -337,6 +351,9 @@ class Board
         if ($unit->getType() == DESTROYER) {
           // specific unit in ocean cannot move to adjacent hexes to beach
           return self::isAdjacentToBeach($cell);
+        } elseif (in_array($unit->getType(), [LOCOMOTIVE,WAGON])) {
+          // train unit can only move on rail paths
+          return self::hasFullRailPath($path);
         } else {
           return self::isValidPath($unit, $cell, $path);
         }
@@ -1055,67 +1072,136 @@ class Board
       return [[], []];
     }
 
-    // Compute all cells reachable at distance $d in the good vertical direction
+    // Particular case Train backward move
+    //(not necessarly vertical direction but check WAGON retreat instead or opposite LOCOMOTIVE orientation)
+    // Case train detected if train case
+    
+    $trainCase = in_array($unit->getType(), [LOCOMOTIVE, WAGON]);
+    
+    // Compute all cells reachable at distance $d
     $deltaY = $unit->getCampDirection();
-    list($cells, $markers) = self::getCellsAtDistance(
-      $unit->getPos(),
-      $d,
-      function ($source, $target, $d) use ($unit, $deltaY) {
-        // Check direction
-        if ($source['y'] + $deltaY != $target['y']) {
-          return \INFINITY;
-        }
 
-        $targetCell = self::$grid[$target['x']][$target['y']];
-        $sourceCell = self::$grid[$source['x']][$source['y']];
-
-        // If there is a unit => can't retreat there
-        if (!is_null($targetCell['unit'])) {
-          return \INFINITY;
-        }
-
-        // If there is an impassable terrain => can't retreat there
-        if (self::isImpassableCell($target, $unit) || self::isImpassableForRetreatCell($target, $unit)) {
-          return \INFINITY;
-        }
-
-        // If the edge is not possible, return infinity
-        foreach ($sourceCell['terrains'] as $terrain) {
-          if ($terrain->isBlocked($target, $unit)) {
+    if ($trainCase) {
+      // Compute all cells reachable at distance $d on rails only
+      list($cells, $markers) = self::getCellsAtDistance(
+        $unit->getPos(),
+        $d,
+        
+        function ($source, $target, $d) use ($unit, $deltaY) {
+          // Check direction to be modified
+          /*if ($source['y'] + $deltaY != $target['y']) {
+            return \INFINITY;
+          }*/
+  
+          $targetCell = self::$grid[$target['x']][$target['y']];
+          $sourceCell = self::$grid[$source['x']][$source['y']];
+  
+          // Train only on railways
+          if (!self::isRailCell(['x' => $target['x'], 'y' => $target['y']])) {
+            return \INFINITY;
+          }
+                   
+          // If there is a unit => can't retreat there
+          if (!is_null($targetCell['unit'])) {
+            return \INFINITY;
+          }
+  
+            
+          // If the edge is not possible, return infinity
+          foreach ($sourceCell['terrains'] as $terrain) {
+            if ($terrain->isBlocked($target, $unit)) {
+              return INFINITY;
+            }
+          }
+          foreach ($targetCell['terrains'] as $terrain) {
+            if ($terrain->isBlocked($source, $unit)) {
+              return INFINITY;
+            }
+          }
+  
+  
+          // Otherwise, ask the terrains about it and take the maximum of the costs to check INFINITY
+          $cost = 1;
+          foreach ($sourceCell['terrains'] as $terrain) {
+            $cost = max($cost, $terrain->getLeavingDeplacementCost($unit, $source, $target, $d, false));
+          }
+          foreach ($targetCell['terrains'] as $terrain) {
+            $cost = max($cost, $terrain->getEnteringDeplacementCost($unit, $source, $target, $d, false));
+          }
+  
+          if ($cost == \INFINITY) {
             return INFINITY;
           }
+  
+          // Ignore all other terrains restriction
+          return 1;
+        },
+        function ($cell) use ($unit) {
+          return self::avoidIfPossibleCell($cell, $unit) ? 1 : 0;
         }
-        foreach ($targetCell['terrains'] as $terrain) {
-          if ($terrain->isBlocked($source, $unit)) {
+      );
+    } else { // not a train unit
+      // Compute all cells reachable at distance $d in the good vertical direction
+      list($cells, $markers) = self::getCellsAtDistance(
+        $unit->getPos(),
+        $d,
+        function ($source, $target, $d) use ($unit, $deltaY) {
+          // Check direction
+          if ($source['y'] + $deltaY != $target['y']) {
+            return \INFINITY;
+          }
+  
+          $targetCell = self::$grid[$target['x']][$target['y']];
+          $sourceCell = self::$grid[$source['x']][$source['y']];
+  
+          // If there is a unit => can't retreat there
+          if (!is_null($targetCell['unit'])) {
+            return \INFINITY;
+          }
+  
+          // If there is an impassable terrain => can't retreat there
+          if (self::isImpassableCell($target, $unit) || self::isImpassableForRetreatCell($target, $unit)) {
+            return \INFINITY;
+          }
+  
+          // If the edge is not possible, return infinity
+          foreach ($sourceCell['terrains'] as $terrain) {
+            if ($terrain->isBlocked($target, $unit)) {
+              return INFINITY;
+            }
+          }
+          foreach ($targetCell['terrains'] as $terrain) {
+            if ($terrain->isBlocked($source, $unit)) {
+              return INFINITY;
+            }
+          }
+  
+          // check to forbid caves teleportation
+          if (!in_array(['x' => $target['x'], 'y' => $target['y']], self::getNeighbours($source))) {
             return INFINITY;
           }
+  
+          // Otherwise, ask the terrains about it and take the maximum of the costs to check INFINITY
+          $cost = 1;
+          foreach ($sourceCell['terrains'] as $terrain) {
+            $cost = max($cost, $terrain->getLeavingDeplacementCost($unit, $source, $target, $d, false));
+          }
+          foreach ($targetCell['terrains'] as $terrain) {
+            $cost = max($cost, $terrain->getEnteringDeplacementCost($unit, $source, $target, $d, false));
+          }
+  
+          if ($cost == \INFINITY) {
+            return INFINITY;
+          }
+  
+          // Ignore all other terrains restriction
+          return 1;
+        },
+        function ($cell) use ($unit) {
+          return self::avoidIfPossibleCell($cell, $unit) ? 1 : 0;
         }
-
-        // check to forbid caves teleportation
-        if (!in_array(['x' => $target['x'], 'y' => $target['y']], self::getNeighbours($source))) {
-          return INFINITY;
-        }
-
-        // Otherwise, ask the terrains about it and take the maximum of the costs to check INFINITY
-        $cost = 1;
-        foreach ($sourceCell['terrains'] as $terrain) {
-          $cost = max($cost, $terrain->getLeavingDeplacementCost($unit, $source, $target, $d, false));
-        }
-        foreach ($targetCell['terrains'] as $terrain) {
-          $cost = max($cost, $terrain->getEnteringDeplacementCost($unit, $source, $target, $d, false));
-        }
-
-        if ($cost == \INFINITY) {
-          return INFINITY;
-        }
-
-        // Ignore all other terrains restriction
-        return 1;
-      },
-      function ($cell) use ($unit) {
-        return self::avoidIfPossibleCell($cell, $unit) ? 1 : 0;
-      }
-    );
+      );
+    }    
 
     return [$cells, $markers];
   }

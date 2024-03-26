@@ -17,6 +17,7 @@ class Rail extends \M44\Models\Terrain
       clienttranslate('Armor may Take ground and Overrun'),
       clienttranslate('Road crossing a railroad plays as standard road'),
     ];
+    $this ->isRail = true;
     parent::__construct($row);
   }
 

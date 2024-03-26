@@ -393,10 +393,29 @@ trait AttackUnitsTrait
       return false;
     }
 
+    // train case : if unit is Wagon, add also hits to loco and vice et versa if loco + wagon
+    $train = Units::getAll()->filter(function ($unit) {
+      return in_array($unit->getType(), [LOCOMOTIVE, WAGON]) && !$unit->isEliminated();
+    });
+    $trainIds = $train->getIds();
+    $unitId = $unit->getId();
+    $trainCase = count($trainIds) > 1 && in_array($unitId, $trainIds);
+    if ($trainCase) {
+      $firstUnitId[] = $unitId;
+      $secondUnitToHitId = array_diff($trainIds,$firstUnitId);
+
+    }
+
+
     // Take the hits
     $realHits = $unit->takeDamage($hits);
+    if ($trainCase) {
+      $secondUnitToHit = Units::get($secondUnitToHitId);
+      $realHits2 = $secondUnitToHit->takeDamage($hits);
+    }
 
-    // Increase the stats
+
+    // Increase the stats, count only once for train case
     $statName = 'inc' . $unit->getStatName() . 'FigRound' . Globals::getRound();
     Stats::$statName($attacker, $realHits);
     if ($unit->isEliminated()) {
@@ -405,16 +424,36 @@ trait AttackUnitsTrait
       Stats::$statName($attacker, 1);
     }
 
-    // Notify
+    // Notify damage
     $player = $unit->getPlayer();
-    Notifications::takeDamage($player, $unit, $hits, $cantRetreat);
+    if ($unit->getType() == WAGON) {
+      Notifications::takeDamage($player, $secondUnitToHit, $hits, $cantRetreat);
+    } else {
+      Notifications::takeDamage($player, $unit, $hits, $cantRetreat);
+    }
+    
 
     // Check for elimination
+    // train case
+    if ($trainCase && $secondUnitToHit->isEliminated()) {
+      Board::removeUnit($secondUnitToHit);
+      $team = $attacker->getTeam();
+      $team->addEliminationMedals($secondUnitToHit);
+      Tokens::removeTargets($secondUnitToHit->getPos());
+      if ($secondUnitToHit->getType() == WAGON) {
+        Notifications::removeUnitfromBoard($secondUnitToHit->getId());
+      }
+    }
+
+    // standard unit case
     if ($unit->isEliminated()) {
       Board::removeUnit($unit);
       $team = $attacker->getTeam();
       $team->addEliminationMedals($unit);
       Tokens::removeTargets($unit->getPos());
+      if ($unit->getType() == WAGON) {
+        Notifications::removeUnitfromBoard($unit->getId());
+      }
 
       if (
         Globals::isItalyHighCommand() &&

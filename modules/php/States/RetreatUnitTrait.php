@@ -125,6 +125,27 @@ trait RetreatUnitTrait
     $player = Players::getActive();
     list($unit, $minFlags, $maxFlags, $effect) = $this->getRetreatInfo();
     $attack = $this->getCurrentAttack();
+    // Case train detected if train case
+    $train = Units::getAll()->filter(function ($unit) {
+      return in_array($unit->getType(), [LOCOMOTIVE, WAGON]) && !$unit->isEliminated();
+    });
+
+    $trainCase = in_array($unit->getType(), [LOCOMOTIVE, WAGON]);
+
+    // check wether it is locomotive only or locomotive + wagon train
+    if ($trainCase) { 
+      if (count($train) > 1 && $unit->getType() == LOCOMOTIVE) {
+        $wagon = $train->filter(function ($unit) {
+          return in_array($unit->getType(), [WAGON]);
+        });
+        $trainUnitToRetreat = $wagon->first();
+      } else {
+        $trainUnitToRetreat = $unit;
+      }
+      $unit = $trainUnitToRetreat;
+    }
+
+
     $args = array_merge(Board::getArgsRetreat($unit, $minFlags, $maxFlags), [
       'unitId' => $unit->getId(),
       'min' => $minFlags,
@@ -178,6 +199,19 @@ trait RetreatUnitTrait
       throw new \BgaVisibleSystemException('You cannot move this unit to this hex. Should not happen');
     }
 
+    // Train case
+    // move all train units at once forward from locomotive or backward from loco or wagon if it exists
+    $train = Units::getAll()->filter(function ($unit) {
+      return in_array($unit->getType(), [LOCOMOTIVE, WAGON]) && !$unit->isEliminated();
+    });
+    $trainIds = $train->getIds();
+    $unitId = $args['unitId'];
+    $trainCase = count($trainIds) > 1 && in_array($unitId, $trainIds);
+    if ($trainCase) {
+      $firstUnitId[] = $unitId;
+      $secondUnitToMoveId = array_diff($trainIds,$firstUnitId);
+    }
+
     // Move the unit
     $cell = $cells[$k];
     $dist = $cell['d'];
@@ -186,11 +220,21 @@ trait RetreatUnitTrait
     });
     $path = $cell['paths'][0]; // Take the least resistance path
     $unitId = $args['unitId'];
+
     $unit = Units::get($unitId);
     $coordSource = $unit->getPos();
     foreach ($path['cells'] as $c) {
       Notifications::retreatUnit($unit->getPlayer(), $unit, $coordSource, $c);
       list($interrupted, $isWinning) = Board::moveUnit($unit, $c, true);
+      if ($trainCase) {
+        $c2 = $c;
+        $c2['x'] = $coordSource['x'];
+        $c2['y'] = $coordSource['y'];
+        $secondUnitToMove = Units::get($secondUnitToMoveId);
+        $secondUnitPos = $secondUnitToMove->getPos();
+        Notifications::moveUnitNoMsg($player, $secondUnitToMove, $secondUnitPos, $c2);
+        $tmp = Board::moveUnit($secondUnitToMove, $c2);
+      }
       if ($isWinning) {
         return;
       } elseif ($interrupted) {

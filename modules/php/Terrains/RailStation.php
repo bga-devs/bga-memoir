@@ -20,5 +20,6 @@ class RailStation extends Village
     $this->isBlockingLineOfSight = true;
     $this->defense = [INFANTRY => -1, ARMOR => -2];
     $this->offense = [ARMOR => -2];
+    $this ->isRail = true;
   }
 }

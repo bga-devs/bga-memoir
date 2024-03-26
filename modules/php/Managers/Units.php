@@ -168,6 +168,9 @@ class Units extends \M44\Helpers\Pieces
       } elseif (isset($hex['rect_terrain']) && in_array($hex['rect_terrain']['name'], $terrainUnits)) {
         $nation = $scenario['game_info']['side_player2'] == ALLIES ? 'us' : 'ger';
         $data = ['nation' => $nation, 'type' => $hex['rect_terrain']['name'], 'badge' => ''];
+        if (isset($hex['rect_terrain']['orientation'])) {
+          $data['extra_datas']['orientation'] = $hex['rect_terrain']['orientation'];
+        }
       }
 
       if (is_null($data)) {
@@ -195,6 +198,10 @@ class Units extends \M44\Helpers\Pieces
       $data['extra_datas'] = ['properties' => []];
       if (isset($hex['unit']['behavior'])) {
         $data['extra_datas']['behavior'] = $hex['unit']['behavior'];
+      }
+
+      if (isset($hex['rect_terrain']['orientation'])) {
+        $data['extra_datas']['orientation'] = $hex['rect_terrain']['orientation'];
       }
 
       if (isset($hex['unit']['nbr_units'])) {

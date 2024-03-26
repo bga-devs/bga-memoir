@@ -395,10 +395,10 @@ $scenarios[1311] = [
           'name' => 'rail',
           'orientation' => 1,
         ],
-        // 'rect_terrain' => [
-        //   'name' => 'loco',
-        //   'orientation' => 1,
-        // ],
+       'rect_terrain' => [
+          'name' => 'loco',
+          'orientation' => 1,
+        ],
       ],
       45 => [
         'row' => 6,
@@ -407,10 +407,10 @@ $scenarios[1311] = [
           'name' => 'rail',
           'orientation' => 1,
         ],
-        // 'rect_terrain' => [
-        //   'name' => 'wagon',
-        //   'orientation' => 1,
-        // ],
+        'rect_terrain' => [
+          'name' => 'wagon',
+          'orientation' => 1,
+        ],
       ],
       46 => [
         'row' => 7,

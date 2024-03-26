@@ -31,7 +31,8 @@ trait AmbushTrait
 
     $canAttack = ($ambushedUnit->canTarget(Units::get($attack['unitId']))) 
       && !($ambushedUnit-> getExtraDatas('cannotBeActivatedUntilTurn') >= Globals::getTurn()) 
-      && !$cannotBattleFromTerrain;
+      && !$cannotBattleFromTerrain
+      && !empty($ambushedUnit->attackPower());
    
     $cards = $canAttack
       ? $player
