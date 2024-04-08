@@ -153,12 +153,16 @@
       &.forMove,
       &.forMoveAndAttack,
       &.forAttack,
+      &.forTrainReinforcement,
       &.forRetreat {
         background-image: url("img/hex_background_highlights.png");
         background-size: 500% 100%;
         background-position: 0% 0%;
       }
       &.forMove {
+        background-position-x: 25%;
+      }
+      &.forTrainReinforcement {
         background-position-x: 25%;
       }
       &.forAttack {

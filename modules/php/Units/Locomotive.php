@@ -13,9 +13,10 @@ class Locomotive extends AbstractUnit
     $this->maxUnits = 4;
     $this->movementRadius = 3;
     $this->movementAndAttackRadius = 3;
-    //$this->attackPower = []; mettre une condition en fonction du type de train
+    //$this->attackPower = []; // TO DO to be defined if its Armored Train,
+    //by default attackPower = [] for Supply train see Abstract Unit
     $this->cannotHeal = true;
-    //$this->canIgnoreOneFlag = true; 
+    $this->canIgnoreOneFlag = true; 
     $this->desc = [
       clienttranslate(
         'Can be activated as a whole unit'

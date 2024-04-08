@@ -87,7 +87,7 @@ class AirPower extends \M44\Models\Card
   {
     // Sanity checks
     $args = $this->argsTargetAirPower();
-    if (count(array_diff($s, $args['units']->getIds())) > 0) {
+    if (count(array_diff($unitIds, $args['units']->getIds())) > 0) {
       throw new \feException('Those units cannot be attacked. Should not happen');
     }
     if (count($unitIds) > 4) {

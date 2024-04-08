@@ -37,6 +37,15 @@ $scenarios[1311] = [
     'options' => [
       'russian_commissar_rule' => 'ALLIES',
       'blitz_rules' => true,
+      'supply_train_rules' => [
+        'side' => 'ALLIES',
+        'nbr_units' => [1, 1], // nbr units for each [loco, wagon]
+        'unit' => [
+          'name' => 'infru',
+          'behavior' => 'CANNOT_BE_ACTIVATED_TILL_TURN',
+          'turn' => 1
+        ],
+      ],
     ],
   ],
   'board' => [

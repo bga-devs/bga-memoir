@@ -49,7 +49,7 @@ define([
         'airDrop2',
         'confirmTurn',
         'targetBridge',
-        //'blowBridge',
+        'trainReinforcement',
       ];
       this._notifications = [
         ['playCard', 1000],
@@ -90,6 +90,7 @@ define([
         ['removeStarToken', 1],
         ['removeUnit', 1],
         ['proposeScenario', 1],
+        ['trainReinforcement', 500],
       ];
 
       // Fix mobile viewport (remove CSS zoom)
@@ -317,6 +318,7 @@ define([
         confirmTurn: 'command',
         targetBridge: 'order',
         blowBridge: 'attack',
+        trainReinforcement: 'para',
       };
 
       if (Object.keys(statusMapping).includes(stateName)) {
@@ -431,6 +433,7 @@ define([
         'retreating',
         'forRetreat',
         'forAirDrop',
+        'forTrainReinforcement',
         'attacked',
         'mayAttack',
       ].forEach((className) => {

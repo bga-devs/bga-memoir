@@ -9,5 +9,6 @@ class Wagon extends Locomotive
     $this->type = WAGON;
     $this->maxUnits = 3;
     $this->medalsWorth = 0;
+    $this->name = clienttranslate('Wagon');
   }
 }

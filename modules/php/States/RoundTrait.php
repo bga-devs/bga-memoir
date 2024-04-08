@@ -23,6 +23,7 @@ trait RoundTrait
     Globals::setRawLastPlayedCards([]);
     Globals::setAttackStack([]);
     Globals::setAirDrop2Done(false);
+    Globals::setSupplyTrainDone(false);
 
     // Check for options
     $options = Scenario::getOptions();

@@ -219,6 +219,7 @@ class Scenario extends \APP_DbObject
     Globals::setBeginDate($scenario['game_info']['date_begin'] ?? null);
     Globals::setBlowBridgeOpt2($options['blowbridge_opt2'] ?? null);
     Globals::setMustHaveExitUnit($options['must_have_unit_exit'] ?? null);
+    Globals::setSupplyTrain($options['supply_train_rules'] ?? null);
 
 
     // Create Teams

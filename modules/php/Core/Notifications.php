@@ -5,6 +5,7 @@ use M44\Helpers\Utils;
 use M44\Core\Globals;
 use M44\Core\Stats;
 use M44\Managers\Cards;
+use M44\Managers\Units;
 
 class Notifications
 {
@@ -523,6 +524,15 @@ class Notifications
     ]);
   }
 
+  public static function trainReinforcement($player, $unit)
+  {
+    self::notifyAll('trainReinforcement', \clienttranslate('${player_name} deployed 1 unit in ${coordSource}'), [
+      'player' => $player,
+      'unit' => $unit,
+      'coordSource' => $unit->getPos(),
+    ]);
+  }
+
   public static function revealMinefield($player, $terrainId, $cell, $value)
   {
     $msg =
@@ -570,8 +580,10 @@ class Notifications
 
   public static function removeUnitfromBoard($id)
   {
-    self::notifyAll('removeUnit', '', [
+    self::notifyAll('removeUnit', 
+    clienttranslate('${unit_name} removed from board'), [
       'id' => $id,
+      'unit_name' => Units::get($id)->getName()
     ]);
   }
 

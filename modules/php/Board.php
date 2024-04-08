@@ -1077,6 +1077,9 @@ class Board
     // Case train detected if train case
     
     $trainCase = in_array($unit->getType(), [LOCOMOTIVE, WAGON]);
+    $train = Units::getAll()->filter(function ($unit) {
+      return in_array($unit->getType(), [LOCOMOTIVE, WAGON]) && !$unit->isEliminated();
+    });
     
     // Compute all cells reachable at distance $d
     $deltaY = $unit->getCampDirection();
@@ -1087,7 +1090,7 @@ class Board
         $unit->getPos(),
         $d,
         
-        function ($source, $target, $d) use ($unit, $deltaY) {
+        function ($source, $target, $d) use ($unit, $train) {
           // Check direction to be modified
           /*if ($source['y'] + $deltaY != $target['y']) {
             return \INFINITY;
@@ -1100,6 +1103,33 @@ class Board
           if (!self::isRailCell(['x' => $target['x'], 'y' => $target['y']])) {
             return \INFINITY;
           }
+
+          // Train only can retreat backward direction, case loco only
+          if (count($train) == 1) {
+            $trainOrientation = $unit->getExtraDatas('orientation');
+            $forwardtargets = [];
+            $directions = [
+              1 => ['x' => -2, 'y' => 0],
+              2 => ['x' => -1, 'y' => -1],
+              3 => ['x' => 1, 'y' => -1],
+              4 => ['x' => 2, 'y' => 0],
+              5 => ['x' => 1, 'y' => 1],
+              0 => ['x' => -1, 'y' => 1],
+            ];
+            for ($index=-1; $index <=1; $index++) { 
+              $indexDirection = ($trainOrientation + $index + 6) % 6 ;
+
+              $forwardtargets[$index + 1]['x'] = $source['x'] + $directions[$indexDirection]['x'];
+              $forwardtargets[$index + 1]['y'] = $source['y'] + $directions[$indexDirection]['y'];
+              
+            }
+            
+            if(in_array($target,$forwardtargets)) {
+              return \INFINITY;
+            }
+          }
+          
+          
                    
           // If there is a unit => can't retreat there
           if (!is_null($targetCell['unit'])) {

@@ -9,6 +9,7 @@ use M44\Managers\Units;
 use M44\Helpers\Utils;
 use M44\Board;
 use M44\Core\Game;
+use M44\Scenario;
 
 
 trait MoveUnitsTrait
@@ -30,7 +31,6 @@ trait MoveUnitsTrait
         }
       }
     }
-
     return $args;
   }
 
@@ -155,7 +155,13 @@ trait MoveUnitsTrait
       $this->nextState('overrun');
       return;
     }
-    $this->nextState('moveUnits');
+
+    if ($unit->getType() == LOCOMOTIVE && $unit->getExtraDatas('trainReinforcement') && !Globals::getSupplyTrainDone()) {
+      $this->nextState('trainReinforcement');
+    } else {
+      $this->nextState('moveUnits');
+    }
+
   }
 
   public function actMoveUnitsDone($check = true)
@@ -183,5 +189,64 @@ trait MoveUnitsTrait
       }
     }
     $this->nextState('attackUnits');
+  }
+
+  public function argsTrainReinforcement()
+  {
+    $train = Units::getAll()->filter(function ($unit) {
+      return in_array($unit->getType(), [LOCOMOTIVE, WAGON]) && !$unit->isEliminated();
+    });
+    $neighbourCells = [];
+    foreach ($train as $trainunit) {
+      $cells = Board::getNeighbours($trainunit->getPos());
+      foreach ($cells as $c) {
+        if (!in_array($c, $neighbourCells) && Board::getUnitInCell($c) == null) {
+          $neighbourCells[] = $c;
+        }
+      }
+    }
+    $args = $neighbourCells;
+    return $args;
+  }
+
+  public function actTrainReinforcement($x , $y)
+  {
+    // Sanity checks
+    self::checkAction('actTrainReinforcement');
+    $args = self::argsTrainReinforcement();
+    $k = Utils::searchCell($args, $x, $y);
+    if ($k === false) {
+      throw new \BgaVisibleSystemException('You cannot performed reinforcement here. Should not happen');
+    }
+
+    $player = Players::getCurrent();
+    $train = Units::getAll()->filter(function ($unit) {
+      return in_array($unit->getType(), [LOCOMOTIVE, WAGON]) && !$unit->isEliminated();
+    });
+    Globals::incReinforcementUnits();
+    $options = Scenario::getOptions()['supply_train_rules'];
+    $currentTurn = Globals::getTurn();
+    $reinforcementNumber = Globals::getReinforcementUnits();
+    $maxi = $options['nbr_units'][$reinforcementNumber-1];
+
+    for ($i = 0; $i < $maxi; $i++) { 
+      $pos = ['x' => $x, 'y' => $y];
+      $unit = Units::addInCell($options['unit'], $pos);
+      if (isset($options['unit']['behavior']) 
+      && $options['unit']['behavior'] == 'CANNOT_BE_ACTIVATED_TILL_TURN') {
+        $unit -> setExtraDatas('cannotBeActivatedUntilTurn', $options['unit']['turn'] + $currentTurn);
+      }
+      Board::addUnit($unit);
+      //Notifications::airDrop($player, $unit);
+      Notifications::trainReinforcement($player, $unit);
+    }
+    
+    if (Globals::getReinforcementUnits()>= count($train)) {
+      Globals::setReinforcementUnits(0);
+      Globals::setSupplyTrainDone(true);
+      $this->gamestate->jumpToState(ST_MOVE_UNITS);
+    } else {
+      $this->gamestate->jumpToState(ST_TRAIN_REINFORCEMENT);
+    } 
   }
 }

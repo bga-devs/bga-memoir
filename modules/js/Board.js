@@ -1295,6 +1295,13 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       this.place('tplUnit', unit, `cell-${unit.x}-${unit.y}`);
     },
 
+    notif_trainReinforcement(n) {
+      debug('Notif: reinforcing a unit from train', n);
+      let unit = n.args.unit;
+      unit.orientation = this._bottomTeam != (ALLIES_NATIONS.includes(unit.nation) ? 'ALLIES' : 'AXIS') ? 1 : 0;
+      this.place('tplUnit', unit, `cell-${unit.x}-${unit.y}`);
+    },
+
     ////////////////////////////
     //    ____  _
     //   |  _ \(_) ___ ___

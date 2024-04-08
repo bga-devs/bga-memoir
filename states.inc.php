@@ -253,8 +253,11 @@ $machinestates = [
       'actHealUnit',
       'actHealUnitHospital',
       'actExitUnit',
+      'actTrainReinforcement',
     ],
-    'transitions' => ['moveUnits' => ST_MOVE_UNITS, 'attackUnits' => ST_PRE_ATTACK],
+    'transitions' => ['moveUnits' => ST_MOVE_UNITS,
+      'attackUnits' => ST_PRE_ATTACK,
+      'trainReinforcement' => ST_TRAIN_REINFORCEMENT,],
   ],
 
   ST_PRE_ATTACK => [
@@ -620,6 +623,17 @@ $machinestates = [
     'action' => 'stBlowBridge',
     'args' => 'argsblowbridge2',
     'transitions' => ['draw' => ST_DRAW],
+  ],
+
+  // TO DO state Train Reinforcement
+  ST_TRAIN_REINFORCEMENT => [
+    'name' => 'trainReinforcement',
+    'description' => clienttranslate('${actplayer} can deploy up to 2 units from train'),
+    'descriptionmyturn' => clienttranslate('${you} can deploy up to 2 units from train'),
+    'type' => 'activeplayer',
+    'possibleactions' => ['actTrainReinforcement'],
+    'args' => 'argsTrainReinforcement',
+    'transitions' => ['moveUnits' => ST_MOVE_UNITS],
   ],
 
   /////////////////////////////////////////////

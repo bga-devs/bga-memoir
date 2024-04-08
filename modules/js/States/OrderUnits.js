@@ -195,6 +195,16 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       this._grid[n.args.fromX][n.args.fromY].unit = null;
     },
 
+    onEnteringStateTrainReinforcement(args) { // args 1 valid neighbour cells of train
+      args.forEach((cell) => {
+        let oCell = $(`cell-${cell.x}-${cell.y}`);
+        oCell.classList.add('forTrainReinforcement');
+        this.onClick(oCell, () => this.takeAction('actTrainReinforcement', { x: cell.x, y: cell.y }));
+      });
+    },
+      
+
+
     //////////////////////////////////////////
     //    _  _____ _____  _    ____ _  __
     //    / \|_   _|_   _|/ \  / ___| |/ /

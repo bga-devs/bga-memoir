@@ -334,8 +334,16 @@ class action_memoir extends APP_GameAction
     self::ajaxResponse();
   }
 
-
-
+  // Train reinforcement
+  public function actTrainReinforcement()
+  {
+    self::setAjaxMode();
+    $x = self::getArg('x', AT_posint, false);
+    $y = self::getArg('y', AT_posint, false);
+    $this->game->actTrainReinforcement($x, $y);
+    self::ajaxResponse();
+  }
+  
   public function actBattleBack()
   {
     self::setAjaxMode();

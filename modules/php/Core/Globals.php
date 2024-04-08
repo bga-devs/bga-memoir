@@ -56,6 +56,9 @@ class Globals extends \M44\Helpers\DB_Manager
     'airDrop2Done' => 'bool', // used if second air drop was performed
     'blowBridgeOpt2' => 'obj',
     'mustHaveExitUnit' => 'obj', // used for victory condition must have n medals from EXIT
+    'supplyTrain' => 'obj',
+    'supplyTrainDone' => 'bool',
+    'reinforcementUnits' => 'int', // used for nb units to be reinforced
 
     // scenario game_info
     'beginDate' => 'str',
