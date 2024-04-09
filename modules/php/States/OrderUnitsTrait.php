@@ -88,8 +88,12 @@ trait OrderUnitsTrait
     $countTrainModifier = count($train) > 1 && count($trainSelectedIds) > 0 ? 1 : 0;
    
     $selectableIds = $args['units']->getIds();
-    // If selected only one we add the others loco or wagons to selected and selectable units
-    $notSelectedTrainIds = array_diff($trainIds,$trainSelectedIds);
+    $notSelectedTrainIds = [];
+
+    // If selected only one we add the others loco or wagons to selected and selectable units and train is 2
+    if (count($trainIds) > 1) {
+      $notSelectedTrainIds = array_diff($trainIds,$trainSelectedIds);
+    }
 
     if (count($notSelectedTrainIds) == 1) {
       $unitIds[] = implode($notSelectedTrainIds);

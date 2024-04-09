@@ -628,8 +628,8 @@ $machinestates = [
   // TO DO state Train Reinforcement
   ST_TRAIN_REINFORCEMENT => [
     'name' => 'trainReinforcement',
-    'description' => clienttranslate('${actplayer} can deploy up to 2 units from train'),
-    'descriptionmyturn' => clienttranslate('${you} can deploy up to 2 units from train'),
+    'description' => clienttranslate('${actplayer} can deploy 1 unit from each train unit'),
+    'descriptionmyturn' => clienttranslate('${you} can deploy 1 unit from each train unit'),
     'type' => 'activeplayer',
     'possibleactions' => ['actTrainReinforcement'],
     'args' => 'argsTrainReinforcement',

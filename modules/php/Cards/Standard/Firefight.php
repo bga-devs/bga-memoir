@@ -24,7 +24,8 @@ class Firefight extends \M44\Models\Card
     $marineCommand = $player->isMarineCommand();
     $units = $player->getUnits()->filter(function ($unit) {
       return !Board::isAdjacentToEnnemy($unit) && 
-      !($unit -> getExtraDatas('cannotBeActivatedUntilTurn') >= Globals::getTurn());
+      !($unit -> getExtraDatas('cannotBeActivatedUntilTurn') >= Globals::getTurn()) &&
+      !empty($unit -> attackPower());
     });
 
     return [
