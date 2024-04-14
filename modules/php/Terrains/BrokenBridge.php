@@ -13,7 +13,7 @@ class BrokenBridge extends \M44\Models\Terrain
   public function __construct($row)
   {
     $this->name = clienttranslate('Broken Bridge');
-    $this->number = 9;
+    $this->number = '9c';
     $this->isBridge = false;
     $this->deltaAngle = -1;
     $this->canBeBlown = false;

@@ -1,7 +1,7 @@
 <?php
 namespace M44\Terrains;
 
-class RailroadBridge extends \M44\Models\Terrain
+class RailroadBridge extends Bridge
 {
   public static function isTileOfType($hex)
   {
@@ -12,7 +12,7 @@ class RailroadBridge extends \M44\Models\Terrain
   {
     $this->name = clienttranslate('Railroad Bridges');
     $this->number = 37;
-    $this->isBridge = true;
+    $this->deltaAngle = 2;
     $this->mustStopWhenEntering = [ARMOR, \ARTILLERY];
     $this->desc = [
       clienttranslate('No movement restriction for Infantry'),

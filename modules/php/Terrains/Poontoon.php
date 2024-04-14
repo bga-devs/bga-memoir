@@ -1,7 +1,7 @@
 <?php
 namespace M44\Terrains;
 
-class Poontoon extends \M44\Models\Terrain
+class Poontoon extends Bridge
 {
   public static function isTileOfType($hex)
   {
@@ -12,8 +12,7 @@ class Poontoon extends \M44\Models\Terrain
   {
     $this->name = clienttranslate('Poonton Bridges');
     $this->number = 33;
-    $this->isBridge = true;
-    // TODO ?
+    
     parent::__construct($row);
   }
 }
