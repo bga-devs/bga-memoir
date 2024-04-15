@@ -167,8 +167,9 @@ class Notifications
   {
     // COUNTER ATTACK
     if ($card->getType() == \CARD_COUNTER_ATTACK && !is_null($card->getCopiedCard())) {
+      $str = $card->getCopiedCard()->getNotifString();
       $copiedCard = Cards::getInstance($card->getExtraDatas('copiedCardType'));
-      $str = $copiedCard->getNotifString();  
+      //$str = $copiedCard->getNotifString();  
 
       if (is_null($str)) {
         self::notifyAll('playCard', clienttranslate('${player_name} plays ${card_name} as ${copied_card_name}'), [
