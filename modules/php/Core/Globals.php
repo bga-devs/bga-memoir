@@ -2,6 +2,7 @@
 namespace M44\Core;
 use M44\Core\Game;
 use M44\Managers\Players;
+use M44\Scenario;
 
 /*
  * Globals
@@ -24,6 +25,9 @@ class Globals extends \M44\Helpers\DB_Manager
     'scenario' => 'obj', // Used to store the scenario
     'scenarioSource' => 'int', // From DoW database or m44 file ?
     'forcedTeam' => 'obj', // Used for one-way game to let a player pick the side he will play
+
+    'campaign' => 'obj', // Used to store the campaign
+    'campaignId' => 'int', // Used to store the campaign id
 
     'round' => 'int',
     'turn' => 'int',
@@ -191,15 +195,29 @@ class Globals extends \M44\Helpers\DB_Manager
     Globals::setDuration($options[OPTION_DURATION]);
     Globals::setMode($options[OPTION_MODE]);
     Globals::setOfficialScenario($options[\OPTION_SCENARIO_TYPE] == \OPTION_SCENARIO_OFFICIAL);
-    $scenarioId = Globals::isOfficialScenario() ? $options[OPTION_MODE + 1 + $options[OPTION_MODE]] : -1;
-    if ($scenarioId == 0) {
-      include_once dirname(__FILE__) . '/../../../gameoptions.inc.php';
-      $ids = $game_options[OPTION_MODE + 1 + $options[OPTION_MODE]]['values'];
-      unset($ids[0]);
-      $scenarioId = array_rand($ids, 1);
+    // Case Campaign set 1st scenario
+    if (Globals::isCampaign()) {
+      // From Campaigne file
+      $campaignId = $options[\OPTION_CAMPAIGN];
+      Globals::setCampaignId($campaignId);
+      Scenario::campaignLoadId($campaignId);
+      $scenarioId = Globals::getCampaign()['scenarios']['ALLIES'][0];
+      Globals::setScenarioId($scenarioId);
+      Globals::setScenarioSource($options[\OPTION_SCENARIO_SOURCE] ?? 0);
+
+    } else { // other than campaign mode
+      $scenarioId = Globals::isOfficialScenario() ? $options[OPTION_MODE + 1 + $options[OPTION_MODE]] : -1;
+      
+      if ($scenarioId == 0) {
+        include_once dirname(__FILE__) . '/../../../gameoptions.inc.php';
+        $ids = $game_options[OPTION_MODE + 1 + $options[OPTION_MODE]]['values'];
+        unset($ids[0]);
+        $scenarioId = array_rand($ids, 1);
+      }
+      Globals::setScenarioId($scenarioId);
+      Globals::setScenarioSource($options[\OPTION_SCENARIO_SOURCE] ?? 0);    
     }
-    Globals::setScenarioId($scenarioId);
-    Globals::setScenarioSource($options[\OPTION_SCENARIO_SOURCE] ?? 0);
+
     Globals::setUnitMoved(-1);
     Globals::setUnitAttacker(-1);
     Globals::setLastPlayedCards([]);
@@ -240,6 +258,11 @@ class Globals extends \M44\Helpers\DB_Manager
   public static function isOverlord()
   {
     return Globals::getMode() == OPTION_MODE_OVERLORD;
+  }
+
+  public static function isCampaign()
+  {
+    return Globals::getMode() == OPTION_MODE_CAMPAIGN;
   }
 
   public static function isTwoWaysGame()

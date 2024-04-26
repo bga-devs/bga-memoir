@@ -54,6 +54,12 @@ $game_options = [
       //   'tmpdisplay' => clienttranslate('Overlord'),
       //   'description' => clienttranslate('Overlord scenario'),
       // ],
+      4 => [
+        'name' => clienttranslate('Campaign Mode'),
+        'tmdisplay' => clienttranslate('Campaign Mode'),
+        'description' => clienttranslate('Standard 1v1 Campaign mode'),
+        'alpha' => true,
+      ],
     ],
     'startcondition' => [
       1 => [
@@ -70,6 +76,13 @@ $game_options = [
           'message' => clienttranslate('Only Overlord mode can be played in teams'),
         ],
       ],
+      4 => [
+        [
+          'type' => 'maxplayers',
+          'value' => 2,
+          'message' => clienttranslate('Only Overlord mode can be played in teams'),
+        ],
+      ]
     ],
   ],
 
@@ -313,6 +326,14 @@ $game_options = [
         'description' => clienttranslate('Sugar Loaf and Half Moon'),
         'premium' => true,
       ],
+
+      1558 => [
+        'name' => clienttranslate('[BB] [1558] Hill 112'),
+        'tmdisplay' => '[1558]',
+        'description' => clienttranslate('Hill 112'),
+        'premium' => true,
+      ],
+
       1599 => [
         'name' => clienttranslate('[PT] [1599] Wake Island'),
         'tmdisplay' => '[1599]',
@@ -324,6 +345,34 @@ $game_options = [
         'name' => clienttranslate('[MT] [1324] Dug in at Sidi Omar'),
         'tmdisplay' => '[1324]',
         'description' => clienttranslate('Dug in at Sidi Omar'),
+        'premium' => true,
+      ],
+
+      4155 => [
+        'name' => clienttranslate('[EF] [4155] Pruzana'),
+        'tmdisplay' => '[4155]',
+        'description' => clienttranslate('Pruzana'),
+        'premium' => true,
+      ],
+
+      4185 => [
+        'name' => clienttranslate('[BB] [4185] Capturing the Crossing'),
+        'tmdisplay' => '[4185]',
+        'description' => clienttranslate('Capturing the Crossing'),
+        'premium' => true,
+      ],
+
+      4186 => [
+        'name' => clienttranslate('[BB] [4186] Withdrawal from Hill 112'),
+        'tmdisplay' => '[4186]',
+        'description' => clienttranslate('Withdrawal from Hill 112'),
+        'premium' => true,
+      ],
+
+      4187 => [
+        'name' => clienttranslate('[BB] [4187] Securing the flank'),
+        'tmdisplay' => '[4187]',
+        'description' => clienttranslate('Securing the flank'),
         'premium' => true,
       ],
 
@@ -664,6 +713,36 @@ $game_options = [
       ],
     ],
   ],
+
+  108 => [
+    'name' => clienttranslate('Campaign'),
+    'displaycondition' => [
+      0 => [
+        'type' => 'otheroption',
+        'id' => 101,
+        'value' => 4,
+      ],
+      1 => [
+        'type' => 'otheroption',
+        'id' => 102,
+        'value' => 1,
+      ],
+      2 => [
+        'type' => 'otheroptionisnot',
+        'id' => 102,
+        'value' => 2,
+      ],
+    ],
+    'values' => [
+      40001 => [
+        'name' => clienttranslate('[CB1] [1] Battle of Normandy'),
+        'tmdisplay' => '[1]',
+        'description' => clienttranslate('Battle of Normandy'),
+        'premium' => true,
+      ],
+    ],
+  ],
+
 
   107 => [
     'name' => \clienttranslate('Scenario source'),

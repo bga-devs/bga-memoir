@@ -35,6 +35,11 @@ $scenariosMap = [
   1422 => '1422-SchwammenauelDam',
 
   1324 => '1324-DugInAtSidiOmar',
+  1558 => '1558-Hill112',
+  4155 => '4155-Pruzana',
+  4185 => '4185-CapturingTheCrossing',
+  4186 => '4186-WithdrawalFromHill112',
+  4187 => '4187-SecuringTheFlank',
   4230 => '4230-FlankingManeuverAtBirHakeim',
   4231 => '4231-PanzersVersusGrants',
   4232 => '4232-1stArmouredToTheRescue',
@@ -104,4 +109,7 @@ $scenariosMap = [
   12508 => '12508-Tenaru',
   12509 => '12509-VaumicelManor',
   1290 => '1290-CounterAttackAtArras',
+
+  // Campaigns ids
+  40001 => 'CB1-1-BattleofNormandy',
 ];

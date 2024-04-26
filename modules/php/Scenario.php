@@ -17,6 +17,7 @@ use M44\Board;
 class Scenario extends \APP_DbObject
 {
   protected static $scenario = null;
+  protected static $campaign = null;
   public static function get()
   {
     if (self::$scenario == null) {
@@ -159,8 +160,9 @@ class Scenario extends \APP_DbObject
    * Load a scenario from a file and store it into a global
    */
   function loadId($id)
-  {
-    require_once dirname(__FILE__) . '/Scenarios/list.inc.php';
+  { 
+    //changed to require not once as it may be called several times in campaign mode
+    require dirname(__FILE__) . '/Scenarios/list.inc.php'; 
     $scenarios = [];
 
     if (isset($scenariosMap[$id])) {
@@ -190,6 +192,26 @@ class Scenario extends \APP_DbObject
     self::$scenario = $scenario;
     Globals::setScenario($scenario);
   }
+
+  /**
+   * Load a campaign from a file and store it into a global
+   */
+  function campaignloadId($id)
+  {
+    require_once dirname(__FILE__) . '/Scenarios/list.inc.php';
+    $scenarios = [];
+
+    if (isset($scenariosMap[$id])) {
+      $name = $scenariosMap[$id];
+      require_once dirname(__FILE__) . '/Scenarios/' . $name . '.php';
+    } 
+
+    $campaign = $scenarios[$id];
+
+    self::$campaign = $campaign;
+    Globals::setCampaign($campaign);
+  }
+
 
   /**
    * Setup the scenario stored into the global
