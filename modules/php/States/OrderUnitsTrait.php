@@ -199,6 +199,7 @@ trait OrderUnitsTrait
       throw new \BgaVisibleSystemException('You cannot move this unit. Should not happen');
     }
 
+    $unit = Units::getSingle($unitId);
     $unit->setNUnits(0);
     // $pos = $unit->getPos();
     $team = $unit->getTeam();
