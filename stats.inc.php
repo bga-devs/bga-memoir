@@ -15,7 +15,7 @@
  *
  */
 
- require_once('modules/php/constants.inc.php');
+require_once('modules/php/constants.inc.php');
 
 $stats_type = [
   'table' => [
@@ -132,7 +132,7 @@ $stats_type = [
       'name' => totranslate('Round 2: killed artillery units'),
       'type' => 'int',
     ],
-    'otherUnitRound1' => [
+    'otherUnitRound2' => [
       'id' => STAT_OTHER_UNIT_SECOND_ROUND,
       'name' => totranslate('Round 2: killed other units'),
       'type' => 'int',
