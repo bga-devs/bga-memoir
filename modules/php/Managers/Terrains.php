@@ -1,5 +1,7 @@
 <?php
+
 namespace M44\Managers;
+
 use M44\Core\Globals;
 use M44\Core\Notifications;
 use M44\Managers\Players;
@@ -25,7 +27,7 @@ class Terrains extends \M44\Helpers\Pieces
     return self::getInstance($row['type'], $row);
   }
 
-  public function getInstance($type, $row = null)
+  public static function getInstance($type, $row = null)
   {
     if ($type == '') {
       return new Terrain($row);
@@ -66,7 +68,7 @@ class Terrains extends \M44\Helpers\Pieces
     self::DB()->delete($terrainId);
   }
 
-  public function add($terrain)
+  public static function add($terrain)
   {
     $terrain['location'] = $terrain['x'] . '_' . $terrain['y'];
     $o = self::singleCreate($terrain);
@@ -77,7 +79,7 @@ class Terrains extends \M44\Helpers\Pieces
   /**
    * Load a scenario
    */
-  public function loadScenario($scenario)
+  public static function loadScenario($scenario)
   {
     self::DB()
       ->delete()
@@ -183,7 +185,7 @@ class Terrains extends \M44\Helpers\Pieces
     self::create($terrains);
   }
 
-  protected function getTypeOfTile($terrain)
+  protected static function getTypeOfTile($terrain)
   {
     foreach (TERRAIN_CLASSES as $type => $className) {
       $className = '\M44\Terrains\\' . $className;
@@ -195,7 +197,7 @@ class Terrains extends \M44\Helpers\Pieces
     return '';
   }
 
-  protected function getBackgroundSpecialTerrains($board)
+  protected static function getBackgroundSpecialTerrains($board)
   {
     $terrains = [];
 
@@ -204,21 +206,21 @@ class Terrains extends \M44\Helpers\Pieces
       foreach (Board::getListOfCells() as $cell) {
         $map =
           $board['type'] == BREAKTHROUGH_DECK
-            ? [
-              11 => 2,
-              12 => 4,
-              13 => 6,
-              14 => 25,
-              15 => 27,
-              16 => 27,
-            ]
-            : [
-              4 => 2,
-              5 => 4,
-              6 => 6,
-              7 => 25,
-              8 => 27,
-            ];
+          ? [
+            11 => 2,
+            12 => 4,
+            13 => 6,
+            14 => 25,
+            15 => 27,
+            16 => 27,
+          ]
+          : [
+            4 => 2,
+            5 => 4,
+            6 => 6,
+            7 => 25,
+            8 => 27,
+          ];
         $tile = $map[$cell['y']] ?? null;
 
         if ($tile != null) {
@@ -248,7 +250,7 @@ class Terrains extends \M44\Helpers\Pieces
     return $terrains;
   }
 
-  public function removeDecoyMedals()
+  public static function removeDecoyMedals()
   {
     $mines = self::getSelectQuery()
       ->where('type', 'minefield')

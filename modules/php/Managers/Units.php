@@ -1,5 +1,7 @@
 <?php
+
 namespace M44\Managers;
+
 use M44\Core\Globals;
 use M44\Core\Notifications;
 use M44\Managers\Players;
@@ -45,7 +47,7 @@ class Units extends \M44\Helpers\Pieces
     return self::getInstance($row['type'], $row['badge'], $row);
   }
 
-  public function getInstance($type, $badge, $row = null)
+  public static function getInstance($type, $badge, $row = null)
   {
     $className = '\M44\Units\\' . (TROOP_CLASSES[$type . '_' . $badge] ?? TROOP_CLASSES[$type]);
     return new $className($row);
@@ -134,7 +136,7 @@ class Units extends \M44\Helpers\Pieces
   /**
    * Load a scenario
    */
-  public function loadScenario($scenario)
+  public static function loadScenario($scenario)
   {
     self::DB()
       ->delete()
@@ -148,20 +150,18 @@ class Units extends \M44\Helpers\Pieces
 
     foreach ($board['hexagons'] as &$hex) {
       $data = null;
-      
+
       if (isset($hex['unit'])) {
         // special case unit is tiger if tank elite german and nb units == 1
         // nbr_units not necessarly defined by default in any scenario
         if (isset($hex['unit']['nbr_units'])) {
-          if ($hex['unit']['name']=='tank2ger' && ($hex['unit']['nbr_units'])==1) {
+          if ($hex['unit']['name'] == 'tank2ger' && ($hex['unit']['nbr_units']) == 1) {
             $hex['unit']['name'] = 'tigerger';
             $hex['unit']['badge'] = 'badge4';
-          }
-          elseif (isset($hex['unit']['behavior']) && isset(\TROOP_BADGE_MAPPING[$hex['unit']['behavior']])) {
+          } elseif (isset($hex['unit']['behavior']) && isset(\TROOP_BADGE_MAPPING[$hex['unit']['behavior']])) {
             $hex['unit']['badge'] = \TROOP_BADGE_MAPPING[$hex['unit']['behavior']];
           }
-        }
-        elseif (isset($hex['unit']['behavior']) && isset(\TROOP_BADGE_MAPPING[$hex['unit']['behavior']])) {
+        } elseif (isset($hex['unit']['behavior']) && isset(\TROOP_BADGE_MAPPING[$hex['unit']['behavior']])) {
           $hex['unit']['badge'] = \TROOP_BADGE_MAPPING[$hex['unit']['behavior']];
         }
         $data = self::getTypeAndNation($hex['unit']);
@@ -178,16 +178,15 @@ class Units extends \M44\Helpers\Pieces
       }
       // Late or Early war SWA condition
       //TODO get date and if >1942 Late War else EarlyWar
-      $date= Globals::getBeginDate();
-      $year= substr($date,0,4);
-      if(isset($data['badge']))
-      {
-        if(in_array($data['badge'], ['37','41','45']) && strval($year) > '1942') {
+      $date = Globals::getBeginDate();
+      $year = substr($date, 0, 4);
+      if (isset($data['badge'])) {
+        if (in_array($data['badge'], ['37', '41', '45']) && strval($year) > '1942') {
           $data['badge'] =  $data['badge'] . 'lw';
         }
       }
-      
-      
+
+
       //Create instance of the unit class
       $unit = self::getInstance($data['type'], $data['badge']);
 
@@ -244,13 +243,14 @@ class Units extends \M44\Helpers\Pieces
       }
 
       if ($data['nation'] == 'jp') {
-        if ($unit->getType() == \INFANTRY && 
-        !($unit instanceof \M44\Units\Sniper)
+        if (
+          $unit->getType() == \INFANTRY &&
+          !($unit instanceof \M44\Units\Sniper)
         ) {
           $data['extra_datas']['properties']['mustIgnore1Flag'] = true;
           $data['extra_datas']['properties']['bonusCloseAssault'] = true;
-          if(!$unit->isSWAEquipped()) { // if SWA (Early War) is equipped banzai does not apply (it apply for later war SWA)
-            $data['extra_datas']['properties']['banzai'] = true; 
+          if (!$unit->isSWAEquipped()) { // if SWA (Early War) is equipped banzai does not apply (it apply for later war SWA)
+            $data['extra_datas']['properties']['banzai'] = true;
           }
         }
       }
@@ -265,7 +265,7 @@ class Units extends \M44\Helpers\Pieces
     self::create($units);
   }
 
-  public function reset()
+  public static function reset()
   {
     self::DB()
       ->update(['activation_card' => null, 'moves' => 0, 'fights' => 0, 'retreats' => 0, 'grounds' => 0])
@@ -289,7 +289,7 @@ class Units extends \M44\Helpers\Pieces
     }
   }
 
-  public function addInCell($unit, $cell)
+  public static function addInCell($unit, $cell)
   {
     $data = self::getTypeAndNation($unit);
     $unit = self::getInstance($data['type'], $data['badge']);
@@ -301,7 +301,7 @@ class Units extends \M44\Helpers\Pieces
     return self::singleCreate($data);
   }
 
-  public function remove($unitId)
+  public static function remove($unitId)
   {
     $unitId = is_int($unitId) ? $unitId : $unitId->getId();
     self::DB()->delete($unitId);
@@ -310,7 +310,7 @@ class Units extends \M44\Helpers\Pieces
   ////////////////////////
   //////// Utils /////////
   ////////////////////////
-  public function getTypeAndNation($unit)
+  public static function getTypeAndNation($unit)
   {
     $name = $unit['name'];
     foreach (array_keys(TROOP_CLASSES) as $t) {

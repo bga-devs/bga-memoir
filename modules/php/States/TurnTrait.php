@@ -1,4 +1,5 @@
 <?php
+
 namespace M44\States;
 
 use M44\Core\Globals;
@@ -82,11 +83,13 @@ trait TurnTrait
     // Check for options
     $options = Scenario::getOptions();
     $AirDrop2Done = Globals::getAirDrop2Done();
-    
+
     if (isset($options['airdrop2']) && $options['airdrop2']['side'] == $team->getId() && !$AirDrop2Done) {
-      if (isset($options['airdrop2']['option']) 
-      && $options['airdrop2']['option'] == 'NEED_FULL_DAY_VISIBILITY') { 
-        if (Globals::getNightVisibility() >= 6 ) {
+      if (
+        isset($options['airdrop2']['option'])
+        && $options['airdrop2']['option'] == 'NEED_FULL_DAY_VISIBILITY'
+      ) {
+        if (Globals::getNightVisibility() >= 6) {
           Globals::setAirDrop2Done(true);
           $this->nextState('airDrop2', $player->getId());
           return;

@@ -1,5 +1,7 @@
 <?php
+
 namespace M44\Managers;
+
 use M44\Core\Globals;
 use M44\Core\Notifications;
 use M44\Managers\Players;
@@ -26,7 +28,7 @@ class Cards extends \M44\Helpers\Pieces
     return self::getInstance($row['type'], $row);
   }
 
-  public function getInstance($type, $row = null)
+  public static function getInstance($type, $row = null)
   {
     $mode = Scenario::getMode();
     $dirs = [
@@ -162,8 +164,8 @@ class Cards extends \M44\Helpers\Pieces
       ->getId();
     self::move($cardId, ['inplay', $pId]);
 
-    $last = Globals::getRawLastPlayedCards();!
-    $last[$player->getId()] = self::DbQuery("SELECT * FROM `cards` WHERE `card_id` = $cardId");
+    $last = Globals::getRawLastPlayedCards();
+    !$last[$player->getId()] = self::DbQuery("SELECT * FROM `cards` WHERE `card_id` = $cardId");
     Globals::setRawLastPlayedCards($last);
 
     $last2 = Globals::getLastPlayedCards();
@@ -176,7 +178,7 @@ class Cards extends \M44\Helpers\Pieces
   /**
    * Load a scenario
    */
-  public function loadScenario($scenario)
+  public static function loadScenario($scenario)
   {
     self::DB()
       ->delete()
@@ -188,12 +190,12 @@ class Cards extends \M44\Helpers\Pieces
     self::initDeck(self::$decks[$mode] ?? self::$decks[STANDARD_DECK], $deckName);
   }
 
-  public function initHands()
+  public static function initHands()
   {
     $scenario = Scenario::get();
 
     // Draw cards TODO
-    if (true || $mode == STANDARD_DECK) {
+    if (true || Globals::getMode() == STANDARD_DECK) {
       foreach (Players::getAll() as $pId => $player) {
         $team = $player->getTeam();
         $cards = self::draw($team->getNCards(), ['hand', $pId]);
@@ -202,7 +204,7 @@ class Cards extends \M44\Helpers\Pieces
     }
   }
 
-  public function initDeck($deck, $deckName)
+  public static function initDeck($deck, $deckName)
   {
     $cards = [];
     foreach ($deck as $type => $occurences) {

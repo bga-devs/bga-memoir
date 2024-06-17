@@ -1,5 +1,7 @@
 <?php
+
 namespace M44;
+
 use M44\Core\Notifications;
 use M44\Core\Stats;
 use M44\Helpers\Log;
@@ -9,7 +11,7 @@ class Dice
   /**
    * Roll dice : roll a given number of dices next to a given cell
    */
-  public function roll($player, $nDice, $cell = null, $aggregate = true)
+  public static function roll($player, $nDice, $cell = null, $aggregate = true)
   {
     $dice = [\DICE_INFANTRY, \DICE_INFANTRY, \DICE_ARMOR, \DICE_FLAG, \DICE_STAR, \DICE_GRENADE];
     $results = [];

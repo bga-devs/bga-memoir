@@ -1,4 +1,5 @@
 <?php
+
 namespace M44\States;
 
 use M44\Core\Globals;
@@ -133,7 +134,7 @@ trait RetreatUnitTrait
     $trainCase = in_array($unit->getType(), [LOCOMOTIVE, WAGON]);
 
     // check wether it is locomotive only or locomotive + wagon train
-    if ($trainCase) { 
+    if ($trainCase) {
       if (count($train) > 1 && $unit->getType() == LOCOMOTIVE) {
         $wagon = $train->filter(function ($unit) {
           return in_array($unit->getType(), [WAGON]);
@@ -151,12 +152,12 @@ trait RetreatUnitTrait
       'min' => $minFlags,
       'max' => $maxFlags,
       'desc' =>
-        $minFlags == $maxFlags
-          ? ''
-          : [
-            'log' => \clienttranslate('(up to ${max} cells)'),
-            'args' => ['max' => $maxFlags],
-          ],
+      $minFlags == $maxFlags
+        ? ''
+        : [
+          'log' => \clienttranslate('(up to ${max} cells)'),
+          'args' => ['max' => $maxFlags],
+        ],
       'i18n' => ['desc'],
       'titleSuffix' => $effect . ($minFlags == 0 ? 'skippable' : ''),
       'actionCount' => Globals::getActionCount(),
@@ -209,7 +210,7 @@ trait RetreatUnitTrait
     $trainCase = count($trainIds) > 1 && in_array($unitId, $trainIds);
     if ($trainCase) {
       $firstUnitId[] = $unitId;
-      $secondUnitToMoveId = array_diff($trainIds,$firstUnitId);
+      $secondUnitToMoveId = array_diff($trainIds, $firstUnitId);
     }
 
     // Move the unit
@@ -266,7 +267,7 @@ trait RetreatUnitTrait
       Globals::incActionCount();
     }
     // check that retreat = 0
-    list($unit, $minFlags, , $effect) = $this->getRetreatInfo();
+    list($unit, $minFlags,, $effect) = $this->getRetreatInfo();
     if (!$unit->isEliminated() && $minFlags > 0) {
       throw new \BgaUserException(clienttranslate('You did not retreat far enough. Should not happen.'));
     }

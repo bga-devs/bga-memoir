@@ -1,4 +1,5 @@
 <?php
+
 namespace M44\States;
 
 use M44\Core\Globals;
@@ -40,8 +41,8 @@ trait AttackUnitsTrait
       // if unit moved and finished on a mine with Infiltration and there is a mine, it must explose
       $activationcard = $unit->getActivationOCard();
       if (($activationcard->getType() == CARD_BEHIND_LINES ||
-          ($activationcard->getType() == CARD_COUNTER_ATTACK) && 
-          $activationcard->getExtraDatas('card')['type'] == CARD_BEHIND_LINES) && $unit->getMoves() < 3) {
+        ($activationcard->getType() == CARD_COUNTER_ATTACK) &&
+        $activationcard->getExtraDatas('card')['type'] == CARD_BEHIND_LINES) && $unit->getMoves() < 3) {
         foreach (Board::getTerrainsInCell($unit->getPos()) as $t) {
           if ($t instanceof \M44\Terrains\Minefield) {
             $unit->setMoves(3);
@@ -217,8 +218,8 @@ trait AttackUnitsTrait
         Tokens::removeCamouflage($unit->getpos());
       }
     }
-    
-        
+
+
     // Check if ambush was played and successfull
     if ($attack['ambush']) {
       if (is_null($unit)) {
@@ -264,7 +265,7 @@ trait AttackUnitsTrait
       // Count all FLAGS and if Tiger would be blocked to retreat to add to hits for second roll 
       // (remove all related flags from 1st in this case results)
       if (isset($results[DICE_FLAG])) {
-        $hitflag = $this->calculateTigerFlagsHits($attack,$results,$oppUnit);
+        $hitflag = $this->calculateTigerFlagsHits($attack, $results, $oppUnit);
         $hits += $hitflag;
         $results[DICE_FLAG] -= $hitflag;
       }
@@ -277,20 +278,18 @@ trait AttackUnitsTrait
         $eliminated = $this->damageUnit($oppUnit, $player, $hits2);
         if (Teams::checkVictory()) {
           return;
-          } 
-        } else {
-          $eliminated = false;
+        }
+      } else {
+        $eliminated = false;
       }
-    }
-    else { // Standard case else than tigers
+    } else { // Standard case else than tigers
       $hits = $this->calculateHits($unit, $oppUnit, $card, $results);
       $eliminated = $this->damageUnit($oppUnit, $player, $hits);
       if (Teams::checkVictory()) {
         return;
       }
-      
     }
-    
+
 
     // Call listener for attacking unit (eg. to remove Wire for armors)
     if ($unit !== null) {
@@ -306,9 +305,9 @@ trait AttackUnitsTrait
       isset($results[DICE_FLAG]) &&
       !$eliminated &&
       // unit is not on a boat on a river without a bridge
-      ($oppUnit->getEquipment() != 'boat' 
-      || !Board::isRiverCell($oppUnit->getPos())
-      || Board::isBridgeCell($oppUnit->getPos()))
+      ($oppUnit->getEquipment() != 'boat'
+        || !Board::isRiverCell($oppUnit->getPos())
+        || Board::isBridgeCell($oppUnit->getPos()))
     ) {
       $this->initRetreat($attack, $results);
       $this->nextState('retreat', $oppUnit->getPlayer());
@@ -402,8 +401,7 @@ trait AttackUnitsTrait
     $trainCase = count($trainIds) > 1 && in_array($unitId, $trainIds);
     if ($trainCase) {
       $firstUnitId[] = $unitId;
-      $secondUnitToHitId = array_diff($trainIds,$firstUnitId);
-
+      $secondUnitToHitId = array_diff($trainIds, $firstUnitId);
     }
 
 
@@ -431,7 +429,7 @@ trait AttackUnitsTrait
     } else {
       Notifications::takeDamage($player, $unit, $hits, $cantRetreat);
     }
-    
+
 
     // Check for elimination
     // train case
@@ -459,9 +457,9 @@ trait AttackUnitsTrait
         Globals::isItalyHighCommand() &&
         $unit->getTeamId() == \AXIS &&
         $unit
-          ->getPlayer()
-          ->getCards()
-          ->count() > 3
+        ->getPlayer()
+        ->getCards()
+        ->count() > 3
       ) {
         $card = $unit
           ->getPlayer()
@@ -626,10 +624,10 @@ trait AttackUnitsTrait
       // Count all FLAGS and if Tiger would be blocked to retreat to add to hits for second roll 
       // (remove all related flags from 1st in this case results)
       if (isset($results[DICE_FLAG])) {
-        $hitflag = $this->calculateTigerFlagsHits($attack,$results,$oppUnit);
+        $hitflag = $this->calculateTigerFlagsHits($attack, $results, $oppUnit);
         $hits += $hitflag;
         $results[DICE_FLAG] -= $hitflag;
-        }
+      }
       // Second roll dice if hits >0 (armor and grenade)
       if ($hits > 0) {
         Notifications::message(clienttranslate('Tiger second roll'), []);
@@ -638,15 +636,15 @@ trait AttackUnitsTrait
         $eliminated = $this->damageUnit($oppUnit, $player, $hits2);
         if (Teams::checkVictory()) {
           return;
-          } 
-        } else {
-          $eliminated = false;
+        }
+      } else {
+        $eliminated = false;
       }
     } else { // standard unit else than a tiger battlebacked
 
       $hits = $this->calculateHits($unit, $oppUnit, null, $results);
       $eliminated = $this->damageUnit($oppUnit, $player, $hits);
-    
+
 
       if (Teams::checkVictory()) {
         return;
@@ -668,9 +666,9 @@ trait AttackUnitsTrait
       isset($results[DICE_FLAG]) &&
       !$eliminated &&
       // unit is not on a boat on a river
-      ($oppUnit->getEquipment() != 'boat' 
-      || !Board::isRiverCell($oppUnit->getPos())
-      || Board::isBridgeCell($oppUnit->getPos()))
+      ($oppUnit->getEquipment() != 'boat'
+        || !Board::isRiverCell($oppUnit->getPos())
+        || Board::isBridgeCell($oppUnit->getPos()))
     ) {
       $this->initRetreat($attack, $results);
       $this->nextState('retreat', $oppPlayer);
@@ -713,8 +711,8 @@ trait AttackUnitsTrait
         $dice[\DICE_FLAG]--;
         $canIgnore1Flag = false;
       }
-    } 
-        
+    }
+
     Globals::setRetreat([
       'min' => $mustIgnoreAllFlags ? 0 : ($canIgnoreAllFlags ? 0 : $dice[\DICE_FLAG] - ($canIgnore1Flag ? 1 : 0)),
       'max' => $mustIgnoreAllFlags ? 0 : $dice[\DICE_FLAG] * $targetUnit->getRetreatHex(),
@@ -733,12 +731,12 @@ trait AttackUnitsTrait
       'min' => $minFlags,
       'max' => $maxFlags,
       'desc' =>
-        $minFlags == $maxFlags
-          ? ''
-          : [
-            'log' => \clienttranslate('(up to ${max} cells)'),
-            'args' => ['max' => $maxFlags],
-          ],
+      $minFlags == $maxFlags
+        ? ''
+        : [
+          'log' => \clienttranslate('(up to ${max} cells)'),
+          'args' => ['max' => $maxFlags],
+        ],
       'i18n' => ['desc'],
       'titleSuffix' => $effect . ($minFlags == 0 ? 'skippable' : ''),
       'actionCount' => Globals::getActionCount(),
@@ -752,11 +750,11 @@ trait AttackUnitsTrait
   public function getTigerRetreatInfo()
   {
     $data = Globals::getRetreat();
-    
+
     return [Units::get($data['unit']), $data['min'], $data['max'], $data['effect']];
   }
 
-  public function calculateTigerFlagsHits($attack,$results1,$targetunit) 
+  public function calculateTigerFlagsHits($attack, $results1, $targetunit)
   {
     $this->initTigerRetreat($attack, $results1, $targetunit);
     $args = $this->argsRetreatTigerUnit($targetunit);

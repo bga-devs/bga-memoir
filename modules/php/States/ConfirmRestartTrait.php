@@ -1,4 +1,5 @@
 <?php
+
 namespace M44\States;
 
 use M44\Core\Globals;

@@ -1,4 +1,5 @@
 <?php
+
 namespace M44\States;
 
 use M44\Core\Globals;
@@ -78,7 +79,7 @@ trait CommissarCardTrait
 
   function stPlayCommissarCard()
   {
-    $args = self::argsPlayCommissarCard();
+    $args = $this->argsPlayCommissarCard();
     if ($args['sections'] == null && !$args['canHill317']) {
       $this->actPlayCommissarCard(null, false, false);
     }

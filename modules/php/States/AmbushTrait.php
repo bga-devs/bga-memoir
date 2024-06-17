@@ -1,4 +1,5 @@
 <?php
+
 namespace M44\States;
 
 use M44\Core\Globals;
@@ -29,20 +30,20 @@ trait AmbushTrait
       }
     }
 
-    $canAttack = ($ambushedUnit->canTarget(Units::get($attack['unitId']))) 
-      && !($ambushedUnit-> getExtraDatas('cannotBeActivatedUntilTurn') >= Globals::getTurn()) 
+    $canAttack = ($ambushedUnit->canTarget(Units::get($attack['unitId'])))
+      && !($ambushedUnit->getExtraDatas('cannotBeActivatedUntilTurn') >= Globals::getTurn())
       && !$cannotBattleFromTerrain
       && !empty($ambushedUnit->attackPower());
-   
+
     $cards = $canAttack
       ? $player
-        ->getCards()
-        ->filter(function ($card) {
-          return $card->getType() == CARD_AMBUSH;
-        })
-        ->getIds()
+      ->getCards()
+      ->filter(function ($card) {
+        return $card->getType() == CARD_AMBUSH;
+      })
+      ->getIds()
       : [];
-    
+
     return [
       'canAttack' => $canAttack,
       'currentAttack' => $attack,
@@ -127,14 +128,14 @@ trait AmbushTrait
 
     // Launch dice
     $results = Dice::roll($player, $target['dice'], $ambushedUnit->getPos());
-    
+
     // if tiger is ambushed double roll check for damages
     if ($ambushedUnit->getNumber() == '16') {
       $hits = $this->calculateHits($unit, $ambushedUnit, null, $results);
       // Count all FLAGS and if Tiger would be blocked to retreat to add to hits for second roll 
       // (remove all related flags from 1st in this case results)
       if (isset($results[DICE_FLAG])) {
-        $hitflag = $this->calculateTigerFlagsHits($currentAttack,$results,$ambushedUnit);
+        $hitflag = $this->calculateTigerFlagsHits($currentAttack, $results, $ambushedUnit);
         $hits += $hitflag;
         $results[DICE_FLAG] -= $hitflag;
       }
@@ -146,9 +147,9 @@ trait AmbushTrait
         $eliminated = $this->damageUnit($ambushedUnit, $player, $hits2);
         if (Teams::checkVictory()) {
           return;
-          } 
-        } else {
-          $eliminated = false;
+        }
+      } else {
+        $eliminated = false;
       }
     } else { // standard unit else than a tiger
       // $hits = $ambushedUnit->getHits($results);
@@ -174,8 +175,10 @@ trait AmbushTrait
     // Handle retreat
     if (isset($results[DICE_FLAG]) && !$eliminated) {
       // add condition if artillery ambushed activated by Bombard and retreat, add 1 fight in order to be at max attack
-      if($ambushedUnit->getType() == \ARTILLERY 
-        && $ambushedUnit->getActivationOCard()->isType(CARD_ARTILLERY_BOMBARD)) {
+      if (
+        $ambushedUnit->getType() == \ARTILLERY
+        && $ambushedUnit->getActivationOCard()->isType(CARD_ARTILLERY_BOMBARD)
+      ) {
         $ambushedUnit->incFights(1);
       }
       $this->initRetreat($attack, $results);
@@ -199,5 +202,4 @@ trait AmbushTrait
     $attack = $this->getCurrentAttack();
     $this->nextState('pass', $attack['pId']);
   }
-
 }

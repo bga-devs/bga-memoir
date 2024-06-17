@@ -1,4 +1,5 @@
 <?php
+
 namespace M44\States;
 
 use M44\Core\Globals;
@@ -64,7 +65,7 @@ trait MoveUnitsTrait
     $trainCase = count($trainIds) > 1 && in_array($unitId, $trainIds);
     if ($trainCase) {
       $firstUnitId[] = $unitId;
-      $secondUnitToMoveId = array_diff($trainIds,$firstUnitId);
+      $secondUnitToMoveId = array_diff($trainIds, $firstUnitId);
     }
 
 
@@ -85,11 +86,11 @@ trait MoveUnitsTrait
     $initMove = $unit->getMoves();
 
     $card = $unit->getActivationOCard();
-    $skipRestrictions = 
-      $card != null 
-      && ($card->isType(CARD_BEHIND_LINES) 
-      || $card->isType(\CARD_COUNTER_ATTACK)
-      && $card->getExtraDatas('copiedCardType') == \CARD_BEHIND_LINES)
+    $skipRestrictions =
+      $card != null
+      && ($card->isType(CARD_BEHIND_LINES)
+        || $card->isType(\CARD_COUNTER_ATTACK)
+        && $card->getExtraDatas('copiedCardType') == \CARD_BEHIND_LINES)
       && $unit->getType() == INFANTRY;
 
     foreach ($path['cells'] as $c) {
@@ -111,7 +112,6 @@ trait MoveUnitsTrait
           $c2['x'] = $coordSource['x'];
           $c2['y'] = $coordSource['y'];
         }
-
       }
       Notifications::moveUnit($player, $unit, $coordSource, $c);
       list($interrupted, $isWinning) = Board::moveUnit($unit, $c);
@@ -161,7 +161,6 @@ trait MoveUnitsTrait
     } else {
       $this->nextState('moveUnits');
     }
-
   }
 
   public function actMoveUnitsDone($check = true)
@@ -209,11 +208,11 @@ trait MoveUnitsTrait
     return $args;
   }
 
-  public function actTrainReinforcement($x , $y)
+  public function actTrainReinforcement($x, $y)
   {
     // Sanity checks
     self::checkAction('actTrainReinforcement');
-    $args = self::argsTrainReinforcement();
+    $args = $this->argsTrainReinforcement();
     $k = Utils::searchCell($args, $x, $y);
     if ($k === false) {
       throw new \BgaVisibleSystemException('You cannot performed reinforcement here. Should not happen');
@@ -227,26 +226,28 @@ trait MoveUnitsTrait
     $options = Scenario::getOptions()['supply_train_rules'];
     $currentTurn = Globals::getTurn();
     $reinforcementNumber = Globals::getReinforcementUnits();
-    $maxi = $options['nbr_units'][$reinforcementNumber-1];
+    $maxi = $options['nbr_units'][$reinforcementNumber - 1];
 
-    for ($i = 0; $i < $maxi; $i++) { 
+    for ($i = 0; $i < $maxi; $i++) {
       $pos = ['x' => $x, 'y' => $y];
       $unit = Units::addInCell($options['unit'], $pos);
-      if (isset($options['unit']['behavior']) 
-      && $options['unit']['behavior'] == 'CANNOT_BE_ACTIVATED_TILL_TURN') {
-        $unit -> setExtraDatas('cannotBeActivatedUntilTurn', $options['unit']['turn'] + $currentTurn);
+      if (
+        isset($options['unit']['behavior'])
+        && $options['unit']['behavior'] == 'CANNOT_BE_ACTIVATED_TILL_TURN'
+      ) {
+        $unit->setExtraDatas('cannotBeActivatedUntilTurn', $options['unit']['turn'] + $currentTurn);
       }
       Board::addUnit($unit);
       //Notifications::airDrop($player, $unit);
       Notifications::trainReinforcement($player, $unit);
     }
-    
-    if (Globals::getReinforcementUnits()>= count($train)) {
+
+    if (Globals::getReinforcementUnits() >= count($train)) {
       Globals::setReinforcementUnits(0);
       Globals::setSupplyTrainDone(true);
       $this->gamestate->jumpToState(ST_MOVE_UNITS);
     } else {
       $this->gamestate->jumpToState(ST_TRAIN_REINFORCEMENT);
-    } 
+    }
   }
 }

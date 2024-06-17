@@ -1,4 +1,5 @@
 <?php
+
 namespace M44\States;
 
 use M44\Core\Globals;
@@ -73,7 +74,7 @@ trait OrderUnitsTrait
     }
     $player = Players::getCurrent();
     $args = $this->argsOrderUnits($player);
-    
+
     // Case train if contain LOCO or WAGON add all LOCO and WAGON in $unitids and count them as a whole unit
     /* $units = $this->getPlayer()
       ->getTeam()
@@ -83,16 +84,16 @@ trait OrderUnitsTrait
       return in_array($unit->getType(), [LOCOMOTIVE, WAGON]) && !$unit->isEliminated();
     });
     $trainIds = $train->getIds();
-    
-    $trainSelectedIds = array_intersect($unitIds,$trainIds);
+
+    $trainSelectedIds = array_intersect($unitIds, $trainIds);
     $countTrainModifier = count($train) > 1 && count($trainSelectedIds) > 0 ? 1 : 0;
-   
+
     $selectableIds = $args['units']->getIds();
     $notSelectedTrainIds = [];
 
     // If selected only one we add the others loco or wagons to selected and selectable units and train is 2
     if (count($trainIds) > 1) {
-      $notSelectedTrainIds = array_diff($trainIds,$trainSelectedIds);
+      $notSelectedTrainIds = array_diff($trainIds, $trainSelectedIds);
     }
 
     if (count($notSelectedTrainIds) == 1) {
@@ -122,7 +123,7 @@ trait OrderUnitsTrait
     // Flag the units as activated by the corresponding card
     $card = $player->getCardInPlay();
     foreach ($unitIds as $unitId) {
-      Units::get($unitId)->activate($card);    
+      Units::get($unitId)->activate($card);
     }
     foreach ($onTheMoveIds as $unitId) {
       Units::get($unitId)->activate($card, true);

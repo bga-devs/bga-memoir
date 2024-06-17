@@ -1,10 +1,13 @@
 <?php
+
 namespace M44\Core;
+
 use M44\Managers\Players;
 
 /*
  * Statistics
  */
+
 class Stats extends \M44\Helpers\DB_Manager
 {
   protected static $table = 'stats';
@@ -189,5 +192,3 @@ class Stats extends \M44\Helpers\DB_Manager
     return null;
   }
 }
-
-?>

@@ -1,5 +1,7 @@
 <?php
+
 namespace M44\Managers;
+
 use M44\Core\Game;
 use M44\Core\Stats;
 use M44\Core\Globals;
@@ -15,6 +17,7 @@ use M44\Models\Terrain;
 /*
  * Medals manager
  */
+
 class Medals extends \M44\Helpers\DB_Manager
 {
   protected static $table = 'medals';
@@ -22,7 +25,8 @@ class Medals extends \M44\Helpers\DB_Manager
   protected static function cast($row)
   {
     if (($row['type'] == \MEDAL_ELIMINATION && isset($row['foreign_id']))
-    || ($row['type'] == \MEDAL_EXIT && isset($row['foreign_id']))) {
+      || ($row['type'] == \MEDAL_EXIT && isset($row['foreign_id']))
+    ) {
       $unit = Units::get($row['foreign_id']);
       $row['unit_type'] = $unit->getType();
       $row['unit_nation'] = $unit->getNation();
@@ -36,14 +40,14 @@ class Medals extends \M44\Helpers\DB_Manager
     return $row;
   }
 
-  public function getOfTeam($team)
+  public static function getOfTeam($team)
   {
     return self::DB()
       ->where('team', $team)
       ->get();
   }
 
-  public function addEliminationMedals($team, $nMedals, $unit)
+  public static function addEliminationMedals($team, $nMedals, $unit)
   {
     $ids = [];
     for ($i = 0; $i < $nMedals; $i++) {
@@ -60,7 +64,7 @@ class Medals extends \M44\Helpers\DB_Manager
       ->get();
   }
 
-  public function addExitMedals($team, $nMedals, $unit)
+  public static function addExitMedals($team, $nMedals, $unit)
   {
     $ids = [];
     for ($i = 0; $i < $nMedals; $i++) {
@@ -77,7 +81,7 @@ class Medals extends \M44\Helpers\DB_Manager
       ->get();
   }
 
-  public function addDestroyedTerrainMedals($team, $nMedals)
+  public static function addDestroyedTerrainMedals($team, $nMedals)
   {
     $ids = [];
     for ($i = 0; $i < $nMedals; $i++) {
@@ -94,7 +98,7 @@ class Medals extends \M44\Helpers\DB_Manager
       ->get();
   }
 
-  public function addDecoyMedals($team, $terrain)
+  public static function addDecoyMedals($team, $terrain)
   {
     $ids = [];
 
@@ -117,7 +121,7 @@ class Medals extends \M44\Helpers\DB_Manager
       ->get();
   }
 
-  public function addSuddenDeathMedals($team, $nMedals)
+  public static function addSuddenDeathMedals($team, $nMedals)
   {
     $ids = [];
     for ($i = 0; $i < $nMedals; $i++) {
@@ -137,7 +141,7 @@ class Medals extends \M44\Helpers\DB_Manager
   /**
    * Load a scenario
    */
-  public function loadScenario($scenario, $rematch)
+  public static function loadScenario($scenario, $rematch)
   {
     self::DB()
       ->delete()
@@ -147,7 +151,7 @@ class Medals extends \M44\Helpers\DB_Manager
   /******************************
    ******** Board Medals *********
    ******************************/
-  public function getBoardMedalHolder($mId)
+  public static function getBoardMedalHolder($mId)
   {
     $medal = self::DB()
       ->where('type', MEDAL_POSITION)
@@ -157,7 +161,7 @@ class Medals extends \M44\Helpers\DB_Manager
     return is_null($medal) ? null : $medal['team'];
   }
 
-  public function checkBoardMedals($startOfTurn = false)
+  public static function checkBoardMedals($startOfTurn = false)
   {
     foreach (Tokens::getBoardMedals() as $medal) {
       $datas = $medal['datas'];
@@ -167,10 +171,11 @@ class Medals extends \M44\Helpers\DB_Manager
       }
       // Manage turn start for Panzer versus Grants next start turn medal rule (for AXIS team in this specific scenario)
       if ((($datas['turn_start'] ?? false) && !$startOfTurn)
-      || (($datas['turn_start'] ?? false) && $startOfTurn && (Globals::getTeamTurn() != $medal['team']))) {
+        || (($datas['turn_start'] ?? false) && $startOfTurn && (Globals::getTeamTurn() != $medal['team']))
+      ) {
         continue; // No need to check startOfTurn medals if not at start of turn
       }
-      
+
 
 
       // Compute the nbr of hexes owned by each nation
@@ -245,15 +250,15 @@ class Medals extends \M44\Helpers\DB_Manager
           // Create medals and notify them
           $medals = self::addPositionMedals($newHolder, $nMedals, $medal);
           Notifications::scoreMedals($newHolder, $medals);
-          
+
           // For Panzer versus Grants next start turn also remove Terrain (HQ)
           if ($datas['turn_start'] ?? false) {
-            foreach(Board::getTerrainsInCell($medal['x'], $medal['y']) as $t) {
-              if($t instanceof \M44\Terrains\HQ){
+            foreach (Board::getTerrainsInCell($medal['x'], $medal['y']) as $t) {
+              if ($t instanceof \M44\Terrains\HQ) {
                 $t->removeFromBoard();
               }
             }
-          } 
+          }
         }
       }
     }
@@ -261,7 +266,7 @@ class Medals extends \M44\Helpers\DB_Manager
     self::checkEmptySectionMedal();
   }
 
-  public function checkEmptySectionMedal()
+  public static function checkEmptySectionMedal()
   {
     $data = Globals::getEmptySectionMedals();
     if (is_null($data) || empty($data)) {
@@ -333,7 +338,7 @@ class Medals extends \M44\Helpers\DB_Manager
     }
   }
 
-  public function addPositionMedals($team, $nMedals, $boardMedal)
+  public static function addPositionMedals($team, $nMedals, $boardMedal)
   {
     $ids = [];
     $sprite = $boardMedal['sprite'];
@@ -356,7 +361,7 @@ class Medals extends \M44\Helpers\DB_Manager
       ->get();
   }
 
-  public function removePositionMedals($boardMedal)
+  public static function removePositionMedals($boardMedal)
   {
     $ids = self::DB()
       ->where('type', MEDAL_POSITION)

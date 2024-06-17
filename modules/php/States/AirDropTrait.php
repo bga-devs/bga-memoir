@@ -1,4 +1,5 @@
 <?php
+
 namespace M44\States;
 
 use M44\Core\Globals;
@@ -19,7 +20,7 @@ trait AirDropTrait
     $cells = Board::getListOfCells();
     $dropcenter = isset($options['option2']) ? $options['option2'] == 'TARGET_DROP_CENTER' : false;
 
-    if(isset($options['behavior']) && isset($options['nbr_drops'])) {
+    if (isset($options['behavior']) && isset($options['nbr_drops'])) {
       return [
         'nb' => $options['nbr_units'],
         'cells' => $cells,
@@ -31,14 +32,14 @@ trait AirDropTrait
       ];
     } else {
       return [
-      'nb'=> $options['nbr_units'],
-      'cells' => $cells,
-      'actionCount' => Globals::getActionCount(),
-      'nb_drops' => 1,
-      'titleSuffix' => ($dropcenter ? 'dropcentertarget' : ''),
-      'targetcenter' => $options['center'],
-      ];}
-    
+        'nb' => $options['nbr_units'],
+        'cells' => $cells,
+        'actionCount' => Globals::getActionCount(),
+        'nb_drops' => 1,
+        'titleSuffix' => ($dropcenter ? 'dropcentertarget' : ''),
+        'targetcenter' => $options['center'],
+      ];
+    }
   }
 
   public function actAirDrop($x, $y)
@@ -57,16 +58,18 @@ trait AirDropTrait
     $options = Scenario::getOptions()['airdrop'];
     Globals::incAirDrops();
     $dropNumber = Globals::getAirDrops();
-    $maxi = ($args['nb_drops'] == 1) ?  $args['nb'] : $args['nb'][$dropNumber-1] ;
-   
-    
+    $maxi = ($args['nb_drops'] == 1) ?  $args['nb'] : $args['nb'][$dropNumber - 1];
+
+
     for ($i = 0; $i < $maxi; $i++) {
       $pos = Board::randomWalk(['x' => $x, 'y' => $y], $options['range']);
       $unit = Units::addInCell($options['unit'], $pos);
-      if (isset($options['unit']['behavior']) 
-      && $options['unit']['behavior'] == 'CANNOT_BE_ACTIVATED_TILL_TURN') {
+      if (
+        isset($options['unit']['behavior'])
+        && $options['unit']['behavior'] == 'CANNOT_BE_ACTIVATED_TILL_TURN'
+      ) {
         //$unit -> setExtraDatas('cannotBeActivated', true);
-        $unit -> setExtraDatas('cannotBeActivatedUntilTurn', $options['unit']['turn']);
+        $unit->setExtraDatas('cannotBeActivatedUntilTurn', $options['unit']['turn']);
       }
 
       $fails = 0;
@@ -87,13 +90,12 @@ trait AirDropTrait
         ]);
       }
     }
-    if (Globals::getActionCount()>= $args['nb_drops']) {
+    if (Globals::getActionCount() >= $args['nb_drops']) {
       $this->gamestate->jumpToState(ST_PREPARE_TURN);
       Globals::setAirDrops(0);
     } else {
       $this->gamestate->jumpToState(ST_AIR_DROP);
     }
-    
   }
 
   ///////////////////////////////////////////////////////////////
@@ -104,7 +106,7 @@ trait AirDropTrait
   ///_/   \_\_|_|  \__,_|_|  \___/| .__/  |_____|
   //                              |_|
   ///////////////////////////////////////////////////////////////
-  
+
 
   public function argsAirDrop2()
   {
@@ -112,7 +114,7 @@ trait AirDropTrait
     $cells = Board::getListOfCells();
     $dropcenter = isset($options['option2']) ? $options['option2'] == 'TARGET_DROP_CENTER' : false;
 
-    if(isset($options['behavior']) && isset($options['nbr_drops'])) {
+    if (isset($options['behavior']) && isset($options['nbr_drops'])) {
       return [
         'nb' => $options['nbr_units'],
         'cells' => $cells,
@@ -124,14 +126,14 @@ trait AirDropTrait
       ];
     } else {
       return [
-      'nb'=> $options['nbr_units'],
-      'cells' => $cells,
-      'actionCount' => Globals::getActionCount(),
-      'nb_drops' => 1,
-      'titleSuffix' => ($dropcenter ? 'dropcentertarget' : ''),
-      'targetcenter' => $options['center'],
-      ];}
-    
+        'nb' => $options['nbr_units'],
+        'cells' => $cells,
+        'actionCount' => Globals::getActionCount(),
+        'nb_drops' => 1,
+        'titleSuffix' => ($dropcenter ? 'dropcentertarget' : ''),
+        'targetcenter' => $options['center'],
+      ];
+    }
   }
 
   public function actAirDrop2($x, $y)
@@ -151,16 +153,18 @@ trait AirDropTrait
     Globals::incAirDrops();
     $dropNumber = Globals::getAirDrops();
     $currentTurn = Globals::getTurn();
-    $maxi = ($args['nb_drops'] == 1) ?  $args['nb'] : $args['nb'][$dropNumber-1] ;
-   
-    
+    $maxi = ($args['nb_drops'] == 1) ?  $args['nb'] : $args['nb'][$dropNumber - 1];
+
+
     for ($i = 0; $i < $maxi; $i++) {
       $pos = Board::randomWalk(['x' => $x, 'y' => $y], $options['range']);
       $unit = Units::addInCell($options['unit'], $pos);
-      if (isset($options['unit']['behavior']) 
-      && $options['unit']['behavior'] == 'CANNOT_BE_ACTIVATED_TILL_TURN') {
+      if (
+        isset($options['unit']['behavior'])
+        && $options['unit']['behavior'] == 'CANNOT_BE_ACTIVATED_TILL_TURN'
+      ) {
         //$unit -> setExtraDatas('cannotBeActivated', true);
-        $unit -> setExtraDatas('cannotBeActivatedUntilTurn', $options['unit']['turn'] + $currentTurn);
+        $unit->setExtraDatas('cannotBeActivatedUntilTurn', $options['unit']['turn'] + $currentTurn);
       }
 
       $fails = 0;
@@ -181,13 +185,11 @@ trait AirDropTrait
         ]);
       }
     }
-    if (Globals::getActionCount()>= $args['nb_drops']) {
+    if (Globals::getActionCount() >= $args['nb_drops']) {
       $this->gamestate->jumpToState(ST_PREPARE_TURN);
       Globals::setAirDrops(0);
     } else {
       $this->gamestate->jumpToState(ST_AIR_DROP);
     }
-    
   }
-
 }

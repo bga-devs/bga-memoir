@@ -1,4 +1,5 @@
 <?php
+
 namespace M44\States;
 
 use M44\Core\Globals;
@@ -40,8 +41,9 @@ trait DrawCardsTrait
     Notifications::discardCard($player, $card, false);
 
     if (($card->getType() == \CARD_FINEST_HOUR ||
-      $card->getType() == \CARD_COUNTER_ATTACK && $card->getExtraDatas('copiedCardType') == \CARD_FINEST_HOUR )
-      && Globals::getDeckReshuffle()) {
+        $card->getType() == \CARD_COUNTER_ATTACK && $card->getExtraDatas('copiedCardType') == \CARD_FINEST_HOUR)
+      && Globals::getDeckReshuffle()
+    ) {
       $n = Cards::reshuffle();
       Notifications::reshuffle($n);
     }

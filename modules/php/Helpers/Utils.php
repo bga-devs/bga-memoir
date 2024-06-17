@@ -1,5 +1,7 @@
 <?php
+
 namespace M44\Helpers;
+
 use M44\Scenario;
 
 abstract class Utils extends \APP_DbObject
@@ -11,9 +13,6 @@ abstract class Utils extends \APP_DbObject
 
   public static function die($args = null)
   {
-    if (is_null($args)) {
-      throw new \BgaVisibleSystemException(implode('<br>', self::$logmsg));
-    }
     throw new \BgaVisibleSystemException(json_encode($args));
   }
 
@@ -130,12 +129,5 @@ abstract class Utils extends \APP_DbObject
     $height = Scenario::getMode() == BREAKTHROUGH_DECK ? 17 : 9;
     $xy['y'] = $height - $xy['y'];
     return $xy;
-
-    // capital
-    if ($x['x'] % 2 == 0) {
-      return strtoupper(alphabet[$x['x'] / 2]) . ($height - $x['y']);
-    } else {
-      return alphabet[($x['x'] - 1) / 2] . ($height - $x['y']);
-    }
   }
 }

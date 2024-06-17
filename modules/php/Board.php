@@ -1,4 +1,5 @@
 <?php
+
 namespace M44;
 
 use M44\Cards\Breakthrough\InfantryAssault;
@@ -32,7 +33,7 @@ class Board
   protected static $hillComponents = null;
   protected static $mountainComponents = null;
   protected static $caveComponents = null;
-  public function init()
+  public static function init()
   {
     // Try to fetch scenario from DB
     $scenario = Scenario::get();
@@ -89,7 +90,7 @@ class Board
   // |____/ \___|\__|\__\___|_|  |___/
   /////////////////////////////////////////
 
-  public function removeTerrain($terrain)
+  public static function removeTerrain($terrain)
   {
     $x = $terrain->getX();
     $y = $terrain->getY();
@@ -99,22 +100,22 @@ class Board
     Terrains::remove($terrain);
   }
 
-  public function addTerrain($terrain)
+  public static function addTerrain($terrain)
   {
     self::$grid[$terrain->getX()][$terrain->getY()]['terrains'][] = $terrain;
   }
 
-  public function addUnit($unit)
+  public static function addUnit($unit)
   {
     self::$grid[$unit->getX()][$unit->getY()]['unit'] = $unit;
   }
 
-  public function removeUnit($unit)
+  public static function removeUnit($unit)
   {
     self::$grid[$unit->getX()][$unit->getY()]['unit'] = null;
 
     // Check for listeners
-    foreach (self::$grid[$unit->getX()][$unit->getY()]['terrains'] as $terrain) {
+    foreach ((self::$grid[$unit->getX()][$unit->getY()]['terrains'] ?? []) as $terrain) {
       $terrain->onUnitEliminated($unit);
     }
 
@@ -134,7 +135,7 @@ class Board
   //  \____|\___|\__|\__\___|_|  |___/
   /////////////////////////////////////////
 
-  public function getUiData()
+  public static function getUiData()
   {
     $scenario = Scenario::get();
     if (is_null($scenario)) {
@@ -147,7 +148,7 @@ class Board
     ];
   }
 
-  public function getUnitInCell($x, $y = null)
+  public static function getUnitInCell($x, $y = null)
   {
     if (is_null($y)) {
       $y = $x['y'];
@@ -156,7 +157,7 @@ class Board
     return self::$grid[$x][$y]['unit'];
   }
 
-  public function getTerrainsInCell($x, $y = null)
+  public static function getTerrainsInCell($x, $y = null)
   {
     if (is_null($y)) {
       $y = $x['y'];
@@ -166,7 +167,7 @@ class Board
   }
 
   // Useful for close assault card
-  public function isAdjacentToEnnemy($unit)
+  public static function isAdjacentToEnnemy($unit)
   {
     foreach (self::getNeighbours($unit->getPos()) as $cell) {
       $t = self::$grid[$cell['x']][$cell['y']];
@@ -178,7 +179,7 @@ class Board
     return false;
   }
 
-  public function isAdjacentToBeach($cell)
+  public static function isAdjacentToBeach($cell)
   {
     $isbeach = false;
     $neighbours = self::getNeighbours($cell); // Not accessible from Ocean.php as protected
@@ -191,13 +192,13 @@ class Board
     return !$isbeach;
   }
 
-  public function hasFullRailPath($path)
+  public static function hasFullRailPath($path)
   {
     $ispathrail = true;
     $cells = $path['cells'];
-    
-    foreach ($cells as $c) {  
-      if ($ispathrail && !self::isRailCell($c) ) {
+
+    foreach ($cells as $c) {
+      if ($ispathrail && !self::isRailCell($c)) {
         $ispathrail = false;
       }
     }
@@ -234,7 +235,7 @@ class Board
   }
 
   // Useful for DigIn card
-  public function canPlaceSandbag($unit)
+  public static function canPlaceSandbag($unit)
   {
     return !self::cellHasProperty($unit->getPos(), 'isBlockingSandbag', $unit);
   }
@@ -263,9 +264,10 @@ class Board
     $card = $unit->getActivationOCard();
     if ($card != null) {
       if (($card->isType(CARD_BEHIND_LINES)
-      || $card->isType(\CARD_COUNTER_ATTACK)
-        && $card->getExtraDatas('copiedCardType') == \CARD_BEHIND_LINES)
-        && $unit->getType() == INFANTRY) {
+          || $card->isType(\CARD_COUNTER_ATTACK)
+          && $card->getExtraDatas('copiedCardType') == \CARD_BEHIND_LINES)
+        && $unit->getType() == INFANTRY
+      ) {
         $maxDistance = 3; // Units activated by "BehindEnemyLines" can moves up to 3 hexes
       }
       // Only effect on unit with a move radius of 2 or less
@@ -351,7 +353,7 @@ class Board
         if ($unit->getType() == DESTROYER) {
           // specific unit in ocean cannot move to adjacent hexes to beach
           return self::isAdjacentToBeach($cell);
-        } elseif (in_array($unit->getType(), [LOCOMOTIVE,WAGON])) {
+        } elseif (in_array($unit->getType(), [LOCOMOTIVE, WAGON])) {
           // train unit can only move on rail paths
           return self::hasFullRailPath($path);
         } else {
@@ -424,12 +426,11 @@ class Board
     ) {
       foreach ($targetCell['terrains'] as $terrain) {
         if ($terrain->isCave($unit)) {
-          if($unit->getActivationOcard()->isType(CARD_INFANTRY_ASSAULT)) {
+          if ($unit->getActivationOcard()->isType(CARD_INFANTRY_ASSAULT)) {
             return 2;
           } else {
             return 1;
           }
-          
         }
       }
     }
@@ -477,9 +478,10 @@ class Board
     // Units activated by "BehindEnemyLines" card have no terrain restriction
     $card = $unit->getActivationOCard();
     if (($card->isType(CARD_BEHIND_LINES)
-      || $card->isType(\CARD_COUNTER_ATTACK)
+        || $card->isType(\CARD_COUNTER_ATTACK)
         && $card->getExtraDatas('copiedCardType') == \CARD_BEHIND_LINES)
-        && $unit->getType() == INFANTRY) {
+      && $unit->getType() == INFANTRY
+    ) {
       return $cost == INFINITY ? INFINITY : ($realMove ? 2 - $unit->getRoadBonus() : 1);
     }
 
@@ -512,9 +514,10 @@ class Board
     // All paths are valid for Behind ennemy lines
     $card = $unit->getActivationOCard();
     if (($unit->getActivationOCard()->isType(CARD_BEHIND_LINES)
-      || $card->isType(\CARD_COUNTER_ATTACK)
-      && $card->getExtraDatas('copiedCardType') == \CARD_BEHIND_LINES)
-      && $unit->getType() == INFANTRY) {
+        || $card->isType(\CARD_COUNTER_ATTACK)
+        && $card->getExtraDatas('copiedCardType') == \CARD_BEHIND_LINES)
+      && $unit->getType() == INFANTRY
+    ) {
       return true;
     }
 
@@ -623,10 +626,11 @@ class Board
       // only if movement and attack radius == 1
       if ($card->isType(CARD_INFANTRY_ASSAULT) && $unit->getType() == \INFANTRY && $maxMoves == 1) {
         $maxMoves++;
-      } elseif (($card->isType(CARD_BEHIND_LINES) 
-        || $card->isType(\CARD_COUNTER_ATTACK)
-        && $card->getExtraDatas('copiedCardType') == \CARD_BEHIND_LINES) 
-        && $unit->getType() == INFANTRY) {
+      } elseif (($card->isType(CARD_BEHIND_LINES)
+          || $card->isType(\CARD_COUNTER_ATTACK)
+          && $card->getExtraDatas('copiedCardType') == \CARD_BEHIND_LINES)
+        && $unit->getType() == INFANTRY
+      ) {
         $maxMoves = INFINITY;
       } elseif ($unit->getBanzai() === true && $m > $maxMoves) {
         $banzai = true;
@@ -1075,12 +1079,12 @@ class Board
     // Particular case Train backward move
     //(not necessarly vertical direction but check WAGON retreat instead or opposite LOCOMOTIVE orientation)
     // Case train detected if train case
-    
+
     $trainCase = in_array($unit->getType(), [LOCOMOTIVE, WAGON]);
     $train = Units::getAll()->filter(function ($unit) {
       return in_array($unit->getType(), [LOCOMOTIVE, WAGON]) && !$unit->isEliminated();
     });
-    
+
     // Compute all cells reachable at distance $d
     $deltaY = $unit->getCampDirection();
 
@@ -1089,16 +1093,16 @@ class Board
       list($cells, $markers) = self::getCellsAtDistance(
         $unit->getPos(),
         $d,
-        
+
         function ($source, $target, $d) use ($unit, $train) {
           // Check direction to be modified
           /*if ($source['y'] + $deltaY != $target['y']) {
             return \INFINITY;
           }*/
-  
+
           $targetCell = self::$grid[$target['x']][$target['y']];
           $sourceCell = self::$grid[$source['x']][$source['y']];
-  
+
           // Train only on railways
           if (!self::isRailCell(['x' => $target['x'], 'y' => $target['y']])) {
             return \INFINITY;
@@ -1116,27 +1120,26 @@ class Board
               5 => ['x' => 1, 'y' => 1],
               0 => ['x' => -1, 'y' => 1],
             ];
-            for ($index=-1; $index <=1; $index++) { 
-              $indexDirection = ($trainOrientation + $index + 6) % 6 ;
+            for ($index = -1; $index <= 1; $index++) {
+              $indexDirection = ($trainOrientation + $index + 6) % 6;
 
               $forwardtargets[$index + 1]['x'] = $source['x'] + $directions[$indexDirection]['x'];
               $forwardtargets[$index + 1]['y'] = $source['y'] + $directions[$indexDirection]['y'];
-              
             }
-            
-            if(in_array($target,$forwardtargets)) {
+
+            if (in_array($target, $forwardtargets)) {
               return \INFINITY;
             }
           }
-          
-          
-                   
+
+
+
           // If there is a unit => can't retreat there
           if (!is_null($targetCell['unit'])) {
             return \INFINITY;
           }
-  
-            
+
+
           // If the edge is not possible, return infinity
           foreach ($sourceCell['terrains'] as $terrain) {
             if ($terrain->isBlocked($target, $unit)) {
@@ -1148,8 +1151,8 @@ class Board
               return INFINITY;
             }
           }
-  
-  
+
+
           // Otherwise, ask the terrains about it and take the maximum of the costs to check INFINITY
           $cost = 1;
           foreach ($sourceCell['terrains'] as $terrain) {
@@ -1158,11 +1161,11 @@ class Board
           foreach ($targetCell['terrains'] as $terrain) {
             $cost = max($cost, $terrain->getEnteringDeplacementCost($unit, $source, $target, $d, false));
           }
-  
+
           if ($cost == \INFINITY) {
             return INFINITY;
           }
-  
+
           // Ignore all other terrains restriction
           return 1;
         },
@@ -1180,20 +1183,20 @@ class Board
           if ($source['y'] + $deltaY != $target['y']) {
             return \INFINITY;
           }
-  
+
           $targetCell = self::$grid[$target['x']][$target['y']];
           $sourceCell = self::$grid[$source['x']][$source['y']];
-  
+
           // If there is a unit => can't retreat there
           if (!is_null($targetCell['unit'])) {
             return \INFINITY;
           }
-  
+
           // If there is an impassable terrain => can't retreat there
           if (self::isImpassableCell($target, $unit) || self::isImpassableForRetreatCell($target, $unit)) {
             return \INFINITY;
           }
-  
+
           // If the edge is not possible, return infinity
           foreach ($sourceCell['terrains'] as $terrain) {
             if ($terrain->isBlocked($target, $unit)) {
@@ -1205,12 +1208,12 @@ class Board
               return INFINITY;
             }
           }
-  
+
           // check to forbid caves teleportation
           if (!in_array(['x' => $target['x'], 'y' => $target['y']], self::getNeighbours($source))) {
             return INFINITY;
           }
-  
+
           // Otherwise, ask the terrains about it and take the maximum of the costs to check INFINITY
           $cost = 1;
           foreach ($sourceCell['terrains'] as $terrain) {
@@ -1219,11 +1222,11 @@ class Board
           foreach ($targetCell['terrains'] as $terrain) {
             $cost = max($cost, $terrain->getEnteringDeplacementCost($unit, $source, $target, $d, false));
           }
-  
+
           if ($cost == \INFINITY) {
             return INFINITY;
           }
-  
+
           // Ignore all other terrains restriction
           return 1;
         },
@@ -1231,7 +1234,7 @@ class Board
           return self::avoidIfPossibleCell($cell, $unit) ? 1 : 0;
         }
       );
-    }    
+    }
 
     return [$cells, $markers];
   }
@@ -1271,12 +1274,12 @@ class Board
     return $cells;
   }
 
-  protected function isValidCell($cell)
+  protected static function isValidCell($cell)
   {
     return isset(self::$grid[$cell['x']][$cell['y']]);
   }
 
-  protected function areSameCell($cell1, $cell2)
+  protected static function areSameCell($cell1, $cell2)
   {
     return $cell1['x'] == $cell2['x'] && $cell1['y'] == $cell2['y'];
   }

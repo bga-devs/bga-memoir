@@ -1,5 +1,7 @@
 <?php
+
 namespace M44;
+
 use M44\Core\Game;
 use M44\Core\Globals;
 use M44\Core\Notifications;
@@ -28,37 +30,37 @@ class Scenario extends \APP_DbObject
     return self::$scenario;
   }
 
-  public function getId()
+  public static function getId()
   {
     $scenario = self::get();
     return is_null($scenario) ? null : $scenario['meta_data']['scenario_id'] ?? $scenario['meta_data']['id'];
   }
 
-  public function getMode()
+  public static function getMode()
   {
     $scenario = self::get();
     return is_null($scenario) ? null : strtoupper($scenario['board']['type']);
   }
 
-  public function getTopTeam()
+  public static function getTopTeam()
   {
     $scenario = self::get();
     return is_null($scenario) ? null : \strtoupper($scenario['game_info']['side_player1']);
   }
 
-  public function getDate()
+  public static function getDate()
   {
     $scenario = self::get();
     return is_null($scenario) ? null : \strtoupper($scenario['game_info']['date_begin']);
   }
 
-  public function getOptions()
+  public static function getOptions()
   {
     $scenario = self::get();
     return is_null($scenario) ? null : $scenario['game_info']['options'] ?? [];
   }
 
-  function getFromTheFront($id)
+  public static function getFromTheFront($id)
   {
     require dirname(__FILE__) . '/FromTheFront/list.inc.php';
     if (!isset($fromTheFront[$id])) {
@@ -81,7 +83,7 @@ class Scenario extends \APP_DbObject
     return $scenarios[$id];
   }
 
-  function getPaginatedScenarios($query)
+  public static function getPaginatedScenarios($query)
   {
     $query['page'] = $query['page'] ?? 1; // Keep it sync with frontend
     $query['pagination'] = $query['pagination'] ?? 20;
@@ -113,7 +115,7 @@ class Scenario extends \APP_DbObject
     ];
   }
 
-  function getMetadataFromTheFront($query)
+  public static function getMetadataFromTheFront($query)
   {
     require dirname(__FILE__) . '/FromTheFront/list.inc.php';
     $scenarios = [];
@@ -140,7 +142,7 @@ class Scenario extends \APP_DbObject
     return $scenarios;
   }
 
-  function isSatisfyingFilters($infos, $filters)
+  public static function isSatisfyingFilters($infos, $filters)
   {
     foreach (['type', 'id', 'front', 'author', 'name'] as $filter) {
       if (is_null($filters[$filter] ?? null)) {
@@ -159,10 +161,10 @@ class Scenario extends \APP_DbObject
   /**
    * Load a scenario from a file and store it into a global
    */
-  function loadId($id)
-  { 
+  public static function loadId($id)
+  {
     //changed to require not once as it may be called several times in campaign mode
-    require dirname(__FILE__) . '/Scenarios/list.inc.php'; 
+    require dirname(__FILE__) . '/Scenarios/list.inc.php';
     $scenarios = [];
 
     if (isset($scenariosMap[$id])) {
@@ -196,7 +198,7 @@ class Scenario extends \APP_DbObject
   /**
    * Load a campaign from a file and store it into a global
    */
-  function campaignloadId($id)
+  public static function campaignloadId($id)
   {
     require_once dirname(__FILE__) . '/Scenarios/list.inc.php';
     $scenarios = [];
@@ -204,7 +206,7 @@ class Scenario extends \APP_DbObject
     if (isset($scenariosMap[$id])) {
       $name = $scenariosMap[$id];
       require_once dirname(__FILE__) . '/Scenarios/' . $name . '.php';
-    } 
+    }
 
     $campaign = $scenarios[$id];
 
@@ -216,7 +218,7 @@ class Scenario extends \APP_DbObject
   /**
    * Setup the scenario stored into the global
    */
-  function setup($rematch = false, $forceRefresh = false)
+  public static function setup($rematch = false, $forceRefresh = false)
   {
     $scenario = self::get();
     if (is_null($scenario)) {
@@ -299,7 +301,7 @@ class Scenario extends \APP_DbObject
     Medals::checkBoardMedals();
   }
 
-  function validateScenario($scenario)
+  public static function validateScenario($scenario)
   {
     // constants copied from globals
     $TROOP_BADGE_MAPPING = ['FRENCH_RESISTANCE' => 'badge3'];
@@ -387,7 +389,7 @@ class Scenario extends \APP_DbObject
     return true;
   }
 
-  function validateTerrain($hex)
+  public static function validateTerrain($hex)
   {
     // prettier-ignore
     if (
@@ -402,7 +404,7 @@ class Scenario extends \APP_DbObject
       (in_array($hex['name'], ['church'])) || // Church
       (in_array($hex['name'], ['hills', 'whill']) && isset($hex['behavior']) && $hex['behavior'] == 'CLIFF') || // cliff
       (in_array($hex['name'], ['coast', 'coastcurve'])) || // coastline
-      (in_array($hex['name'], ['dam']))|| // Dam
+      (in_array($hex['name'], ['dam'])) || // Dam
       (in_array($hex['name'], ['dragonteeth'])) || // DragonTeeth
       (in_array($hex['name'], ['dridge'])) || //Erg
       (in_array($hex['name'], ['descarpment'])) || // Escarpment
@@ -419,7 +421,7 @@ class Scenario extends \APP_DbObject
       (in_array($hex['name'], ['hills', 'whill', 'dhill']) && (!isset($hex['behavior']) || in_array($hex['behavior'], ['HILL', 'IMPASSABLE_HILL', 'IMPASSABLE_BLOCKING_HILL']))) || // Hill
       (in_array($hex['name'], ['pcave'])) || // HillCave
       (in_array($hex['name'], ['whillforest'])) || // HillForest
-      (in_array($hex['name'], ['whillvillage'])) ||// HillVillage
+      (in_array($hex['name'], ['whillvillage'])) || // HillVillage
       (in_array($hex['name'], ['phospital'])) || // Hospital
       (in_array($hex['name'], ['dcamp', 'pheadquarter'])) || // HQ
       (in_array($hex['name'], ['pjungle'])) || // Jungle
@@ -427,7 +429,7 @@ class Scenario extends \APP_DbObject
       (in_array($hex['name'], ['lighthouse'])) || // Lighthouse
       (in_array($hex['name'], ['marshes', 'wmarshes'])) || // Marshes
       (in_array($hex['name'], ['mountain']) && (!isset($hex['behavior']) || in_array($hex['behavior'], ['MOUNTAIN', 'IMPASSABLE_HILL', 'IMPASSABLE_BLOCKING_HILL']))) || // Mountain
-      (in_array($hex['name'], ['pmcave'])) ||// MountainCave
+      (in_array($hex['name'], ['pmcave'])) || // MountainCave
       (in_array($hex['name'], ['oasis'])) || // Oasis
       (in_array($hex['name'], ['palmtrees'])) || // PalmForest
       (in_array($hex['name'], ['ppier'])) || // Pier
@@ -441,7 +443,7 @@ class Scenario extends \APP_DbObject
       (in_array($hex['name'], ['wravine'])) || // ravine
       (in_array($hex['name'], ['price'])) || // Rice paddles
       (in_array($hex['name'], ['river', 'riverFL', 'riverFR', 'riverY', 'curve', 'pond', 'pmouth']) && (!isset($hex['behavior']) || $hex['behavior'] == 'WIDE_RIVER')) || // River
-      (in_array($hex['name'], ['road', 'roadcurve', 'roadFL', 'roadFR', 'roadX', 'roadY', 'droad', 'droadX', 'droadcurve', 'droadFL', 'droadFR', 'wroad', 'wroadcurve', 'wroadFL', 'wroadFR', 'wroadX','wroadY',])) || // Road
+      (in_array($hex['name'], ['road', 'roadcurve', 'roadFL', 'roadFR', 'roadX', 'roadY', 'droad', 'droadX', 'droadcurve', 'droadFL', 'droadFR', 'wroad', 'wroadcurve', 'wroadFL', 'wroadFR', 'wroadX', 'wroadY',])) || // Road
       (in_array($hex['name'], ['roadblock', 'droadblock'])) || // RoadBlock
       (in_array($hex['name'], ['hillroad', 'hillcurve'])) || // roadhill
       (in_array($hex['name'], ['wruins'])) || // ruins
@@ -461,7 +463,7 @@ class Scenario extends \APP_DbObject
     return false;
   }
 
-  function validateUnit($unit)
+  public static function validateUnit($unit)
   {
     $TROOP_CLASSES = [
       'inf2' => 'SpecialForces',
@@ -497,7 +499,7 @@ class Scenario extends \APP_DbObject
       'gun_35' => 'MobileArtillery',
       'gun_46' => 'HeavyAntiTankGun',
       'tank2_33' => 'FlameThrower',
-      'tiger'=> 'Tiger',
+      'tiger' => 'Tiger',
     ];
     $name = $unit['name'];
     foreach (array_keys($TROOP_CLASSES) as $t) {

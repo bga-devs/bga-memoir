@@ -1,5 +1,7 @@
 <?php
+
 namespace M44\Managers;
+
 use M44\Core\Game;
 use M44\Core\Globals;
 use M44\Core\Notifications;
@@ -13,6 +15,7 @@ use M44\Managers\Medals;
 /*
  * Medals manager
  */
+
 class Tokens extends \M44\Helpers\Pieces
 {
   protected static $table = 'tokens';
@@ -28,7 +31,7 @@ class Tokens extends \M44\Helpers\Pieces
     return $row;
   }
 
-  public function getOfTeam($team)
+  public static function getOfTeam($team)
   {
     return self::DB()
       ->where('team', $team)
@@ -47,7 +50,7 @@ class Tokens extends \M44\Helpers\Pieces
     return $q;
   }
 
-  public function getOnCoords($location, $coords, $type = null)
+  public static function getOnCoords($location, $coords, $type = null)
   {
     $query = self::getSelectWhere(null, $location, null);
     if (!is_null($coords)) {
@@ -62,7 +65,7 @@ class Tokens extends \M44\Helpers\Pieces
   /**
    * Load a scenario
    */
-  public function loadScenario($scenario, $rematch)
+  public static function loadScenario($scenario, $rematch)
   {
     self::DB()
       ->delete()
@@ -131,7 +134,7 @@ class Tokens extends \M44\Helpers\Pieces
   /**
    * extract all the needed datas from m44 about the medal
    */
-  protected function extractMedalDatas($hex, $tag, $baseDatas)
+  protected static function extractMedalDatas($hex, $tag, $baseDatas)
   {
     $team = $tag['name'] == 'medal0' ? null : (in_array($tag['name'], ['medal1', 'medal4', 'medal6']) ? ALLIES : AXIS);
     $hexes = [['x' => $hex['col'], 'y' => $hex['row']]];
@@ -160,7 +163,7 @@ class Tokens extends \M44\Helpers\Pieces
   /**
    * convert a sudden death victory conditions into a position medal
    */
-  protected function extractSuddenDeathDatas($condition)
+  protected static function extractSuddenDeathDatas($condition)
   {
     $hexes = [];
     foreach ($condition['group'] as $g) {
@@ -183,14 +186,14 @@ class Tokens extends \M44\Helpers\Pieces
     ];
   }
 
-  public function getBoardMedals()
+  public static function getBoardMedals()
   {
     return self::getSelectQuery()
       ->where('type', \TOKEN_MEDAL)
       ->get();
   }
 
-  public function removeTargets($coords)
+  public static function removeTargets($coords)
   {
     $tokens = self::getSelectQuery()
       ->where('x', $coords['x'])
@@ -204,7 +207,7 @@ class Tokens extends \M44\Helpers\Pieces
     }
   }
 
-  public function removeCamouflage($coords)
+  public static function removeCamouflage($coords)
   {
     $tokens = self::getSelectQuery()
       ->where('x', $coords['x'])

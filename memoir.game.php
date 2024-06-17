@@ -1,4 +1,5 @@
 <?php
+
 /**
  *------
  * BGA framework: © Gregory Isabelli <gisabelli@boardgamearena.com> & Emmanuel Colin <ecolin@boardgamearena.com>
@@ -139,7 +140,7 @@ class memoir extends Table
       $progression = max(round(($team->getMedals()->count() / $team->getNVictory()) * 100), $progression);
     }
     if (Globals::getDuration() == OPTION_DURATION_TWO_WAYS) {
-      $progression = intdiv($progression, 2) + (Globals::getRound() == 1? 0 : 50);
+      $progression = intdiv($progression, 2) + (Globals::getRound() == 1 ? 0 : 50);
     }
     return $progression;
   }
@@ -203,7 +204,7 @@ class memoir extends Table
       }
     }
   }
- 
+
   /////////////////////////////////////////////////////////////
   // Exposing protected methods, please use at your own risk //
   /////////////////////////////////////////////////////////////
@@ -211,13 +212,13 @@ class memoir extends Table
   // Exposing protected method getCurrentPlayerId
   public static function getCurrentPId()
   {
-    return self::getCurrentPlayerId();
+    return self::get()->getCurrentPlayerId();
   }
 
   // Exposing protected method translation
   public static function translate($text)
   {
-    return self::_($text);
+    return self::get()->_($text);
   }
 
   ////////////////////////////////////
@@ -244,7 +245,7 @@ class memoir extends Table
 
     if ($state['type'] === 'multipleactiveplayer') {
       // Make sure player is in a non blocking status for role turn
-      $this->gamestate->setPlayerNonMultiactive($active_player, '');
+      $this->gamestate->setPlayerNonMultiactive($activePlayer, '');
 
       return;
     }

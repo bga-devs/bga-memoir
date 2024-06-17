@@ -1,4 +1,5 @@
 <?php
+
 namespace M44\States;
 
 use M44\Core\Globals;
@@ -173,11 +174,12 @@ trait TacticCardTrait
     return $card->blowBridgeFilters($card);
   }
 
-  public function isTerrainInCardSections($terrain, $cardsections, $side) {
+  public function isTerrainInCardSections($terrain, $cardsections, $side)
+  {
     $isInSection = false;
-    foreach($terrain->getSections($side) as $s) {
-      if(!$isInSection) {
-        $isInSection = ($cardsections[$s]!=0);
+    foreach ($terrain->getSections($side) as $s) {
+      if (!$isInSection) {
+        $isInSection = ($cardsections[$s] != 0);
       }
     }
     return $isInSection;
@@ -188,8 +190,8 @@ trait TacticCardTrait
     self::checkAction('actBlowBridge');
     Globals::incActionCount();
 
-    $args = self::argsblowbridge();
-   
+    $args = $this->argsblowbridge();
+
     $selectedBridge = Terrains::get($terrainId);
     $player = Players::getCurrent();
     $teamId = $player->getTeam()->getId();
@@ -211,7 +213,7 @@ trait TacticCardTrait
         'y' => $selectedBridge->getPos()['y'],
         'orientation' => $selectedBridge->getOrientation(),
       ]);
-      
+
       Notifications::addTerrain(
         $player,
         $brokenbridge,
@@ -224,19 +226,19 @@ trait TacticCardTrait
 
       // check if unit on this cell, if so eliminate it and add related medals
       $unitOnBridge = Board::getUnitInCell($bridge_cell['x'], $bridge_cell['y']);
-      
-      if(isset($unitOnBridge)) {
+
+      if (isset($unitOnBridge)) {
         $playerOppUnit_tmp = Players::getOfTeam($unitOnBridge->getPlayer()->getTeam()->getOpponent()->getId());
         $playerOppUnit_tmp2 = $playerOppUnit_tmp->toArray();
         $playerOppUnit = array_shift($playerOppUnit_tmp2);
-        $eliminated = AttackUnitsTrait::damageUnit($unitOnBridge, $playerOppUnit, 4);
+        $eliminated = $this->damageUnit($unitOnBridge, $playerOppUnit, 4);
         if (Teams::checkVictory()) {
           return;
         }
       }
 
       // gain medals related to bridge blown objectives scenario 'behavior2' == 'ONE_MEDAL_IF_BLOWN' if applicable
-      if($bonusmedal) {
+      if ($bonusmedal) {
         // Increase stats
         $statName = 'incMedalRound' . Globals::getRound();
         foreach ($player->getTeam()->getMembers() as $p) {
@@ -245,20 +247,16 @@ trait TacticCardTrait
 
         // Create medals and notify them (will refresh previous stats)
         $medals = Medals::addDestroyedTerrainMedals($teamId, 1);
-        Notifications::scoreMedals($teamId, $medals);       
+        Notifications::scoreMedals($teamId, $medals);
 
         if (Teams::checkVictory()) {
           return;
         }
       }
-
-      
-
     } else {
       Notifications::message(clienttranslate('Bridge blown unsuccessfull'));
     }
 
     $this->nextState('draw');
   }
-
 }
