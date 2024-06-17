@@ -47,10 +47,10 @@ trait MoveUnitsTrait
     } else {
       $args = $this->argsMoveUnits($player, false);
     }
-    if (!\array_key_exists($unitId, $args['units'])) {
+    $cells = $args['units'][$unitId] ?? null;
+    if (is_null($cells)) {
       throw new \BgaVisibleSystemException('You cannot move this unit. Should not happen');
     }
-    $cells = $args['units'][$unitId];
     $k = Utils::searchCell($cells, $x, $y);
     if ($k === false) {
       throw new \BgaVisibleSystemException('You cannot move this unit to this hex. Should not happen');

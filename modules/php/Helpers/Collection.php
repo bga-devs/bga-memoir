@@ -1,4 +1,5 @@
 <?php
+
 namespace M44\Helpers;
 
 class Collection extends \ArrayObject

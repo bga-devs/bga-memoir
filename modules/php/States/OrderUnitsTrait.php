@@ -194,11 +194,10 @@ trait OrderUnitsTrait
     Globals::incActionCount();
     $player = Players::getCurrent();
     $args = $this->argsMoveUnits($player, false);
-    if (!\array_key_exists($unitId, $args['units'])) {
+    $unit = $args['unit'][$unitId] ?? null;
+    if (is_null($unit)) {
       throw new \BgaVisibleSystemException('You cannot move this unit. Should not happen');
     }
-
-    $unit = Units::get($unitId);
 
     $unit->setNUnits(0);
     // $pos = $unit->getPos();

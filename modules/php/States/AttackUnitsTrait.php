@@ -112,10 +112,10 @@ trait AttackUnitsTrait
     $player = Players::getCurrent();
     $card = $player->getCardInPlay();
     $args = $this->gamestate->state()['args'];
-    if (!\array_key_exists($unitId, $args['units'])) {
-      throw new \BgaVisibleSystemException('You cannot attack with this unit. Should not happen');
+    $cells = $args['units'][$unitId] ?? null;
+    if (is_null($cells)) {
+      throw new \BgaVisibleSystemException('You cannot move this unit. Should not happen');
     }
-    $cells = $args['units'][$unitId];
     $k = Utils::searchCell($cells, $x, $y);
     if ($k === false) {
       throw new \BgaVisibleSystemException('You cannot attack this hex with this unit. Should not happen');
@@ -484,10 +484,10 @@ trait AttackUnitsTrait
 
     $player = Players::getCurrent();
     $args = $this->gamestate->state()['args'];
-    if (!\array_key_exists($unitId, $args['units'])) {
-      throw new \BgaVisibleSystemException('You cannot remove wire with this unit. Should not happen');
+    $cells = $args['units'][$unitId] ?? null;
+    if (is_null($cells)) {
+      throw new \BgaVisibleSystemException('You cannot move this unit. Should not happen');
     }
-    $cells = $args['units'][$unitId];
     $k = Utils::array_usearch($cells, function ($cell) {
       return ($cell['action'] ?? null) == 'actRemoveWire';
     });
@@ -515,10 +515,10 @@ trait AttackUnitsTrait
 
     $player = Players::getCurrent();
     $args = $this->gamestate->state()['args'];
-    if (!\array_key_exists($unitId, $args['units'])) {
-      throw new \BgaVisibleSystemException('You cannot remove roadblock with this unit. Should not happen');
+    $cells = $args['units'][$unitId] ?? null;
+    if (is_null($cells)) {
+      throw new \BgaVisibleSystemException('You cannot move this unit. Should not happen');
     }
-    $cells = $args['units'][$unitId];
     $k = Utils::array_usearch($cells, function ($cell) {
       return ($cell['action'] ?? null) == 'actRemoveRoadBlock';
     });
@@ -546,10 +546,10 @@ trait AttackUnitsTrait
 
     $player = Players::getCurrent();
     $args = $this->gamestate->state()['args'];
-    if (!\array_key_exists($unitId, $args['units'])) {
-      throw new \BgaVisibleSystemException('You cannot seal the cave with this unit. Should not happen');
+    $cells = $args['units'][$unitId] ?? null;
+    if (is_null($cells)) {
+      throw new \BgaVisibleSystemException('You cannot move this unit. Should not happen');
     }
-    $cells = $args['units'][$unitId];
     $k = Utils::array_usearch($cells, function ($cell) {
       return ($cell['action'] ?? null) == 'actSealCave';
     });

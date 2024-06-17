@@ -3,6 +3,7 @@
 namespace M44\Managers;
 
 use M44\Core\Globals;
+use M44\Core\Game;
 use M44\Core\Notifications;
 use M44\Managers\Players;
 use M44\Helpers\Utils;
@@ -115,7 +116,7 @@ class Cards extends \M44\Helpers\Pieces
     self::move($cardId, ['inplay', $player->getId()]);
     $last = Globals::getRawLastPlayedCards();
     // Fix 70821 : removed extra_datas when using Hill 317 is creating a JSON syntax error : RawLastPlayedCards[extra_datas] not used
-    $last[$player->getId()] = self::getObjectFromDB("SELECT `card_id` AS id, `card_state` AS state, `card_location` AS location, type, value/*, extra_datas */ FROM `cards` WHERE `card_id` = $cardId");
+    $last[$player->getId()] = Game::get()->getObjectFromDB("SELECT `card_id` AS id, `card_state` AS state, `card_location` AS location, type, value/*, extra_datas */ FROM `cards` WHERE `card_id` = $cardId");
     Globals::setRawLastPlayedCards($last);
 
     $last2 = Globals::getLastPlayedCards();
