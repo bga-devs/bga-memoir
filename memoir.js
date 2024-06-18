@@ -50,6 +50,7 @@ define([
         'confirmTurn',
         'targetBridge',
         'trainReinforcement',
+        'reserveUnitsDeployement',
       ];
       this._notifications = [
         ['playCard', 1000],
@@ -91,6 +92,7 @@ define([
         ['removeUnit', 1],
         ['proposeScenario', 1],
         ['trainReinforcement', 500],
+        ['reserveUnitsDeployement',1000],
       ];
 
       // Fix mobile viewport (remove CSS zoom)
@@ -319,6 +321,7 @@ define([
         targetBridge: 'order',
         blowBridge: 'attack',
         trainReinforcement: 'para',
+        reserveUnitsDeployement : 'para',
       };
 
       if (Object.keys(statusMapping).includes(stateName)) {

@@ -95,6 +95,19 @@ $machinestates = [
     ],
   ],
 
+  ST_RESERVE_ROLL_DEPLOYEMENT => [
+    'name' => 'reserveUnitsDeployement',
+    'description' => clienttranslate('${actplayer} may use tokens to deploy reserve units'),
+    'descriptionmyturn' => clienttranslate('${you} may use tokens to deploy reserve units'),
+    'type' => 'activeplayer',
+    'args' => 'argsReserveUnits',
+    'action' => 'stReserveRoll',
+    'possibleactions' => ['actReserveUnitsDeployement'],
+    'transitions' => [
+      '' => ST_PREPARE_TURN
+    ],
+  ],
+
   ST_NEW_ROUND => [
     'name' => 'newRound',
     'description' => '',
@@ -102,7 +115,7 @@ $machinestates = [
     'type' => 'game',
     'action' => 'stNewRound',
     'possibleactions' => [],
-    'transitions' => ['' => ST_NEW_ROUND],
+    'transitions' => ['' => ST_NEW_ROUND, '' => ST_RESERVE_ROLL_DEPLOYEMENT],
   ],
 
   ST_AIR_DROP => [

@@ -108,6 +108,16 @@ class action_memoir extends APP_GameAction
     $this->game->actUploadScenario($scenario);
     self::ajaxResponse();
   }
+  
+  public function actReserveUnitsDeployement()
+  {
+    self::setAjaxMode();
+    $x = self::getArg('x', AT_posint, false);
+    $y = self::getArg('y', AT_posint, false);
+    $finished = self::getArg('finished', AT_bool, false);
+    $this->game->actReserveUnitsDeployement($x, $y, $finished);
+    self::ajaxResponse();
+  }
 
   public function actPlayCard()
   {

@@ -73,6 +73,21 @@ class Teams extends \M44\Helpers\DB_Manager
       $teamId = $rematch ? 2 - $i : $i - 1;
       $team = $info['side_player' . $i];
 
+      
+      if (Globals::isCampaign()) {
+        self::DB()->insert([
+          'team' => $team,
+          'position' => $i,
+          'country' => $info['country_player' . $i] ?? '',
+          'cards' => Globals::isItalyHighCommand() && $team == AXIS ? 6 : $info['cards_player' . $i],
+          'victory' => $info['victory_player' . $i],
+          'reserve_tokens' => Globals::getCampaign()['scenarios'][$team]['reserve_tokens'],
+          'left_pId' => $composition[$teamId][0],
+          'central_pId' => $composition[$teamId][1],
+          'right_pId' => $composition[$teamId][2],
+          'commander_pId' => $composition[$teamId][3],
+        ]);
+      } else {
       self::DB()->insert([
         'team' => $team,
         'position' => $i,
@@ -84,7 +99,8 @@ class Teams extends \M44\Helpers\DB_Manager
         'right_pId' => $composition[$teamId][2],
         'commander_pId' => $composition[$teamId][3],
       ]);
-
+    }
+    
       foreach ($composition[$teamId] as $pId) {
         if ($pId !== null) {
           $players[$pId]->setTeam($team);

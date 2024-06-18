@@ -649,6 +649,75 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       });
     },
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //______                               ______      _ _  ______           _                                       _   
+    //| ___ \                              | ___ \    | | | |  _  \         | |                                     | |  
+    //| |_/ /___  ___  ___ _ ____   _____  | |_/ /___ | | | | | | |___ _ __ | | ___  _   _  ___ _ __ ___   ___ _ __ | |_ 
+    //|    // _ \/ __|/ _ \ '__\ \ / / _ \ |    // _ \| | | | | | / _ \ '_ \| |/ _ \| | | |/ _ \ '_ ` _ \ / _ \ '_ \| __|
+    //| |\ \  __/\__ \  __/ |   \ V /  __/ | |\ \ (_) | | | | |/ /  __/ |_) | | (_) | |_| |  __/ | | | | |  __/ | | | |_ 
+    //\_| \_\___||___/\___|_|    \_/ \___| \_| \_\___/|_|_| |___/ \___| .__/|_|\___/ \__, |\___|_| |_| |_|\___|_| |_|\__|
+    //                                                                | |             __/ |                              
+    //                                                                |_|            |___/  
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    onEnteringStateReserveUnitsDeployement(args) {
+      console.log('reserveroll args',args);
+      //console.log('Entering reserve deployement choice JD');
+      var elem_map = new Array();
+      elem_map['inf'] = ['1 infantry', 'unit'];
+      elem_map['tank'] = ['1 armor', 'unit'];
+      elem_map['gun'] = ['1 artillery', 'unit'];
+      elem_map['inf2'] = ['1 special force infantry', 'unit'];
+      elem_map['tank2'] = ['1 elite armor', 'unit'];
+      elem_map['wild'] = ['1 unit of your choice', 'unit'];
+      elem_map['wild2'] = ['1 elite unit of your choice', 'unit'];
+      elem_map['sandbag'] = ['1 sandbag (at no token cost)', 'obstacle'];
+      elem_map['wire'] = ['1 wire', 'obstacle'];
+      elem_map['sandbag2'] = ['advance 1 unit by 2 hexes', 'unit'];
+     
+      let playerid = args.playerid;
+      let element_list = args.elements_to_deploy[playerid];
+      console.log(element_list,playerid);
+      let n = 0;
+      element_list.forEach( (elem) => {
+        n++;
+        console.log(elem);
+        let elem_name = elem_map[elem][0];
+        console.log(elem_name);
+        this.addActionButton('btnReserveElem'+n, _(elem_name), () => this.onClickChooseDepLocation(elem, args));
+        }
+      )
+      /*args.cells.forEach((cell) => {
+        let oCell = $(`cell-${cell.x}-${cell.y}`);
+        oCell.classList.add('forTrainReinforcement');
+        let finished = false
+        this.onClick(oCell, () => this.takeAction('actReserveUnitsDeployement', { x: cell.x, y: cell.y, finished: finished }));
+      });*/
+
+
+      this.addDangerActionButton('btnConfirmReserveDeployement', _('End reserve deployement'), () =>
+        this.onClickConfirmReserveDeployement(),
+      );
+    },
+
+    onClickConfirmReserveDeployement() {
+      this.takeAction('actReserveUnitsDeployement', {
+        x : null, y: null, finished : true
+      });
+    },
+
+    onClickChooseDepLocation(elem, args) {
+      /*args.cells.forEach((cell) => {
+        let oCell = $(`cell-${cell.x}-${cell.y}`);
+        oCell.classList.add('forTrainReinforcement');
+        let finished = false
+        this.onClick(oCell, () => this.takeAction('actReserveUnitsDeployement', { x: cell.x, y: cell.y, finished: finished }));
+      });*/
+    },
+
+
+
+
     /////////////////////////////////////////////////
     //  __  __          _ _            ____ _____
     // |  \/  | ___  __| (_) ___ ___  | __ )_   _|

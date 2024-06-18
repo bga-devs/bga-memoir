@@ -72,6 +72,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         if ($(`commissar-holder-${player.id}`)) {
           dojo.place(`commissar-holder-${player.id}`, container);
         }
+        if(player.isCampaign){
+          dojo.place(`reservetokens-holder-${player.id}`, container);
+        }
 
         if (player.isCommissar && player.id == this.player_id) {
           dojo.place(`commissar-holder-${player.id}`, 'm44-player-hand', 'first');
@@ -105,7 +108,21 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           <div class='commissar-slot' id='commissar-${player.id}'></div>
         </div>`
         : '';
-
+      
+      const NATION_SPRITES = ['GB', 'DE', 'US', 'FR'];
+      let sprite = player.isCampaign
+      ?
+      NATION_SPRITES.findIndex((t) => t == player.campaignNation)
+      : 0;
+      console.log(player.id, player.campaignNation, sprite);
+      let restokens = player.isCampaign
+      ? `
+        <div class='reservetokens-holder' id="reservetokens-holder-${player.id}">
+          <div class='reserve-token' data-sprite="${sprite}"></div>
+          <div class='reservetoken-count' id="reservetokens-count-${player.id}">${player.nreservetoken}</div>
+        </div>`
+        : '';
+      // <div class='reserve-token' data-sprite="${sprite}"></div>
       return `<div class='m44-player-panel' id="m44-player-pannel-${player.id}">
         <div class='player-avatar'>
           <img src="${img.src}" alt="" class="avatar emblem" />
@@ -118,6 +135,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           <div class='hand-count' id="hand-count-${player.id}">${player.cardsCount}</div>
         </div>
         ${commissar}
+        ${restokens}
       </div>`;
     },
 

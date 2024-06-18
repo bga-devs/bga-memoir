@@ -71,6 +71,7 @@ CREATE TABLE IF NOT EXISTS `teams` (
   `country` varchar(255) NOT NULL,
   `cards` int(10) NOT NULL,
   `victory` int(10) NOT NULL,
+  `reserve_tokens` int(10) NOT NULL, 
   `left_pId` int(10) NOT NULL,
   `central_pId` int(10) NOT NULL,
   `right_pId` int(10) NOT NULL,

@@ -26,6 +26,7 @@ class Team extends \M44\Helpers\DB_Model
     'country' => 'country',
     'nCards' => ['cards', 'int'],
     'nVictory' => ['victory', 'int'],
+    'nReserveTokens' => ['reserve_tokens', 'int'],
     'leftPId' => ['left_pId', 'int'],
     'centralPId' => ['central_pId', 'int'],
     'rightPId' => ['right_pId', 'int'],
@@ -39,12 +40,18 @@ class Team extends \M44\Helpers\DB_Model
       'position' => $this->position,
       'medals' => $this->getMedals(),
       'victory' => $this->nVictory,
+      'reserve_tokens' => $this->nReserveTokens,
     ];
   }
 
   public function getMedals()
   {
     return Medals::getOfTeam($this->id);
+  }
+
+  public function getReserveTokens()
+  {
+    return $this->nReserveTokens;
   }
 
   public function getMembers()

@@ -28,6 +28,7 @@ class Globals extends \M44\Helpers\DB_Manager
 
     'campaign' => 'obj', // Used to store the campaign
     'campaignId' => 'int', // Used to store the campaign id
+    'campaignStep' => 'int', // Used to store the step in the campaign
 
     'round' => 'int',
     'turn' => 'int',
@@ -63,6 +64,8 @@ class Globals extends \M44\Helpers\DB_Manager
     'supplyTrain' => 'obj',
     'supplyTrainDone' => 'bool',
     'reinforcementUnits' => 'int', // used for nb units to be reinforced
+    'rollReserveDone' => 'bool',
+    'rollReserveList' => 'obj',
 
     // scenario game_info
     'beginDate' => 'str',
@@ -197,13 +200,14 @@ class Globals extends \M44\Helpers\DB_Manager
     Globals::setOfficialScenario($options[\OPTION_SCENARIO_TYPE] == \OPTION_SCENARIO_OFFICIAL);
     // Case Campaign set 1st scenario
     if (Globals::isCampaign()) {
-      // From Campaigne file
+      // From Campaign file
       $campaignId = $options[\OPTION_CAMPAIGN];
       Globals::setCampaignId($campaignId);
       Scenario::campaignLoadId($campaignId);
       $scenarioId = Globals::getCampaign()['scenarios']['ALLIES'][0];
       Globals::setScenarioId($scenarioId);
       Globals::setScenarioSource($options[\OPTION_SCENARIO_SOURCE] ?? 0);
+      Globals::setCampaignStep(0);
 
     } else { // other than campaign mode
       $scenarioId = Globals::isOfficialScenario() ? $options[OPTION_MODE + 1 + $options[OPTION_MODE]] : -1;

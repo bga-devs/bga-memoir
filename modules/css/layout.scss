@@ -719,6 +719,10 @@ html {
           background-color: #95612a3b;
           border-left: 1px solid #2f2f2f;
         }
+
+        .reservetokens-holder{
+          background-color: #95612a3b;
+        }
       }
     }
 
@@ -882,6 +886,20 @@ html {
   }
 }
 
+.reservetokens-holder {
+  display: flex;
+  padding: 2px 3px;
+  font-family: "Gunplay";
+  font-size: 28px;
+  line-height: 52px;
+
+  .reservetoken-count::before {
+    content: "x";
+    margin: 0px 3px;
+  }
+
+}
+
 .commissar-holder {
   display: flex;
   padding: 2px 7px;
@@ -907,6 +925,10 @@ html {
 }
 
 .player-panel-wrapper .commissar-holder {
+  --memoirCardScale: 0.1;
+}
+
+.player-panel-wrapper .reservetokens-holder {
   --memoirCardScale: 0.1;
 }
 

@@ -56,6 +56,9 @@ class Player extends \M44\Helpers\DB_Model
       'inplay' => $this->getCardInPlay(),
       'isCommissar' => $this->isCommissar(),
       'commissarCard' => $current ? $this->getCommissarCard() : $this->getCommissarCard() != null,
+      'nreservetoken' => $this->getReserveTokens(),
+      'isCampaign' => Globals::isCampaign(),
+      'campaignNation' => Globals::isCampaign() ? Globals::getCampaign()['scenarios'][$this->getTeam()->getId()]['country'] : NULL,
     ]);
 
     return $data;
@@ -161,4 +164,13 @@ class Player extends \M44\Helpers\DB_Model
     }
     return false;
   }
+
+  /*****************
+  * Reserve Tokens
+  *****************/
+  public function getReserveTokens()
+  {
+    return $this->getTeam()->getReserveTokens();
+  }
+
 }

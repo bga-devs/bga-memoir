@@ -1,0 +1,14 @@
+.reserve-token {
+  width: 48px;
+  height: 48px;
+  background-image: url('img/reserve_tokens.png');
+  background-size: 400% 100%;
+
+  @for $i from 0 through 3 {
+    &[data-sprite='#{$i}'] {
+      background-position-x: ($i % 4) * 100% / 3;
+      background-position-y: 0%;
+    }
+  }
+}
+
