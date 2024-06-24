@@ -320,8 +320,8 @@ define([
         confirmTurn: 'command',
         targetBridge: 'order',
         blowBridge: 'attack',
-        trainReinforcement: 'para',
-        reserveUnitsDeployement : 'para',
+        trainReinforcement: 'move',
+        reserveUnitsDeployement : 'command',
       };
 
       if (Object.keys(statusMapping).includes(stateName)) {
@@ -437,6 +437,7 @@ define([
         'forRetreat',
         'forAirDrop',
         'forTrainReinforcement',
+        'forReserveUnitDeploy',
         'attacked',
         'mayAttack',
       ].forEach((className) => {

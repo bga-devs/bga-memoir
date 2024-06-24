@@ -12,6 +12,7 @@ use M44\Managers\Units;
 use M44\Core\Notifications;
 use M44\Dice;
 use M44\Scenario;
+use M44\Helpers\Utils;
 
 trait RoundTrait
 {
@@ -70,21 +71,40 @@ trait RoundTrait
     ];
   }
 
-  public function actReserveUnitsDeployement($x = null, $y = null, $finished = false)
+  public function actReserveUnitsDeployement($x = null, $y = null, $finished = false, $pId = null, $elem = null)
   {
     self::checkAction('actReserveUnitsDeployement');
-    
-    $args = self::argsReserveUnits();
-
-    
-    // Passer les arguments a l'Ui
-    //$args = self::argsReserveUnits();
-    
+    $args = $this->argsReserveUnits();
+    /*$k = Utils::searchCell($args, $x, $y);
+    if ($k === false) {
+      throw new \BgaVisibleSystemException('You cannot performed reinforcement here. Should not happen');
+    }*/
 
     if($finished)
     {
       $this->gamestate->jumpToState(\ST_PREPARE_TURN);
     } else { 
+      // add unit from select ui
+      $player = Players::get($pId);
+      $scenario = Scenario::get();  
+      $country = Scenario::getTopTeam() == $player->getTeam() ? 
+        $scenario['game_info']['country_player1'] : 
+        $scenario['game_info']['country_player2'] ;
+      $suffix = TROOP_NATION_MAPPING[$country];
+      //$info = $scenario['game_info'];
+
+      $pos = ['x' => $x, 'y' => $y];
+      // define unit name and badge from elem args
+      //var_dump('element to deploy', $elem . $suffix);
+      $unit_type = ['name' => $elem . $suffix];
+      //var_dump($unit_type);
+      $unit = Units::addInCell($unit_type, $pos);
+      Board::addUnit($unit);
+      Notifications::trainReinforcement($player, $unit); // TO DO creer une notif specifique pour reserve roll
+
+      //var_dump('unit to deploy for player ', $player);
+
+      // Ajouter condition reste des jetons de reserve ? ou ne reste plus d'elements a deployer
       $this->gamestate->jumpToState(\ST_RESERVE_ROLL_DEPLOYEMENT);
     }
   }
@@ -102,8 +122,8 @@ trait RoundTrait
       }
       Globals::setRollReserveList($list);
       Globals::setRollReserveDone(true);
-      $args = self::argsReserveUnits();
     }
+    $args = $this->argsReserveUnits();
   }
 
   public function ReserveRoll($player) 

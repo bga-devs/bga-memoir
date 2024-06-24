@@ -238,7 +238,6 @@ trait MoveUnitsTrait
         $unit->setExtraDatas('cannotBeActivatedUntilTurn', $options['unit']['turn'] + $currentTurn);
       }
       Board::addUnit($unit);
-      //Notifications::airDrop($player, $unit);
       Notifications::trainReinforcement($player, $unit);
     }
 

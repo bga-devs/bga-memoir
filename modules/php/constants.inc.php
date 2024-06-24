@@ -330,10 +330,24 @@ const TROOP_CLASSES = [
   'tiger' => 'Tiger',
 ];
 
-const TROOP_BADGE_MAPPING = ['FRENCH_RESISTANCE' => 'badge3'];
+const TROOP_BADGE_MAPPING = [
+  'FRENCH_RESISTANCE' => 'badge3',
+  'DE' => 'badge4',
+  'US' => 'badge2',
+  'GB' => 'badge1',
+];
 
 // badge mapping nation
-const TROOP_NATION_MAPPING = ['38' => 'it'];
+const TROOP_NATION_MAPPING = [
+  '38' => 'it',
+  'DE' => 'ger',
+  'US' => 'us',
+  'GB' => 'brit',
+  'FR' => 'us',
+  'RU' => 'ru',
+  'FI' => 'ger',
+  'JP '=> 'jp',
+];
 
 /******************
  ****** STATS ******

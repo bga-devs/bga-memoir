@@ -687,32 +687,38 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         this.addActionButton('btnReserveElem'+n, _(elem_name), () => this.onClickChooseDepLocation(elem, args));
         }
       )
-      /*args.cells.forEach((cell) => {
-        let oCell = $(`cell-${cell.x}-${cell.y}`);
-        oCell.classList.add('forTrainReinforcement');
-        let finished = false
-        this.onClick(oCell, () => this.takeAction('actReserveUnitsDeployement', { x: cell.x, y: cell.y, finished: finished }));
-      });*/
-
-
+      
       this.addDangerActionButton('btnConfirmReserveDeployement', _('End reserve deployement'), () =>
-        this.onClickConfirmReserveDeployement(),
+        this.onClickConfirmReserveDeployement(args),
       );
     },
 
-    onClickConfirmReserveDeployement() {
+    onClickConfirmReserveDeployement(args) {
+      let playerid = args.playerid;
+      let elem = '';
       this.takeAction('actReserveUnitsDeployement', {
-        x : null, y: null, finished : true
+        x : 0, y: 0, 
+        finished : true, 
+        pId: playerid, 
+        elem: elem
       });
     },
 
     onClickChooseDepLocation(elem, args) {
-      /*args.cells.forEach((cell) => {
+      console.log('elem', elem);
+      let cells = Object.values(args.cells_units_deployement);
+      console.log('cells array', cells);
+      let playerid = args.playerid;
+      cells.forEach((cell) => {
         let oCell = $(`cell-${cell.x}-${cell.y}`);
-        oCell.classList.add('forTrainReinforcement');
+        oCell.classList.add('forReserveUnitDeploy');
         let finished = false
-        this.onClick(oCell, () => this.takeAction('actReserveUnitsDeployement', { x: cell.x, y: cell.y, finished: finished }));
-      });*/
+        this.onClick(oCell, () => this.takeAction('actReserveUnitsDeployement', { x: cell.x, y: cell.y, 
+          finished: finished, 
+          pId: playerid, 
+          elem: elem
+        }));
+      });
     },
 
 

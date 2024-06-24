@@ -1217,7 +1217,7 @@ html {
 #m44-board .hex-cell-container .hex-cell.selectable {
   cursor: pointer;
 }
-#m44-board .hex-cell-container .hex-cell.forMove, #m44-board .hex-cell-container .hex-cell.forMoveAndAttack, #m44-board .hex-cell-container .hex-cell.forAttack, #m44-board .hex-cell-container .hex-cell.forTrainReinforcement, #m44-board .hex-cell-container .hex-cell.forRetreat {
+#m44-board .hex-cell-container .hex-cell.forMove, #m44-board .hex-cell-container .hex-cell.forMoveAndAttack, #m44-board .hex-cell-container .hex-cell.forAttack, #m44-board .hex-cell-container .hex-cell.forTrainReinforcement, #m44-board .hex-cell-container .hex-cell.forReserveUnitDeploy, #m44-board .hex-cell-container .hex-cell.forRetreat {
   background-image: url("img/hex_background_highlights.png");
   background-size: 500% 100%;
   background-position: 0% 0%;
@@ -1226,6 +1226,9 @@ html {
   background-position-x: 25%;
 }
 #m44-board .hex-cell-container .hex-cell.forTrainReinforcement {
+  background-position-x: 25%;
+}
+#m44-board .hex-cell-container .hex-cell.forReserveUnitDeploy {
   background-position-x: 25%;
 }
 #m44-board .hex-cell-container .hex-cell.forAttack {

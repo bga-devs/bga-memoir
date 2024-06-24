@@ -112,10 +112,12 @@ class action_memoir extends APP_GameAction
   public function actReserveUnitsDeployement()
   {
     self::setAjaxMode();
-    $x = self::getArg('x', AT_posint, false);
-    $y = self::getArg('y', AT_posint, false);
-    $finished = self::getArg('finished', AT_bool, false);
-    $this->game->actReserveUnitsDeployement($x, $y, $finished);
+    $x = self::getArg('x', AT_posint, true);
+    $y = self::getArg('y', AT_posint, true);
+    $finished = self::getArg('finished', AT_bool, true);
+    $pId = self::getArg('pId', AT_posint, true);
+    $elem = self::getArg('elem', AT_alphanum, true);
+    $this->game->actReserveUnitsDeployement($x, $y, $finished, $pId, $elem);
     self::ajaxResponse();
   }
 
