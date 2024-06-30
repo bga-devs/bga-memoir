@@ -13,6 +13,9 @@ use M44\Core\Notifications;
 use M44\Dice;
 use M44\Scenario;
 use M44\Helpers\Utils;
+use M44\Managers\Terrains;
+
+use function PHPSTORM_META\type;
 
 trait RoundTrait
 {
@@ -56,22 +59,39 @@ trait RoundTrait
     $dim = Board::$dimensions[$mode];
     $yBackLine = $sidePlayer1 == $player->getTeam()->getId() ? 0 : $dim['y']-1;
     $cells = Board::getListOfCells();
+    // filter cells on player backline and no unit on cells
     $cells_unit_deployement = array_filter($cells, function ($c) use ($yBackLine) {
       return $c['y'] == $yBackLine 
       && is_null(Board::getUnitInCell($c));
-    });  // filter cells on player backline and no unit on cells
+    });
+    // select cells of player's units for sandbad deployement 
+    $player_units = $player->getTeam()->getUnits();
+    $cells_sandbag_deployement = [];
+    foreach ($player_units as $unit) {
+      $cells_sandbag_deployement[] = $unit->getPos();
+    }
+    // max figures conditions
+    $player_figures = [INFANTRY => 0, ARMOR => 0, ARTILLERY => 0];
+    foreach ($player_units as $unit) {
+      $type = $unit->getType();
+      $figures = $unit->getNUnits();
+      $player_figures [$type] = $player_figures[$type] + $figures;
+    }
     return [
       'playerid' => $player->getId(),
-      'elements_to_deploy' => Globals::getRollReserveList(),
+      'elements_to_deploy' => (object) Globals::getRollReserveList(),
       // add cells list at the player border to be selectable for unit deployement
       'cells_units_deployement' => $cells_unit_deployement,
       // add cells list for sandbags (cells on player's units)
+      'cells_sandbag_deployement' => $cells_sandbag_deployement,
       // add cells list for wire (2 cells adjacent to units)
-
+      // max units conditions
+      'n_units_by_type' => $player_figures,
+      'max_units_by_type' => MAX_FIGURES_STANDARD,
     ];
   }
 
-  public function actReserveUnitsDeployement($x = null, $y = null, $finished = false, $pId = null, $elem = null)
+  public function actReserveUnitsDeployement($x = null, $y = null, $finished = false, $pId = null, $elem = null, $isWild = false)
   {
     self::checkAction('actReserveUnitsDeployement');
     $args = $this->argsReserveUnits();
@@ -82,9 +102,13 @@ trait RoundTrait
 
     if($finished)
     {
+      // end of reserve deployement phase : init game cards after all reserve deployement
+      if (Globals::isCampaign()) {
+        Cards::initHands();
+      }
       $this->gamestate->jumpToState(\ST_PREPARE_TURN);
     } else { 
-      // add unit from select ui
+      // add unit from select ui cell
       $player = Players::get($pId);
       $scenario = Scenario::get();  
       $country = Scenario::getTopTeam() == $player->getTeam() ? 
@@ -94,18 +118,72 @@ trait RoundTrait
       //$info = $scenario['game_info'];
 
       $pos = ['x' => $x, 'y' => $y];
-      // define unit name and badge from elem args
-      //var_dump('element to deploy', $elem . $suffix);
-      $unit_type = ['name' => $elem . $suffix];
-      //var_dump($unit_type);
-      $unit = Units::addInCell($unit_type, $pos);
-      Board::addUnit($unit);
-      Notifications::trainReinforcement($player, $unit); // TO DO creer une notif specifique pour reserve roll
 
-      //var_dump('unit to deploy for player ', $player);
+      switch ($elem) {
+        case 'inf':
+        case 'tank':
+        case 'gun':
+        case 'inf2':
+        case 'tank2':
+          // define unit name and badge from elem args
+          $unit_type = ['name' => $elem . $suffix];
+          // Case special forces or elite add a badge
+          if (str_ends_with($elem, '2')) {
+            $unit_type['badge'] = TROOP_BADGE_MAPPING[$country];
+          }
+          $unit = Units::addInCell($unit_type, $pos);
+          Board::addUnit($unit);
+          // decrease nb of reserve token
+          $player->getTeam()->incNReserveTokens(-1);
+          Notifications::ReserveUnitDeployement($player, $unit); 
+        break;
 
-      // Ajouter condition reste des jetons de reserve ? ou ne reste plus d'elements a deployer
-      $this->gamestate->jumpToState(\ST_RESERVE_ROLL_DEPLOYEMENT);
+        
+        case 'sandbag':
+          $unit = Board::getUnitInCell($x, $y);
+          $sandbag = Terrains::add([
+            'type' => 'sand',
+            'tile' => 'sand',
+            'x' => $x,
+            'y' => $y,
+            'orientation' => ($unit->getCampDirection() + 3) / 2,
+          ]);
+          Notifications::addTerrain(
+            $player,
+            $sandbag,
+            \clienttranslate('${player_name} reinforces their position by placing a sandbag (in ${coordSource})')
+          );
+        break;
+        
+        default:
+          throw new \BgaVisibleSystemException('You cannot performed this kind of reinforcement here. Should not happen');
+        break;
+      }
+      // remove element from list of remaining elements to be deployed
+      $fullListToDeploy = Globals::getRollReserveList();
+      $listToDeploy = $fullListToDeploy[$pId];
+      if ($isWild) {
+        $elem = in_array('wild',$listToDeploy) ? 'wild' : 'wild2';
+      }
+      $listelem[] = $elem;
+      $listToDeployAfter = array_diff($listToDeploy, $listelem);
+      //$listToDeployAfter2= json_decode(json_encode($listToDeployAfter), true);
+      $fullListToDeploy[$pId] = $listToDeployAfter;
+      //var_dump('reste a deployer', $listToDeploy, $listelem, $listToDeployAfter, $fullListToDeploy);
+      Globals::setRollReserveList($fullListToDeploy);
+
+      // deployement may continue if there are remaining reverse tokens
+      // and if there are still unit or elements to be deployed
+      if ($player->getTeam()->getNReserveTokens() > 0 
+        && !empty($listToDeployAfter)) {
+        $this->gamestate->jumpToState(\ST_RESERVE_ROLL_DEPLOYEMENT);
+      } else {
+        // end of reserve deployement phase : init game cards after all reserve deployement
+        if (Globals::isCampaign()) {
+          Cards::initHands();
+        }
+        $this->gamestate->jumpToState(\ST_PREPARE_TURN);
+      }
     }
   }
 
@@ -126,7 +204,7 @@ trait RoundTrait
     $args = $this->argsReserveUnits();
   }
 
-  public function ReserveRoll($player) 
+  public static function ReserveRoll($player) 
   {
     $results = Dice::roll($player, 2, null, false);
     $reserveElements = [];
@@ -152,13 +230,6 @@ trait RoundTrait
       }
     }
     return $reserveElements;
-    
-        
-    // when done, Cards are distributed
-    //Cards::initHands();
-
-
-    //$this->gamestate->jumpToState(\ST_PREPARE_TURN);
   }
 
   public function stEndOfRound()

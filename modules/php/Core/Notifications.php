@@ -534,6 +534,18 @@ class Notifications
     ]);
   }
 
+  public static function ReserveUnitDeployement($player, $unit)
+  {
+    self::notifyAll('reserveUnitsDeployement', \clienttranslate('${player_name} deployed 1 ${unit_name} in ${coordSource} from reserve depot'), [
+      'player' => $player,
+      'unit' => $unit,
+      'unit_name' => $unit->getName(),
+      'coordSource' => $unit->getPos(),
+      'team' => $player->getTeam(),
+    ]);
+  }
+
+
   public static function revealMinefield($player, $terrainId, $cell, $value)
   {
     $msg =

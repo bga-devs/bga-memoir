@@ -194,6 +194,17 @@ const LOCOMOTIVE = 6;
 const WAGON = 7;
 
 /*
+ * Max Units figures for Campaign Reserve
+ */
+
+ const MAX_FIGURES_STANDARD = [
+  INFANTRY => 42,
+  ARMOR => 24,
+  ARTILLERY => 6
+ ];
+
+
+/*
  * Medals / Tokens
  */
 const MEDAL_ELIMINATION = 1;

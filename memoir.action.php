@@ -117,7 +117,8 @@ class action_memoir extends APP_GameAction
     $finished = self::getArg('finished', AT_bool, true);
     $pId = self::getArg('pId', AT_posint, true);
     $elem = self::getArg('elem', AT_alphanum, true);
-    $this->game->actReserveUnitsDeployement($x, $y, $finished, $pId, $elem);
+    $isWild = self::getArg('isWild', AT_bool, true);
+    $this->game->actReserveUnitsDeployement($x, $y, $finished, $pId, $elem, $isWild);
     self::ajaxResponse();
   }
 

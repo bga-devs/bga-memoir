@@ -1147,73 +1147,6 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       };
     },
 
-    /*makeTerrainsSelectable(terrains, callback, checkCallback, className = 'selected', updateButtonCallback = null) {
-      
-      this._selectedTerrains = [];
-      this._selectableTerrains = terrains;
-      this._checkCallbackForSelectingTerrains = checkCallback;
-      console.log(this);
-
-      Object.keys(terrains).forEach((tId) => {
-        const terrainId = terrains[tId]['id'];
-        //const el1 = document.getElementById('terrain-' + terrainId);
-        //console.log('terrain-' + terrainId, el1.classList );
-
-        // Il faut creer les classe 'selectable'et 'unselectable' dans le css
-        //document.getElementById('terrain-' + terrainId).className = 'selectable';
-        //console.log($('terrain-' + terrainId).classList);
-        //$('terrain-' + terrainId).classList.add('unselectable');
-        let terrainIndex = this._selectedTerrains.findIndex((t) => t == terrainId);
-        console.log('terrainIndex',terrainIndex, t, tId);
-
-        this.onClick('terrain-' + terrainId, () => {
-          console.log('click on ' + 'terrain-' + terrainId);
-          let terrainIndex = this._selectedTerrains.findIndex((t) => t == terrainId);
-          console.log('terrainIndex',terrainIndex, tId);  // terrainId n'est pas celui que tu souhaite
-          let selected = terrainIndex !== -1; // Already selected ?
-          // Should we take the click into account ?
-          if (callback(terrainId, this._selectableTerrains[terrainId], selected)) {
-            if (selected) {
-              this._selectedTerrains.splice(terrainIndex, 1);
-              
-            } else {
-              this._selectedTerrains.push(terrainId);
-              $('terrain-' + terrainId).classList.add(className);
-            }
-          }
-
-
-          if (updateButtonCallback) {
-            updateButtonCallback();
-          }
-
-          let selectable = checkCallback(terrainId, this._selectableTerrains[terrainId], selected, false);
-          $('terrain-' + terrainId).classList.toggle('unselectable', !selectable);
-
-
-          // Update unselectable units   
-          /*let minFilling = this.getMinFillingOfSections();
-          Object.keys(this._selectableUnits).forEach((unitId) => {
-            let unitIndex = this._selectedUnits.findIndex((t) => t == unitId);
-            let selected = unitIndex !== -1; // Already selected ?
-            let selectable = checkCallback(unitId, this._selectableUnits[unitId], selected, minFilling);
-            $('unit-' + unitId).classList.toggle('unselectable', !selectable);
-          });
-        });
-      });
-            
-      this.clearSelectedTerrains = () => {
-        this._selectedTerrains.forEach((terrainId) => {
-          $('terrain-' + terrainId).classList.remove(className);
-        });
-        this._selectedTerrains = [];
-
-        Object.keys(this._selectableTerrains).forEach((terrainId) => {
-          let selectable = this._checkCallbackForSelectingUnit(terrainId, this._selectableTerrains[terrainId], false, []);
-          $('terrain-' + terrainId).classList.toggle('unselectable', !selectable);
-        });
-      };
-    },*/
     /**
      * getMinFillingOfSections: handle units that are on two sections
      */
@@ -1300,6 +1233,15 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       let unit = n.args.unit;
       unit.orientation = this._bottomTeam != (ALLIES_NATIONS.includes(unit.nation) ? 'ALLIES' : 'AXIS') ? 1 : 0;
       this.place('tplUnit', unit, `cell-${unit.x}-${unit.y}`);
+    },
+
+    notif_reserveUnitsDeployement(n) {
+      debug('Notif: placing unit on the board from reserve', n);
+      let unit = n.args.unit;
+      let player_id =n.args.player_id;
+      unit.orientation = this._bottomTeam != (ALLIES_NATIONS.includes(unit.nation) ? 'ALLIES' : 'AXIS') ? 1 : 0;
+      this.place('tplUnit', unit, `cell-${unit.x}-${unit.y}`);
+      this._reserveTokenCounter[player_id].incValue(-1);
     },
 
     ////////////////////////////

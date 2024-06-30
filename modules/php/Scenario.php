@@ -284,8 +284,10 @@ class Scenario extends \APP_DbObject
     }
 
     // Init hands
-    Cards::initHands();
-
+    if (!Globals::isCampaign()) {
+      Cards::initHands();
+    }
+   
     // Activate player
     $infos = $scenario['game_info'];
     $starting = mb_strtolower($infos['starting']);

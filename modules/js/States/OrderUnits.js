@@ -676,17 +676,27 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       elem_map['sandbag2'] = ['advance 1 unit by 2 hexes', 'unit'];
      
       let playerid = args.playerid;
-      let element_list = args.elements_to_deploy[playerid];
+      let element_list = Object.values(args.elements_to_deploy[playerid]);
       console.log(element_list,playerid);
       let n = 0;
       element_list.forEach( (elem) => {
         n++;
         console.log(elem);
         let elem_name = elem_map[elem][0];
+        let elem_type = elem_map[elem][1];
         console.log(elem_name);
-        this.addActionButton('btnReserveElem'+n, _(elem_name), () => this.onClickChooseDepLocation(elem, args));
+        switch(elem_type) {
+          case 'unit':
+            this.addActionButton('btnReserveElem'+n, _(elem_name), () => this.onClickChooseDepLocation(elem, args));
+          break;
+
+          case 'obstacle':
+            this.addActionButton('btnReserveElem'+n, _(elem_name), () => this.onClickChooseSandbagLocation(elem, args));
+          break;
+          default:
+          console.log(`Sorry, not know element type.`);
         }
-      )
+      })
       
       this.addDangerActionButton('btnConfirmReserveDeployement', _('End reserve deployement'), () =>
         this.onClickConfirmReserveDeployement(args),
@@ -700,11 +710,50 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         x : 0, y: 0, 
         finished : true, 
         pId: playerid, 
-        elem: elem
+        elem: elem,
+        isWild: false
       });
     },
 
     onClickChooseDepLocation(elem, args) {
+      console.log('elem', elem);
+      let cells = Object.values(args.cells_units_deployement);
+      console.log('cells array', cells);
+      let playerid = args.playerid;
+      if (elem != 'wild' && elem != 'wild2' ) {
+        cells.forEach((cell) => {
+          let oCell = $(`cell-${cell.x}-${cell.y}`);
+          oCell.classList.add('forReserveUnitDeploy');
+          let finished = false
+          this.onClick(oCell, () => this.takeAction('actReserveUnitsDeployement', { x: cell.x, y: cell.y, 
+            finished: finished, 
+            pId: playerid, 
+            elem: elem,
+            isWild: false
+          }));
+        });
+      }
+      switch (elem) {
+        case 'wild':
+          this.removeActionButtons();
+          this.addActionButton('btnReserveElem'+10, _('1 infantry'), () => this.onClickChooseDepLocation2('inf', args));
+          this.addActionButton('btnReserveElem'+11, _('1 armor'), () => this.onClickChooseDepLocation2('tank', args));
+          this.addActionButton('btnReserveElem'+12, _('1 artillery'), () => this.onClickChooseDepLocation2('gun', args));
+
+          break;
+        case 'wild2':
+          this.removeActionButtons();
+          this.addActionButton('btnReserveElem'+10, _('1 special force infantry'), () => this.onClickChooseDepLocation2('inf2', args));
+          this.addActionButton('btnReserveElem'+11, _('1 elite armor'), () => this.onClickChooseDepLocation2('tank2', args));
+          this.addActionButton('btnReserveElem'+12, _('1 artillery'), () => this.onClickChooseDepLocation2('gun', args));
+          break;
+        default:
+          console.log(`Sorry, none wild unit to deploy.`);
+      }
+
+    },
+
+    onClickChooseDepLocation2(elem, args) {
       console.log('elem', elem);
       let cells = Object.values(args.cells_units_deployement);
       console.log('cells array', cells);
@@ -716,11 +765,31 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         this.onClick(oCell, () => this.takeAction('actReserveUnitsDeployement', { x: cell.x, y: cell.y, 
           finished: finished, 
           pId: playerid, 
-          elem: elem
-        }));
-      });
+          elem: elem,
+          isWild : true
+          }));
+        });
+      },
+
+    onClickChooseSandbagLocation(elem, args) {
+      console.log('elem', elem);
+      let cells = Object.values(args.cells_sandbag_deployement);
+      console.log('cells array', cells);
+      let playerid = args.playerid;
+      cells.forEach((cell) => {
+        let oCell = $(`cell-${cell.x}-${cell.y}`);
+        oCell.classList.add('forReserveUnitDeploy');
+        let finished = false
+        this.onClick(oCell, () => this.takeAction('actReserveUnitsDeployement', { x: cell.x, y: cell.y, 
+          finished: finished, 
+          pId: playerid, 
+          elem: elem,
+          isWild: false
+          }));
+        });
     },
 
+  
 
 
 

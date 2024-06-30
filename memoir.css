@@ -191,6 +191,12 @@ html {
   background-repeat: repeat-x;
   display: flex;
 }
+#m44-container .m44-staging-area {
+  height: 45px;
+  background: url("img/ui/staging_area.png");
+  background-repeat: repeat-x;
+  display: flex;
+}
 #m44-container #m44-top-container {
   height: 65px;
   position: relative;
@@ -201,7 +207,7 @@ html {
   box-shadow: 0px 2px 3px black;
 }
 #m44-container[data-layout="0"] #m44-top-container {
-  height: 11px;
+  height: 56px;
 }
 #m44-container[data-layout="0"] #m44-top-container #top-medals {
   left: 0px;

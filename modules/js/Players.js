@@ -10,6 +10,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
     setupPlayers() {
       this._handCounters = {};
+      this._reserveTokenCounter = {};
       if (!this.isSpectator) {
         dojo.place('<div id="m44-player-hand"></div>', 'm44-bottom-container');
         this.gamedatas.players[this._pId].cards.forEach((card) => this.addCard(card, 'm44-player-hand'));
@@ -28,6 +29,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         );
         dojo.place(`<div class='card-in-play' id='in-play-${player.id}'></div>`, pos + '-in-play');
         this._handCounters[player.id] = this.createCounter(`hand-count-${player.id}`, player.cardsCount);
+        if(player.isCampaign) {
+          this._reserveTokenCounter[player.id] = this.createCounter(`reservetokens-count-${player.id}`, player.nreservetoken);
+        }
 
         if (player.inplay) {
           this.addCard(player.inplay, 'in-play-' + player.id);
@@ -85,6 +89,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     updatePlayers() {
       this.forEachPlayer((player) => {
         this._handCounters[player.id].setValue(player.cardsCount);
+        this._reserveTokenCounter[player.id].setValue(player.nreservetoken);
       });
     },
 

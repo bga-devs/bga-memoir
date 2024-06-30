@@ -13,6 +13,7 @@
       </div>
     </div>
     <div class="m44-hrule" id="m44-top-hrule"></div>
+    <div class="m44-staging-area" id="m44-top-staging-area"></div>
   </div>
 
   <div id="m44-central-part">
@@ -168,6 +169,7 @@
 
   <div id="m44-bottom-container">
     <div class="m44-hrule" id="m44-bottom-hrule"></div>
+    <div class="m44-staging-area" id="m44-bottom-staging-area"></div>
     <div id="m44-bottom-part">
       <div id="bottom-team" class='m44-team'>
         <div id="bottom-medals" class='m44-team-medals'>
