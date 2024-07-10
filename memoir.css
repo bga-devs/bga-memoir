@@ -186,8 +186,8 @@ html {
   flex-flow: column;
 }
 #m44-container .m44-hrule {
-  height: 11px;
-  background: url("img/ui/h_rule.jpg");
+  height: 26px;
+  background: url("img/ui/staging_area.png");
   background-repeat: repeat-x;
   display: flex;
 }
@@ -198,7 +198,7 @@ html {
   display: flex;
 }
 #m44-container #m44-top-container {
-  height: 65px;
+  height: 78px;
   position: relative;
   z-index: 5;
   display: flex;
@@ -207,11 +207,19 @@ html {
   box-shadow: 0px 2px 3px black;
 }
 #m44-container[data-layout="0"] #m44-top-container {
-  height: 56px;
+  height: 45px;
 }
 #m44-container[data-layout="0"] #m44-top-container #top-medals {
   left: 0px;
   top: -10px;
+}
+#m44-container[data-layout="0"] #m44-top-container #top-staging-area {
+  margin: auto;
+  top: 0px;
+}
+#m44-container[data-layout="1"] #m44-top-container #top-staging-area {
+  margin: auto;
+  top: 0px;
 }
 #m44-container #m44-top-part {
   height: 54px;
@@ -226,6 +234,10 @@ html {
 #m44-container #m44-top-part #top-team #top-medals {
   position: absolute;
   bottom: -29px;
+}
+#m44-container #m44-top-part #top-team #top-staging-area {
+  position: absolute;
+  top: -29px;
 }
 #m44-container[data-layout="0"] #m44-central-part #left-holder {
   width: 173px;
@@ -656,6 +668,14 @@ html {
   left: 0px;
   top: -10px;
 }
+#m44-container[data-layout="0"] #m44-bottom-container #bottom-staging-area {
+  margin: auto;
+  top: 0px;
+}
+#m44-container[data-layout="1"] #m44-bottom-container #bottom-staging-area {
+  margin: auto;
+  top: 0px;
+}
 #m44-container #m44-bottom-part {
   height: 54px;
   display: flex;
@@ -668,9 +688,13 @@ html {
 }
 #m44-container #m44-bottom-part #bottom-team #bottom-medals {
   position: absolute;
-  top: -29px;
+  top: 50px;
 }
-#m44-container[data-layout="0"] .m44-team-medals {
+#m44-container #m44-bottom-part #bottom-team #bottom-staging-area {
+  position: absolute;
+  top: 50px;
+}
+#m44-container[data-layout="0"] .m44-team-medals, #m44-container .m44-team-reserve-units {
   position: relative;
 }
 #m44-container .m44-team-medals {
@@ -691,6 +715,29 @@ html {
   left: 0;
 }
 #m44-container .m44-team-medals .medals-slots-container .m44-medal-slot {
+  width: 35px;
+  height: 35px;
+  background-image: url("img/ui/medalspot.png");
+  background-size: 100% 100%;
+}
+#m44-container .m44-team-reserve-units {
+  position: relative;
+  z-index: 2;
+}
+#m44-container .m44-team-reserve-units .reserve-units-container,
+#m44-container .m44-team-reserve-units .reserve-container {
+  height: 35px;
+  display: flex;
+  column-gap: 3px;
+  padding-left: 3px;
+}
+#m44-container .m44-team-reserve-units .reserve-units-container {
+  position: absolute;
+  z-index: -1;
+  top: -10px;
+  left: 0;
+}
+#m44-container .m44-team-reserve-units .reserve-units-container .reserve-unit {
   width: 35px;
   height: 35px;
   background-image: url("img/ui/medalspot.png");
@@ -785,7 +832,7 @@ html {
   align-items: center;
   column-gap: 10px;
   z-index: 5;
-  padding: 5px;
+  padding: 15px;
 }
 #m44-container #m44-player-hand .m44-card.choice {
   margin-top: -40px;

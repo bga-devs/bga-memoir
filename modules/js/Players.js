@@ -61,6 +61,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         dojo.place('bottom-medals', 'bottom-team', 'first');
         dojo.place('top-team-name', 'top-team', 'first');
         dojo.place('bottom-team-name', 'bottom-team', 'first');
+        dojo.place('top-staging-area', 'm44-top-hrule');
+        dojo.place('bottom-staging-area', 'm44-bottom-hrule');
+
       } else if (layout == 0) {
         dojo.place('m44-top-part', 'left-holder', 'first');
         dojo.place('m44-bottom-part', 'left-holder', 'last');
@@ -68,6 +71,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         dojo.place('bottom-team-name', 'm44-bottom-hrule');
         dojo.place('top-medals', 'm44-top-hrule');
         dojo.place('bottom-medals', 'm44-bottom-hrule');
+        dojo.place('top-staging-area', 'm44-top-hrule');
+        dojo.place('bottom-staging-area', 'm44-bottom-hrule');
       }
 
       this.forEachPlayer((player) => {
@@ -157,6 +162,11 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         }
 
         Object.values(team.medals).forEach((medal) => this.addMedal(medal));
+
+        // Add reserve units slots on staging area
+        for (let i = 0; i < 2; i++) {
+            dojo.place('<div class="reserve-unit"></div>', pos + '-staging-slots');
+        }
       });
     },
 

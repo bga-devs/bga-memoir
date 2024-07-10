@@ -106,8 +106,8 @@ html {
   flex-flow: column;
 
   .m44-hrule {
-    height: 11px;
-    background: url("img/ui/h_rule.jpg");
+    height: 26px;
+    background: url("img/ui/staging_area.png");
     background-repeat: repeat-x;
 
     display: flex;
@@ -122,7 +122,7 @@ html {
   }
 
   #m44-top-container {
-    height: 65px;
+    height: 78px;
     position: relative;
     z-index: 5;
     display: flex;
@@ -131,14 +131,31 @@ html {
     box-shadow: 0px 2px 3px black;
   }
   &[data-layout="0"] #m44-top-container {
-    height: 56px;
+    height: 45px;
 
     #top-medals {
       //      left: 180px;
       left: 0px;
       top: -10px;
     }
+
+    #top-staging-area {
+      margin: auto;
+      top: 0px;
+    }
   }
+
+  &[data-layout="1"] #m44-top-container {
+    //height: 81px;
+
+    #top-staging-area {
+      margin: auto;
+      top: 0px;
+    }
+  }
+
+
+
 
   #m44-top-part {
     height: 54px;
@@ -153,6 +170,11 @@ html {
       #top-medals {
         position: absolute;
         bottom: -29px;
+      }
+
+      #top-staging-area {
+        position: absolute;
+        top: -29px;
       }
     }
   }
@@ -622,7 +644,24 @@ html {
       left: 0px;
       top: -10px;
     }
+
+    #bottom-staging-area {
+      margin: auto;
+      top: 0px;
+
+    }
   }
+
+
+  &[data-layout="1"] #m44-bottom-container {
+    #bottom-staging-area {
+      margin: auto;
+      top: 0px;
+
+    }
+  }
+
+
 
   #m44-bottom-part {
     height: 54px;
@@ -636,14 +675,21 @@ html {
 
       #bottom-medals {
         position: absolute;
-        top: -29px;
+        top: 50px;
+      }
+
+      #bottom-staging-area {
+        position: absolute;
+        top: 50px;
       }
     }
   }
 
-  &[data-layout="0"] .m44-team-medals {
+  &[data-layout="0"] .m44-team-medals, .m44-team-reserve-units{
     position: relative;
   }
+
+
 
   .m44-team-medals {
     position: absolute;
@@ -671,6 +717,35 @@ html {
       }
     }
   }
+
+  
+  .m44-team-reserve-units {
+    position: relative;
+    z-index: 2;
+
+    .reserve-units-container,
+    .reserve-container {
+      height: 35px;
+      display: flex;
+      column-gap: 3px;
+      padding-left: 3px;
+    }
+
+    .reserve-units-container {
+      position: absolute;
+      z-index: -1;
+      top: -10px;
+      left: 0;
+
+      .reserve-unit {
+        width: 35px;
+        height: 35px;
+        background-image: url("img/ui/medalspot.png");
+        background-size: 100% 100%;
+      }
+    }
+  }
+  
 
   .m44-team {
     display: flex;
@@ -774,7 +849,7 @@ html {
     align-items: center;
     column-gap: 10px;
     z-index: 5;
-    padding: 5px;
+    padding: 15px;
 
     .m44-card.choice {
       margin-top: -40px;

@@ -165,17 +165,19 @@ trait RoundTrait
       if ($isWild) {
         $elem = in_array('wild',$listToDeploy) ? 'wild' : 'wild2';
       }
-      $listelem[] = $elem;
-      $listToDeployAfter = array_diff($listToDeploy, $listelem);
+      $key = array_search($elem, $listToDeploy);
+      unset($listToDeploy[$key]);
+      //$listelem[] = $elem;
+      //$listToDeployAfter = array_diff($listToDeploy, $listelem); 
       //$listToDeployAfter2= json_decode(json_encode($listToDeployAfter), true);
-      $fullListToDeploy[$pId] = $listToDeployAfter;
+      $fullListToDeploy[$pId] = $listToDeploy;
       //var_dump('reste a deployer', $listToDeploy, $listelem, $listToDeployAfter, $fullListToDeploy);
       Globals::setRollReserveList($fullListToDeploy);
 
       // deployement may continue if there are remaining reverse tokens
       // and if there are still unit or elements to be deployed
       if ($player->getTeam()->getNReserveTokens() > 0 
-        && !empty($listToDeployAfter)) {
+        && !empty($listToDeploy)) {
         $this->gamestate->jumpToState(\ST_RESERVE_ROLL_DEPLOYEMENT);
       } else {
         // end of reserve deployement phase : init game cards after all reserve deployement

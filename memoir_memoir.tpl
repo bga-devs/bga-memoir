@@ -1,8 +1,13 @@
 {OVERALL_GAME_HEADER}
 <div id="m44-container">
   <div id="m44-top-container">
+    <div class="m44-hrule" id="m44-top-hrule"></div>
     <div id="m44-top-part">
       <div id="top-team" class='m44-team'>
+        <div id="top-staging-area" class='m44-team-reserve-units'>
+          <div id="top-staging-slots" class='reserve-units-container'></div>
+          <div id="top-staging-container" class='reserve-container'></div>
+        </div>
         <div id="top-medals" class='m44-team-medals'>
           <div id="top-medals-slots" class='medals-slots-container'></div>
           <div id="top-medals-container" class='medals-container'></div>
@@ -12,8 +17,6 @@
         <div id="top-team-status" class='m44-team-status'></div>
       </div>
     </div>
-    <div class="m44-hrule" id="m44-top-hrule"></div>
-    <div class="m44-staging-area" id="m44-top-staging-area"></div>
   </div>
 
   <div id="m44-central-part">
@@ -169,9 +172,12 @@
 
   <div id="m44-bottom-container">
     <div class="m44-hrule" id="m44-bottom-hrule"></div>
-    <div class="m44-staging-area" id="m44-bottom-staging-area"></div>
     <div id="m44-bottom-part">
       <div id="bottom-team" class='m44-team'>
+        <div id="bottom-staging-area" class='m44-team-reserve-units'>
+          <div id="bottom-staging-slots" class='reserve-units-container'></div>
+          <div id="bottom-staging-container" class='reserve-container'></div>
+        </div>
         <div id="bottom-medals" class='m44-team-medals'>
           <div id="bottom-medals-slots" class='medals-slots-container'></div>
           <div id="bottom-medals-container" class='medals-container'></div>
