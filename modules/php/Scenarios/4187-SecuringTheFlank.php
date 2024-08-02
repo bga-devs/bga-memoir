@@ -185,6 +185,7 @@ $scenarios[4187] = [
               1 => 'g6',
               //2 => 'G7', // medal already present intresenqly in G7 otherwise will be counted twice
             ],
+            'side' => 'ALLIES',
           ],
         ],
       ],

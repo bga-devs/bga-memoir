@@ -59,7 +59,7 @@ class Board
       self::$grid[$terrain->getX()][$terrain->getY()]['terrains'][] = $terrain;
     }
 
-    // Add the units
+    // Add the units on the board not on the reserve
     foreach (Units::getAllOrdered() as $unit) {
       if ($unit->getNUnits() > 0) {
         self::$grid[$unit->getX()][$unit->getY()]['unit'] = $unit;

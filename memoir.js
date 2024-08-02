@@ -448,6 +448,10 @@ define([
       dojo.query('.dice-mini').forEach(dojo.destroy);
       dojo.query('.mustStop').forEach(dojo.destroy);
       dojo.query('.cannotAttack').forEach(dojo.destroy);
+      if (this.gamedatas.isCampaign) {
+        $('bottom-reserve-0').classList.remove('forReserveStagingDeploy');
+        $('bottom-reserve-1').classList.remove('forReserveStagingDeploy');
+      }
     },
 
     /* This enable to inject translatable styled things to logs or action bar */

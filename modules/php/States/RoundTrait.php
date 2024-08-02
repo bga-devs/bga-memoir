@@ -91,7 +91,8 @@ trait RoundTrait
     ];
   }
 
-  public function actReserveUnitsDeployement($x = null, $y = null, $finished = false, $pId = null, $elem = null, $isWild = false)
+  public function actReserveUnitsDeployement($x = null, $y = null, $finished = false, $pId = null, 
+    $elem = null, $isWild = false, $onStageArea = false)
   {
     self::checkAction('actReserveUnitsDeployement');
     $args = $this->argsReserveUnits();
@@ -117,7 +118,12 @@ trait RoundTrait
       $suffix = TROOP_NATION_MAPPING[$country];
       //$info = $scenario['game_info'];
 
-      $pos = ['x' => $x, 'y' => $y];
+      if ($onStageArea) {
+        $pos = ['x' => 0, 'y' => 0];
+      } else {
+        $pos = ['x' => $x, 'y' => $y];
+      }
+      
 
       switch ($elem) {
         case 'inf':
@@ -131,11 +137,13 @@ trait RoundTrait
           if (str_ends_with($elem, '2')) {
             $unit_type['badge'] = TROOP_BADGE_MAPPING[$country];
           }
-          $unit = Units::addInCell($unit_type, $pos);
-          Board::addUnit($unit);
+          $unit = Units::addInCell($unit_type, $pos, $onStageArea);
+          if (!$onStageArea) {
+            Board::addUnit($unit);
+          }          
           // decrease nb of reserve token
           $player->getTeam()->incNReserveTokens(-1);
-          Notifications::ReserveUnitDeployement($player, $unit); 
+          Notifications::ReserveUnitDeployement($player, $unit, $onStageArea); 
         break;
 
         

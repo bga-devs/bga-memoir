@@ -41,6 +41,7 @@ class Team extends \M44\Helpers\DB_Model
       'medals' => $this->getMedals(),
       'victory' => $this->nVictory,
       'reserve_tokens' => $this->nReserveTokens,
+      'units_on_reserve' => Units::getOfTeamOnReserve($this->id),
     ];
   }
 

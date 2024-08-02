@@ -6,6 +6,7 @@ use M44\Core\Globals;
 use M44\Core\Stats;
 use M44\Managers\Cards;
 use M44\Managers\Units;
+use M44\Managers\Teams;
 
 class Notifications
 {
@@ -534,14 +535,25 @@ class Notifications
     ]);
   }
 
-  public static function ReserveUnitDeployement($player, $unit)
-  {
-    self::notifyAll('reserveUnitsDeployement', \clienttranslate('${player_name} deployed 1 ${unit_name} in ${coordSource} from reserve depot'), [
+  public static function ReserveUnitDeployement($player, $unit, $onStageArea = false)
+  { $message = $onStageArea ? 
+    self::notifyAll('reserveUnitsDeployement', \clienttranslate('${player_name} deployed 1 ${unit_name} on reserve staging area'), [
       'player' => $player,
       'unit' => $unit,
       'unit_name' => $unit->getName(),
       'coordSource' => $unit->getPos(),
       'team' => $player->getTeam(),
+      'stage_area' => $onStageArea,
+      'teams' => Teams::getAll(),
+    ])
+    : self::notifyAll('reserveUnitsDeployement', \clienttranslate('${player_name} deployed 1 ${unit_name} in ${coordSource} from reserve depot'), [
+      'player' => $player,
+      'unit' => $unit,
+      'unit_name' => $unit->getName(),
+      'coordSource' => $unit->getPos(),
+      'team' => $player->getTeam(),
+      'stage_area' => $onStageArea,
+      'teams' => Teams::getAll(),
     ]);
   }
 

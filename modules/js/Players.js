@@ -73,7 +73,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         dojo.place('bottom-medals', 'm44-bottom-hrule');
         dojo.place('top-staging-area', 'm44-top-hrule');
         dojo.place('bottom-staging-area', 'm44-bottom-hrule');
-      }
+      }  
 
       this.forEachPlayer((player) => {
         let container = (layout == 1 ? 'm44-player-pannel-' : 'player-panel-holder-') + player.id;
@@ -94,7 +94,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     updatePlayers() {
       this.forEachPlayer((player) => {
         this._handCounters[player.id].setValue(player.cardsCount);
-        this._reserveTokenCounter[player.id].setValue(player.nreservetoken);
+        if (player.isCampaign) {
+          this._reserveTokenCounter[player.id].setValue(player.nreservetoken);
+        }
       });
     },
 
@@ -150,6 +152,10 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     },
 
     setupTeams() {
+      // Add reserve units slots on staging area if campaign mode
+      let playerid = Object.keys(this.gamedatas.players)[0];
+      let player = this.gamedatas.players[playerid];
+      this.gamedatas.isCampaign = player.isCampaign;
       this.gamedatas.teams.forEach((team) => {
         let pos = this._bottomTeam == team.team ? 'bottom' : 'top';
         // Add basic infos
@@ -160,19 +166,30 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         for (let i = 0; i < team.victory; i++) {
           dojo.place('<div class="m44-medal-slot"></div>', pos + '-medals-slots');
         }
+        if (this.gamedatas.isCampaign) {
+          dojo.place(`<div class="reserve-unit" id="${pos}-reserve-0"> </div>`, pos + '-staging-slots');
+          dojo.place(`<div class="reserve-unit" id="${pos}-reserve-1"> </div>`, pos + '-staging-slots');
+        }
 
         Object.values(team.medals).forEach((medal) => this.addMedal(medal));
-
-        // Add reserve units slots on staging area
-        for (let i = 0; i < 2; i++) {
-            dojo.place('<div class="reserve-unit"></div>', pos + '-staging-slots');
+        if (this.gamedatas.isCampaign) { 
+          Object.values(team.units_on_reserve).forEach((unit, index)=> {
+            console.log('reserve index', index, team.team);
+            this.updateUnitOnStagingArea(unit, team.team, index);
+          })
         }
       });
     },
 
     updateTeams() {
-      this.gamedatas.teams.forEach((team) => {
+      console.log('update teams', this.gamedatas.teams);
+      Object.values(this.gamedatas.teams).forEach((team) => {
         Object.values(team.medals).forEach((medal) => this.addMedal(medal));
+        console.log('check unit on staging area update phase :', team.units_on_reserve);
+        Object.values(team.units_on_reserve).forEach((unit, index)=> {
+          console.log('reserve index', index, team.team);
+          this.updateUnitOnStagingArea(unit, team.team, index);
+        })
       });
     },
 
@@ -181,6 +198,22 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       let pos2 = pos == 'top' ? 'bottom' : 'top';
       $(pos + '-team-status').dataset.status = status;
       $(pos2 + '-team-status').dataset.status = 'idle';
+    },
+
+    updateUnitOnStagingArea(unit, team, number, container = null) {
+      if (container == null) {
+        let pos = this._bottomTeam == team ? 'bottom' : 'top';
+        container = pos + '-reserve-' + number;
+      }
+      console.log('reserve container', container);
+      dojo.empty(container);
+
+      //const NATION_SPRITES = ['GB', 'DE', 'US', 'FR'];
+      //let sprite = NATION_SPRITES.findIndex((t) => t == team);
+      //console.log(player.id, player.campaignNation, sprite);
+      
+      dojo.place(`<div class="reserve-token-staging" data-sprite="0"></div>`, container);
+      this.place('tplUnit', unit, container);
     },
 
     ////////////////////////////////////

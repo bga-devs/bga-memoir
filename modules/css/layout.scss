@@ -732,17 +732,29 @@ html {
     }
 
     .reserve-units-container {
-      position: absolute;
+      position: relative;
       z-index: -1;
-      top: -10px;
+      top: -20px;
       left: 0;
 
       .reserve-unit {
-        width: 35px;
-        height: 35px;
-        background-image: url("img/ui/medalspot.png");
-        background-size: 100% 100%;
+        display: inline-flex;
+        align-items: center;
+        width: 140px;
+        height: 70px;
+        background-image: url("img/ui/reservespot.png");
+        background-size: 200% 100%;
+        background-position: 0% 0%;
+        background-position-x: 0% ;
+        position: relative;
+        &.forReserveStagingDeploy {
+          background-image: url("img/ui/reservespot.png");
+          background-size: 200% 100%;
+          background-position: 0% 0%;
+          background-position-x: 100%;
+        }
       }
+      
     }
   }
   

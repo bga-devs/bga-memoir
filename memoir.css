@@ -732,16 +732,27 @@ html {
   padding-left: 3px;
 }
 #m44-container .m44-team-reserve-units .reserve-units-container {
-  position: absolute;
+  position: relative;
   z-index: -1;
-  top: -10px;
+  top: -20px;
   left: 0;
 }
 #m44-container .m44-team-reserve-units .reserve-units-container .reserve-unit {
-  width: 35px;
-  height: 35px;
-  background-image: url("img/ui/medalspot.png");
-  background-size: 100% 100%;
+  display: inline-flex;
+  align-items: center;
+  width: 140px;
+  height: 70px;
+  background-image: url("img/ui/reservespot.png");
+  background-size: 200% 100%;
+  background-position: 0% 0%;
+  background-position-x: 0%;
+  position: relative;
+}
+#m44-container .m44-team-reserve-units .reserve-units-container .reserve-unit.forReserveStagingDeploy {
+  background-image: url("img/ui/reservespot.png");
+  background-size: 200% 100%;
+  background-position: 0% 0%;
+  background-position-x: 100%;
 }
 #m44-container .m44-team {
   display: flex;
@@ -7277,6 +7288,29 @@ span.m44-dice-result[data-result="4"] {
   background-position-y: 0%;
 }
 .reserve-token[data-sprite="3"] {
+  background-position-x: 100%;
+  background-position-y: 0%;
+}
+
+.reserve-token-staging {
+  width: 60%;
+  height: 60%;
+  background-image: url("img/reserve_tokens.png");
+  background-size: 400% 100%;
+}
+.reserve-token-staging[data-sprite="0"] {
+  background-position-x: 0%;
+  background-position-y: 0%;
+}
+.reserve-token-staging[data-sprite="1"] {
+  background-position-x: 33.3333333333%;
+  background-position-y: 0%;
+}
+.reserve-token-staging[data-sprite="2"] {
+  background-position-x: 66.6666666667%;
+  background-position-y: 0%;
+}
+.reserve-token-staging[data-sprite="3"] {
   background-position-x: 100%;
   background-position-y: 0%;
 }/*# sourceMappingURL=memoir.css.map */

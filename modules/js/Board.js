@@ -1240,7 +1240,16 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       let unit = n.args.unit;
       let player_id =n.args.player_id;
       unit.orientation = this._bottomTeam != (ALLIES_NATIONS.includes(unit.nation) ? 'ALLIES' : 'AXIS') ? 1 : 0;
-      this.place('tplUnit', unit, `cell-${unit.x}-${unit.y}`);
+      if (n.args.stage_area) {
+        //let stagingArea = [...$('bottom-staging-area').getElementsByClassName('reserve-container')];
+        console.log('staging area notif');
+        //this.place('tplUnit', unit, `reserve-1`);
+        this.gamedatas.teams = n.args.teams;
+        console.log(this.gamedatas.teams);
+        this.updateTeams();   
+      } else {
+        this.place('tplUnit', unit, `cell-${unit.x}-${unit.y}`);
+      }
       this._reserveTokenCounter[player_id].incValue(-1);
     },
 

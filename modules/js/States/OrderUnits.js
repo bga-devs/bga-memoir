@@ -711,17 +711,32 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         finished : true, 
         pId: playerid, 
         elem: elem,
-        isWild: false
+        isWild: false,
+        onStagingArea: false
       });
     },
 
     onClickChooseDepLocation(elem, args) {
       console.log('elem', elem);
-      let cells = Object.values(args.cells_units_deployement);
-      console.log('cells array', cells);
+      let stagingArea = [...$('bottom-staging-area').getElementsByClassName('reserve-unit')];
+      console.log('staging units area', stagingArea);
+      stagingArea.forEach((area) => {
+        area.classList.add('forReserveStagingDeploy');
+        let finished = false;
+        this.onClick(area, () => this.takeAction('actReserveUnitsDeployement', { x: 0, y: 0, 
+            finished: finished, 
+            pId: playerid, 
+            elem: elem,
+            isWild: false,
+            onStagingArea: true
+            }));
+
+      });
+      let cells_list = Object.values(args.cells_units_deployement);
+      console.log('cells array', cells_list);
       let playerid = args.playerid;
       if (elem != 'wild' && elem != 'wild2' ) {
-        cells.forEach((cell) => {
+        cells_list.forEach((cell) => {
           let oCell = $(`cell-${cell.x}-${cell.y}`);
           oCell.classList.add('forReserveUnitDeploy');
           let finished = false
@@ -729,7 +744,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
             finished: finished, 
             pId: playerid, 
             elem: elem,
-            isWild: false
+            isWild: false,
+            onStagingArea: false
           }));
         });
       }
@@ -755,10 +771,10 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
     onClickChooseDepLocation2(elem, args) {
       console.log('elem', elem);
-      let cells = Object.values(args.cells_units_deployement);
-      console.log('cells array', cells);
+      let cells_list = Object.values(args.cells_units_deployement);
+      console.log('cells array', cells_list);
       let playerid = args.playerid;
-      cells.forEach((cell) => {
+      cells_list.forEach((cell) => {
         let oCell = $(`cell-${cell.x}-${cell.y}`);
         oCell.classList.add('forReserveUnitDeploy');
         let finished = false
@@ -766,17 +782,18 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           finished: finished, 
           pId: playerid, 
           elem: elem,
-          isWild : true
+          isWild : true,
+          onStagingArea: false
           }));
         });
       },
 
     onClickChooseSandbagLocation(elem, args) {
       console.log('elem', elem);
-      let cells = Object.values(args.cells_sandbag_deployement);
-      console.log('cells array', cells);
+      let cells_list = Object.values(args.cells_sandbag_deployement);
+      console.log('cells array', cells_list);
       let playerid = args.playerid;
-      cells.forEach((cell) => {
+      cells_list.forEach((cell) => {
         let oCell = $(`cell-${cell.x}-${cell.y}`);
         oCell.classList.add('forReserveUnitDeploy');
         let finished = false
@@ -784,7 +801,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           finished: finished, 
           pId: playerid, 
           elem: elem,
-          isWild: false
+          isWild: false,
+          onStagingArea: false
           }));
         });
     },

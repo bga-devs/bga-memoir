@@ -101,12 +101,35 @@ class Units extends \M44\Helpers\Pieces
     $q = $q->whereIn('nation', self::$nations[\strtoupper($side)]);
   }
 
+  public static function addOnStagingAreaClause(&$q)
+  {
+    $q = $q->where('unit_location', 'reserve');
+  }
+
+  // units only on board not on reserve
+  public static function getAllOrdered()
+  {
+    return self::getSelectQuery()
+      ->orderBy([static::$prefix . 'state', 'ASC'])
+      ->where('unit_location', 'board')
+      ->get();
+  }
+
   public static function getOfTeam($side)
   {
     $query = self::getSelectQuery();
     self::addTeamClause($query, $side);
     self::addAliveClause($query);
     return $query->get();
+  }
+
+  public static function getOfTeamOnReserve($side)
+  {
+    $query = self::getSelectQuery();
+    self::addTeamClause($query, $side);
+    self::addAliveClause($query);
+    self::addOnStagingAreaClause($query);
+    return $query->get(); 
   }
 
   public static function getInSection($side, $section)
@@ -289,11 +312,15 @@ class Units extends \M44\Helpers\Pieces
     }
   }
 
-  public static function addInCell($unit, $cell)
+  public static function addInCell($unit, $cell, $onStageArea = false)
   {
     $data = self::getTypeAndNation($unit);
     $unit = self::getInstance($data['type'], $data['badge']);
-    $data['location'] = 'board';
+    if ($onStageArea) {
+      $data['location'] = 'reserve';
+    } else {
+      $data['location'] = 'board';
+    }
     $data['x'] = $cell['x'];
     $data['y'] = $cell['y'];
     $data['figures'] = $unit->getMaxUnits();
