@@ -24,7 +24,8 @@ class CloseAssault extends \M44\Models\Card
   {
     $player = $this->getPlayer();
     $units = $player->getUnits()->filter(function ($unit) {
-      return in_array($unit->getType(), [INFANTRY, ARMOR]) && Board::isAdjacentToEnnemy($unit);
+      return in_array($unit->getType(), [INFANTRY, ARMOR]) && Board::isAdjacentToEnnemy($unit) 
+      && !$unit->isOnReserveStaging();
     });
     $unitstmp = $units->filter(function ($unit) {
       return (!($unit -> getExtraDatas('cannotBeActivatedUntilTurn') >= Globals::getTurn()));

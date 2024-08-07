@@ -27,7 +27,7 @@ class Dice
     // $results = [\DICE_GRENADE, \DICE_GRENADE, \DICE_GRENADE, \DICE_GRENADE];
     // $results = [\DICE_GRENADE, \DICE_GRENADE];
     // $results = [\DICE_GRENADE, \DICE_STAR];
-    // $results = [\DICE_INFANTRY, DICE_ARMOR];
+    // $results = [\DICE_INFANTRY, \DICE_GRENADE];
     Log::checkpoint(); // Make undo invalid
     Notifications::rollDice($player, $nDice, $results, $cell);
 

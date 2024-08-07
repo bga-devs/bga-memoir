@@ -106,6 +106,10 @@ abstract class Utils extends \APP_DbObject
     }
 
     $height = Scenario::getMode() == BREAKTHROUGH_DECK ? 17 : 9;
+    
+    if ($x['x'] == -1) {
+      return '';
+    }
     // capital
     if ($x['x'] % 2 == 0) {
       return strtoupper(alphabet[$x['x'] / 2]) . ($height - $x['y']);

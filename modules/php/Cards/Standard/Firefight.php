@@ -25,7 +25,8 @@ class Firefight extends \M44\Models\Card
     $units = $player->getUnits()->filter(function ($unit) {
       return !Board::isAdjacentToEnnemy($unit) && 
       !($unit -> getExtraDatas('cannotBeActivatedUntilTurn') >= Globals::getTurn()) &&
-      !empty($unit -> attackPower());
+      !empty($unit -> attackPower()) &&
+      !$unit->isOnReserveStaging();
     });
 
     return [

@@ -10,6 +10,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
     onEnteringStateOrderUnits(args) {
       this.removeClassNameOfCells('unselectableForAttacking');
+      console.log('On entering Order State', args.units);
       this.makeUnitsSelectable(
         args.units,
         this.onClickUnitToOrder.bind(this),
@@ -720,22 +721,25 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       console.log('elem', elem);
       let stagingArea = [...$('bottom-staging-area').getElementsByClassName('reserve-unit')];
       console.log('staging units area', stagingArea);
-      stagingArea.forEach((area) => {
-        area.classList.add('forReserveStagingDeploy');
-        let finished = false;
-        this.onClick(area, () => this.takeAction('actReserveUnitsDeployement', { x: 0, y: 0, 
-            finished: finished, 
-            pId: playerid, 
-            elem: elem,
-            isWild: false,
-            onStagingArea: true
-            }));
-
-      });
+      let playerid = args.playerid;
+      if (elem != 'wild' && elem != 'wild2') {
+        stagingArea.forEach((area) => {
+          area.classList.add('forReserveStagingDeploy');
+          let finished = false;
+          this.onClick(area, () => this.takeAction('actReserveUnitsDeployement', { x: -1, y: 0, 
+              finished: finished, 
+              pId: playerid, 
+              elem: elem,
+              isWild: false,
+              onStagingArea: true
+              }));
+        });
+      }
+      
       let cells_list = Object.values(args.cells_units_deployement);
       console.log('cells array', cells_list);
-      let playerid = args.playerid;
-      if (elem != 'wild' && elem != 'wild2' ) {
+      //let playerid = args.playerid;
+      if (elem != 'wild' && elem != 'wild2') {
         cells_list.forEach((cell) => {
           let oCell = $(`cell-${cell.x}-${cell.y}`);
           oCell.classList.add('forReserveUnitDeploy');
@@ -771,6 +775,20 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
     onClickChooseDepLocation2(elem, args) {
       console.log('elem', elem);
+      let stagingArea = [...$('bottom-staging-area').getElementsByClassName('reserve-unit')];
+      console.log('staging units area', stagingArea);
+      stagingArea.forEach((area) => {
+        area.classList.add('forReserveStagingDeploy');
+        let finished = false;
+        this.onClick(area, () => this.takeAction('actReserveUnitsDeployement', { x: 0, y: 0, 
+            finished: finished, 
+            pId: playerid, 
+            elem: elem,
+            isWild: true,
+            onStagingArea: true
+            }));
+
+      });
       let cells_list = Object.values(args.cells_units_deployement);
       console.log('cells array', cells_list);
       let playerid = args.playerid;

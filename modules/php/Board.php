@@ -211,6 +211,9 @@ class Board
    */
   public static function cellHasProperty($cell, $property, $unit)
   {
+    /*if($unit->isOnReserveStaging()) {
+      return false;
+    }*/
     $t = self::$grid[$cell['x']][$cell['y']];
     foreach ($t['terrains'] as $terrain) {
       if ($terrain->$property($unit)) {

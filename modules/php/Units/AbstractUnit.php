@@ -83,6 +83,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     'cannotBattleBack',
     'isSWAEquipped', // for unit who are supporting Special Weapon Assets
     'cannotBeActivatedUntilTurn', // example for units who just drops or cannot be actived until n turns
+    'isOnReserveStaging', // for unit on staging area
   ];
 
   protected $attackPower = [];

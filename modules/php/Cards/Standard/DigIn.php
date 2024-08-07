@@ -26,9 +26,9 @@ class DigIn extends \M44\Models\Card
     $marineCommand = $player->isMarineCommand();
     $units = $player->getUnits();
 
-    // Keep only infantry
+    // Keep only infantry on board only (not on Staging area)
     $infantry = $units->filter(function ($unit) {
-      return $unit->getType() == \INFANTRY;
+      return $unit->getType() == \INFANTRY && !$unit->isOnReserveStaging();
     });
 
     if ($infantry->empty()) {

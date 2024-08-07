@@ -39,7 +39,7 @@ class Units extends \M44\Helpers\Pieces
     $sections = self::$sections[$mode];
     $row['sections'] = [];
     for ($i = 0; $i < 3; $i++) {
-      if ($sections[$i] <= $row['x'] && $row['x'] <= $sections[$i + 1]) {
+      if (($sections[$i] <= $row['x'] && $row['x'] <= $sections[$i + 1]) || $row['location'] == 'reserve') {
         $row['sections'][] = $flipped ? 2 - $i : $i;
       }
     }
@@ -88,7 +88,7 @@ class Units extends \M44\Helpers\Pieces
   {
     $mode = Scenario::getMode();
     $sections = self::$sections[$mode];
-    $q = $q->where('x', '>=', $sections[$section])->where('x', '<=', $sections[$section + 1]);
+    $q = $q->where('x', '>=', $sections[$section])->where('x', '<=', $sections[$section + 1])->orWhere('unit_location', 'reserve');
   }
 
   public static function addAliveClause(&$q)
@@ -318,13 +318,14 @@ class Units extends \M44\Helpers\Pieces
     $unit = self::getInstance($data['type'], $data['badge']);
     if ($onStageArea) {
       $data['location'] = 'reserve';
+      $data['extra_datas']['properties']['isOnReserveStaging'] = true;
     } else {
       $data['location'] = 'board';
+      $data['extra_datas']['properties'] = [];
     }
     $data['x'] = $cell['x'];
     $data['y'] = $cell['y'];
-    $data['figures'] = $unit->getMaxUnits();
-    $data['extra_datas']['properties'] = [];
+    $data['figures'] = $unit->getMaxUnits();    
     return self::singleCreate($data);
   }
 
