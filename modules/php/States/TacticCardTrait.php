@@ -174,7 +174,7 @@ trait TacticCardTrait
     return $card->blowBridgeFilters($card);
   }
 
-  public function isTerrainInCardSections($terrain, $cardsections, $side)
+  public static function isTerrainInCardSections($terrain, $cardsections, $side)
   {
     $isInSection = false;
     foreach ($terrain->getSections($side) as $s) {

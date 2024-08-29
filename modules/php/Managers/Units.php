@@ -88,7 +88,8 @@ class Units extends \M44\Helpers\Pieces
   {
     $mode = Scenario::getMode();
     $sections = self::$sections[$mode];
-    $q = $q->where('x', '>=', $sections[$section])->where('x', '<=', $sections[$section + 1])->orWhere('unit_location', 'reserve');
+    $q = $q->where('x', '>=', $sections[$section])->where('x', '<=', $sections[$section + 1]);
+    //->orWhere('unit_location', 'reserve');
   }
 
   public static function addAliveClause(&$q)
