@@ -170,7 +170,7 @@ class Player extends \M44\Helpers\DB_Model
   *****************/
   public function getReserveTokens()
   {
-    return $this->getTeam()->getReserveTokens();
+    return Globals::isCampaign() ? $this->getTeam()->getReserveTokens() : 0;
   }
 
 }

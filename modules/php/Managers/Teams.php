@@ -94,6 +94,7 @@ class Teams extends \M44\Helpers\DB_Manager
         'country' => $info['country_player' . $i] ?? '',
         'cards' => Globals::isItalyHighCommand() && $team == AXIS ? 6 : $info['cards_player' . $i],
         'victory' => $info['victory_player' . $i],
+        'reserve_tokens' => 0,
         'left_pId' => $composition[$teamId][0],
         'central_pId' => $composition[$teamId][1],
         'right_pId' => $composition[$teamId][2],
