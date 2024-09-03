@@ -292,5 +292,13 @@ SQL;
     if ($from_version <= 2204130041) {
       Globals::setNightVisibility(INFINITY);
     }
+
+    if ($from_version <= 2409031042) {
+      $result = self::getUniqueValueFromDB("SHOW COLUMNS FROM `teams` LIKE 'reserve_tokens'");
+      if (is_null($result)) {
+        $sql = 'ALTER TABLE `DBPREFIX_teams` ADD `reserve_tokens` INT(10) NOT NULL DEFAULT 0';
+        self::applyDbUpgradeToAllDB($sql);
+      }
+    }
   }
 }
