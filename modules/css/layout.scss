@@ -27,7 +27,7 @@ html {
   margin-top: 0px;
 
   #left-side {
-    margin-right: 270px;
+    margin-right: 20px;
     top: 0px;
     margin-left: 0px;
 
@@ -153,9 +153,6 @@ html {
       top: 0px;
     }
   }
-
-
-
 
   #m44-top-part {
     height: 54px;
@@ -648,20 +645,15 @@ html {
     #bottom-staging-area {
       margin: auto;
       top: 0px;
-
     }
   }
-
 
   &[data-layout="1"] #m44-bottom-container {
     #bottom-staging-area {
       margin: auto;
       top: 0px;
-
     }
   }
-
-
 
   #m44-bottom-part {
     height: 54px;
@@ -685,11 +677,10 @@ html {
     }
   }
 
-  &[data-layout="0"] .m44-team-medals, .m44-team-reserve-units{
+  &[data-layout="0"] .m44-team-medals,
+  .m44-team-reserve-units {
     position: relative;
   }
-
-
 
   .m44-team-medals {
     position: absolute;
@@ -718,7 +709,6 @@ html {
     }
   }
 
-  
   .m44-team-reserve-units {
     position: relative;
     z-index: 2;
@@ -745,7 +735,7 @@ html {
         background-image: url("img/ui/reservespot.png");
         background-size: 200% 100%;
         background-position: 0% 0%;
-        background-position-x: 0% ;
+        background-position-x: 0%;
         position: relative;
         &.forReserveStagingDeploy {
           background-image: url("img/ui/reservespot.png");
@@ -754,10 +744,8 @@ html {
           background-position-x: 100%;
         }
       }
-      
     }
   }
-  
 
   .m44-team {
     display: flex;
@@ -815,7 +803,7 @@ html {
           border-left: 1px solid #2f2f2f;
         }
 
-        .reservetokens-holder{
+        .reservetokens-holder {
           background-color: #95612a3b;
         }
       }
@@ -992,7 +980,6 @@ html {
     content: "x";
     margin: 0px 3px;
   }
-
 }
 
 .commissar-holder {
