@@ -198,9 +198,25 @@ class Medals extends \M44\Helpers\DB_Manager
       // Is this a majority medal ?
       if ($newHolder != null && $datas['majority']) {
         if ($nHexes[ALLIES] > $nHexes[AXIS]) {
-          $newHolder = ALLIES;
+          if(isset($datas['side'])){
+            if ($datas['side'] == ALLIES) {
+              $newHolder = ALLIES;
+            } else {
+              $newHolder = null;
+            }
+          } else {
+            $newHolder = ALLIES;
+          }          
         } elseif ($nHexes[AXIS] > $nHexes[ALLIES]) {
-          $newHolder = AXIS;
+          if(isset($datas['side'])){
+            if ($datas['side'] == AXIS) {
+              $newHolder = AXIS;
+            } else {
+              $newHolder = null;
+            }
+          } else {
+            $newHolder = AXIS;
+          }          
         } else {
           $newHolder = null;
         }
