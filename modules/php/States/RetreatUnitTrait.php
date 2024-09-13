@@ -288,8 +288,10 @@ trait RetreatUnitTrait
       $oppUnit->getRetreats() == 0 &&
       !$oppUnit->cannotBattleBack() // ex Sniper do not benefit from british nation battle back
     ) {
+      $oppUnit->setRetreats(0);
       $this->nextState('battleBack', $oppUnit->getPlayer());
     } else {
+      $oppUnit->setRetreats(0);
       $this->nextState('takeGround', $attack['pId']);
     }
   }
