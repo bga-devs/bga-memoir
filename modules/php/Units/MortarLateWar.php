@@ -17,11 +17,11 @@ class MortarLateWar extends Infantry
     $this->mustSeeToAttack = false;// by default if not moved
     $this->desc = [
       clienttranslate('Treated as Infantry for all purposes'),
-      clienttranslate('when it move battle like infantry 3/2/1'),
+      clienttranslate('when it moves, battles like infantry 3/2/1'),
       clienttranslate('May not Take Ground'),
       clienttranslate('In addition when it does not move, increase range to 3/2/1/1 
       and ignore line of sight and terrains protections'),
-      clienttranslate('when it move battle like infantry 3/2/1'),
+      clienttranslate('when it moves, battles like infantry 3/2/1'),
       ];
     $this->applyPropertiesModifiers();
   }

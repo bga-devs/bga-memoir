@@ -14,9 +14,9 @@ class AntiTankLateWar extends Infantry
     $this->applyPropertiesModifiers();
     $this->desc = [
       clienttranslate('Treated as Infantry for all purposes'),
-      clienttranslate('when it move battle like infantry 3/2/1'),
+      clienttranslate('when it moves, battle like infantry 3/2/1'),
       clienttranslate('May not Take Ground'),
-      clienttranslate('In addition when it does not move, stars hit on Armor or Vehicule'),
+      clienttranslate('In addition when it does not move, stars hit on Armor or Vehicle'),
     ];
   }
 
