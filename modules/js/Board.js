@@ -516,12 +516,21 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       // Special rules
       if (this.gamedatas.scenario && this.gamedatas.scenario.game_info && this.gamedatas.scenario.game_info.options) {
         let options = this.gamedatas.scenario.game_info.options;
+        // No option in editor for Japanese Imperial Army but only Nation trigger
+        if (this.gamedatas.scenario.game_info.country_player1 == 'JP' 
+          || this.gamedatas.scenario.game_info.country_player2 == 'JP') {
+          options.japanese_imperial = true;
+        }
+        // filter option with no rules (like mine_deck_name, ...) that may cause empty tooltip card
+        const no_rules = ['mine_deck_name', 'empty_section_medals', 'deck_reshuffling'];
         Object.keys(options).forEach((option) => {
-          tooltips.push({
-            tpl: 'tplSpecialRuleSummary',
-            t: { name: option, val: options[option] },
-            n: 0,
-          });
+          if (!no_rules.includes(option)) {
+            tooltips.push({
+              tpl: 'tplSpecialRuleSummary',
+              t: { name: option, val: options[option] },
+              n: 0,
+            });
+          }
         });
       }
 
@@ -682,6 +691,25 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         name = _('Partial Blitz rules');
         tile = '';
         desc = ['<li>' + _('Allied Armor move 2 hexes max and Axis Armor move 3 hexes') + '</li>'];
+      } else if (rule.name == 'gung_ho') {
+        name = _('US Marines Corps');
+        tile = '';
+        desc = [
+          '<li>' + _('Order 1 more unit than indicated on any Section card played') + '</li>',
+          '<li>' + _('All Tactic cards that activate 1 to 4 units activate 2 to 5 instead') + '</li>',
+          '<li>' + _('Marines counter-attack with +1 ordered unit against Japanese Command card. Opposite not true.') + '</li>',
+          '<li>' + _('No effect on Air Power, Air Sortie, Artillery Bombard, Barrage, Close Assault, Infantry Assault, and Their Finest Hour.') + '</li>',     
+        ];
+      } else if (rule.name == 'japanese_imperial') {
+        name = _('Imperial Japanese Army');
+        tile = '';
+        desc = [
+          '<li>' + _('Infantry must always ignore 1 flag') + '</li>',
+          '<li>' + _('When in terrain that ignores a flag, must ignore 2 flags instead') + '</li>',
+          '<li>' + _('When in caves, must ignore all flags') + '</li>',
+          '<li>' + _('Infantry at full strength in Close Assault battles at +1 die') + '</li>',
+          '<li>' + _('Infantry may move 2 hexes to combat into Close Assault') + '</li>',     
+        ];
       }
 
       return `<div class='summary-card summary-rules'>
