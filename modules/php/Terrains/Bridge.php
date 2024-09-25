@@ -25,7 +25,7 @@ class Bridge extends \M44\Models\Terrain
   public function isImpassable($unit)
   {
     // Unit coming from a river cannot cross as it is on a boat
-    if (Board::isRiverCell($unit->getPos())) {
+    if (Board::isRiverCell($unit->getPos()) && $unit->getEquipment() == 'boat') {
       return true;
     }
 
