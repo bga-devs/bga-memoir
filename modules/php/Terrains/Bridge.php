@@ -14,6 +14,9 @@ class Bridge extends \M44\Models\Terrain
   {
     $this->name = clienttranslate('Bridge');
     $this->number = 9;
+    $this->desc = [
+      clienttranslate('No movement restrictions, unless the bridge is detroyed'),
+    ];
     $this->isBridge = true;
     $this->deltaAngle = -1;
     $this->canBeBlown = false;

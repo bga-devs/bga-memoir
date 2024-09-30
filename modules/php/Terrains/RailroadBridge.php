@@ -10,18 +10,15 @@ class RailroadBridge extends Bridge
 
   public function __construct($row)
   {
+    parent::__construct($row);
     $this->name = clienttranslate('Railroad Bridges');
     $this->number = 37;
     $this->deltaAngle = 2;
     $this->mustStopWhenEntering = [ARMOR, \ARTILLERY];
     $this->desc = [
       clienttranslate('No movement restriction for Infantry'),
-      clienttranslate('Armor and Artillery moving in must stop'),
-      clienttranslate('No combat restriction'),
       clienttranslate('Armor may Take Ground and Overrun'),
-      clienttranslate('Do not block line of sight'),
     ];
-    $this ->isRail = true;
-    parent::__construct($row);
+    $this->isRail = true;
   }
 }

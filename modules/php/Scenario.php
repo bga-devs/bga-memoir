@@ -398,7 +398,7 @@ class Scenario extends \APP_DbObject
       (in_array($hex['name'], ['airfieldX', 'airfield', 'dairfieldX', 'dairfield', 'pairfield', 'pairfieldX', 'wairfield'])) || // airfield
       (in_array($hex['name'], ['barracks'])) || // barracks
       (in_array($hex['name'], ['pbeach', 'beach'])) || // beach
-      (in_array($hex['name'], ['bridge', 'pbridge', 'railbridge', 'wbridge', 'wrailbridge']) && (!isset($hex['behavior']) || !in_array($hex['behavior'], ['BRIDGE_SECTION']))) || // bridge
+      (in_array($hex['name'], ['bridge', 'pbridge', 'wbridge']) && (!isset($hex['behavior']) || !in_array($hex['behavior'], ['BRIDGE_SECTION']))) || // bridge
       (in_array($hex['name'], ['bridge']) && isset($hex['behavior']) && $hex['behavior'] == 'BRIDGE_SECTION') || // bridge section
       (in_array($hex['name'], ['brkbridge']) && (!isset($hex['behavior']) || !in_array($hex['behavior'], ['BRIDGE_SECTION']))) || //broken bridge
       (in_array($hex['name'], ['bunker'])) || // Bunker
@@ -440,7 +440,7 @@ class Scenario extends \APP_DbObject
       (in_array($hex['name'], ['camp'])) || // Prison camp
       (in_array($hex['name'], ['radar'])) || // RadarStation
       (in_array($hex['name'], ['rail', 'railcurve', 'railFL', 'railFR', 'railX', 'wrail', 'wrailcurve'])) || // Rail
-      (in_array($hex['name'], ['railbridge'])) || // RailroadBridge
+      (in_array($hex['name'], ['railbridge', 'wrailbridge'])) || // RailroadBridge
       (in_array($hex['name'], ['station'])) || // RailStation
       (in_array($hex['name'], ['wravine'])) || // ravine
       (in_array($hex['name'], ['price'])) || // Rice paddles
