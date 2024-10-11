@@ -61,6 +61,7 @@ define([
         ['pDrawCards', 1000],
         ['activateUnits', 2],
         ['moveUnit', 600],
+        ['moveUnitFromReserve',600],
         ['throwAttack', 300],
         ['rollDice', 3300],
         ['clearUnitsStatus', 2],

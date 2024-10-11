@@ -64,11 +64,13 @@ trait RoundTrait
       return $c['y'] == $yBackLine 
       && is_null(Board::getUnitInCell($c));
     });
-    // select cells of player's units for sandbad deployement 
+    // select cells of player's units for sandbag deployement only on board not on reserve
     $player_units = $player->getTeam()->getUnits();
     $cells_sandbag_deployement = [];
     foreach ($player_units as $unit) {
-      $cells_sandbag_deployement[] = $unit->getPos();
+      if(!$unit->isOnReserveStaging()) {
+        $cells_sandbag_deployement[] = $unit->getPos();
+      }
     }
     // max figures conditions
     $player_figures = [INFANTRY => 0, ARMOR => 0, ARTILLERY => 0];
@@ -119,7 +121,7 @@ trait RoundTrait
       //$info = $scenario['game_info'];
 
       if ($onStageArea) {
-        $pos = ['x' => 0, 'y' => 0];
+        $pos = $args['cells_units_deployement'][array_key_first($args['cells_units_deployement'])];
       } else {
         $pos = ['x' => $x, 'y' => $y];
       }

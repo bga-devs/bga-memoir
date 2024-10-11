@@ -113,7 +113,13 @@ trait MoveUnitsTrait
           $c2['y'] = $coordSource['y'];
         }
       }
-      Notifications::moveUnit($player, $unit, $coordSource, $c);
+      if ($unit->isOnReserveStaging()) {
+        Units::moveFromReserveToBoard($unit);
+        // Notification moveUnitFromReserve
+        Notifications::moveUnitFromReserve($player,$unit,$coordSource, $c);
+      } else {
+        Notifications::moveUnit($player, $unit, $coordSource, $c);
+      }
       list($interrupted, $isWinning) = Board::moveUnit($unit, $c);
       if ($trainCase) {
         $secondUnitToMove = Units::get($secondUnitToMoveId);

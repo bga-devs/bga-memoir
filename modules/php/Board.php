@@ -308,6 +308,7 @@ class Board
     }
 
     $startingCell = $unit->getPos();
+    $stagingarea = $unit->isOnReserveStaging();
     list($cells, $markers) = self::getCellsAtDistance(
       $startingCell,
       $d,
@@ -317,7 +318,9 @@ class Board
       },
       function ($cell) use ($unit) {
         return self::avoidIfPossibleCell($cell, $unit) ? 1 : 0;
-      }
+      },
+      true,
+      $stagingarea
     );
 
     // Compute road paths with bonus of 1 move if starting pos is on road
@@ -417,7 +420,7 @@ class Board
     }
 
     // If there is a unit => can't go there
-    if (!is_null($targetCell['unit'])) {
+    if (!is_null($targetCell['unit']) && !$targetCell['unit']->isOnReserveStaging()) {
       return \INFINITY;
     }
 
@@ -1310,6 +1313,26 @@ class Board
     }
     return $cells;
   }
+  /**
+   * getNeighnoursStagingArea : get cells close to player's stagingarea
+   */
+  public static function getNeighboursStagingArea($cell, $onlyValidOnes = true) {
+    $player = Players::getActive();
+    $scenario = Globals::getScenario();
+    $mode = Scenario::getMode();
+    $sidePlayer1 = isset($scenario['game_info']['side_player1']) ? $scenario['game_info']['side_player1'] : 'AXIS';
+    $dim = Board::$dimensions[$mode];
+    $yBackLine = $sidePlayer1 == $player->getTeam()->getId() ? 0 : $dim['y']-1;
+
+    $cells = Board::getListOfCells();
+    // filter cells on player backline and no unit on cells
+    $cellsNextStagingArea = array_filter($cells, function ($c) use ($yBackLine) {
+      return $c['y'] == $yBackLine 
+      && is_null(Board::getUnitInCell($c));
+    });
+
+    return $cellsNextStagingArea;
+  }
 
   /**
    * getReachableCellsAtDistance: perform a Disjktra shortest path finding :
@@ -1322,7 +1345,8 @@ class Board
     $d,
     $costCallback,
     $resistanceCallback = null,
-    $computePaths = true
+    $computePaths = true,
+    $stagingarea = false,
   ) {
     $queue = new \SplPriorityQueue();
     $queue->setExtractFlags(\SplPriorityQueue::EXTR_BOTH);
@@ -1333,6 +1357,7 @@ class Board
       $paths[$startingCell['x']][$startingCell['y']] = [['resistance' => 0, 'cells' => [], 'd' => 0]];
     }
 
+    $stagingareaonce = false;
     while (!$queue->isEmpty()) {
       // Extract the top node and adds it to the result
       $node = $queue->extract();
@@ -1346,10 +1371,16 @@ class Board
       $markers[$pos['x']][$pos['y']] = $cell;
 
       // Look at neighbours
-      $neighbours = self::getNeighbours($pos);
+      if ($stagingarea && $cell['d'] == 0 && !$stagingareaonce) {
+        $neighbours = self::getNeighboursStagingArea($pos);
+        $stagingareaonce = true;
+      } else {
+        $neighbours = self::getNeighbours($pos);
+      }
+      
       foreach ($neighbours as $nextCell) {
-        $cost = $costCallback($cell, $nextCell, $d);
-        $resistance = is_null($resistanceCallback) ? 0 : $resistanceCallback($nextCell);
+        $cost = $stagingarea && $cell['d'] == 0 ? 1 : $costCallback($cell, $nextCell, $d);
+        $resistance = is_null($resistanceCallback) || ($stagingarea && $cell['d'] == 0) ? 0 : $resistanceCallback($nextCell);
         $dist = $cell['d'] + $cost;
         $t = $markers[$nextCell['x']][$nextCell['y']];
         if ($t !== false) {

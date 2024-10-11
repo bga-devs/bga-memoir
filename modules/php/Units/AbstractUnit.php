@@ -27,6 +27,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     'activationCard' => 'activation_card',
     'extraDatas' => ['extra_datas', 'obj'],
     'orientation' => ['orientation', 'int'],
+    'location' => 'unit_location',
   ];
 
   protected $id = null;
@@ -83,7 +84,6 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     'cannotBattleBack',
     'isSWAEquipped', // for unit who are supporting Special Weapon Assets
     'cannotBeActivatedUntilTurn', // example for units who just drops or cannot be actived until n turns
-    'isOnReserveStaging', // for unit on staging area
   ];
 
   protected $attackPower = [];
@@ -388,6 +388,16 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
   public function getRoadBonus()
   {
     return $this->getExtraDatas('roadBonus') ?? 1;
+  }
+
+  public function isOnReserveStaging()
+  {
+    return $this->getExtraDatas('isOnReserveStaging') ?? false;
+  }
+
+  public function leaveStagingArea()
+  {
+    $this->setExtraDatas('isOnReserveStaging', false);
   }
 
   public function hasUsedRoadBonus()

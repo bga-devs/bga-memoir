@@ -196,6 +196,22 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       this._grid[n.args.fromX][n.args.fromY].unit = null;
     },
 
+    notif_moveUnitFromReserve(n) {
+      debug('Notif: unit is moving from reserve area', n);
+      this.clearPossible();
+      // remove reserve token from staging area
+      let unit = document.getElementById('unit-' + n.args.unitId);
+      let parent = unit.parentElement;
+      let tokenToRemove = parent.firstChild;
+      tokenToRemove = parent.removeChild(tokenToRemove);
+      // move unit
+      $('unit-' + n.args.unitId).classList.add('moving');
+      $('unit-' + n.args.unitId).classList.remove('selected');
+      this.slide('unit-' + n.args.unitId, `cell-${n.args.x}-${n.args.y}`, { duration: 580, preserveSize: true });
+      this._grid[n.args.x][n.args.y].unit = this._grid[n.args.fromX][n.args.fromY].unit;
+      this._grid[n.args.fromX][n.args.fromY].unit = null;
+    },
+
     onEnteringStateTrainReinforcement(args) { // args 1 valid neighbour cells of train
       args.forEach((cell) => {
         let oCell = $(`cell-${cell.x}-${cell.y}`);

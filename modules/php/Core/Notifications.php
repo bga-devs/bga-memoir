@@ -273,6 +273,27 @@ class Notifications
     );
   }
 
+  public static function moveUnitFromReserve($player, $unit, $coordSource, $coordTarget)
+  {
+    self::notifyAll(
+      'moveUnitFromReserve',
+      clienttranslate('${player_name} moves ${unit_desc} (From reserve staging area to ${coordTarget})'),
+      [
+        'player' => $player,
+        'unitId' => $unit->getId(),
+        'unit_desc' => self::computeUnitsDesc([$unit]),
+        'coordSource' => $coordSource,
+        'coordTarget' => $coordTarget,
+        'x' => $coordTarget['x'],
+        'y' => $coordTarget['y'],
+        'fromX' => $coordSource['x'],
+        'fromY' => $coordSource['y'],
+      ]
+    );
+  }
+
+
+
   public static function retreatUnit($player, $unit, $coordSource, $coordTarget)
   {
     self::notifyAll(
