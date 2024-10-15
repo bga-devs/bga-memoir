@@ -271,6 +271,7 @@ const TERRAIN_CLASSES = [
   'prisoncamp' => 'PrisonCamp',
   'radarstation' => 'RadarStation',
   'railbridge' => 'RailroadBridge',
+  'railroadbridge' => 'RailroadBridge',
   'rail' => 'Rail',
   'railstation' => 'RailStation',
   'roadblock' => 'RoadBlock',
