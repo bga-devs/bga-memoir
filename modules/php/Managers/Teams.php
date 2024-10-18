@@ -40,7 +40,7 @@ class Teams extends \M44\Helpers\DB_Manager
 
   public static function changeTeamTurn()
   {
-    $currentTeam = Globals::getTeamTurn();
+    $currentTeam = mb_strtoupper(Globals::getTeamTurn());
     $newTeam = $currentTeam == ALLIES ? AXIS : ALLIES;
     Globals::setTeamTurn($newTeam);
   }
@@ -71,14 +71,12 @@ class Teams extends \M44\Helpers\DB_Manager
     // Create teams
     for ($i = 1; $i <= 2; $i++) {
       $teamId = $rematch ? 2 - $i : $i - 1;
-      $team = $info['side_player' . $i];
-
-      
+      $team = mb_strtoupper($info['side_player' . $i]);
       if (Globals::isCampaign()) {
         self::DB()->insert([
           'team' => $team,
           'position' => $i,
-          'country' => $info['country_player' . $i] ?? '',
+          'country' => mb_strtoupper($info['country_player' . $i]) ?? '',
           'cards' => Globals::isItalyHighCommand() && $team == AXIS ? 6 : $info['cards_player' . $i],
           'victory' => $info['victory_player' . $i],
           'reserve_tokens' => Globals::getCampaign()['scenarios'][$team]['reserve_tokens'],
@@ -91,7 +89,7 @@ class Teams extends \M44\Helpers\DB_Manager
       self::DB()->insert([
         'team' => $team,
         'position' => $i,
-        'country' => $info['country_player' . $i] ?? '',
+        'country' => mb_strtoupper($info['country_player' . $i]) ?? '',
         'cards' => Globals::isItalyHighCommand() && $team == AXIS ? 6 : $info['cards_player' . $i],
         'victory' => $info['victory_player' . $i],
         'reserve_tokens' => 0,

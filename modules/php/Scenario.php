@@ -296,7 +296,7 @@ class Scenario extends \APP_DbObject
         '"starting = ' . $starting . '" field of scenario is not currently supported'
       );
     }
-    $startingTeam = $infos['side_' . $starting];
+    $startingTeam = mb_strtoupper($infos['side_' . $starting]);
     Globals::setTeamTurn($startingTeam);
     Globals::setTurn(0);
 

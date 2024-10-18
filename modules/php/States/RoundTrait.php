@@ -115,8 +115,8 @@ trait RoundTrait
       $player = Players::get($pId);
       $scenario = Scenario::get();  
       $country = Scenario::getTopTeam() == $player->getTeam() ? 
-        $scenario['game_info']['country_player1'] : 
-        $scenario['game_info']['country_player2'] ;
+        mb_strtoupper($scenario['game_info']['country_player1']) : 
+        mb_strtoupper($scenario['game_info']['country_player2']) ;
       $suffix = TROOP_NATION_MAPPING[$country];
       //$info = $scenario['game_info'];
 
