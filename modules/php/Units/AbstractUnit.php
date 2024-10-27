@@ -390,6 +390,11 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     return $this->getExtraDatas('roadBonus') ?? 1;
   }
 
+  public function getMovesOnTheRoad()
+  {
+    return $this->getExtraDatas('movesOnTheRoad') ?? 0;
+  }
+
   public function isOnReserveStaging()
   {
     return $this->getExtraDatas('isOnReserveStaging') ?? false;

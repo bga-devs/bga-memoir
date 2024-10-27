@@ -144,7 +144,19 @@ trait MoveUnitsTrait
 
     // Handle Road
     if ($cell['road'] ?? false) {
-      $unit->useRoadBonus();
+      // Case if Infantry or unit moved only one hex on road 
+      // and wants to move another one and battle on second hex on the road
+      if ($unit->getMovesOnTheRoad() == 0) {
+        //$unit->useRoadBonus();
+        //$unit->incMoves($cell['cost'] - 1);
+        $moveOnTheRoad = $unit->getMovesOnTheRoad() + $cell['cost'];
+        $unit->setExtraDatas('movesOnTheRoad', $moveOnTheRoad );
+      } else {
+        //$unit->incMoves($cell['cost']);
+        $moveOnTheRoad = $unit->getMovesOnTheRoad() + $cell['cost'];
+        $unit->setExtraDatas('movesOnTheRoad', $moveOnTheRoad );
+      }
+      
     } else {
       $unit->leaveRoad();
     }

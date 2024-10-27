@@ -72,6 +72,7 @@ class Teams extends \M44\Helpers\DB_Manager
     for ($i = 1; $i <= 2; $i++) {
       $teamId = $rematch ? 2 - $i : $i - 1;
       $team = mb_strtoupper($info['side_player' . $i]);
+      $info['country_player' . $i] = $info['country_player' . $i] ?? '';
       if (Globals::isCampaign()) {
         self::DB()->insert([
           'team' => $team,
