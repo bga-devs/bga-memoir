@@ -306,7 +306,7 @@ class Board
     if ($unit->isStopped()) {
       return [self::getCurrentPosAttackInfo($unit)];
     }
-    $d -= $unit->getMovesOnTheRoad();
+    //$d -= $unit->getMovesOnTheRoad();
 
     $startingCell = $unit->getPos();
     $stagingarea = $unit->isOnReserveStaging();
@@ -325,18 +325,17 @@ class Board
     );
 
     // Compute road paths with bonus of 1 move if starting pos is on road
-    
     if ($realMove && self::isRoadCell($startingCell, $unit) && $unit->stayedOnRoad()) {
       $d2 = $d + $unit->getRoadBonus();
       list($cells2, $markers2) = self::getCellsAtDistance($startingCell, $d2, function ($source, $target, $d) use (
         $unit
       ) {
-        return self::getDeplacementCost($unit, $source, $target, $d, false, true, true);
+        return self::getDeplacementCost($unit, $source, $target, $d, false, true);
       });
       // Reduce cost by 1 if bonus not used
       foreach ($cells2 as &$cell) {
         $cell['road'] = true;
-        if ($unit->getRoadBonus() != 0 && in_array($unit->getMovesOnTheRoad(), [0, null])) {
+        if ($unit->getRoadBonus() != 0) {
           $cell['d'] -= $unit->getRoadBonus();
           foreach ($cell['paths'] as &$path) {
             if (!empty($path)) {
@@ -345,7 +344,6 @@ class Board
           }
         }
       }
-    
 
       // Merge with other matching cell, avoiding duplicates
       foreach ($cells as $oldCell) {
