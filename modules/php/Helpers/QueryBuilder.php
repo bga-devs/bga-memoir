@@ -375,6 +375,7 @@ class QueryBuilder extends \APP_DbObject
     $num_args = func_num_args();
     $args = func_get_args();
     $this->computeWhereClause($num_args == 1 ? $args[0] : [$args]);
+    $this->isOrWhere = false;
     return $this;
   }
 

@@ -63,7 +63,7 @@ class Barrage extends \M44\Models\Card
       ->getOpponent()
       ->getUnits()
       ->filter(function ($unit) {
-        return !$unit->isCamouflaged();
+        return !$unit->isCamouflaged() && !$unit->isOnReserveStaging();
       });
 
     return ['unitIds' => $units->getIds()];

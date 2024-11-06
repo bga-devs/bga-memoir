@@ -591,8 +591,8 @@ class Board
    */
   public static function getTargetableCells($unit, $cell = null, $moves = null)
   {
-    // On the move => can't fight
-    if ($unit->isOnTheMove()) {
+    // On the move or on reserve staging=> can't fight
+    if ($unit->isOnTheMove() || $unit->isOnReserveStaging()) {
       return [];
     }
 
@@ -687,7 +687,9 @@ class Board
     // remove units that are camouflage where not close assault
     Utils::filter($cells, function ($cell) use ($unit) {
       $oppUnit = self::getUnitInCell($cell);
-      return !is_null($oppUnit) && $oppUnit->isOpponent($unit) && ($cell['d'] == 1 || !$oppUnit->isCamouflaged());
+      return !is_null($oppUnit) && $oppUnit->isOpponent($unit) 
+        && ($cell['d'] == 1 || !$oppUnit->isCamouflaged()) 
+        && !$oppUnit->isOnReserveStaging();
     });
 
     // Keep only the cells in sight
@@ -1317,7 +1319,7 @@ class Board
   /**
    * getNeighnoursStagingArea : get cells close to player's stagingarea
    */
-  public static function getNeighboursStagingArea($cell, $onlyValidOnes = true) {
+  public static function getNeighboursStagingArea($startingCell, $onlyValidOnes = true) {
     $player = Players::getActive();
     $scenario = Globals::getScenario();
     $mode = Scenario::getMode();
@@ -1326,14 +1328,54 @@ class Board
     $yBackLine = $sidePlayer1 == $player->getTeam()->getId() ? 0 : $dim['y']-1;
 
     $cells = Board::getListOfCells();
-    // filter cells on player backline and no unit on cells
-    $cellsNextStagingArea = array_filter($cells, function ($c) use ($yBackLine) {
+    // filter cells on player backline and no unit on cells and not starting cell (current pos of staging area unit)
+    $cellsNextStagingArea = array_filter($cells, function ($c) use ($yBackLine, $startingCell) {
       return $c['y'] == $yBackLine 
-      && is_null(Board::getUnitInCell($c));
+      && is_null(Board::getUnitInCell($c))
+      && $c['x'] != $startingCell['x'];
     });
+    // filter cells based on section from activation card
+    $card = $player->getCardInPlay();
+    $team = $player->getTeam();
+    $args = $card->getArgsOrderUnits();
+    if (isset($args['sections']) 
+    || $card->isType(CARD_INFANTRY_ASSAULT)
+    || ($card->isType(CARD_COUNTER_ATTACK) && $card->getExtraDatas('copiedCardType') == \CARD_INFANTRY_ASSAULT)) {
+      if (isset($args['sections'])) {
+        $argsSections = $args['sections'];
+      } elseif ($card->isType(CARD_INFANTRY_ASSAULT)
+      || ($card->isType(CARD_COUNTER_ATTACK) && $card->getExtraDatas('copiedCardType') == \CARD_INFANTRY_ASSAULT)) {
+        $argsSections = [0, 0, 0];
+        $activatedSection = (int) $args['section'];
+        $argsSections[$activatedSection] = INFINITY;
+      } 
+      // filter only starting cells in activated section
+      $cellsNextStagingArea2 = array_filter($cellsNextStagingArea, function ($c) use ($argsSections, $team) {
+        return $argsSections[self::getCellSections($team, $c)[0]] != 0;
+      });
+      return $cellsNextStagingArea2;
+    }
 
     return $cellsNextStagingArea;
   }
+
+  /** 
+   * Return an array of 1 or 2 sections of a cell 
+   */
+  public static function getCellSections($side, $cell)
+  {
+    $mode = Scenario::getMode();
+    $flipped = ($side == Scenario::getTopTeam());
+    $sections = Units::$sections[$mode];
+    $sections_results = [];
+    for ($i = 0; $i < 3; $i++) {
+      if ($sections[$i] <= $cell['x'] && $cell['x'] <= $sections[$i + 1]) {
+        $sections_results[] = $flipped ? 2 - $i : $i;
+      }
+    }
+    return $sections_results;
+  }
+
 
   /**
    * getReachableCellsAtDistance: perform a Disjktra shortest path finding :
@@ -1362,19 +1404,27 @@ class Board
     while (!$queue->isEmpty()) {
       // Extract the top node and adds it to the result
       $node = $queue->extract();
-      $cell = $node['data']['cell'];
-      $cell['d'] = -$node['priority'];
-      $pos = ['x' => $cell['x'], 'y' => $cell['y']];
-      $mark = $markers[$pos['x']][$pos['y']];
-      if ($mark !== false) {
-        continue;
+      if (!$stagingareaonce && $stagingarea) {
+        // si l'unité part de staging area, la permiere fois on retire la position courante de l'unité
+        $cell = $node['data']['cell'];
+        $cell['d'] = -$node['priority'];
+        $pos = ['x' => $cell['x'], 'y' => $cell['y']];
+      } else {
+        $cell = $node['data']['cell'];
+        $cell['d'] = -$node['priority'];
+        $pos = ['x' => $cell['x'], 'y' => $cell['y']];
+        $mark = $markers[$pos['x']][$pos['y']];
+        if ($mark !== false) {
+         continue;
+        }
+        $markers[$pos['x']][$pos['y']] = $cell ;
       }
-      $markers[$pos['x']][$pos['y']] = $cell;
+
 
       // Look at neighbours
-      if ($stagingarea && $cell['d'] == 0 && !$stagingareaonce) {
-        $neighbours = self::getNeighboursStagingArea($pos);
-        $stagingareaonce = true;
+      if ($stagingarea && !$stagingareaonce) {
+        $neighbours = self::getNeighboursStagingArea($startingCell);
+        //$stagingareaonce = true;
       } else {
         $neighbours = self::getNeighbours($pos);
       }
@@ -1444,6 +1494,8 @@ class Board
           }
         }
       }
+      // if staging area path will have backline cells as firts neighbours
+      $stagingareaonce = true;
     }
 
     // Extract the reachable cells

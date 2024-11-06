@@ -52,6 +52,9 @@ class Recon extends \M44\Models\SectionCard
       ->getTeam()
       ->getOpponent()
       ->getUnits()
+      ->filter(function ($unit) {
+        return !$unit->isCamouflaged() && !$unit->isOnReserveStaging();
+      })
       ->map(function ($unit) {
         return $unit->getPos();
       });

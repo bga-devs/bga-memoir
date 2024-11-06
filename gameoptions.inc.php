@@ -54,12 +54,12 @@ $game_options = [
       //   'tmpdisplay' => clienttranslate('Overlord'),
       //   'description' => clienttranslate('Overlord scenario'),
       // ],
-      /*4 => [
+      4 => [
         'name' => clienttranslate('Campaign Mode'),
         'tmdisplay' => clienttranslate('Campaign Mode'),
         'description' => clienttranslate('Standard 1v1 Campaign mode'),
         'alpha' => true,
-      ],*/
+      ],
     ],
     'startcondition' => [
       1 => [
@@ -76,13 +76,13 @@ $game_options = [
           'message' => clienttranslate('Only Overlord mode can be played in teams'),
         ],
       ],
-      /*4 => [
+      4 => [
         [
           'type' => 'maxplayers',
           'value' => 2,
           'message' => clienttranslate('Only Overlord mode can be played in teams'),
         ],
-      ]*/
+      ]
     ],
   ],
 
@@ -714,7 +714,7 @@ $game_options = [
     ],
   ],
 
-  /*108 => [
+  108 => [
     'name' => clienttranslate('Campaign'),
     'displaycondition' => [
       0 => [
@@ -741,7 +741,7 @@ $game_options = [
         'premium' => true,
       ],
     ],
-  ],*/
+  ],
 
 
   107 => [

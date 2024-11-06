@@ -171,7 +171,10 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           if (!cell.source) {
             this.onClick(oCell, () => this.takeAction('actMoveUnit', { unitId: args.unitId, x: cell.x, y: cell.y }));
           }
-          oCell.classList.add(cell.canAttack ? 'forMoveAndAttack' : 'forMove');
+          if (!cell.source) {
+            oCell.classList.add(cell.canAttack ? 'forMoveAndAttack' : 'forMove'); 
+          }
+
 
           if (cell.stop) {
             dojo.place(`<div class='mustStop'></div>`, oCell);

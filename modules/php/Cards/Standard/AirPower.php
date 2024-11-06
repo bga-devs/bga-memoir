@@ -75,7 +75,7 @@ class AirPower extends \M44\Models\Card
       ->getOpponent()
       ->getUnits()
       ->filter(function ($unit) {
-        return !$unit->isCamouflaged();
+        return !$unit->isCamouflaged() && !$unit->isOnReserveStaging();
       })
       ->map(function ($unit) {
         return $unit->getPos();

@@ -139,7 +139,7 @@ class Units extends \M44\Helpers\Pieces
     self::addSectionClause($query, $section);
     self::addAliveClause($query);
     if (Globals::isCampaign()) {
-      $query = $query->orWhere('unit_location', 'reserve');
+      $query = $query->orWhere('unit_location', 'reserve')->whereIn('nation', self::$nations[\strtoupper($side)]);
     }
     return $query->get();
   }

@@ -89,6 +89,7 @@ class InfantryAssault extends \M44\Models\Card
         'nTitle' => \clienttranslate('all'),
         'desc' => $descs[$section],
         'units' => $infantrytmp->getPositions(),
+        'section' => $section,
       ];
     }
   }
