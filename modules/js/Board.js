@@ -710,6 +710,19 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           '<li>' + _('Infantry at full strength in Close Assault battles at +1 die') + '</li>',
           '<li>' + _('Infantry may move 2 hexes to combat into Close Assault') + '</li>',     
         ];
+      } else if (rule.name == 'night_visibility_rules') {
+        name = _('Night Attacks');
+        tile = '';
+        desc = [
+          '<li>' + _('Each turn Allied player rolls 4 dice, each Star increases visibility') + '</li>',
+          '<li>' + _('When full daylight is reached chart set aside, normal visibility conditions resume') + '</li>',     
+        ];
+      } else if (rule.name == 'deck_name' && rule.val == 'AIR_POWER_AS_ARTILLERY_BOMBARD_DECK') {
+        name = _('Special Deck');
+        tile = '';
+        desc = [
+          '<li>' + _('Air Power card is played as Artillery Bombard card') + '</li>',
+        ];
       }
 
       return `<div class='summary-card summary-rules'>
