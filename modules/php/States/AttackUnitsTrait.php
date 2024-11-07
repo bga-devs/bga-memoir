@@ -42,7 +42,7 @@ trait AttackUnitsTrait
       $activationcard = $unit->getActivationOCard();
       if (($activationcard->getType() == CARD_BEHIND_LINES ||
         ($activationcard->getType() == CARD_COUNTER_ATTACK) &&
-        $activationcard->getExtraDatas('card')['type'] == CARD_BEHIND_LINES) && $unit->getMoves() < 3) {
+        $activationcard->getExtraDatas('copiedCardType') == CARD_BEHIND_LINES) && $unit->getMoves() < 3) {
         foreach (Board::getTerrainsInCell($unit->getPos()) as $t) {
           if ($t instanceof \M44\Terrains\Minefield) {
             $unit->setMoves(3);
