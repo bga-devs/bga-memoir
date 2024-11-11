@@ -693,8 +693,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       elem_map['wild'] = ['1 unit of your choice', 'unit'];
       elem_map['wild2'] = ['1 elite unit of your choice', 'unit'];
       elem_map['sandbag'] = ['1 sandbag (at no token cost)', 'obstacle'];
-      elem_map['wire'] = ['1 wire', 'obstacle'];
-      elem_map['sandbag2'] = ['advance 1 unit by 2 hexes', 'unit'];
+      elem_map['wire'] = ['2 wires (at no token cost)', 'obstacle'];
+      elem_map['advance2'] = ['advance 1 unit by 2 hexes', 'moveunit']; // TO DO
       elem_map['airpowertoken'] = ['get 1 one air power token', 'token']; // TO DO
      
       let playerid = this.player_id;
@@ -722,8 +722,13 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
             // TO DO
           break;
 
+          case 'moveunit' :
+            console.log('Case Advance 1 unit by 2 hexes');
+            // TO DO
+          break;
+
           default:
-          console.log(`Sorry, not know element type.`);
+          console.log('Sorry, unknow element type.', elem_type);
         }
       })
       

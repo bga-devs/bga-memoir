@@ -260,10 +260,22 @@ trait RoundTrait
       \DICE_GRENADE => 'wild',
       \DICE_FLAG => 'sandbag'];
 
+    // get campaign special rolls elements/actions to deploy
+    $scenarioId = Globals::getScenario()['meta_data']['scenario_id'];
+    $teamId = $player->getTeam()->getId();
+    $reserveRollSpecial = Globals::getCampaign()['scenarios'][$teamId]['reserve_roll_special'][$scenarioId];
+
     // upon roll results, create a list of possible combinations
     if (in_array(\DICE_STAR, $results)) {
       if ($results == [\DICE_STAR, \DICE_STAR]) {
-        $reserveElements[] = 'airpowertoken';
+        if (!is_null($reserveRollSpecial['star_star'])) {
+          $reserveElements[] = $reserveRollSpecial['star_star'];          
+        }
+        
+      } elseif ($results == [\DICE_STAR, \DICE_FLAG] || $results == [\DICE_FLAG, \DICE_STAR]) {
+        if (!is_null($reserveRollSpecial['flag_star'])) {
+          $reserveElements[] = $reserveRollSpecial['flag_star'];          
+        }
       } else {
         $results2 = array_diff($results,[\DICE_STAR]);
         $reserveElements[] = $reserveRollMap[$results2[array_key_first($results2)]].'2';
