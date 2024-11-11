@@ -14,6 +14,8 @@ use M44\Dice;
 use M44\Scenario;
 use M44\Helpers\Utils;
 use M44\Managers\Terrains;
+use M44\Models\Player;
+use M44\Core\Game;
 
 use function PHPSTORM_META\type;
 
@@ -32,12 +34,21 @@ trait RoundTrait
     Globals::setAirDrop2Done(false);
     Globals::setSupplyTrainDone(false);
     Globals::setRollReserveDone(false);
+    Globals::setInitHandDone(false);
+
+    if (!Globals::isCampaign()) {
+      Globals::setInitHandDone(true);
+    }
 
    // TODO only once per round
     if (Globals::isCampaign()) {
       $team = Teams::get(Globals::getTeamTurn());
-      $this->changeActivePlayerAndJumpTo($team->getCommander(), ST_RESERVE_ROLL_DEPLOYEMENT);
-      return;
+
+      // TO DO
+      $this->gamestate->setAllPlayersMultiactive();
+      $this->gamestate->nextState('reserveRoll');
+    } else {
+      $this->gamestate->nextState('prepareTurn');
     }
     // Check for options
     $options = Scenario::getOptions();
@@ -46,51 +57,59 @@ trait RoundTrait
       $this->changeActivePlayerAndJumpTo($team->getCommander(), ST_AIR_DROP);
       return;
     }
-
-    $this->gamestate->jumpToState(\ST_PREPARE_TURN);
   }
 
   public function argsReserveUnits() 
   { 
-    $player = Players::getActive();
+    $args = [];
     $scenario = Globals::getScenario();
     $mode = Scenario::getMode();
     $sidePlayer1 = isset($scenario['game_info']['side_player1']) ? $scenario['game_info']['side_player1'] : 'AXIS';
     $dim = Board::$dimensions[$mode];
-    $yBackLine = $sidePlayer1 == $player->getTeam()->getId() ? 0 : $dim['y']-1;
     $cells = Board::getListOfCells();
-    // filter cells on player backline and no unit on cells
-    $cells_unit_deployement = array_filter($cells, function ($c) use ($yBackLine) {
-      return $c['y'] == $yBackLine 
-      && is_null(Board::getUnitInCell($c));
-    });
-    // select cells of player's units for sandbag deployement only on board not on reserve
-    $player_units = $player->getTeam()->getUnits();
-    $cells_sandbag_deployement = [];
-    foreach ($player_units as $unit) {
-      if(!$unit->isOnReserveStaging()) {
-        $cells_sandbag_deployement[] = $unit->getPos();
+    
+    // pass all players reserve args and active player from UI will select its own deployement args
+    foreach(Teams::getAll() as $team) {
+      $player = $team->getCommander();
+      $yBackLine = $sidePlayer1 == $player->getTeam()->getId() ? 0 : $dim['y']-1;
+       
+      // filter cells on player backline and no unit on cells
+      $cells_unit_deployement = array_filter($cells, function ($c) use ($yBackLine) {
+        return $c['y'] == $yBackLine 
+        && is_null(Board::getUnitInCell($c));
+      });
+      
+      // select cells of player's units for sandbag deployement only on board not on reserve
+      $player_units = $player->getTeam()->getUnits();
+      $cells_sandbag_deployement = [];
+      foreach ($player_units as $unit) {
+        if(!$unit->isOnReserveStaging()) {
+          $cells_sandbag_deployement[] = $unit->getPos();
+        }
       }
+      // max figures conditions
+      $player_figures = [INFANTRY => 0, ARMOR => 0, ARTILLERY => 0];
+      foreach ($player_units as $unit) {
+        $type = $unit->getType();
+        $figures = $unit->getNUnits();
+        $player_figures [$type] = $player_figures[$type] + $figures;
+      }
+
+      $argsplayer = [
+          'elements_to_deploy' => (object) Globals::getRollReserveList(),
+          // add cells list at the player border to be selectable for unit deployement
+          'cells_units_deployement' => $cells_unit_deployement,
+          // add cells list for sandbags (cells on player's units)
+          'cells_sandbag_deployement' => $cells_sandbag_deployement,
+          // add cells list for wire (2 cells adjacent to units)
+          // max units conditions
+          'n_units_by_type' => $player_figures,
+          'max_units_by_type' => MAX_FIGURES_STANDARD,      
+      ];
+      $args[$player->getId()] = $argsplayer;
     }
-    // max figures conditions
-    $player_figures = [INFANTRY => 0, ARMOR => 0, ARTILLERY => 0];
-    foreach ($player_units as $unit) {
-      $type = $unit->getType();
-      $figures = $unit->getNUnits();
-      $player_figures [$type] = $player_figures[$type] + $figures;
-    }
-    return [
-      'playerid' => $player->getId(),
-      'elements_to_deploy' => (object) Globals::getRollReserveList(),
-      // add cells list at the player border to be selectable for unit deployement
-      'cells_units_deployement' => $cells_unit_deployement,
-      // add cells list for sandbags (cells on player's units)
-      'cells_sandbag_deployement' => $cells_sandbag_deployement,
-      // add cells list for wire (2 cells adjacent to units)
-      // max units conditions
-      'n_units_by_type' => $player_figures,
-      'max_units_by_type' => MAX_FIGURES_STANDARD,
-    ];
+
+    return $args;
   }
 
   public function actReserveUnitsDeployement($x = null, $y = null, $finished = false, $pId = null, 
@@ -98,30 +117,26 @@ trait RoundTrait
   {
     self::checkAction('actReserveUnitsDeployement');
     $args = $this->argsReserveUnits();
-    /*$k = Utils::searchCell($args, $x, $y);
-    if ($k === false) {
-      throw new \BgaVisibleSystemException('You cannot performed reinforcement here. Should not happen');
-    }*/
+
 
     if($finished)
     {
-      // end of reserve deployement phase : init game cards after all reserve deployement
-      if (Globals::isCampaign()) {
-        Cards::initHands();
-      }
-      $this->gamestate->jumpToState(\ST_PREPARE_TURN);
+      // end of reserve deployement phase choosen by player (button action)
+      $player = Players::get($pId);
+      // remove latest selectable fields, latest button action, update title for this player
+      Notifications::clearEndReserveDeployement($player);
+      // wait for other player to finish reserve roll deployement
+      $this->gamestate->setPlayerNonMultiactive($pId, 'done');
     } else { 
       // add unit from select ui cell
       $player = Players::get($pId);
-      $scenario = Scenario::get();  
-      $country = Scenario::getTopTeam() == $player->getTeam() ? 
-        mb_strtoupper($scenario['game_info']['country_player1']) : 
-        mb_strtoupper($scenario['game_info']['country_player2']) ;
+      $scenario = Scenario::get();
+      $country = $player->getTeam()->getCountry(); 
       $suffix = TROOP_NATION_MAPPING[$country];
-      //$info = $scenario['game_info'];
 
       if ($onStageArea) {
-        $pos = $args['cells_units_deployement'][array_key_first($args['cells_units_deployement'])];
+        // case staging define a default 'dummy' position on the board
+        $pos = $args[$pId]['cells_units_deployement'][array_key_first($args[$pId]['cells_units_deployement'])];
       } else {
         $pos = ['x' => $x, 'y' => $y];
       }
@@ -145,7 +160,7 @@ trait RoundTrait
           }          
           // decrease nb of reserve token
           $player->getTeam()->incNReserveTokens(-1);
-          Notifications::ReserveUnitDeployement($player, $unit, $onStageArea); 
+          Notifications::ReserveUnitDeployement($player, $unit, $onStageArea);
         break;
 
         
@@ -169,6 +184,7 @@ trait RoundTrait
           throw new \BgaVisibleSystemException('You cannot performed this kind of reinforcement here. Should not happen');
         break;
       }
+
       // remove element from list of remaining elements to be deployed
       $fullListToDeploy = Globals::getRollReserveList();
       $listToDeploy = $fullListToDeploy[$pId];
@@ -184,17 +200,22 @@ trait RoundTrait
       //var_dump('reste a deployer', $listToDeploy, $listelem, $listToDeployAfter, $fullListToDeploy);
       Globals::setRollReserveList($fullListToDeploy);
 
-      // deployement may continue if there are remaining reverse tokens
+      // deployement may continue if there are remaining reserve tokens
       // and if there are still unit or elements to be deployed
       if ($player->getTeam()->getNReserveTokens() > 0 
         && !empty($listToDeploy)) {
-        $this->gamestate->jumpToState(\ST_RESERVE_ROLL_DEPLOYEMENT);
+        // loop back in Reserve Roll Deployement state until all players finished 
+        // or nothing to deploy 
+        // or no other tokens
+        $this->gamestate->nextPrivateState($pId, 'again');
       } else {
-        // end of reserve deployement phase : init game cards after all reserve deployement
-        if (Globals::isCampaign()) {
-          Cards::initHands();
-        }
-        $this->gamestate->jumpToState(\ST_PREPARE_TURN);
+
+        // thus no other possible action
+        // remove latest selectable fields, latest button action, update title for this player
+        Notifications::clearEndReserveDeployement($player);
+        // wait for other player to finish reserve roll deployement
+        $this->gamestate->setPlayerNonMultiactive($pId, 'done');
+
       }
     }
   }
@@ -213,8 +234,19 @@ trait RoundTrait
       Globals::setRollReserveList($list);
       Globals::setRollReserveDone(true);
     }
+    $this->gamestate->setAllPlayersMultiactive();
+    //this is needed when starting private parallel states
+    //players will be transitioned to initialprivate state defined in master state
+    $this->gamestate->initializePrivateStateForAllActivePlayers(); 
+    // note : next private state is ST_RESERVE_ROLL_DEPLOYEMENT
+  }
+
+  public function stReserveRollDeployement()
+  {
     $args = $this->argsReserveUnits();
   }
+
+
 
   public static function ReserveRoll($player) 
   {

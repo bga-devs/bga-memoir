@@ -578,6 +578,9 @@ class Notifications
     ]);
   }
 
+  public static function clearEndReserveDeployement($playerid) {
+    self::notify($playerid, 'clearEndReserveDeployement', '', NULL);
+  }
 
   public static function revealMinefield($player, $terrainId, $cell, $value)
   {

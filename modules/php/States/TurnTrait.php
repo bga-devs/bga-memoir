@@ -44,6 +44,12 @@ trait TurnTrait
 
   function stPrepareTurn()
   {
+    // Init Hands just after Reserve deployement state in campaign mode only
+    if (Globals::isCampaign() && !Globals::getInitHandDone()) {
+      Cards::initHands();
+      Globals::setInitHandDone(true);
+    }
+
     Globals::incTurn();
     Medals::checkBoardMedals(true);
     if (Teams::checkVictory()) {

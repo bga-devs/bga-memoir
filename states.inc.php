@@ -95,16 +95,38 @@ $machinestates = [
     ],
   ],
 
+  //Used toperforme reserve roll dice and initiate multipleplayer choice in private mode for ST_RESERVE_ROLL_DEPLOYEMEN
+  ST_RESERVE_ROLL => [
+    'name' => 'reserveRoll',
+    'description' => clienttranslate('Waiting for other players to complete reserve roll deployement.'),
+    // Won't be displayed anyway since each private state has its own description
+    'descriptionmyturn' => clienttranslate('${you} may use tokens to deploy reserve units'), 
+    'type' => 'multipleactiveplayer',
+    // This makes this state a master multiactive state and enables private states, this is also a first private state
+    'initialprivate' => ST_RESERVE_ROLL_DEPLOYEMENT,
+    'action' => 'stReserveRoll',
+    /*"args" => "argsReserveUnits",
+    // note : args Not needed at this stage, dice results and action/element to deploy are stored in Globals database
+    */
+    //this action is possible if player is not in any private state which usually happens when they are inactive
+    'possibleactions' => [], 
+    // this is normal next transition which will happen after all players finish their turns 
+    'transitions' => ['done' => ST_PREPARE_TURN, 'again' => ST_RESERVE_ROLL_DEPLOYEMENT] 
+  ],
+  
+  // Used for each player to choose reserve deployement actions or elements (units, obstacles, airpower tokens)
   ST_RESERVE_ROLL_DEPLOYEMENT => [
     'name' => 'reserveUnitsDeployement',
     'description' => clienttranslate('${actplayer} may use tokens to deploy reserve units'),
     'descriptionmyturn' => clienttranslate('${you} may use tokens to deploy reserve units'),
-    'type' => 'activeplayer',
+    // in private mode 
+    // player can choose independantly actions but will see any notification or board update from other players
+    'type' => 'private',
     'args' => 'argsReserveUnits',
-    'action' => 'stReserveRoll',
+    'action' => 'stReserveRollDeployement',
     'possibleactions' => ['actReserveUnitsDeployement'],
     'transitions' => [
-      '' => ST_PREPARE_TURN
+      'again' => ST_RESERVE_ROLL_DEPLOYEMENT
     ],
   ],
 
@@ -115,7 +137,7 @@ $machinestates = [
     'type' => 'game',
     'action' => 'stNewRound',
     'possibleactions' => [],
-    'transitions' => ['' => ST_NEW_ROUND, '' => ST_RESERVE_ROLL_DEPLOYEMENT],
+    'transitions' => ['prepareTurn' => ST_PREPARE_TURN, 'reserveRoll' => ST_RESERVE_ROLL],
   ],
 
   ST_AIR_DROP => [

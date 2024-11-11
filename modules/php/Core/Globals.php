@@ -66,7 +66,7 @@ class Globals extends \M44\Helpers\DB_Manager
     'reinforcementUnits' => 'int', // used for nb units to be reinforced
     'rollReserveDone' => 'bool',
     'rollReserveList' => 'obj',
-
+    'initHandDone' => 'bool',
     // scenario game_info
     'beginDate' => 'str',
   ];

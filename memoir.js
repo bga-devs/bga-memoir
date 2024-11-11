@@ -94,6 +94,7 @@ define([
         ['proposeScenario', 1],
         ['trainReinforcement', 500],
         ['reserveUnitsDeployement',1000],
+        ['clearEndReserveDeployement',500],
       ];
 
       // Fix mobile viewport (remove CSS zoom)
@@ -322,7 +323,7 @@ define([
         targetBridge: 'order',
         blowBridge: 'attack',
         trainReinforcement: 'move',
-        reserveUnitsDeployement : 'command',
+        //reserveUnitsDeployement : 'command',
       };
 
       if (Object.keys(statusMapping).includes(stateName)) {

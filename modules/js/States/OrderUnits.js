@@ -681,8 +681,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     onEnteringStateReserveUnitsDeployement(args) {
-      console.log('reserveroll args',args);
-      //console.log('Entering reserve deployement choice JD');
+      console.log('reserverolldeployement args',args);
+
+      this.clearActionButtons();
       var elem_map = new Array();
       elem_map['inf'] = ['1 infantry', 'unit'];
       elem_map['tank'] = ['1 armor', 'unit'];
@@ -694,8 +695,10 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       elem_map['sandbag'] = ['1 sandbag (at no token cost)', 'obstacle'];
       elem_map['wire'] = ['1 wire', 'obstacle'];
       elem_map['sandbag2'] = ['advance 1 unit by 2 hexes', 'unit'];
+      elem_map['airpowertoken'] = ['get 1 one air power token', 'token']; // TO DO
      
-      let playerid = args.playerid;
+      let playerid = this.player_id;
+      args = args[playerid];
       let element_list = Object.values(args.elements_to_deploy[playerid]);
       console.log(element_list,playerid);
       let n = 0;
@@ -707,12 +710,18 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         console.log(elem_name);
         switch(elem_type) {
           case 'unit':
-            this.addActionButton('btnReserveElem'+n, _(elem_name), () => this.onClickChooseDepLocation(elem, args));
+            this.addPrimaryActionButton('btnReserveElem'+n, _(elem_name), () => this.onClickChooseDepLocation(elem, args));
           break;
 
           case 'obstacle':
-            this.addActionButton('btnReserveElem'+n, _(elem_name), () => this.onClickChooseSandbagLocation(elem, args));
+            this.addPrimaryActionButton('btnReserveElem'+n, _(elem_name), () => this.onClickChooseSandbagLocation(elem, args));
           break;
+
+          case 'token' :
+            console.log('Case AirPower Token');
+            // TO DO
+          break;
+
           default:
           console.log(`Sorry, not know element type.`);
         }
@@ -724,7 +733,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     },
 
     onClickConfirmReserveDeployement(args) {
-      let playerid = args.playerid;
+      let playerid = this.player_id;
       let elem = '';
       this.takeAction('actReserveUnitsDeployement', {
         x : 0, y: 0, 
@@ -738,9 +747,10 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
     onClickChooseDepLocation(elem, args) {
       console.log('elem', elem);
-      let stagingArea = [...$('bottom-staging-area').getElementsByClassName('reserve-unit')];
+      let stagingArea = [];
+      stagingArea = [...$('bottom-staging-area').getElementsByClassName('reserve-unit')];
       console.log('staging units area', stagingArea);
-      let playerid = args.playerid;
+      let playerid = this.player_id;
       if (elem != 'wild' && elem != 'wild2') {
         stagingArea.forEach((area) => {
           area.classList.add('forReserveStagingDeploy');
@@ -774,17 +784,17 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       }
       switch (elem) {
         case 'wild':
-          this.removeActionButtons();
-          this.addActionButton('btnReserveElem'+10, _('1 infantry'), () => this.onClickChooseDepLocation2('inf', args));
-          this.addActionButton('btnReserveElem'+11, _('1 armor'), () => this.onClickChooseDepLocation2('tank', args));
-          this.addActionButton('btnReserveElem'+12, _('1 artillery'), () => this.onClickChooseDepLocation2('gun', args));
+          this.clearActionButtons();
+          this.addPrimaryActionButton('btnReserveElem'+10, _('1 infantry'), () => this.onClickChooseDepLocation2('inf', args));
+          this.addPrimaryActionButton('btnReserveElem'+11, _('1 armor'), () => this.onClickChooseDepLocation2('tank', args));
+          this.addPrimaryActionButton('btnReserveElem'+12, _('1 artillery'), () => this.onClickChooseDepLocation2('gun', args));
 
           break;
         case 'wild2':
-          this.removeActionButtons();
-          this.addActionButton('btnReserveElem'+10, _('1 special force infantry'), () => this.onClickChooseDepLocation2('inf2', args));
-          this.addActionButton('btnReserveElem'+11, _('1 elite armor'), () => this.onClickChooseDepLocation2('tank2', args));
-          this.addActionButton('btnReserveElem'+12, _('1 artillery'), () => this.onClickChooseDepLocation2('gun', args));
+          this.clearActionButtons();
+          this.addPrimaryActionButton('btnReserveElem'+10, _('1 special force infantry'), () => this.onClickChooseDepLocation2('inf2', args));
+          this.addPrimaryActionButton('btnReserveElem'+11, _('1 elite armor'), () => this.onClickChooseDepLocation2('tank2', args));
+          this.addPrimaryActionButton('btnReserveElem'+12, _('1 artillery'), () => this.onClickChooseDepLocation2('gun', args));
           break;
         default:
           console.log(`Sorry, none wild unit to deploy.`);
@@ -794,14 +804,16 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
     onClickChooseDepLocation2(elem, args) {
       console.log('elem', elem);
-      let stagingArea = [...$('bottom-staging-area').getElementsByClassName('reserve-unit')];
+      let stagingArea = [];
+      stagingArea = [...$('bottom-staging-area').getElementsByClassName('reserve-unit')];
       console.log('staging units area', stagingArea);
+      let playerid2 = this.player_id;
       stagingArea.forEach((area) => {
         area.classList.add('forReserveStagingDeploy');
         let finished = false;
         this.onClick(area, () => this.takeAction('actReserveUnitsDeployement', { x: 0, y: 0, 
             finished: finished, 
-            pId: playerid, 
+            pId: playerid2, 
             elem: elem,
             isWild: true,
             onStagingArea: true
@@ -810,14 +822,13 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       });
       let cells_list = Object.values(args.cells_units_deployement);
       console.log('cells array', cells_list);
-      let playerid = args.playerid;
       cells_list.forEach((cell) => {
         let oCell = $(`cell-${cell.x}-${cell.y}`);
         oCell.classList.add('forReserveUnitDeploy');
         let finished = false
         this.onClick(oCell, () => this.takeAction('actReserveUnitsDeployement', { x: cell.x, y: cell.y, 
           finished: finished, 
-          pId: playerid, 
+          pId: playerid2, 
           elem: elem,
           isWild : true,
           onStagingArea: false
@@ -829,7 +840,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       console.log('elem', elem);
       let cells_list = Object.values(args.cells_sandbag_deployement);
       console.log('cells array', cells_list);
-      let playerid = args.playerid;
+      let playerid = this.player_id;
       cells_list.forEach((cell) => {
         let oCell = $(`cell-${cell.x}-${cell.y}`);
         oCell.classList.add('forReserveUnitDeploy');
@@ -842,6 +853,21 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           onStagingArea: false
           }));
         });
+    },
+
+
+    onLeavingStateReserveUnitsDeployement() {
+      console.log('onLeavingStateReserveUnitsDeployement');
+      //this.onEnteringStateReserveUnitsDeployement(args);
+      this.clearPossible();
+      this.resetPageTitle();
+    },
+
+    notif_clearEndReserveDeployement(n) {
+      console.log('clearEndReserveDeployement');
+      this.clearPossible();
+      this.clearActionButtons();
+      this.resetPageTitle();
     },
 
   

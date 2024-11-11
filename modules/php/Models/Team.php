@@ -55,6 +55,11 @@ class Team extends \M44\Helpers\DB_Model
     return $this->nReserveTokens;
   }
 
+  public function getCountry()
+  {
+    return $this->country;
+  }
+
   public function getMembers()
   {
     return Players::getOfTeam($this->id);
