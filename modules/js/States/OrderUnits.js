@@ -724,7 +724,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
           case 'moveunit' :
             console.log('Case Advance 1 unit by 2 hexes');
-            // TO DO
+            this.addPrimaryActionButton('btnReserveElem'+n, _(elem_name), () => this.onClickSelectUnitToBeMoved(elem, args));
+
           break;
 
           default:
@@ -746,7 +747,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         pId: playerid, 
         elem: elem,
         isWild: false,
-        onStagingArea: false
+        onStagingArea: false,
+        unit_Id: 0
       });
     },
 
@@ -765,7 +767,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
               pId: playerid, 
               elem: elem,
               isWild: false,
-              onStagingArea: true
+              onStagingArea: true,
+              unit_Id: 0
               }));
         });
       }
@@ -783,7 +786,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
             pId: playerid, 
             elem: elem,
             isWild: false,
-            onStagingArea: false
+            onStagingArea: false,
+            unit_Id : 0
           }));
         });
       }
@@ -821,7 +825,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
             pId: playerid2, 
             elem: elem,
             isWild: true,
-            onStagingArea: true
+            onStagingArea: true,
+            unit_Id : 0
             }));
 
       });
@@ -836,7 +841,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           pId: playerid2, 
           elem: elem,
           isWild : true,
-          onStagingArea: false
+          onStagingArea: false,
+          unit_Id: 0
           }));
         });
       },
@@ -855,9 +861,46 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           pId: playerid, 
           elem: elem,
           isWild: false,
-          onStagingArea: false
+          onStagingArea: false,
+          unit_Id: 0
           }));
         });
+    },
+
+    onClickSelectUnitToBeMoved(elem, args) {
+      console.log('elem', elem);
+      let cells_list = Object.entries(args.cells_sandbag_deployement);
+      console.log('cells array', cells_list);
+      let playerid = this.player_id;
+      for (const [key, value] of cells_list) {
+        let unitId = key;
+        let cell = value;
+        let oCell = $(`cell-${cell.x}-${cell.y}`);
+        oCell.classList.add('forReserveUnitDeploy');
+        this.onClick(oCell, () => this.onClickChooseMoveUnitLocation(elem, args, cell, unitId));
+      };
+    },
+
+    onClickChooseMoveUnitLocation(elem,args,startingCell, unitId) {
+      // First propose list of ReachableCells at Distance from php Args 
+      //(Advance could also mean towards ennemy not back 'contrary of Retreat') -> Keep all direction as a first release
+      // mark all reachable cells like in moveTrait
+      this.clearPossible();
+      let cells_list = Object.values(args.cells_advance2[unitId]);
+      let playerid = this.player_id;
+      cells_list.forEach((cell) => {
+        let oCell = $(`cell-${cell.x}-${cell.y}`);
+        oCell.classList.add('forReserveUnitDeploy');
+        let finished = false
+        this.onClick(oCell, () => this.takeAction('actReserveUnitsDeployement', { x: cell.x, y: cell.y, 
+          finished: finished, 
+          pId: playerid, 
+          elem: elem,
+          isWild: false,
+          onStagingArea: false,
+          unit_Id : unitId
+        }));
+      });
     },
 
 

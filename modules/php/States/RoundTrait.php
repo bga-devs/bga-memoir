@@ -80,13 +80,19 @@ trait RoundTrait
       });
       
       // select cells of player's units for sandbag deployement only on board not on reserve
+      // and select cells from player units for advance 2 hexes action
       $player_units = $player->getTeam()->getUnits();
       $cells_sandbag_deployement = [];
+      $cells_reachable_for_advance2 = [];
       foreach ($player_units as $unit) {
         if(!$unit->isOnReserveStaging()) {
-          $cells_sandbag_deployement[] = $unit->getPos();
+          $cells_sandbag_deployement[$unit->getId()] = $unit->getPos();
+          // get reachable cells at distance specific for reserve deployement
+          $cells_reachable_for_advance2[$unit->getId()] = Board::getReachableCellsAtDistanceReserve($unit, 2);
+
         }
       }
+
       // max figures conditions
       $player_figures = [INFANTRY => 0, ARMOR => 0, ARTILLERY => 0];
       foreach ($player_units as $unit) {
@@ -103,6 +109,7 @@ trait RoundTrait
           'cells_sandbag_deployement' => $cells_sandbag_deployement,
           // add cells list for wire (2 cells adjacent to units)
           // max units conditions
+          'cells_advance2' => $cells_reachable_for_advance2,
           'n_units_by_type' => $player_figures,
           'max_units_by_type' => MAX_FIGURES_STANDARD,      
       ];
@@ -113,7 +120,7 @@ trait RoundTrait
   }
 
   public function actReserveUnitsDeployement($x = null, $y = null, $finished = false, $pId = null, 
-    $elem = null, $isWild = false, $onStageArea = false)
+    $elem = null, $isWild = false, $onStageArea = false, $unitId = null)
   {
     self::checkAction('actReserveUnitsDeployement');
     $args = $this->argsReserveUnits();
@@ -178,6 +185,17 @@ trait RoundTrait
             $sandbag,
             \clienttranslate('${player_name} reinforces their position by placing a sandbag (in ${coordSource})')
           );
+        break;
+
+        case 'advance2':
+          // move unit to targeted cell
+          $player = Players::get($pId);
+          $unit = Units::get($unitId);
+          $startingCell = $unit-> getPos();
+          $targetCell['x'] = $x;
+          $targetCell['y'] = $y;
+          Notifications::moveUnit($player, $unit, $startingCell, $targetCell);
+          Board::moveUnit($unit, $targetCell);
         break;
         
         default:

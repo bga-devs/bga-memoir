@@ -390,6 +390,52 @@ class Board
     return $cells;
   }
 
+  public static function getReachableCellsAtDistanceReserve($unit, $d, $realMove = true)
+  {
+
+    $startingCell = $unit->getPos();
+    
+    list($cells, $markers) = self::getCellsAtDistance(
+      $startingCell,
+      $d,
+      function ($source, $target, $d) use ($unit, $realMove) {
+        $cost = self::getDeplacementCost($unit, $source, $target, $d, false, false, $realMove);
+        return min(INFINITY, $cost);
+      },
+      function ($cell) use ($unit) {
+        return self::avoidIfPossibleCell($cell, $unit) ? 1 : 0;
+      },
+      true
+    );
+
+    // Filter out paths if needed
+    foreach ($cells as &$cell) {
+      Utils::filter($cell['paths'], function ($path) use ($unit, $cell) {
+        return self::isValidPath($unit, $cell, $path);
+      });
+    }
+    // Filter out cells without paths
+    Utils::filter($cells, function ($cell) {
+      return !empty($cell['paths']);
+    });
+
+    // Compute for each cell whether the unit might be able to attack after the move
+    foreach ($cells as &$cell) {
+      if (!empty(self::getTargetableCells($unit, $cell, $cell['d']))) {
+        $cell['canAttack'] = true;
+      }
+      if (self::mustStopWhenEnteringCell($cell, $unit) || self::mustStopMovingWhenEnteringCell($cell, $unit)) {
+        $cell['stop'] = true;
+      }
+      if (self::enteringCannotBattleCell($cell, $unit)) {
+        $cell['noAttack'] = true;
+      }
+    }
+
+    $cells[] = self::getCurrentPosAttackInfo($unit);
+    return $cells;
+  }
+
   /**
    * getDeplacementCost: return the cost for a unit to move from $source to an adjacent $target,
    *    given the fact that the unit can move at most $d hexes
@@ -484,7 +530,8 @@ class Board
 
     // Units activated by "BehindEnemyLines" card have no terrain restriction
     $card = $unit->getActivationOCard();
-    if (($card->isType(CARD_BEHIND_LINES)
+    if (!is_null($card) &&
+        ($card->isType(CARD_BEHIND_LINES)
         || $card->isType(\CARD_COUNTER_ATTACK)
         && $card->getExtraDatas('copiedCardType') == \CARD_BEHIND_LINES)
       && $unit->getType() == INFANTRY
@@ -520,7 +567,8 @@ class Board
   {
     // All paths are valid for Behind ennemy lines
     $card = $unit->getActivationOCard();
-    if (($unit->getActivationOCard()->isType(CARD_BEHIND_LINES)
+    if (!is_null($card) &&
+        ($unit->getActivationOCard()->isType(CARD_BEHIND_LINES)
         || $card->isType(\CARD_COUNTER_ATTACK)
         && $card->getExtraDatas('copiedCardType') == \CARD_BEHIND_LINES)
       && $unit->getType() == INFANTRY
