@@ -84,12 +84,19 @@ trait RoundTrait
       $player_units = $player->getTeam()->getUnits();
       $cells_sandbag_deployement = [];
       $cells_reachable_for_advance2 = [];
+      $cells_wire_deployement = [];
       foreach ($player_units as $unit) {
         if(!$unit->isOnReserveStaging()) {
           $cells_sandbag_deployement[$unit->getId()] = $unit->getPos();
           // get reachable cells at distance specific for reserve deployement
           $cells_reachable_for_advance2[$unit->getId()] = Board::getReachableCellsAtDistanceReserve($unit, 2);
-
+          // get reachable cells at distance 1 equivalent to neighbours but with valid move
+          $cells_wire_deployement2[$unit->getId()] = Board::getReachableCellsAtDistanceReserve($unit, 1);
+          $cells_wire_deployement[$unit->getId()] = array_filter($cells_wire_deployement2[$unit->getId()],
+            function ($c) {
+              return !isset($c['source']) || !$c['source'];
+            }
+          );
         }
       }
 
@@ -107,7 +114,8 @@ trait RoundTrait
           'cells_units_deployement' => $cells_unit_deployement,
           // add cells list for sandbags (cells on player's units)
           'cells_sandbag_deployement' => $cells_sandbag_deployement,
-          // add cells list for wire (2 cells adjacent to units)
+          // add cells list for wire (cells adjacent to units)
+          'cells_wire_deployement' => $cells_wire_deployement,
           // max units conditions
           'cells_advance2' => $cells_reachable_for_advance2,
           'n_units_by_type' => $player_figures,
@@ -120,7 +128,7 @@ trait RoundTrait
   }
 
   public function actReserveUnitsDeployement($x = null, $y = null, $finished = false, $pId = null, 
-    $elem = null, $isWild = false, $onStageArea = false, $unitId = null)
+    $elem = null, $isWild = false, $onStageArea = false, $unitId = null, $miscArgs = null)
   {
     self::checkAction('actReserveUnitsDeployement');
     $args = $this->argsReserveUnits();
@@ -186,6 +194,25 @@ trait RoundTrait
             \clienttranslate('${player_name} reinforces their position by placing a sandbag (in ${coordSource})')
           );
         break;
+
+        case 'wire':
+          //$unit = $player->getTeam()->getUnits()[0];
+          foreach ($miscArgs as $key => $cell) {
+            $wire = Terrains::add([
+              'type' => 'wire',
+              'tile' => 'wire',
+              'x' => $cell['x'],
+              'y' => $cell['y'],
+              'orientation' => 1,
+            ]);
+            Notifications::addTerrain(
+              $player,
+              $wire,
+              \clienttranslate('${player_name} reinforces their position by placing a wire (in ${coordSource})')
+            );
+          }
+        break;
+
 
         case 'advance2':
           // move unit to targeted cell

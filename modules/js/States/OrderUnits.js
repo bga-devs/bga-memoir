@@ -693,7 +693,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       elem_map['wild'] = ['1 unit of your choice', 'unit'];
       elem_map['wild2'] = ['1 elite unit of your choice', 'unit'];
       elem_map['sandbag'] = ['1 sandbag (at no token cost)', 'obstacle'];
-      elem_map['wire'] = ['2 wires (at no token cost)', 'obstacle'];
+      elem_map['wire'] = ['2 wires (at no token cost)', 'obstacle2'];
       elem_map['advance2'] = ['advance 1 unit by 2 hexes', 'moveunit']; // TO DO
       elem_map['airpowertoken'] = ['get 1 one air power token', 'token']; // TO DO
      
@@ -715,6 +715,10 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
           case 'obstacle':
             this.addPrimaryActionButton('btnReserveElem'+n, _(elem_name), () => this.onClickChooseSandbagLocation(elem, args));
+          break;
+
+          case 'obstacle2':
+            this.addPrimaryActionButton('btnReserveElem'+n, _(elem_name), () => this.onClickSelectUnitForWire(elem, args));
           break;
 
           case 'token' :
@@ -748,7 +752,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         elem: elem,
         isWild: false,
         onStagingArea: false,
-        unit_Id: 0
+        unit_Id: 0,
+        misc_args : {}
       });
     },
 
@@ -768,7 +773,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
               elem: elem,
               isWild: false,
               onStagingArea: true,
-              unit_Id: 0
+              unit_Id: 0,
+              misc_args : {}
               }));
         });
       }
@@ -787,7 +793,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
             elem: elem,
             isWild: false,
             onStagingArea: false,
-            unit_Id : 0
+            unit_Id : 0,
+            misc_args : {}
           }));
         });
       }
@@ -826,7 +833,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
             elem: elem,
             isWild: true,
             onStagingArea: true,
-            unit_Id : 0
+            unit_Id : 0,
+            misc_args : {}
             }));
 
       });
@@ -842,7 +850,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           elem: elem,
           isWild : true,
           onStagingArea: false,
-          unit_Id: 0
+          unit_Id: 0,
+          misc_args : {}
           }));
         });
       },
@@ -862,10 +871,93 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           elem: elem,
           isWild: false,
           onStagingArea: false,
-          unit_Id: 0
+          unit_Id: 0,
+          misc_args : {}
           }));
         });
     },
+
+    onClickSelectUnitForWire(elem, args) {
+      console.log('elem', elem);
+      let cells_list = Object.entries(args.cells_sandbag_deployement);
+      console.log('cells array', cells_list);
+      for (const [key, value] of cells_list) {
+        let unitId = key;
+        let cell = value;
+        let oCell = $(`cell-${cell.x}-${cell.y}`);
+        oCell.classList.add('forReserveUnitDeploy');
+        this.onClick(oCell, () => this.onClickSelectWireLocation(elem, args, cell, unitId));
+      };
+    },
+
+    onClickSelectWireLocation(elem,args,selectedUnitCell, unitId) {
+      // First propose list of ReachableCells at Distance from php Args
+      this.clearPossible();
+      let playerid2 = this.player_id;
+      args.wireCellList = new Object();
+      this.addPrimaryActionButton('btnConfirmWireTargetCells', _('Confirm cells where to deploy 2 wire'), () => 
+      {
+        console.log(args.wireCellList);
+        let cells_list = Object.entries(args.wireCellList);
+        let wireCellList2 = JSON.stringify(args.wireCellList);
+        console.log(wireCellList2);
+        for (const [key, value] of cells_list) {
+          let cell = value;
+          $(`cell-${cell.x}-${cell.y}`).classList.remove('airPowerTarget');
+        };
+        this.takeAction('actReserveUnitsDeployement', { x: 0, y: 0, 
+          finished: false, 
+          pId: playerid2, 
+          elem: elem,
+          isWild: false,
+          onStagingArea: false,
+          unit_Id: 0,
+          misc_args : wireCellList2
+        });
+        }
+      );
+      let cells_list = Object.values(args.cells_wire_deployement[unitId]);
+      let playerid = this.player_id;
+      cells_list.forEach((cell) => {
+        let cell2 = [];
+        let oCell = $(`cell-${cell.x}-${cell.y}`);
+        oCell.classList.add('forReserveUnitDeploy');
+        cell2['x'] = cell.x;
+        cell2['y'] = cell.y;
+        this.onClick(oCell, () => this.onClickCellTargetWire(elem, args, cell2));
+
+        
+      });
+
+      // display and mark 2 empty and valid cells close to selected unit like Air power target
+      // mark all reachable cells
+    }, 
+
+    onClickCellTargetWire(elem,args,cell) {
+      // Add a number on selected cell where to add wires and add them in list to be returned to memoir.action.php
+      console.log('Selected Wire Cell List', args.wireCellList, Object.keys(args.wireCellList).length)
+      let length = Object.keys(args.wireCellList).length;
+      cell1 = new Object();
+      cell2 = new Object();
+      cell2['x'] = cell.x;
+      cell2['y'] = cell.y;
+      if (length == 1) {
+        cell1 = args.wireCellList[0];
+      }
+      if (length < 2 && !this.isCellObjectEqual(cell1,cell2)) {
+        $(`cell-${cell.x}-${cell.y}`).dataset.airPowerOrder = length + 1;
+        $(`cell-${cell.x}-${cell.y}`).classList.add('airPowerTarget');
+        args.wireCellList[length] = cell2;
+        console.log(args.wireCellList);
+      }
+    },
+
+    isCellObjectEqual(cell1,cell2) {
+      console.log('comparaison',cell1, cell2)
+      return cell1['x'] == cell2['x'] && cell1['y'] == cell2['y'];
+      // !Object.values(args.wireCellList).includes(cell2)
+    },
+
 
     onClickSelectUnitToBeMoved(elem, args) {
       console.log('elem', elem);
@@ -898,7 +990,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           elem: elem,
           isWild: false,
           onStagingArea: false,
-          unit_Id : unitId
+          unit_Id : unitId,
+          misc_args : {}
         }));
       });
     },

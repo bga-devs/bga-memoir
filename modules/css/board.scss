@@ -198,6 +198,25 @@
         background-position: 75% 0%;
       }
 
+      &.airPowerTarget {
+        background-position: 0% 100%;
+        &::before {
+          content: attr(data-air-power-order);
+          position: absolute;
+          z-index: 2;
+          left: 33%;
+          top: 35%;
+          width: 34.7%;
+          height: 30%;
+          background: #ffffffc4;
+          border-radius: 50%;
+          border: 1px solid black;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+
       .dice-mini {
         position: absolute;
         display: block;

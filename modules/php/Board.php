@@ -1414,6 +1414,7 @@ class Board
   {
     $mode = Scenario::getMode();
     $flipped = ($side == Scenario::getTopTeam());
+    var_dump($side, $flipped, Scenario::getTopTeam());
     $sections = Units::$sections[$mode];
     $sections_results = [];
     for ($i = 0; $i < 3; $i++) {
