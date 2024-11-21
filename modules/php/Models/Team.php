@@ -42,6 +42,7 @@ class Team extends \M44\Helpers\DB_Model
       'victory' => $this->nVictory,
       'reserve_tokens' => $this->nReserveTokens,
       'units_on_reserve' => Units::getOfTeamOnReserve($this->id),
+      'air_power_tokens' => $this->getAirPowerTokens(),
     ];
   }
 
@@ -53,6 +54,11 @@ class Team extends \M44\Helpers\DB_Model
   public function getReserveTokens()
   {
     return $this->nReserveTokens;
+  }
+
+  public function getAirPowerTokens()
+  {
+    return Globals::isCampaign() && in_array($this->id, Globals::getAirPowerTokens()) ? 1 : 0;
   }
 
   public function getCountry()

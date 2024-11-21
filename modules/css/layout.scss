@@ -744,6 +744,18 @@ html {
           background-position-x: 100%;
         }
       }
+
+      .reserve-token {
+        display: inline-flex;
+        align-items: center;
+        width: 70px;
+        height: 70px;
+        background-image: url("img/ui/reservespot.png");
+        background-size: 200% 100%;
+        background-position: 0% 0%;
+        background-position-x: 0%;
+        position: relative;
+      }
     }
   }
 

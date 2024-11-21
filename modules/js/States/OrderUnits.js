@@ -723,7 +723,15 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
           case 'token' :
             console.log('Case AirPower Token');
-            // TO DO
+            this.takeAction('actReserveUnitsDeployement', { x: 0, y: 0, 
+              finished: false, 
+              pId: playerid, 
+              elem: elem,
+              isWild: false,
+              onStagingArea: true,
+              unit_Id: 0,
+              misc_args : {}
+              });
           break;
 
           case 'moveunit' :

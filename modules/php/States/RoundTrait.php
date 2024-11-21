@@ -38,6 +38,7 @@ trait RoundTrait
 
     if (!Globals::isCampaign()) {
       Globals::setInitHandDone(true);
+      Globals::setAirPowerTokens(null);
     }
 
    // TODO only once per round
@@ -223,6 +224,21 @@ trait RoundTrait
           $targetCell['y'] = $y;
           Notifications::moveUnit($player, $unit, $startingCell, $targetCell);
           Board::moveUnit($unit, $targetCell);
+        break;
+
+        case 'airpowertoken':
+          //get one Air Power Token for playerId'team
+          $player = Players::get($pId);
+          $teamId = $player->getTeam()->getId();
+          $teamToken = Globals::getAirPowerTokens();
+          if(!is_null($teamToken)) {
+            array_push($teamToken, $teamId);
+          } else {
+            $teamToken[] = $teamId;
+          }
+          Globals::setAirPowerTokens($teamToken);
+          // TO DO notification addAirPowerToken
+          Notifications::addAirpowerToken($player);
         break;
         
         default:

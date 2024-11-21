@@ -1294,6 +1294,20 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       this._reserveTokenCounter[player_id].incValue(-1);
     },
 
+    notif_addAirPowerToken(n) {
+      console.log('addAirPOwerToken', n.args, this._bottomTeam);
+      team = n.args.team.team;
+      this.addAirpowerToken(team);
+    },
+
+    addAirpowerToken(team) {
+      let pos = this._bottomTeam == team ? 'bottom' : 'top';
+      let container = pos + '-reserve-2';
+      console.log(container)
+      dojo.place(`<div class="air_power_token"></div>`, container);
+    },
+
+
     ////////////////////////////
     //    ____  _
     //   |  _ \(_) ___ ___

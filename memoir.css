@@ -755,6 +755,17 @@ html {
   background-position: 0% 0%;
   background-position-x: 100%;
 }
+#m44-container .m44-team-reserve-units .reserve-units-container .reserve-token {
+  display: inline-flex;
+  align-items: center;
+  width: 70px;
+  height: 70px;
+  background-image: url("img/ui/reservespot.png");
+  background-size: 200% 100%;
+  background-position: 0% 0%;
+  background-position-x: 0%;
+  position: relative;
+}
 #m44-container .m44-team {
   display: flex;
   position: relative;
@@ -7331,5 +7342,14 @@ span.m44-dice-result[data-result="4"] {
 }
 .reserve-token-staging[data-sprite="3"] {
   background-position-x: 100%;
+  background-position-y: 0%;
+}
+
+.air_power_token {
+  width: 48px;
+  height: 48px;
+  background-image: url("img/air_power_token.png");
+  background-size: 100% 100%;
+  background-position-x: 0%;
   background-position-y: 0%;
 }/*# sourceMappingURL=memoir.css.map */

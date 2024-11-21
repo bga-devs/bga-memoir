@@ -169,6 +169,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         if (this.gamedatas.isCampaign) {
           dojo.place(`<div class="reserve-unit" id="${pos}-reserve-0"> </div>`, pos + '-staging-slots');
           dojo.place(`<div class="reserve-unit" id="${pos}-reserve-1"> </div>`, pos + '-staging-slots');
+          dojo.place(`<div class="reserve-token" id="${pos}-reserve-2"> </div>`, pos + '-staging-slots');
         }
 
         Object.values(team.medals).forEach((medal) => this.addMedal(medal));
@@ -177,6 +178,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
             console.log('reserve index', index, team.team);
             this.updateUnitOnStagingArea(unit, team.team, index);
           })
+          if (team.air_power_tokens > 0) {
+            this.addAirpowerToken(team.team);            
+          }
         }
       });
     },

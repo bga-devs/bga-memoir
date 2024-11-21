@@ -1399,7 +1399,7 @@ class Board
       } 
       // filter only starting cells in activated section
       $cellsNextStagingArea2 = array_filter($cellsNextStagingArea, function ($c) use ($argsSections, $team) {
-        return $argsSections[self::getCellSections($team, $c)[0]] != 0;
+        return $argsSections[self::getCellSections($team->getId(), $c)[0]] != 0;
       });
       return $cellsNextStagingArea2;
     }
@@ -1410,11 +1410,10 @@ class Board
   /** 
    * Return an array of 1 or 2 sections of a cell 
    */
-  public static function getCellSections($side, $cell)
+  public static function getCellSections($sideId, $cell)
   {
     $mode = Scenario::getMode();
-    $flipped = ($side == Scenario::getTopTeam());
-    var_dump($side, $flipped, Scenario::getTopTeam());
+    $flipped = ($sideId == Scenario::getTopTeam());
     $sections = Units::$sections[$mode];
     $sections_results = [];
     for ($i = 0; $i < 3; $i++) {
