@@ -76,7 +76,15 @@ trait AttackUnitsTrait
   public function argsAttackUnit($player = null)
   {
     $player = $player ?? Players::getActive();
-    $card = $player->getCardInPlay();
+
+    if (Globals::isCampaign() && Globals::getAirPowerTokenUsed()) {
+      $card = Cards::getInstance(CARD_AIR_POWER);
+      $card->setPlayer($player->getId());
+      $card->setId(41);
+    } else {
+      $card = $player->getCardInPlay();
+    }
+
     $args = $card->getArgsAttackUnits();
     Utils::clearPaths($args['units']);
     $args['lastUnitAttacker'] = Globals::getUnitAttacker();
@@ -95,7 +103,15 @@ trait AttackUnitsTrait
       Globals::incActionCount();
     }
     $player = Players::getActive();
-    $card = $player->getCardInPlay();
+    
+    if (Globals::isCampaign() && Globals::getAirPowerTokenUsed()) {
+      $card = Cards::getInstance(CARD_AIR_POWER);
+      $card->setPlayer($player->getId());
+      $card->setId(41);
+    } else {
+      $card = $player->getCardInPlay();
+    }
+
     $nextState = $card->nextStateAfterAttacks();
     $this->nextState($nextState);
   }

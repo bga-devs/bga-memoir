@@ -133,7 +133,8 @@ class action_memoir extends APP_GameAction
     $section = self::getArg('section', AT_posint, false);
     $hill = self::getArg('hill317', AT_bool, false);
     $blowbridge = self::getArg('blowbridge',AT_bool, false);
-    $this->game->actPlayCard($cardId, $section, $hill, $blowbridge);
+    $airpowertoken = self::getArg('airPowerToken',AT_bool, false);
+    $this->game->actPlayCard($cardId, $section, $hill, $blowbridge,$airpowertoken);
     self::ajaxResponse();
   }
 

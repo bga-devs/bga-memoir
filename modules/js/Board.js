@@ -1295,17 +1295,30 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     },
 
     notif_addAirPowerToken(n) {
-      console.log('addAirPOwerToken', n.args, this._bottomTeam);
+      console.log('addAirPowerToken');
       team = n.args.team.team;
       this.addAirpowerToken(team);
+    },
+
+    notif_removeAirPowerToken(n) {
+      console.log('removeAirPowerToken');
+      team = n.args.team.team;
+      this.removeAirpowerToken(team);
     },
 
     addAirpowerToken(team) {
       let pos = this._bottomTeam == team ? 'bottom' : 'top';
       let container = pos + '-reserve-2';
-      console.log(container)
       dojo.place(`<div class="air_power_token"></div>`, container);
     },
+
+    removeAirpowerToken(team) {
+      let pos = this._bottomTeam == team ? 'bottom' : 'top';
+      let container = pos + '-reserve-2';
+      let tokenToRemove =  [...$(container).getElementsByClassName('air_power_token')]
+      $(tokenToRemove[0]).remove();
+      this.updateTeams();
+    }, 
 
 
     ////////////////////////////

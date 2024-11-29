@@ -53,63 +53,83 @@ trait PlayCardTrait
         ->getIds();
     }
 
+    $hasAirPowerTokens = $player->getTeam()->hasAirPowerTokens();
+
     $args = [
       'cards' => $cards,
       'cardsHill317' => $cardsHill317,
       'cardsBlowBridge' => $cardBlowBridge,
       'actionCount' => Globals::getActionCount(),
     ];
-    return $singleActive ? Utils::privatise($args) : $args;
+    $args = $singleActive ? Utils::privatise($args) : $args;
+    $args['hasAirpowerToken'] = $hasAirPowerTokens;
+    return $args;
   }
 
-  function actPlayCard($cardId, $sectionId = null, $hill317 = false, $canBlowbridge = false)
+  function actPlayCard($cardId, $sectionId = null, $hill317 = false, $canBlowbridge = false, $airPowerTokenUsed = false)
   {
     // Sanity check
     $this->checkAction('actPlayCard');
     Globals::incActionCount();
     $player = Players::getCurrent();
     $args = $this->argsPlayCard($player);
+   
+    if ($airPowerTokenUsed) {
+      // create a flag AirPowerToken Used to future conditions as no card used
+      Globals::setAirPowerTokenUsed(true);
+      // remove AirPower Token
+      $airPowerTokens = Globals::getAirPowerTokens();
+      $teamId = $player->getTeam()->getId();
+      unset($airPowerTokens[array_search($teamId, $airPowerTokens)]);
+      Globals::setAirPowerTokens($airPowerTokens);
+      // notify
+      Notifications::removeAirpowerToken($player);      
+      
+      $nextState = 'airpower';
+    } else {
 
-    if (!in_array($cardId, $args['cards']->getIds())) {
-      throw new \BgaVisibleSystemException('Non playable card. Should not happen.');
+      if (!in_array($cardId, $args['cards']->getIds())) {
+        throw new \BgaVisibleSystemException('Non playable card. Should not happen.');
+      }
+  
+      if (!is_null($args['cards'][$cardId]) && (!in_array($sectionId, $args['cards'][$cardId]) || is_null($sectionId))) {
+        throw new \BgaVisibleSystemException('Invalid section. Should not happen');
+      }
+  
+      if (is_null($args['cards'][$cardId]) && !is_null($sectionId)) {
+        throw new \BgaVisibleSystemException('Invalid section. Should not happen');
+      }
+  
+      if ($hill317 && !$player->canHill317()) {
+        throw new \BgaVisibleSystemException('Cannot play card as hill317. Should not happen');
+      }
+  
+      if ($hill317 && !Cards::get($cardId)->canHill317()) {
+        throw new \BgaVisibleSystemException('Cannot play this type of card as hill317. Should not happen');
+      }
+  
+      if ($hill317) {
+        $card = Cards::get($cardId);
+        $card->setExtraDatas('hill317', true);
+      }
+  
+      if ($canBlowbridge) {
+        $card = Cards::get($cardId);
+        $card->setExtraDatas('canblowbridge', true);
+      }
+  
+      // Play the card
+      $card = Cards::play($player, $cardId, $sectionId);
+      $card->onPlay();
+      Notifications::playCard($player, $card);
+      $nextState = $card->nextStateAfterPlay();
+  
+      // Handle first turn of Russian
+      if ($player->isCommissar() && $player->getCommissarCard() == null) {
+        $nextState = 'commissar';
+      }
     }
 
-    if (!is_null($args['cards'][$cardId]) && (!in_array($sectionId, $args['cards'][$cardId]) || is_null($sectionId))) {
-      throw new \BgaVisibleSystemException('Invalid section. Should not happen');
-    }
-
-    if (is_null($args['cards'][$cardId]) && !is_null($sectionId)) {
-      throw new \BgaVisibleSystemException('Invalid section. Should not happen');
-    }
-
-    if ($hill317 && !$player->canHill317()) {
-      throw new \BgaVisibleSystemException('Cannot play card as hill317. Should not happen');
-    }
-
-    if ($hill317 && !Cards::get($cardId)->canHill317()) {
-      throw new \BgaVisibleSystemException('Cannot play this type of card as hill317. Should not happen');
-    }
-
-    if ($hill317) {
-      $card = Cards::get($cardId);
-      $card->setExtraDatas('hill317', true);
-    }
-
-    if ($canBlowbridge) {
-      $card = Cards::get($cardId);
-      $card->setExtraDatas('canblowbridge', true);
-    }
-
-    // Play the card
-    $card = Cards::play($player, $cardId, $sectionId);
-    $card->onPlay();
-    Notifications::playCard($player, $card);
-    $nextState = $card->nextStateAfterPlay();
-
-    // Handle first turn of Russian
-    if ($player->isCommissar() && $player->getCommissarCard() == null) {
-      $nextState = 'commissar';
-    }
     $this->nextState($nextState);
   }
 }

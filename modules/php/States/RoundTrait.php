@@ -39,6 +39,7 @@ trait RoundTrait
     if (!Globals::isCampaign()) {
       Globals::setInitHandDone(true);
       Globals::setAirPowerTokens(null);
+      Globals::setAirPowerTokenUsed(false);
     }
 
    // TODO only once per round
@@ -237,7 +238,6 @@ trait RoundTrait
             $teamToken[] = $teamId;
           }
           Globals::setAirPowerTokens($teamToken);
-          // TO DO notification addAirPowerToken
           Notifications::addAirpowerToken($player);
         break;
         

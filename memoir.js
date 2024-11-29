@@ -96,6 +96,7 @@ define([
         ['reserveUnitsDeployement',1000],
         ['clearEndReserveDeployement',500],
         ['addAirPowerToken',500],
+        ['removeAirPowerToken',500],
       ];
 
       // Fix mobile viewport (remove CSS zoom)

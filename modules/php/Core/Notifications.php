@@ -590,6 +590,16 @@ class Notifications
     ]);
   }
 
+  public static function removeAirpowerToken($player) {
+    self::notifyAll('removeAirPowerToken', \clienttranslate('${player_name} used 1 Air Power token instead of playing a card'), [
+      'player' => $player,
+      'team' => $player->getTeam(),
+      'teams' => Teams::getAll(),
+    ]);
+
+    
+  }
+
   public static function revealMinefield($player, $terrainId, $cell, $value)
   {
     $msg =

@@ -61,6 +61,11 @@ class Team extends \M44\Helpers\DB_Model
     return Globals::isCampaign() && in_array($this->id, Globals::getAirPowerTokens()) ? 1 : 0;
   }
 
+  public function hasAirPowerTokens()
+  {
+    return $this->getAirPowerTokens() > 0;
+  }
+
   public function getCountry()
   {
     return $this->country;

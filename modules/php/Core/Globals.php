@@ -67,7 +67,8 @@ class Globals extends \M44\Helpers\DB_Manager
     'rollReserveDone' => 'bool',
     'rollReserveList' => 'obj',
     'initHandDone' => 'bool',
-    'airPowerTokens' => 'obj', // used if player has a Air Power Token (campaign mode only) 
+    'airPowerTokens' => 'obj', // used if player has a Air Power Token (campaign mode only)
+    'airPowerTokenUsed' => 'bool', // usefull to deal AirpowerToken as no card is played (campaign mode only)
     // scenario game_info
     'beginDate' => 'str',
   ];

@@ -66,7 +66,12 @@ trait TacticCardTrait
   public function argsTargetAirPower()
   {
     $player = Players::getActive();
-    $card = $player->getCardInPlay();
+    if (Globals::isCampaign() && Globals::getAirPowerTokenUsed()) {
+      $card = Cards::getInstance(CARD_AIR_POWER);
+      $card->setPlayer($player->getId());
+    } else {
+      $card = $player->getCardInPlay();
+    }
     $args = $card->argsTargetAirPower();
     $args['actionCount'] = Globals::getActionCount();
     return $args;
@@ -77,7 +82,13 @@ trait TacticCardTrait
     self::checkAction('actTargetAirPower');
     Globals::incActionCount();
     $player = Players::getActive();
-    $card = $player->getCardInPlay();
+    if (Globals::isCampaign() && Globals::getAirPowerTokenUsed()) {
+      $card = Cards::getInstance(CARD_AIR_POWER);
+      $card->setPlayer($player->getId());
+      $card->setId(41); 
+    } else {
+      $card = $player->getCardInPlay();
+    }
     return $card->actTargetAirPower($unitIds);
   }
 

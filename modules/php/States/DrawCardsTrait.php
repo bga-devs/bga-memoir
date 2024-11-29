@@ -15,54 +15,61 @@ trait DrawCardsTrait
 {
   public function stDrawCard($player = null)
   {
-    // Discard played card
-    $player = $player ?? Players::getActive();
-    $card = $player->getCardInPlay();
-
-    // Ambush card management
-    $cards = Cards::getInPlayOfAll();
-    foreach ($cards as $otherCard) {
-      $owner = $otherCard->getPlayer();
-      if ($owner == $player) {
-        continue;
-      }
-
-      $oMethod = $otherCard->getDrawMethod();
-      Cards::discard($otherCard);
-      Notifications::discardCard($owner, $otherCard, false);
-
-      $newCards = Cards::draw($oMethod['nDraw'], ['hand', $owner->getId()]);
-      Notifications::drawCards($owner, $newCards);
-    }
-
-    $method = $card->getDrawMethod();
-
-    Cards::discard($card);
-    Notifications::discardCard($player, $card, false);
-
-    if (($card->getType() == \CARD_FINEST_HOUR ||
-        $card->getType() == \CARD_COUNTER_ATTACK && $card->getExtraDatas('copiedCardType') == \CARD_FINEST_HOUR)
-      && Globals::getDeckReshuffle()
-    ) {
-      $n = Cards::reshuffle();
-      Notifications::reshuffle($n);
-    }
-
-    if ($method['nKeep'] == $method['nDraw']) {
-      $cards = Cards::draw($method['nDraw'], ['hand', $player->getId()]);
-      if (is_null($cards)) {
-        return;
-      }
-      Notifications::drawCards($player, $cards);
+    // get a flag AirpowerTokenUsed if no card was played thus no new card to Draw
+    // if a card was played continue
+    if (Globals::isCampaign() && Globals::getAirPowerTokenUsed()) {
+      Globals::setAirPowerTokenUsed(false);
       $this->nextState('endRound');
-    } else {
-      $cards = Cards::draw($method['nDraw'], ['choice', $player->getId()]);
-      if (is_null($cards)) {
-        return;
+    } else { // standard case if a card was played continue
+      // Discard played card
+      $player = $player ?? Players::getActive();
+      $card = $player->getCardInPlay();
+
+      // Ambush card management
+      $cards = Cards::getInPlayOfAll();
+      foreach ($cards as $otherCard) {
+        $owner = $otherCard->getPlayer();
+        if ($owner == $player) {
+          continue;
+        }
+
+        $oMethod = $otherCard->getDrawMethod();
+        Cards::discard($otherCard);
+        Notifications::discardCard($owner, $otherCard, false);
+
+        $newCards = Cards::draw($oMethod['nDraw'], ['hand', $owner->getId()]);
+        Notifications::drawCards($owner, $newCards);
       }
-      Notifications::drawCardsAndKeep($player, $cards, $method['nKeep']);
-      Globals::setNToKeep($method['nKeep']);
-      $this->nextState('choice');
+
+      $method = $card->getDrawMethod();
+
+      Cards::discard($card);
+      Notifications::discardCard($player, $card, false);
+
+      if (($card->getType() == \CARD_FINEST_HOUR ||
+          $card->getType() == \CARD_COUNTER_ATTACK && $card->getExtraDatas('copiedCardType') == \CARD_FINEST_HOUR)
+        && Globals::getDeckReshuffle()
+      ) {
+        $n = Cards::reshuffle();
+        Notifications::reshuffle($n);
+      }
+
+      if ($method['nKeep'] == $method['nDraw']) {
+        $cards = Cards::draw($method['nDraw'], ['hand', $player->getId()]);
+        if (is_null($cards)) {
+          return;
+        }
+        Notifications::drawCards($player, $cards);
+        $this->nextState('endRound');
+      } else {
+        $cards = Cards::draw($method['nDraw'], ['choice', $player->getId()]);
+        if (is_null($cards)) {
+          return;
+        }
+        Notifications::drawCardsAndKeep($player, $cards, $method['nKeep']);
+        Globals::setNToKeep($method['nKeep']);
+        $this->nextState('choice');
+      }
     }
   }
 

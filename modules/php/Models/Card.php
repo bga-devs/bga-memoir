@@ -69,6 +69,19 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
     $pId = $this->getPId();
     return $pId == null ? $pId : Players::get($pId);
   }
+
+  // Created only to set some parameters of a fictive card played as Airpower Token
+  public function setPlayer($playerId)
+  {
+    $this->pId = (int) $playerId;
+  }
+
+  // Created only to set some parameters of a fictive card played as Airpower Token
+  public function setId($Id)
+  {
+    $this->id = $Id;
+  }
+  
   public function getName()
   {
     return $this->name;

@@ -361,6 +361,29 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     },
 
     onEnteringStatePlayCard(args) {
+      // if Player has a power token propose a choice 'Yes/No' for playing Airpower token, instead of playing a card
+      // if NO play a card, If Yes play airToken and switch to Airpower clientState
+      console.log('AirpowerToken choice');
+      let hasAirPowerToken = args.hasAirpowerToken;
+      if (hasAirPowerToken) {
+        this.changePageTitle('airpowertoken');
+        this.addPrimaryActionButton(`btnAirPowerYes`, _('Yes'), () =>
+        this.clientState('playAirPowerToken', _('Play Air Power token instead of playing a card'), { cardId : 0, airPowerToken: true })
+        );
+
+        this.addPrimaryActionButton(`btnAirPowerNo`, _('No'), () => {
+          this.changePageTitle(null);
+          this.clearActionButtons();
+          this.PlayCardSelection(args);
+        });
+    
+      } else {
+        this.PlayCardSelection(args);        
+      }
+    },
+
+    PlayCardSelection(args) {
+
       let cards = args._private.cards;
       let cards317 = args._private.cardsHill317;
       let cardsBlowBridge = args._private.cardsBlowBridge;
@@ -378,6 +401,11 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           }
         });
       });
+    },
+
+    onEnteringStatePlayAirPowerToken (args) {
+      console.log('Entering Play Air Power token');
+      this.takeAction('actPlayCard', { cardId : 0 , airPowerToken: true });
     },
 
     onEnteringStatePlayCardSelectSection(args) {
