@@ -1318,7 +1318,23 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       let tokenToRemove =  [...$(container).getElementsByClassName('air_power_token')]
       $(tokenToRemove[0]).remove();
       this.updateTeams();
-    }, 
+    },
+
+    notif_replenishWinnerReserveTokens(n) {
+      console.log('notif replenish winner tokens', n.args, this._reserveTokenCounter[n.args.player_id] );
+      //this._reserveTokenCounter[n.args.player_id] = incValue(n.args.nbAddedTokens);
+      this.updatePlayers();
+      // clean and remove all staging areas for all team
+      let stagingAreaToRemove = [...$('bottom-staging-slots').getElementsByClassName('reserve-unit')];
+      stagingAreaToRemove.push(...$('top-staging-slots').getElementsByClassName('reserve-unit'));
+      stagingAreaToRemove.push(...$('bottom-staging-slots').getElementsByClassName('reserve-token'));
+      stagingAreaToRemove.push(...$('top-staging-slots').getElementsByClassName('reserve-token'));
+      console.log(stagingAreaToRemove);
+    
+      stagingAreaToRemove.forEach ((elem) => {
+        $(elem).remove();
+      });
+    },
 
 
     ////////////////////////////

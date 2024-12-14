@@ -695,7 +695,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       elem_map['sandbag'] = ['1 sandbag (at no token cost)', 'obstacle'];
       elem_map['wire'] = ['2 wires (at no token cost)', 'obstacle2'];
       elem_map['advance2'] = ['advance 1 unit by 2 hexes', 'moveunit']; // TO DO
-      elem_map['airpowertoken'] = ['get 1 one air power token', 'token']; // TO DO
+      elem_map['airpowertoken'] = ['get 1 one air power token (at no cost)', 'token']; 
      
       let playerid = this.player_id;
       args = args[playerid];
@@ -722,8 +722,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           break;
 
           case 'token' :
-            console.log('Case AirPower Token');
-            this.takeAction('actReserveUnitsDeployement', { x: 0, y: 0, 
+            console.log('Case AirPower Token', playerid);
+            this.addPrimaryActionButton('btnReserveElem'+n, _(elem_name), () => this.takeAction('actReserveUnitsDeployement', { x: 0, y: 0, 
               finished: false, 
               pId: playerid, 
               elem: elem,
@@ -731,7 +731,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
               onStagingArea: true,
               unit_Id: 0,
               misc_args : {}
-              });
+              }));
           break;
 
           case 'moveunit' :

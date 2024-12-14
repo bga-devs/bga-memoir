@@ -85,7 +85,8 @@ trait TacticCardTrait
     if (Globals::isCampaign() && Globals::getAirPowerTokenUsed()) {
       $card = Cards::getInstance(CARD_AIR_POWER);
       $card->setPlayer($player->getId());
-      $card->setId(41); 
+      $cardId = Cards::getIdByType(CARD_AIR_POWER);
+      $card->setId($cardId); 
     } else {
       $card = $player->getCardInPlay();
     }

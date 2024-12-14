@@ -206,7 +206,7 @@ class Globals extends \M44\Helpers\DB_Manager
       $campaignId = $options[\OPTION_CAMPAIGN];
       Globals::setCampaignId($campaignId);
       Scenario::campaignLoadId($campaignId);
-      $scenarioId = Globals::getCampaign()['scenarios']['ALLIES'][0];
+      $scenarioId = Globals::getCampaign()['scenarios']['list'][0];
       Globals::setScenarioId($scenarioId);
       Globals::setScenarioSource($options[\OPTION_SCENARIO_SOURCE] ?? 0);
       Globals::setCampaignStep(0);

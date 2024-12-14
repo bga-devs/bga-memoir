@@ -19,12 +19,6 @@ trait LoadScenarioTrait
     if (Globals::isOfficialScenario()) {
       $scenarioId = Globals::getScenarioId();
       Scenario::loadId($scenarioId);
-      /*if (Globals::isCampaign()) {
-        $this->gamestate->jumpToState(\ST_RESERVE_ROLL_DEPLOYEMENT);
-      }
-      else {
-        $this->gamestate->jumpToState(\ST_NEW_ROUND);
-      }*/
       $this->gamestate->jumpToState(\ST_NEW_ROUND);
     } else {
       if (Globals::getScenarioSource() == OPTION_SCENARIO_SOURCE_DOW) {

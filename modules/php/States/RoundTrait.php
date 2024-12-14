@@ -75,10 +75,14 @@ trait RoundTrait
       $player = $team->getCommander();
       $yBackLine = $sidePlayer1 == $player->getTeam()->getId() ? 0 : $dim['y']-1;
        
-      // filter cells on player backline and no unit on cells
-      $cells_unit_deployement = array_filter($cells, function ($c) use ($yBackLine) {
+      // filter cells on player backline and no unit on cells nor impassable terrains
+      $units = $team->getUnits()->toArray();
+      $unit = $units[0];
+      
+      $cells_unit_deployement = array_filter($cells, function ($c) use ($yBackLine, $unit) {
         return $c['y'] == $yBackLine 
-        && is_null(Board::getUnitInCell($c));
+        && is_null(Board::getUnitInCell($c))
+        && !Board::isImpassableCell($c, $unit);
       });
       
       // select cells of player's units for sandbag deployement only on board not on reserve
@@ -254,11 +258,7 @@ trait RoundTrait
       }
       $key = array_search($elem, $listToDeploy);
       unset($listToDeploy[$key]);
-      //$listelem[] = $elem;
-      //$listToDeployAfter = array_diff($listToDeploy, $listelem); 
-      //$listToDeployAfter2= json_decode(json_encode($listToDeployAfter), true);
       $fullListToDeploy[$pId] = $listToDeploy;
-      //var_dump('reste a deployer', $listToDeploy, $listelem, $listToDeployAfter, $fullListToDeploy);
       Globals::setRollReserveList($fullListToDeploy);
 
       // deployement may continue if there are remaining reserve tokens
@@ -283,14 +283,33 @@ trait RoundTrait
 
   public function stReserveRoll()
   {
+    if (Globals::getCampaignStep() > 0) {
+      // Refresh interface before any reserve roll deployement for 2nd scenario (like $forceRefresh or $rematch case)
+      $datas = Game::get()->getAllDatas();
+      unset($datas['prefs']);
+      unset($datas['discard']);
+      unset($datas['canceledNotifIds']);
+      unset($datas['localPrefs']);
+      Notifications::refreshInterface($datas);
+    }
+
     if (!Globals::getRollReserveDone()) {
       $list = [];
       foreach(Teams::getAll() as $team) {
         $player = $team->getCommander();
-        // ajouter une condition si pas de jeton de reserve disponible
+        
         $elementsToDeploy = self::ReserveRoll($player);
-        $list[$player->getId()] = $elementsToDeploy;
-        //$list[] = [$player->getId() => $elementsToDeploy];        
+        // remove elements which are costing 1 token, if team has no token available
+        // keep only elements at no cost 
+        if ($team->getReserveTokens() == 0) {
+          $elementNoCost = ['sandbag','advance2','airpowertoken','wire'];
+          $elementsToDeploy2 = array_filter($elementsToDeploy, function ($elem) use ($elementNoCost)  {
+            return in_array($elem, $elementNoCost);
+          });
+          $list[$player->getId()] = $elementsToDeploy2;
+        } else {
+          $list[$player->getId()] = $elementsToDeploy;
+        }
       }
       Globals::setRollReserveList($list);
       Globals::setRollReserveDone(true);
@@ -322,7 +341,7 @@ trait RoundTrait
       \DICE_FLAG => 'sandbag'];
 
     // get campaign special rolls elements/actions to deploy
-    $scenarioId = Globals::getScenario()['meta_data']['scenario_id'];
+    $scenarioId = Scenario::getId();
     $teamId = $player->getTeam()->getId();
     $reserveRollSpecial = Globals::getCampaign()['scenarios'][$teamId]['reserve_roll_special'][$scenarioId];
 
@@ -351,14 +370,50 @@ trait RoundTrait
 
   public function stEndOfRound()
   {
-    $round = Globals::getRound();
-    $maxRound = Globals::isTwoWaysGame() ? 2 : 1;
-    if ($round == $maxRound) {
-      $this->gamestate->jumpToState(\ST_END_OF_GAME);
+    if (Globals::isCampaign()) {
+      // Campaign mode case
+      // get winner and check Replenish reserve tokens
+      $team = Teams::getWinner();
+      $campaign = Globals::getCampaign();
+      $step = Globals::getCampaignStep();
+      // TODO store last winner in Globals Campaign
+      $campaign['winners'][$step] = $team->getId();
+      Globals::setCampaign($campaign);
+      $nextstep = $campaign['scenarios'][$team->getId()][$step];
+      if ($nextstep == 'END') {
+        $nextstep = INFINITY;
+      }
+      Globals::setCampaignStep($nextstep); // increment Campaign step according to campaign order by team
+     
+      // Check if remaining tokens or units on staging area, 
+      // if so add the token back to the reserve token counter
+      $nbunitsStillOnReserve = count(Units::getOfTeamOnReserve($team->getId()));
+      $team->incNReserveTokens($nbunitsStillOnReserve);
+      // remove all Air Power Tokens
+      Globals::setAirPowerTokens([]);
+      // and notify all players
+      Notifications::replenishWinnerReserveTokens($team, $nbunitsStillOnReserve);
+      //Store current tokens in Globals or set them back to 0 if END of Campaign Round
+      $teams = Teams::getAll();
+      foreach ($teams as $t) {
+        $campaign['scenarios'][$t->getId()]['reserve_tokens']['current'] = $nextstep == INFINITY ? 0 :  $t->getReserveTokens();        
+      }
+      Globals::setCampaign($campaign);
+
+      //temporary next state for testing :
+      $this->gamestate->nextState('next_scenario');
+
     } else {
-      $this->gamestate->setAllPlayersMultiactive();
-      $this->gamestate->nextState('change');
-    }
+      // standard Case
+      $round = Globals::getRound();
+      $maxRound = Globals::isTwoWaysGame() ? 2 : 1;
+      if ($round == $maxRound) {
+        $this->gamestate->jumpToState(\ST_END_OF_GAME);
+      } else {
+        $this->gamestate->setAllPlayersMultiactive();
+        $this->gamestate->nextState('change');
+      }
+    }    
   }
 
   public function argsChangeOfRound()
@@ -379,6 +434,44 @@ trait RoundTrait
     self::checkAction('actProceed');
     $pId = $this->getCurrentPId();
     $this->gamestate->setPlayerNonMultiactive($pId, 'done');
+  }
+
+  public function stNextCampaignScenario() 
+  {
+    // Delete previous Scenario from DB Globals
+    Globals::setScenario(null);
+    Globals::setScenarioId(null);
+    // Select next scenario to play, load scenario and init it
+    $step = Globals::getCampaignStep();
+
+    // case END of Campaign :
+    if ($step == \INFINITY) {
+      // If this is END of campaign, we switch to round 2 or End the game if Round 2
+      $round = Globals::getRound();
+      $maxRound = Globals::isTwoWaysGame() ? 2 : 1;
+      if ($round == $maxRound) {
+        $this->gamestate->jumpToState(\ST_END_OF_GAME);
+      } else {
+        // case end of round 1        
+        $scenarioId = Globals::getCampaign()['scenarios']['list'][0];
+        Globals::setScenarioId($scenarioId);
+        Scenario::loadId($scenarioId);
+        // In this case, Round will be incremented at next ST NEW ROUND so finaly will be round 2(keep it to remember)
+        Globals::setRound(1);
+        // Restart Campaign for round 2 at campaign step 0
+        Globals::setCampaignStep(0);
+      }
+    } else {
+      $scenarioId = Globals::getCampaign()['scenarios']['list'][$step];
+      Globals::setScenarioId($scenarioId);
+      Scenario::loadId($scenarioId);
+      // In this case Round will be incremented at next ST NEW ROUND, in this case final Round will stay the same
+      Globals::incRound(-1); 
+    }
+
+    // Next state ST_CHANGE_OF ROUND in order to See intermediate scoresof curent scenario before next scenario
+    $this->gamestate->setAllPlayersMultiactive();
+    $this->gamestate->nextState('done');
   }
 
   public function stEndOfGame()

@@ -105,6 +105,17 @@ class Cards extends \M44\Helpers\Pieces
       ->get();
   }
 
+  /**
+   * getIdByType
+   * return Id of the first card of a type from the DB.
+   * Usefull for AirPowerToken to create a virtual card an reuse an existing id without creating a line in the DB
+   */
+   public static function getIdByType($type) 
+   {
+    $cardsType = self::getByType($type)->toArray();
+    return $cardsType[0]->getId();
+   }
+
   //////////////////////////////////
   //////////////////////////////////
   ///////////// SETTERS ////////////

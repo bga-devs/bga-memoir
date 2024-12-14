@@ -100,7 +100,7 @@ $machinestates = [
     'name' => 'reserveRoll',
     'description' => clienttranslate('Waiting for other players to complete reserve roll deployement.'),
     // Won't be displayed anyway since each private state has its own description
-    'descriptionmyturn' => clienttranslate('${you} may use tokens to deploy reserve units'), 
+    'descriptionmyturn' => clienttranslate('${you} may use tokens (if any) to deploy reserve units'), 
     'type' => 'multipleactiveplayer',
     // This makes this state a master multiactive state and enables private states, this is also a first private state
     'initialprivate' => ST_RESERVE_ROLL_DEPLOYEMENT,
@@ -117,8 +117,8 @@ $machinestates = [
   // Used for each player to choose reserve deployement actions or elements (units, obstacles, airpower tokens)
   ST_RESERVE_ROLL_DEPLOYEMENT => [
     'name' => 'reserveUnitsDeployement',
-    'description' => clienttranslate('${actplayer} may use tokens to deploy reserve units'),
-    'descriptionmyturn' => clienttranslate('${you} may use tokens to deploy reserve units'),
+    'description' => clienttranslate('${actplayer} may use tokens (if any) to deploy reserve units'),
+    'descriptionmyturn' => clienttranslate('${you} may use tokens (if any) to deploy reserve units'),
     // in private mode 
     // player can choose independantly actions but will see any notification or board update from other players
     'type' => 'private',
@@ -173,7 +173,7 @@ $machinestates = [
     'type' => 'game',
     'action' => 'stEndOfRound',
     'possibleactions' => [],
-    'transitions' => ['change' => ST_CHANGE_OF_ROUND, 'end' => ST_END_OF_GAME],
+    'transitions' => ['change' => ST_CHANGE_OF_ROUND, 'end' => ST_END_OF_GAME, 'next_scenario' => ST_NEXT_CAMPAIGN_SCENARIO],
   ],
 
   ST_CHANGE_OF_ROUND => [
@@ -184,6 +184,15 @@ $machinestates = [
     'possibleactions' => ['actProceed'],
     'args' => 'argsChangeOfRound',
     'transitions' => ['done' => ST_NEW_ROUND],
+  ],
+
+  ST_NEXT_CAMPAIGN_SCENARIO => [
+    'name' => 'changeOfCampaignScenario',
+    'description' => clienttranslate('New Campaign scenario loading'),
+    'descriptionmyturn' => clienttranslate('New Campaign scenario loading'),
+    'type' => 'game',
+    'action' => 'stNextCampaignScenario',
+    'transitions' => ['done' => ST_CHANGE_OF_ROUND],
   ],
 
   ///////////////////////////////////////////////////////

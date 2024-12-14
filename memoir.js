@@ -97,6 +97,7 @@ define([
         ['clearEndReserveDeployement',500],
         ['addAirPowerToken',500],
         ['removeAirPowerToken',500],
+        ['replenishWinnerReserveTokens',1],
       ];
 
       // Fix mobile viewport (remove CSS zoom)
@@ -453,8 +454,14 @@ define([
       dojo.query('.mustStop').forEach(dojo.destroy);
       dojo.query('.cannotAttack').forEach(dojo.destroy);
       if (this.gamedatas.isCampaign) {
-        $('bottom-reserve-0').classList.remove('forReserveStagingDeploy');
-        $('bottom-reserve-1').classList.remove('forReserveStagingDeploy');
+        var elem0 = document.getElementById('bottom-reserve-0');
+        if (elem0 != null) {
+          $('bottom-reserve-0').classList.remove('forReserveStagingDeploy');
+        }
+        var elem1 = document.getElementById('bottom-reserve-1');
+        if (elem1 != null) {
+          $('bottom-reserve-1').classList.remove('forReserveStagingDeploy');
+        }
       }
     },
 

@@ -582,6 +582,17 @@ class Notifications
     self::notify($playerid, 'clearEndReserveDeployement', '', NULL);
   }
 
+  public static function replenishWinnerReserveTokens($team, $nbAddedTokens) {
+  $player = $team->getCommander();
+    self::notifyAll('replenishWinnerReserveTokens', 
+    \clienttranslate('As winner, ${player_name} received back ${nbAddedTokens} reserve token from staging area'),
+    [
+      'player' => $player,
+      'team' => $team,
+      'nbAddedTokens' => $nbAddedTokens,
+    ]);
+  }
+
   public static function addAirpowerToken($player) {
     self::notifyAll('addAirPowerToken', \clienttranslate('${player_name} received 1 Air Power token'), [
       'player' => $player,

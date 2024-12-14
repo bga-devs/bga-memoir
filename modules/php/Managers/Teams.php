@@ -74,13 +74,17 @@ class Teams extends \M44\Helpers\DB_Manager
       $team = mb_strtoupper($info['side_player' . $i]);
       $info['country_player' . $i] = $info['country_player' . $i] ?? '';
       if (Globals::isCampaign()) {
+        $step = Globals::getCampaignStep();
+        $currentReserveTokens = isset(Globals::getCampaign()['scenarios'][$team]['reserve_tokens']['current']) ? 
+          Globals::getCampaign()['scenarios'][$team]['reserve_tokens']['current'] : 0;
         self::DB()->insert([
           'team' => $team,
           'position' => $i,
           'country' => mb_strtoupper($info['country_player' . $i]) ?? '',
           'cards' => Globals::isItalyHighCommand() && $team == AXIS ? 6 : $info['cards_player' . $i],
           'victory' => $info['victory_player' . $i],
-          'reserve_tokens' => Globals::getCampaign()['scenarios'][$team]['reserve_tokens'],
+          'reserve_tokens' => $currentReserveTokens + 
+            Globals::getCampaign()['scenarios'][$team]['reserve_tokens'][$step],
           'left_pId' => $composition[$teamId][0],
           'central_pId' => $composition[$teamId][1],
           'right_pId' => $composition[$teamId][2],
