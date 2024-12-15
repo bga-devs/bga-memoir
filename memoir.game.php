@@ -300,5 +300,11 @@ SQL;
         self::applyDbUpgradeToAllDB($sql);
       }
     }
+
+    if ($from_version <= 2410212115) {
+      Globals::setCampaign([]);
+      Globals::setCampaignId(0);
+      Globals::setCampaignStep(0);
+    }
   }
 }

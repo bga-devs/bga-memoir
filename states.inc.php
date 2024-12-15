@@ -43,6 +43,7 @@ $machinestates = [
     'descriptionmyturn' => clienttranslate('${you} must upload a m44 scenario'),
     'type' => 'multipleactiveplayer',
     'possibleactions' => ['actUploadScenario'],
+    'transitions' => ['prepareTurn' => ST_NEW_ROUND],
   ],
 
   ST_LOBBY_MAKE_FIRST_PROPOSAL => [
