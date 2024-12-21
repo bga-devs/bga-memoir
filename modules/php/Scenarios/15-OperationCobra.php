@@ -23,6 +23,7 @@ $scenarios[15] = [
     'side_player1' => 'AXIS',
     'side_player2' => 'ALLIES',
     'country_player1' => 'DE',
+    'country_player2' => 'US',
     'cards_player1' => 4,
     'cards_player2' => 5,
     'victory_player1' => 5,

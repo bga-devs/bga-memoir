@@ -348,12 +348,27 @@ $game_options = [
         'premium' => true,
       ],
 
+      4152 => [
+        'name' => clienttranslate('[BB] [4152] Panzer Lehr Counter Attack'),
+        'tmdisplay' => '[4152]',
+        'description' => clienttranslate('Panzer Lehr Counter Attack'),
+        'premium' => true,
+      ],      
+
       4155 => [
         'name' => clienttranslate('[EF] [4155] Pruzana'),
         'tmdisplay' => '[4155]',
         'description' => clienttranslate('Pruzana'),
         'premium' => true,
       ],
+
+      4172 => [
+        'name' => clienttranslate('[BB] [4172] Martinville Ridge'),
+        'tmdisplay' => '[4172]',
+        'description' => clienttranslate('Martinville Ridge'),
+        'premium' => true,
+      ],      
+
 
       4185 => [
         'name' => clienttranslate('[BB] [4185] Capturing the Crossing'),
@@ -735,9 +750,15 @@ $game_options = [
     ],
     'values' => [
       40001 => [
-        'name' => clienttranslate('[CB1] [1] Battle of Normandy'),
+        'name' => clienttranslate('[CB1] [1] Small Campaign Flanking Caen'),
         'tmdisplay' => '[1]',
-        'description' => clienttranslate('Battle of Normandy'),
+        'description' => clienttranslate('Small Campaign Flanking Caen'),
+        'premium' => true,
+      ],
+      40002 => [
+        'name' => clienttranslate('[CB1] [2] Small Campaign The Breakout'),
+        'tmdisplay' => '[2]',
+        'description' => clienttranslate('Small Campaign The Breakout'),
         'premium' => true,
       ],
     ],

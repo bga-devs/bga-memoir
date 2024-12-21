@@ -306,5 +306,10 @@ SQL;
       Globals::setCampaignId(0);
       Globals::setCampaignStep(0);
     }
+
+    if ($from_version <= 2412151602) {
+      Globals::setAirStrikes(null);
+    }
+
   }
 }

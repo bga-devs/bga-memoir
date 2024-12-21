@@ -656,7 +656,14 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           '<li>' + _('Axis may play a Recon 1 card as an Air Power card in same section') + '</li>',
           '<li>' + _('Allied Armor move 2 hexes max and Axis Armor move 3 hexes') + '</li>',
         ];
-      } else if (rule.name == 'british_commonwealth') {
+      } else if (rule.name == 'air_strikes_rules') {
+        name = _('Air Strikes rules');
+        tile = '';
+        desc = [
+          '<li>' + _('When a player is capable of making Air Strikes, in conditions specified by the scenario, any Recon 1 card he plays may be played as an Air Power card instead (Air Sortie if Air Rules in effect)') + '</li>',
+          '<li>' + _('This player may play a Recon 1 card as an Air Power card in same section') + '</li>',
+        ];
+      }else if (rule.name == 'british_commonwealth') {
         name = _('Commonwealth');
         tile = '';
         desc = [

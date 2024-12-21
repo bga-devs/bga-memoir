@@ -49,6 +49,7 @@ class Globals extends \M44\Helpers\DB_Manager
     'deckReshuffle' => 'bool',
     'defaultWinner' => 'str',
     'blitz' => 'bool',
+    'airStrikes' => 'str',
     'commissar' => 'str',
     'desert' => 'bool',
     'italyRoyalArmy' => 'bool', // affect units
