@@ -79,7 +79,7 @@ $machinestates = [
     'possibleactions' => ['actGetScenarios', 'actGetScenarioInfo', 'actProposeScenario', 'actValidateScenario'],
     'transitions' => [
       'next' => ST_LOBBY_NEXT_PLAYER,
-      'accept' => ST_NEW_ROUND,
+      'accept' => ST_PREPARE_TURN,
     ],
   ],
 
@@ -91,7 +91,7 @@ $machinestates = [
     'args' => 'argsProposeScenario',
     'possibleactions' => ['actValidateScenario'],
     'transitions' => [
-      'accept' => ST_NEW_ROUND,
+      'accept' => ST_PREPARE_TURN,
       'reject' => ST_END_GAME,
     ],
   ],
