@@ -36,6 +36,9 @@ $scenariosMap = [
 
   1324 => '1324-DugInAtSidiOmar',
   1558 => '1558-Hill112',
+  4087 => '4087-DriveOnCaen',
+  4088 => '4088-PushingThroughCaen',
+  4089 => '4089-NightWithdrawal',
   4152 => '4152-PanzerLehrCounterAttack',
   4155 => '4155-Pruzana',
   4172 => '4172-MartinvilleRidge',
@@ -115,4 +118,6 @@ $scenariosMap = [
   // Campaigns ids
   40001 => 'CB1-1-BattleofNormandy',
   40002 => 'CB1-2-BattleofNormandy',
+  40003 => 'CB1-3-BattleofNormandy',
+
 ];

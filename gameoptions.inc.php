@@ -348,12 +348,33 @@ $game_options = [
         'premium' => true,
       ],
 
+      4087 => [
+        'name' => clienttranslate('[BB] [4087] Drive On Caen'),
+        'tmdisplay' => '[4087]',
+        'description' => clienttranslate('Drive On Caen'),
+        'premium' => true,
+      ],
+
+      4088 => [
+        'name' => clienttranslate('[BB] [4088] Pushing Through Caen'),
+        'tmdisplay' => '[4088]',
+        'description' => clienttranslate('Pushing Through Caen'),
+        'premium' => true,
+      ],
+
+      4089 => [
+        'name' => clienttranslate('[BB] [4089] Night Withdrawal'),
+        'tmdisplay' => '[4089]',
+        'description' => clienttranslate('Night Withdrawal'),
+        'premium' => true,
+      ],
+
       4152 => [
         'name' => clienttranslate('[BB] [4152] Panzer Lehr Counter Attack'),
         'tmdisplay' => '[4152]',
         'description' => clienttranslate('Panzer Lehr Counter Attack'),
         'premium' => true,
-      ],      
+      ],
 
       4155 => [
         'name' => clienttranslate('[EF] [4155] Pruzana'),
@@ -759,6 +780,12 @@ $game_options = [
         'name' => clienttranslate('[CB1] [2] Small Campaign The Breakout'),
         'tmdisplay' => '[2]',
         'description' => clienttranslate('Small Campaign The Breakout'),
+        'premium' => true,
+      ],
+      40003 => [
+        'name' => clienttranslate('[CB1] [3] Small Campaign Taking Caen'),
+        'tmdisplay' => '[3]',
+        'description' => clienttranslate('Small Campaign Taking Caen'),
         'premium' => true,
       ],
     ],

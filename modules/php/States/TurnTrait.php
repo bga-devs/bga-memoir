@@ -60,7 +60,10 @@ trait TurnTrait
     $player = $team->getMembers()->first();
 
     $visibility = Globals::getNightVisibility();
-    if ($team->getId() == ALLIES && $visibility < \INFINITY) {
+    $scenario = Globals::getScenario();
+    $team_turn = isset($scenario['game_info']['options']['night_visibility_team_turn']) ?
+      $scenario['game_info']['options']['night_visibility_team_turn'] : ALLIES;
+    if ($team->getId() == $team_turn && $visibility < \INFINITY) {
       $results = Dice::roll($player, 4);
       $star = $results[DICE_STAR] ?? 0;
 

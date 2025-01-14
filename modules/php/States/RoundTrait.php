@@ -260,11 +260,23 @@ trait RoundTrait
       unset($listToDeploy[$key]);
       $fullListToDeploy[$pId] = $listToDeploy;
       Globals::setRollReserveList($fullListToDeploy);
-
+      
+      // condition if there are still elements at no cost
+      $elementNoCost = ['sandbag','advance2','airpowertoken','wire'];
+      $isElementNoCostToDeploy = false;
+      if (!empty($listToDeploy)) {
+        foreach ($listToDeploy as $elem) {
+          if (in_array($elem,$elementNoCost)) {
+            $isElementNoCostToDeploy = true;
+          }
+        }
+      }
+      
       // deployement may continue if there are remaining reserve tokens
-      // and if there are still unit or elements to be deployed
-      if ($player->getTeam()->getNReserveTokens() > 0 
-        && !empty($listToDeploy)) {
+      // and if there are still unit or elements to be deployed or
+      // if there are still element at no cost if no remaining tokens
+      if (($player->getTeam()->getNReserveTokens() > 0 && !empty($listToDeploy))
+        || ($player->getTeam()->getNReserveTokens() <= 0 && $isElementNoCostToDeploy)){
         // loop back in Reserve Roll Deployement state until all players finished 
         // or nothing to deploy 
         // or no other tokens

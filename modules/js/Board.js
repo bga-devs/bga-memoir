@@ -724,7 +724,15 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           '<li>' + _('Each turn Allied player rolls 4 dice, each Star increases visibility') + '</li>',
           '<li>' + _('When full daylight is reached chart set aside, normal visibility conditions resume') + '</li>',     
         ];
-      } else if (rule.name == 'deck_name' && rule.val == 'AIR_POWER_AS_ARTILLERY_BOMBARD_DECK') {
+      } else if (rule.name == 'night_visibility_team_turn') {
+        name = _('Night Attacks (Axis)');
+        tile = '';
+        desc = [
+          '<li>' + _('This rule supersedes standard Night Attack rules') + '</li>',
+          '<li>' + _('Each turn Axis player rolls 4 dice, each Star increases visibility') + '</li>',
+          '<li>' + _('When full daylight is reached chart set aside, normal visibility conditions resume') + '</li>',     
+        ];
+      }else if (rule.name == 'deck_name' && rule.val == 'AIR_POWER_AS_ARTILLERY_BOMBARD_DECK') {
         name = _('Special Deck');
         tile = '';
         desc = [
