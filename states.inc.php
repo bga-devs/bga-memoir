@@ -630,6 +630,7 @@ $machinestates = [
       'counterAttack' => ST_COUNTER_ATTACK,
       'medicsBT' => ST_MEDICS_BT_ROLL,
     ],
+    'possibleactions' => ['actOrderUnitsFinestHour'],
   ],
 
   // Medics BT
