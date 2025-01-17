@@ -470,22 +470,25 @@ class Board
     if (!is_null($targetCell['unit']) && !$targetCell['unit']->isOnReserveStaging()) {
       return \INFINITY;
     }
-
+    
     // if it's a cave && not a neighbour: JP can teleport, other can go if near
     if (
       $unit->getNation() == 'jp' &&
-      $unit->getType() == \INFANTRY &&
-      !in_array(['x' => $target['x'], 'y' => $target['y']], self::getNeighbours($source))
+      $unit->getType() == \INFANTRY 
     ) {
-      foreach ($targetCell['terrains'] as $terrain) {
-        if ($terrain->isCave($unit)) {
-          if ($unit->getActivationOcard()->isType(CARD_INFANTRY_ASSAULT)) {
-            return 2;
-          } else {
-            return 1;
+      if (!in_array(['x' => $target['x'], 'y' => $target['y']], self::getNeighbours($source))) {
+        foreach ($targetCell['terrains'] as $terrain) {
+          if ($terrain->isCave($unit)) {
+            if ($unit->getActivationOcard()->isType(CARD_INFANTRY_ASSAULT)) {
+              return 2;
+            } else {
+              return 2;
+            }
           }
         }
-      }
+      } else { // if it's cave and neighbour to previous one
+        return 1;
+      }      
     }
 
     if (isset($source['teleportation']) && $source['teleportation'] == true) {
