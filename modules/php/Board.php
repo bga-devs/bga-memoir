@@ -482,17 +482,21 @@ class Board
             if ($unit->getActivationOcard()->isType(CARD_INFANTRY_ASSAULT)) {
               return 2;
             } else {
-              return 2;
+              return 1;
             }
           }
         }
       } else { // if it's cave and neighbour to previous one
-        return 1;
+        foreach ($targetCell['terrains'] as $terrain) {
+          if ($terrain->isCave($unit)) {
+            return 1;
+          }
+        }
       }      
     }
 
     if (isset($source['teleportation']) && $source['teleportation'] == true) {
-      return INFINITY;
+      return INFINITY; 
     }
 
     // check to forbid caves teleportation
