@@ -1530,7 +1530,7 @@ class Board
 
           if ($dist <= $d) {
             $cave['cost'] = $cost;
-            $cave['teleportation'] = true;
+            $cave['teleportation'] = in_array(['x' => $cave['x'], 'y' => $cave['y']], self::getNeighbours($startingCell)) ? false : true;
             $queue->insert(['cell' => $cave], -$dist);
 
             if ($computePaths) {
