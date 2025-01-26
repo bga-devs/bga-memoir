@@ -38,7 +38,7 @@ $scenarios[4089] = [
     'date_end' => '1944-07-10',
     'operationID' => 12,
     'options' => [
-      'night_visibility_rules' => true,
+      'night_visibility_reverse_rule' => true,
       'night_visibility_team_turn' => AXIS,
     ],
   ],

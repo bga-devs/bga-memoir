@@ -522,7 +522,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           options.japanese_imperial = true;
         }
         // filter option with no rules (like mine_deck_name, ...) that may cause empty tooltip card
-        const no_rules = ['mine_deck_name', 'empty_section_medals', 'deck_reshuffling'];
+        const no_rules = ['mine_deck_name', 'empty_section_medals', 'deck_reshuffling', 'night_visibility_reverse_rule'];
         Object.keys(options).forEach((option) => {
           if (!no_rules.includes(option)) {
             tooltips.push({
@@ -725,12 +725,12 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           '<li>' + _('When full daylight is reached chart set aside, normal visibility conditions resume') + '</li>',     
         ];
       } else if (rule.name == 'night_visibility_team_turn') {
-        name = _('Night Attacks (Axis)');
+        name = _('Night Fall Attacks (Axis)');
         tile = '';
         desc = [
-          '<li>' + _('This rule supersedes standard Night Attack rules') + '</li>',
-          '<li>' + _('Each turn Axis player rolls 4 dice, each Star increases visibility') + '</li>',
-          '<li>' + _('When full daylight is reached chart set aside, normal visibility conditions resume') + '</li>',     
+          '<li>' + _('This specific rule supersedes standard Night Attack rules') + '</li>',
+          '<li>' + _('Each turn Axis player rolls 4 dice, each Star decreases visibility') + '</li>',
+          '<li>' + _('Visibility starts from 6 to 1') + '</li>',     
         ];
       }else if (rule.name == 'deck_name' && rule.val == 'AIR_POWER_AS_ARTILLERY_BOMBARD_DECK') {
         name = _('Special Deck');

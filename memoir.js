@@ -510,7 +510,7 @@ define([
         'scenario-informations',
       );
 
-      if (this.gamedatas.visibility <= 5) {
+      if (this.gamedatas.visibility <= 6) {
         dojo.place(`<div id='night-visibility' data-n='${this.gamedatas.visibility}'></div>`, 'scenario-informations');
         this.addTooltip($('night-visibility'), _('Current night visibility (Pacific Theater rules)'), '');
       }

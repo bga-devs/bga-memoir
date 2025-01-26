@@ -123,7 +123,7 @@ class Player extends \M44\Helpers\DB_Model
   {
     if (((Globals::isBlitz() && $this->team == \AXIS) 
       || (!is_null(Globals::getAirStrikes()) && $this->team == Globals::getAirStrikes()))
-      && Globals::getNightVisibility() == \INFINITY) {
+      && Globals::getNightVisibility() >= 6) {
       return true;
     }
 

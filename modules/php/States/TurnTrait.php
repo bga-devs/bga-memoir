@@ -63,23 +63,47 @@ trait TurnTrait
     $scenario = Globals::getScenario();
     $team_turn = isset($scenario['game_info']['options']['night_visibility_team_turn']) ?
       $scenario['game_info']['options']['night_visibility_team_turn'] : ALLIES;
-    if ($team->getId() == $team_turn && $visibility < \INFINITY) {
-      $results = Dice::roll($player, 4);
-      $star = $results[DICE_STAR] ?? 0;
+    $nightReserveRule = $scenario['game_info']['options']['night_visibility_reverse_rule'] ?? false;
+    if ($nightReserveRule) {
+      if ($team->getId() == $team_turn && $visibility > 1) {
+        $results = Dice::roll($player, 4);
+        $star = $results[DICE_STAR] ?? 0;
 
-      if ($star + $visibility > 6) {
-        $star = 6 - $visibility;
+        /*if ($star > 0 && $visibility == \INFINITY) {
+          $visibility = 6;
+        }*/
+  
+        if ($visibility - $star < 1) {
+          $star = $visibility - 1;
+        }
+        $visibility -= $star;
+  
+        if ($star > 0) {
+          Globals::incNightVisibility(-$star);
+          Notifications::visibility(-$star);
+        }
+        Notifications::message(clienttranslate('Night visibility is ${vis}'), ['vis' => $visibility]);
+  
       }
-      $visibility += $star;
-
-      if ($star > 0) {
-        Globals::incNightVisibility($star);
-        Notifications::visibility($star);
-      }
-      Notifications::message(clienttranslate('Night visibility is ${vis}'), ['vis' => $visibility]);
-
-      if ($visibility >= 6) {
-        Globals::setNightVisibility(\INFINITY);
+    } else { // normal night rule case
+      if ($team->getId() == $team_turn && $visibility < \INFINITY) {
+        $results = Dice::roll($player, 4);
+        $star = $results[DICE_STAR] ?? 0;
+  
+        if ($star + $visibility > 6) {
+          $star = 6 - $visibility;
+        }
+        $visibility += $star;
+  
+        if ($star > 0) {
+          Globals::incNightVisibility($star);
+          Notifications::visibility($star);
+        }
+        Notifications::message(clienttranslate('Night visibility is ${vis}'), ['vis' => $visibility]);
+  
+        if ($visibility >= 6) {
+          Globals::setNightVisibility(\INFINITY);
+        }
       }
     }
 

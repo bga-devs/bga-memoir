@@ -56,9 +56,16 @@ class Notifications
 
   public static function visibility($increase)
   {
-    self::notifyAll('updateVisibility', clienttranslate('Night visibility increase by ${star}'), [
-      'star' => $increase,
-    ]);
+    if($increase > 0) {
+      self::notifyAll('updateVisibility', clienttranslate('Night visibility increase by ${star}'), [
+        'star' => $increase,
+      ]);
+    } else {
+      self::notifyAll('updateVisibility', clienttranslate('Night visibility decrease by ${abs_star}'), [
+        'star' => $increase,
+        'abs_star' => -$increase,
+      ]);
+    }
   }
 
   public static function proposeScenario($player, $scenario, $counter = false)

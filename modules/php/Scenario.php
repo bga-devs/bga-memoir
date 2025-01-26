@@ -237,7 +237,15 @@ class Scenario extends \APP_DbObject
     Globals::setItalyHighCommand($options['italy_high_command'] ?? false);
     Globals::setBritishCommand($options['british_commonwealth'] ?? false);
     Globals::setMarineCommand($options['gung_ho'] ?? false);
-    Globals::setNightVisibility($options['night_visibility_rules'] ?? false ? 1 : \INFINITY);
+    if (isset($options['night_visibility_rules'])) {
+      Globals::setNightVisibility(1) ;
+    } else {
+      if (isset($options['night_visibility_reverse_rule'])) {
+        Globals::setNightVisibility(6);
+      } else {
+      Globals::setNightVisibility(\INFINITY);
+      }
+    } 
     Globals::setEmptySectionMedals($options['empty_section_medals'] ?? null);
     // Init date to get Late >1942 or Early War for SWA
     Globals::setBeginDate($scenario['game_info']['date_begin'] ?? null);

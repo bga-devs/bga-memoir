@@ -29,7 +29,7 @@ class AirPower extends \M44\Models\Card
 
   public function nextStateAfterPlay()
   {
-    if (Globals::getNightVisibility() != \INFINITY) {
+    if (Globals::getNightVisibility() < 6) {
       return parent::nextStateAfterPlay();
     }
     return 'airpower';
@@ -37,7 +37,7 @@ class AirPower extends \M44\Models\Card
 
   public function cannotIgnoreFlags()
   {
-    if (Globals::getNightVisibility() != \INFINITY) {
+    if (Globals::getNightVisibility() < 6) {
       return false;
     }
     return true;
@@ -45,7 +45,7 @@ class AirPower extends \M44\Models\Card
 
   public function getHits($type, $nb)
   {
-    if (Globals::getNightVisibility() != \INFINITY) {
+    if (Globals::getNightVisibility() < 6) {
       return -1;
     }
     return parent::getHits($type, $nb);
