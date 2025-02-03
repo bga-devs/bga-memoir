@@ -39,6 +39,7 @@ $scenariosMap = [
   4087 => '4087-DriveOnCaen',
   4088 => '4088-PushingThroughCaen',
   4089 => '4089-NightWithdrawal',
+  4090 => '4090-ClosingTheGap',
   4152 => '4152-PanzerLehrCounterAttack',
   4155 => '4155-Pruzana',
   4172 => '4172-MartinvilleRidge',
@@ -52,6 +53,8 @@ $scenariosMap = [
   4241 => '4241-EscapeViaTheCoastalRoad',
   4245 => '4245-HellfirePass',
   4246 => '4246-SidiRezeghAirfield',
+  4258 => '4258-MontPincon',
+  4272 => '4272-SaintMartinAndBullBridge',
 
   1412 => '1412-MatanikauRiver',
   1413 => '1413-SlopesOfMountAusten',

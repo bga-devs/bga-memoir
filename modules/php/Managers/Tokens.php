@@ -155,6 +155,7 @@ class Tokens extends \M44\Helpers\Pieces
       'turn_start' => $tag['medal']['turn_start'] ?? false,
       'last_to_occupy' => $tag['medal']['last_to_occupy'] ?? false,
       'sole_control' => $tag['medal']['sole_control'] ?? false,
+      'any_hex' => $tag['medal']['any_hex'] ?? false,
       'side' => $tag['medal']['side'] ?? null,
     ]);
 

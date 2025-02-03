@@ -1073,6 +1073,10 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           if (token.datas.majority) {
             desc.push('<li>' + _('Majority medal') + '</li>');
           }
+
+          if (token.datas.any_hex) {
+            desc.push('<li>' + _('If any Objective hex is occupied by an Allied unit, the Allies get the Objective Medal and the Axis lose it.') + '</li>');
+          }
         }
       } else {
         tile = this.tplBoardToken(token);

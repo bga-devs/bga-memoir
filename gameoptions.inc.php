@@ -369,6 +369,13 @@ $game_options = [
         'premium' => true,
       ],
 
+      4090 => [
+        'name' => clienttranslate('[BB] [4090] Closing The Gap'),
+        'tmdisplay' => '[4090]',
+        'description' => clienttranslate('Closing The Gap'),
+        'premium' => true,
+      ],
+
       4152 => [
         'name' => clienttranslate('[BB] [4152] Panzer Lehr Counter Attack'),
         'tmdisplay' => '[4152]',
@@ -454,6 +461,19 @@ $game_options = [
         'description' => clienttranslate('Sidi Rezegh Airfield'),
         'premium' => true,
       ],
+      4258 => [
+        'name' => clienttranslate('[BB] [4258] Mont Pinçon'),
+        'tmdisplay' => '[4258]',
+        'description' => clienttranslate('Mont Pinçon'),
+        'premium' => true,
+      ],
+      4272 => [
+        'name' => clienttranslate('[BB] [4272] Saint-Martin and Bull Bridge'),
+        'tmdisplay' => '[4272]',
+        'description' => clienttranslate('Saint-Martin and Bull Bridge'),
+        'premium' => true,
+      ],
+
 
       // OTHER OFFICIAL SCENARIOS
       42 => [
