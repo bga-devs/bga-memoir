@@ -109,6 +109,8 @@ class SectionCard extends Card
   {
    if ($this->getExtraDatas('canblowbridge') === true) {
       return 'blowbridgeopt2'; // 'blowbridgeopt2'
+    } elseif ($this->getExtraDatas('canArmorBreakthrough') === true) {
+      return 'armorBreakthrough';
     } else {
       return parent::nextStateAfterPlay();
     }
@@ -182,6 +184,11 @@ class SectionCard extends Card
     } else {
         return $isNeighbourAlliedUnit;
     }
+  }
+
+  public function canArmorBreakthrough() 
+  {
+    return true;
   }
 
 }

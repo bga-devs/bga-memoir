@@ -11,6 +11,7 @@ use M44\Managers\Tokens;
 use M44\Helpers\Utils;
 use M44\Board;
 use M44\Dice;
+use M44\Scenario;
 
 trait OrderUnitsTrait
 {
@@ -221,5 +222,86 @@ trait OrderUnitsTrait
       return;
     }
     $this->nextState('moveUnits');
+  }
+
+  public function argsArmorBreakthroughDeploy()
+  {
+    //  s'inspirer de baseline reserve deploy
+    
+    $scenario = Globals::getScenario();
+    $mode = Scenario::getMode();
+    $sidePlayer1 = isset($scenario['game_info']['side_player1']) ? $scenario['game_info']['side_player1'] : 'AXIS';
+    $dim = Board::$dimensions[$mode];
+    $cells = Board::getListOfCells();
+
+    $oppPlayer = Players::getActive()->getTeam()->getOpponent()->getCommander();
+    $yBackLine = $sidePlayer1 == $oppPlayer->getTeam()->getId() ? 0 : $dim['y']-1;
+
+    // filter cells on player backline and no unit on cells nor impassable terrains
+    $units = $oppPlayer->getTeam()->getUnits()->toArray(); 
+    $unit = Units::getInstance('tank','');
+    
+    $cells_unit_deployement = array_filter($cells, function ($c) use ($yBackLine, $unit) {
+      return $c['y'] == $yBackLine 
+      && is_null(Board::getUnitInCell($c))
+      && !Board::isImpassableCell($c, $unit);
+    });
+
+    // filter cells based on section from activation card
+    $player = Players::getActive();
+    $card = $player->getCardInPlay();
+    $team = $player->getTeam();
+    $args = $card->getArgsOrderUnits();
+    if (isset($args['sections']) 
+    || $card->isType(CARD_INFANTRY_ASSAULT)
+    || ($card->isType(CARD_COUNTER_ATTACK) && $card->getExtraDatas('copiedCardType') == \CARD_INFANTRY_ASSAULT)) {
+      if (isset($args['sections'])) {
+        $argsSections = $args['sections'];
+      } elseif ($card->isType(CARD_INFANTRY_ASSAULT)
+      || ($card->isType(CARD_COUNTER_ATTACK) && $card->getExtraDatas('copiedCardType') == \CARD_INFANTRY_ASSAULT)) {
+        $argsSections = [0, 0, 0];
+        $activatedSection = (int) $args['section'];
+        $argsSections[$activatedSection] = INFINITY;
+      } 
+      // filter only starting cells in activated section
+      $cells_unit_deployement2 = array_filter($cells_unit_deployement, function ($c) use ($argsSections, $team) {
+        return $argsSections[Board::getCellSections($team->getId(), $c)[0]] != 0;
+      });
+      return $cells_unit_deployement2;
+    }
+    
+    return $cells_unit_deployement;
+  }
+  
+  public function actArmorBreakthroughDeploy($x, $y)
+  {
+    // Sanity checks
+    self::checkAction('actArmorBreakthroughDeploy');
+    $args = $this->argsArmorBreakthroughDeploy();
+    $k = Utils::searchCell($args, $x, $y);
+    if ($k === false) {
+      throw new \BgaVisibleSystemException('You cannot performed reinforcement here. Should not happen');
+    }
+
+    // get unit name and badge from scenario
+    $player = Players::getActive();
+    $teamId = $player->getTeam()->getId();
+    $options = Scenario::getOptions()['armor_breakthrough_rules'][$teamId];
+    $unit = Units::addInCell($options, ['x' => $x, 'y' => $y]);
+    Board::addUnit($unit);
+    Globals::incReinforcementUnits(1);
+
+    // Notify added unit
+    Notifications::ArmorBreakthroughDeployement($player, $unit);
+
+    
+  // TODO tant qu'on a pas deployé au maxi nbr_units unité
+    if (Globals::getReinforcementUnits() >= $options['nbr_units']) {
+      Globals::setReinforcementUnits(0);
+      Globals::setSupplyTrainDone(true);
+      $this->gamestate->jumpToState(ST_ORDER_UNITS);
+    } else {
+      $this->gamestate->jumpToState(ST_ARMOR_BREAKTHROUGH);
+    }
   }
 }

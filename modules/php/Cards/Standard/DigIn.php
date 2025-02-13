@@ -85,4 +85,26 @@ class DigIn extends \M44\Models\Card
       }
     }
   }
+
+  public function canArmorBreakthrough() 
+  {
+    $player = $this->getPlayer();
+    $units = $player->getUnits();
+
+    // Keep only infantry on board only (not on Staging area)
+    $infantry = $units->filter(function ($unit) {
+      return $unit->getType() == \INFANTRY && !$unit->isOnReserveStaging();
+    });
+
+    return $infantry->empty();
+  }
+
+  public function nextStateAfterPlay()
+  {
+   if ($this->getExtraDatas('canArmorBreakthrough') === true) {
+      return 'armorBreakthrough';
+    } else {
+      return parent::nextStateAfterPlay();
+    }
+  }
 }

@@ -54,6 +54,16 @@ class CounterAttack extends \M44\Models\Card
     return is_null($copiedCard) ? false : $copiedCard->canHill317();
   }
 
+  public function canArmorBreakthrough()
+  {
+    $lastCards = Globals::getLastPlayedCards();
+    $oppId = $this->getOpponentPId();
+    $cardId = $lastCards[$oppId] ?? null;
+    $copiedCard = $this->getCopiedCard($cardId);
+
+    return is_null($copiedCard) ? false : $copiedCard->canArmorBreakthrough();
+  }
+
   // STATE SHOULD BE USELESS NOW => MOVE TO ONPLAY INSTEAD
   public function stCounterAttack($shouldTransition = true)
   {

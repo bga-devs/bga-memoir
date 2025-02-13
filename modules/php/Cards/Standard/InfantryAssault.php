@@ -93,4 +93,26 @@ class InfantryAssault extends \M44\Models\Card
       ];
     }
   }
+
+  public function canArmorBreakthrough() 
+  {
+    $player = $this->getPlayer();
+    $units = $player->getUnits();
+
+    // Keep only infantry
+    $infantry = $units->filter(function ($unit) {
+      return $unit->getType() == \INFANTRY;
+    });
+    
+    return $infantry->empty();
+  }
+
+  public function nextStateAfterPlay()
+  {
+   if ($this->getExtraDatas('canArmorBreakthrough') === true) {
+      return 'armorBreakthrough';
+    } else {
+      return parent::nextStateAfterPlay();
+    }
+  }
 }

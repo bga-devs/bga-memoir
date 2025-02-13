@@ -369,12 +369,12 @@ $game_options = [
         'premium' => true,
       ],
 
-      4090 => [
+      /*4090 => [
         'name' => clienttranslate('[BB] [4090] Closing The Gap'),
         'tmdisplay' => '[4090]',
         'description' => clienttranslate('Closing The Gap'),
         'premium' => true,
-      ],
+      ],*/
 
       4152 => [
         'name' => clienttranslate('[BB] [4152] Panzer Lehr Counter Attack'),

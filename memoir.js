@@ -51,6 +51,7 @@ define([
         'targetBridge',
         'trainReinforcement',
         'reserveUnitsDeployement',
+        'armorBreakthroughDeployement',
       ];
       this._notifications = [
         ['playCard', 1000],
@@ -98,6 +99,7 @@ define([
         ['addAirPowerToken',500],
         ['removeAirPowerToken',500],
         ['replenishWinnerReserveTokens',1],
+        ['armorBreakthroughDeployement',1000],
       ];
 
       // Fix mobile viewport (remove CSS zoom)
@@ -326,6 +328,7 @@ define([
         targetBridge: 'order',
         blowBridge: 'attack',
         trainReinforcement: 'move',
+        armorBreakthrough: 'order',
         //reserveUnitsDeployement : 'command',
       };
 

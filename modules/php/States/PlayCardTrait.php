@@ -53,12 +53,24 @@ trait PlayCardTrait
         ->getIds();
     }
 
+    $cardArmorBreakthrough = [];
+    if ($player->canArmorBreakthrough()) {
+      $cardArmorBreakthrough = $player
+        ->getCards()
+        ->filter(function ($card) {
+          return $card->canArmorBreakthrough();
+        })
+        ->getIds();
+    }
+
+
     $hasAirPowerTokens = $player->getTeam()->hasAirPowerTokens();
 
     $args = [
       'cards' => $cards,
       'cardsHill317' => $cardsHill317,
       'cardsBlowBridge' => $cardBlowBridge,
+      'cardsArmorBreakthrough' => $cardArmorBreakthrough,
       'actionCount' => Globals::getActionCount(),
     ];
     $args = $singleActive ? Utils::privatise($args) : $args;
@@ -66,7 +78,7 @@ trait PlayCardTrait
     return $args;
   }
 
-  function actPlayCard($cardId, $sectionId = null, $hill317 = false, $canBlowbridge = false, $airPowerTokenUsed = false)
+  function actPlayCard($cardId, $sectionId = null, $hill317 = false, $canBlowbridge = false, $airPowerTokenUsed = false, $armorBreakthrough = false)
   {
     // Sanity check
     $this->checkAction('actPlayCard');
@@ -116,6 +128,11 @@ trait PlayCardTrait
       if ($canBlowbridge) {
         $card = Cards::get($cardId);
         $card->setExtraDatas('canblowbridge', true);
+      }
+
+      if ($armorBreakthrough) {
+        $card = Cards::get($cardId);
+        $card->setExtraDatas('canArmorBreakthrough', true);
       }
   
       // Play the card

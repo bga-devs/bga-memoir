@@ -58,4 +58,24 @@ class ArtilleryBombard extends \M44\Models\Card
   {
     return parent::getArgsAttackUnits([\ARTILLERY => 2]);
   }
+
+  public function canArmorBreakthrough() 
+  {
+    $player = $this->getPlayer();
+    $units = $player->getUnits();
+    $artillery = $units->filter(function ($unit) {
+      return $unit->getType() == \ARTILLERY;
+    });
+
+    return $artillery->empty();
+  }
+
+  public function nextStateAfterPlay()
+  {
+   if ($this->getExtraDatas('canArmorBreakthrough') === true) {
+      return 'armorBreakthrough';
+    } else {
+      return parent::nextStateAfterPlay();
+    }
+  }
 }

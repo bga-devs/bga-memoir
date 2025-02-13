@@ -80,6 +80,7 @@ $machinestates = [
     'transitions' => [
       'next' => ST_LOBBY_NEXT_PLAYER,
       'accept' => ST_PREPARE_TURN,
+      'prepareTurn' => ST_PREPARE_TURN
     ],
   ],
 
@@ -93,6 +94,7 @@ $machinestates = [
     'transitions' => [
       'accept' => ST_PREPARE_TURN,
       'reject' => ST_END_GAME,
+      'prepareTurn' => ST_PREPARE_TURN
     ],
   ],
 
@@ -272,6 +274,7 @@ $machinestates = [
       'commissar' => ST_COMMISSAR,
       'medicsBT' => ST_MEDICS_BT_ROLL,
       'blowbridgeopt2' => ST_BRIDGE_TARGET,
+      'armorBreakthrough' => ST_ARMOR_BREAKTHROUGH,
     ],
   ],
 
@@ -683,6 +686,17 @@ $machinestates = [
     'args' => 'argsTrainReinforcement',
     'transitions' => ['moveUnits' => ST_MOVE_UNITS],
   ],
+
+  ST_ARMOR_BREAKTHROUGH => [
+    'name' => 'armorBreakthrough',
+    'description' => clienttranslate('${actplayer} can deploy up to 2 armor units on opponent baseline'),
+    'descriptionmyturn' => clienttranslate('${you} can deploy up to 2 armor units on opponent baseline'),
+    'type' => 'activeplayer',
+    'possibleactions' => ['actArmorBreakthroughDeploy'],
+    'args' => 'argsArmorBreakthroughDeploy',
+    'transitions' => ['orderUnits' => ST_ORDER_UNITS],
+  ],
+
 
   /////////////////////////////////////////////
   //   ___                 _               _

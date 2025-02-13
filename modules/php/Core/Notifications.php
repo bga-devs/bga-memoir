@@ -589,6 +589,19 @@ class Notifications
     self::notify($playerid, 'clearEndReserveDeployement', '', NULL);
   }
 
+  public static function ArmorBreakthroughDeployement($player, $unit)
+  { 
+  self::notifyAll('armorBreakthroughDeployement', \clienttranslate('${player_name} deployed 1 ${unit_name} in ${coordSource} according to Armor Breakthrough rule'), [
+      'player' => $player,
+      'unit' => $unit,
+      'unit_name' => $unit->getName(),
+      'coordSource' => $unit->getPos(),
+      'team' => $player->getTeam(),
+      'teams' => Teams::getAll(),
+    ]);
+  }
+
+
   public static function replenishWinnerReserveTokens($team, $nbAddedTokens) {
   $player = $team->getCommander();
     self::notifyAll('replenishWinnerReserveTokens', 

@@ -387,6 +387,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       let cards = args._private.cards;
       let cards317 = args._private.cardsHill317;
       let cardsBlowBridge = args._private.cardsBlowBridge;
+      let cardsArmorBreakthrough = args._private.cardsArmorBreakthrough;
       Object.keys(cards).forEach((cardId) => {
         this.onClick(`card-${cardId}`, () => {
           if (cards[cardId]) {
@@ -395,8 +396,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
             this.clientState('playCardHill317', _('Do you wish to play it as Air Power card?'), { cardId });
           } else if (cardsBlowBridge.includes(parseInt(cardId))) {
             this.clientState('playCardBlowBridge', _('Do you wish to play it to try to blow a bridge ?'), { cardId });
-          }
-          else {
+          } else if (cardsArmorBreakthrough.includes(parseInt(cardId))) {
+            this.clientState('playCardArmorBreakthough', _('Do you wish to play it to deploy Armor Breakthrough ?'), { cardId });
+          } else {
             this.takeAction('actPlayCard', { cardId });
           }
         });
@@ -435,7 +437,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         this.takeAction('actPlayCard', { cardId, hill317: false }),
       );
     },
-
+    
     onEnteringStatePlayCardBlowBridge(args) {
       let cardId = args.cardId;
       this.addCancelStateBtn();
@@ -448,6 +450,17 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       );
     },
 
+    onEnteringStatePlayCardArmorBreakthough(args) {
+      let cardId = args.cardId;
+      this.addCancelStateBtn();
+      this.addPrimaryActionButton(`btnArmorBreakthroughYes`, _('Yes'), () =>
+        this.takeAction('actPlayCard', { cardId, armorbreakthrough: true }),
+      );
+
+      this.addPrimaryActionButton(`btnArmorBreakthroughNo`, _('No'), () =>
+        this.takeAction('actPlayCard', { cardId, armorbreakthrough: false }),
+      );
+    },
 
 
     notif_playCard(n) {

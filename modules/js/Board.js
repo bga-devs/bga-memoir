@@ -1313,6 +1313,14 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       this._reserveTokenCounter[player_id].incValue(-1);
     },
 
+    notif_armorBreakthroughDeployement(n) {
+      debug('Notif: placing unit on the board Armor Breakthrough', n);
+      let unit = n.args.unit;
+      let player_id =n.args.player_id;
+      unit.orientation = this._bottomTeam != (ALLIES_NATIONS.includes(unit.nation) ? 'ALLIES' : 'AXIS') ? 1 : 0;
+      this.place('tplUnit', unit, `cell-${unit.x}-${unit.y}`);
+    },
+
     notif_addAirPowerToken(n) {
       console.log('addAirPowerToken');
       team = n.args.team.team;

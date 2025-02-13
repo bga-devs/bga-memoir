@@ -134,7 +134,8 @@ class action_memoir extends APP_GameAction
     $hill = self::getArg('hill317', AT_bool, false);
     $blowbridge = self::getArg('blowbridge',AT_bool, false);
     $airpowertoken = self::getArg('airPowerToken',AT_bool, false);
-    $this->game->actPlayCard($cardId, $section, $hill, $blowbridge,$airpowertoken);
+    $armorbreakthrough = self::getArg('armorbreakthrough',AT_bool, false);
+    $this->game->actPlayCard($cardId, $section, $hill, $blowbridge, $airpowertoken, $armorbreakthrough);
     self::ajaxResponse();
   }
 
@@ -359,6 +360,15 @@ class action_memoir extends APP_GameAction
     $x = self::getArg('x', AT_posint, false);
     $y = self::getArg('y', AT_posint, false);
     $this->game->actTrainReinforcement($x, $y);
+    self::ajaxResponse();
+  }
+   // Armor Breakthrough Deployement
+  public function actArmorBreakthroughDeploy()
+  {
+    self::setAjaxMode();
+    $x = self::getArg('x', AT_posint, false);
+    $y = self::getArg('y', AT_posint, false);
+    $this->game->actArmorBreakthroughDeploy($x, $y);
     self::ajaxResponse();
   }
   

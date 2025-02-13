@@ -36,6 +36,19 @@ $scenarios[4090] = [
     'date_begin' => '1944-08-20',
     'date_end' => '1944-08-23',
     'operationID' => 23,
+    'options' => [
+      'armor_breakthrough_rules' => [
+        'ALLIES' => [
+          'nbr_units' => 2,
+          'name' => 'tankus',
+        ],
+        'AXIS' => [
+          'nbr_units' => 2,
+          'name' => 'tank2ger',
+          'badge' => 'badge4',
+        ],
+      ],
+    ],
   ],
   'board' => [
     'type' => 'standard',

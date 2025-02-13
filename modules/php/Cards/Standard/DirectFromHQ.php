@@ -30,4 +30,19 @@ class DirectFromHQ extends \M44\Models\Card
       'units' => $unitstmp->getPositions(),
     ];
   }
+
+  public function canArmorBreakthrough() 
+  {
+    return true;
+  }
+
+  public function nextStateAfterPlay()
+  {
+   if ($this->getExtraDatas('canArmorBreakthrough') === true) {
+      return 'armorBreakthrough';
+    } else {
+      return parent::nextStateAfterPlay();
+    }
+  }
+
 }

@@ -144,6 +144,16 @@ class Player extends \M44\Helpers\DB_Model
     return !is_null($blowbridge) && $blowbridge['side'] == Globals::getTeamTurn();
   }
 
+  public function canArmorBreakthrough() {
+    $armorBreakthrough = Globals::getArmorBreakthrough();
+    $team = $this->getTeam();
+
+    
+    // TODO si ce n'est pas deja fait pour ce joueur (Global Variable), si ce joueur est eligible dans le scenario
+
+    return !is_null($armorBreakthrough); //&& in_array($team->getId(), $armorBreakthrough);
+  }
+
   /**************
    * Commissar
    *************/

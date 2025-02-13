@@ -253,6 +253,7 @@ class Scenario extends \APP_DbObject
     Globals::setMustHaveExitUnit($options['must_have_unit_exit'] ?? null);
     Globals::setSupplyTrain($options['supply_train_rules'] ?? null);
     Globals::setAirStrikes($options['air_strikes_rules'] ?? null);
+    Globals::setArmorBreakthrough($options['armor_breakthrough_rules'] ?? null);
 
 
     // Create Teams

@@ -60,4 +60,18 @@ class ArmorAssault extends \M44\Models\Card
     // Bonus dice is only for close combat & for Armor
     return $unit->getType() == \ARMOR && $cell['d'] == 1 ? 1 : 0;
   }
+
+  public function canArmorBreakthrough() 
+  {
+    return true;
+  }
+
+  public function nextStateAfterPlay()
+  {
+   if ($this->getExtraDatas('canArmorBreakthrough') === true) {
+      return 'armorBreakthrough';
+    } else {
+      return parent::nextStateAfterPlay();
+    }
+  }
 }

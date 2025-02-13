@@ -72,6 +72,7 @@ class Globals extends \M44\Helpers\DB_Manager
     'airPowerTokenUsed' => 'bool', // usefull to deal AirpowerToken as no card is played (campaign mode only)
     // scenario game_info
     'beginDate' => 'str',
+    'armorBreakthrough' => 'obj', // players who can use Armor Breakthrough action
   ];
 
   protected static $table = 'global_variables';

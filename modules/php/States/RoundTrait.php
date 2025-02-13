@@ -50,14 +50,15 @@ trait RoundTrait
       $this->gamestate->setAllPlayersMultiactive();
       $this->gamestate->nextState('reserveRoll');
     } else {
+      // Check for options
+      $options = Scenario::getOptions();
+      if (isset($options['airdrop'])) {
+        $team = Teams::get($options['airdrop']['side']);
+        $this->changeActivePlayerAndJumpTo($team->getCommander(), ST_AIR_DROP);
+        return;
+      }
+      
       $this->gamestate->nextState('prepareTurn');
-    }
-    // Check for options
-    $options = Scenario::getOptions();
-    if (isset($options['airdrop'])) {
-      $team = Teams::get($options['airdrop']['side']);
-      $this->changeActivePlayerAndJumpTo($team->getCommander(), ST_AIR_DROP);
-      return;
     }
   }
 
