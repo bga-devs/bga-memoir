@@ -8,6 +8,7 @@ use M44\Helpers\Utils;
 use M44\Managers\Cards;
 use M44\Managers\Players;
 use M44\Managers\Teams;
+use M44\Models\Player;
 
 trait PlayCardTrait
 {
@@ -118,6 +119,10 @@ trait PlayCardTrait
   
       if ($hill317 && !Cards::get($cardId)->canHill317()) {
         throw new \BgaVisibleSystemException('Cannot play this type of card as hill317. Should not happen');
+      }
+
+      if ($armorBreakthrough && !$player->canBreakthrough()) {
+        throw new \BgaVisibleSystemException('Cannot play this type of card as Armor Breakthrough. Should not happen');
       }
   
       if ($hill317) {

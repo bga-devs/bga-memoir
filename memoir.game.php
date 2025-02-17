@@ -311,5 +311,9 @@ SQL;
       Globals::setAirStrikes(null);
     }
 
+    if ($from_version <=  2502161951) {
+      Globals::setArmorBreakthrough(null);
+    }
+
   }
 }
