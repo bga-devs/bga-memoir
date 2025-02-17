@@ -121,7 +121,7 @@ trait PlayCardTrait
         throw new \BgaVisibleSystemException('Cannot play this type of card as hill317. Should not happen');
       }
 
-      if ($armorBreakthrough && !$player->canBreakthrough()) {
+      if ($armorBreakthrough && !$player->canArmorBreakthrough()) {
         throw new \BgaVisibleSystemException('Cannot play this type of card as Armor Breakthrough. Should not happen');
       }
   
