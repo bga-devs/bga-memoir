@@ -1031,7 +1031,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     onEnteringStateArmorBreakthrough(args) {
-      console.log('Armor Brekthrough Deployement args',args);
+      console.log('Armor Breakthrough Deployement args',args);
 
       let cells_list = Object.values(args);
       console.log('cells array', cells_list);
@@ -1046,6 +1046,11 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         }));
       });
 
+      this.addDangerActionButton('btnRestartTurn', _('Undo actions'), () => {
+        this.takeAction('actRestart');
+      },
+      'restartAction',
+      );
     }, 
 
 

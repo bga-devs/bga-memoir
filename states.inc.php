@@ -692,7 +692,7 @@ $machinestates = [
     'description' => clienttranslate('${actplayer} can deploy up to 2 armor units on opponent baseline'),
     'descriptionmyturn' => clienttranslate('${you} can deploy up to 2 armor units on opponent baseline'),
     'type' => 'activeplayer',
-    'possibleactions' => ['actArmorBreakthroughDeploy'],
+    'possibleactions' => ['actRestart','actArmorBreakthroughDeploy'],
     'args' => 'argsArmorBreakthroughDeploy',
     'transitions' => ['orderUnits' => ST_ORDER_UNITS],
   ],
