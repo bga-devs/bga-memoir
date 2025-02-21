@@ -14,6 +14,13 @@ class SeaBluff extends Hill
     parent::__construct($row);
     $this->name = clienttranslate('Cliffs & Sea Bluffs');
     $this->number = 11;
+    $this->desc = [
+      clienttranslate('Moving up from/down on beach is a 2 hex move for Infantry'),
+      clienttranslate('Armor/Artillery may not move up/down from beach'),
+      //clienttranslate('Cliffs only - Infantry may not Take Ground from the beach'),
+      clienttranslate('Treat as normal hill from inland side for movement and battle'),
+      clienttranslate('Treat as normal hill from both sides for retreat'),
+    ];
   }
 
   public function getLeavingDeplacementCost($unit, $source, $target, $d, $takeGround)
