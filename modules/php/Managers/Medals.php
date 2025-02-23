@@ -230,7 +230,7 @@ class Medals extends \M44\Helpers\DB_Manager
       }
 
       // Is this a any_hex medal (ex : scenario 4258 Mont Pincon where Allies gain a medal for a minimum 1 hex, )
-      if ($newHolder != null && isset($datas['any_hex'])) {
+      if ($newHolder != null && isset($datas['any_hex']) && $datas['any_hex']) {
         if ($nHexes[ALLIES] >= $datas['nbr_hex']) {
           $newHolder = ALLIES;
         }
