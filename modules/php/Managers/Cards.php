@@ -38,7 +38,8 @@ class Cards extends \M44\Helpers\Pieces
       OVERLORD_DECK => 'Overlord',
     ];
 
-    $className = '\M44\Cards\\' . $dirs[$mode] . '\\' . \CARD_CLASSES[$type];
+    $folder = $dirs[$mode] ?? 'Standard';
+    $className = '\M44\Cards\\' . $folder . '\\' . \CARD_CLASSES[$type];
     return new $className($row);
   }
 

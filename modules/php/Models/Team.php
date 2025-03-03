@@ -53,7 +53,7 @@ class Team extends \M44\Helpers\DB_Model
 
   public function getReserveTokens()
   {
-    return $this->nReserveTokens;
+    return Globals::isCampaign() ? $this->nReserveTokens : 0;
   }
 
   public function getAirPowerTokens()

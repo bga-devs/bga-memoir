@@ -225,10 +225,10 @@ trait AttackUnitsTrait
   public function stAttackThrow()
   {
     $attack = $this->getCurrentAttack();
-    $unit = $attack['unit'];
-    $oppUnit = $attack['oppUnit'];
-    $player = $attack['player'];
-    $card = $attack['card'];
+    $unit = $attack['unit'] ?? null;
+    $oppUnit = $attack['oppUnit'] ?? null;
+    $player = $attack['player'] ?? null ;
+    $card = $attack['card'] ?? null;
 
     // if unit attack is camoufled, remove camouflage
     if ($unit != null) {
@@ -239,7 +239,7 @@ trait AttackUnitsTrait
 
 
     // Check if ambush was played and successfull
-    if ($attack['ambush']) {
+    if (isset($attack['ambush']) && $attack['ambush']) {
       if (is_null($unit)) {
         throw new \BgaVisibleSystemException('Ambush was played on a card attack');
       }
@@ -270,7 +270,7 @@ trait AttackUnitsTrait
     }
 
     // Display who is attacking who
-    Notifications::throwAttack($player, $unit, $attack['nDice'], $oppUnit);
+    Notifications::throwAttack($player, $unit, $attack['nDice'] ?? 0, $oppUnit);
 
     // Launch dice
     $results = Dice::roll($player, $attack['nDice'], $oppUnit->getPos());

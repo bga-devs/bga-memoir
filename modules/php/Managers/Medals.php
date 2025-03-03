@@ -196,7 +196,7 @@ class Medals extends \M44\Helpers\DB_Manager
       }
 
       // Is this a majority medal ?
-      if ($newHolder != null && $datas['majority']) {
+      if ($newHolder != null && isset($datas['majority']) && $datas['majority']) {
         if ($nHexes[ALLIES] > $nHexes[AXIS]) {
           if(isset($datas['side'])){
             if ($datas['side'] == ALLIES) {
@@ -223,7 +223,7 @@ class Medals extends \M44\Helpers\DB_Manager
       }
 
       // Is this a sole control medal ?
-      if ($newHolder != null && $datas['sole_control']) {
+      if ($newHolder != null && isset($datas['sole_control']) && $datas['sole_control']) {
         if (min($nHexes) > 0) {
           $newHolder = null;
         }

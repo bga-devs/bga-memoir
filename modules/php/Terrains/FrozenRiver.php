@@ -38,7 +38,7 @@ class FrozenRiver extends \M44\Models\Terrain
     if (!$isRetreat && 
     ($activationcard->getType() == CARD_BEHIND_LINES ||
       ($activationcard->getType() == CARD_COUNTER_ATTACK) && 
-      $activationcard->getExtraDatas('card')['type'] == CARD_BEHIND_LINES)) {
+      $activationcard->getExtraDatas('copiedCardType') == CARD_BEHIND_LINES)) {
       return false;
     }
 
