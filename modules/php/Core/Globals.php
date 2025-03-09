@@ -73,6 +73,7 @@ class Globals extends \M44\Helpers\DB_Manager
     // scenario game_info
     'beginDate' => 'str',
     'armorBreakthrough' => 'obj', // players who can use Armor Breakthrough action
+    'armorBreakthroughDone' => 'obj', // array of bool for each player
   ];
 
   protected static $table = 'global_variables';

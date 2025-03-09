@@ -315,5 +315,10 @@ SQL;
       Globals::setArmorBreakthrough(null);
     }
 
+    if ($from_version <=  2502231610) {
+      Globals::setArmorBreakthroughDone(['AXIS' => false, 'ALLIES' => false]);
+    }
+
+
   }
 }

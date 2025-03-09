@@ -34,6 +34,7 @@ trait RoundTrait
     Globals::setAirDrop2Done(false);
     Globals::setSupplyTrainDone(false);
     Globals::setRollReserveDone(false);
+    Globals::setArmorBreakthroughDone(['AXIS' => false, 'ALLIES' => false]);
     Globals::setInitHandDone(false);
 
     if (!Globals::isCampaign()) {

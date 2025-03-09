@@ -147,10 +147,13 @@ class Player extends \M44\Helpers\DB_Model
   public function canArmorBreakthrough() {
     $armorBreakthrough = Globals::getArmorBreakthrough();
     $team = $this->getTeam()->getId();
+    $armorBreakthroughDone = isset(Globals::getArmorBreakthroughDone()[$team]) ? 
+      Globals::getArmorBreakthroughDone()[$team] : true ;
     
-    // TODO si ce n'est pas deja fait pour ce joueur (Global Variable), si ce joueur est eligible dans le scenario
-
-    return !is_null($armorBreakthrough) && isset($armorBreakthrough[$team]);
+    // TODO , si ce joueur est eligible dans le scenario
+    // et si ce n'est pas deja fait pour ce joueur (Global Variable)
+    
+    return !is_null($armorBreakthrough) && isset($armorBreakthrough[$team]) && !$armorBreakthroughDone;
   }
 
   /**************

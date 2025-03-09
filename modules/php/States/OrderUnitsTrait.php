@@ -295,10 +295,12 @@ trait OrderUnitsTrait
     Notifications::ArmorBreakthroughDeployement($player, $unit);
 
     
-  // TODO tant qu'on a pas deployé au maxi nbr_units unité
+  // TODO tant qu'on a pas deployé nbr_units unité => armor_BreakThrough
     if (Globals::getReinforcementUnits() >= $options['nbr_units']) {
       Globals::setReinforcementUnits(0);
-      Globals::setSupplyTrainDone(true);
+      $armorBreakThroughDone = Globals::getArmorBreakthroughDone();
+      $armorBreakThroughDone[$teamId] = true;
+      Globals::setArmorBreakthroughDone($armorBreakThroughDone);
       $this->gamestate->jumpToState(ST_ORDER_UNITS);
     } else {
       $this->gamestate->jumpToState(ST_ARMOR_BREAKTHROUGH);
