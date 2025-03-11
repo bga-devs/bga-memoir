@@ -290,13 +290,29 @@ trait OrderUnitsTrait
     $unit = Units::addInCell($options, ['x' => $x, 'y' => $y]);
     Board::addUnit($unit);
     Globals::incReinforcementUnits(1);
+    // this unit cannot perform Armor Overrun
+    $unit->setExtraDatas('cannotArmorOverrun', true);
+    $unit->setExtraDatas('stopped', true);
+    $unit->ableTakeGround();
+    // max nbr of unit to be deployed from the card rule
+    $cardInPlay = $player->getCardInPlay();
+    $args = $cardInPlay->getArgsOrderUnits();
+    $nCardInPlay = $args['n'] ?? 0;
+    // activate by default
+    $unit->activate($cardInPlay);
+    // for specific scenario 4090, axis cannot exit (escape from exit markers)
+    if (isset($options['behavior']) && $options['behavior'] == 'CANNOT_EXIT' ) {
+      $unit->setExtraDatas('cannotExit', true);
+    }
+
 
     // Notify added unit
     Notifications::ArmorBreakthroughDeployement($player, $unit);
 
     
-  // TODO tant qu'on a pas deployé nbr_units unité => armor_BreakThrough
-    if (Globals::getReinforcementUnits() >= $options['nbr_units']) {
+  // TODO tant qu'on a pas deployé nbr_units unité et au maxi n units de la carte jouée => armor_BreakThrough
+    if (Globals::getReinforcementUnits() >= $options['nbr_units']
+      || Globals::getReinforcementUnits() >= $nCardInPlay) {
       Globals::setReinforcementUnits(0);
       $armorBreakThroughDone = Globals::getArmorBreakthroughDone();
       $armorBreakThroughDone[$teamId] = true;

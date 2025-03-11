@@ -46,6 +46,7 @@ $scenarios[4090] = [
           'nbr_units' => 2,
           'name' => 'tank2ger',
           'badge' => 'badge4',
+          'behavior' => 'CANNOT_EXIT',
         ],
       ],
     ],

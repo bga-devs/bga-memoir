@@ -343,6 +343,7 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
 
       // exit markers
       if (
+        !$this->cannotExit() &&
         !$this->isStopped() &&
         $this->getMoves() <
           $this->getMovementRadius() +
@@ -434,6 +435,11 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
   public function canTakeGround()
   {
     return $this->getExtraDatas('canTakeGround') ?? false;
+  }
+
+  public function cannotExit()
+  {
+    return $this->getExtraDatas('cannotExit') ?? false;
   }
 
   //////////////////////////////////////////

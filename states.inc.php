@@ -689,8 +689,8 @@ $machinestates = [
 
   ST_ARMOR_BREAKTHROUGH => [
     'name' => 'armorBreakthrough',
-    'description' => clienttranslate('${actplayer} can deploy up to 2 armor units on opponent baseline'),
-    'descriptionmyturn' => clienttranslate('${you} can deploy up to 2 armor units on opponent baseline'),
+    'description' => clienttranslate('${actplayer} can deploy up to 2 armor units (or less based on card restriction) on opponent baseline'),
+    'descriptionmyturn' => clienttranslate('${you} can deploy up to 2 armor units (or less based on card restriction) on opponent baseline'),
     'type' => 'activeplayer',
     'possibleactions' => ['actRestart','actArmorBreakthroughDeploy'],
     'args' => 'argsArmorBreakthroughDeploy',

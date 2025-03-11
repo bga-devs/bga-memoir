@@ -206,10 +206,9 @@ class Globals extends \M44\Helpers\DB_Manager
     // Case Campaign set 1st scenario
     if (Globals::isCampaign()) {
       // From Campaign file
-      $campaignId = $options[\OPTION_CAMPAIGN];
-      Globals::setCampaignId($campaignId);
+      $campaignId = $options[\OPTION_CAMPAIGN] ?? 40001;
       Scenario::campaignLoadId($campaignId);
-      $scenarioId = Globals::getCampaign()['scenarios']['list'][0];
+      $scenarioId = Globals::getCampaign()['scenarios']['list'][0] ?? 4187;
       Globals::setScenarioId($scenarioId);
       Globals::setScenarioSource($options[\OPTION_SCENARIO_SOURCE] ?? 0);
       Globals::setCampaignStep(0);

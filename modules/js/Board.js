@@ -732,7 +732,17 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           '<li>' + _('Each turn Axis player rolls 4 dice, each Star decreases visibility') + '</li>',
           '<li>' + _('Visibility starts from 6 to 1') + '</li>',     
         ];
-      }else if (rule.name == 'deck_name' && rule.val == 'AIR_POWER_AS_ARTILLERY_BOMBARD_DECK') {
+      } else if (rule.name == 'armor_breakthrough_rules') {
+        name = _('Armor Breakthrough');
+        tile = '';
+        desc = [
+          '<li>' + _('During a single game turn, you may order new Armor Units onto the board') + '</li>',
+          '<li>' + _('Order must be valid and issued as normal') + '</li>',
+          '<li>' + _('Units must enter through Opponent\'s baseline') + '</li>',
+          '<li>' + _('Units must stop on baseline hex; they may battle and Take Ground this turn, but may not Armor Overrun') + '</li>',
+          '<li>' + _('When retreating, Units must retreat towrd controlling player\'s baseline') + '</li>',     
+        ];
+      } else if (rule.name == 'deck_name' && rule.val == 'AIR_POWER_AS_ARTILLERY_BOMBARD_DECK') {
         name = _('Special Deck');
         tile = '';
         desc = [
