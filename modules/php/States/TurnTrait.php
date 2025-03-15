@@ -51,6 +51,7 @@ trait TurnTrait
     }
 
     Globals::incTurn();
+    Notifications::increaseTurn(Globals::getTurn());
     Medals::checkBoardMedals(true);
     if (Teams::checkVictory()) {
       return;

@@ -361,7 +361,8 @@ const TROOP_NATION_MAPPING = [
   'FR' => 'us',
   'RU' => 'ru',
   'FI' => 'ger',
-  'JP '=> 'jp',
+  'JP' => 'jp',
+  'CA' => 'us',
 ];
 
 /******************

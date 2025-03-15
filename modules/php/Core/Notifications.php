@@ -68,6 +68,11 @@ class Notifications
     }
   }
 
+  public static function increaseTurn($turn) 
+  {
+    self::notifyAll('updateTurn', '', ['turn' => $turn]);
+  }
+
   public static function proposeScenario($player, $scenario, $counter = false)
   {
     if ($counter === true) {

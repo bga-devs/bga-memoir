@@ -309,6 +309,7 @@ class Scenario extends \APP_DbObject
     $startingTeam = mb_strtoupper($infos['side_' . $starting]);
     Globals::setTeamTurn($startingTeam);
     Globals::setTurn(0);
+    Notifications::increaseTurn(Globals::getTurn());
 
     Medals::checkBoardMedals();
   }

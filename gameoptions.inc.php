@@ -808,6 +808,12 @@ $game_options = [
         'description' => clienttranslate('Small Campaign Taking Caen'),
         'premium' => true,
       ],
+      40004 => [
+        'name' => clienttranslate('[CB1] [4] Small Campaign Early Falaise'),
+        'tmdisplay' => '[4]',
+        'description' => clienttranslate('Small Campaign Early Falaise'),
+        'premium' => true,
+      ],
     ],
   ],
 

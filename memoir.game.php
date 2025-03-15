@@ -127,6 +127,7 @@ class memoir extends Table
 
       'canceledNotifIds' => Log::getCanceledNotifIds(),
       'visibility' => Globals::getNightVisibility(),
+      'turn' => Globals::getTurn(),
     ];
   }
 

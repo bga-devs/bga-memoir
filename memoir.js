@@ -89,6 +89,7 @@ define([
         ['smallRefreshInterface', 1],
         ['smallRefreshHand', 1],
         ['updateVisibility', 500],
+        ['updateTurn', 1],
         ['updateStats', 1],
         ['removeStarToken', 1],
         ['removeUnit', 1],
@@ -563,6 +564,13 @@ define([
         setTimeout(() => dojo.destroy('night-visibility'), 800);
       }
     },
+
+    notif_updateTurn(n) {
+      debug('Notif: Turn increase', n);
+      this.gamedatas.turn = n.args.turn;
+    },
+
+
 
     tplScenarioModal(scenario = null, lobby = false) {
       scenario = scenario || this.gamedatas.scenario;

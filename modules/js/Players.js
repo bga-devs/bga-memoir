@@ -228,6 +228,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     // |_|  |_|\___|\__,_|\__,_|_|___/
     ////////////////////////////////////
     addMedal(medal, container = null) {
+      console.log(medal);
       if (container == null) {
         let pos = this._bottomTeam == medal.team ? 'bottom' : 'top';
         container = pos + '-medals-container';
@@ -235,7 +236,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
       if (medal.type == MEDAL_POSITION) {
         let boardMedal = $(`board-medal-${medal.foreign_id}`);
-        if (boardMedal.dataset.permanent == 1) {
+        if (boardMedal != null && boardMedal.dataset.permanent == 1) {
           boardMedal.classList.add('hide');
         }
       }
@@ -269,9 +270,12 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           console.error('No container for medal, should not happen');
         }
         this.addMedal(medal, container);
-
-        let pos = this._bottomTeam == medal.team ? 'bottom' : 'top';
-        this.slide('medal-' + medal.id, pos + '-medals-container');
+        
+        if (!(this.gamedatas.isCampaign && this.gamedatas.turn == 0)) {
+          console.log('slide medal-id', medal.id);
+          let pos = this._bottomTeam == medal.team ? 'bottom' : 'top';
+          this.slide('medal-' + medal.id, pos + '-medals-container');
+        }
       });
     },
 

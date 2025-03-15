@@ -8,6 +8,7 @@ $scenarios[4090] = [
       'id' => 1918554,
       'login' => 'player1918554',
     ],
+     'scenario_id' => '4090',
     'author' => [
       'id' => 1918554,
       'login' => 'player1918554',
