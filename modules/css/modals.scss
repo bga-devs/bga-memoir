@@ -52,6 +52,7 @@
 }
 
 #popin_showScenario,
+#popin_showCampaign,
 #popin_showScenarioLobby {
   width: 1000px;
 
@@ -68,6 +69,7 @@
   }
 
   #popin_showScenario_contents,
+  #popin_showCampaign_contents,
   #popin_showScenarioLobby_contents {
     display: flex;
     flex-flow: column;
@@ -103,7 +105,240 @@
       }
     }
   }
+
+  #popin_showCampaign_contents {
+    padding: 5px 15px;
+
+    #operation_subtitle {
+      text-align: center;
+      font-family: "Gunplay";
+      color: #9e0a0f;
+      font-size: 28px;
+      text-transform: uppercase;
+    }
+
+    #scenario-dates {
+      text-align: right;
+      font-size: 17px;
+    }
+
+    #general-briefing {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin: 5px 10px;
+    }
+
+    #general-speech {
+      margin: 0px 20px;
+      width: 200%;
+    }
+
+    #token-container {
+      display: flex;
+      justify-content: center;
+    }
+
+    #scenarios-container { 
+      display: inline-flex;
+      flex-wrap: wrap;
+    }
+
+    .generals {
+      width: 66%;
+      height: 210px;
+      background-image: url('img/generals.png');
+      background-size: 200% 100%;
+    
+      @for $i from 0 through 1 {
+        &[data-sprite='#{$i}'] {
+          background-position-x: ($i % 2) * 100% / 1;
+          background-position-y: 0%;
+        }
+      }
+    }
+  
+    .token-panel{
+      width: 110%;
+      height: 227px;
+      background-image: url('img/reserve_token_panel.png');
+      background-size: 200% 100%;
+    
+      @for $i from 0 through 1 {
+        &[data-sprite='#{$i}'] {
+          background-position-x: ($i % 2) * 100% / 1;
+          background-position-y: 0%;
+        }
+      }
+    }
+  
+    .token-panel-text {
+      text-align: center;
+      font-family: "Gunplay";
+      color: #ffffff;
+      font-size: 30px;
+      margin: 9px 0px;
+    }
+    
+    .token-panel-number {
+      text-align: center;
+      font-family: "Gunplay";
+      color: #9e0a0f;
+      font-size: 33px;
+      margin: 8px 7px 0px 0px;
+    }
+  
+    #scenarios-container-right {
+      margin: 21px 0px 0px 0px;
+    }
+
+    .arrow-container-right{
+      margin: 0px 0px -15px -2px;
+    }
+
+    .arrow-container-left{
+      margin: 0px 0px 0px 0px;
+    }
+
+    .campaign-step-titles {
+      align-items: center;
+      display: flex;
+      width: 480px;
+      height: 48px;
+      background-image: url('img/campaign_step_title.png');
+      background-size: 100% 200%;
+      position: relative;
+    
+      @for $i from 0 through 1 {
+        &[data-sprite='#{$i}'] {
+          background-position-x: 0%;
+          background-position-y: ($i % 2) * 100% / 1;
+        }
+      }
+    }
+
+    .campaign-step-number {
+      text-align: center;
+      font-family: "Gunplay";
+      color: #ffffff;
+      font-size: 25px;
+    }
+
+    .scenario-step-number-container {
+      width: 30px;
+      margin: 5px 0px 0px 31px;
+    }
+
+    .scenario-title {
+      text-align: center;
+      font-family: "Gunplay";
+      color: #9e0a0f;
+      font-size: 25px;
+      text-transform: uppercase;
+    }
+
+    .scenario-title-container {
+      width: 300px;
+      margin: 5px 0px 0px 7px;
+    }
+
+    .scenario-id-container {
+      width: 50px;
+      margin: 5px 0px 0px 19px;
+    }
+
+    .scenario-id {
+      text-align: center;
+      font-family: "Gunplay";
+      color: #270708;
+      font-size: 18px;
+    }
+
+    .scenario-box{
+      background-color: #ffffff;
+      border-width: thin;
+      width : 440px;
+      margin: -3px 0px 0px 17px;
+      box-shadow: 7px 7px 15px 1px #2F2F2F;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .scenario-box-top{
+      display: flex;
+    }
+
+    .scenario-box-left{
+      width: 100%;
+      margin: 7px 0px 0px 10px;
+    }
+
+    .campaign-medal{
+      width: 100%;
+      height: 100px;
+      background-image: url('img/campaign_medals.png');
+      background-size: 200% 100%;
+      margin: -21px 0px 0px 10px;
+      position: relative;
+    
+      @for $i from 0 through 1 {
+        &[data-sprite='#{$i}'] {
+          background-position-x: ($i % 2) * 100% / 1;
+          background-position-y: 0%;
+        }
+      }
+    }
+
+
+    .win-message-container{
+      display: flex;
+      margin: 0px 0px 0px 0px;
+    }
+
+    .win-message{
+      width: 470%;
+      font-size: 14px;
+      margin: 2px 5px 0px 3px;
+      text-align: center;
+    }
+
+    .scenario-box-right{
+      margin: 7px 10px 0px 0px;
+    }
+
+    .scenario-map-mini {
+      width: 140px;
+      height: 77px;
+      background-image: url('img/scenarios_maps_mini.png');
+      background-size: 400% 100%;
+      margin: 0px 0px 0px 0px;
+    
+      @for $i from 0 through 3 {
+        &[data-sprite='#{$i}'] {
+          background-position-x: ($i % 4) * 100% / 3;
+          background-position-y: 0%;
+        }
+      }
+    }
+
+    .scenario-scores{
+      width: 140px;
+      height: 77px;
+      background-image: url('img/scenario_score.png');
+      background-size: 100% 100%;
+      margin: 0px 0px 0px 0px;
+    }
+
+    .next-scenario-container{
+      width: fit-content;
+      margin: 7px 0px 11px 0px;
+    }
+
+  }
+
 }
+
 
 #popin_showScenarioLobby {
   #popin_showScenarioLobby_contents {

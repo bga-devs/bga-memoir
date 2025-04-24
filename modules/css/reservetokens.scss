@@ -1,4 +1,4 @@
-.reserve-token {
+.reserve-token, .reserve-token2 {
   width: 48px;
   height: 48px;
   background-image: url('img/reserve_tokens.png');
@@ -10,6 +10,12 @@
       background-position-y: 0%;
     }
   }
+}
+
+.reserve-token2 {
+  width: 70px;
+  height: 70px;
+  margin: 0px 5px;
 }
 
 .reserve-token-staging {

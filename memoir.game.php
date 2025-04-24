@@ -108,6 +108,7 @@ class memoir extends Table
   {
     $pId = $pId ?? self::getCurrentPId();
     $scenario = Scenario::get();
+    $campaign = Globals::isCampaign() ? Globals::getCampaign() : null;
     return [
       'localPrefs' => Preferences::getLocalPrefsData(),
       'prefs' => Preferences::getUiData($pId),
@@ -117,6 +118,7 @@ class memoir extends Table
       'deckCount' => Cards::countInLocation('deck'),
       'discard' => Cards::getTopOf('discard'),
       'scenario' => is_null($scenario) ? null : $scenario,
+      'campaign' => is_null($campaign) ? null : $campaign,
 
       'duration' => 3 - Globals::getDuration(),
       'round' => Globals::getRound(),
@@ -128,6 +130,7 @@ class memoir extends Table
       'canceledNotifIds' => Log::getCanceledNotifIds(),
       'visibility' => Globals::getNightVisibility(),
       'turn' => Globals::getTurn(),
+      'isCampaign' => Globals::isCampaign(),
     ];
   }
 

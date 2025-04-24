@@ -155,7 +155,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       // Add reserve units slots on staging area if campaign mode
       let playerid = Object.keys(this.gamedatas.players)[0];
       let player = this.gamedatas.players[playerid];
-      this.gamedatas.isCampaign = player.isCampaign;
+      //this.gamedatas.isCampaign = player.isCampaign;
       this.gamedatas.teams.forEach((team) => {
         let pos = this._bottomTeam == team.team ? 'bottom' : 'top';
         // Add basic infos

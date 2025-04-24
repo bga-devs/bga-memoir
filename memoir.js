@@ -514,6 +514,114 @@ define([
         'scenario-informations',
       );
 
+      if (this.gamedatas.isCampaign) {
+        console.log('create campaign, clipboard-button');
+        dojo.place(
+          `<div id='campaign-clipboard-button'>
+  <svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 384 512">
+  <path id="Sélection"
+        fill="black" stroke="black" stroke-width="1"
+        d="M 178.00,0.22
+           C 155.79,4.53 135.44,13.49 120.43,31.00
+             115.89,36.29 111.68,41.87 108.31,48.00
+             106.43,51.42 102.61,61.28 99.78,62.98
+             97.74,64.20 94.34,64.00 92.00,64.00
+             92.00,64.00 45.00,64.00 45.00,64.00
+             38.80,64.03 34.81,64.81 29.00,67.07
+             12.79,73.36 0.21,90.51 0.00,108.00
+             0.00,108.00 0.00,125.00 0.00,125.00
+             0.00,125.00 0.00,156.00 0.00,156.00
+             0.00,156.00 0.00,466.00 0.00,466.00
+             0.04,490.04 19.48,511.71 44.00,512.00
+             44.00,512.00 149.00,512.00 149.00,512.00
+             149.00,512.00 338.00,512.00 338.00,512.00
+             363.60,511.96 383.96,491.60 384.00,466.00
+             384.00,466.00 384.00,323.00 384.00,323.00
+             384.00,323.00 384.00,110.00 384.00,110.00
+             383.96,84.40 363.60,64.04 338.00,64.00
+             338.00,64.00 292.00,64.00 292.00,64.00
+             289.66,64.00 286.26,64.20 284.22,62.98
+             281.39,61.28 277.57,51.42 275.69,48.00
+             272.05,41.38 265.34,32.32 259.96,27.09
+             244.43,11.96 221.03,0.10 199.00,0.22
+             199.00,0.22 178.00,0.22 178.00,0.22 Z
+           M 186.00,65.30
+           C 197.85,64.12 208.65,66.13 216.47,76.01
+             230.54,93.80 221.54,123.22 198.00,126.70
+             187.59,128.24 176.61,125.70 169.18,117.91
+             163.58,112.03 161.09,105.00 161.00,97.00
+             160.84,80.67 169.57,68.51 186.00,65.30 Z
+           M 113.00,192.10
+           C 113.00,192.10 165.00,192.10 165.00,192.10
+             165.00,192.10 264.00,192.10 264.00,192.10
+             269.14,192.01 275.50,192.23 279.98,195.01
+             288.99,200.57 289.51,214.11 280.96,220.35
+             276.31,223.74 269.54,223.99 264.00,224.00
+             264.00,224.00 120.00,224.00 120.00,224.00
+             113.51,223.99 106.10,223.68 101.21,218.79
+             94.11,211.68 96.08,199.08 105.00,194.45
+             107.48,193.17 110.29,192.75 113.00,192.10 Z
+           M 181.00,312.00
+           C 182.82,318.42 182.00,334.51 182.00,342.00
+             182.00,342.00 182.00,399.00 182.00,399.00
+             182.00,405.50 181.09,421.82 183.57,427.00
+             185.18,430.36 187.10,431.87 190.00,434.00
+             190.00,434.00 189.00,437.00 189.00,437.00
+             199.35,429.74 195.47,450.55 195.40,450.69
+             194.10,453.32 191.37,452.69 189.00,452.42
+             184.55,451.91 171.45,451.70 170.00,447.00
+             166.54,447.62 164.04,447.87 163.00,444.00
+             155.66,444.60 142.42,434.44 142.00,427.00
+             138.89,426.28 139.03,426.15 139.00,423.00
+             134.35,421.92 132.51,416.08 130.81,412.00
+             126.84,402.46 122.13,386.10 125.00,376.00
+             121.22,374.65 123.50,363.47 123.83,360.00
+             125.15,346.43 126.76,336.53 132.78,324.00
+             134.80,319.80 137.14,314.08 142.00,313.00
+             142.04,308.37 143.49,306.86 148.00,306.00
+             148.00,306.00 150.00,304.00 150.00,304.00
+             151.00,298.84 154.78,295.94 160.00,296.00
+             161.61,289.00 179.41,284.58 186.00,283.84
+             187.75,283.85 192.27,283.12 193.69,283.84
+             196.89,284.97 196.73,297.01 194.98,299.44
+             193.56,301.41 190.49,301.60 187.33,304.53
+             184.91,306.77 183.97,311.04 181.00,312.00 Z
+           M 250.00,287.00
+           C 254.36,288.13 253.95,293.15 254.00,297.00
+             254.00,297.00 254.00,328.00 254.00,328.00
+             254.00,332.72 254.38,340.72 253.06,344.98
+             251.05,351.49 242.42,353.33 241.00,348.00
+             235.52,346.70 234.04,336.81 235.00,332.00
+             230.92,330.78 229.63,324.79 230.00,321.00
+             225.56,319.98 224.14,316.26 224.00,312.00
+             224.00,312.00 214.00,305.64 214.00,305.64
+             214.00,305.64 202.00,301.00 202.00,301.00
+             202.00,301.00 202.00,284.00 202.00,284.00
+             209.11,284.06 212.35,284.95 219.00,287.42
+             221.80,288.47 229.36,291.50 232.00,291.53
+             238.82,291.61 238.04,282.81 246.93,284.15
+             249.40,284.52 249.44,284.91 250.00,287.00 Z
+           M 244.00,428.00
+           C 243.96,432.63 242.51,434.14 238.00,435.00
+             236.43,443.24 220.01,451.88 212.00,450.00
+             211.09,452.54 204.84,453.50 203.02,451.36
+             201.24,449.27 201.44,437.81 203.60,436.01
+             204.69,435.10 209.30,434.19 211.00,433.64
+             213.90,432.71 216.49,430.75 219.00,433.00
+             219.00,433.00 219.00,430.00 219.00,430.00
+             219.00,430.00 225.00,429.00 225.00,429.00
+             225.90,424.24 228.24,421.90 233.00,421.00
+             232.80,416.56 233.90,415.85 235.68,412.00
+             236.69,409.82 237.94,405.99 239.22,404.23
+             242.52,399.69 249.99,399.98 252.69,405.06
+             255.87,411.05 250.66,426.51 244.00,428.00 Z" />
+             </svg>
+          </div>`,
+        'scenario-informations',
+        );
+      }
+
       if (this.gamedatas.visibility <= 6) {
         dojo.place(`<div id='night-visibility' data-n='${this.gamedatas.visibility}'></div>`, 'scenario-informations');
         this.addTooltip($('night-visibility'), _('Current night visibility (Pacific Theater rules)'), '');
@@ -532,8 +640,29 @@ define([
         title: _(this.getScenarioTexts().name ?? ''),
       });
 
+
       this.addTooltip('clipboard-button', _('Show the scenario informations'), '');
       $('clipboard-button').addEventListener('click', () => dial.show());
+
+      if (this.gamedatas.isCampaign) {
+        console.log('setup campaign clipboard button');
+        var dialCampaign = new customgame.modal('showCampaign', {
+          class: 'memoir44_popin',
+          closeIcon: 'fa-times',
+          openAnimation: true,
+          openAnimationTarget: 'campaign-clipboard-button',
+          contents: this.tplCampaignModal(),
+          breakpoint: 800,
+          closeAction: 'hide',
+          verticalAlign: 'flex-begin',
+          scale: 0.8,
+          title: _(this.getCampaignTexts().name ?? ''),
+        });
+
+        this.addTooltip('campaign-clipboard-button', _('Show the campaign informations'), '');
+        $('campaign-clipboard-button').addEventListener('click', () => dialCampaign.show());
+      }
+
       this.updateGameProgress();
     },
 
@@ -546,6 +675,17 @@ define([
         return scenario.text[langs[0]];
       }
     },
+
+    getCampaignTexts(campaign = null) {
+      campaign = campaign || this.gamedatas.campaign;
+      if (campaign.text.en) {
+        return campaign.text.en;
+      } else {
+        let langs = Object.keys(campaign.text);
+        return campaign.text[langs[0]];
+      }
+    },
+
 
     updateGameProgress() {
       $('scenario-name').innerHTML =
@@ -630,6 +770,278 @@ define([
         return (
           `
         <div id='scenario-image-brief'>
+          <img src='https://api.asmodee.net/main/v1/m44/scenario/board/${
+            scenario.id || scenario.meta_data.id
+          }.webp?hires=2' width="50%" height="50%" />
+
+          <div id='scenario-brief'>
+            <h5>${_('Briefing')}</h5>
+            <p>
+              ${_(this.getScenarioTexts(scenario).description ?? '').replace(/\n/g, '<br />')}
+            </p>
+            <div id='lobby-button-container'></div>
+          </div>
+        </div>
+
+          <div id='scenario-historical'>
+            <div id='scenario-dates'>
+              ${intervalFormat.formatRange(begin, end)}
+            </div>
+            <h5>${_('Historical Background')}</h5>
+              ${_(this.getScenarioTexts(scenario).historical ?? '').replace(/\n/g, '<br />')}
+          </div>
+
+          <div id='scenario-conditions-rules'>
+            <h5>${_('Conditions of Victory')}</h5>
+            ${_(this.getScenarioTexts(scenario).victory ?? '').replace(/\n/g, '<br />')}
+            ` +
+          (this.getScenarioTexts(scenario).rules === undefined
+            ? ''
+            : `
+            <h5>${_('Special rules')}</h5>
+            ${_(this.getScenarioTexts(scenario).rules ?? '').replace(/\n/g, '<br />')}
+              `) +
+          `
+        </div>
+      `
+        );
+      }
+    },
+
+    tplCampaignModal(campaign = null, lobby = false) {
+      campaign = campaign || this.gamedatas.campaign;
+      let intervalFormat = new Intl.DateTimeFormat([], {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      });
+
+      let begin = '';
+      let end = '';
+      // Compute start-end dates
+      if (
+        campaign.game_info.hasOwnProperty('date_begin') &&
+        campaign.game_info.hasOwnProperty('date_end') &&
+        campaign.game_info.date_begin !== null &&
+        campaign.game_info.date_end !== null
+      ) {
+        let dateBegin = campaign.game_info.date_begin.split('-');
+        let dateEnd = campaign.game_info.date_end.split('-');
+        begin = new Date(Date.UTC(dateBegin[0], parseInt(dateBegin[1]) - 1, parseInt(dateBegin[2])));
+        end = new Date(Date.UTC(dateEnd[0], parseInt(dateEnd[1]) - 1, parseInt(dateEnd[2])));
+      }
+
+      const GENERALS_SPRITES = ['Montgomery', 'Rommel'];
+      player = this.player_id;
+      team = this.gamedatas.players[player].team;
+      side = team == 'ALLIES' ? 0 : 1;
+      scenarios = campaign.scenarios[team];
+      general = scenarios.general;
+      general_briefing = scenarios.general_briefing;
+      let generalsprite = 
+      GENERALS_SPRITES.findIndex((t) => t == general);
+      console.log('General', player, team, general, generalsprite);
+      tokens_nbr = scenarios.reserve_tokens[0];
+      token_container = ``;
+      const NATION_SPRITES = ['GB', 'DE', 'US', 'FR'];
+      sprite =
+      NATION_SPRITES.findIndex((t) => t == scenarios.country);
+      console.log(player.id, scenarios.country, sprite);
+      if (tokens_nbr > 0) {
+        token_container = `<div id='token-container'>`;
+        
+        for (let index = 0; index < tokens_nbr ; index++) {
+          token_container += `<div class="reserve-token2" data-sprite="${sprite}"></div>`;      
+        }
+        token_container += `</div>`;
+      }
+      const CAMPAIGN_SCENARIOS = [4187, 4185, 4186, 1558];
+      //scenario_name = campaign.scenarios.name[0];
+      //scenario_id = campaign.scenarios.list[0];
+
+      // iterate scenario numbers and display scenarios campaign container
+      scenarios_nbr = campaign.scenarios.list.length;
+      scenarios_container_tmp = ``;
+
+      for (let index = 0; index < scenarios_nbr; index++) {
+        scenario_name = campaign.scenarios.name[index];
+        next_scenario_name = campaign.scenarios.name[index + 1] ?? 'END';
+        scenario_id = campaign.scenarios.list[index];
+        column = index % 2 == 0 ? 'left' : 'right';
+        color_win = team == 'ALLIES' ? '#5e6d3a' : '#3e5d75';
+        scenario_sprite = CAMPAIGN_SCENARIOS.findIndex((t) => t == scenario_id);
+        scenario_win_message = scenarios.win_message[index] ?? '';
+        arrow_fill_opacity = index % 2 == 0 ? 0 : 1;
+        arrow = index % 2 == 0 ? `` :
+          `<svg xmlns="http://www.w3.org/2000/svg"
+            width="257px"
+            height="66px"
+            viewBox="0 0 257 66">
+            <path
+              d="m 0,0 c 0,0 246,0 246,0 0,0 0,42 0,42 0,0 10.5,-3.5 10.5,-3.5 0,0 -17.5,27 -17.5,27 0,0 -15,-27 -15,-27 0,0 10,3.5 10,3.5 0,0 0,-30 0,-30 C 234,12 0,12 0,12 0,12 0,0 0,0"
+              style="fill:#000000;fill-opacity:${arrow_fill_opacity};stroke:none"
+            />
+          </svg>`;
+        next_scenario_banner = scenarios[index] == 'END' ? 
+          `<svg xmlns="http://www.w3.org/2000/svg"
+            width="401px"
+            height="28px"
+            viewBox="0 0 401 28">
+            <path
+              d="m 0.68723424,0.68723424 c 0,0 398.99999576,0 398.99999576,0 0,0 -0.5,15.49999976 -0.5,15.49999976 -104,10.5 -288,16 -398.49999576,1.5 0,0 0,-16.99999976 0,-16.99999976 M -8.8127658,25.687234"
+              style="fill:#be683c;fill-opacity:1;stroke:none"
+            />
+            <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="20" font-family="Gunplay">END CAMPAIGN</text>
+          </svg>`
+        :
+          `<svg xmlns="http://www.w3.org/2000/svg"
+            width="401px"
+            height="31px"
+            viewBox="0 0 401 31">
+            <path
+              d="M 0.00,0.00            C 0.00,0.00 0.00,31.00 0.00,31.00              0.00,31.00 401.00,31.00 401.00,31.00              401.00,31.00 401.00,0.00 401.00,0.00              401.00,0.00 0.00,0.00 0.00,0.00 Z            M 389.00,15.00            C 389.00,15.00 379.00,22.00 379.00,22.00              379.00,22.00 378.00,6.00 378.00,6.00              383.22,7.73 386.52,10.00 389.00,15.00 Z            M 19.00,16.00            C 19.00,16.00 9.00,23.00 9.00,23.00              9.00,23.00 8.00,7.00 8.00,7.00              13.22,8.73 16.52,11.00 19.00,16.00 Z"
+              style="fill:#f2e7d5;fill-opacity:1;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none"
+            />
+            <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="#623b2d" font-size="20" font-family="Gunplay">Play ${next_scenario_name} next</text>
+          </svg>`;
+        
+        scenarios_container_tmp +=
+            `<div id="scenarios-container-${column}">
+              <div class="arrow-container-${column}">
+                ${arrow}
+              </div>
+              <div class="campaign-step-titles" data-sprite="${sprite}">
+                <div class="scenario-step-number-container">
+                  <div class="campaign-step-number">
+                  ${index + 1}
+                  </div>
+                </div>
+                <div class="scenario-title-container">
+                  <div class="scenario-title">
+                  ${scenario_name}
+                  </div>
+                </div>
+                <div class="scenario-id-container">
+                  <div class="scenario-id">
+                  ${scenario_id}
+                  </div>
+                </div>
+              </div>
+              <div class="scenario-box">
+                <div class="scenario-box-top">
+                  <div class="scenario-box-left">
+                    <div>
+                      <svg xmlns="http://www.w3.org/2000/svg"
+                        width="69.5mm"
+                        height="5.6600003mm"
+                        viewBox="0 0 68.338989 5.6600003">
+                        <path
+                          style="opacity:1;fill:${color_win};fill-opacity:1;stroke:${color_win};stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+                          d="M 2.205061,5.5412335 C 1.4621395,5.3220997 0.65405828,4.7387922 0.26152099,4.1383051 0.05003004,3.8147752 7.1765715e-4,3.570425 1.4733755e-5,2.8424843 -8.4040131e-4,2.0431644 0.03530628,1.8946805 0.3308658,1.4802735 0.51331116,1.2244661 0.88699437,0.85684432 1.1612747,0.66333594 2.1807117,-0.05589064 -0.73631358,0.00164703 34.707419,0.00164703 c 35.809346,0 32.547396,-0.0730457 33.663198,0.75382812 C 70.157855,2.0799152 69.766666,4.4516938 67.60167,5.4176524 L 67.117928,5.6334825 34.888821,5.6544103 C 8.1445523,5.6717792 2.5823375,5.6525456 2.205061,5.5412335 Z"
+                        />
+                        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="3">${team} Win !</text>
+                      </svg>
+                    </div>
+                    <div class="win-message-container">
+                      <div class="campaign-medal" data-sprite="${sprite}">
+                      </div>
+                      <div class="win-message">
+                      ${scenario_win_message.replace(/\n/g, '<br />')}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="scenario-box-right">
+                    <div class="scenario-map-mini" data-sprite="${scenario_sprite}">
+                    </div>
+                    <div class="scenario-scores">
+                    </div>
+                  </div>
+                </div>
+                <div class="next-scenario-container">
+                  ${next_scenario_banner}
+                </div>
+              </div>
+              
+            </div>`;
+            
+      }
+      scenarios_container = `
+      <div id='scenarios-container'>
+        ${scenarios_container_tmp}
+      </div>
+      `
+
+      
+
+
+      if (!lobby) {
+        return (
+          `          
+          <div id='operation_subtitle'>
+          ${_(this.getCampaignTexts(campaign).subtitle ?? '').replace(/\n/g, '<br />')}
+          </div>
+
+          <div id='scenario-dates'>
+          ${intervalFormat.formatRange(begin, end)}
+          </div>
+
+          <div id='general-briefing'>
+            <div id='general' class='generals' data-sprite="${generalsprite}"> </div>
+            <div id='general-speech'>
+              ${general_briefing.replace(/\n/g, '<br />')}
+            </div>
+            <div id='reserve-tokens-panel' class='token-panel' data-sprite="${side}">
+              <div id='start_with' class='token-panel-text'>
+                Start with
+              </div>
+              <div id='start_with' class='token-panel-number'>
+                ${tokens_nbr}
+              </div>
+              <div id='reserve_token_text' class='token-panel-text'>
+                  Reserve Token
+              </div>
+              ${token_container}
+            </div>
+          </div>
+          ${scenarios_container}
+          
+          `
+        );
+      } 
+      
+      /*
+      <div id='scenarios-container'>
+            <div id='scenarios-container-left'>
+              <div class="campaign-step-titles" data-sprite="${sprite}">
+                <div class="campaign-step-number">
+                1
+                </div>
+                <div class="scenario-title-container">
+                  <div class="scenario-title">
+                  ${scenario_name}
+                  </div>
+                </div>
+                <div class="scenario-id-container">
+                  <div class="scenario-id">
+                  ${scenario_id}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id='scenarios-container-right'>
+              <div class="campaign-step-titles" data-sprite="${sprite}">
+                <div class="campaign-step-number">
+                2
+                </div>
+              </div>
+            </div>
+          </div>
+          */
+      
+      /*else {
+        return (
+          `
+        <div id='scenario-image-brief'>
           <img src='https://www.daysofwonder.com/memoir44/fr/memoire_board/?id=${
             scenario.id || scenario.meta_data.id
           }' />
@@ -665,7 +1077,7 @@ define([
         </div>
       `
         );
-      }
+      }*/
     },
 
     ////////////////////////////////////////////
@@ -927,7 +1339,7 @@ define([
 
           this.addCustomTooltip(
             `scenario-name-${scenario.id}`,
-            `<img src='https://www.daysofwonder.com/memoir44/fr/memoire_board/?id=${scenario.id}' width="386" height="272" />`,
+            `<img src='https://api.asmodee.net/main/v1/m44/scenario/board/${scenario.id}.webp?hires=2' width="386" height="272" />`,
           );
 
           this.onClick(`scenario-${scenario.id}`, () => {

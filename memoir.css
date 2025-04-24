@@ -6421,10 +6421,12 @@ span.m44-dice-result[data-result="4"] {
 }
 
 #popin_showScenario,
+#popin_showCampaign,
 #popin_showScenarioLobby {
   width: 1000px;
 }
 #popin_showScenario h2,
+#popin_showCampaign h2,
 #popin_showScenarioLobby h2 {
   text-align: center;
   font-family: "Gunplay";
@@ -6437,54 +6439,386 @@ span.m44-dice-result[data-result="4"] {
   border-bottom: 1px solid rgba(128, 128, 128, 0.5411764706);
 }
 #popin_showScenario #popin_showScenario_contents,
+#popin_showScenario #popin_showCampaign_contents,
 #popin_showScenario #popin_showScenarioLobby_contents,
+#popin_showCampaign #popin_showScenario_contents,
+#popin_showCampaign #popin_showCampaign_contents,
+#popin_showCampaign #popin_showScenarioLobby_contents,
 #popin_showScenarioLobby #popin_showScenario_contents,
+#popin_showScenarioLobby #popin_showCampaign_contents,
 #popin_showScenarioLobby #popin_showScenarioLobby_contents {
   display: flex;
   flex-flow: column;
   padding: 10px 15px;
 }
 #popin_showScenario #popin_showScenario_contents h5,
+#popin_showScenario #popin_showCampaign_contents h5,
 #popin_showScenario #popin_showScenarioLobby_contents h5,
+#popin_showCampaign #popin_showScenario_contents h5,
+#popin_showCampaign #popin_showCampaign_contents h5,
+#popin_showCampaign #popin_showScenarioLobby_contents h5,
 #popin_showScenarioLobby #popin_showScenario_contents h5,
+#popin_showScenarioLobby #popin_showCampaign_contents h5,
 #popin_showScenarioLobby #popin_showScenarioLobby_contents h5 {
   font-family: "Gunplay";
   color: #c2602f;
   font-size: 23px;
 }
 #popin_showScenario #popin_showScenario_contents #scenario-dates,
+#popin_showScenario #popin_showCampaign_contents #scenario-dates,
 #popin_showScenario #popin_showScenarioLobby_contents #scenario-dates,
+#popin_showCampaign #popin_showScenario_contents #scenario-dates,
+#popin_showCampaign #popin_showCampaign_contents #scenario-dates,
+#popin_showCampaign #popin_showScenarioLobby_contents #scenario-dates,
 #popin_showScenarioLobby #popin_showScenario_contents #scenario-dates,
+#popin_showScenarioLobby #popin_showCampaign_contents #scenario-dates,
 #popin_showScenarioLobby #popin_showScenarioLobby_contents #scenario-dates {
   text-align: right;
   font-size: 20px;
 }
 #popin_showScenario #popin_showScenario_contents #scenario-historical,
+#popin_showScenario #popin_showCampaign_contents #scenario-historical,
 #popin_showScenario #popin_showScenarioLobby_contents #scenario-historical,
+#popin_showCampaign #popin_showScenario_contents #scenario-historical,
+#popin_showCampaign #popin_showCampaign_contents #scenario-historical,
+#popin_showCampaign #popin_showScenarioLobby_contents #scenario-historical,
 #popin_showScenarioLobby #popin_showScenario_contents #scenario-historical,
+#popin_showScenarioLobby #popin_showCampaign_contents #scenario-historical,
 #popin_showScenarioLobby #popin_showScenarioLobby_contents #scenario-historical {
   font-family: "Dax";
   text-align: justify;
 }
 #popin_showScenario #popin_showScenario_contents #scenario-bottom-container,
+#popin_showScenario #popin_showCampaign_contents #scenario-bottom-container,
 #popin_showScenario #popin_showScenarioLobby_contents #scenario-bottom-container,
+#popin_showCampaign #popin_showScenario_contents #scenario-bottom-container,
+#popin_showCampaign #popin_showCampaign_contents #scenario-bottom-container,
+#popin_showCampaign #popin_showScenarioLobby_contents #scenario-bottom-container,
 #popin_showScenarioLobby #popin_showScenario_contents #scenario-bottom-container,
+#popin_showScenarioLobby #popin_showCampaign_contents #scenario-bottom-container,
 #popin_showScenarioLobby #popin_showScenarioLobby_contents #scenario-bottom-container {
   display: flex;
   margin-top: 20px;
   justify-content: space-between;
 }
 #popin_showScenario #popin_showScenario_contents #scenario-bottom-container > div,
+#popin_showScenario #popin_showCampaign_contents #scenario-bottom-container > div,
 #popin_showScenario #popin_showScenarioLobby_contents #scenario-bottom-container > div,
+#popin_showCampaign #popin_showScenario_contents #scenario-bottom-container > div,
+#popin_showCampaign #popin_showCampaign_contents #scenario-bottom-container > div,
+#popin_showCampaign #popin_showScenarioLobby_contents #scenario-bottom-container > div,
 #popin_showScenarioLobby #popin_showScenario_contents #scenario-bottom-container > div,
+#popin_showScenarioLobby #popin_showCampaign_contents #scenario-bottom-container > div,
 #popin_showScenarioLobby #popin_showScenarioLobby_contents #scenario-bottom-container > div {
   width: 49%;
 }
 #popin_showScenario #popin_showScenario_contents #scenario-bottom-container #scenario-brief,
+#popin_showScenario #popin_showCampaign_contents #scenario-bottom-container #scenario-brief,
 #popin_showScenario #popin_showScenarioLobby_contents #scenario-bottom-container #scenario-brief,
+#popin_showCampaign #popin_showScenario_contents #scenario-bottom-container #scenario-brief,
+#popin_showCampaign #popin_showCampaign_contents #scenario-bottom-container #scenario-brief,
+#popin_showCampaign #popin_showScenarioLobby_contents #scenario-bottom-container #scenario-brief,
 #popin_showScenarioLobby #popin_showScenario_contents #scenario-bottom-container #scenario-brief,
+#popin_showScenarioLobby #popin_showCampaign_contents #scenario-bottom-container #scenario-brief,
 #popin_showScenarioLobby #popin_showScenarioLobby_contents #scenario-bottom-container #scenario-brief {
   border-right: 2px solid #9e0a0f;
+}
+#popin_showScenario #popin_showCampaign_contents,
+#popin_showCampaign #popin_showCampaign_contents,
+#popin_showScenarioLobby #popin_showCampaign_contents {
+  padding: 5px 15px;
+}
+#popin_showScenario #popin_showCampaign_contents #operation_subtitle,
+#popin_showCampaign #popin_showCampaign_contents #operation_subtitle,
+#popin_showScenarioLobby #popin_showCampaign_contents #operation_subtitle {
+  text-align: center;
+  font-family: "Gunplay";
+  color: #9e0a0f;
+  font-size: 28px;
+  text-transform: uppercase;
+}
+#popin_showScenario #popin_showCampaign_contents #scenario-dates,
+#popin_showCampaign #popin_showCampaign_contents #scenario-dates,
+#popin_showScenarioLobby #popin_showCampaign_contents #scenario-dates {
+  text-align: right;
+  font-size: 17px;
+}
+#popin_showScenario #popin_showCampaign_contents #general-briefing,
+#popin_showCampaign #popin_showCampaign_contents #general-briefing,
+#popin_showScenarioLobby #popin_showCampaign_contents #general-briefing {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 5px 10px;
+}
+#popin_showScenario #popin_showCampaign_contents #general-speech,
+#popin_showCampaign #popin_showCampaign_contents #general-speech,
+#popin_showScenarioLobby #popin_showCampaign_contents #general-speech {
+  margin: 0px 20px;
+  width: 200%;
+}
+#popin_showScenario #popin_showCampaign_contents #token-container,
+#popin_showCampaign #popin_showCampaign_contents #token-container,
+#popin_showScenarioLobby #popin_showCampaign_contents #token-container {
+  display: flex;
+  justify-content: center;
+}
+#popin_showScenario #popin_showCampaign_contents #scenarios-container,
+#popin_showCampaign #popin_showCampaign_contents #scenarios-container,
+#popin_showScenarioLobby #popin_showCampaign_contents #scenarios-container {
+  display: inline-flex;
+  flex-wrap: wrap;
+}
+#popin_showScenario #popin_showCampaign_contents .generals,
+#popin_showCampaign #popin_showCampaign_contents .generals,
+#popin_showScenarioLobby #popin_showCampaign_contents .generals {
+  width: 66%;
+  height: 210px;
+  background-image: url("img/generals.png");
+  background-size: 200% 100%;
+}
+#popin_showScenario #popin_showCampaign_contents .generals[data-sprite="0"],
+#popin_showCampaign #popin_showCampaign_contents .generals[data-sprite="0"],
+#popin_showScenarioLobby #popin_showCampaign_contents .generals[data-sprite="0"] {
+  background-position-x: 0%;
+  background-position-y: 0%;
+}
+#popin_showScenario #popin_showCampaign_contents .generals[data-sprite="1"],
+#popin_showCampaign #popin_showCampaign_contents .generals[data-sprite="1"],
+#popin_showScenarioLobby #popin_showCampaign_contents .generals[data-sprite="1"] {
+  background-position-x: 100%;
+  background-position-y: 0%;
+}
+#popin_showScenario #popin_showCampaign_contents .token-panel,
+#popin_showCampaign #popin_showCampaign_contents .token-panel,
+#popin_showScenarioLobby #popin_showCampaign_contents .token-panel {
+  width: 110%;
+  height: 227px;
+  background-image: url("img/reserve_token_panel.png");
+  background-size: 200% 100%;
+}
+#popin_showScenario #popin_showCampaign_contents .token-panel[data-sprite="0"],
+#popin_showCampaign #popin_showCampaign_contents .token-panel[data-sprite="0"],
+#popin_showScenarioLobby #popin_showCampaign_contents .token-panel[data-sprite="0"] {
+  background-position-x: 0%;
+  background-position-y: 0%;
+}
+#popin_showScenario #popin_showCampaign_contents .token-panel[data-sprite="1"],
+#popin_showCampaign #popin_showCampaign_contents .token-panel[data-sprite="1"],
+#popin_showScenarioLobby #popin_showCampaign_contents .token-panel[data-sprite="1"] {
+  background-position-x: 100%;
+  background-position-y: 0%;
+}
+#popin_showScenario #popin_showCampaign_contents .token-panel-text,
+#popin_showCampaign #popin_showCampaign_contents .token-panel-text,
+#popin_showScenarioLobby #popin_showCampaign_contents .token-panel-text {
+  text-align: center;
+  font-family: "Gunplay";
+  color: #ffffff;
+  font-size: 30px;
+  margin: 9px 0px;
+}
+#popin_showScenario #popin_showCampaign_contents .token-panel-number,
+#popin_showCampaign #popin_showCampaign_contents .token-panel-number,
+#popin_showScenarioLobby #popin_showCampaign_contents .token-panel-number {
+  text-align: center;
+  font-family: "Gunplay";
+  color: #9e0a0f;
+  font-size: 33px;
+  margin: 8px 7px 0px 0px;
+}
+#popin_showScenario #popin_showCampaign_contents #scenarios-container-right,
+#popin_showCampaign #popin_showCampaign_contents #scenarios-container-right,
+#popin_showScenarioLobby #popin_showCampaign_contents #scenarios-container-right {
+  margin: 21px 0px 0px 0px;
+}
+#popin_showScenario #popin_showCampaign_contents .arrow-container-right,
+#popin_showCampaign #popin_showCampaign_contents .arrow-container-right,
+#popin_showScenarioLobby #popin_showCampaign_contents .arrow-container-right {
+  margin: 0px 0px -15px -2px;
+}
+#popin_showScenario #popin_showCampaign_contents .arrow-container-left,
+#popin_showCampaign #popin_showCampaign_contents .arrow-container-left,
+#popin_showScenarioLobby #popin_showCampaign_contents .arrow-container-left {
+  margin: 0px 0px 0px 0px;
+}
+#popin_showScenario #popin_showCampaign_contents .campaign-step-titles,
+#popin_showCampaign #popin_showCampaign_contents .campaign-step-titles,
+#popin_showScenarioLobby #popin_showCampaign_contents .campaign-step-titles {
+  align-items: center;
+  display: flex;
+  width: 480px;
+  height: 48px;
+  background-image: url("img/campaign_step_title.png");
+  background-size: 100% 200%;
+  position: relative;
+}
+#popin_showScenario #popin_showCampaign_contents .campaign-step-titles[data-sprite="0"],
+#popin_showCampaign #popin_showCampaign_contents .campaign-step-titles[data-sprite="0"],
+#popin_showScenarioLobby #popin_showCampaign_contents .campaign-step-titles[data-sprite="0"] {
+  background-position-x: 0%;
+  background-position-y: 0%;
+}
+#popin_showScenario #popin_showCampaign_contents .campaign-step-titles[data-sprite="1"],
+#popin_showCampaign #popin_showCampaign_contents .campaign-step-titles[data-sprite="1"],
+#popin_showScenarioLobby #popin_showCampaign_contents .campaign-step-titles[data-sprite="1"] {
+  background-position-x: 0%;
+  background-position-y: 100%;
+}
+#popin_showScenario #popin_showCampaign_contents .campaign-step-number,
+#popin_showCampaign #popin_showCampaign_contents .campaign-step-number,
+#popin_showScenarioLobby #popin_showCampaign_contents .campaign-step-number {
+  text-align: center;
+  font-family: "Gunplay";
+  color: #ffffff;
+  font-size: 25px;
+}
+#popin_showScenario #popin_showCampaign_contents .scenario-step-number-container,
+#popin_showCampaign #popin_showCampaign_contents .scenario-step-number-container,
+#popin_showScenarioLobby #popin_showCampaign_contents .scenario-step-number-container {
+  width: 30px;
+  margin: 5px 0px 0px 31px;
+}
+#popin_showScenario #popin_showCampaign_contents .scenario-title,
+#popin_showCampaign #popin_showCampaign_contents .scenario-title,
+#popin_showScenarioLobby #popin_showCampaign_contents .scenario-title {
+  text-align: center;
+  font-family: "Gunplay";
+  color: #9e0a0f;
+  font-size: 25px;
+  text-transform: uppercase;
+}
+#popin_showScenario #popin_showCampaign_contents .scenario-title-container,
+#popin_showCampaign #popin_showCampaign_contents .scenario-title-container,
+#popin_showScenarioLobby #popin_showCampaign_contents .scenario-title-container {
+  width: 300px;
+  margin: 5px 0px 0px 7px;
+}
+#popin_showScenario #popin_showCampaign_contents .scenario-id-container,
+#popin_showCampaign #popin_showCampaign_contents .scenario-id-container,
+#popin_showScenarioLobby #popin_showCampaign_contents .scenario-id-container {
+  width: 50px;
+  margin: 5px 0px 0px 19px;
+}
+#popin_showScenario #popin_showCampaign_contents .scenario-id,
+#popin_showCampaign #popin_showCampaign_contents .scenario-id,
+#popin_showScenarioLobby #popin_showCampaign_contents .scenario-id {
+  text-align: center;
+  font-family: "Gunplay";
+  color: #270708;
+  font-size: 18px;
+}
+#popin_showScenario #popin_showCampaign_contents .scenario-box,
+#popin_showCampaign #popin_showCampaign_contents .scenario-box,
+#popin_showScenarioLobby #popin_showCampaign_contents .scenario-box {
+  background-color: #ffffff;
+  border-width: thin;
+  width: 440px;
+  margin: -3px 0px 0px 17px;
+  box-shadow: 7px 7px 15px 1px #2F2F2F;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#popin_showScenario #popin_showCampaign_contents .scenario-box-top,
+#popin_showCampaign #popin_showCampaign_contents .scenario-box-top,
+#popin_showScenarioLobby #popin_showCampaign_contents .scenario-box-top {
+  display: flex;
+}
+#popin_showScenario #popin_showCampaign_contents .scenario-box-left,
+#popin_showCampaign #popin_showCampaign_contents .scenario-box-left,
+#popin_showScenarioLobby #popin_showCampaign_contents .scenario-box-left {
+  width: 100%;
+  margin: 7px 0px 0px 10px;
+}
+#popin_showScenario #popin_showCampaign_contents .campaign-medal,
+#popin_showCampaign #popin_showCampaign_contents .campaign-medal,
+#popin_showScenarioLobby #popin_showCampaign_contents .campaign-medal {
+  width: 100%;
+  height: 100px;
+  background-image: url("img/campaign_medals.png");
+  background-size: 200% 100%;
+  margin: -21px 0px 0px 10px;
+  position: relative;
+}
+#popin_showScenario #popin_showCampaign_contents .campaign-medal[data-sprite="0"],
+#popin_showCampaign #popin_showCampaign_contents .campaign-medal[data-sprite="0"],
+#popin_showScenarioLobby #popin_showCampaign_contents .campaign-medal[data-sprite="0"] {
+  background-position-x: 0%;
+  background-position-y: 0%;
+}
+#popin_showScenario #popin_showCampaign_contents .campaign-medal[data-sprite="1"],
+#popin_showCampaign #popin_showCampaign_contents .campaign-medal[data-sprite="1"],
+#popin_showScenarioLobby #popin_showCampaign_contents .campaign-medal[data-sprite="1"] {
+  background-position-x: 100%;
+  background-position-y: 0%;
+}
+#popin_showScenario #popin_showCampaign_contents .win-message-container,
+#popin_showCampaign #popin_showCampaign_contents .win-message-container,
+#popin_showScenarioLobby #popin_showCampaign_contents .win-message-container {
+  display: flex;
+  margin: 0px 0px 0px 0px;
+}
+#popin_showScenario #popin_showCampaign_contents .win-message,
+#popin_showCampaign #popin_showCampaign_contents .win-message,
+#popin_showScenarioLobby #popin_showCampaign_contents .win-message {
+  width: 470%;
+  font-size: 14px;
+  margin: 2px 5px 0px 3px;
+  text-align: center;
+}
+#popin_showScenario #popin_showCampaign_contents .scenario-box-right,
+#popin_showCampaign #popin_showCampaign_contents .scenario-box-right,
+#popin_showScenarioLobby #popin_showCampaign_contents .scenario-box-right {
+  margin: 7px 10px 0px 0px;
+}
+#popin_showScenario #popin_showCampaign_contents .scenario-map-mini,
+#popin_showCampaign #popin_showCampaign_contents .scenario-map-mini,
+#popin_showScenarioLobby #popin_showCampaign_contents .scenario-map-mini {
+  width: 140px;
+  height: 77px;
+  background-image: url("img/scenarios_maps_mini.png");
+  background-size: 400% 100%;
+  margin: 0px 0px 0px 0px;
+}
+#popin_showScenario #popin_showCampaign_contents .scenario-map-mini[data-sprite="0"],
+#popin_showCampaign #popin_showCampaign_contents .scenario-map-mini[data-sprite="0"],
+#popin_showScenarioLobby #popin_showCampaign_contents .scenario-map-mini[data-sprite="0"] {
+  background-position-x: 0%;
+  background-position-y: 0%;
+}
+#popin_showScenario #popin_showCampaign_contents .scenario-map-mini[data-sprite="1"],
+#popin_showCampaign #popin_showCampaign_contents .scenario-map-mini[data-sprite="1"],
+#popin_showScenarioLobby #popin_showCampaign_contents .scenario-map-mini[data-sprite="1"] {
+  background-position-x: 33.3333333333%;
+  background-position-y: 0%;
+}
+#popin_showScenario #popin_showCampaign_contents .scenario-map-mini[data-sprite="2"],
+#popin_showCampaign #popin_showCampaign_contents .scenario-map-mini[data-sprite="2"],
+#popin_showScenarioLobby #popin_showCampaign_contents .scenario-map-mini[data-sprite="2"] {
+  background-position-x: 66.6666666667%;
+  background-position-y: 0%;
+}
+#popin_showScenario #popin_showCampaign_contents .scenario-map-mini[data-sprite="3"],
+#popin_showCampaign #popin_showCampaign_contents .scenario-map-mini[data-sprite="3"],
+#popin_showScenarioLobby #popin_showCampaign_contents .scenario-map-mini[data-sprite="3"] {
+  background-position-x: 100%;
+  background-position-y: 0%;
+}
+#popin_showScenario #popin_showCampaign_contents .scenario-scores,
+#popin_showCampaign #popin_showCampaign_contents .scenario-scores,
+#popin_showScenarioLobby #popin_showCampaign_contents .scenario-scores {
+  width: 140px;
+  height: 77px;
+  background-image: url("img/scenario_score.png");
+  background-size: 100% 100%;
+  margin: 0px 0px 0px 0px;
+}
+#popin_showScenario #popin_showCampaign_contents .next-scenario-container,
+#popin_showCampaign #popin_showCampaign_contents .next-scenario-container,
+#popin_showScenarioLobby #popin_showCampaign_contents .next-scenario-container {
+  width: fit-content;
+  margin: 7px 0px 11px 0px;
 }
 
 #popin_showScenarioLobby #popin_showScenarioLobby_contents #scenario-image-brief {
@@ -7116,7 +7450,7 @@ span.m44-dice-result[data-result="4"] {
 }
 #scenario-informations #clipboard-button {
   width: 40px;
-  padding: 6px 6px;
+  padding: 3px 3px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7128,10 +7462,21 @@ span.m44-dice-result[data-result="4"] {
 #scenario-informations #clipboard-button svg:hover {
   fill: white;
 }
+#scenario-informations #campaign-clipboard-button {
+  width: 40px;
+  margin-left: 1px;
+}
+#scenario-informations #campaign-clipboard-button svg {
+  width: 80%;
+  cursor: pointer;
+}
+#scenario-informations #campaign-clipboard-button svg:hover {
+  fill: white;
+}
 #scenario-informations #night-visibility {
   width: 40px;
   height: 47px;
-  margin-left: 10px;
+  margin-left: 1px;
   background-image: url("img/ui/visibility.jpg");
   background-size: 600% 100%;
   border-radius: 4px;
@@ -7299,27 +7644,33 @@ span.m44-dice-result[data-result="4"] {
   margin: 5px;
 }
 
-.reserve-token {
+.reserve-token, .reserve-token2 {
   width: 48px;
   height: 48px;
   background-image: url("img/reserve_tokens.png");
   background-size: 400% 100%;
 }
-.reserve-token[data-sprite="0"] {
+.reserve-token[data-sprite="0"], .reserve-token2[data-sprite="0"] {
   background-position-x: 0%;
   background-position-y: 0%;
 }
-.reserve-token[data-sprite="1"] {
+.reserve-token[data-sprite="1"], .reserve-token2[data-sprite="1"] {
   background-position-x: 33.3333333333%;
   background-position-y: 0%;
 }
-.reserve-token[data-sprite="2"] {
+.reserve-token[data-sprite="2"], .reserve-token2[data-sprite="2"] {
   background-position-x: 66.6666666667%;
   background-position-y: 0%;
 }
-.reserve-token[data-sprite="3"] {
+.reserve-token[data-sprite="3"], .reserve-token2[data-sprite="3"] {
   background-position-x: 100%;
   background-position-y: 0%;
+}
+
+.reserve-token2 {
+  width: 70px;
+  height: 70px;
+  margin: 0px 5px;
 }
 
 .reserve-token-staging {
