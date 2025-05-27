@@ -871,8 +871,17 @@ define([
         color_win = team == 'ALLIES' ? '#5e6d3a' : '#3e5d75';
         scenario_sprite = CAMPAIGN_SCENARIOS.findIndex((t) => t == scenario_id);
         scenario_win_message = scenarios.win_message[index] ?? '';
-        arrow_fill_opacity = index % 2 == 0 ? 0 : 1;
-        arrow = index % 2 == 0 ? `` :
+        arrow_fill_opacity = index % 2 == 0 ? 1 : 1;
+        arrow = index % 2 == 0 ? 
+          `<svg xmlns="http://www.w3.org/2000/svg"
+            width="257px"
+            height="66px"
+            viewBox="0 0 257 66">
+            <path
+              d="M 11.00,0.00 C 11.00,0.00 11.00,41.00 11.00,41.00 11.00,41.00 0.00,38.00 0.00,38.00 0.00,38.00 17.00,66.00 17.00,66.00 17.00,66.00 19.00,66.00 19.00,66.00 19.00,66.00 33.00,38.00 33.00,38.00 33.00,38.00 23.00,41.00 23.00,41.00 23.00,41.00 23.00,12.00 23.00,12.00 23.00,12.00 257.00,12.00 257.00,12.00 257.00,12.00 257.00,0.00 257.00,0.00 257.00,0.00 11.00,0.00 11.00,0.00 Z"
+              style="fill:#000000;fill-opacity:${arrow_fill_opacity};stroke:none"
+            />
+          </svg>` :
           `<svg xmlns="http://www.w3.org/2000/svg"
             width="257px"
             height="66px"
@@ -882,6 +891,9 @@ define([
               style="fill:#000000;fill-opacity:${arrow_fill_opacity};stroke:none"
             />
           </svg>`;
+        if (index == 0) {
+          arrow = ``;          
+        }
         next_scenario_banner = scenarios[index] == 'END' ? 
           `<svg xmlns="http://www.w3.org/2000/svg"
             width="401px"
@@ -969,10 +981,35 @@ define([
       <div id='scenarios-container'>
         ${scenarios_container_tmp}
       </div>
+      `;
+
+      objectives_table_points = scenarios.objectives_points;
+      objectives_table_length = objectives_table_points.length;
+      td_objective_tmp = `<td width="25px">none</td>`;
+      td_points_tmp = `<td width="25px">${objectives_table_points[0]}</td>`;
+      for (let index = 1; index < objectives_table_length; index++) {
+        td_objective_tmp += `<td width="25px">    </td>`;
+        td_points_tmp += `<td width="25px">${objectives_table_points[index]}</td>`;
+      }
+
+      objective_track_table = `
+      <table id='objective_track_table'>
+        <colgroup>
+          <col border: 2px solid black>
+          <col span="2">
+        </colgroup>
+        <tbody>
+          <tr>
+            <td width="105px">Objectives</td>
+            ${td_objective_tmp}
+          </tr>
+          <tr>
+            <td>Points</td>
+            ${td_points_tmp}
+          </tr>
+        </tbody>
+      </table>
       `
-
-      
-
 
       if (!lobby) {
         return (
@@ -1004,80 +1041,72 @@ define([
             </div>
           </div>
           ${scenarios_container}
-          
+          <div id="bottom_tables">
+            <div class="bottom-container">
+              ${objective_track_table}
+              <svg xmlns="http://www.w3.org/2000/svg"
+                id="objective_table_svg"
+                width="125px"
+                height="25px"
+                viewBox="0 0 125 25">
+                <path
+                  style="stroke:none;stroke-opacity:1;fill:#7b5442;fill-opacity:1"
+                  d="M 1.00,0.00 C 1.00,0.00 124.00,0.00 124.00,0.00 126.00,16.00 118.18,25.10 104.00,25.00 104.00,25.00 23.00,24.50 23.00,24.50 0.00,25.00 1.50,12.50 1.00,-0.50"
+                />
+                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="10">Objective Track</text>
+              </svg>
+            </div>
+            <div class="bottom-container2">
+              <table id="nbr_medals">
+                <colgroup>
+                  <col border: 2px solid black>
+                  <col span="1">
+                </colgroup>
+                <thead>
+                  <th scope="col" width="90px">MEDALS</th> 
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>0</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="small-campaign-medal" data-sprite="${sprite}"></div>
+              <div class="dot">+</div>
+              <table id="nbr_objectives">
+                <colgroup>
+                  <col border: 2px solid black>
+                  <col span="1">
+                </colgroup>
+                <thead>
+                  <th scope="col" width="90px">OBJ. TRACK</th> 
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>0</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="dot2">=</div>
+              <table id="victory_points">
+                <colgroup>
+                  <col border: 2px solid black>
+                  <col span="1">
+                </colgroup>
+                <thead>
+                  <th scope="col" width="90px">VICTORY POINTS</th> 
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>0</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>          
           `
         );
       } 
-      
-      /*
-      <div id='scenarios-container'>
-            <div id='scenarios-container-left'>
-              <div class="campaign-step-titles" data-sprite="${sprite}">
-                <div class="campaign-step-number">
-                1
-                </div>
-                <div class="scenario-title-container">
-                  <div class="scenario-title">
-                  ${scenario_name}
-                  </div>
-                </div>
-                <div class="scenario-id-container">
-                  <div class="scenario-id">
-                  ${scenario_id}
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div id='scenarios-container-right'>
-              <div class="campaign-step-titles" data-sprite="${sprite}">
-                <div class="campaign-step-number">
-                2
-                </div>
-              </div>
-            </div>
-          </div>
-          */
-      
-      /*else {
-        return (
-          `
-        <div id='scenario-image-brief'>
-          <img src='https://www.daysofwonder.com/memoir44/fr/memoire_board/?id=${
-            scenario.id || scenario.meta_data.id
-          }' />
-
-          <div id='scenario-brief'>
-            <h5>${_('Briefing')}</h5>
-            <p>
-              ${_(this.getScenarioTexts(scenario).description ?? '').replace(/\n/g, '<br />')}
-            </p>
-            <div id='lobby-button-container'></div>
-          </div>
-        </div>
-
-          <div id='scenario-historical'>
-            <div id='scenario-dates'>
-              ${intervalFormat.formatRange(begin, end)}
-            </div>
-            <h5>${_('Historical Background')}</h5>
-              ${_(this.getScenarioTexts(scenario).historical ?? '').replace(/\n/g, '<br />')}
-          </div>
-
-          <div id='scenario-conditions-rules'>
-            <h5>${_('Conditions of Victory')}</h5>
-            ${_(this.getScenarioTexts(scenario).victory ?? '').replace(/\n/g, '<br />')}
-            ` +
-          (this.getScenarioTexts(scenario).rules === undefined
-            ? ''
-            : `
-            <h5>${_('Special rules')}</h5>
-            ${_(this.getScenarioTexts(scenario).rules ?? '').replace(/\n/g, '<br />')}
-              `) +
-          `
-        </div>
-      `
-        );
-      }*/
     },
 
     ////////////////////////////////////////////

@@ -6640,7 +6640,8 @@ span.m44-dice-result[data-result="4"] {
 #popin_showScenario #popin_showCampaign_contents .arrow-container-left,
 #popin_showCampaign #popin_showCampaign_contents .arrow-container-left,
 #popin_showScenarioLobby #popin_showCampaign_contents .arrow-container-left {
-  margin: 0px 0px 0px 0px;
+  margin: -51px 0px 0px 240px;
+  position: fixed;
 }
 #popin_showScenario #popin_showCampaign_contents .campaign-step-titles,
 #popin_showCampaign #popin_showCampaign_contents .campaign-step-titles,
@@ -6731,9 +6732,11 @@ span.m44-dice-result[data-result="4"] {
   width: 100%;
   margin: 7px 0px 0px 10px;
 }
-#popin_showScenario #popin_showCampaign_contents .campaign-medal,
+#popin_showScenario #popin_showCampaign_contents .campaign-medal, #popin_showScenario #popin_showCampaign_contents .small-campaign-medal,
 #popin_showCampaign #popin_showCampaign_contents .campaign-medal,
-#popin_showScenarioLobby #popin_showCampaign_contents .campaign-medal {
+#popin_showCampaign #popin_showCampaign_contents .small-campaign-medal,
+#popin_showScenarioLobby #popin_showCampaign_contents .campaign-medal,
+#popin_showScenarioLobby #popin_showCampaign_contents .small-campaign-medal {
   width: 100%;
   height: 100px;
   background-image: url("img/campaign_medals.png");
@@ -6741,17 +6744,28 @@ span.m44-dice-result[data-result="4"] {
   margin: -21px 0px 0px 10px;
   position: relative;
 }
-#popin_showScenario #popin_showCampaign_contents .campaign-medal[data-sprite="0"],
+#popin_showScenario #popin_showCampaign_contents .campaign-medal[data-sprite="0"], #popin_showScenario #popin_showCampaign_contents .small-campaign-medal[data-sprite="0"],
 #popin_showCampaign #popin_showCampaign_contents .campaign-medal[data-sprite="0"],
-#popin_showScenarioLobby #popin_showCampaign_contents .campaign-medal[data-sprite="0"] {
+#popin_showCampaign #popin_showCampaign_contents .small-campaign-medal[data-sprite="0"],
+#popin_showScenarioLobby #popin_showCampaign_contents .campaign-medal[data-sprite="0"],
+#popin_showScenarioLobby #popin_showCampaign_contents .small-campaign-medal[data-sprite="0"] {
   background-position-x: 0%;
   background-position-y: 0%;
 }
-#popin_showScenario #popin_showCampaign_contents .campaign-medal[data-sprite="1"],
+#popin_showScenario #popin_showCampaign_contents .campaign-medal[data-sprite="1"], #popin_showScenario #popin_showCampaign_contents .small-campaign-medal[data-sprite="1"],
 #popin_showCampaign #popin_showCampaign_contents .campaign-medal[data-sprite="1"],
-#popin_showScenarioLobby #popin_showCampaign_contents .campaign-medal[data-sprite="1"] {
+#popin_showCampaign #popin_showCampaign_contents .small-campaign-medal[data-sprite="1"],
+#popin_showScenarioLobby #popin_showCampaign_contents .campaign-medal[data-sprite="1"],
+#popin_showScenarioLobby #popin_showCampaign_contents .small-campaign-medal[data-sprite="1"] {
   background-position-x: 100%;
   background-position-y: 0%;
+}
+#popin_showScenario #popin_showCampaign_contents .small-campaign-medal,
+#popin_showCampaign #popin_showCampaign_contents .small-campaign-medal,
+#popin_showScenarioLobby #popin_showCampaign_contents .small-campaign-medal {
+  width: 30px;
+  height: 60px;
+  margin: 0px 0px 0px -123px;
 }
 #popin_showScenario #popin_showCampaign_contents .win-message-container,
 #popin_showCampaign #popin_showCampaign_contents .win-message-container,
@@ -6819,6 +6833,153 @@ span.m44-dice-result[data-result="4"] {
 #popin_showScenarioLobby #popin_showCampaign_contents .next-scenario-container {
   width: fit-content;
   margin: 7px 0px 11px 0px;
+}
+#popin_showScenario #popin_showCampaign_contents #bottom_tables,
+#popin_showCampaign #popin_showCampaign_contents #bottom_tables,
+#popin_showScenarioLobby #popin_showCampaign_contents #bottom_tables {
+  display: inline-flex;
+  flex-wrap: wrap;
+  margin: 15px 0px 0px 0px;
+}
+#popin_showScenario #popin_showCampaign_contents #bottom_tables .bottom-container, #popin_showScenario #popin_showCampaign_contents #bottom_tables .bottom-container2,
+#popin_showCampaign #popin_showCampaign_contents #bottom_tables .bottom-container,
+#popin_showCampaign #popin_showCampaign_contents #bottom_tables .bottom-container2,
+#popin_showScenarioLobby #popin_showCampaign_contents #bottom_tables .bottom-container,
+#popin_showScenarioLobby #popin_showCampaign_contents #bottom_tables .bottom-container2 {
+  width: 464px;
+  margin: 0px 0px 0px 16px;
+}
+#popin_showScenario #popin_showCampaign_contents #bottom_tables .bottom-container2,
+#popin_showCampaign #popin_showCampaign_contents #bottom_tables .bottom-container2,
+#popin_showScenarioLobby #popin_showCampaign_contents #bottom_tables .bottom-container2 {
+  display: inline-flex;
+}
+#popin_showScenario #popin_showCampaign_contents #objective_track_table,
+#popin_showCampaign #popin_showCampaign_contents #objective_track_table,
+#popin_showScenarioLobby #popin_showCampaign_contents #objective_track_table {
+  border-collapse: collapse;
+  font-size: 20px;
+  text-align: center;
+  font-family: "Gunplay";
+  table-layout: fixed;
+  background-color: #ffffff;
+  color: #5e6d3a;
+}
+#popin_showScenario #popin_showCampaign_contents #objective_track_table td,
+#popin_showCampaign #popin_showCampaign_contents #objective_track_table td,
+#popin_showScenarioLobby #popin_showCampaign_contents #objective_track_table td {
+  border: 3px solid rgb(190, 190, 190);
+  padding: 3px 12px;
+}
+#popin_showScenario #popin_showCampaign_contents #objective_track_table td:first-child,
+#popin_showCampaign #popin_showCampaign_contents #objective_track_table td:first-child,
+#popin_showScenarioLobby #popin_showCampaign_contents #objective_track_table td:first-child {
+  background-color: #cbbeb5;
+  color: #7b5442;
+}
+#popin_showScenario #popin_showCampaign_contents #objective_track_table td:nth-child(2),
+#popin_showCampaign #popin_showCampaign_contents #objective_track_table td:nth-child(2),
+#popin_showScenarioLobby #popin_showCampaign_contents #objective_track_table td:nth-child(2) {
+  color: #7b5442;
+}
+#popin_showScenario #popin_showCampaign_contents #objective_table_svg,
+#popin_showCampaign #popin_showCampaign_contents #objective_table_svg,
+#popin_showScenarioLobby #popin_showCampaign_contents #objective_table_svg {
+  margin-left: 4px;
+}
+#popin_showScenario #popin_showCampaign_contents #nbr_medals, #popin_showScenario #popin_showCampaign_contents #nbr_objectives, #popin_showScenario #popin_showCampaign_contents #victory_points,
+#popin_showCampaign #popin_showCampaign_contents #nbr_medals,
+#popin_showCampaign #popin_showCampaign_contents #nbr_objectives,
+#popin_showCampaign #popin_showCampaign_contents #victory_points,
+#popin_showScenarioLobby #popin_showCampaign_contents #nbr_medals,
+#popin_showScenarioLobby #popin_showCampaign_contents #nbr_objectives,
+#popin_showScenarioLobby #popin_showCampaign_contents #victory_points {
+  border-collapse: collapse;
+  font-size: 25px;
+  text-align: center;
+  font-family: "Gunplay";
+  table-layout: fixed;
+  background-color: #ffffff;
+  color: #ffffff;
+}
+#popin_showScenario #popin_showCampaign_contents #nbr_medals td, #popin_showScenario #popin_showCampaign_contents #nbr_objectives td, #popin_showScenario #popin_showCampaign_contents #victory_points td,
+#popin_showCampaign #popin_showCampaign_contents #nbr_medals td,
+#popin_showCampaign #popin_showCampaign_contents #nbr_objectives td,
+#popin_showCampaign #popin_showCampaign_contents #victory_points td,
+#popin_showScenarioLobby #popin_showCampaign_contents #nbr_medals td,
+#popin_showScenarioLobby #popin_showCampaign_contents #nbr_objectives td,
+#popin_showScenarioLobby #popin_showCampaign_contents #victory_points td {
+  border: 3px solid rgb(190, 190, 190);
+  padding: 6px 12px;
+}
+#popin_showScenario #popin_showCampaign_contents #nbr_medals th, #popin_showScenario #popin_showCampaign_contents #nbr_objectives th, #popin_showScenario #popin_showCampaign_contents #victory_points th,
+#popin_showCampaign #popin_showCampaign_contents #nbr_medals th,
+#popin_showCampaign #popin_showCampaign_contents #nbr_objectives th,
+#popin_showCampaign #popin_showCampaign_contents #victory_points th,
+#popin_showScenarioLobby #popin_showCampaign_contents #nbr_medals th,
+#popin_showScenarioLobby #popin_showCampaign_contents #nbr_objectives th,
+#popin_showScenarioLobby #popin_showCampaign_contents #victory_points th {
+  background-color: #cbbeb5;
+  border: 3px solid #cbbeb5;
+  color: #7b5442;
+  text-align: right;
+  font-size: 12px;
+  padding: 1px 20px;
+}
+#popin_showScenario #popin_showCampaign_contents #nbr_medals .second-line, #popin_showScenario #popin_showCampaign_contents #nbr_objectives .second-line, #popin_showScenario #popin_showCampaign_contents #victory_points .second-line,
+#popin_showCampaign #popin_showCampaign_contents #nbr_medals .second-line,
+#popin_showCampaign #popin_showCampaign_contents #nbr_objectives .second-line,
+#popin_showCampaign #popin_showCampaign_contents #victory_points .second-line,
+#popin_showScenarioLobby #popin_showCampaign_contents #nbr_medals .second-line,
+#popin_showScenarioLobby #popin_showCampaign_contents #nbr_objectives .second-line,
+#popin_showScenarioLobby #popin_showCampaign_contents #victory_points .second-line {
+  color: #ffffff;
+}
+#popin_showScenario #popin_showCampaign_contents #nbr_objectives, #popin_showScenario #popin_showCampaign_contents #victory_points,
+#popin_showCampaign #popin_showCampaign_contents #nbr_objectives,
+#popin_showCampaign #popin_showCampaign_contents #victory_points,
+#popin_showScenarioLobby #popin_showCampaign_contents #nbr_objectives,
+#popin_showScenarioLobby #popin_showCampaign_contents #victory_points {
+  margin: 0px 0px 0px -5px;
+}
+#popin_showScenario #popin_showCampaign_contents #nbr_objectives th, #popin_showScenario #popin_showCampaign_contents #victory_points th,
+#popin_showCampaign #popin_showCampaign_contents #nbr_objectives th,
+#popin_showCampaign #popin_showCampaign_contents #victory_points th,
+#popin_showScenarioLobby #popin_showCampaign_contents #nbr_objectives th,
+#popin_showScenarioLobby #popin_showCampaign_contents #victory_points th {
+  text-align: center;
+}
+#popin_showScenario #popin_showCampaign_contents #victory_points th,
+#popin_showCampaign #popin_showCampaign_contents #victory_points th,
+#popin_showScenarioLobby #popin_showCampaign_contents #victory_points th {
+  background-color: #7b5442;
+  border: 3px solid #7b5442;
+  color: #ffffff;
+}
+#popin_showScenario #popin_showCampaign_contents #victory_points td,
+#popin_showCampaign #popin_showCampaign_contents #victory_points td,
+#popin_showScenarioLobby #popin_showCampaign_contents #victory_points td {
+  border: 3px solid #7b5442;
+}
+#popin_showScenario #popin_showCampaign_contents .dot, #popin_showScenario #popin_showCampaign_contents .dot2,
+#popin_showCampaign #popin_showCampaign_contents .dot,
+#popin_showCampaign #popin_showCampaign_contents .dot2,
+#popin_showScenarioLobby #popin_showCampaign_contents .dot,
+#popin_showScenarioLobby #popin_showCampaign_contents .dot2 {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 22px;
+  color: #7b5442;
+  text-align: center;
+  background: #cbbeb5;
+  position: relative;
+  margin: 30px 0px 0px 87px;
+}
+#popin_showScenario #popin_showCampaign_contents .dot2,
+#popin_showCampaign #popin_showCampaign_contents .dot2,
+#popin_showScenarioLobby #popin_showCampaign_contents .dot2 {
+  margin: 30px 0px 0px -5px;
 }
 
 #popin_showScenarioLobby #popin_showScenarioLobby_contents #scenario-image-brief {

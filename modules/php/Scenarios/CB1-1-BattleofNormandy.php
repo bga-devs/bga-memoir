@@ -27,7 +27,15 @@ $scenarios[40001] = [
                 1 => 0,
                 2 => 0,
                 3 => 0,
-            ], 
+            ],
+            'objectives_points' => [
+                0 => 0,
+                1 => 2,
+                2 => 2,
+                3 => 3,
+                4 => 3,
+                5 => 4,
+            ],
             'country' => 'GB',
             0 => 1, // if ALLIES won scenario 0 => 4187, 
             1 => 2, // if ALLIES won scenario 1, play 1=> 4185-CapturingTheCrossing
@@ -67,7 +75,11 @@ $scenarios[40001] = [
                 1 => 0,
                 2 => 0,
                 3 => 0,
-            ], 
+            ],
+            'objectives_points' => [
+                0 => -1,
+                1 => 1,
+            ],
             'country' => 'DE',
             0 => 1, // if AXIS won scenario 0, play  1=> 4185-CapturingTheCrossing 
             1 => 2, // if AXIS won scenario 1, play 2=> 4185-CapturingTheCrossing
