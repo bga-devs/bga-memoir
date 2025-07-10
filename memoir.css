@@ -6575,7 +6575,7 @@ span.m44-dice-result[data-result="4"] {
   width: 66%;
   height: 210px;
   background-image: url("img/generals.png");
-  background-size: 200% 100%;
+  background-size: 400% 100%;
 }
 #popin_showScenario #popin_showCampaign_contents .generals[data-sprite="0"],
 #popin_showCampaign #popin_showCampaign_contents .generals[data-sprite="0"],
@@ -6586,6 +6586,18 @@ span.m44-dice-result[data-result="4"] {
 #popin_showScenario #popin_showCampaign_contents .generals[data-sprite="1"],
 #popin_showCampaign #popin_showCampaign_contents .generals[data-sprite="1"],
 #popin_showScenarioLobby #popin_showCampaign_contents .generals[data-sprite="1"] {
+  background-position-x: 33.3333333333%;
+  background-position-y: 0%;
+}
+#popin_showScenario #popin_showCampaign_contents .generals[data-sprite="2"],
+#popin_showCampaign #popin_showCampaign_contents .generals[data-sprite="2"],
+#popin_showScenarioLobby #popin_showCampaign_contents .generals[data-sprite="2"] {
+  background-position-x: 66.6666666667%;
+  background-position-y: 0%;
+}
+#popin_showScenario #popin_showCampaign_contents .generals[data-sprite="3"],
+#popin_showCampaign #popin_showCampaign_contents .generals[data-sprite="3"],
+#popin_showScenarioLobby #popin_showCampaign_contents .generals[data-sprite="3"] {
   background-position-x: 100%;
   background-position-y: 0%;
 }
@@ -6740,7 +6752,7 @@ span.m44-dice-result[data-result="4"] {
   width: 100%;
   height: 100px;
   background-image: url("img/campaign_medals.png");
-  background-size: 200% 100%;
+  background-size: 300% 100%;
   margin: -21px 0px 0px 10px;
   position: relative;
 }
@@ -6757,6 +6769,14 @@ span.m44-dice-result[data-result="4"] {
 #popin_showCampaign #popin_showCampaign_contents .small-campaign-medal[data-sprite="1"],
 #popin_showScenarioLobby #popin_showCampaign_contents .campaign-medal[data-sprite="1"],
 #popin_showScenarioLobby #popin_showCampaign_contents .small-campaign-medal[data-sprite="1"] {
+  background-position-x: 50%;
+  background-position-y: 0%;
+}
+#popin_showScenario #popin_showCampaign_contents .campaign-medal[data-sprite="2"], #popin_showScenario #popin_showCampaign_contents .small-campaign-medal[data-sprite="2"],
+#popin_showCampaign #popin_showCampaign_contents .campaign-medal[data-sprite="2"],
+#popin_showCampaign #popin_showCampaign_contents .small-campaign-medal[data-sprite="2"],
+#popin_showScenarioLobby #popin_showCampaign_contents .campaign-medal[data-sprite="2"],
+#popin_showScenarioLobby #popin_showCampaign_contents .small-campaign-medal[data-sprite="2"] {
   background-position-x: 100%;
   background-position-y: 0%;
 }

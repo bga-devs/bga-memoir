@@ -148,11 +148,11 @@
       width: 66%;
       height: 210px;
       background-image: url('img/generals.png');
-      background-size: 200% 100%;
+      background-size: 400% 100%;
     
-      @for $i from 0 through 1 {
+      @for $i from 0 through 3 {
         &[data-sprite='#{$i}'] {
-          background-position-x: ($i % 2) * 100% / 1;
+          background-position-x: ($i % 4) * 100% / 3;
           background-position-y: 0%;
         }
       }
@@ -279,13 +279,13 @@
       width: 100%;
       height: 100px;
       background-image: url('img/campaign_medals.png');
-      background-size: 200% 100%;
+      background-size: 300% 100%;
       margin: -21px 0px 0px 10px;
       position: relative;
     
-      @for $i from 0 through 1 {
+      @for $i from 0 through 2 {
         &[data-sprite='#{$i}'] {
-          background-position-x: ($i % 2) * 100% / 1;
+          background-position-x: ($i % 3) * 100% / 2;
           background-position-y: 0%;
         }
       }

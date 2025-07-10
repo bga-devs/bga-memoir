@@ -831,7 +831,7 @@ define([
         end = new Date(Date.UTC(dateEnd[0], parseInt(dateEnd[1]) - 1, parseInt(dateEnd[2])));
       }
 
-      const GENERALS_SPRITES = ['Montgomery', 'Rommel'];
+      const GENERALS_SPRITES = ['Montgomery', 'Rommel', 'Von_Rundstedt', 'Bradley'];
       player = this.player_id;
       team = this.gamedatas.players[player].team;
       side = team == 'ALLIES' ? 0 : 1;
