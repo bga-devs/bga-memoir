@@ -47,7 +47,7 @@ $game_options = [
         'name' => clienttranslate('Breakthrough'),
         'tmdisplay' => clienttranslate('BKT'),
         'description' => clienttranslate('Breakthrough scenario'),
-        'alpha' => true,
+        //'alpha' => true,
       ],
       // 3 => [
       //   'name' => clienttranslate('Overlord'),
@@ -623,6 +623,11 @@ $game_options = [
       ],
     ],
     'values' => [
+      0 => [
+        'name' => \clienttranslate('Random'),
+        'tmdisplay' => \clienttranslate('[Random]'),
+        'premium' => true,
+      ],
       3129 => [
         'name' => clienttranslate('[3129] Operation Crusader'),
         'tmdisplay' => '[3129]',

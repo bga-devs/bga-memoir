@@ -323,6 +323,13 @@ SQL;
       Globals::setArmorBreakthroughDone(['AXIS' => false, 'ALLIES' => false]);
     }
 
-
+    if ($from_version <=  2503091812) {
+      if (Globals::isCampaign()) {
+        // reload current campaign in order to have all campaign infomation for briefing in the database
+        $campaign = Globals::getCampaign();
+        $campaignId = $campaign['campaignId'];
+        Scenario::campaignloadId($campaignId);
+      }
+    }
   }
 }
