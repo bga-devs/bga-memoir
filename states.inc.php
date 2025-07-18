@@ -666,7 +666,7 @@ $machinestates = [
     'transitions' => ['draw' => ST_DRAW],
   ],
   // TODO try to remove Not sure to keep 
-  ST_BLOW_BRIDGE => [
+  /*ST_BLOW_BRIDGE => [
     'name' => 'blowBridge',
     'description' => clienttranslate('${actplayer} is blowing one bridge'),
     'descriptionmyturn' => clienttranslate('${you} are blowing one bridge'),
@@ -674,9 +674,8 @@ $machinestates = [
     'action' => 'stBlowBridge',
     'args' => 'argsblowbridge2',
     'transitions' => ['draw' => ST_DRAW],
-  ],
+  ],*/
 
-  // TO DO state Train Reinforcement
   ST_TRAIN_REINFORCEMENT => [
     'name' => 'trainReinforcement',
     'description' => clienttranslate('${actplayer} can deploy 1 unit from each train unit'),
@@ -707,7 +706,8 @@ $machinestates = [
   //
   /////////////////////////////////////////////
 
-  ST_OVERLORD_PLAY_CARD => [
+  // Commented those 4 states as Overlord is not developped yet
+  /*ST_OVERLORD_PLAY_CARD => [
     'name' => 'playCard',
     'description' => clienttranslate('Players must play a card'),
     'descriptionmyturn' => clienttranslate('${you} must play a card'),
@@ -745,7 +745,7 @@ $machinestates = [
     'args' => 'argsOverlordAttackUnit',
     'possibleactions' => ['actAttackUnit'],
     'transitions' => ['ambush' => ST_OPPONENT_AMBUSH, 'attack' => ST_ATTACK_THROW], // attack if not close assault
-  ],
+  ],*/
 
   // Generic state to change player
   ST_CHANGE_ACTIVE_PLAYER => [

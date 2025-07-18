@@ -348,6 +348,23 @@ $game_options = [
         'premium' => true,
       ],
 
+      4085 => [
+        'name' => clienttranslate('[BB] [4085] Wittmann\'s Final Battle'),
+        'tmdisplay' => '[4085]',
+        'description' => clienttranslate('[4085] Wittmann\'s Final Battle'),
+        'premium' => true,
+      ],
+
+      /* Waiting for smoke screen action
+      4086 => [
+        'name' => clienttranslate('[BB] [4086] Opportunity at Falaise'),
+        'tmdisplay' => '[4086]',
+        'description' => clienttranslate('[4086] Opportunity at Falaise'),
+        'premium' => true,
+      ],*/
+
+
+
       4087 => [
         'name' => clienttranslate('[BB] [4087] Drive On Caen'),
         'tmdisplay' => '[4087]',

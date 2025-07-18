@@ -36,6 +36,8 @@ $scenariosMap = [
 
   1324 => '1324-DugInAtSidiOmar',
   1558 => '1558-Hill112',
+  4085 => '4085-WittmannsFinalBattle',
+  4086 => '4086-OpportunityAtFalaise',
   4087 => '4087-DriveOnCaen',
   4088 => '4088-PushingThroughCaen',
   4089 => '4089-NightWithdrawal',
