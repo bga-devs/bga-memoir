@@ -21,7 +21,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
   const TOKEN_MINE = 2;
   const TOKEN_CAMOUFLAGE = 4;
   const TOKEN_EXIT_MARKER = 5;
-  const TOKEN_ON_TOP = ['target'];
+  const TOKEN_ON_TOP = ['target','tag14','tag15'];
 
   function computeCoords(x, y) {
     // TODO : replace 9 by dim.y
@@ -739,7 +739,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           '<li>' + _('During a single game turn, you may order new Armor Units onto the board') + '</li>',
           '<li>' + _('Order must be valid and issued as normal') + '</li>',
           '<li>' + _('Units must enter through Opponent\'s baseline') + '</li>',
-          '<li>' + _('Units must stop on baseline hex; they may battle and Take Ground this turn, but may not Armor Overrun') + '</li>',
+          '<li>' + _('Units must stop on baseline hex; they may battle (if no terrain restriction when entering) and Take Ground this turn, but may not Armor Overrun') + '</li>',
           '<li>' + _('When retreating, Units must retreat towrd controlling player\'s baseline') + '</li>',     
         ];
       } else if (rule.name == 'deck_name' && rule.val == 'AIR_POWER_AS_ARTILLERY_BOMBARD_DECK') {

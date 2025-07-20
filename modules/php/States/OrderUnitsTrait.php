@@ -294,6 +294,11 @@ trait OrderUnitsTrait
     $unit->setExtraDatas('cannotArmorOverrun', true);
     $unit->setExtraDatas('stopped', true);
     $unit->ableTakeGround();
+    // if deployed on terrain with battle restriction (eg. forest or village) :
+    $cell = $unit->getPos();
+    if (Board::enteringCannotBattleCell($cell, $unit)) {
+      $unit->setExtraDatas('cannotBattle', true);
+    }
     // max nbr of unit to be deployed from the card rule
     $cardInPlay = $player->getCardInPlay();
     $args = $cardInPlay->getArgsOrderUnits();

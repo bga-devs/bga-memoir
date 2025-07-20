@@ -1,11 +1,11 @@
 .board-token {
   background-image: url('img/tokens.png');
-  background-size: 300% 400%;
+  background-size: 300% 500%;
 
-  @for $i from 0 through 12 {
+  @for $i from 0 through 13 {
     &[data-sprite='#{$i}'] {
       background-position-x: ($i % 3) * 100% / 2;
-      background-position-y: (($i - ($i % 3)) / 3) * 100% / 3;
+      background-position-y: (($i - ($i % 3)) / 3) * 100% / 4;
     }
   }
 }
@@ -40,15 +40,15 @@
 
 .hex-grid-terrain[data-tile^='mine'] {
   background-image: url('img/tokens.png');
-  background-size: 300% 400%;
-  background-position: 100% 66.6666%;
+  background-size: 300% 500%;
+  background-position: 100% 50%;
   z-index: 10;
 
   @for $i from 0 through 5 {
     &[data-tile='mine#{$i}'] {
       $j: $i + 3;
       background-position-x: ($j % 3) * 100% / 2;
-      background-position-y: (($j - ($j % 3)) / 3) * 100% / 3;
+      background-position-y: (($j - ($j % 3)) / 3) * 100% / 4;
     }
   }
 }

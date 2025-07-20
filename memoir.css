@@ -7181,7 +7181,7 @@ span.m44-dice-result[data-result="4"] {
 
 .board-token {
   background-image: url("img/tokens.png");
-  background-size: 300% 400%;
+  background-size: 300% 500%;
 }
 .board-token[data-sprite="0"] {
   background-position-x: 0%;
@@ -7197,43 +7197,51 @@ span.m44-dice-result[data-result="4"] {
 }
 .board-token[data-sprite="3"] {
   background-position-x: 0%;
-  background-position-y: 33.3333333333%;
+  background-position-y: 25%;
 }
 .board-token[data-sprite="4"] {
   background-position-x: 50%;
-  background-position-y: 33.3333333333%;
+  background-position-y: 25%;
 }
 .board-token[data-sprite="5"] {
   background-position-x: 100%;
-  background-position-y: 33.3333333333%;
+  background-position-y: 25%;
 }
 .board-token[data-sprite="6"] {
   background-position-x: 0%;
-  background-position-y: 66.6666666667%;
+  background-position-y: 50%;
 }
 .board-token[data-sprite="7"] {
   background-position-x: 50%;
-  background-position-y: 66.6666666667%;
+  background-position-y: 50%;
 }
 .board-token[data-sprite="8"] {
   background-position-x: 100%;
-  background-position-y: 66.6666666667%;
+  background-position-y: 50%;
 }
 .board-token[data-sprite="9"] {
   background-position-x: 0%;
-  background-position-y: 100%;
+  background-position-y: 75%;
 }
 .board-token[data-sprite="10"] {
   background-position-x: 50%;
-  background-position-y: 100%;
+  background-position-y: 75%;
 }
 .board-token[data-sprite="11"] {
   background-position-x: 100%;
-  background-position-y: 100%;
+  background-position-y: 75%;
 }
 .board-token[data-sprite="12"] {
   background-position-x: 0%;
-  background-position-y: 133.3333333333%;
+  background-position-y: 100%;
+}
+.board-token[data-sprite="13"] {
+  background-position-x: 50%;
+  background-position-y: 100%;
+}
+.board-token[data-sprite="14"] {
+  background-position-x: 100%;
+  background-position-y: 100%;
 }
 
 .hex-grid-item .board-token {
@@ -7260,33 +7268,33 @@ span.m44-dice-result[data-result="4"] {
 
 .hex-grid-terrain[data-tile^=mine] {
   background-image: url("img/tokens.png");
-  background-size: 300% 400%;
-  background-position: 100% 66.6666%;
+  background-size: 300% 500%;
+  background-position: 100% 50%;
   z-index: 10;
 }
 .hex-grid-terrain[data-tile^=mine][data-tile=mine0] {
   background-position-x: 0%;
-  background-position-y: 33.3333333333%;
+  background-position-y: 25%;
 }
 .hex-grid-terrain[data-tile^=mine][data-tile=mine1] {
   background-position-x: 50%;
-  background-position-y: 33.3333333333%;
+  background-position-y: 25%;
 }
 .hex-grid-terrain[data-tile^=mine][data-tile=mine2] {
   background-position-x: 100%;
-  background-position-y: 33.3333333333%;
+  background-position-y: 25%;
 }
 .hex-grid-terrain[data-tile^=mine][data-tile=mine3] {
   background-position-x: 0%;
-  background-position-y: 66.6666666667%;
+  background-position-y: 50%;
 }
 .hex-grid-terrain[data-tile^=mine][data-tile=mine4] {
   background-position-x: 50%;
-  background-position-y: 66.6666666667%;
+  background-position-y: 50%;
 }
 .hex-grid-terrain[data-tile^=mine][data-tile=mine5] {
   background-position-x: 100%;
-  background-position-y: 66.6666666667%;
+  background-position-y: 50%;
 }
 
 #m44-board .hex-grid-item .hex-grid-content.hex-grid-terrain[data-tile^=mine] {
