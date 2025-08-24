@@ -52,6 +52,7 @@ define([
         'trainReinforcement',
         'reserveUnitsDeployement',
         'armorBreakthroughDeployement',
+        'smokescreen',
       ];
       this._notifications = [
         ['playCard', 1000],
@@ -81,6 +82,7 @@ define([
         ['addToken', 1000],
         ['removeToken', 1000],
         ['revealMinefield', 100],
+        ['flipSmokeScreen', 100],
         ['commissarCard', 1000],
         ['pCommissarCard', 1000],
         ['revealCommissarCard', 1000],
@@ -101,6 +103,7 @@ define([
         ['removeAirPowerToken',500],
         ['replenishWinnerReserveTokens',1],
         ['armorBreakthroughDeployement',1000],
+        ['smokescreen',1000],
       ];
 
       // Fix mobile viewport (remove CSS zoom)
@@ -330,6 +333,7 @@ define([
         blowBridge: 'attack',
         trainReinforcement: 'move',
         armorBreakthrough: 'order',
+        smokeScreen: 'order',
         //reserveUnitsDeployement : 'command',
       };
 
@@ -447,6 +451,7 @@ define([
         'forAirDrop',
         'forTrainReinforcement',
         'forReserveUnitDeploy',
+        'airPowerTarget',
         'attacked',
         'mayAttack',
       ].forEach((className) => {
@@ -831,7 +836,7 @@ define([
         end = new Date(Date.UTC(dateEnd[0], parseInt(dateEnd[1]) - 1, parseInt(dateEnd[2])));
       }
 
-      const GENERALS_SPRITES = ['Montgomery', 'Rommel', 'Von_Rundstedt', 'Bradley'];
+      const GENERALS_SPRITES = ['Montgomery', 'Rommel', 'Von_Rundstedt', 'Bradley', 'Von_Kluge'];
       player = this.player_id;
       team = this.gamedatas.players[player].team;
       side = team == 'ALLIES' ? 0 : 1;

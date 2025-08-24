@@ -355,15 +355,13 @@ $game_options = [
         'premium' => true,
       ],
 
-      /* Waiting for smoke screen action
+      
       4086 => [
         'name' => clienttranslate('[BB] [4086] Opportunity at Falaise'),
         'tmdisplay' => '[4086]',
         'description' => clienttranslate('[4086] Opportunity at Falaise'),
         'premium' => true,
-      ],*/
-
-
+      ],
 
       4087 => [
         'name' => clienttranslate('[BB] [4087] Drive On Caen'),
@@ -834,6 +832,12 @@ $game_options = [
         'name' => clienttranslate('[CB1] [4] Small Campaign Early Falaise'),
         'tmdisplay' => '[4]',
         'description' => clienttranslate('Small Campaign Early Falaise'),
+        'premium' => true,
+      ],
+      40005 => [
+        'name' => clienttranslate('[CB1] [5] Small Campaign Falaise'),
+        'tmdisplay' => '[5]',
+        'description' => clienttranslate('Small Campaign Falaise'),
         'premium' => true,
       ],
     ],

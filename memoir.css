@@ -2299,6 +2299,15 @@ html {
   background-image: url("img/ui/commissar.png");
   background-size: 100% 100%;
 }
+.board-tooltip .summary-card.summary-rules .smoke_screen {
+  width: 50px;
+  height: 50px;
+  background-image: url("img/tokens.png");
+  background-size: 300% 500%;
+  background-position: 100% 150%;
+  background-position-x: 0%;
+  background-position-y: 100%;
+}
 .board-tooltip .summary-card.summary-rules .summary-tile {
   width: 50px;
 }
@@ -6575,7 +6584,7 @@ span.m44-dice-result[data-result="4"] {
   width: 66%;
   height: 210px;
   background-image: url("img/generals.png");
-  background-size: 400% 100%;
+  background-size: 500% 100%;
 }
 #popin_showScenario #popin_showCampaign_contents .generals[data-sprite="0"],
 #popin_showCampaign #popin_showCampaign_contents .generals[data-sprite="0"],
@@ -6586,18 +6595,24 @@ span.m44-dice-result[data-result="4"] {
 #popin_showScenario #popin_showCampaign_contents .generals[data-sprite="1"],
 #popin_showCampaign #popin_showCampaign_contents .generals[data-sprite="1"],
 #popin_showScenarioLobby #popin_showCampaign_contents .generals[data-sprite="1"] {
-  background-position-x: 33.3333333333%;
+  background-position-x: 25%;
   background-position-y: 0%;
 }
 #popin_showScenario #popin_showCampaign_contents .generals[data-sprite="2"],
 #popin_showCampaign #popin_showCampaign_contents .generals[data-sprite="2"],
 #popin_showScenarioLobby #popin_showCampaign_contents .generals[data-sprite="2"] {
-  background-position-x: 66.6666666667%;
+  background-position-x: 50%;
   background-position-y: 0%;
 }
 #popin_showScenario #popin_showCampaign_contents .generals[data-sprite="3"],
 #popin_showCampaign #popin_showCampaign_contents .generals[data-sprite="3"],
 #popin_showScenarioLobby #popin_showCampaign_contents .generals[data-sprite="3"] {
+  background-position-x: 75%;
+  background-position-y: 0%;
+}
+#popin_showScenario #popin_showCampaign_contents .generals[data-sprite="4"],
+#popin_showCampaign #popin_showCampaign_contents .generals[data-sprite="4"],
+#popin_showScenarioLobby #popin_showCampaign_contents .generals[data-sprite="4"] {
   background-position-x: 100%;
   background-position-y: 0%;
 }
@@ -7239,10 +7254,6 @@ span.m44-dice-result[data-result="4"] {
   background-position-x: 50%;
   background-position-y: 100%;
 }
-.board-token[data-sprite="14"] {
-  background-position-x: 100%;
-  background-position-y: 100%;
-}
 
 .hex-grid-item .board-token {
   width: 42.8%;
@@ -7307,6 +7318,36 @@ span.m44-dice-result[data-result="4"] {
 }
 
 .board-tooltip .summary-card .summary-tile .hex-grid-content.hex-grid-terrain[data-tile^=mine] {
+  width: 70px;
+  height: 70px;
+  clip-path: none;
+}
+
+.hex-grid-terrain[data-tile^=smoke] {
+  background-image: url("img/tokens.png");
+  background-size: 300% 500%;
+  background-position: 100% 150%;
+  z-index: 2;
+}
+.hex-grid-terrain[data-tile^=smoke][data-tile=smoke0] {
+  background-position-x: 0%;
+  background-position-y: 100%;
+}
+.hex-grid-terrain[data-tile^=smoke][data-tile=smoke1] {
+  background-position-x: 50%;
+  background-position-y: 100%;
+}
+
+#m44-board .hex-grid-item .hex-grid-content.hex-grid-terrain[data-tile^=smoke] {
+  width: 70%;
+  height: 60.6218%;
+  top: 19.3%;
+  left: 15%;
+  clip-path: none;
+  transform: none;
+}
+
+.board-tooltip .summary-card .summary-tile .hex-grid-content.hex-grid-terrain[data-tile^=smoke] {
   width: 70px;
   height: 70px;
   clip-path: none;

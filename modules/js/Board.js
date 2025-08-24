@@ -299,7 +299,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       let terrain = n.args.terrain;
       let cellC = $(`cell-background-${terrain.x}-${terrain.y}`);
       terrain.rotate = this._isRotated;
-      if (terrain.tile == 'hills' || terrain.tile == 'mountain') {
+      if (terrain.tile == 'hills' || terrain.tile == 'mountain' || terrain.tile == 'smoke0') {
         this.place('tplTerrainTile', terrain, cellC);
       } else {
         this.place('tplObstacleTile', terrain, cellC);
@@ -328,6 +328,19 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       }
     },
 
+    notif_flipSmokeScreen(n) {
+      console.log('Notif: flip smoke screen markers to tile smoke1', n);
+      let tile = 'smoke1';
+      $(`terrain-${n.args.smokeId}`).dataset.tile = tile;
+      this._grid[n.args.cell.x][n.args.cell.y].terrains.forEach((terrain) => {
+        if (terrain.id == n.args.smokeId) {
+          terrain.tile = tile;
+        }
+      });
+      
+    },
+
+
     tplTerrainTile(terrain) {
       let className = '';
       let tile = TERRAINS.findIndex((t) => t == terrain.tile);
@@ -338,6 +351,11 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       }
       if (terrain.tile.substr(0, 4) == 'mine') {
         // Special case of minefields
+        tile = terrain.tile;
+      }
+
+      if (terrain.tile.substr(0, 5) == 'smoke') {
+        // Special case of smoke screen
         tile = terrain.tile;
       }
 
@@ -382,7 +400,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
     tplBoardToken(token) {
       // prettier-ignore
-      const SPRITES = ['tag1', 'tag4', 'tag5', 'mine0', 'mine1', 'mine2', 'mine3', 'mine4', 'mineX', 'tag14', 'tag15', 'target'];
+      const SPRITES = ['tag1', 'tag4', 'tag5', 'mine0', 'mine1', 'mine2', 'mine3', 'mine4', 'mineX', 'tag14', 'tag15', 'target', 'smoke0', 'smoke1'];
       let sprite = SPRITES.findIndex((t) => t == token.sprite);
 
       return `<div id='board-token-${token.id}' class="board-token" data-sprite="${sprite}"></div>`;
@@ -748,6 +766,18 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         desc = [
           '<li>' + _('Air Power card is played as Artillery Bombard card') + '</li>',
         ];
+      } else if (rule.name == 'smoke_screen') {
+        name = _('Smoke screen');
+        tile = '<div class="smoke_screen"></div>';
+        desc = [
+          '<li>' + _('Place Smoke Screen markers on 3 adjacent contiguous hexes') + '</li>',
+          '<li>' + _('Once your turn has elapsed, flip Smoke Screen markers over') + '</li>',
+          '<li>' + _('Once your second turn has elapsed, remove Smoke Screen markers ') + '</li>',
+          '<li>' + _('Units can move on and through Smoke Screen without penalty') + '</li>',
+          '<li>' + _('Smoke Screen blocks line of Sight') + '</li>',
+          '<li>' + _('Unit on Smoke Screen hex may be seen and see out of that hex') + '</li>',
+        ];
+
       }
 
       return `<div class='summary-card summary-rules'>

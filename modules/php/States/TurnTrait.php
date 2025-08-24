@@ -12,6 +12,7 @@ use M44\Core\Notifications;
 use M44\Scenario;
 use M44\Dice;
 use M44\Helpers\Log;
+use M44\Managers\Terrains;
 
 trait TurnTrait
 {
@@ -29,6 +30,30 @@ trait TurnTrait
       Cards::reshuffleListener();
       return;
     }
+
+    // Smoke screen : flip to smoke1 tile at end of first turn and remove at end of turn 3 (second turn of 1st player)
+    if (Globals::getTurn() == 1) {
+      $player = Players::getActive();
+      // flip each smoke screen to 'smoke1' sunny tile
+      $smokeScreens = Terrains::getSelectQuery()
+      ->where('type', 'smokescreen')
+      ->get();
+      foreach ($smokeScreens as $smoke) {
+        $smoke -> setTile('smoke1');
+        Notifications::flipSmokeScreenMarker($player, $smoke);
+      }
+    }
+    // End of second turn of 1st player
+    if (Globals::getTurn() == 3) {
+      $smokeScreens = Terrains::getSelectQuery()
+      ->where('type', 'smokescreen')
+      ->get();
+      foreach ($smokeScreens as $smoke) {
+        $smoke -> removeFromBoard();
+      }
+
+    }
+    
 
     // Change team
     Teams::changeTeamTurn();

@@ -44,21 +44,31 @@ trait RoundTrait
     }
 
    // TODO only once per round
+   $options = Scenario::getOptions();
+   // Case if Campaign and one scenario has airdrop option or smoke screen option
+   // will be checked in ST_RECHECK_BEFORE_FIRST TURN after Reserve Roll Deployement
     if (Globals::isCampaign()) {
       $team = Teams::get(Globals::getTeamTurn());
 
       // TO DO
       $this->gamestate->setAllPlayersMultiactive();
       $this->gamestate->nextState('reserveRoll');
-    } else {
+    } elseif (isset($options['airdrop'])) {
       // Check for options
-      $options = Scenario::getOptions();
       if (isset($options['airdrop'])) {
         $team = Teams::get($options['airdrop']['side']);
         $this->changeActivePlayerAndJumpTo($team->getCommander(), ST_AIR_DROP);
         return;
       }
       
+    } else {
+
+      if (isset($options['smoke_screen'])) {
+        $team = Teams::get($options['smoke_screen']['side']);
+        $this->changeActivePlayerAndJumpTo($team->getCommander(), ST_SMOKE_SCREEN);
+        return;
+      }
+
       $this->gamestate->nextState('prepareTurn');
     }
   }
@@ -380,6 +390,64 @@ trait RoundTrait
       }
     }
     return $reserveElements;
+  }
+
+  public function stRecheckBeforeFirstTurn() {
+    $options = Scenario::getOptions();
+   // Case if Campaign and one scenario has airdrop option or smoke screen option (as reserve roll was executed)
+    if (Globals::isCampaign() && Globals::getRollReserveDone()) {
+      // Check for options
+
+      if (isset($options['airdrop'])) {
+        $team = Teams::get($options['airdrop']['side']);
+        $this->changeActivePlayerAndJumpTo($team->getCommander(), ST_AIR_DROP);
+        return;
+      }
+
+      if (isset($options['smoke_screen'])) {
+        $team = Teams::get($options['smoke_screen']['side']);
+        $this->changeActivePlayerAndJumpTo($team->getCommander(), ST_SMOKE_SCREEN);
+        return;
+      }
+ 
+      $this->gamestate->nextState('prepareTurn');
+    }
+  }
+
+  public function argsSmokeScreen() {
+    $cells = Board::getListOfCells();
+    return ['cells' => $cells];
+  }
+
+  public function actSmokeScreen($cells, $smokescreen) {
+    // add one smoke screen per each hexes selected
+    self::checkAction('actSmokeScreen');
+
+    if ($smokescreen) {
+      foreach($cells as $cell) {
+        // add smoke screen terrain in the database
+        $smokeScreen = Terrains::add([
+            'type' => 'smokescreen',
+            'tile' => 'smoke0',
+            'x' => $cell['x'],
+            'y' => $cell['y'],
+            'orientation' => 0,
+          ]);
+
+        // display full smoke screen on the cells
+        $player = Players::getActive();
+        Notifications::addTerrain(
+              $player,
+              $smokeScreen,
+              \clienttranslate('${player_name} places a smoke screen in ${coordSource}')
+            );
+      }
+    }
+
+    // state transition
+    $this->gamestate->jumpToState(ST_PREPARE_TURN);
+
+
   }
 
   public function stEndOfRound()

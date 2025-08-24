@@ -1,4 +1,7 @@
 <?php
+
+use Bga\GameFramework\Actions\Types\BoolParam;
+
 /**
  *------
  * BGA framework: © Gregory Isabelli <gisabelli@boardgamearena.com> & Emmanuel Colin <ecolin@boardgamearena.com>
@@ -352,6 +355,16 @@ class action_memoir extends APP_GameAction
     $this->game->actBlowBridge($bridgeIds);
     self::ajaxResponse();
   }
+
+  public function actSmokeScreen()
+  {
+    self::setAjaxMode();
+    $cells = self::getArg('cells', AT_json, true);
+    $smokeScreen = self::getArg('smokeScreen', AT_bool, true);
+    $this->game->actSmokeScreen($cells, $smokeScreen);
+    self::ajaxResponse();
+  }
+
 
   // Train reinforcement
   public function actTrainReinforcement()

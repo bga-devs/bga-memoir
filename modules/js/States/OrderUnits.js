@@ -745,7 +745,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         }
       })
       
-      this.addDangerActionButton('btnConfirmReserveDeployement', _('End reserve deployement'), () =>
+      this.addDangerActionButton('btnConfirmReserveDeployement', _('End reserve deployment'), () =>
         this.onClickConfirmReserveDeployement(args),
       );
     },
@@ -1183,8 +1183,104 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       //return Math.abs(pos.x - lastTerrainPos.x) + 2 * Math.abs(pos.y - lastTerrainPos.y) <= 3;
     },
 
+    ////////////////////////////////////////////////////////////
+    //  _____                 _          _____                          
+    // /  ___|               | |        /  ___|                         
+    // \ `--. _ __ ___   ___ | | _____  \ `--.  ___ _ __ ___  ___ _ __  
+    //  `--. \ '_ ` _ \ / _ \| |/ / _ \  `--. \/ __| '__/ _ \/ _ \ '_ \ 
+    // /\__/ / | | | | | (_) |   <  __/ /\__/ / (__| | |  __/  __/ | | |
+    // \____/|_| |_| |_|\___/|_|\_\___| \____/ \___|_|  \___|\___|_| |_|             
+    //
+    ////////////////////////////////////////////////////////////
+
+    onEnteringStateSmokeScreen(args) {
+      if (this.isCurrentPlayerActive()) {
+        this.addPrimaryActionButton(`btnSmokeScreenYes`, _('Yes'), () =>
+        this.clientState('targetSmokeScreen', _('You may place 3 adjacent smoke screen markers'), {cells : args.cells}));
+        this.addPrimaryActionButton(`btnSmokeScreenNo`, _('No'), () =>
+        this.takeAction('actSmokeScreen',  {cells: {} , smokeScreen : false}));
+      }
+
+    },
+
+    onEnteringStateTargetSmokeScreen(args) {
+      console.log('Entering state target Smoke screen', args.cells);
+      
+
+      args._selectedCells = [];
+      this._selectableCells = args.cells;
+
+      this._selectableCells.forEach((cell) => {
+        let x = cell['x'];
+        let y = cell['y'];
+        let oCell = $(`cell-${x}-${y}`);
+        this.onClick(oCell, () => {
+          dojo.destroy('btnRestartTurn');
+          //args._selectedCells.push(cell);
+          this.onClickSmokeScreen(cell, args);
+        })
+
+      });
 
 
+      this.addDangerActionButton('btnRestartTurn', _('Undo actions'), () => {
+          this.takeAction('actRestart');
+        },
+        'restartAction',
+      );
+
+      this.addPrimaryActionButton('btnConfirmTargetSmokeScreen', _('Confirm smoke screen target(s)'), () => {
+        this.takeAction('actSmokeScreen', { cells : JSON.stringify(args._selectedCells), smokeScreen : true });
+        }
+      );
+        
+
+    },
+
+    onClickSmokeScreen(cell, args) {
+      console.log('On ClickSmokeScreen selected cell', args, cell);
+      
+      let length = Object.keys(args._selectedCells).length;
+
+      // Add a number on the cell
+      if (this.isSelectableSmokeScreen(cell, args)) {
+        $(`cell-${cell.x}-${cell.y}`).dataset.airPowerOrder = length + 1;
+        $(`cell-${cell.x}-${cell.y}`).classList.add('airPowerTarget');
+        args._selectedCells[length] = cell;
+      }
+
+      dojo.destroy('btnClearSelectedCells');
+      if (args._selectedCells.length > 0) {
+        this.addSecondaryActionButton('btnClearSelectedCells', _('Clear'), () =>           
+          this.clearSelectedCells(args))
+      }
+      return true;
+    },
+
+    isSelectableSmokeScreen(cell, args) {
+      console.log('Is selectable cell ?', args._selectedCells, cell);
+      // If no selected terrain yet, can select any terrain
+      if (args._selectedCells.length == 0) return true;
+      // If already selected
+      if ($(`cell-${cell.x}-${cell.y}`).classList.contains('airPowerTarget')) return false;
+      let lastCell = args._selectedCells[args._selectedCells.length - 1];
+      // No more than 3 smoke screens
+      if (args._selectedCells.length == 3) return false;
+      // Otherwise, it must be adjacent to the last smoke screen cell
+      return Math.abs(cell['x'] - lastCell['x']) + 2 * Math.abs(cell['y'] - lastCell['y']) <= 3;
+    },
+
+    clearSelectedCells(args) {
+      args._selectedCells.forEach((cell) => {
+          console.log('test clear selection', cell.x, cell.y);
+          $(`cell-${cell.x}-${cell.y}`).classList.remove('airPowerTarget');
+        });
+      args._selectedCells = [];     
+    },
+
+    onLeavingStateTargetSmokeScreen() {
+      this.clearPossible();
+    },
 
   });
 });

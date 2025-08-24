@@ -652,6 +652,16 @@ class Notifications
     ]);
   }
 
+  public static function flipSmokeScreenMarker($player, $smoke) {
+    $msg = \clienttranslate('At end of ${player_name}\'s turn, smoke screen marker has been flipped over');
+
+    self::notifyAll('flipSmokeScreen', $msg, [
+      'player' => $player,
+      'smokeId' => $smoke->getId(),
+      'cell' => $smoke->getPos(),
+    ]);
+  }
+
   public static function commissarCard($player, $card)
   {
     self::notifyAll('commissarCard', clienttranslate('${player_name} puts 1 card under the commissar token'), [

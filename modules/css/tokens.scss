@@ -67,3 +67,33 @@
   height: 70px;
   clip-path: none;
 }
+
+.hex-grid-terrain[data-tile^='smoke'] {
+  background-image: url('img/tokens.png');
+  background-size: 300% 500%;
+  background-position: 100% 150%;
+  z-index: 2;
+
+  @for $i from 0 through 1 {
+    &[data-tile='smoke#{$i}'] {
+      $j: $i + 12;
+      background-position-x: ($j % 3) * 100% / 2;
+      background-position-y: (($j - ($j % 3)) / 3) * 100% / 4;
+    }
+  }
+}
+
+#m44-board .hex-grid-item .hex-grid-content.hex-grid-terrain[data-tile^='smoke'] {
+  width: 70%;
+  height: 60.6218%;
+  top: 19.3%;
+  left: 15%;
+  clip-path: none;
+  transform: none;
+}
+
+.board-tooltip .summary-card .summary-tile .hex-grid-content.hex-grid-terrain[data-tile^='smoke'] {
+  width: 70px;
+  height: 70px;
+  clip-path: none;
+}

@@ -148,11 +148,11 @@
       width: 66%;
       height: 210px;
       background-image: url('img/generals.png');
-      background-size: 400% 100%;
+      background-size: 500% 100%;
     
-      @for $i from 0 through 3 {
+      @for $i from 0 through 4 {
         &[data-sprite='#{$i}'] {
-          background-position-x: ($i % 4) * 100% / 3;
+          background-position-x: ($i % 5) * 100% / 4;
           background-position-y: 0%;
         }
       }

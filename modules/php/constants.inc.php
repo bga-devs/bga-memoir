@@ -59,9 +59,11 @@ const ST_AIR_DROP = 50;
 const ST_AIR_DROP2 = 51;
 const ST_TRAIN_REINFORCEMENT = 52;
 const ST_ARMOR_BREAKTHROUGH = 53;
+const ST_SMOKE_SCREEN = 54;
 
 const ST_RESERVE_ROLL_DEPLOYEMENT = 55;
 const ST_RESERVE_ROLL = 56;
+const ST_RECHECK_BEFORE_FIRST_TURN = 57;
 
 const ST_CONFIRM_TURN = 59;
 
@@ -303,6 +305,7 @@ const TERRAIN_CLASSES = [
   'jungle' => 'Jungle',
   'pier' => 'Pier',
   'rice' => 'RicePaddie',
+  'smokescreen' => 'SmokeScreen',
 ];
 
 const TROOP_CLASSES = [
@@ -350,6 +353,7 @@ const TROOP_BADGE_MAPPING = [
   'DE' => 'badge4',
   'US' => 'badge2',
   'GB' => 'badge1',
+  'CA' => 'badge1',
 ];
 
 // badge mapping nation

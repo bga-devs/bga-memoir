@@ -8,8 +8,8 @@ $scenarios[4625] = [
     'software' => 'sed 1.2',
   ],
   'game_info' => [
-    'date_begin' => '1944-06-06',
-    'date_end' => '1944-06-06',
+    'date_begin' => '1944-07-30',
+    'date_end' => '1944-07-31',
     'front' => 'WESTERN',
     'type' => 'HISTORICAL',
     'starting' => 'PLAYER2',

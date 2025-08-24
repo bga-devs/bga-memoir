@@ -37,6 +37,11 @@ $scenarios[4086] =[
     'date_begin' => '1944-08-15',
     'date_end' => '1944-08-17',
     'operationID' => 23,
+    'options' => [
+      'smoke_screen' => [
+        'side' => 'ALLIES',
+      ],      
+    ],
   ],
   'board' => [
     'type' => 'standard',

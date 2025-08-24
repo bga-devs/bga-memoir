@@ -538,6 +538,16 @@
         background-image: url("img/ui/commissar.png");
         background-size: 100% 100%;
       }
+      .smoke_screen {
+        width: 50px;
+        height: 50px;
+        background-image: url("img/tokens.png");
+        background-size: 300% 500%;
+        background-position: 100% 150%;
+        background-position-x: 0%;
+        background-position-y: 100%;
+      }
+
       .summary-tile {
         width: 50px;
       }

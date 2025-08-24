@@ -90,7 +90,7 @@ $scenarios[40003] = [
                     1 => clienttranslate('Tert book, Herr General! We can make a better stand here. They will no doubt keep coming but we can keep holding out. The longer they are delayed... well... just get ready nest Allies push.'),
                     2 => clienttranslate('You made the Allies fight hard for the ground they gained. Good! They will think twice before trying to advance so swiftly again.'),
                 ],
-            'general' => 'Rommel',
+            'general' => 'Von_Kluge',
             'general_briefing' => clienttranslate('I\'m sure you you know how vital Caen is. This crossroad is the key to the Allies breaking out of the bridgehead and into the open grounds of France. We cannot allow their armor to break into the open or their sheer numbers will overhelm us. Delay the Allies as long as possible. And remember, our reserves are sparse. \n\n        - Generalfeldmarschall Von Kluge'),
         ],
     ],

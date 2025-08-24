@@ -98,7 +98,7 @@ $machinestates = [
     ],
   ],
 
-  //Used toperforme reserve roll dice and initiate multipleplayer choice in private mode for ST_RESERVE_ROLL_DEPLOYEMEN
+  //Used to perform reserve roll dice and initiate multipleplayer choice in private mode for ST_RESERVE_ROLL_DEPLOYEMEN
   ST_RESERVE_ROLL => [
     'name' => 'reserveRoll',
     'description' => clienttranslate('Waiting for other players to complete reserve roll deployement.'),
@@ -114,7 +114,7 @@ $machinestates = [
     //this action is possible if player is not in any private state which usually happens when they are inactive
     'possibleactions' => [], 
     // this is normal next transition which will happen after all players finish their turns 
-    'transitions' => ['done' => ST_PREPARE_TURN, 'again' => ST_RESERVE_ROLL_DEPLOYEMENT] 
+    'transitions' => ['done' => ST_RECHECK_BEFORE_FIRST_TURN, 'again' => ST_RESERVE_ROLL_DEPLOYEMENT] 
   ],
   
   // Used for each player to choose reserve deployement actions or elements (units, obstacles, airpower tokens)
@@ -143,6 +143,17 @@ $machinestates = [
     'transitions' => ['prepareTurn' => ST_PREPARE_TURN, 'reserveRoll' => ST_RESERVE_ROLL],
   ],
 
+  // In case of CAmpaign mode and possible Smoke Screen or Air Drop after reserve Roll
+  ST_RECHECK_BEFORE_FIRST_TURN => [
+    'name' => 'recheckBeforeFirstTurn',
+    'description' => '',
+    'descriptionmyturn' => '',
+    'type' => 'game',
+    'action' => 'stRecheckBeforeFirstTurn',
+    'possibleactions' => [],
+    'transitions' => ['airDrop' => ST_AIR_DROP, 'smokeScreen' => ST_SMOKE_SCREEN, 'prepareTurn' => ST_PREPARE_TURN],
+  ],
+
   ST_AIR_DROP => [
     'name' => 'airDrop',
     'description' => clienttranslate('${actplayer} must choose where to air drop ${nb} units in ${nb_drops} different air drop(s)'),
@@ -168,6 +179,20 @@ $machinestates = [
     'possibleactions' => ['actAirDrop2'],
     'transitions' => ['playCard' => ST_PLAY_CARD, 'commissar' => ST_COMMISSAR],
   ],
+
+    ST_SMOKE_SCREEN => [
+    'name' => 'smokeScreen',
+    'description' => clienttranslate('${actplayer} may place 3 adjacent smoke screen markers'),
+    'descriptionmyturn' => clienttranslate('Do you want to deploy 3 adjacent smoke screen markers'),
+    'type' => 'activeplayer',
+    'args' => 'argsSmokeScreen',
+    'possibleactions' => ['actSmokeScreen'],
+    'transitions' => [
+      '' => ST_PREPARE_TURN,
+    ],
+  ],
+
+
 
   ST_END_OF_ROUND => [
     'name' => 'endOfRound',
