@@ -53,7 +53,7 @@ $scenarios[4086] =[
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
-          'behavior' => 'FORDABLE_STREAM',
+          'behavior' => 'FORD',
         ],
       ],
       1 => [
@@ -62,7 +62,7 @@ $scenarios[4086] =[
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
-          'behavior' => 'FORDABLE_STREAM',
+          'behavior' => 'FORD',
         ],
       ],
       2 => [
@@ -71,7 +71,7 @@ $scenarios[4086] =[
         'terrain' => [
           'name' => 'curve',
           'orientation' => 3,
-          'behavior' => 'FORDABLE_STREAM',
+          'behavior' => 'FORD',
         ],
       ],
       3 => [
@@ -80,7 +80,7 @@ $scenarios[4086] =[
         'terrain' => [
           'name' => 'curve',
           'orientation' => 6,
-          'behavior' => 'FORDABLE_STREAM',
+          'behavior' => 'FORD',
         ],
       ],
       4 => [
@@ -89,7 +89,7 @@ $scenarios[4086] =[
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
-          'behavior' => 'FORDABLE_STREAM',
+          'behavior' => 'FORD',
         ],
       ],
       5 => [
@@ -98,7 +98,7 @@ $scenarios[4086] =[
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
-          'behavior' => 'FORDABLE_STREAM',
+          'behavior' => 'FORD',
         ],
       ],
       6 => [
@@ -107,7 +107,7 @@ $scenarios[4086] =[
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
-          'behavior' => 'FORDABLE_STREAM',
+          'behavior' => 'FORD',
         ],
       ],
       7 => [
@@ -116,7 +116,7 @@ $scenarios[4086] =[
         'terrain' => [
           'name' => 'curve',
           'orientation' => 5,
-          'behavior' => 'FORDABLE_STREAM',
+          'behavior' => 'FORD',
         ],
       ],
       8 => [
@@ -125,7 +125,7 @@ $scenarios[4086] =[
         'terrain' => [
           'name' => 'curve',
           'orientation' => 2,
-          'behavior' => 'FORDABLE_STREAM',
+          'behavior' => 'FORD',
         ],
       ],
       9 => [
@@ -134,7 +134,7 @@ $scenarios[4086] =[
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
-          'behavior' => 'FORDABLE_STREAM',
+          'behavior' => 'FORD',
         ],
       ],
       10 => [
@@ -143,7 +143,7 @@ $scenarios[4086] =[
         'terrain' => [
           'name' => 'river',
           'orientation' => 1,
-          'behavior' => 'FORDABLE_STREAM',
+          'behavior' => 'FORD',
         ],
       ],
       11 => [

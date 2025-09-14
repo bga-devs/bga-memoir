@@ -77,14 +77,7 @@ trait AttackUnitsTrait
   {
     $player = $player ?? Players::getActive();
 
-    if (Globals::isCampaign() && Globals::getAirPowerTokenUsed()) {
-      $card = Cards::getInstance(CARD_AIR_POWER);
-      $card->setPlayer($player->getId());
-      $cardId = Cards::getIdByType(CARD_AIR_POWER);
-      $card->setId($cardId); 
-    } else {
-      $card = $player->getCardInPlay();
-    }
+    $card = $player->getCardInPlay();
 
     $args = $card->getArgsAttackUnits();
     Utils::clearPaths($args['units']);
@@ -105,14 +98,7 @@ trait AttackUnitsTrait
     }
     $player = Players::getActive();
     
-    if (Globals::isCampaign() && Globals::getAirPowerTokenUsed()) {
-      $card = Cards::getInstance(CARD_AIR_POWER);
-      $card->setPlayer($player->getId());
-      $cardId = Cards::getIdByType(CARD_AIR_POWER);
-      $card->setId($cardId); 
-    } else {
-      $card = $player->getCardInPlay();
-    }
+    $card = $player->getCardInPlay();
 
     $nextState = $card->nextStateAfterAttacks();
     $this->nextState($nextState);

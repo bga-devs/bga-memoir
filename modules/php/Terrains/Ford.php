@@ -10,7 +10,7 @@ class Ford extends \M44\Models\Terrain
 
   public function __construct($row)
   {
-    $this->name = clienttranslate('Fords');
+    $this->name = clienttranslate('Fords or Fordable River');
     $this->number = 41;
     $this->isBridge = true;
     $this->mustStopWhenEntering = true;

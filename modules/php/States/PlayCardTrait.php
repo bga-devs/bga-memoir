@@ -96,9 +96,13 @@ trait PlayCardTrait
       unset($airPowerTokens[array_search($teamId, $airPowerTokens)]);
       Globals::setAirPowerTokens($airPowerTokens);
       // notify
-      Notifications::removeAirpowerToken($player);      
+      Notifications::removeAirpowerToken($player);
+      $card = Cards::getInstance(CARD_AIR_POWER);
+      $card->setPlayer($player->getId());
+      $cardId = Cards::getIdByType(CARD_AIR_POWER);
+      $card->setId($cardId);      
       
-      $nextState = 'airpower';
+      $nextState = $card->nextStateAfterPlay();
     } else {
 
       if (!in_array($cardId, $args['cards']->getIds())) {

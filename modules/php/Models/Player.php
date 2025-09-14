@@ -81,7 +81,16 @@ class Player extends \M44\Helpers\DB_Model
 
   public function getCardInPlay()
   {
-    return Cards::getInPlayOfPlayer($this->id);
+    if (Globals::isCampaign() && Globals::getAirPowerTokenUsed()) {
+      $card = Cards::getInstance(CARD_AIR_POWER);
+      $card->setPlayer($this->id);
+      $cardId = Cards::getIdByType(CARD_AIR_POWER);
+      $card->setId($cardId); 
+    } else {
+      $card = Cards::getInPlayOfPlayer($this->id);
+    }
+    
+    return $card;
   }
 
   public function countAllCards()
