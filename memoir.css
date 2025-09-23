@@ -6862,6 +6862,17 @@ span.m44-dice-result[data-result="4"] {
   background-image: url("img/scenario_score.png");
   background-size: 100% 100%;
   margin: 0px 0px 0px 0px;
+  display: flex;
+}
+#popin_showScenario #popin_showCampaign_contents .scores-allies, #popin_showScenario #popin_showCampaign_contents .scores-axis,
+#popin_showCampaign #popin_showCampaign_contents .scores-allies,
+#popin_showCampaign #popin_showCampaign_contents .scores-axis,
+#popin_showScenarioLobby #popin_showCampaign_contents .scores-allies,
+#popin_showScenarioLobby #popin_showCampaign_contents .scores-axis {
+  width: 70px;
+  height: 77px;
+  text-align: center;
+  margin-top: 14px;
 }
 #popin_showScenario #popin_showCampaign_contents .next-scenario-container,
 #popin_showCampaign #popin_showCampaign_contents .next-scenario-container,
@@ -6935,7 +6946,7 @@ span.m44-dice-result[data-result="4"] {
   font-family: "Gunplay";
   table-layout: fixed;
   background-color: #ffffff;
-  color: #ffffff;
+  color: #7b5442;
 }
 #popin_showScenario #popin_showCampaign_contents #nbr_medals td, #popin_showScenario #popin_showCampaign_contents #nbr_objectives td, #popin_showScenario #popin_showCampaign_contents #victory_points td,
 #popin_showCampaign #popin_showCampaign_contents #nbr_medals td,
@@ -6968,7 +6979,7 @@ span.m44-dice-result[data-result="4"] {
 #popin_showScenarioLobby #popin_showCampaign_contents #nbr_medals .second-line,
 #popin_showScenarioLobby #popin_showCampaign_contents #nbr_objectives .second-line,
 #popin_showScenarioLobby #popin_showCampaign_contents #victory_points .second-line {
-  color: #ffffff;
+  color: #7b5442;
 }
 #popin_showScenario #popin_showCampaign_contents #nbr_objectives, #popin_showScenario #popin_showCampaign_contents #victory_points,
 #popin_showCampaign #popin_showCampaign_contents #nbr_objectives,

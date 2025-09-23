@@ -867,6 +867,11 @@ define([
       // iterate scenario numbers and display scenarios campaign container
       scenarios_nbr = campaign.scenarios.list.length;
       scenarios_container_tmp = ``;
+      let getStat = (pId, type) => {
+          let v = this.gamedatas.stats.find((stat) => stat.type == type && stat.pId == pId);
+          return v ? v.value : 0;
+        };
+      let round = this.gamedatas.round;
 
       for (let index = 0; index < scenarios_nbr; index++) {
         scenario_name = campaign.scenarios.name[index];
@@ -877,6 +882,20 @@ define([
         scenario_sprite = CAMPAIGN_SCENARIOS.findIndex((t) => t == scenario_id);
         scenario_win_message = scenarios.win_message[index] ?? '';
         arrow_fill_opacity = index % 2 == 0 ? 1 : 1;
+        //let twoWays = this.gamedatas.duration == 2;
+        let scenario_scores_type = [ 
+          [60, 70],
+          [61, 71],
+          [62, 72],
+          [63, 73],
+       ];
+        players = this.gamedatas.players;
+        pIds = Object.keys(players);
+        pId_allies = players[pIds[0]].team == 'ALLIES' ? pIds[0] : pIds[1];
+        pId_axis = players[pIds[0]].team == 'AXIS' ? pIds[0] : pIds[1];
+        scenario_stat_type = scenario_scores_type[index][round-1];
+        score_allies = getStat(pId_allies, scenario_stat_type);
+        score_axis = getStat(pId_axis, scenario_stat_type);
         arrow = index % 2 == 0 ? 
           `<svg xmlns="http://www.w3.org/2000/svg"
             width="257px"
@@ -971,6 +990,12 @@ define([
                     <div class="scenario-map-mini" data-sprite="${scenario_sprite}">
                     </div>
                     <div class="scenario-scores">
+                      <div class="scores-allies">
+                        ${score_allies}
+                      </div>
+                      <div class="scores-axis">
+                        ${score_axis}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -988,12 +1013,27 @@ define([
       </div>
       `;
 
+      let campaign_scores_type = [ 
+          [80, 90], // Total earned medal round
+          [81, 91], // Objectives medals
+          [82, 92], // Objectives track bonus
+          [83, 93], // Total victory points
+       ];
+      nbr_medals = getStat(player, campaign_scores_type[0][round -1]);
+      nbr_objectives = getStat(player, campaign_scores_type[1][round -1]);
+      objectives_track_bonus = getStat(player, campaign_scores_type[2][round -1]);
+      victory_points = getStat(player, campaign_scores_type[3][round -1]);
+
       objectives_table_points = scenarios.objectives_points;
       objectives_table_length = objectives_table_points.length;
       td_objective_tmp = `<td width="25px">none</td>`;
       td_points_tmp = `<td width="25px">${objectives_table_points[0]}</td>`;
       for (let index = 1; index < objectives_table_length; index++) {
-        td_objective_tmp += `<td width="25px">    </td>`;
+        if (index <= nbr_objectives) {
+          td_objective_tmp += `<td width="25px">&#x2713;</td>`;
+        } else {
+          td_objective_tmp += `<td width="25px">    </td>`;
+        }
         td_points_tmp += `<td width="25px">${objectives_table_points[index]}</td>`;
       }
 
@@ -1014,7 +1054,8 @@ define([
           </tr>
         </tbody>
       </table>
-      `
+      `;
+      
 
       if (!lobby) {
         return (
@@ -1072,7 +1113,7 @@ define([
                 </thead>
                 <tbody>
                   <tr>
-                    <td>0</td>
+                    <td>${nbr_medals}</td>
                   </tr>
                 </tbody>
               </table>
@@ -1088,7 +1129,7 @@ define([
                 </thead>
                 <tbody>
                   <tr>
-                    <td>0</td>
+                    <td>${objectives_track_bonus}</td>
                   </tr>
                 </tbody>
               </table>
@@ -1103,7 +1144,7 @@ define([
                 </thead>
                 <tbody>
                   <tr>
-                    <td>0</td>
+                    <td>${victory_points}</td>
                   </tr>
                 </tbody>
               </table>

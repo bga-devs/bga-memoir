@@ -840,6 +840,12 @@ $game_options = [
         'description' => clienttranslate('Small Campaign Falaise'),
         'premium' => true,
       ],
+      /*40006 => [
+        'name' => clienttranslate('[CB1] [6] Test stats'),
+        'tmdisplay' => '[6]',
+        'description' => clienttranslate('Test stats'),
+        'premium' => true,
+      ],*/
     ],
   ],
 

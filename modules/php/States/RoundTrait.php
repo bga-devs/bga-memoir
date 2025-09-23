@@ -465,6 +465,52 @@ trait RoundTrait
       if ($nextstep == 'END') {
         $nextstep = INFINITY;
       }
+
+      // TO DO update the campaign stats ater each round for each player
+      $round = Globals::getRound();
+      foreach (Players::getAll() as $player) {
+        // set campaign step results of the current round
+        $statName = 'set' . 'Campaign' . ($step + 1) . 'medalRound' . $round;
+        $medalStepRound = $player->getStat('medalRound' . $round);
+        if($step > 0) {
+          for ($i=0 ; $i < $step ; $i++) { 
+            $medalStepRound = $medalStepRound - $player->getStat('campaign' . ($i+1) . 'medalRound' . $round);
+          }
+        }
+        Stats::$statName($player, $medalStepRound);
+      
+
+        // set campaign total medal round of the current round
+        $statName = 'set' . 'CampaignTotalMedalRound' . $round;
+        $totalMedalsName = 'get' . 'MedalRound' . $round;
+        $totalMedals = Stats::$totalMedalsName($player);
+        Stats::$statName($player, $totalMedals);
+
+
+        // set total objectives medals
+        $nUnitsMedals = 0;
+        foreach (['inf', 'armor', 'artillery', 'other'] as $type) {
+          $nUnitsMedals += $player->getStat($type . 'UnitRound' . $round);
+        }
+        $objectivesMedals = $player->getStat('medalRound' . $round) - $nUnitsMedals;
+        $statName = 'set' . 'CampaignObjectivesRound' . $round;
+        Stats::$statName($player, $objectivesMedals);
+
+
+        // set campaign objective track bonus according to objective track
+        $teamId = $player->getTeam()->getId();
+        $objectivesBonus = Globals::getCampaign()['scenarios'][$teamId]['objectives_points'][$objectivesMedals];
+        $statName = 'set' . 'CampaignObjectivesTrackBonusRound' . $round;
+        Stats::$statName($player, $objectivesBonus);
+
+        // set total victory points : total medals + objective track bonuses
+        $victoryPoints = $totalMedals + $objectivesBonus;
+        $statName = 'set' . 'CampaignVictoryPointsRound' . $round;
+        Stats::$statName($player, $victoryPoints);
+      }
+      Notifications::updateStats();
+
+
       Globals::setCampaignStep($nextstep); // increment Campaign step according to campaign order by team
      
       // Check if remaining tokens or units on staging area, 

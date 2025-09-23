@@ -335,6 +335,14 @@
       background-image: url('img/scenario_score.png');
       background-size: 100% 100%;
       margin: 0px 0px 0px 0px;
+      display: flex;
+    }
+
+    .scores-allies, .scores-axis {
+      width: 70px;
+      height: 77px;
+      text-align: center;
+      margin-top: 14px;
     }
 
     .next-scenario-container{
@@ -393,7 +401,7 @@
       font-family: "Gunplay";
       table-layout: fixed;
       background-color: #ffffff;
-      color: #ffffff;
+      color: #7b5442;
 
       td {
       border: 3px solid rgb(190,190,190);
@@ -410,7 +418,7 @@
       }
 
       .second-line {
-        color: #ffffff;
+        color: #7b5442;
       }
     }
 

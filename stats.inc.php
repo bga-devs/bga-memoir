@@ -101,7 +101,47 @@ $stats_type = [
       'name' => totranslate('Round 1: killed other figures'),
       'type' => 'int',
     ],
-
+    'campaign1medalRound1' => [
+      'id' => STAT_CAMPAIGN_1_MEDAL_FIRST_ROUND,
+      'name' => totranslate('Round 1: scenario 1 earned medals'),
+      'type' => 'int',
+    ],
+    'campaign2medalRound1' => [
+      'id' => STAT_CAMPAIGN_2_MEDAL_FIRST_ROUND,
+      'name' => totranslate('Round 1: scenario 2 earned medals'),
+      'type' => 'int',
+    ],
+    'campaign3medalRound1' => [
+      'id' => STAT_CAMPAIGN_3_MEDAL_FIRST_ROUND,
+      'name' => totranslate('Round 1: scenario 3 earned medals'),
+      'type' => 'int',
+    ],
+    'campaign4medalRound1' => [
+      'id' => STAT_CAMPAIGN_4_MEDAL_FIRST_ROUND,
+      'name' => totranslate('Round 1: scenario 4 earned medals'),
+      'type' => 'int',
+    ],
+    'campaignTotalMedalRound1' => [
+      'id' => STAT_CAMPAIGN_TOTAL_MEDAL_FIRST_ROUND,
+      'name' => totranslate('Round 1: campaign total earned medals'),
+      'type' => 'int',
+    ],
+    'campaignObjectivesRound1' => [
+      'id' => STAT_CAMPAIGN_OBJECTIVES_FIRST_ROUND,
+      'name' => totranslate('Round 1: campaign earned objectives medals'),
+      'type' => 'int',
+    ],
+    'campaignObjectivesTrackBonusRound1' => [
+      'id' => STAT_CAMPAIGN_OBJECTIVES_TRACK_FIRST_ROUND,
+      'name' => totranslate('Round 1: campaign objectives medals bonus'),
+      'type' => 'int',
+    ],
+    'campaignVictoryPointsRound1' => [
+      'id' => STAT_CAMPAIGN_VICTORY_POINTS_FIRST_ROUND,
+      'name' => totranslate('Round 1: campaign total victory points'),
+      'type' => 'int',
+    ],
+  
     'teamRound2' => [
       'id' => STAT_TEAM_SECOND_ROUND,
       'name' => totranslate('Round 2: played side'),
@@ -155,6 +195,46 @@ $stats_type = [
     'otherFigRound2' => [
       'id' => STAT_OTHER_FIG_SECOND_ROUND,
       'name' => totranslate('Round 2: killed other figures'),
+      'type' => 'int',
+    ],
+    'campaign1medalRound2' => [
+      'id' => STAT_CAMPAIGN_1_MEDAL_SECOND_ROUND,
+      'name' => totranslate('Round 2: scenario 1 earned medals'),
+      'type' => 'int',
+    ],
+    'campaign2medalRound2' => [
+      'id' => STAT_CAMPAIGN_2_MEDAL_SECOND_ROUND,
+      'name' => totranslate('Round 2: scenario 2 earned medals'),
+      'type' => 'int',
+    ],
+    'campaign3medalRound2' => [
+      'id' => STAT_CAMPAIGN_3_MEDAL_SECOND_ROUND,
+      'name' => totranslate('Round 2: scenario 3 earned medals'),
+      'type' => 'int',
+    ],
+    'campaign4medalRound2' => [
+      'id' => STAT_CAMPAIGN_4_MEDAL_SECOND_ROUND,
+      'name' => totranslate('Round 2: scenario 4 earned medals'),
+      'type' => 'int',
+    ],
+    'campaignTotalMedalRound2' => [
+      'id' => STAT_CAMPAIGN_TOTAL_MEDAL_SECOND_ROUND,
+      'name' => totranslate('Round 2: campaign total earned medals'),
+      'type' => 'int',
+    ],
+    'campaignObjectivesRound2' => [
+      'id' => STAT_CAMPAIGN_OBJECTIVES_SECOND_ROUND,
+      'name' => totranslate('Round 2: campaign earned objectives medals'),
+      'type' => 'int',
+    ],
+    'campaignObjectivesTrackBonusRound2' => [
+      'id' => STAT_CAMPAIGN_OBJECTIVES_TRACK_SECOND_ROUND,
+      'name' => totranslate('Round 2: campaign objectives medals bonus'),
+      'type' => 'int',
+    ],
+    'campaignVictoryPointsRound2' => [
+      'id' => STAT_CAMPAIGN_VICTORY_POINTS_SECOND_ROUND,
+      'name' => totranslate('Round 2: campaign total victory points'),
       'type' => 'int',
     ],
 

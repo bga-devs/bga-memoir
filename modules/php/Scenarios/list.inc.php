@@ -126,4 +126,7 @@ $scenariosMap = [
   40003 => 'CB1-3-BattleofNormandy',
   40004 => 'CB1-4-BattleofNormandy',
   40005 => 'CB1-5-BattleofNormandy',
+  40006 => 'CB1-6-Test',
+  41870 => '41870-SecuringTheFlank',
+  41850 => '41850-CapturingTheCrossing',
 ];
