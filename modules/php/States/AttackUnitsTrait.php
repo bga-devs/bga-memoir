@@ -321,7 +321,8 @@ trait AttackUnitsTrait
       $attack['distance'] == 1 &&
       !$eliminated &&
       $oppUnit->getNUnits() == 1 &&
-      !$oppUnit->cannotBattleBack() // ex Sniper do not benefit from british nation battle back
+      !$oppUnit->cannotBattleBack() && // ex Sniper do not benefit from british nation battle back
+      !$oppUnit->cannotBattleTerrainRestriction() // ex unit in ocean cannot battleback
     ) {
       $this->nextState('battleBack', $oppUnit->getPlayer());
     } else {

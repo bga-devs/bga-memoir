@@ -249,6 +249,19 @@ class AbstractUnit extends \M44\Helpers\DB_Model implements \JsonSerializable
     return $this->getExtraDatas('cannotBattle') || $this->isOnTheMove();
   }
 
+  public function cannotBattleTerrainRestriction() {
+    $terrains = Board::getTerrainsInCell($this->getPos());
+    $cannotBattleFromTerrain = false;
+    foreach ($terrains as $t) {
+      if (!$cannotBattleFromTerrain) {
+        $cannotBattleFromTerrain = $t->cannotBattle($this, 0);
+      }
+    }
+
+    return $cannotBattleFromTerrain;
+
+  }
+
   public function getEquipment()
   {
     return $this->getExtraDatas('equipment') ?? false;

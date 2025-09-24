@@ -286,7 +286,8 @@ trait RetreatUnitTrait
       !$attack['ambush'] &&
       $oppUnit->getNUnits() == 1 &&
       $oppUnit->getRetreats() == 0 &&
-      !$oppUnit->cannotBattleBack() // ex Sniper do not benefit from british nation battle back
+      !$oppUnit->cannotBattleBack() && // ex Sniper do not benefit from british nation battle back
+      !$oppUnit->cannotBattleTerrainRestriction() // ex unit in ocean cannot battleback
     ) {
       $oppUnit->setRetreats(0);
       $this->nextState('battleBack', $oppUnit->getPlayer());
