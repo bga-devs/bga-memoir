@@ -1132,6 +1132,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
             '<li>' +
               _('Markers designate specific hex(es) through which a unit exiting the board earn a medal') +
               '</li>',
+            '<li>' + _('Unit on the marker needs an additional hex move available to exit and gain the medal') + '</li>',
           ];
         }
       }
