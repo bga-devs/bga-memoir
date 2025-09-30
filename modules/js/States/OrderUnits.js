@@ -210,7 +210,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       // move unit
       $('unit-' + n.args.unitId).classList.add('moving');
       $('unit-' + n.args.unitId).classList.remove('selected');
-      this.slide('unit-' + n.args.unitId, `cell-${n.args.x}-${n.args.y}`, { duration: 580, preserveSize: true });
+      $('unit-' + n.args.unitId).offsetWidth = 61;
+      $('unit-' + n.args.unitId).offsetHeight = 61;
+      this.slide('unit-' + n.args.unitId, `cell-${n.args.x}-${n.args.y}`, { duration: 580, preserveSize: true, fromReserve: true});
       this._grid[n.args.x][n.args.y].unit = this._grid[n.args.fromX][n.args.fromY].unit;
       this._grid[n.args.fromX][n.args.fromY].unit = null;
     },

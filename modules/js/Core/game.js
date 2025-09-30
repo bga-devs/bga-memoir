@@ -667,7 +667,7 @@ define(['dojo', 'dojo/_base/declare', g_gamethemeurl + 'modules/js/vendor/nouisl
         dojo.addClass(mobileElt, 'phantom');
         if (config.preserveSize) {
           dojo.style(mobile, {
-            width: mobileElt.offsetWidth + 'px',
+            width: config.fromReserve ? mobileElt.offsetHeight +'px' : mobileElt.offsetWidth + 'px',
             height: mobileElt.offsetHeight + 'px',
             //          transform: 'scale(1)',
             //          transition: 'transform ' + config.duration + 'ms',

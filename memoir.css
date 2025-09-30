@@ -741,8 +741,8 @@ html {
 #m44-container .m44-team-reserve-units .reserve-units-container .reserve-unit {
   display: inline-flex;
   align-items: center;
-  width: 140px;
-  height: 70px;
+  width: 115px;
+  height: 61px;
   background-image: url("img/ui/reservespot.png");
   background-size: 200% 100%;
   background-position: 0% 0%;
