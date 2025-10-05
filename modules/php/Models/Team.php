@@ -98,6 +98,17 @@ class Team extends \M44\Helpers\DB_Model
     return Players::get($this->$name);
   }
 
+  public function noOpponentRemainingUnits()
+  {
+    // for scenario where all units may have been eliminated (typically Drop in the Night scenario with unsuccessfull air drops)
+    // case if EXIT what is the unit status ?
+    $oppUnits = $this->getOpponent()->getUnits()
+      ->filter(function ($unit) { return !$unit->isEliminated();})
+      ->toArray();
+
+    return empty($oppUnits); 
+  }
+
   public function getCommander()
   {
     return Players::get($this->commanderPId);

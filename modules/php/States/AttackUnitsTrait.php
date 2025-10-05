@@ -289,7 +289,14 @@ trait AttackUnitsTrait
     } else { // Standard case else than tigers
       $hits = $this->calculateHits($unit, $oppUnit, $card, $results);
       $eliminated = $this->damageUnit($oppUnit, $player, $hits);
+      $noOpponentRemainingUnits = $oppUnit->getTeam()->getOpponent()->noOpponentRemainingUnits();
       if (Teams::checkVictory()) {
+        // in case of no remaining units of the opponent player (or this team's unit removed) 
+        // due to too many unsuccesfull airdrops
+        if($noOpponentRemainingUnits) 
+          {
+          $this->nextState('endRound', $player);
+        }
         return;
       }
     }

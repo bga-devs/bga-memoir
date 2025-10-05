@@ -380,6 +380,7 @@ $machinestates = [
       'nextAttack' => ST_ATTACK_THROW,
       'takeGround' => ST_TAKING_GROUND,
       'battleBack' => ST_BATTLE_BACK,
+      'endRound' => ST_END_OF_ROUND,
     ],
   ],
 

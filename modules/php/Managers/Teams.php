@@ -128,10 +128,11 @@ class Teams extends \M44\Helpers\DB_Manager
       $nb_medal_exit = $team->getMedals()->filter(function ($m) {
         return $m['type'] == MEDAL_EXIT;
       })->count();
+      $noOpponentRemainingUnits = $team->noOpponentRemainingUnits();
 
       $victory_condition = !is_null($must_have_exit) && $must_have_exit['side'] == $team->getId() ?
         $team->getNVictory() <= $team->getMedals()->count() && $must_have_exit['min_nbr_units'] <= $nb_medal_exit // add && nb medals exit >= $must_have_exit['min_nbr_units']
-        : $team->getNVictory() <= $team->getMedals()->count();
+        : $team->getNVictory() <= $team->getMedals()->count() || $noOpponentRemainingUnits;
 
       if ($victory_condition) {
         foreach ($team->getMembers() as $member) {
@@ -151,7 +152,10 @@ class Teams extends \M44\Helpers\DB_Manager
         }
 
         Notifications::winRound($team, Globals::getRound());
-        Game::get()->gamestate->jumpToState(ST_END_OF_ROUND);
+        if(!$noOpponentRemainingUnits) {
+          Game::get()->gamestate->jumpToState(ST_END_OF_ROUND);
+        }
+        
         return true;
       }
       // Condition if the nb of medals are obtained but no exit medal
@@ -172,7 +176,8 @@ class Teams extends \M44\Helpers\DB_Manager
   public static function getWinner()
   {
     foreach (self::getAll() as $team) {
-      if ($team->getNVictory() <= $team->getMedals()->count()) {
+      $noOpponentRemainingUnits = $team->noOpponentRemainingUnits();
+      if ($team->getNVictory() <= $team->getMedals()->count() || $noOpponentRemainingUnits) {
         return $team;
       }
     }

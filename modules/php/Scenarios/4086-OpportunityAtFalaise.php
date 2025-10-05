@@ -184,7 +184,12 @@ $scenarios[4086] =[
         'tags' => [
           0 => [
             'name' => 'medal1',
-            'orientation' => 1,
+            'group' => ['J9'],
+            'medal' => [
+              'permanent' => false,
+              'counts_for' => 1,
+              'nbr_hex' => 2,
+            ],
           ],
         ],
       ],
