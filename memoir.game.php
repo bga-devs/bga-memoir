@@ -331,5 +331,21 @@ SQL;
         Scenario::campaignloadId($campaignId);
       }
     }
+
+    if ($from_version <= 2510051743) {
+      if (Globals::isCampaign()) {
+        // remove campaign stats from database in order to prevent large notification >128k error
+        for ($i=60; $i < 94 ; $i++) { // stat type
+          foreach (Players::getAll() as $player) {
+            $stat = Stats::getFilteredQuery2($i, $player->getId())->get(true);
+            if (isset($stat['id'])) {
+              Stats::DB()->delete($stat['id']);
+            } 
+            
+          }
+        }
+      }
+    }
+
   }
 }

@@ -434,6 +434,54 @@ $scenarios[41870] = [
           'name' => 'tankus',
         ],
       ],
+      50 => [
+        'row' => 8,
+        'col' => 6,
+        'tags' => [
+          0 => [
+            'name' => 'tag4',
+            'behavior' => 'EXIT_MARKER',
+            'group' => [],
+            'side' => \ALLIES,
+          ],
+        ],
+      ],
+      51 => [
+        'row' => 8,
+        'col' => 8,
+        'tags' => [
+          0 => [
+            'name' => 'tag4',
+            'behavior' => 'EXIT_MARKER',
+            'group' => [],
+            'side' => \ALLIES,
+          ],
+        ],
+      ],
+      52 => [
+        'row' => 8,
+        'col' => 14,
+        'tags' => [
+          0 => [
+            'name' => 'tag4',
+            'behavior' => 'EXIT_MARKER',
+            'group' => [],
+            'side' => \ALLIES,
+          ],
+        ],
+      ],
+      53 => [
+        'row' => 8,
+        'col' => 16,
+        'tags' => [
+          0 => [
+            'name' => 'tag4',
+            'behavior' => 'EXIT_MARKER',
+            'group' => [],
+            'side' => \ALLIES,
+          ],
+        ],
+      ],
       47 => [
         'row' => 8,
         'col' => 10,

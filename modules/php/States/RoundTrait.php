@@ -465,8 +465,8 @@ trait RoundTrait
       if ($nextstep == 'END') {
         $nextstep = INFINITY;
       }
-
-      // TO DO update the campaign stats ater each round for each player
+      
+      /*// update the campaign stats after each round for each player
       $round = Globals::getRound();
       foreach (Players::getAll() as $player) {
         // set campaign step results of the current round
@@ -499,7 +499,10 @@ trait RoundTrait
 
         // set campaign objective track bonus according to objective track
         $teamId = $player->getTeam()->getId();
-        $objectivesBonus = Globals::getCampaign()['scenarios'][$teamId]['objectives_points'][$objectivesMedals];
+        // if objectives are above max bonus allow only max bonus track points
+        $objectivePoints = Globals::getCampaign()['scenarios'][$teamId]['objectives_points'];
+        $objectivesMax = array_key_last($objectivePoints);
+        $objectivesBonus = $objectivesMedals > $objectivesMax ? $objectivePoints[$objectivesMax] : $objectivePoints[$objectivesMedals];
         $statName = 'set' . 'CampaignObjectivesTrackBonusRound' . $round;
         Stats::$statName($player, $objectivesBonus);
 
@@ -508,7 +511,7 @@ trait RoundTrait
         $statName = 'set' . 'CampaignVictoryPointsRound' . $round;
         Stats::$statName($player, $victoryPoints);
       }
-      Notifications::updateStats();
+      //Notifications::updateStats(); not sure it is causing the issue*/
 
 
       Globals::setCampaignStep($nextstep); // increment Campaign step according to campaign order by team
@@ -571,7 +574,6 @@ trait RoundTrait
     Globals::setScenarioId(null);
     // Select next scenario to play, load scenario and init it
     $step = Globals::getCampaignStep();
-
     // case END of Campaign :
     if ($step == \INFINITY) {
       // If this is END of campaign, we switch to round 2 or End the game if Round 2
@@ -580,7 +582,7 @@ trait RoundTrait
       if ($round == $maxRound) {
         $this->gamestate->jumpToState(\ST_END_OF_GAME);
       } else {
-        // case end of round 1        
+        // case end of round 1   
         $scenarioId = Globals::getCampaign()['scenarios']['list'][0];
         Globals::setScenarioId($scenarioId);
         Scenario::loadId($scenarioId);

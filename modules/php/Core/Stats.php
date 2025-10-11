@@ -108,6 +108,18 @@ class Stats extends \M44\Helpers\DB_Manager
     return $query;
   }
 
+  public static function getFilteredQuery2($id, $pId)
+  {
+    $query = self::DB()->where('stats_type', $id);
+    if (is_null($pId)) {
+      $query = $query->whereNull('stats_player_id');
+    } else {
+      $query = $query->where('stats_player_id', is_int($pId) ? $pId : $pId->getId());
+    }
+    return $query;
+  }
+
+
   /*
    * Magic method that intercept not defined static method and do the appropriate stuff
    */

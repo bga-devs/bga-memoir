@@ -31,14 +31,14 @@ $scenarios[40006] = [
             'objectives_points' => [
                 0 => 0,
                 1 => 2,
-                2 => 2,
+                /*2 => 2,
                 3 => 3,
                 4 => 3,
-                5 => 4,
+                5 => 4,*/
             ],
             'country' => 'GB',
             0 => 1, // if ALLIES won scenario 0 => 4187, 
-            1 => 2, // if ALLIES won scenario 1, play 1=> 4185-CapturingTheCrossing
+            1 => 'END', // if ALLIES won scenario 1, play 1=> 4185-CapturingTheCrossing
             2 => 3, // if ALLIES won scenario 2, END for small campaign
             3 => 'END', // if ALLIES won scenario 3, END for small campaign
             'reserve_roll_special' => [

@@ -101,7 +101,7 @@ $stats_type = [
       'name' => totranslate('Round 1: killed other figures'),
       'type' => 'int',
     ],
-    'campaign1medalRound1' => [
+    /*'campaign1medalRound1' => [
       'id' => STAT_CAMPAIGN_1_MEDAL_FIRST_ROUND,
       'name' => totranslate('Round 1: scenario 1 earned medals'),
       'type' => 'int',
@@ -140,7 +140,7 @@ $stats_type = [
       'id' => STAT_CAMPAIGN_VICTORY_POINTS_FIRST_ROUND,
       'name' => totranslate('Round 1: campaign total victory points'),
       'type' => 'int',
-    ],
+    ],*/
   
     'teamRound2' => [
       'id' => STAT_TEAM_SECOND_ROUND,
@@ -197,7 +197,7 @@ $stats_type = [
       'name' => totranslate('Round 2: killed other figures'),
       'type' => 'int',
     ],
-    'campaign1medalRound2' => [
+    /*'campaign1medalRound2' => [
       'id' => STAT_CAMPAIGN_1_MEDAL_SECOND_ROUND,
       'name' => totranslate('Round 2: scenario 1 earned medals'),
       'type' => 'int',
@@ -236,7 +236,7 @@ $stats_type = [
       'id' => STAT_CAMPAIGN_VICTORY_POINTS_SECOND_ROUND,
       'name' => totranslate('Round 2: campaign total victory points'),
       'type' => 'int',
-    ],
+    ],*/
 
     'diceCount' => [
       'id' => STAT_DICE_COUNT,
