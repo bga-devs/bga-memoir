@@ -60,6 +60,32 @@ $scenarios[40006] = [
                 ],
 
             ],
+            'score' => [
+                // round 1
+                1 => [
+                    // score campaign steps
+                    0 => 0,
+                    1 => 0,
+                    2 => 0,
+                    3 => 0,
+                    'total' => 0,
+                    'objectives_medals' => 0,
+                    'objectives_bonus' => 0,
+                    'victory_points' => 0,
+                ],
+                // round 2
+                2 => [
+                    0 => 0,
+                    1 => 0,
+                    2 => 0,
+                    3 => 0,
+                    'total' => 0,
+                    'objectives_medals' => 0,
+                    'objectives_bonus' => 0,
+                    'victory_points' => 0,
+                ],
+
+            ],
             'win_message' => [
                 0 => clienttranslate('Good show ! With the flank secure, you can safely get across the river. Now we need to capture the bridge spanning the Odon to maintain our Momentum.\nDrive on in all Haste.'),
                 1 => clienttranslate('Good progress ! This is going just as I planned. Now get the 11th Armoured Division to secure Hill 112 but be careful. We know Jerry has something up his sleeve.'),
@@ -102,6 +128,32 @@ $scenarios[40006] = [
                     'flag_star' => 'advance2',
                     'star_star' => 'airpowertoken',
                 ],
+            ],
+            'score' => [
+                // round 1
+                1 => [
+                    // score campaign steps
+                    0 => 0,
+                    1 => 0,
+                    2 => 0,
+                    3 => 0,
+                    'total' => 0,
+                    'objectives_medals' => 0,
+                    'objectives_bonus' => 0,
+                    'victory_points' => 0,
+                ],
+                // round 2
+                2 => [
+                    0 => 0,
+                    1 => 0,
+                    2 => 0,
+                    3 => 0,
+                    'total' => 0,
+                    'objectives_medals' => 0,
+                    'objectives_bonus' => 0,
+                    'victory_points' => 0,
+                ],
+
             ],
             'win_message' => [
                 0 => clienttranslate('Well done Herr General. Without a secure flank to its side, we should be able to easily halt Tommy\'s main advance. He\'ll have to try and capture the crossing over the Odon next.'),

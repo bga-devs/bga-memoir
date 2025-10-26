@@ -131,8 +131,8 @@ class Teams extends \M44\Helpers\DB_Manager
       $noOpponentRemainingUnits = $team->noOpponentRemainingUnits();
 
       $victory_condition = !is_null($must_have_exit) && $must_have_exit['side'] == $team->getId() ?
-        $team->getNVictory() <= $team->getMedals()->count() && $must_have_exit['min_nbr_units'] <= $nb_medal_exit // add && nb medals exit >= $must_have_exit['min_nbr_units']
-        : $team->getNVictory() <= $team->getMedals()->count() || $noOpponentRemainingUnits;
+        ($team->getNVictory() <= $team->getMedals()->count() && $must_have_exit['min_nbr_units'] <= $nb_medal_exit) || $noOpponentRemainingUnits // add && nb medals exit >= $must_have_exit['min_nbr_units']
+        : ($team->getNVictory() <= $team->getMedals()->count()) || $noOpponentRemainingUnits;
 
       if ($victory_condition) {
         foreach ($team->getMembers() as $member) {

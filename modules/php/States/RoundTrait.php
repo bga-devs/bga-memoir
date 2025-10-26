@@ -466,52 +466,53 @@ trait RoundTrait
         $nextstep = INFINITY;
       }
       
-      /*// update the campaign stats after each round for each player
+      /*// update the campaign stats in Globals variable after each round for each player
       $round = Globals::getRound();
+      $campaign = Globals::getCampaign();
       foreach (Players::getAll() as $player) {
+        $teamId = $player -> getTeam() ->getId();
         // set campaign step results of the current round
-        $statName = 'set' . 'Campaign' . ($step + 1) . 'medalRound' . $round;
+        $scoreTeam = $campaign['scenarios'][$teamId]['score'];
+
         $medalStepRound = $player->getStat('medalRound' . $round);
         if($step > 0) {
           for ($i=0 ; $i < $step ; $i++) { 
-            $medalStepRound = $medalStepRound - $player->getStat('campaign' . ($i+1) . 'medalRound' . $round);
+            $medalStepRound = $medalStepRound - $scoreTeam[$round][$i];
           }
         }
-        Stats::$statName($player, $medalStepRound);
+        $campaign['scenarios'][$teamId]['score'][$round][$step] = $medalStepRound;
+        
       
 
         // set campaign total medal round of the current round
-        $statName = 'set' . 'CampaignTotalMedalRound' . $round;
         $totalMedalsName = 'get' . 'MedalRound' . $round;
         $totalMedals = Stats::$totalMedalsName($player);
-        Stats::$statName($player, $totalMedals);
-
-
+        $campaign['scenarios'][$teamId]['score'][$round]['total'] = $totalMedals;
+        
+        
         // set total objectives medals
         $nUnitsMedals = 0;
         foreach (['inf', 'armor', 'artillery', 'other'] as $type) {
           $nUnitsMedals += $player->getStat($type . 'UnitRound' . $round);
         }
         $objectivesMedals = $player->getStat('medalRound' . $round) - $nUnitsMedals;
-        $statName = 'set' . 'CampaignObjectivesRound' . $round;
-        Stats::$statName($player, $objectivesMedals);
+        $campaign['scenarios'][$teamId]['score'][$round]['objectives_medals'] = $objectivesMedals;
 
-
+        
         // set campaign objective track bonus according to objective track
-        $teamId = $player->getTeam()->getId();
+
         // if objectives are above max bonus allow only max bonus track points
         $objectivePoints = Globals::getCampaign()['scenarios'][$teamId]['objectives_points'];
         $objectivesMax = array_key_last($objectivePoints);
         $objectivesBonus = $objectivesMedals > $objectivesMax ? $objectivePoints[$objectivesMax] : $objectivePoints[$objectivesMedals];
-        $statName = 'set' . 'CampaignObjectivesTrackBonusRound' . $round;
-        Stats::$statName($player, $objectivesBonus);
+        $campaign['scenarios'][$teamId]['score'][$round]['objectives_bonus'] = $objectivesBonus;
 
         // set total victory points : total medals + objective track bonuses
         $victoryPoints = $totalMedals + $objectivesBonus;
-        $statName = 'set' . 'CampaignVictoryPointsRound' . $round;
-        Stats::$statName($player, $victoryPoints);
-      }
-      //Notifications::updateStats(); not sure it is causing the issue*/
+        $campaign['scenarios'][$teamId]['score'][$round]['victory_points'] = $victoryPoints;
+
+        Globals::setCampaign($campaign);
+      }*/
 
 
       Globals::setCampaignStep($nextstep); // increment Campaign step according to campaign order by team
