@@ -465,10 +465,11 @@ trait RoundTrait
       if ($nextstep == 'END') {
         $nextstep = INFINITY;
       }
-      
-      /*// update the campaign stats in Globals variable after each round for each player
+
+      // update the campaign scores in Globals variable after each round for each player
       $round = Globals::getRound();
       $campaign = Globals::getCampaign();
+      $step = Globals::getCampaignStep();
       foreach (Players::getAll() as $player) {
         $teamId = $player -> getTeam() ->getId();
         // set campaign step results of the current round
@@ -480,15 +481,13 @@ trait RoundTrait
             $medalStepRound = $medalStepRound - $scoreTeam[$round][$i];
           }
         }
+
         $campaign['scenarios'][$teamId]['score'][$round][$step] = $medalStepRound;
-        
-      
 
         // set campaign total medal round of the current round
         $totalMedalsName = 'get' . 'MedalRound' . $round;
         $totalMedals = Stats::$totalMedalsName($player);
         $campaign['scenarios'][$teamId]['score'][$round]['total'] = $totalMedals;
-        
         
         // set total objectives medals
         $nUnitsMedals = 0;
@@ -497,10 +496,8 @@ trait RoundTrait
         }
         $objectivesMedals = $player->getStat('medalRound' . $round) - $nUnitsMedals;
         $campaign['scenarios'][$teamId]['score'][$round]['objectives_medals'] = $objectivesMedals;
-
         
         // set campaign objective track bonus according to objective track
-
         // if objectives are above max bonus allow only max bonus track points
         $objectivePoints = Globals::getCampaign()['scenarios'][$teamId]['objectives_points'];
         $objectivesMax = array_key_last($objectivePoints);
@@ -512,8 +509,8 @@ trait RoundTrait
         $campaign['scenarios'][$teamId]['score'][$round]['victory_points'] = $victoryPoints;
 
         Globals::setCampaign($campaign);
-      }*/
-
+      }
+      Notifications::updateCampaignScore();
 
       Globals::setCampaignStep($nextstep); // increment Campaign step according to campaign order by team
      

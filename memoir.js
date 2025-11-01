@@ -93,6 +93,7 @@ define([
         ['updateVisibility', 500],
         ['updateTurn', 1],
         ['updateStats', 1],
+        ['updateCampaignScores',1],
         ['removeStarToken', 1],
         ['removeUnit', 1],
         ['proposeScenario', 1],
@@ -867,10 +868,6 @@ define([
       // iterate scenario numbers and display scenarios campaign container
       scenarios_nbr = campaign.scenarios.list.length;
       scenarios_container_tmp = ``;
-      let getStat = (pId, type) => {
-          let v = this.gamedatas.stats.find((stat) => stat.type == type && stat.pId == pId);
-          return v ? v.value : 0;
-        };
       let round = this.gamedatas.round;
 
       for (let index = 0; index < scenarios_nbr; index++) {
@@ -882,20 +879,12 @@ define([
         scenario_sprite = CAMPAIGN_SCENARIOS.findIndex((t) => t == scenario_id);
         scenario_win_message = scenarios.win_message[index] ?? '';
         arrow_fill_opacity = index % 2 == 0 ? 1 : 1;
-        //let twoWays = this.gamedatas.duration == 2;
-        let scenario_scores_type = [ 
-          [60, 70],
-          [61, 71],
-          [62, 72],
-          [63, 73],
-       ];
         players = this.gamedatas.players;
         pIds = Object.keys(players);
         pId_allies = players[pIds[0]].team == 'ALLIES' ? pIds[0] : pIds[1];
         pId_axis = players[pIds[0]].team == 'AXIS' ? pIds[0] : pIds[1];
-        scenario_stat_type = scenario_scores_type[index][round-1];
-        score_allies = getStat(pId_allies, scenario_stat_type);
-        score_axis = getStat(pId_axis, scenario_stat_type);
+        score_allies = campaign.scenarios['ALLIES'].score[round][index];
+        score_axis = campaign.scenarios['AXIS'].score[round][index];
         arrow = index % 2 == 0 ? 
           `<svg xmlns="http://www.w3.org/2000/svg"
             width="257px"
@@ -1013,16 +1002,11 @@ define([
       </div>
       `;
 
-      let campaign_scores_type = [ 
-          [80, 90], // Total earned medal round
-          [81, 91], // Objectives medals
-          [82, 92], // Objectives track bonus
-          [83, 93], // Total victory points
-       ];
-      nbr_medals = getStat(player, campaign_scores_type[0][round -1]);
-      nbr_objectives = getStat(player, campaign_scores_type[1][round -1]);
-      objectives_track_bonus = getStat(player, campaign_scores_type[2][round -1]);
-      victory_points = getStat(player, campaign_scores_type[3][round -1]);
+      
+      nbr_medals = campaign.scenarios[team].score[round].total;
+      nbr_objectives = campaign.scenarios[team].score[round].objectives_medals;
+      objectives_track_bonus = campaign.scenarios[team].score[round].objectives_bonus;
+      victory_points = campaign.scenarios[team].score[round].victory_points;
 
       objectives_table_points = scenarios.objectives_points;
       objectives_table_length = objectives_table_points.length;
@@ -1670,6 +1654,11 @@ define([
     notif_updateStats(n) {
       debug('Notif: update stats', n);
       this.gamedatas.stats = n.args.stats;
+    },
+
+    notif_updateCampaignScores(n) {
+      debug('Notif: update campaign score', n);
+      this.gamedatas.campaign = n.args.campaign;
     },
   });
 });

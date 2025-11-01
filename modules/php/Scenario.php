@@ -210,6 +210,24 @@ class Scenario extends \APP_DbObject
 
     $campaign = $scenarios[$id];
 
+    // init campaign scores only for first step
+    if (Globals::getCampaignStep() == 0) {
+      $teams = ['ALLIES', 'AXIS'];
+      $campaignStats = ['total', 'objectives_medals', 'objectives_bonus', 'victory_points',];
+      $nbrScenarios = count($campaign['scenarios']['list']);
+      for ($i=0; $i < $nbrScenarios ; $i++) { 
+        $campaignStats[] = $i;
+      }
+      foreach ($teams as $teamId) {
+        $nbrScenarios = count($campaign['scenarios']['list']);
+        for ($round = 1; $round <= 2 ; $round++) {
+          foreach ($campaignStats as $stat) {
+            $campaign['scenarios'][$teamId]['score'][$round][$stat] = 0;
+          }        
+        }
+      }
+    }
+    
     self::$campaign = $campaign;
     Globals::setCampaign($campaign);
   }

@@ -31,14 +31,14 @@ $scenarios[40006] = [
             'objectives_points' => [
                 0 => 0,
                 1 => 2,
-                /*2 => 2,
+                2 => 2,
                 3 => 3,
                 4 => 3,
-                5 => 4,*/
+                5 => 4,
             ],
             'country' => 'GB',
             0 => 1, // if ALLIES won scenario 0 => 4187, 
-            1 => 'END', // if ALLIES won scenario 1, play 1=> 4185-CapturingTheCrossing
+            1 => 2, // if ALLIES won scenario 1, play 1=> 4185-CapturingTheCrossing
             2 => 3, // if ALLIES won scenario 2, END for small campaign
             3 => 'END', // if ALLIES won scenario 3, END for small campaign
             'reserve_roll_special' => [
@@ -60,7 +60,7 @@ $scenarios[40006] = [
                 ],
 
             ],
-            'score' => [
+            /*'score' => [
                 // round 1
                 1 => [
                     // score campaign steps
@@ -85,7 +85,7 @@ $scenarios[40006] = [
                     'victory_points' => 0,
                 ],
 
-            ],
+            ],*/
             'win_message' => [
                 0 => clienttranslate('Good show ! With the flank secure, you can safely get across the river. Now we need to capture the bridge spanning the Odon to maintain our Momentum.\nDrive on in all Haste.'),
                 1 => clienttranslate('Good progress ! This is going just as I planned. Now get the 11th Armoured Division to secure Hill 112 but be careful. We know Jerry has something up his sleeve.'),
@@ -129,7 +129,7 @@ $scenarios[40006] = [
                     'star_star' => 'airpowertoken',
                 ],
             ],
-            'score' => [
+            /*'score' => [
                 // round 1
                 1 => [
                     // score campaign steps
@@ -154,7 +154,7 @@ $scenarios[40006] = [
                     'victory_points' => 0,
                 ],
 
-            ],
+            ],*/
             'win_message' => [
                 0 => clienttranslate('Well done Herr General. Without a secure flank to its side, we should be able to easily halt Tommy\'s main advance. He\'ll have to try and capture the crossing over the Odon next.'),
                 1 => clienttranslate('Excellent, you have prevented the Allies from getting a solid bridgehead across the Odon. Their hold on Hill 112 is tentative as best. Use your forces to drive them back across the river and gain us some breathing room !'),

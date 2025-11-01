@@ -347,5 +347,27 @@ SQL;
       }
     }
 
+    if ($from_version <= 2510262033) {
+      if (Globals::isCampaign()) {
+        // init campaign scores to zero for existing games
+        $campaign = Globals::getCampaign();
+        $teams = ['ALLIES', 'AXIS'];
+        $campaignStats = ['total', 'objectives_medals', 'objectives_bonus', 'victory_points',];
+        $nbrScenarios = count($campaign['scenarios']['list']);
+        for ($i=0; $i < $nbrScenarios ; $i++) { 
+          $campaignStats[] = $i;
+        }
+        foreach ($teams as $teamId) {
+          $nbrScenarios = count($campaign['scenarios']['list']);
+          for ($round = 1; $round <= 2 ; $round++) {
+            foreach ($campaignStats as $stat) {
+              $campaign['scenarios'][$teamId]['score'][$round][$stat] = 0;
+            }        
+          }
+        }
+        Globals::setCampaign($campaign);
+      }
+    }
+
   }
 }

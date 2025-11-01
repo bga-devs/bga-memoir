@@ -100,6 +100,11 @@ class Notifications
     self::notifyAll('updateStats', '', ['stats' => Stats::getUiData()]);
   }
 
+  public static function updateCampaignScore()
+  {
+    self::notifyAll('updateCampaignScores', '', ['campaign' => Globals::getCampaign()]);
+  }
+
   public static function throwAttack($player, $unit, $nDice, $oppUnit)
   {
     if (is_null($oppUnit)) {
