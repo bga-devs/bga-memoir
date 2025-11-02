@@ -1448,7 +1448,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
     notif_rollDice(n) {
       debug('Notif: rolling dice', n);
-      let cell = n.args.cell ? n.args.cell : { x: 0, y: 0 };
+      line_default = this.gamedatas.board.type == 'BRKTHRU' ? 8 : 4;
+      let cell = n.args.cell ? n.args.cell : { x: 12, y: line_default }; // by default center of board cell-12-4 or 8 (standard or BT)
       this.rollDice(n.args.results, cell);
     },
 
