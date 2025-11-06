@@ -883,8 +883,11 @@ define([
         pIds = Object.keys(players);
         pId_allies = players[pIds[0]].team == 'ALLIES' ? pIds[0] : pIds[1];
         pId_axis = players[pIds[0]].team == 'AXIS' ? pIds[0] : pIds[1];
-        score_allies = campaign.scenarios['ALLIES'].score[round][index];
-        score_axis = campaign.scenarios['AXIS'].score[round][index];
+        //console.log(round, index, campaign.scenarios['ALLIES'].score, campaign.scenarios['ALLIES'].score[round][index]);
+        //score_allies = campaign.scenarios['ALLIES'].score[round][index];
+        //score_axis = campaign.scenarios['AXIS'].score[round][index];
+        score_allies = 0;
+        score_axis = 0;
         arrow = index % 2 == 0 ? 
           `<svg xmlns="http://www.w3.org/2000/svg"
             width="257px"
@@ -1003,10 +1006,14 @@ define([
       `;
 
       
-      nbr_medals = campaign.scenarios[team].score[round].total;
+      /*nbr_medals = campaign.scenarios[team].score[round].total;
       nbr_objectives = campaign.scenarios[team].score[round].objectives_medals;
       objectives_track_bonus = campaign.scenarios[team].score[round].objectives_bonus;
-      victory_points = campaign.scenarios[team].score[round].victory_points;
+      victory_points = campaign.scenarios[team].score[round].victory_points;*/
+      nbr_medals = 0;
+      nbr_objectives = 0;
+      objectives_track_bonus = 0;
+      victory_points = 0;
 
       objectives_table_points = scenarios.objectives_points;
       objectives_table_length = objectives_table_points.length;

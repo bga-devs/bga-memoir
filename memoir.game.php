@@ -347,7 +347,7 @@ SQL;
       }
     }
 
-    if ($from_version <= 2510262033) {
+    if ($from_version <= 2511052137) {
       if (Globals::isCampaign()) {
         // init campaign scores to zero for existing games
         $campaign = Globals::getCampaign();

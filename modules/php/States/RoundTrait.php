@@ -482,7 +482,7 @@ trait RoundTrait
           }
         }
 
-        $campaign['scenarios'][$teamId]['score'][$round][$step] = $medalStepRound;
+        $campaign['scenarios'][$teamId]['score'][$round][$step] = $medalStepRound + 0;
 
         // set campaign total medal round of the current round
         $totalMedalsName = 'get' . 'MedalRound' . $round;
