@@ -13,5 +13,6 @@ class HillForest extends Forest
     parent::__construct($row);
     $this->name = clienttranslate('Hills with Forests');
     $this->number = 48;
+    $this->height = 1;
   }
 }

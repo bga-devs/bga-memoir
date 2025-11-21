@@ -13,5 +13,6 @@ class HillVillage extends Village
     parent::__construct($row);
     $this->name = clienttranslate('Hills with Villages');
     $this->number = 49;
+    $this->height = 1;
   }
 }

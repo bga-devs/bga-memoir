@@ -16,6 +16,7 @@ class Hill extends \M44\Models\Terrain
     $this->number = 6;
     $this->isHill = true;
     $this->defense = [\INFANTRY => "-1*", ARMOR => "-1*"];
+    $this->height = 1;
 
     parent::__construct($row);
   }
@@ -38,8 +39,8 @@ class Hill extends \M44\Models\Terrain
     if ($unit->getType() == \ARTILLERY) {
       return 0;
     } else {
-      $isHill = Board::isHillCell($unit->getPos());
-      return $isHill ? 0 : -1;
+      $isLower = Board::getHeight($unit->getPos()) < $this->getHeight();
+      return $isLower ? -1 : 0;
     }
   }
 }

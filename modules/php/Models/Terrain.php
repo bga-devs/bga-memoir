@@ -36,6 +36,7 @@ class Terrain extends \M44\Helpers\DB_Model
   protected $name = '';
   protected $desc = [];
   protected $deltaAngle = 2;
+  protected $height = 0;
 
   /*
    * TERRAIN PROPERTIES
@@ -125,6 +126,7 @@ class Terrain extends \M44\Helpers\DB_Model
         $datas[$prop] = $this->$prop;
       }
     }
+    $datas['height'] = $this->height;
 
     return $datas;
   }
@@ -137,6 +139,11 @@ class Terrain extends \M44\Helpers\DB_Model
   public function getOrientation()
   {
     return $this->orientation;
+  }
+
+  public function getHeight()
+  {
+    return $this->height;
   }
 
   public function getProperty($prop, $unit)

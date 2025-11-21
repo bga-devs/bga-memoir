@@ -797,6 +797,11 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       let tplName = OBSTACLES.includes(terrainData.tile) ? 'tplObstacleTile' : 'tplTerrainTile';
       let tile = this[tplName](terrainData);
       let desc = terrainData.desc.map((t) => `<li>${_(t)}</li>`);
+      let heightdesc = _('Height : ');
+      
+      if (terrainData.height > 0) {
+        desc.push(`<li class=''>${heightdesc}${terrainData.height}</li>`);
+      }
 
       let properties = {
         isImpassable: {
@@ -847,7 +852,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           bool: _('Block line of sight'),
           negbool: _('Do not block line of sight'),
           obj: _('Block line of sight of ${units}'),
-          hill: _('Block line of sight (except for contiguous adjacent hills)'),
+          hill: _('Block line of sight (except for contiguous adjacent hills). Also, line of sight between two units that are on elevated terrain is never blocked by terrain or units that are on lower heights.'),
         },
         hill317: {
           bool: _('Hill317: If Allies has a unit on the hill, Recon cards can be played as Air Power card'),

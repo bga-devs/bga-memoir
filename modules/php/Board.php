@@ -878,6 +878,33 @@ class Board
       return true;
     }
 
+    // if the starting and ending point are at the same height, apply new height rules for Hills or mountains
+    $sourceHeight = self::getHeight($unit->getPos());
+    $targetHeight = self::getHeight($target);
+    $cellHeight = self::getHeight($cell);
+    if ($targetHeight > 0 && $sourceHeight >= $targetHeight && ($cellHeight <= $sourceHeight || $cellHeight <= $targetHeight)) {
+      if ($cellHeight == $sourceHeight || $cellHeight == $targetHeight) {
+        $c = self::$grid[$cell['x']][$cell['y']];
+        if ($unit->mustSeeToAttack() && !is_null($c['unit']) && $c['unit']->getId() != $unit->getId()) {
+          return true;
+        }
+
+        foreach ($c['terrains'] as $t) { // usefull for bunker on hill
+          if ($t->getHeight() < 1) {
+            if ($t->isBlockingLineOfAttack($unit)) {
+            return true;
+            }
+
+            if ($unit->mustSeeToAttack() && $t->isBlockingLineOfSight($unit, $target, $path)) {
+              return true;
+            }
+          }    
+        }
+      }
+      
+      return false;
+    }    
+
     $t = self::$grid[$cell['x']][$cell['y']];
     if ($unit->mustSeeToAttack() && !is_null($t['unit']) && $t['unit']->getId() != $unit->getId()) {
       return true;
@@ -995,6 +1022,18 @@ class Board
 
     return $cells;
   }
+
+  public static function getHeight($pos) {
+    $cell = self::$grid[$pos['x']][$pos['y']];
+    $cellHeight = 0;
+    if (isset($cell['terrains'])) {
+      foreach ($cell['terrains'] as $t) {
+        $cellHeight = $t->getHeight() > $cellHeight ? $t->getHeight() : $cellHeight;
+        }
+    }
+    return $cellHeight;
+  }
+  
 
   /**
    * Return dice number modifier for a given unit and cell for either offense or defense

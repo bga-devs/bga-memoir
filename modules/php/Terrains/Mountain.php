@@ -24,6 +24,7 @@ class Mountain extends \M44\Models\Terrain
     ];
     $this->isImpassable = [ARMOR, \ARTILLERY];
     $this->cantLeave = [\ARTILLERY];
+    $this->height = 2;
     parent::__construct($row);
   }
 
