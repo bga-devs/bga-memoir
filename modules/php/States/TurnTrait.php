@@ -26,6 +26,21 @@ trait TurnTrait
       Notifications::drawCards($player, $cards);
     }
 
+    // Same as PEGASUS for reduce card victory roll event
+    if(Globals::isCampaign()) {
+      $player = Players::getActive();
+      $teamId = $player -> getTeam() -> getId();
+      $scenario = Scenario::get();
+      $info = $scenario['game_info'];
+      $mustDraw_player = $teamId == $info['side_player1'] ? 'mustDraw_player1' : 'mustDraw_player2';
+      if (isset($info[$mustDraw_player]) && $info[$mustDraw_player] > 0) {
+        $cards = Cards::draw(1, ['hand', $player->getId()]);
+        Notifications::drawCards($player, $cards);
+        $scenario['game_info'][$mustDraw_player] -= 1;
+        Globals::setScenario($scenario);  
+      }
+    }
+
     if (Cards::countInLocation('deck') == 0 && Globals::getDefaultWinner() != null) {
       Cards::reshuffleListener();
       return;

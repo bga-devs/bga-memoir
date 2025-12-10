@@ -198,6 +198,12 @@
         background-position: 75% 0%;
       }
 
+      &.retreating {
+        background-image: url('img/hex_border_highlights.png');
+        background-size: 400% 300%;
+        background-position: 100% 50%;
+      }
+
       &.airPowerTarget {
         background-position: 0% 100%;
         &::before {

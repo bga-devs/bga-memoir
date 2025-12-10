@@ -34,6 +34,7 @@ trait RoundTrait
     Globals::setAirDrop2Done(false);
     Globals::setSupplyTrainDone(false);
     Globals::setRollReserveDone(false);
+    Globals::setRollVictoryEventDone(false);
     Globals::setArmorBreakthroughDone(['AXIS' => false, 'ALLIES' => false]);
     Globals::setInitHandDone(false);
 
@@ -51,8 +52,12 @@ trait RoundTrait
       $team = Teams::get(Globals::getTeamTurn());
 
       // TO DO
-      $this->gamestate->setAllPlayersMultiactive();
-      $this->gamestate->nextState('reserveRoll');
+      if(Globals::getCampaignStep() > 0) {
+        $this->gamestate->nextState('victoryEventRoll');
+      } else {
+        $this->gamestate->setAllPlayersMultiactive();
+        $this->gamestate->nextState('reserveRoll');
+      }
     } elseif (isset($options['airdrop'])) {
       // Check for options
       if (isset($options['airdrop'])) {
@@ -307,15 +312,15 @@ trait RoundTrait
 
   public function stReserveRoll()
   {
-    if (Globals::getCampaignStep() > 0) {
-      // Refresh interface before any reserve roll deployement for 2nd scenario (like $forceRefresh or $rematch case)
+    /*if (Globals::getCampaignStep() > 0) {
+      // Refresh interface on first scenario
       $datas = Game::get()->getAllDatas();
       unset($datas['prefs']);
       unset($datas['discard']);
       unset($datas['canceledNotifIds']);
       unset($datas['localPrefs']);
       Notifications::refreshInterface($datas);
-    }
+    }*/
 
     if (!Globals::getRollReserveDone()) {
       $list = [];
@@ -390,6 +395,237 @@ trait RoundTrait
       }
     }
     return $reserveElements;
+  }
+
+  public function stVictoryEventRoll() {
+
+    $round = Globals::getRound();
+    if (Globals::getCampaignStep() > 0 && !($round == 2)) {
+      // Refresh interface before any reserve roll deployement for 2nd scenario (like $forceRefresh or $rematch case)
+      $datas = Game::get()->getAllDatas();
+      unset($datas['prefs']);
+      unset($datas['discard']);
+      unset($datas['canceledNotifIds']);
+      unset($datas['localPrefs']);
+      Notifications::refreshInterface($datas);
+    }
+    Notifications::message(clienttranslate('Victory Event Roll'));
+
+    // get numbers of dice per player and roll them
+    if (!Globals::getRollReserveDone()) {
+      $list = [];
+      foreach(Teams::getAll() as $team) {
+        $player = $team->getCommander();
+        $nDice = 2;
+        $campaign = Globals::getCampaign();
+        $winners = $campaign['winners'] ?? [];
+        foreach ($winners as $winner) {
+          if ($winner == $player->getTeam()->getId()) {
+            $nDice += 1;
+          }
+        }      
+        
+        $eventsList= $this->victoryRoll($player, $nDice);
+        $list[$player->getId()] = $eventsList;
+      }
+      // determine team and player order
+      $activePlayer = Players::getActive();
+      $activeTeamId = $activePlayer->getTeam()->getId();
+      $teamOrder = $activeTeamId == ALLIES ? [ALLIES, AXIS] : [AXIS, ALLIES];
+      $finalList = [];
+      foreach ($teamOrder as $tId) {
+        $pId = Teams::get($tId) -> getCommander() -> getId();
+        $oppId = Teams::get($tId) -> getOpponent() -> getCommander() -> getId();
+        $playerList = $list[$pId];
+        foreach ($playerList as $result) {
+          if ($result == 'wild') {
+            $finalList[] = ['action' => 'wild', 'player' => $pId];
+          } else {
+            $finalList[] = ['action' => $result, 'player' => $oppId];
+          }
+        }
+      }
+
+      Globals::setRollVictoryEventList($finalList);
+      Globals::setRollVictoryEventDone(true);
+    }
+
+    $actionList = Globals::getRollVictoryEventList();
+    $currentAction = $actionList[array_key_first($actionList)];
+    $nextPlayerId = $currentAction['player'];
+    $this->changeActivePlayerAndJumpTo($nextPlayerId, ST_VICTORY_EVENT_RESOLUTION);
+  }
+
+  public function victoryRoll($player, $nDice) {
+    $victoryRollList = [];
+    $results = Dice::roll($player, $nDice, null, false);
+
+    $victoryRollMap = [
+      \DICE_INFANTRY => 'inf',
+      \DICE_ARMOR => 'tank',
+      \DICE_GRENADE => 'wild',
+      \DICE_FLAG => 'retreat',
+      \DICE_STAR => 'card'];
+
+    $rollPriorityMap = [
+      0 => \DICE_INFANTRY,
+      1 => \DICE_ARMOR,
+      2 => \DICE_STAR,
+      3 => \DICE_FLAG,
+      4 => \DICE_GRENADE
+    ];
+
+    // Sort victory event roll result by priority type
+    for ($i=0; $i < 5; $i++) { 
+      foreach ($results as $d) {
+        if ($d == $rollPriorityMap[$i]) {
+          $victoryRollList[] = $victoryRollMap[$d];
+        }
+      }
+    }
+
+    return $victoryRollList;
+  }
+
+  public function argsVictoryEventResolution() {
+    // args are Player to perform the action, list of units of this player
+    // specific action for card to be defined (like scenario Pegasus Bridge)
+    $actionList = Globals::getRollVictoryEventList();
+    $currentAction = $actionList[array_key_first($actionList)];
+    $pId = $currentAction['player'];
+    $actionType = $currentAction['action'];
+
+    // get all Inf and Armor units of opponent player (this player is already sorted from previous state)
+    $player = Players::get($pId);
+    $units = $player -> getUnits() -> toArray();
+    $unitsPos = [];
+    foreach ($units as $unit) {
+      $unitId = $unit->getId();
+      $unitsPos[$unitId]['pos'] = $unit -> getPos();
+      $unitsPos[$unitId]['retreat_args'] = Board::getArgsRetreat($unit, 1, 1);
+    }
+
+    $oppunits = $player -> getTeam() -> getOpponent() -> getCommander() -> getUnits() -> toArray();
+    $infUnits = array_filter($units, function ($unit) {
+      return $unit->getType() == \INFANTRY;});
+    $infPos = [];
+    foreach ($infUnits as $unit) {
+      $infPos[] = $unit -> getPos();
+    }
+    $tankUnits = array_filter($units, function ($unit) {
+      return $unit->getType() == \ARMOR;});
+    $tankPos = [];
+    foreach ($tankUnits as $unit) {
+      $tankPos[] = $unit -> getPos();
+    }
+    $fullStrengthUnits = array_filter($oppunits, function ($unit) {
+      return !($unit->isWounded()) && !($unit instanceof \M44\Units\Sniper);});
+    $fullStrengthPos = [];
+    foreach ($fullStrengthUnits as $unit) {
+      $fullStrengthPos[] = $unit -> getPos();
+    }
+    
+    $args = [
+          'player' => $pId,
+          'action_type' => $actionType, 
+          'inf_units' => $infPos,
+          'tank_units' => $tankPos,
+          'full_strength_units' => $fullStrengthPos,
+          'retreat_units' => $unitsPos,
+          'titleSuffix' => $actionType,
+      ];
+
+    return $args;
+  }
+
+  public function actVictoryEventResolution($x, $y, $actionPerformed, $retreat_cell) {
+    self::checkAction('actVictoryEventResolution');
+    // deal with current action type results
+    $actionList = Globals::getRollVictoryEventList();
+    $currentAction = $actionList[array_key_first($actionList)];
+    $player = Players::get($currentAction['player']);
+    $oppPlayer = $player -> getTeam() -> getOpponent() -> getCommander();
+    
+    switch ($actionPerformed) {
+      case 'inf':
+      case 'tank':
+        $unit = Board::getUnitInCell($x, $y);
+        $realHits = $unit->takeDamage(1);
+        Notifications::takeDamage($player, $unit, 1, false);
+        break;
+      
+      case 'wild':
+        $unit = Board::getUnitInCell($x, $y);
+        $realHits = $unit->takeDamage(1);
+        Notifications::takeDamage($oppPlayer, $unit, 1, false);
+        break;
+
+      case 'card':
+        $scenario = Scenario::get();
+        $teamId = $player -> getTeam() -> getId();
+        $card_player = $scenario['game_info']['side_player1'] == $teamId ? 'cards_player1' : 'cards_player2';
+        $scenario['game_info'][$card_player] -= 1;
+        $team = $player -> getTeam();
+        $team -> incNCards(-1);
+
+        $mustDraw_player = $scenario['game_info']['side_player1'] == $teamId ? 'mustDraw_player1' : 'mustDraw_player2';
+        if (!isset($scenario['game_info'][$mustDraw_player])) {
+          $scenario['game_info'][$mustDraw_player] = 1;
+        } else {
+          $scenario['game_info'][$mustDraw_player] += 1;
+        }
+        Globals::setScenario($scenario);
+        break;
+
+      // 'retreat' cases
+      case 'retreat':
+        if (empty($retreat_cell)) { // can not retreat result, take 1 hit
+          $unit = Board::getUnitInCell($x, $y);
+          $realHits = $unit->takeDamage(1);
+          Notifications::takeDamage($player, $unit, 1, false);
+        } else {
+          // move retreat 1 move
+          $unit = Board::getUnitInCell($x,$y);
+          $coordSource = $unit -> getPos();
+          $coordRetreat = [
+            'x' => $retreat_cell['x'],
+            'y' => $retreat_cell['y'],
+          ];
+          Notifications::retreatUnit($unit->getPlayer(), $unit, $coordSource, $coordRetreat);
+          $tmp = Board::moveUnit($unit, $coordRetreat, true);
+        }
+        break;
+      
+      default:
+        var_dump('Case not coded so far, should not happen');
+        break;
+    }
+
+    // remove latest action from the action list and check if list is empty
+    if ($currentAction['action'] == $actionPerformed) {
+      $removeAction = array_shift($actionList);
+      Globals::setRollVictoryEventList($actionList);
+    } else {
+      throw new \BgaVisibleSystemException(
+        'Should not happen. Please create a bug report at this exact point in the game with details on what you were trying to do'
+      );
+    }
+    
+    if (!empty($actionList)) {
+      $nextAction = $actionList[array_key_first($actionList)];
+      $nextPlayerId = $nextAction['player'];
+      $this->changeActivePlayerAndJumpTo($nextPlayerId, ST_VICTORY_EVENT_RESOLUTION);
+    } else {
+      // next state management if finished
+      $this->gamestate->setAllPlayersMultiactive();
+      $this->gamestate->nextState('reserveRoll');
+    }
+    
+  }
+
+  public function stVictoryEventResolution() {
+    $args = $this->argsVictoryEventResolution();
+
   }
 
   public function stRecheckBeforeFirstTurn() {
@@ -588,6 +824,10 @@ trait RoundTrait
         Globals::setRound(1);
         // Restart Campaign for round 2 at campaign step 0
         Globals::setCampaignStep(0);
+        // reset winners list from campaign mode (prevent having more victory event roll dice from the 1st round)
+        $campaign = Globals::getCampaign();
+        $campaign['winners'] = [];
+        Globals::setCampaign($campaign);      
       }
     } else {
       $scenarioId = Globals::getCampaign()['scenarios']['list'][$step];

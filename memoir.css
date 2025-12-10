@@ -1332,6 +1332,11 @@ html {
   background-size: 500% 100%;
   background-position: 75% 0%;
 }
+#m44-board .hex-cell-container .hex-cell.retreating {
+  background-image: url("img/hex_border_highlights.png");
+  background-size: 400% 300%;
+  background-position: 100% 50%;
+}
 #m44-board .hex-cell-container .hex-cell.airPowerTarget {
   background-position: 0% 100%;
 }

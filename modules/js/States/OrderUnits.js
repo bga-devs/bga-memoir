@@ -1021,6 +1021,144 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       this.resetPageTitle();
     },
 
+    //////////////////////////////////////////////////////////////////////////////////////
+    //
+    //   _   _ _      _                     _____                _    ______      _ _ 
+    //  | | | (_)    | |                   |  ___|              | |   | ___ \    | | |
+    //  | | | |_  ___| |_ ___  _ __ _   _  | |____   _____ _ __ | |_  | |_/ /___ | | |
+    //  | | | | |/ __| __/ _ \| '__| | | | |  __\ \ / / _ \ '_ \| __| |    // _ \| | |
+    //  \ \_/ / | (__| || (_) | |  | |_| | | |___\ V /  __/ | | | |_  | |\ \ (_) | | |
+    //   \___/|_|\___|\__\___/|_|   \__, | \____/ \_/ \___|_| |_|\__| \_| \_\___/|_|_|
+    //                               __/ |                                            
+    //                              |___/
+    //
+    /////////////////////////////////////////////////////////////////////////////////////
+
+    onEnteringStateVictoryEventRoll(args) {
+      console.log('Entering State : Victory Event Roll args',args);
+
+
+    },
+
+    onEnteringStateVictoryEventResolution(args) {
+      console.log('Entering State : Victory Event Resolution args',args);
+
+      // Here we get the action of the active player (often opponent of victory event roll result) to perform 
+      // and then we highlight the units for which the action is to be performed (remove 1 figure or retreat or remove one card)
+      let actionType = args.action_type;
+      let playerid = args.player;
+      console.log(actionType, playerid);
+      //this.changePageTitle(actionType);
+      
+
+      switch(actionType) {
+        case 'inf':
+          cells_list = Object.values(args.inf_units);
+          console.log('cells array', cells_list);
+
+          cells_list.forEach((cell) => {
+            let oCell = $(`cell-${cell.x}-${cell.y}`);
+            oCell.classList.add('attacked');
+            this.onClick(oCell, () => this.takeAction('actVictoryEventResolution', { 
+              x: cell.x, 
+              y: cell.y, 
+              action_performed : actionType,
+              retreat_cell : JSON.stringify([])
+            }));
+          });
+        break;
+        
+        case 'tank':
+          cells_list = Object.values(args.tank_units);
+          console.log('cells array', cells_list);
+
+          cells_list.forEach((cell) => {
+            let oCell = $(`cell-${cell.x}-${cell.y}`);
+            oCell.classList.add('attacked');
+            this.onClick(oCell, () => this.takeAction('actVictoryEventResolution', { 
+              x: cell.x, 
+              y: cell.y, 
+              action_performed : actionType,
+              retreat_cell : JSON.stringify([])
+            }));
+          });
+        break;
+
+        case 'card':
+          this.addDangerActionButton('btnConfirmCardReduction', _('Confirm'), () =>
+          this.takeAction('actVictoryEventResolution', { 
+              x: 0, y: 0,
+              action_performed : actionType,
+              retreat_cell : JSON.stringify([])
+              }),
+          );
+  
+        break;
+        
+        case 'retreat':
+          units_list = Object.values(args.retreat_units);
+          console.log('cells array', units_list);
+
+          units_list.forEach((unitId) => {
+            cell = unitId['pos'];
+            let oCell = $(`cell-${cell.x}-${cell.y}`);
+            oCell.classList.add('retreating');
+            this.onClick(oCell, () => {
+              if (unitId['retreat_args']['hits'] > 0) {
+                this.takeAction('actVictoryEventResolution', { 
+                  x: unitId['pos']['x'], 
+                  y: unitId['pos']['y'],
+                  action_performed : actionType,
+                  retreat_cell : JSON.stringify([])
+                });                
+              } else {
+                this.onClickChooseRetreatHex(unitId, actionType, unitId['pos']);              
+              }
+            });
+          });
+        break;
+
+        case 'wild':
+          cells_list = Object.values(args.full_strength_units);
+          console.log('cells array', cells_list);
+
+          cells_list.forEach((cell) => {
+            let oCell = $(`cell-${cell.x}-${cell.y}`);
+            oCell.classList.add('attacked');
+            this.onClick(oCell, () => this.takeAction('actVictoryEventResolution', { 
+              x: cell.x, 
+              y: cell.y,
+              action_performed : actionType,
+              retreat_cell : JSON.stringify([])
+            }));
+          });
+        break;
+
+        default:
+        console.log('Sorry, unknow action type.', actionType);  
+      }
+    
+    },
+
+    onClickChooseRetreatHex(unit_retreat_args, actionType, cell_unit) {
+      retreat_cells = unit_retreat_args['retreat_args']['cells'];
+      console.log(retreat_cells, actionType, cell_unit);
+      retreat_cells.forEach((cell) => {
+        console.log(cell, cell.x, cell.y);
+        let oCell2 = $(`cell-${cell.x}-${cell.y}`);
+          oCell2.classList.add('forRetreat');
+          this.onClick(oCell2, () => {
+            this.takeAction('actVictoryEventResolution', { 
+              x: cell_unit.x, // pos of retreated unit
+              y: cell_unit.y,
+              action_performed : actionType,
+              retreat_cell : JSON.stringify({'x' : cell.x, 'y' : cell.y})
+            });             
+          });
+      });
+    },
+
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //   ___                             ______                _    _   _                           _      ______           _                                       _   
     //  / _ \                            | ___ \              | |  | | | |                         | |     |  _  \         | |                                     | |  

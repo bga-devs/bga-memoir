@@ -67,6 +67,8 @@ class Globals extends \M44\Helpers\DB_Manager
     'reinforcementUnits' => 'int', // used for nb units to be reinforced
     'rollReserveDone' => 'bool',
     'rollReserveList' => 'obj',
+    'rollVictoryEventDone' => 'bool',
+    'rollVictoryEventList' => 'obj',
     'initHandDone' => 'bool',
     'airPowerTokens' => 'obj', // used if player has a Air Power Token (campaign mode only)
     'airPowerTokenUsed' => 'bool', // usefull to deal AirpowerToken as no card is played (campaign mode only)

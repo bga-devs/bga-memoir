@@ -51,6 +51,8 @@ define([
         'targetBridge',
         'trainReinforcement',
         'reserveUnitsDeployement',
+        'victoryEventRoll',
+        'victoryEventResolution',
         'armorBreakthroughDeployement',
         'smokescreen',
       ];
@@ -336,6 +338,7 @@ define([
         armorBreakthrough: 'order',
         smokeScreen: 'order',
         //reserveUnitsDeployement : 'command',
+        victoryEventResolution: 'command',
       };
 
       if (Object.keys(statusMapping).includes(stateName)) {
@@ -838,15 +841,15 @@ define([
       }
 
       const GENERALS_SPRITES = ['Montgomery', 'Rommel', 'Von_Rundstedt', 'Bradley', 'Von_Kluge'];
-      player = this.player_id;
-      team = this.gamedatas.players[player].team;
-      side = team == 'ALLIES' ? 0 : 1;
-      scenarios = campaign.scenarios[team];
+      let player = this.player_id;
+      let team_id = this.gamedatas.players[player].team ?? 'ALLIES';
+      let side = team_id == 'ALLIES' ? 0 : 1;
+      scenarios = campaign.scenarios[team_id];
       general = scenarios.general;
       general_briefing = scenarios.general_briefing;
       let generalsprite = 
       GENERALS_SPRITES.findIndex((t) => t == general);
-      console.log('General', player, team, general, generalsprite);
+      console.log('General', player, team_id, general, generalsprite);
       tokens_nbr = scenarios.reserve_tokens[0];
       token_container = ``;
       const NATION_SPRITES = ['GB', 'DE', 'US', 'FR'];
@@ -862,20 +865,20 @@ define([
         token_container += `</div>`;
       }
       const CAMPAIGN_SCENARIOS = [4187, 4185, 4186, 1558];
-      //scenario_name = campaign.scenarios.name[0];
-      //scenario_id = campaign.scenarios.list[0];
+      scenario_name = campaign.scenarios.name[0];
+      scenario_id = campaign.scenarios.list[0];
 
       // iterate scenario numbers and display scenarios campaign container
       scenarios_nbr = campaign.scenarios.list.length;
       scenarios_container_tmp = ``;
-      let round = this.gamedatas.round;
+      let round = this.gamedatas.round == 0 ? this.gamedatas.round + 1 : this.gamedatas.round ;
 
       for (let index = 0; index < scenarios_nbr; index++) {
         scenario_name = campaign.scenarios.name[index];
         next_scenario_name = campaign.scenarios.name[index + 1] ?? 'END';
         scenario_id = campaign.scenarios.list[index];
         column = index % 2 == 0 ? 'left' : 'right';
-        color_win = team == 'ALLIES' ? '#5e6d3a' : '#3e5d75';
+        color_win = team_id == 'ALLIES' ? '#5e6d3a' : '#3e5d75';
         scenario_sprite = CAMPAIGN_SCENARIOS.findIndex((t) => t == scenario_id);
         scenario_win_message = scenarios.win_message[index] ?? '';
         arrow_fill_opacity = index % 2 == 0 ? 1 : 1;
@@ -883,11 +886,11 @@ define([
         pIds = Object.keys(players);
         pId_allies = players[pIds[0]].team == 'ALLIES' ? pIds[0] : pIds[1];
         pId_axis = players[pIds[0]].team == 'AXIS' ? pIds[0] : pIds[1];
-        //console.log(round, index, campaign.scenarios['ALLIES'].score, campaign.scenarios['ALLIES'].score[round][index]);
-        //score_allies = campaign.scenarios['ALLIES'].score[round][index];
-        //score_axis = campaign.scenarios['AXIS'].score[round][index];
-        score_allies = 0;
-        score_axis = 0;
+        console.log(round, index, campaign.scenarios.ALLIES.score);
+        score_allies = campaign.scenarios.ALLIES.score[round][index] ?? 0;
+        score_axis = campaign.scenarios.AXIS.score[round][index] ?? 0;
+        //score_allies = 0;
+        //score_axis = 0;
         arrow = index % 2 == 0 ? 
           `<svg xmlns="http://www.w3.org/2000/svg"
             width="257px"
@@ -967,7 +970,7 @@ define([
                           style="opacity:1;fill:${color_win};fill-opacity:1;stroke:${color_win};stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
                           d="M 2.205061,5.5412335 C 1.4621395,5.3220997 0.65405828,4.7387922 0.26152099,4.1383051 0.05003004,3.8147752 7.1765715e-4,3.570425 1.4733755e-5,2.8424843 -8.4040131e-4,2.0431644 0.03530628,1.8946805 0.3308658,1.4802735 0.51331116,1.2244661 0.88699437,0.85684432 1.1612747,0.66333594 2.1807117,-0.05589064 -0.73631358,0.00164703 34.707419,0.00164703 c 35.809346,0 32.547396,-0.0730457 33.663198,0.75382812 C 70.157855,2.0799152 69.766666,4.4516938 67.60167,5.4176524 L 67.117928,5.6334825 34.888821,5.6544103 C 8.1445523,5.6717792 2.5823375,5.6525456 2.205061,5.5412335 Z"
                         />
-                        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="3">${team} Win !</text>
+                        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="3">${team_id} Win !</text>
                       </svg>
                     </div>
                     <div class="win-message-container">
@@ -1006,14 +1009,14 @@ define([
       `;
 
       
-      /*nbr_medals = campaign.scenarios[team].score[round].total;
-      nbr_objectives = campaign.scenarios[team].score[round].objectives_medals;
-      objectives_track_bonus = campaign.scenarios[team].score[round].objectives_bonus;
-      victory_points = campaign.scenarios[team].score[round].victory_points;*/
-      nbr_medals = 0;
+      nbr_medals = campaign.scenarios[team_id].score[round].total ?? 0;
+      nbr_objectives = campaign.scenarios[team_id].score[round].objectives_medals ?? 0;
+      objectives_track_bonus = campaign.scenarios[team_id].score[round].objectives_bonus ?? 0;
+      victory_points = campaign.scenarios[team_id].score[round].victory_points ?? 0;
+      /*nbr_medals = 0;
       nbr_objectives = 0;
       objectives_track_bonus = 0;
-      victory_points = 0;
+      victory_points = 0;*/
 
       objectives_table_points = scenarios.objectives_points;
       objectives_table_length = objectives_table_points.length;

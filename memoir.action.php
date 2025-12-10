@@ -129,6 +129,17 @@ class action_memoir extends APP_GameAction
     self::ajaxResponse();
   }
 
+  public function actVictoryEventResolution() {
+    self::setAjaxMode();
+    $x = self::getArg('x', AT_int, true);
+    $y = self::getArg('y', AT_int, true);
+    $action = self::getArg('action_performed', AT_alphanum, true);
+    $retreatCell = self::getArg('retreat_cell', AT_json, true);
+    self::validateJSonAlphaNum($retreatCell, 'retreat_cell');
+    $this->game->actVictoryEventResolution($x, $y, $action, $retreatCell);
+    self::ajaxResponse();
+  }
+
   public function actPlayCard()
   {
     self::setAjaxMode();

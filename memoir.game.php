@@ -369,5 +369,11 @@ SQL;
       }
     }
 
+    if ($from_version <= 2511212004) {
+      Globals::setRollVictoryEventDone(false);
+      Globals::setRollVictoryEventList([]);
+    }
+
+
   }
 }

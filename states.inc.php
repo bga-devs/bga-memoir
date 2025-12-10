@@ -133,6 +133,37 @@ $machinestates = [
     ],
   ],
 
+  ST_VICTORY_EVENT_ROLL => [
+    'name' => 'victoryEventRoll',
+    'description' => clienttranslate('Victory Event Roll'),
+    'descriptionmyturn' => clienttranslate('Victory Event Roll'),
+    'type' => 'activeplayer',
+    'action' => 'stVictoryEventRoll',
+    'possibleactions' => [],
+    'transitions' => ['reserveRoll' => ST_RESERVE_ROLL, 'victoryEventResolution' => ST_VICTORY_EVENT_RESOLUTION],
+  ],
+
+  ST_VICTORY_EVENT_RESOLUTION => [
+    'name' => 'victoryEventResolution',
+    'description' => clienttranslate('Victory Event resolution'),
+    'descriptionmyturn' => clienttranslate('Victory Event Resolution'),
+    'descriptioninf' => clienttranslate('${actplayer} must remove one infantry figure from an infantry unit of his choice'),
+    'descriptionmyturninf' => clienttranslate('${you} must remove one infantry figure from an infantry unit of your choice'),
+    'descriptiontank' => clienttranslate('${actplayer} must remove one armor figure from an armor unit of his choice'),
+    'descriptionmyturntank' => clienttranslate('${you} must remove one armor figure from an armor unit of your choice'),
+    'descriptioncard' => clienttranslate('${actplayer} reduce the number of command card hold at the start of the battle by 1. He will draw 2 cards after each turn until the numbers of command cards is equal to the scenario briefing'),
+    'descriptionmyturncard' => clienttranslate('${you} reduce the number of command card hold at the start of the battle by 1. You will draw 2 cards after each turn until the numbers of command cards is equal to the scenario briefing'),
+    'descriptionretreat' => clienttranslate('${actplayer} must retreat one unit of his choice back one hex. Units on the edge, if forced back, lose 1 figure instead of retreating '),
+    'descriptionmyturnretreat' => clienttranslate('${you} must retreat one unit of your choice back one hex. Units on the edge, if forced back, lose 1 figure instead of retreating'),
+    'descriptionwild' => clienttranslate('${actplayer} must remove one figure from any of his opponent\'s full strength units, (not more than 1 grenade per unit)'),
+    'descriptionmyturnwild' => clienttranslate('${you} must remove one figure from any of your opponent\'s full strength units, (not more than 1 grenade per unit)'),
+    'type' => 'activeplayer',
+    'action' => 'stVictoryEventResolution',
+    'args' => 'argsVictoryEventResolution',
+    'possibleactions' => ['actVictoryEventResolution'],
+    'transitions' => ['reserveRoll' => ST_RESERVE_ROLL, 'again' => ST_VICTORY_EVENT_RESOLUTION],
+  ],
+
   ST_NEW_ROUND => [
     'name' => 'newRound',
     'description' => '',
@@ -140,7 +171,7 @@ $machinestates = [
     'type' => 'game',
     'action' => 'stNewRound',
     'possibleactions' => [],
-    'transitions' => ['prepareTurn' => ST_PREPARE_TURN, 'reserveRoll' => ST_RESERVE_ROLL],
+    'transitions' => ['prepareTurn' => ST_PREPARE_TURN, 'reserveRoll' => ST_RESERVE_ROLL, 'victoryEventRoll' => ST_VICTORY_EVENT_ROLL],
   ],
 
   // In case of CAmpaign mode and possible Smoke Screen or Air Drop after reserve Roll
