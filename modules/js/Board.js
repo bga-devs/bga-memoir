@@ -23,9 +23,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
   const TOKEN_EXIT_MARKER = 5;
   const TOKEN_ON_TOP = ['target','tag14','tag15'];
 
-  function computeCoords(x, y) {
-    // TODO : replace 9 by dim.y
-    return String.fromCharCode(65 + (x % 2 == 0 ? 0 : 32) + parseInt(x / 2)) + (9 - y);
+  function computeCoords(x, y, dim_y) {
+    return String.fromCharCode(65 + (x % 2 == 0 ? 0 : 32) + parseInt(x / 2)) + (dim_y - y);
   }
 
   const isObject = (obj) => {
@@ -1081,7 +1080,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           ALLIES: _('Allied units'),
           AXIS: _('Axis units'),
         };
-        let hexes = token.datas.group.map((cell) => computeCoords(cell.x, cell.y)).join(', ');
+        let dim_y = this.gamedatas.board.type == 'BRKTHRU' ? 17 : 9;
+        let hexes = token.datas.group.map((cell) => computeCoords(cell.x, cell.y, dim_y)).join(', ');
         let subst = {
           units: sides[token.team],
           nb: token.datas.nbr_hex,
