@@ -39,6 +39,7 @@ trait DrawCardsTrait
 
         $newCards = Cards::draw($oMethod['nDraw'], ['hand', $owner->getId()]);
         Notifications::drawCards($owner, $newCards);
+        Cards::cannotPlayAirPower($owner);
       }
 
       $method = $card->getDrawMethod();
@@ -60,6 +61,7 @@ trait DrawCardsTrait
           return;
         }
         Notifications::drawCards($player, $cards);
+        Cards::cannotPlayAirPower($player);
         $this->nextState('endRound');
       } else {
         $cards = Cards::draw($method['nDraw'], ['choice', $player->getId()]);
@@ -127,6 +129,8 @@ trait DrawCardsTrait
     $otherCards = $player->getCardsChoice();
     Cards::move($otherCards->getIds(), ['hand', $player->getId()]);
     Notifications::discardCard($player, $cards);
+    Cards::cannotPlayAirPower($player);
+    
 
     $this->nextState('endRound');
   }

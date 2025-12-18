@@ -215,6 +215,28 @@ class Cards extends \M44\Helpers\Pieces
         Notifications::drawCards(Players::get($pId), $cards);
       }
     }
+    // case scenario 5142 CounterAttack of the BEF : Air Power cannot be played by ALLIES
+    $team = Teams::get(ALLIES);
+    $player = $team -> getCommander();
+    self::cannotPlayAirPower($player);
+  }
+
+  public static function cannotPlayAirPower($player) {
+    // case scenario 5142 CounterAttack of the BEF : Air Power cannot be played by ALLIES
+    $team = $player->getTeam();
+    if(Scenario::getId() == 5142 && $team->getId() == ALLIES) {
+      $cards = self::getOfPlayer($player-> getId());
+      foreach($cards as $card) {
+        if($card->getType() == CARD_AIR_POWER) {
+          // if AIR_POWER card, discard it
+          Cards::discard($card);
+          Notifications::discardCard($player, $card); 
+          // then draw a replacement card
+          $newCards = Cards::draw(1, ['hand', $player->getId()]);
+          Notifications::drawCards($player, $newCards);
+        }
+      }
+    }
   }
 
   public static function initDeck($deck, $deckName)
