@@ -146,6 +146,7 @@ trait AmbushTrait
         $hits2 = $this->calculateHitsTiger2ndRoll($results2);
         $eliminated = $this->damageUnit($ambushedUnit, $player, $hits2);
         if (Teams::checkVictory()) {
+          $this->nextState('endRound', $player);
           return;
         }
       } else {
@@ -157,6 +158,7 @@ trait AmbushTrait
       $eliminated = $this->damageUnit($ambushedUnit, $player, $hits, false, true);
 
       if (Teams::checkVictory()) {
+        $this->nextState('endRound', $player);
         return;
       }
     }

@@ -64,8 +64,6 @@ class Cards extends \M44\Helpers\Pieces
         'i18n' => ['side'],
       ]);
       Teams::get(Globals::getDefaultWinner())->addSuddenDeathMedals();
-
-      Teams::checkVictory();
     }
   }
 

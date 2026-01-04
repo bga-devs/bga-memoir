@@ -212,6 +212,7 @@ trait OrderUnitsTrait
     Tokens::removeTargets($unit->getPos());
     Tokens::removeCamouflage($unit->getPos());
     if (Teams::checkVictory()) {
+      $this->nextState('endRound', $player);
       return;
     }
 

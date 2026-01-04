@@ -43,6 +43,12 @@ trait TurnTrait
 
     if (Cards::countInLocation('deck') == 0 && Globals::getDefaultWinner() != null) {
       Cards::reshuffleListener();
+      if(Teams::checkVictory()) {
+        $player = Players::getActive();
+        $this->nextState('endRound', $player);
+        return;
+      }
+
       return;
     }
 
@@ -93,12 +99,13 @@ trait TurnTrait
     Globals::incTurn();
     Notifications::increaseTurn(Globals::getTurn());
     Medals::checkBoardMedals(true);
-    if (Teams::checkVictory()) {
-      return;
-    }
 
     $team = Teams::getTeamTurn();
     $player = $team->getMembers()->first();
+    if (Teams::checkVictory()) {
+      $this->nextState('endRound', $player);
+      return;
+    }
 
     $visibility = Globals::getNightVisibility();
     $scenario = Globals::getScenario();

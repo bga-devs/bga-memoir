@@ -87,6 +87,10 @@ trait RetreatUnitTrait
       }
       Globals::setRetreat($retreatInfo);
       if (Teams::checkVictory()) {
+        // in case of no remaining units of the opponent player (or this team's unit removed) 
+        // due to too many unsuccesfull airdrops
+        $player = $unit->getTeam()->getCommander();
+        $this->nextState('endRound', $player);
         return;
       }
 

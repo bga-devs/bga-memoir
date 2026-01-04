@@ -233,6 +233,8 @@ trait TacticCardTrait
         $playerOppUnit = array_shift($playerOppUnit_tmp2);
         $eliminated = $this->damageUnit($unitOnBridge, $playerOppUnit, 4);
         if (Teams::checkVictory()) {
+          $player = Players::getActive();
+          $this->nextState('endRound', $player);
           return;
         }
       }
@@ -250,6 +252,8 @@ trait TacticCardTrait
         Notifications::scoreMedals($teamId, $medals);
 
         if (Teams::checkVictory()) {
+          $player = Players::getActive();
+          $this->nextState('endRound', $player);
           return;
         }
       }

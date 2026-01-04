@@ -128,6 +128,7 @@ trait MoveUnitsTrait
         $tmp = Board::moveUnit($secondUnitToMove, $c2);
       }
       if ($isWinning) {
+        $this->nextState('endRound');
         return;
       } elseif ($interrupted) {
         Globals::setUnitMoved($unitId);

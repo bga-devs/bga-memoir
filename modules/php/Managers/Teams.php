@@ -152,10 +152,6 @@ class Teams extends \M44\Helpers\DB_Manager
         }
 
         Notifications::winRound($team, Globals::getRound());
-        if(!$noOpponentRemainingUnits) {
-          Game::get()->gamestate->jumpToState(ST_END_OF_ROUND);
-        }
-        
         return true;
       }
       // Condition if the nb of medals are obtained but no exit medal

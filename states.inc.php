@@ -268,7 +268,7 @@ $machinestates = [
     'type' => 'game',
     'action' => 'stPrepareTurn',
     'updateGameProgression' => true,
-    'transitions' => ['playCard' => ST_PLAY_CARD, 'commissar' => ST_COMMISSAR, 'airDrop2' => ST_AIR_DROP2],
+    'transitions' => ['playCard' => ST_PLAY_CARD, 'commissar' => ST_COMMISSAR, 'airDrop2' => ST_AIR_DROP2, 'endRound' => ST_END_OF_ROUND],
   ],
 
   ST_COMMISSAR => [
@@ -363,7 +363,9 @@ $machinestates = [
     ],
     'transitions' => ['moveUnits' => ST_MOVE_UNITS,
       'attackUnits' => ST_PRE_ATTACK,
-      'trainReinforcement' => ST_TRAIN_REINFORCEMENT,],
+      'trainReinforcement' => ST_TRAIN_REINFORCEMENT,
+      'endRound' => ST_END_OF_ROUND,
+    ],
   ],
 
   ST_PRE_ATTACK => [
@@ -444,6 +446,7 @@ $machinestates = [
       'nextAttack' => ST_ATTACK_THROW,
       'takeGround' => ST_TAKING_GROUND,
       'battleBack' => ST_BATTLE_BACK,
+      'endRound' => ST_END_OF_ROUND,
     ],
   ],
 
@@ -482,7 +485,7 @@ $machinestates = [
     'descriptionmyturn' => '',
     'type' => 'game',
     'action' => 'stEndTurn',
-    'transitions' => ['next' => ST_PREPARE_TURN],
+    'transitions' => ['next' => ST_PREPARE_TURN, 'endRound' => ST_END_OF_ROUND],
   ],
 
   ////////////////////////////////////////////////////////////////
@@ -553,7 +556,7 @@ $machinestates = [
     'args' => 'argsOpponentAmbush',
     'action' => 'stAmbush',
     'possibleactions' => ['actAmbush', 'actPassAmbush'],
-    'transitions' => ['pass' => ST_ATTACK_THROW, 'retreat' => ST_AMBUSH_RESOLVE],
+    'transitions' => ['pass' => ST_ATTACK_THROW, 'retreat' => ST_AMBUSH_RESOLVE, 'endRound' => ST_END_OF_ROUND],
   ],
 
   ST_AMBUSH_RESOLVE => [
@@ -580,7 +583,7 @@ $machinestates = [
     'args' => 'argsRetreatUnit',
     'action' => 'stRetreatUnit',
     'possibleactions' => ['actRetreatUnit', 'actRetreatUnitDone', 'actIgnore1Flag'],
-    'transitions' => ['takeGround' => ST_ATTACK_THROW, 'retreat' => ST_AMBUSH_RESOLVE], // to default go to attack resolution
+    'transitions' => ['takeGround' => ST_ATTACK_THROW, 'retreat' => ST_AMBUSH_RESOLVE, 'endRound' => ST_END_OF_ROUND], // to default go to attack resolution
   ],
 
   ///////////////////////////////////
@@ -720,7 +723,7 @@ $machinestates = [
     'type' => 'activeplayer',
     'args' => 'argsblowbridge',
     'possibleactions' => ['actRestart','actBlowBridge'],
-    'transitions' => ['draw' => ST_DRAW],
+    'transitions' => ['draw' => ST_DRAW, 'endRound' => ST_END_OF_ROUND],
   ],
   // TODO try to remove Not sure to keep 
   /*ST_BLOW_BRIDGE => [
