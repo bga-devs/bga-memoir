@@ -69,6 +69,7 @@ trait TakeGroundTrait
     Notifications::takeGround($player, $attack['unitId'], $attack['x'], $attack['y'], $unit->getPos());
     list($interrupted, $victory) = Board::moveUnit($unit, $attack, false, true);
     if ($victory) {
+      $this->nextState('endRound', $player);
       return;
     }
     if ($interrupted) {

@@ -842,6 +842,7 @@ define([
 
       const GENERALS_SPRITES = ['Montgomery', 'Rommel', 'Von_Rundstedt', 'Bradley', 'Von_Kluge'];
       let player = this.player_id;
+      console.log(player, this.gamedatas.players, this.gamedatas.players[player]); // investigation bug 198264
       let team_id = this.gamedatas.players[player].team ?? 'ALLIES';
       let side = team_id == 'ALLIES' ? 0 : 1;
       scenarios = campaign.scenarios[team_id];

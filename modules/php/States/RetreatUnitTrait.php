@@ -241,6 +241,7 @@ trait RetreatUnitTrait
         $tmp = Board::moveUnit($secondUnitToMove, $c2);
       }
       if ($isWinning) {
+        $this->nextState('endRound', $unit->getPlayer());
         return;
       } elseif ($interrupted) {
         $this->nextState('retreat');

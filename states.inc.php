@@ -508,6 +508,7 @@ $machinestates = [
       'nextAttack' => ST_ATTACK_THROW,
       'desertMove' => ST_DESERT_MOVE,
       'overrun' => ST_ARMOR_OVERRUN,
+      'endRound' => ST_END_OF_ROUND,
     ],
   ],
 
