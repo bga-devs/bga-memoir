@@ -611,7 +611,7 @@ $machinestates = [
     'type' => 'game',
     'action' => 'stMoveAgain',
     'descriptionmyturn' => '',
-    'transitions' => ['next' => ST_MOVE_AGAIN],
+    'transitions' => ['next' => ST_MOVE_AGAIN, 'endRound' => ST_END_OF_ROUND],
   ],
 
   ST_MOVE_AGAIN => [
@@ -622,7 +622,7 @@ $machinestates = [
     'args' => 'argsMoveUnits',
     'action' => 'stMoveUnits',
     'possibleactions' => ['actRestart', 'actMoveUnit', 'actMoveUnitsDone', 'actExitUnit'],
-    'transitions' => ['moveUnits' => ST_MOVE_AGAIN, 'attackUnits' => ST_DRAW],
+    'transitions' => ['moveUnits' => ST_MOVE_AGAIN, 'attackUnits' => ST_DRAW, 'endRound' => ST_END_OF_ROUND],
   ],
 
   // Finest Hour
