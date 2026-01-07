@@ -81,7 +81,7 @@ class Units extends \M44\Helpers\Pieces
   public static $sections = [
     STANDARD_DECK => [0, 7, 17, 24],
     BREAKTHROUGH_DECK => [0, 7, 17, 24],
-    OVERLORD_DECK => [0, 14, 21, 35], // TODO : handle subsections
+    OVERLORD_DECK => [0, 17, 33, 50], // TODO : handle subsections
   ];
 
   public static function addSectionClause(&$q, $section)
