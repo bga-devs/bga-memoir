@@ -11,7 +11,21 @@
  *
  * memoir stylesheet
  *
- */
+ */ 
+
+@use "modules/css/layout";
+@use "modules/css/board";
+@use "modules/css/units";
+@use "modules/css/cards";
+@use "modules/css/medals";
+@use "modules/css/dice";
+@use "modules/css/flip";
+@use "modules/css/explosion";
+@use "modules/css/modals";
+@use "modules/css/tokens";
+@use "modules/css/nouislider";
+@use "modules/css/settings";
+@use "modules/css/reservetokens";
 
 @font-face {
   font-family: "Army";
@@ -89,16 +103,3 @@
   display: none;
 }
 
-@import "modules/css/layout";
-@import "modules/css/board";
-@import "modules/css/units";
-@import "modules/css/cards";
-@import "modules/css/medals";
-@import "modules/css/dice";
-@import "modules/css/flip";
-@import "modules/css/explosion";
-@import "modules/css/modals";
-@import "modules/css/tokens";
-@import "modules/css/nouislider";
-@import "modules/css/settings";
-@import "modules/css/reservetokens";

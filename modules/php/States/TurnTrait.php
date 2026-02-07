@@ -179,7 +179,7 @@ trait TurnTrait
     }
 
     // TODO : Overlord => branch here to distribute cards instead
-    if (true) {
+    if (!Globals::isOverlord()) {
       $player = $team->getMembers()->first();
       $this->giveExtraTime($player->getId());
       $transition = 'playCard';
@@ -190,8 +190,8 @@ trait TurnTrait
       $this->nextState($transition, $player->getId());
     } else {
       // Activate commander in chief only
-      // TODO
-      $this->nextState('distributeCard');
+      //var_dump('OVERLORD DISTRIBUTION CASE');
+      $this->nextState('distributeCards');
     }
   }
 }

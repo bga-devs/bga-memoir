@@ -229,6 +229,20 @@ class Notifications
     }
   }
 
+  public static function distributeCard($player, $card, $sectionId)
+  {
+    self::notifyAll(
+      'distributeCard',
+      clienttranslate('${player_name} distributes ${card_name} on section ${section_name}'),
+      [
+        'player' => $player,
+        'card' => $card,
+        'section_name' => Utils::getSubSectionName($sectionId),
+        'sectionId' => $sectionId,
+      ]
+    );
+  }
+
   public static function orderUnits($player, $units, $unitsOnTheMove = null)
   {
     if (is_null($unitsOnTheMove) || $unitsOnTheMove->empty()) {

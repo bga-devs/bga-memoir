@@ -36,6 +36,7 @@ trait RoundTrait
     Globals::setRollReserveDone(false);
     Globals::setRollVictoryEventDone(false);
     Globals::setArmorBreakthroughDone(['AXIS' => false, 'ALLIES' => false]);
+    Globals::setDistributedCards(['AXIS' => [], 'ALLIES' => []]); // Overlord
     Globals::setInitHandDone(false);
 
     if (!Globals::isCampaign()) {

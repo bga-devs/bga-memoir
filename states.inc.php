@@ -268,7 +268,7 @@ $machinestates = [
     'type' => 'game',
     'action' => 'stPrepareTurn',
     'updateGameProgression' => true,
-    'transitions' => ['playCard' => ST_PLAY_CARD, 'commissar' => ST_COMMISSAR, 'airDrop2' => ST_AIR_DROP2, 'endRound' => ST_END_OF_ROUND],
+    'transitions' => ['playCard' => ST_PLAY_CARD, 'commissar' => ST_COMMISSAR, 'distributeCards' => ST_DISTRIBUTE_CARDS, 'airDrop2' => ST_AIR_DROP2, 'endRound' => ST_END_OF_ROUND],
   ],
 
   ST_COMMISSAR => [
@@ -333,6 +333,18 @@ $machinestates = [
       'armorBreakthrough' => ST_ARMOR_BREAKTHROUGH,
     ],
   ],
+
+  ST_DISTRIBUTE_CARDS => [
+    'name' => 'distributeCards',
+    'description' => clienttranslate('${actplayer} may distribute 1, 2 or up 3 cards to himself or to subsections'),
+    'descriptionmyturn' => clienttranslate('${you} may distribute 1, 2 or up 3 cards to yourself or to subsections'),
+    'type' => 'activeplayer',
+    'args' => 'argsDistributeCards',
+    'action' => 'stDistributeCards',
+    'possibleactions' => ['actDistributeCards', 'actRestart'],
+    'transitions' => ['playCards' => ST_PLAY_CARD, 'distributeCards' => ST_DISTRIBUTE_CARDS],
+  ],
+
 
   ST_ORDER_UNITS => [
     'name' => 'orderUnits',

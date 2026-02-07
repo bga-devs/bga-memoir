@@ -170,6 +170,15 @@ class action_memoir extends APP_GameAction
     self::ajaxResponse();
   }
 
+  public function actDistributeCards()
+  {
+    self::setAjaxMode();
+    $cardId = self::getArg('cardId', AT_posint, true);
+    $section = self::getArg('section', AT_posint, true);
+    $this->game->actDistributeCards($cardId, $section);
+    self::ajaxResponse();
+  }
+
   public function actOrderUnits()
   {
     self::setAjaxMode();

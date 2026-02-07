@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 .m44-unit {
   [data-summary-click='1'] & {
     pointer-events: none;
@@ -24,8 +26,8 @@
   }
   @for $i from 0 through 47 {
     &[data-badge='#{$i + 1}']::after {
-      background-position-x: ($i % 6) * 100% / 5;
-      background-position-y: (($i - ($i % 6)) / 6) * 100% / 7;
+      background-position-x: calc((math.max($i % 6)) * 100% / 5);
+      background-position-y: calc((($i - (math.max($i % 6))) / 6) * 100% / 7);
     }
   }
 
@@ -412,17 +414,17 @@ $newUnits: (
 
 
 .m44-unit[data-type='5']::after {
-  background-position-x: 3 * 100% / 5;
-  background-position-y: 2 * 100% / 4;
+  background-position-x: calc(3 * 100% / 5);
+  background-position-y: calc(2 * 100% / 4);
 }
 
 .m44-unit[data-type='6']::after {
-  background-position-x: 5 * 100% / 5;
-  background-position-y: 1 * 100% / 4;
+  background-position-x: calc(5 * 100% / 5);
+  background-position-y: calc(1 * 100% / 4);
 }
 .m44-unit[data-type='7']::after {
-  background-position-x: 2 * 100% / 5;
-  background-position-y: 3 * 100% / 4;
+  background-position-x: calc(2 * 100% / 5);
+  background-position-y: calc(3 * 100% / 4);
 }
 
 // Destroyer has 3 life

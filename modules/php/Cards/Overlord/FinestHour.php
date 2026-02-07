@@ -12,4 +12,9 @@ class FinestHour extends \M44\Cards\Standard\FinestHour
       clienttranslate('No other card may be played this turn. At the end of the turn, reshuffle the discard and draw piles together.'),
     ];
   }
+
+  public function getPlayableSubSections($side = null)
+    {
+        return [6];
+    }
 }

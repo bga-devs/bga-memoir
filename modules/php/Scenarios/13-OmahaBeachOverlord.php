@@ -2,299 +2,223 @@
 namespace M44\Scenarios;
 
 $scenarios[13] = [
-  'meta_data' => [
-    'scenario_id' => '13',
-    'status' => 'APPROVED',
-    'can_translate' => 'false',
-    'mod_date' => '2010-05-27 06:37:20',
-    'ownerID' => 8860,
-    'software' => 'sed 1.2',
-    'create_by' => 8860,
-    'create_date' => '2008-04-15 10:53:26',
-    'mod_by' => 291520,
-    'author_id' => 8860,
-  ],
-  'game_info' => [
-    'front' => 'WESTERN',
-    'date_begin' => '1944-06-06',
-    'date_end' => '1944-06-06',
-    'type' => 'HISTORICAL',
-    'starting' => 'PLAYER1',
-    'side_player1' => 'AXIS',
-    'side_player2' => 'ALLIES',
-    'country_player1' => 'DE',
-    'cards_player1' => 8,
-    'cards_player2' => 8,
-    'victory_player1' => 8,
-    'victory_player2' => 8,
-    'victory_conditions' => [
-      0 => [
-        'standard' => [],
-      ],
-    ],
-  ],
   'board' => [
-    'type' => 'OVERLORD',
-    'face' => 'BEACH',
+    'type' => 'overlord',
+    'face' => 'beach',
     'hexagons' => [
       0 => [
-        'row' => 0,
         'col' => 0,
+        'row' => 0,
         'terrain' => [
           'name' => 'buildings',
+          'orientation' => 1,
         ],
         'tags' => [
           0 => [
             'name' => 'medal1',
+            'orientation' => 1,
           ],
         ],
       ],
       1 => [
-        'row' => 0,
         'col' => 2,
+        'row' => 0,
         'terrain' => [
           'name' => 'buildings',
+          'orientation' => 1,
         ],
         'tags' => [
           0 => [
             'name' => 'medal1',
+            'orientation' => 1,
           ],
         ],
       ],
       2 => [
-        'row' => 0,
         'col' => 6,
+        'row' => 0,
         'unit' => [
           'name' => 'infger',
         ],
       ],
       3 => [
-        'row' => 0,
-        'col' => 18,
+        'col' => 5,
+        'row' => 3,
+        'terrain' => [
+          'name' => 'hills',
+          'behavior' => 'BLUFF',
+          'orientation' => 1,
+        ],
         'unit' => [
           'name' => 'infger',
+        ],
+        'obstacle' => [
+          'name' => 'sand',
+          'orientation' => 1,
         ],
       ],
       4 => [
-        'row' => 0,
-        'col' => 22,
+        'col' => 3,
+        'row' => 3,
         'terrain' => [
-          'name' => 'buildings',
-        ],
-        'tags' => [
-          0 => [
-            'name' => 'medal1',
-          ],
+          'name' => 'hills',
+          'behavior' => 'BLUFF',
+          'orientation' => 1,
         ],
       ],
       5 => [
-        'row' => 0,
-        'col' => 24,
+        'col' => 2,
+        'row' => 4,
         'terrain' => [
-          'name' => 'buildings',
-        ],
-        'tags' => [
-          0 => [
-            'name' => 'medal1',
-          ],
+          'name' => 'hills',
+          'behavior' => 'BLUFF',
+          'orientation' => 1,
         ],
       ],
       6 => [
-        'row' => 0,
-        'col' => 26,
-        'terrain' => [
-          'name' => 'buildings',
+        'col' => 0,
+        'row' => 4,
+        'unit' => [
+          'name' => 'infger',
         ],
-        'tags' => [
-          0 => [
-            'name' => 'medal1',
-          ],
+        'obstacle' => [
+          'name' => 'sand',
+          'orientation' => 1,
         ],
       ],
       7 => [
-        'row' => 1,
-        'col' => 45,
-        'terrain' => [
-          'name' => 'buildings',
-        ],
-        'unit' => [
-          'name' => 'infger',
-        ],
-        'tags' => [
-          0 => [
-            'name' => 'medal1',
-          ],
+        'col' => 1,
+        'row' => 5,
+        'obstacle' => [
+          'name' => 'wire',
+          'orientation' => 1,
         ],
       ],
       8 => [
-        'row' => 1,
-        'col' => 47,
-        'terrain' => [
-          'name' => 'buildings',
-        ],
-        'tags' => [
-          0 => [
-            'name' => 'medal1',
-          ],
+        'col' => 3,
+        'row' => 5,
+        'obstacle' => [
+          'name' => 'wire',
+          'orientation' => 1,
         ],
       ],
       9 => [
-        'row' => 2,
-        'col' => 8,
-        'terrain' => [
-          'name' => 'hills',
+        'col' => 5,
+        'row' => 5,
+        'obstacle' => [
+          'name' => 'wire',
+          'orientation' => 1,
         ],
       ],
       10 => [
-        'row' => 2,
-        'col' => 18,
-        'terrain' => [
-          'name' => 'hills',
+        'col' => 6,
+        'row' => 4,
+        'obstacle' => [
+          'name' => 'wire',
+          'orientation' => 1,
         ],
       ],
       11 => [
-        'row' => 2,
-        'col' => 30,
-        'terrain' => [
-          'name' => 'buildings',
-        ],
-        'unit' => [
-          'name' => 'infger',
-        ],
-        'tags' => [
-          0 => [
-            'name' => 'medal1',
-          ],
+        'col' => 2,
+        'row' => 6,
+        'obstacle' => [
+          'name' => 'hedgehog',
+          'orientation' => 1,
         ],
       ],
       12 => [
-        'row' => 3,
-        'col' => 3,
-        'terrain' => [
-          'name' => 'hills',
+        'col' => 6,
+        'row' => 6,
+        'obstacle' => [
+          'name' => 'hedgehog',
+          'orientation' => 1,
         ],
       ],
       13 => [
-        'row' => 3,
-        'col' => 5,
-        'terrain' => [
-          'name' => 'hills',
-        ],
-        'obstacle' => [
-          'name' => 'sand',
-          'orientation' => 1,
-        ],
+        'col' => 1,
+        'row' => 7,
         'unit' => [
-          'name' => 'infger',
+          'name' => 'infus',
         ],
       ],
       14 => [
-        'row' => 3,
-        'col' => 9,
-        'terrain' => [
-          'name' => 'hills',
-        ],
-        'rect_terrain' => [
-          'name' => 'bunker',
-          'orientation' => 1,
-        ],
+        'col' => 0,
+        'row' => 8,
         'unit' => [
-          'name' => 'gunger',
+          'name' => 'infus',
         ],
       ],
       15 => [
-        'row' => 3,
-        'col' => 11,
-        'terrain' => [
-          'name' => 'hills',
+        'col' => 5,
+        'row' => 7,
+        'unit' => [
+          'name' => 'infus',
         ],
       ],
       16 => [
-        'row' => 3,
-        'col' => 13,
-        'terrain' => [
-          'name' => 'hills',
+        'col' => 7,
+        'row' => 7,
+        'unit' => [
+          'name' => 'infus',
         ],
       ],
       17 => [
-        'row' => 3,
-        'col' => 15,
-        'terrain' => [
-          'name' => 'hills',
-        ],
+        'col' => 6,
+        'row' => 8,
         'unit' => [
-          'name' => 'infger',
+          'name' => 'infus',
         ],
       ],
       18 => [
-        'row' => 3,
-        'col' => 17,
-        'obstacle' => [
-          'name' => 'wire',
-          'orientation' => 1,
+        'col' => 8,
+        'row' => 8,
+        'unit' => [
+          'name' => 'infus',
         ],
       ],
       19 => [
-        'row' => 3,
-        'col' => 19,
-        'terrain' => [
-          'name' => 'hills',
-        ],
-        'rect_terrain' => [
-          'name' => 'bunker',
-          'orientation' => 1,
-        ],
+        'col' => 9,
+        'row' => 7,
         'unit' => [
-          'name' => 'infger',
+          'name' => 'infus',
         ],
       ],
       20 => [
-        'row' => 3,
-        'col' => 21,
-        'terrain' => [
-          'name' => 'hills',
+        'col' => 10,
+        'row' => 8,
+        'unit' => [
+          'name' => 'infus',
         ],
       ],
       21 => [
-        'row' => 3,
-        'col' => 23,
-        'terrain' => [
-          'name' => 'hills',
+        'col' => 13,
+        'row' => 7,
+        'unit' => [
+          'name' => 'infus',
         ],
       ],
       22 => [
-        'row' => 3,
-        'col' => 25,
-        'terrain' => [
-          'name' => 'hills',
-        ],
-        'obstacle' => [
-          'name' => 'sand',
-          'orientation' => 1,
-        ],
+        'col' => 15,
+        'row' => 7,
         'unit' => [
-          'name' => 'infger',
+          'name' => 'tankus',
         ],
       ],
       23 => [
-        'row' => 3,
-        'col' => 27,
+        'col' => 8,
+        'row' => 2,
         'terrain' => [
           'name' => 'hills',
+          'orientation' => 1,
         ],
       ],
       24 => [
+        'col' => 9,
         'row' => 3,
-        'col' => 31,
         'terrain' => [
           'name' => 'hills',
-        ],
-      ],
-      25 => [
-        'row' => 3,
-        'col' => 33,
-        'terrain' => [
-          'name' => 'hills',
+          'behavior' => 'BLUFF',
+          'orientation' => 1,
         ],
         'rect_terrain' => [
           'name' => 'bunker',
@@ -304,708 +228,872 @@ $scenarios[13] = [
           'name' => 'gunger',
         ],
       ],
-      26 => [
+      25 => [
+        'col' => 11,
         'row' => 3,
-        'col' => 35,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'BLUFF',
+          'orientation' => 1,
+        ],
+      ],
+      26 => [
+        'col' => 13,
+        'row' => 3,
+        'terrain' => [
+          'name' => 'hills',
+          'behavior' => 'BLUFF',
+          'orientation' => 1,
         ],
       ],
       27 => [
+        'col' => 15,
         'row' => 3,
-        'col' => 37,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'BLUFF',
+          'orientation' => 1,
+        ],
+        'unit' => [
+          'name' => 'infger',
         ],
       ],
       28 => [
+        'col' => 17,
         'row' => 3,
-        'col' => 39,
-        'terrain' => [
-          'name' => 'hills',
+        'obstacle' => [
+          'name' => 'wire',
+          'orientation' => 1,
         ],
       ],
       29 => [
-        'row' => 3,
-        'col' => 41,
-        'terrain' => [
-          'name' => 'hills',
-        ],
+        'col' => 16,
+        'row' => 4,
         'obstacle' => [
-          'name' => 'sand',
+          'name' => 'wire',
           'orientation' => 1,
-        ],
-        'unit' => [
-          'name' => 'infger',
         ],
       ],
       30 => [
-        'row' => 3,
-        'col' => 43,
-        'terrain' => [
-          'name' => 'hills',
-        ],
-        'rect_terrain' => [
-          'name' => 'bunker',
+        'col' => 17,
+        'row' => 5,
+        'obstacle' => [
+          'name' => 'wire',
           'orientation' => 1,
-        ],
-        'unit' => [
-          'name' => 'infger',
         ],
       ],
       31 => [
-        'row' => 3,
-        'col' => 47,
-        'terrain' => [
-          'name' => 'hills',
-        ],
+        'col' => 18,
+        'row' => 4,
         'obstacle' => [
-          'name' => 'sand',
+          'name' => 'wire',
           'orientation' => 1,
-        ],
-        'unit' => [
-          'name' => 'infger',
         ],
       ],
       32 => [
-        'row' => 3,
-        'col' => 49,
-        'terrain' => [
-          'name' => 'hills',
+        'col' => 8,
+        'row' => 6,
+        'obstacle' => [
+          'name' => 'hedgehog',
+          'orientation' => 1,
         ],
       ],
       33 => [
-        'row' => 4,
-        'col' => 0,
+        'col' => 11,
+        'row' => 5,
         'obstacle' => [
-          'name' => 'sand',
+          'name' => 'hedgehog',
           'orientation' => 1,
-        ],
-        'unit' => [
-          'name' => 'infger',
         ],
       ],
       34 => [
-        'row' => 4,
-        'col' => 2,
-        'terrain' => [
-          'name' => 'hills',
+        'col' => 12,
+        'row' => 6,
+        'obstacle' => [
+          'name' => 'hedgehog',
+          'orientation' => 1,
         ],
       ],
       35 => [
-        'row' => 4,
-        'col' => 6,
+        'col' => 15,
+        'row' => 5,
         'obstacle' => [
-          'name' => 'wire',
+          'name' => 'hedgehog',
           'orientation' => 1,
         ],
       ],
       36 => [
-        'row' => 4,
-        'col' => 8,
+        'col' => 18,
+        'row' => 6,
         'obstacle' => [
-          'name' => 'wire',
+          'name' => 'hedgehog',
           'orientation' => 1,
         ],
       ],
       37 => [
-        'row' => 4,
-        'col' => 16,
+        'col' => 19,
+        'row' => 5,
         'obstacle' => [
-          'name' => 'wire',
+          'name' => 'hedgehog',
           'orientation' => 1,
         ],
       ],
       38 => [
-        'row' => 4,
-        'col' => 18,
+        'col' => 20,
+        'row' => 6,
         'obstacle' => [
-          'name' => 'wire',
+          'name' => 'hedgehog',
           'orientation' => 1,
         ],
       ],
       39 => [
-        'row' => 4,
-        'col' => 26,
-        'obstacle' => [
-          'name' => 'wire',
-          'orientation' => 1,
-        ],
-      ],
-      40 => [
-        'row' => 4,
-        'col' => 28,
-        'obstacle' => [
-          'name' => 'wire',
-          'orientation' => 1,
-        ],
-      ],
-      41 => [
-        'row' => 4,
-        'col' => 30,
-        'obstacle' => [
-          'name' => 'sand',
-          'orientation' => 1,
-        ],
+        'col' => 18,
+        'row' => 0,
         'unit' => [
           'name' => 'infger',
         ],
       ],
-      42 => [
-        'row' => 4,
-        'col' => 38,
-        'obstacle' => [
-          'name' => 'wire',
+      40 => [
+        'col' => 22,
+        'row' => 0,
+        'terrain' => [
+          'name' => 'buildings',
           'orientation' => 1,
+        ],
+        'tags' => [
+          0 => [
+            'name' => 'medal1',
+            'orientation' => 1,
+          ],
+        ],
+      ],
+      41 => [
+        'col' => 24,
+        'row' => 0,
+        'terrain' => [
+          'name' => 'buildings',
+          'orientation' => 1,
+        ],
+        'tags' => [
+          0 => [
+            'name' => 'medal1',
+            'orientation' => 1,
+          ],
+        ],
+      ],
+      42 => [
+        'col' => 26,
+        'row' => 0,
+        'terrain' => [
+          'name' => 'buildings',
+          'orientation' => 1,
+        ],
+        'tags' => [
+          0 => [
+            'name' => 'medal1',
+            'orientation' => 1,
+          ],
         ],
       ],
       43 => [
-        'row' => 4,
-        'col' => 44,
-        'obstacle' => [
-          'name' => 'wire',
+        'col' => 18,
+        'row' => 2,
+        'terrain' => [
+          'name' => 'hills',
           'orientation' => 1,
         ],
       ],
       44 => [
-        'row' => 4,
-        'col' => 46,
-        'obstacle' => [
-          'name' => 'wire',
-          'orientation' => 1,
-        ],
-      ],
-      45 => [
-        'row' => 4,
-        'col' => 50,
+        'col' => 19,
+        'row' => 3,
         'terrain' => [
           'name' => 'hills',
+          'behavior' => 'BLUFF',
+          'orientation' => 1,
         ],
         'rect_terrain' => [
           'name' => 'bunker',
           'orientation' => 1,
         ],
         'unit' => [
-          'name' => 'gunger',
+          'name' => 'infger',
+        ],
+      ],
+      45 => [
+        'col' => 21,
+        'row' => 3,
+        'terrain' => [
+          'name' => 'hills',
+          'behavior' => 'BLUFF',
+          'orientation' => 1,
         ],
       ],
       46 => [
-        'row' => 5,
-        'col' => 1,
-        'obstacle' => [
-          'name' => 'wire',
+        'col' => 23,
+        'row' => 3,
+        'terrain' => [
+          'name' => 'hills',
+          'behavior' => 'BLUFF',
           'orientation' => 1,
         ],
       ],
       47 => [
-        'row' => 5,
-        'col' => 3,
+        'col' => 25,
+        'row' => 3,
+        'terrain' => [
+          'name' => 'hills',
+          'behavior' => 'BLUFF',
+          'orientation' => 1,
+        ],
+        'unit' => [
+          'name' => 'infger',
+        ],
         'obstacle' => [
-          'name' => 'wire',
+          'name' => 'sand',
           'orientation' => 1,
         ],
       ],
       48 => [
-        'row' => 5,
-        'col' => 5,
-        'obstacle' => [
-          'name' => 'wire',
+        'col' => 27,
+        'row' => 3,
+        'terrain' => [
+          'name' => 'hills',
+          'behavior' => 'BLUFF',
           'orientation' => 1,
         ],
       ],
       49 => [
-        'row' => 5,
-        'col' => 11,
+        'col' => 24,
+        'row' => 6,
         'obstacle' => [
           'name' => 'hedgehog',
+          'orientation' => 1,
         ],
       ],
       50 => [
-        'row' => 5,
-        'col' => 15,
-        'obstacle' => [
-          'name' => 'hedgehog',
+        'col' => 23,
+        'row' => 7,
+        'unit' => [
+          'name' => 'infus',
         ],
       ],
       51 => [
-        'row' => 5,
-        'col' => 17,
-        'obstacle' => [
-          'name' => 'wire',
-          'orientation' => 1,
+        'col' => 25,
+        'row' => 7,
+        'unit' => [
+          'name' => 'infus',
         ],
       ],
       52 => [
-        'row' => 5,
-        'col' => 19,
-        'obstacle' => [
-          'name' => 'hedgehog',
+        'col' => 24,
+        'row' => 8,
+        'unit' => [
+          'name' => 'infus',
         ],
       ],
       53 => [
-        'row' => 5,
         'col' => 27,
-        'obstacle' => [
-          'name' => 'wire',
-          'orientation' => 1,
+        'row' => 7,
+        'unit' => [
+          'name' => 'infus',
         ],
       ],
       54 => [
-        'row' => 5,
-        'col' => 29,
-        'obstacle' => [
-          'name' => 'hedgehog',
+        'col' => 31,
+        'row' => 7,
+        'unit' => [
+          'name' => 'infus',
         ],
       ],
       55 => [
-        'row' => 5,
-        'col' => 31,
-        'obstacle' => [
-          'name' => 'hedgehog',
+        'col' => 29,
+        'row' => 7,
+        'unit' => [
+          'name' => 'tankus',
         ],
       ],
       56 => [
+        'col' => 28,
+        'row' => 8,
+        'unit' => [
+          'name' => 'tankus',
+        ],
+      ],
+      57 => [
+        'col' => 26,
+        'row' => 6,
+        'obstacle' => [
+          'name' => 'hedgehog',
+          'orientation' => 1,
+        ],
+      ],
+      58 => [
+        'col' => 27,
         'row' => 5,
-        'col' => 33,
         'obstacle' => [
           'name' => 'wire',
           'orientation' => 1,
         ],
       ],
-      57 => [
-        'row' => 5,
-        'col' => 35,
-        'obstacle' => [
-          'name' => 'sand',
-          'orientation' => 2,
-        ],
-      ],
-      58 => [
-        'row' => 5,
-        'col' => 37,
-        'obstacle' => [
-          'name' => 'sand',
-          'orientation' => 2,
-        ],
-      ],
       59 => [
-        'row' => 5,
-        'col' => 39,
+        'col' => 26,
+        'row' => 4,
         'obstacle' => [
-          'name' => 'hedgehog',
+          'name' => 'wire',
+          'orientation' => 1,
         ],
       ],
       60 => [
-        'row' => 5,
-        'col' => 41,
+        'col' => 28,
+        'row' => 4,
         'obstacle' => [
-          'name' => 'sand',
-          'orientation' => 2,
+          'name' => 'wire',
+          'orientation' => 1,
         ],
       ],
       61 => [
+        'col' => 29,
         'row' => 5,
-        'col' => 43,
         'obstacle' => [
-          'name' => 'sand',
-          'orientation' => 2,
+          'name' => 'hedgehog',
+          'orientation' => 1,
         ],
       ],
       62 => [
+        'col' => 31,
         'row' => 5,
-        'col' => 45,
         'obstacle' => [
           'name' => 'hedgehog',
+          'orientation' => 1,
         ],
       ],
       63 => [
+        'col' => 33,
         'row' => 5,
-        'col' => 47,
         'obstacle' => [
           'name' => 'wire',
           'orientation' => 1,
         ],
       ],
       64 => [
+        'col' => 30,
+        'row' => 2,
+        'terrain' => [
+          'name' => 'buildings',
+          'orientation' => 1,
+        ],
+        'tags' => [
+          0 => [
+            'name' => 'medal1',
+            'orientation' => 1,
+          ],
+        ],
+        'unit' => [
+          'name' => 'infger',
+        ],
+      ],
+      65 => [
+        'col' => 31,
+        'row' => 3,
+        'terrain' => [
+          'name' => 'hills',
+          'behavior' => 'BLUFF',
+          'orientation' => 1,
+        ],
+      ],
+      66 => [
+        'col' => 33,
+        'row' => 3,
+        'terrain' => [
+          'name' => 'hills',
+          'behavior' => 'BLUFF',
+          'orientation' => 1,
+        ],
+        'rect_terrain' => [
+          'name' => 'bunker',
+          'orientation' => 1,
+        ],
+        'unit' => [
+          'name' => 'gunger',
+        ],
+      ],
+      67 => [
+        'col' => 35,
+        'row' => 3,
+        'terrain' => [
+          'name' => 'hills',
+          'behavior' => 'BLUFF',
+          'orientation' => 1,
+        ],
+      ],
+      68 => [
+        'col' => 37,
+        'row' => 3,
+        'terrain' => [
+          'name' => 'hills',
+          'behavior' => 'BLUFF',
+          'orientation' => 1,
+        ],
+      ],
+      69 => [
+        'col' => 39,
+        'row' => 3,
+        'terrain' => [
+          'name' => 'hills',
+          'behavior' => 'BLUFF',
+          'orientation' => 1,
+        ],
+      ],
+      70 => [
+        'col' => 41,
+        'row' => 3,
+        'terrain' => [
+          'name' => 'hills',
+          'behavior' => 'BLUFF',
+          'orientation' => 1,
+        ],
+        'unit' => [
+          'name' => 'infger',
+        ],
+        'obstacle' => [
+          'name' => 'sand',
+          'orientation' => 1,
+        ],
+      ],
+      71 => [
+        'col' => 43,
+        'row' => 3,
+        'terrain' => [
+          'name' => 'hills',
+          'behavior' => 'BLUFF',
+          'orientation' => 1,
+        ],
+        'rect_terrain' => [
+          'name' => 'bunker',
+          'orientation' => 1,
+        ],
+        'unit' => [
+          'name' => 'infger',
+        ],
+      ],
+      72 => [
+        'col' => 30,
+        'row' => 4,
+        'unit' => [
+          'name' => 'infger',
+        ],
+        'obstacle' => [
+          'name' => 'sand',
+          'orientation' => 1,
+        ],
+      ],
+      73 => [
+        'col' => 34,
+        'row' => 6,
+        'obstacle' => [
+          'name' => 'hedgehog',
+          'orientation' => 1,
+        ],
+      ],
+      74 => [
+        'col' => 36,
+        'row' => 6,
+        'obstacle' => [
+          'name' => 'hedgehog',
+          'orientation' => 1,
+        ],
+      ],
+      75 => [
+        'col' => 35,
         'row' => 5,
-        'col' => 49,
+        'obstacle' => [
+          'name' => 'sand',
+          'behavior' => 'SEAWALL',
+          'original_owner' => 'ALLIES',
+          'orientation' => 2,
+        ],
+      ],
+      76 => [
+        'col' => 37,
+        'row' => 5,
+        'obstacle' => [
+          'name' => 'sand',
+          'behavior' => 'SEAWALL',
+          'original_owner' => 'ALLIES',
+          'orientation' => 2,
+        ],
+      ],
+      77 => [
+        'col' => 39,
+        'row' => 5,
+        'obstacle' => [
+          'name' => 'hedgehog',
+          'orientation' => 1,
+        ],
+      ],
+      78 => [
+        'col' => 41,
+        'row' => 5,
+        'obstacle' => [
+          'name' => 'sand',
+          'behavior' => 'SEAWALL',
+          'original_owner' => 'ALLIES',
+          'orientation' => 2,
+        ],
+      ],
+      79 => [
+        'col' => 43,
+        'row' => 5,
+        'obstacle' => [
+          'name' => 'sand',
+          'behavior' => 'SEAWALL',
+          'original_owner' => 'ALLIES',
+          'orientation' => 2,
+        ],
+      ],
+      80 => [
+        'col' => 42,
+        'row' => 6,
+        'obstacle' => [
+          'name' => 'hedgehog',
+          'orientation' => 1,
+        ],
+      ],
+      81 => [
+        'col' => 38,
+        'row' => 4,
         'obstacle' => [
           'name' => 'wire',
           'orientation' => 1,
         ],
       ],
-      65 => [
-        'row' => 6,
-        'col' => 2,
-        'obstacle' => [
-          'name' => 'hedgehog',
-        ],
-      ],
-      66 => [
-        'row' => 6,
-        'col' => 6,
-        'obstacle' => [
-          'name' => 'hedgehog',
-        ],
-      ],
-      67 => [
-        'row' => 6,
-        'col' => 8,
-        'obstacle' => [
-          'name' => 'hedgehog',
-        ],
-      ],
-      68 => [
-        'row' => 6,
-        'col' => 12,
-        'obstacle' => [
-          'name' => 'hedgehog',
-        ],
-      ],
-      69 => [
-        'row' => 6,
-        'col' => 18,
-        'obstacle' => [
-          'name' => 'hedgehog',
-        ],
-      ],
-      70 => [
-        'row' => 6,
-        'col' => 20,
-        'obstacle' => [
-          'name' => 'hedgehog',
-        ],
-      ],
-      71 => [
-        'row' => 6,
-        'col' => 24,
-        'obstacle' => [
-          'name' => 'hedgehog',
-        ],
-      ],
-      72 => [
-        'row' => 6,
-        'col' => 26,
-        'obstacle' => [
-          'name' => 'hedgehog',
-        ],
-      ],
-      73 => [
-        'row' => 6,
-        'col' => 34,
-        'obstacle' => [
-          'name' => 'hedgehog',
-        ],
-      ],
-      74 => [
-        'row' => 6,
-        'col' => 36,
-        'obstacle' => [
-          'name' => 'hedgehog',
-        ],
-      ],
-      75 => [
-        'row' => 6,
-        'col' => 42,
-        'obstacle' => [
-          'name' => 'hedgehog',
-        ],
-      ],
-      76 => [
-        'row' => 6,
-        'col' => 48,
-        'obstacle' => [
-          'name' => 'hedgehog',
-        ],
-      ],
-      77 => [
-        'row' => 7,
-        'col' => 1,
-        'unit' => [
-          'name' => 'infus',
-        ],
-      ],
-      78 => [
-        'row' => 7,
-        'col' => 5,
-        'unit' => [
-          'name' => 'infus',
-        ],
-      ],
-      79 => [
-        'row' => 7,
-        'col' => 7,
-        'unit' => [
-          'name' => 'infus',
-        ],
-      ],
-      80 => [
-        'row' => 7,
-        'col' => 9,
-        'unit' => [
-          'name' => 'infus',
-        ],
-      ],
-      81 => [
-        'row' => 7,
-        'col' => 13,
-        'unit' => [
-          'name' => 'infus',
-        ],
-      ],
       82 => [
+        'col' => 41,
         'row' => 7,
-        'col' => 15,
         'unit' => [
-          'name' => 'tankus',
+          'name' => 'infus',
         ],
       ],
       83 => [
+        'col' => 43,
         'row' => 7,
-        'col' => 23,
         'unit' => [
           'name' => 'infus',
         ],
       ],
       84 => [
+        'col' => 45,
         'row' => 7,
-        'col' => 25,
-        'unit' => [
-          'name' => 'infus',
-        ],
-      ],
-      85 => [
-        'row' => 7,
-        'col' => 27,
-        'unit' => [
-          'name' => 'infus',
-        ],
-      ],
-      86 => [
-        'row' => 7,
-        'col' => 29,
         'unit' => [
           'name' => 'tankus',
         ],
       ],
-      87 => [
+      85 => [
+        'col' => 44,
+        'row' => 8,
+        'unit' => [
+          'name' => 'tankus',
+        ],
+      ],
+      86 => [
+        'col' => 47,
         'row' => 7,
-        'col' => 31,
+        'unit' => [
+          'name' => 'infus',
+        ],
+      ],
+      87 => [
+        'col' => 49,
+        'row' => 7,
         'unit' => [
           'name' => 'infus',
         ],
       ],
       88 => [
-        'row' => 7,
-        'col' => 41,
+        'col' => 48,
+        'row' => 8,
         'unit' => [
-          'name' => 'infus',
+          'name' => 'inf2us',
+          'badge' => 'badge2',
         ],
       ],
       89 => [
-        'row' => 7,
-        'col' => 43,
+        'col' => 50,
+        'row' => 8,
         'unit' => [
-          'name' => 'infus',
+          'name' => 'inf2us',
+          'badge' => 'badge2',
         ],
       ],
       90 => [
-        'row' => 7,
-        'col' => 45,
-        'unit' => [
-          'name' => 'tankus',
-        ],
+        'col' => 38,
+        'row' => 6,
       ],
       91 => [
-        'row' => 7,
-        'col' => 47,
-        'unit' => [
-          'name' => 'infus',
+        'col' => 45,
+        'row' => 5,
+        'obstacle' => [
+          'name' => 'hedgehog',
+          'orientation' => 1,
         ],
       ],
       92 => [
-        'row' => 7,
-        'col' => 49,
-        'unit' => [
-          'name' => 'infus',
+        'col' => 48,
+        'row' => 6,
+        'obstacle' => [
+          'name' => 'hedgehog',
+          'orientation' => 1,
         ],
       ],
       93 => [
-        'row' => 8,
-        'col' => 0,
-        'unit' => [
-          'name' => 'infus',
+        'col' => 47,
+        'row' => 5,
+        'obstacle' => [
+          'name' => 'wire',
+          'orientation' => 1,
         ],
       ],
       94 => [
-        'row' => 8,
-        'col' => 6,
-        'unit' => [
-          'name' => 'infus',
+        'col' => 49,
+        'row' => 5,
+        'obstacle' => [
+          'name' => 'wire',
+          'orientation' => 1,
         ],
       ],
       95 => [
-        'row' => 8,
-        'col' => 8,
-        'unit' => [
-          'name' => 'infus',
+        'col' => 44,
+        'row' => 4,
+        'obstacle' => [
+          'name' => 'wire',
+          'orientation' => 1,
         ],
       ],
       96 => [
-        'row' => 8,
-        'col' => 10,
-        'unit' => [
-          'name' => 'infus',
+        'col' => 46,
+        'row' => 4,
+        'obstacle' => [
+          'name' => 'wire',
+          'orientation' => 1,
         ],
       ],
       97 => [
-        'row' => 8,
-        'col' => 24,
+        'col' => 47,
+        'row' => 3,
+        'terrain' => [
+          'name' => 'hills',
+          'behavior' => 'BLUFF',
+          'orientation' => 1,
+        ],
         'unit' => [
-          'name' => 'infus',
+          'name' => 'infger',
+        ],
+        'obstacle' => [
+          'name' => 'sand',
+          'orientation' => 1,
         ],
       ],
       98 => [
-        'row' => 8,
-        'col' => 28,
-        'unit' => [
-          'name' => 'tankus',
+        'col' => 49,
+        'row' => 3,
+        'terrain' => [
+          'name' => 'hills',
+          'behavior' => 'BLUFF',
+          'orientation' => 1,
         ],
       ],
       99 => [
-        'row' => 8,
-        'col' => 44,
+        'col' => 50,
+        'row' => 4,
+        'terrain' => [
+          'name' => 'hills',
+          'behavior' => 'BLUFF',
+          'orientation' => 1,
+        ],
+        'rect_terrain' => [
+          'name' => 'bunker',
+          'orientation' => 1,
+        ],
         'unit' => [
-          'name' => 'tankus',
+          'name' => 'gunger',
         ],
       ],
       100 => [
-        'row' => 8,
-        'col' => 48,
-        'unit' => [
-          'name' => 'inf2us',
-          'badge' => 'badge2',
+        'col' => 47,
+        'row' => 1,
+        'terrain' => [
+          'name' => 'buildings',
+          'orientation' => 1,
+        ],
+        'tags' => [
+          0 => [
+            'name' => 'medal1',
+            'orientation' => 1,
+          ],
         ],
       ],
       101 => [
-        'row' => 8,
-        'col' => 50,
+        'col' => 45,
+        'row' => 1,
+        'terrain' => [
+          'name' => 'buildings',
+          'orientation' => 1,
+        ],
         'unit' => [
-          'name' => 'inf2us',
-          'badge' => 'badge2',
+          'name' => 'infger',
+        ],
+        'tags' => [
+          0 => [
+            'name' => 'medal1',
+            'orientation' => 1,
+          ],
+        ],
+      ],
+      102 => [
+        'col' => 50,
+        'row' => 6,
+      ],
+      103 => [
+        'col' => 45,
+        'row' => 3,
+      ],
+      104 => [
+        'col' => 44,
+        'row' => 0,
+      ],
+      105 => [
+        'col' => 8,
+        'row' => 4,
+        'obstacle' => [
+          'name' => 'wire',
+          'orientation' => 1,
         ],
       ],
     ],
     'labels' => [
       0 => [
-        'row' => 0,
         'col' => 4,
+        'row' => 0,
         'text' => [
-          0 => clienttranslate('Coleville-'),
-          1 => clienttranslate('sur-Mer'),
+          0 => 'Colleville-sur-Mer',
         ],
       ],
       1 => [
-        'row' => 0,
-        'col' => 20,
+        'col' => 7,
+        'row' => 3,
         'text' => [
-          0 => clienttranslate('Saint -Laurent-'),
-          1 => clienttranslate('sur-Mer'),
+          0 => 'E-3',
         ],
       ],
       2 => [
-        'row' => 0,
-        'col' => 44,
+        'col' => 4,
+        'row' => 6,
         'text' => [
-          0 => clienttranslate('Vieville-'),
-          1 => clienttranslate('sur-Mer'),
+          0 => 'Fox',
         ],
       ],
       3 => [
+        'col' => 17,
         'row' => 3,
-        'col' => 7,
         'text' => [
-          0 => clienttranslate('E-3'),
+          0 => 'E-1',
         ],
       ],
       4 => [
-        'row' => 3,
-        'col' => 17,
+        'col' => 18,
+        'row' => 6,
         'text' => [
-          0 => clienttranslate('E-1'),
+          0 => 'Easy',
         ],
       ],
       5 => [
-        'row' => 3,
-        'col' => 29,
+        'col' => 20,
+        'row' => 0,
         'text' => [
-          0 => clienttranslate('D-3'),
+          0 => 'Saint-Laurent-sur-Mer',
         ],
       ],
       6 => [
+        'col' => 29,
         'row' => 3,
-        'col' => 45,
         'text' => [
-          0 => clienttranslate('D-1'),
+          0 => 'D-3',
         ],
       ],
       7 => [
+        'col' => 36,
         'row' => 4,
-        'col' => 0,
         'text' => [
-          0 => clienttranslate('F-1'),
+          0 => 'Sea Wall',
         ],
       ],
       8 => [
+        'col' => 42,
         'row' => 4,
-        'col' => 36,
         'text' => [
-          0 => clienttranslate('Sea Wall'),
+          0 => 'Sea Wall',
         ],
       ],
       9 => [
-        'row' => 4,
-        'col' => 42,
+        'col' => 38,
+        'row' => 6,
         'text' => [
-          0 => clienttranslate('Sea Wall'),
+          0 => 'Dog',
         ],
       ],
       10 => [
+        'col' => 50,
         'row' => 6,
-        'col' => 4,
         'text' => [
-          0 => clienttranslate('Fox'),
+          0 => 'Charlie',
         ],
       ],
       11 => [
-        'row' => 6,
-        'col' => 18,
+        'col' => 45,
+        'row' => 3,
         'text' => [
-          0 => clienttranslate('Easy'),
+          0 => 'D-1',
         ],
       ],
       12 => [
-        'row' => 6,
-        'col' => 38,
+        'col' => 44,
+        'row' => 0,
         'text' => [
-          0 => clienttranslate('Dog'),
-        ],
-      ],
-      13 => [
-        'row' => 6,
-        'col' => 50,
-        'text' => [
-          0 => clienttranslate('Charlie'),
+          0 => 'Vieville-sur-Mer',
         ],
       ],
     ],
   ],
+  'game_info' => [
+    'front' => 'western',
+    'type' => 'historical',
+    'starting' => 'player1',
+    'side_player1' => 'axis',
+    'side_player2' => 'allies',
+    'country_player1' => 'de',
+    'country_player2' => 'us',
+    'cards_player1' => 8,
+    'cards_player2' => 8,
+    'victory_player1' => 8,
+    'victory_player2' => 8,
+    'date_begin' => '1944-06-06',
+    'date_end' => '1944-06-06',
+    'operationID' => '92',
+  ],
+  'meta_data' => [
+    'scenario_id' => '13',
+  ],
+  'packs' => [
+  ],
   'text' => [
     'en' => [
       'name' => clienttranslate('Omaha Beach Overlord'),
-      'historical' => clienttranslate('The US assault waves on Omaha Beach were led by the 116th Regimental Combat Team, destined for Dog sector on the left; and the 16th Regimental Combat Team hitting Easy and Fox sectors. The first wave also included two battalions of tanks from the 741st and 743rd. A persistent swell and strong undertow kept pushing the incoming troops toward the wrong sections of the beach. Heavily-fortified German positions delivered a withering roll of fire the moment any LCA crashlanded in. Exhausted and sea-sick survivors reaching the water\'s edge would find no protection, save for a 200-yard dash to the seawall. Many simply collapsed, or tried to find cover behind the numerous beach obstructions. Yet in the face of intense small arms and artillery fire, a handful of young soldiers rallied and began to act. The first infiltrations were made between the E-1 and E-3 exits. Advances against other strong points were also successful and while it was not apparent at the time, German defenses were starting to crumble.
+      'sdate' => '',
+      'subtitle' => '',
+      'historical' => clienttranslate('The US assault waves on Omaha Beach were led by the 116th Regimental Combat Team, destined for Dog sector on the left;
+        and the 16th Regimental Combat Team hitting Easy and Fox sectors. The first wave also included two battalions of tanks from the 741st and 743rd. A persistent swell and strong undertow kept pushing the incoming troops toward the wrong sections of the beach. Heavily-fortified German positions delivered a withering roll of fire the moment any LCA crashlanded in. Exhausted and sea-sick survivors reaching the water\'s edge would find no protection, save for a 200-yard dash to the seawall. Many simply collapsed, or tried to find cover behind the numerous beach obstructions. Yet in the face of intense small arms and artillery fire, a handful of young soldiers rallied and began to act. The first infiltrations were made between the E-1 and E-3 exits. Advances against other strong points were also successful and while it was not apparent at the time, German defenses were starting to crumble.
 
-The stage is set, the battle lines are drawn, and you are in command. The rest is history. '),
+        The stage is set, the battle lines are drawn, and you are in command. The rest is history. '),
       'description' => clienttranslate('Axis Player: Take 8 command cards
 You move first.
 
@@ -1013,7 +1101,7 @@ Allied Player: Take 8 command cards.'),
       'victory' => clienttranslate('8 Medals
 An Allied unit that captures a town counts as one Victory Medal. Place an Objective Medal in each of the towns. As long as the Allied unit remains on the Town hex, it continues to count toward the Allied victory. If the unit moves off or is eliminated, it no longer counts.
 
-An Allied unit that exits off the Axis side of the battlefield, counts as one Victory Medal. The Allied unit is removed from play. Place one figure from this unit onto the Allied medal track.'),
+An Allied unit that exits off the Axis side of the battlefield, counts as one Victory Medal. The Allied unit is removed from play. Place one figure from this unit onto the Allied medal track.') ,
       'rules' => clienttranslate('The hill that runs along the beach is a sea bluff. Moving up the bluff from the beach is a 2 hex move. Tanks may not move up the bluff from the beach. From the inland side, treat it as a normal hill in battle and for movement.
 
 Treat the Sea Walls as a permanent improved position (sandbags) for the Allied player. Place sandbags in these hexes. The seawall offers protection, but has no effect on the movement of units.
@@ -1023,6 +1111,7 @@ The Axis player is in control of the Bunkers and may claim them as a defensive p
 The Allied Special Forces are Ranger units. Place a Ranger badge in the same hex with these units to distinguish them from the other units. Rangers may move 1 or 2 and still battle.
 
 Either side may choose to play a \'Recon\' command card as a Barrage Tactic card instead: \'Target any enemy unit and roll 4 dice\' (see Barrage card for more details).'),
+      'bibliography' => '',
     ],
   ],
 ];

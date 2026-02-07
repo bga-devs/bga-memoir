@@ -54,6 +54,7 @@ const ST_OVERLORD_PLAY_CARD = 40;
 const ST_OVERLORD_SELECT_UNIT = 41;
 const ST_OVERLORD_MOVE_UNIT = 42;
 const ST_OVERLORD_ATTACK = 43;
+const ST_DISTRIBUTE_CARDS = 44;
 
 const ST_AIR_DROP = 50;
 const ST_AIR_DROP2 = 51;
@@ -123,6 +124,9 @@ const CARD_INFANTRY_ASSAULT = 34; // TWO VERSIONS
 const CARD_MEDICS = 36;
 const CARD_MOVE_OUT = 37; // TWO VERSIONS
 const CARD_FINEST_HOUR = 39;
+
+// Overlord specific sections
+const CHIEF_COMMANDER_SUB_SECTION = 6;
 
 const CARD_CLASSES = [
   CARD_RECON => 'Recon',

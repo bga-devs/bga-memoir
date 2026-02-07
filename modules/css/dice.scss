@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 .m44-dice-resizable {
   width: calc(64px * 0.8 * var(--memoirBoardScale));
   height: calc(64px * 0.8 * var(--memoirBoardScale));
@@ -40,7 +42,7 @@
       &[data-result='#{$j}'] {
         .m44-dice {
           background-position-x: 100%;
-          background-position-y: ($j * 4 + 3) * 100% / 19;
+          background-position-y: calc(($j * 4 + 3) * 100% / 19);
         }
 
         &.animated .m44-dice {
@@ -81,7 +83,7 @@ span.m44-dice-result {
 
   @for $j from 0 to 5 {
     &[data-result='#{$j}'] {
-      background-position-y: ($j + 1) * 100% / 6;
+      background-position-y: calc(($j + 1) * 100% / 6);
     }
   }
 }
@@ -98,10 +100,10 @@ span.m44-dice-result {
 @for $j from 0 to 5 {
   @keyframes rollDice_#{$j} {
     @for $i from 0 to 32 {
-      #{$i * 100% / 31 + 0.0001},
-      #{($i+1) * 100% / 31} {
-        background-position-x: ($i % 8) * 100% / 7;
-        background-position-y: ($j * 4 + (($i - ($i % 8)) / 8)) * 100% / 19;
+      #{calc($i * 100% / 31 + 0.01%)},
+      #{calc(($i + 1) * 100% / 31)} {
+        background-position-x: calc(math.max($i % 8) * 100% / 7);
+        background-position-y: calc(($j * 4 + (($i - math.max($i % 8)) / 8)) * 100% / 19);
       }
     }
   }

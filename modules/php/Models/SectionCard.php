@@ -7,6 +7,7 @@ use M44\Core\Globals;
 use M44\States\TacticCardTrait;
 use M44\Board;
 use M44\Managers\Terrains;
+use M44\Scenario;
 
 class SectionCard extends Card
 {
@@ -190,5 +191,18 @@ class SectionCard extends Card
   {
     return true;
   }
+
+  public function getPlayableSubSections($side = null)
+    {
+      $sections = $this->getSections();
+      $flipped = ($side == Scenario::getTopTeam());
+      foreach ($sections as $i => $n) {
+        if ($n > 0) {
+          $subSections[] = $flipped ?  (2 - $i) *2 : $i * 2;
+          $subSections[] = $flipped ?  (2 - $i) *2 + 1 : $i * 2 + 1;
+        }
+      }
+      return $subSections;
+    }
 
 }

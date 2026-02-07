@@ -35,6 +35,7 @@ define([
         'commissarCard',
         'playCommissarCard',
         'playCard',
+        'distributeCards', // Overlord cards distribution
         'orderUnits',
         'moveUnits',
         'opponentAmbush',
@@ -58,6 +59,7 @@ define([
       ];
       this._notifications = [
         ['playCard', 1000],
+        ['distributeCard', 1000],
         ['discardCard', 1200],
         ['discardCardItalianHighCommand', 1200],
         ['discardCards', 1200],
@@ -323,6 +325,7 @@ define([
         commissarCard: 'commissar',
         playCommissarCard: 'command',
         playCard: 'command',
+        distributeCards: 'command',
         orderUnits: 'order',
         moveUnits: 'move',
         ambushResolve: 'move',

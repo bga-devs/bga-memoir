@@ -13,74 +13,6 @@
  * memoir stylesheet
  *
  */
-@font-face {
-  font-family: "Army";
-  src: url("img/fonts/Army.woff2") format("woff2"), url("img/fonts/Army.woff") format("woff"), url("img/fonts/Army.ttf") format("truetype");
-  font-weight: 100;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Gunplay";
-  src: url("img/fonts/Gunplay.woff2") format("woff2"), url("img/fonts/Gunplay.woff") format("woff"), url("img/fonts/Gunplay.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Oswald";
-  src: url("img/fonts/Oswald-Regular.woff2") format("woff2"), url("img/fonts/Oswald-Regular.woff") format("woff"), url("img/fonts/Oswald-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Dax";
-  src: url("img/fonts/DaxLight.woff2") format("woff2"), url("img/fonts/DaxLight.woff") format("woff"), url("img/fonts/DaxLight.ttf") format("truetype");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-.phantom {
-  visibility: hidden;
-}
-
-.notransition {
-  transition: none !important;
-}
-
-#logs .roundedbox {
-  background-color: #eadacc;
-  border-radius: 2px;
-}
-
-#logs .timestamp {
-  color: black;
-}
-
-#logs .log-coordinate {
-  font-family: Courier New, serif;
-}
-
-.help-marker-btn {
-  display: inline-block;
-  top: 2px;
-  left: 2px;
-  width: 20px;
-  height: 20px;
-  z-index: 900;
-  border: 1px solid black;
-  border-radius: 50%;
-}
-.help-marker-btn svg {
-  width: 20px;
-  height: 20px;
-}
-
-.help-marker {
-  display: none;
-}
-
 html {
   background: url("img/ui/background.jpg");
 }
@@ -652,6 +584,17 @@ html {
 }
 [data-auto-react="1"] #m44-container #m44-central-part #right-holder #m44-react-settings svg:last-of-type {
   display: none;
+}
+#m44-container #m44-central-part #bottom-overlord-inplay-cards-container, #m44-container #m44-central-part #top-overlord-inplay-cards-container {
+  display: inline-flex;
+  align-items: center;
+}
+#m44-container #m44-central-part #bottom-overlord-inplay-cards-container .subsection, #m44-container #m44-central-part #top-overlord-inplay-cards-container .subsection {
+  width: 80px;
+  height: 128px;
+  background-color: royalblue;
+  margin: 0px calc((var(--memoirBoardScale) * 1500px - 480px) / 12) 0px calc((var(--memoirBoardScale) * 1500px - 480px) / 12);
+  --memoirCardScale: 0.2548;
 }
 #m44-container #m44-bottom-container {
   position: relative;
@@ -5318,651 +5261,651 @@ span.m44-dice-result[data-result="4"] {
 }
 
 @keyframes rollDice_0 {
-  0.0001%, 3.2258064516% {
+  0.01%, 3.2258064516% {
     background-position-x: 0%;
     background-position-y: 0%;
   }
-  3.2259064516%, 6.4516129032% {
+  3.2358064516%, 6.4516129032% {
     background-position-x: 14.2857142857%;
     background-position-y: 0%;
   }
-  6.4517129032%, 9.6774193548% {
+  6.4616129032%, 9.6774193548% {
     background-position-x: 28.5714285714%;
     background-position-y: 0%;
   }
-  9.6775193548%, 12.9032258065% {
+  9.6874193548%, 12.9032258065% {
     background-position-x: 42.8571428571%;
     background-position-y: 0%;
   }
-  12.9033258065%, 16.1290322581% {
+  12.9132258065%, 16.1290322581% {
     background-position-x: 57.1428571429%;
     background-position-y: 0%;
   }
-  16.1291322581%, 19.3548387097% {
+  16.1390322581%, 19.3548387097% {
     background-position-x: 71.4285714286%;
     background-position-y: 0%;
   }
-  19.3549387097%, 22.5806451613% {
+  19.3648387097%, 22.5806451613% {
     background-position-x: 85.7142857143%;
     background-position-y: 0%;
   }
-  22.5807451613%, 25.8064516129% {
+  22.5906451613%, 25.8064516129% {
     background-position-x: 100%;
     background-position-y: 0%;
   }
-  25.8065516129%, 29.0322580645% {
+  25.8164516129%, 29.0322580645% {
     background-position-x: 0%;
     background-position-y: 5.2631578947%;
   }
-  29.0323580645%, 32.2580645161% {
+  29.0422580645%, 32.2580645161% {
     background-position-x: 14.2857142857%;
     background-position-y: 5.2631578947%;
   }
-  32.2581645161%, 35.4838709677% {
+  32.2680645161%, 35.4838709677% {
     background-position-x: 28.5714285714%;
     background-position-y: 5.2631578947%;
   }
-  35.4839709677%, 38.7096774194% {
+  35.4938709677%, 38.7096774194% {
     background-position-x: 42.8571428571%;
     background-position-y: 5.2631578947%;
   }
-  38.7097774194%, 41.935483871% {
+  38.7196774194%, 41.935483871% {
     background-position-x: 57.1428571429%;
     background-position-y: 5.2631578947%;
   }
-  41.935583871%, 45.1612903226% {
+  41.945483871%, 45.1612903226% {
     background-position-x: 71.4285714286%;
     background-position-y: 5.2631578947%;
   }
-  45.1613903226%, 48.3870967742% {
+  45.1712903226%, 48.3870967742% {
     background-position-x: 85.7142857143%;
     background-position-y: 5.2631578947%;
   }
-  48.3871967742%, 51.6129032258% {
+  48.3970967742%, 51.6129032258% {
     background-position-x: 100%;
     background-position-y: 5.2631578947%;
   }
-  51.6130032258%, 54.8387096774% {
+  51.6229032258%, 54.8387096774% {
     background-position-x: 0%;
     background-position-y: 10.5263157895%;
   }
-  54.8388096774%, 58.064516129% {
+  54.8487096774%, 58.064516129% {
     background-position-x: 14.2857142857%;
     background-position-y: 10.5263157895%;
   }
-  58.064616129%, 61.2903225806% {
+  58.074516129%, 61.2903225806% {
     background-position-x: 28.5714285714%;
     background-position-y: 10.5263157895%;
   }
-  61.2904225806%, 64.5161290323% {
+  61.3003225806%, 64.5161290323% {
     background-position-x: 42.8571428571%;
     background-position-y: 10.5263157895%;
   }
-  64.5162290323%, 67.7419354839% {
+  64.5261290323%, 67.7419354839% {
     background-position-x: 57.1428571429%;
     background-position-y: 10.5263157895%;
   }
-  67.7420354839%, 70.9677419355% {
+  67.7519354839%, 70.9677419355% {
     background-position-x: 71.4285714286%;
     background-position-y: 10.5263157895%;
   }
-  70.9678419355%, 74.1935483871% {
+  70.9777419355%, 74.1935483871% {
     background-position-x: 85.7142857143%;
     background-position-y: 10.5263157895%;
   }
-  74.1936483871%, 77.4193548387% {
+  74.2035483871%, 77.4193548387% {
     background-position-x: 100%;
     background-position-y: 10.5263157895%;
   }
-  77.4194548387%, 80.6451612903% {
+  77.4293548387%, 80.6451612903% {
     background-position-x: 0%;
     background-position-y: 15.7894736842%;
   }
-  80.6452612903%, 83.8709677419% {
+  80.6551612903%, 83.8709677419% {
     background-position-x: 14.2857142857%;
     background-position-y: 15.7894736842%;
   }
-  83.8710677419%, 87.0967741935% {
+  83.8809677419%, 87.0967741935% {
     background-position-x: 28.5714285714%;
     background-position-y: 15.7894736842%;
   }
-  87.0968741935%, 90.3225806452% {
+  87.1067741935%, 90.3225806452% {
     background-position-x: 42.8571428571%;
     background-position-y: 15.7894736842%;
   }
-  90.3226806452%, 93.5483870968% {
+  90.3325806452%, 93.5483870968% {
     background-position-x: 57.1428571429%;
     background-position-y: 15.7894736842%;
   }
-  93.5484870968%, 96.7741935484% {
+  93.5583870968%, 96.7741935484% {
     background-position-x: 71.4285714286%;
     background-position-y: 15.7894736842%;
   }
-  96.7742935484%, 100% {
+  96.7841935484%, 100% {
     background-position-x: 85.7142857143%;
     background-position-y: 15.7894736842%;
   }
-  100.0001%, 103.2258064516% {
+  100.01%, 103.2258064516% {
     background-position-x: 100%;
     background-position-y: 15.7894736842%;
   }
 }
 @keyframes rollDice_1 {
-  0.0001%, 3.2258064516% {
+  0.01%, 3.2258064516% {
     background-position-x: 0%;
     background-position-y: 21.0526315789%;
   }
-  3.2259064516%, 6.4516129032% {
+  3.2358064516%, 6.4516129032% {
     background-position-x: 14.2857142857%;
     background-position-y: 21.0526315789%;
   }
-  6.4517129032%, 9.6774193548% {
+  6.4616129032%, 9.6774193548% {
     background-position-x: 28.5714285714%;
     background-position-y: 21.0526315789%;
   }
-  9.6775193548%, 12.9032258065% {
+  9.6874193548%, 12.9032258065% {
     background-position-x: 42.8571428571%;
     background-position-y: 21.0526315789%;
   }
-  12.9033258065%, 16.1290322581% {
+  12.9132258065%, 16.1290322581% {
     background-position-x: 57.1428571429%;
     background-position-y: 21.0526315789%;
   }
-  16.1291322581%, 19.3548387097% {
+  16.1390322581%, 19.3548387097% {
     background-position-x: 71.4285714286%;
     background-position-y: 21.0526315789%;
   }
-  19.3549387097%, 22.5806451613% {
+  19.3648387097%, 22.5806451613% {
     background-position-x: 85.7142857143%;
     background-position-y: 21.0526315789%;
   }
-  22.5807451613%, 25.8064516129% {
+  22.5906451613%, 25.8064516129% {
     background-position-x: 100%;
     background-position-y: 21.0526315789%;
   }
-  25.8065516129%, 29.0322580645% {
+  25.8164516129%, 29.0322580645% {
     background-position-x: 0%;
     background-position-y: 26.3157894737%;
   }
-  29.0323580645%, 32.2580645161% {
+  29.0422580645%, 32.2580645161% {
     background-position-x: 14.2857142857%;
     background-position-y: 26.3157894737%;
   }
-  32.2581645161%, 35.4838709677% {
+  32.2680645161%, 35.4838709677% {
     background-position-x: 28.5714285714%;
     background-position-y: 26.3157894737%;
   }
-  35.4839709677%, 38.7096774194% {
+  35.4938709677%, 38.7096774194% {
     background-position-x: 42.8571428571%;
     background-position-y: 26.3157894737%;
   }
-  38.7097774194%, 41.935483871% {
+  38.7196774194%, 41.935483871% {
     background-position-x: 57.1428571429%;
     background-position-y: 26.3157894737%;
   }
-  41.935583871%, 45.1612903226% {
+  41.945483871%, 45.1612903226% {
     background-position-x: 71.4285714286%;
     background-position-y: 26.3157894737%;
   }
-  45.1613903226%, 48.3870967742% {
+  45.1712903226%, 48.3870967742% {
     background-position-x: 85.7142857143%;
     background-position-y: 26.3157894737%;
   }
-  48.3871967742%, 51.6129032258% {
+  48.3970967742%, 51.6129032258% {
     background-position-x: 100%;
     background-position-y: 26.3157894737%;
   }
-  51.6130032258%, 54.8387096774% {
+  51.6229032258%, 54.8387096774% {
     background-position-x: 0%;
     background-position-y: 31.5789473684%;
   }
-  54.8388096774%, 58.064516129% {
+  54.8487096774%, 58.064516129% {
     background-position-x: 14.2857142857%;
     background-position-y: 31.5789473684%;
   }
-  58.064616129%, 61.2903225806% {
+  58.074516129%, 61.2903225806% {
     background-position-x: 28.5714285714%;
     background-position-y: 31.5789473684%;
   }
-  61.2904225806%, 64.5161290323% {
+  61.3003225806%, 64.5161290323% {
     background-position-x: 42.8571428571%;
     background-position-y: 31.5789473684%;
   }
-  64.5162290323%, 67.7419354839% {
+  64.5261290323%, 67.7419354839% {
     background-position-x: 57.1428571429%;
     background-position-y: 31.5789473684%;
   }
-  67.7420354839%, 70.9677419355% {
+  67.7519354839%, 70.9677419355% {
     background-position-x: 71.4285714286%;
     background-position-y: 31.5789473684%;
   }
-  70.9678419355%, 74.1935483871% {
+  70.9777419355%, 74.1935483871% {
     background-position-x: 85.7142857143%;
     background-position-y: 31.5789473684%;
   }
-  74.1936483871%, 77.4193548387% {
+  74.2035483871%, 77.4193548387% {
     background-position-x: 100%;
     background-position-y: 31.5789473684%;
   }
-  77.4194548387%, 80.6451612903% {
+  77.4293548387%, 80.6451612903% {
     background-position-x: 0%;
     background-position-y: 36.8421052632%;
   }
-  80.6452612903%, 83.8709677419% {
+  80.6551612903%, 83.8709677419% {
     background-position-x: 14.2857142857%;
     background-position-y: 36.8421052632%;
   }
-  83.8710677419%, 87.0967741935% {
+  83.8809677419%, 87.0967741935% {
     background-position-x: 28.5714285714%;
     background-position-y: 36.8421052632%;
   }
-  87.0968741935%, 90.3225806452% {
+  87.1067741935%, 90.3225806452% {
     background-position-x: 42.8571428571%;
     background-position-y: 36.8421052632%;
   }
-  90.3226806452%, 93.5483870968% {
+  90.3325806452%, 93.5483870968% {
     background-position-x: 57.1428571429%;
     background-position-y: 36.8421052632%;
   }
-  93.5484870968%, 96.7741935484% {
+  93.5583870968%, 96.7741935484% {
     background-position-x: 71.4285714286%;
     background-position-y: 36.8421052632%;
   }
-  96.7742935484%, 100% {
+  96.7841935484%, 100% {
     background-position-x: 85.7142857143%;
     background-position-y: 36.8421052632%;
   }
-  100.0001%, 103.2258064516% {
+  100.01%, 103.2258064516% {
     background-position-x: 100%;
     background-position-y: 36.8421052632%;
   }
 }
 @keyframes rollDice_2 {
-  0.0001%, 3.2258064516% {
+  0.01%, 3.2258064516% {
     background-position-x: 0%;
     background-position-y: 42.1052631579%;
   }
-  3.2259064516%, 6.4516129032% {
+  3.2358064516%, 6.4516129032% {
     background-position-x: 14.2857142857%;
     background-position-y: 42.1052631579%;
   }
-  6.4517129032%, 9.6774193548% {
+  6.4616129032%, 9.6774193548% {
     background-position-x: 28.5714285714%;
     background-position-y: 42.1052631579%;
   }
-  9.6775193548%, 12.9032258065% {
+  9.6874193548%, 12.9032258065% {
     background-position-x: 42.8571428571%;
     background-position-y: 42.1052631579%;
   }
-  12.9033258065%, 16.1290322581% {
+  12.9132258065%, 16.1290322581% {
     background-position-x: 57.1428571429%;
     background-position-y: 42.1052631579%;
   }
-  16.1291322581%, 19.3548387097% {
+  16.1390322581%, 19.3548387097% {
     background-position-x: 71.4285714286%;
     background-position-y: 42.1052631579%;
   }
-  19.3549387097%, 22.5806451613% {
+  19.3648387097%, 22.5806451613% {
     background-position-x: 85.7142857143%;
     background-position-y: 42.1052631579%;
   }
-  22.5807451613%, 25.8064516129% {
+  22.5906451613%, 25.8064516129% {
     background-position-x: 100%;
     background-position-y: 42.1052631579%;
   }
-  25.8065516129%, 29.0322580645% {
+  25.8164516129%, 29.0322580645% {
     background-position-x: 0%;
     background-position-y: 47.3684210526%;
   }
-  29.0323580645%, 32.2580645161% {
+  29.0422580645%, 32.2580645161% {
     background-position-x: 14.2857142857%;
     background-position-y: 47.3684210526%;
   }
-  32.2581645161%, 35.4838709677% {
+  32.2680645161%, 35.4838709677% {
     background-position-x: 28.5714285714%;
     background-position-y: 47.3684210526%;
   }
-  35.4839709677%, 38.7096774194% {
+  35.4938709677%, 38.7096774194% {
     background-position-x: 42.8571428571%;
     background-position-y: 47.3684210526%;
   }
-  38.7097774194%, 41.935483871% {
+  38.7196774194%, 41.935483871% {
     background-position-x: 57.1428571429%;
     background-position-y: 47.3684210526%;
   }
-  41.935583871%, 45.1612903226% {
+  41.945483871%, 45.1612903226% {
     background-position-x: 71.4285714286%;
     background-position-y: 47.3684210526%;
   }
-  45.1613903226%, 48.3870967742% {
+  45.1712903226%, 48.3870967742% {
     background-position-x: 85.7142857143%;
     background-position-y: 47.3684210526%;
   }
-  48.3871967742%, 51.6129032258% {
+  48.3970967742%, 51.6129032258% {
     background-position-x: 100%;
     background-position-y: 47.3684210526%;
   }
-  51.6130032258%, 54.8387096774% {
+  51.6229032258%, 54.8387096774% {
     background-position-x: 0%;
     background-position-y: 52.6315789474%;
   }
-  54.8388096774%, 58.064516129% {
+  54.8487096774%, 58.064516129% {
     background-position-x: 14.2857142857%;
     background-position-y: 52.6315789474%;
   }
-  58.064616129%, 61.2903225806% {
+  58.074516129%, 61.2903225806% {
     background-position-x: 28.5714285714%;
     background-position-y: 52.6315789474%;
   }
-  61.2904225806%, 64.5161290323% {
+  61.3003225806%, 64.5161290323% {
     background-position-x: 42.8571428571%;
     background-position-y: 52.6315789474%;
   }
-  64.5162290323%, 67.7419354839% {
+  64.5261290323%, 67.7419354839% {
     background-position-x: 57.1428571429%;
     background-position-y: 52.6315789474%;
   }
-  67.7420354839%, 70.9677419355% {
+  67.7519354839%, 70.9677419355% {
     background-position-x: 71.4285714286%;
     background-position-y: 52.6315789474%;
   }
-  70.9678419355%, 74.1935483871% {
+  70.9777419355%, 74.1935483871% {
     background-position-x: 85.7142857143%;
     background-position-y: 52.6315789474%;
   }
-  74.1936483871%, 77.4193548387% {
+  74.2035483871%, 77.4193548387% {
     background-position-x: 100%;
     background-position-y: 52.6315789474%;
   }
-  77.4194548387%, 80.6451612903% {
+  77.4293548387%, 80.6451612903% {
     background-position-x: 0%;
     background-position-y: 57.8947368421%;
   }
-  80.6452612903%, 83.8709677419% {
+  80.6551612903%, 83.8709677419% {
     background-position-x: 14.2857142857%;
     background-position-y: 57.8947368421%;
   }
-  83.8710677419%, 87.0967741935% {
+  83.8809677419%, 87.0967741935% {
     background-position-x: 28.5714285714%;
     background-position-y: 57.8947368421%;
   }
-  87.0968741935%, 90.3225806452% {
+  87.1067741935%, 90.3225806452% {
     background-position-x: 42.8571428571%;
     background-position-y: 57.8947368421%;
   }
-  90.3226806452%, 93.5483870968% {
+  90.3325806452%, 93.5483870968% {
     background-position-x: 57.1428571429%;
     background-position-y: 57.8947368421%;
   }
-  93.5484870968%, 96.7741935484% {
+  93.5583870968%, 96.7741935484% {
     background-position-x: 71.4285714286%;
     background-position-y: 57.8947368421%;
   }
-  96.7742935484%, 100% {
+  96.7841935484%, 100% {
     background-position-x: 85.7142857143%;
     background-position-y: 57.8947368421%;
   }
-  100.0001%, 103.2258064516% {
+  100.01%, 103.2258064516% {
     background-position-x: 100%;
     background-position-y: 57.8947368421%;
   }
 }
 @keyframes rollDice_3 {
-  0.0001%, 3.2258064516% {
+  0.01%, 3.2258064516% {
     background-position-x: 0%;
     background-position-y: 63.1578947368%;
   }
-  3.2259064516%, 6.4516129032% {
+  3.2358064516%, 6.4516129032% {
     background-position-x: 14.2857142857%;
     background-position-y: 63.1578947368%;
   }
-  6.4517129032%, 9.6774193548% {
+  6.4616129032%, 9.6774193548% {
     background-position-x: 28.5714285714%;
     background-position-y: 63.1578947368%;
   }
-  9.6775193548%, 12.9032258065% {
+  9.6874193548%, 12.9032258065% {
     background-position-x: 42.8571428571%;
     background-position-y: 63.1578947368%;
   }
-  12.9033258065%, 16.1290322581% {
+  12.9132258065%, 16.1290322581% {
     background-position-x: 57.1428571429%;
     background-position-y: 63.1578947368%;
   }
-  16.1291322581%, 19.3548387097% {
+  16.1390322581%, 19.3548387097% {
     background-position-x: 71.4285714286%;
     background-position-y: 63.1578947368%;
   }
-  19.3549387097%, 22.5806451613% {
+  19.3648387097%, 22.5806451613% {
     background-position-x: 85.7142857143%;
     background-position-y: 63.1578947368%;
   }
-  22.5807451613%, 25.8064516129% {
+  22.5906451613%, 25.8064516129% {
     background-position-x: 100%;
     background-position-y: 63.1578947368%;
   }
-  25.8065516129%, 29.0322580645% {
+  25.8164516129%, 29.0322580645% {
     background-position-x: 0%;
     background-position-y: 68.4210526316%;
   }
-  29.0323580645%, 32.2580645161% {
+  29.0422580645%, 32.2580645161% {
     background-position-x: 14.2857142857%;
     background-position-y: 68.4210526316%;
   }
-  32.2581645161%, 35.4838709677% {
+  32.2680645161%, 35.4838709677% {
     background-position-x: 28.5714285714%;
     background-position-y: 68.4210526316%;
   }
-  35.4839709677%, 38.7096774194% {
+  35.4938709677%, 38.7096774194% {
     background-position-x: 42.8571428571%;
     background-position-y: 68.4210526316%;
   }
-  38.7097774194%, 41.935483871% {
+  38.7196774194%, 41.935483871% {
     background-position-x: 57.1428571429%;
     background-position-y: 68.4210526316%;
   }
-  41.935583871%, 45.1612903226% {
+  41.945483871%, 45.1612903226% {
     background-position-x: 71.4285714286%;
     background-position-y: 68.4210526316%;
   }
-  45.1613903226%, 48.3870967742% {
+  45.1712903226%, 48.3870967742% {
     background-position-x: 85.7142857143%;
     background-position-y: 68.4210526316%;
   }
-  48.3871967742%, 51.6129032258% {
+  48.3970967742%, 51.6129032258% {
     background-position-x: 100%;
     background-position-y: 68.4210526316%;
   }
-  51.6130032258%, 54.8387096774% {
+  51.6229032258%, 54.8387096774% {
     background-position-x: 0%;
     background-position-y: 73.6842105263%;
   }
-  54.8388096774%, 58.064516129% {
+  54.8487096774%, 58.064516129% {
     background-position-x: 14.2857142857%;
     background-position-y: 73.6842105263%;
   }
-  58.064616129%, 61.2903225806% {
+  58.074516129%, 61.2903225806% {
     background-position-x: 28.5714285714%;
     background-position-y: 73.6842105263%;
   }
-  61.2904225806%, 64.5161290323% {
+  61.3003225806%, 64.5161290323% {
     background-position-x: 42.8571428571%;
     background-position-y: 73.6842105263%;
   }
-  64.5162290323%, 67.7419354839% {
+  64.5261290323%, 67.7419354839% {
     background-position-x: 57.1428571429%;
     background-position-y: 73.6842105263%;
   }
-  67.7420354839%, 70.9677419355% {
+  67.7519354839%, 70.9677419355% {
     background-position-x: 71.4285714286%;
     background-position-y: 73.6842105263%;
   }
-  70.9678419355%, 74.1935483871% {
+  70.9777419355%, 74.1935483871% {
     background-position-x: 85.7142857143%;
     background-position-y: 73.6842105263%;
   }
-  74.1936483871%, 77.4193548387% {
+  74.2035483871%, 77.4193548387% {
     background-position-x: 100%;
     background-position-y: 73.6842105263%;
   }
-  77.4194548387%, 80.6451612903% {
+  77.4293548387%, 80.6451612903% {
     background-position-x: 0%;
     background-position-y: 78.9473684211%;
   }
-  80.6452612903%, 83.8709677419% {
+  80.6551612903%, 83.8709677419% {
     background-position-x: 14.2857142857%;
     background-position-y: 78.9473684211%;
   }
-  83.8710677419%, 87.0967741935% {
+  83.8809677419%, 87.0967741935% {
     background-position-x: 28.5714285714%;
     background-position-y: 78.9473684211%;
   }
-  87.0968741935%, 90.3225806452% {
+  87.1067741935%, 90.3225806452% {
     background-position-x: 42.8571428571%;
     background-position-y: 78.9473684211%;
   }
-  90.3226806452%, 93.5483870968% {
+  90.3325806452%, 93.5483870968% {
     background-position-x: 57.1428571429%;
     background-position-y: 78.9473684211%;
   }
-  93.5484870968%, 96.7741935484% {
+  93.5583870968%, 96.7741935484% {
     background-position-x: 71.4285714286%;
     background-position-y: 78.9473684211%;
   }
-  96.7742935484%, 100% {
+  96.7841935484%, 100% {
     background-position-x: 85.7142857143%;
     background-position-y: 78.9473684211%;
   }
-  100.0001%, 103.2258064516% {
+  100.01%, 103.2258064516% {
     background-position-x: 100%;
     background-position-y: 78.9473684211%;
   }
 }
 @keyframes rollDice_4 {
-  0.0001%, 3.2258064516% {
+  0.01%, 3.2258064516% {
     background-position-x: 0%;
     background-position-y: 84.2105263158%;
   }
-  3.2259064516%, 6.4516129032% {
+  3.2358064516%, 6.4516129032% {
     background-position-x: 14.2857142857%;
     background-position-y: 84.2105263158%;
   }
-  6.4517129032%, 9.6774193548% {
+  6.4616129032%, 9.6774193548% {
     background-position-x: 28.5714285714%;
     background-position-y: 84.2105263158%;
   }
-  9.6775193548%, 12.9032258065% {
+  9.6874193548%, 12.9032258065% {
     background-position-x: 42.8571428571%;
     background-position-y: 84.2105263158%;
   }
-  12.9033258065%, 16.1290322581% {
+  12.9132258065%, 16.1290322581% {
     background-position-x: 57.1428571429%;
     background-position-y: 84.2105263158%;
   }
-  16.1291322581%, 19.3548387097% {
+  16.1390322581%, 19.3548387097% {
     background-position-x: 71.4285714286%;
     background-position-y: 84.2105263158%;
   }
-  19.3549387097%, 22.5806451613% {
+  19.3648387097%, 22.5806451613% {
     background-position-x: 85.7142857143%;
     background-position-y: 84.2105263158%;
   }
-  22.5807451613%, 25.8064516129% {
+  22.5906451613%, 25.8064516129% {
     background-position-x: 100%;
     background-position-y: 84.2105263158%;
   }
-  25.8065516129%, 29.0322580645% {
+  25.8164516129%, 29.0322580645% {
     background-position-x: 0%;
     background-position-y: 89.4736842105%;
   }
-  29.0323580645%, 32.2580645161% {
+  29.0422580645%, 32.2580645161% {
     background-position-x: 14.2857142857%;
     background-position-y: 89.4736842105%;
   }
-  32.2581645161%, 35.4838709677% {
+  32.2680645161%, 35.4838709677% {
     background-position-x: 28.5714285714%;
     background-position-y: 89.4736842105%;
   }
-  35.4839709677%, 38.7096774194% {
+  35.4938709677%, 38.7096774194% {
     background-position-x: 42.8571428571%;
     background-position-y: 89.4736842105%;
   }
-  38.7097774194%, 41.935483871% {
+  38.7196774194%, 41.935483871% {
     background-position-x: 57.1428571429%;
     background-position-y: 89.4736842105%;
   }
-  41.935583871%, 45.1612903226% {
+  41.945483871%, 45.1612903226% {
     background-position-x: 71.4285714286%;
     background-position-y: 89.4736842105%;
   }
-  45.1613903226%, 48.3870967742% {
+  45.1712903226%, 48.3870967742% {
     background-position-x: 85.7142857143%;
     background-position-y: 89.4736842105%;
   }
-  48.3871967742%, 51.6129032258% {
+  48.3970967742%, 51.6129032258% {
     background-position-x: 100%;
     background-position-y: 89.4736842105%;
   }
-  51.6130032258%, 54.8387096774% {
+  51.6229032258%, 54.8387096774% {
     background-position-x: 0%;
     background-position-y: 94.7368421053%;
   }
-  54.8388096774%, 58.064516129% {
+  54.8487096774%, 58.064516129% {
     background-position-x: 14.2857142857%;
     background-position-y: 94.7368421053%;
   }
-  58.064616129%, 61.2903225806% {
+  58.074516129%, 61.2903225806% {
     background-position-x: 28.5714285714%;
     background-position-y: 94.7368421053%;
   }
-  61.2904225806%, 64.5161290323% {
+  61.3003225806%, 64.5161290323% {
     background-position-x: 42.8571428571%;
     background-position-y: 94.7368421053%;
   }
-  64.5162290323%, 67.7419354839% {
+  64.5261290323%, 67.7419354839% {
     background-position-x: 57.1428571429%;
     background-position-y: 94.7368421053%;
   }
-  67.7420354839%, 70.9677419355% {
+  67.7519354839%, 70.9677419355% {
     background-position-x: 71.4285714286%;
     background-position-y: 94.7368421053%;
   }
-  70.9678419355%, 74.1935483871% {
+  70.9777419355%, 74.1935483871% {
     background-position-x: 85.7142857143%;
     background-position-y: 94.7368421053%;
   }
-  74.1936483871%, 77.4193548387% {
+  74.2035483871%, 77.4193548387% {
     background-position-x: 100%;
     background-position-y: 94.7368421053%;
   }
-  77.4194548387%, 80.6451612903% {
+  77.4293548387%, 80.6451612903% {
     background-position-x: 0%;
     background-position-y: 100%;
   }
-  80.6452612903%, 83.8709677419% {
+  80.6551612903%, 83.8709677419% {
     background-position-x: 14.2857142857%;
     background-position-y: 100%;
   }
-  83.8710677419%, 87.0967741935% {
+  83.8809677419%, 87.0967741935% {
     background-position-x: 28.5714285714%;
     background-position-y: 100%;
   }
-  87.0968741935%, 90.3225806452% {
+  87.1067741935%, 90.3225806452% {
     background-position-x: 42.8571428571%;
     background-position-y: 100%;
   }
-  90.3226806452%, 93.5483870968% {
+  90.3325806452%, 93.5483870968% {
     background-position-x: 57.1428571429%;
     background-position-y: 100%;
   }
-  93.5484870968%, 96.7741935484% {
+  93.5583870968%, 96.7741935484% {
     background-position-x: 71.4285714286%;
     background-position-y: 100%;
   }
-  96.7742935484%, 100% {
+  96.7841935484%, 100% {
     background-position-x: 85.7142857143%;
     background-position-y: 100%;
   }
-  100.0001%, 103.2258064516% {
+  100.01%, 103.2258064516% {
     background-position-x: 100%;
     background-position-y: 100%;
   }
@@ -6339,51 +6282,51 @@ span.m44-dice-result[data-result="4"] {
 }
 
 @keyframes explode {
-  0.0001%, 9.0909090909% {
+  0.01%, 9.0909090909% {
     background-position-x: 0%;
     background-position-y: 0%;
   }
-  9.0910090909%, 18.1818181818% {
+  9.1009090909%, 18.1818181818% {
     background-position-x: 33.3333333333%;
     background-position-y: 0%;
   }
-  18.1819181818%, 27.2727272727% {
+  18.1918181818%, 27.2727272727% {
     background-position-x: 66.6666666667%;
     background-position-y: 0%;
   }
-  27.2728272727%, 36.3636363636% {
+  27.2827272727%, 36.3636363636% {
     background-position-x: 100%;
     background-position-y: 0%;
   }
-  36.3637363636%, 45.4545454545% {
+  36.3736363636%, 45.4545454545% {
     background-position-x: 0%;
     background-position-y: 50%;
   }
-  45.4546454545%, 54.5454545455% {
+  45.4645454545%, 54.5454545455% {
     background-position-x: 33.3333333333%;
     background-position-y: 50%;
   }
-  54.5455545455%, 63.6363636364% {
+  54.5554545455%, 63.6363636364% {
     background-position-x: 66.6666666667%;
     background-position-y: 50%;
   }
-  63.6364636364%, 72.7272727273% {
+  63.6463636364%, 72.7272727273% {
     background-position-x: 100%;
     background-position-y: 50%;
   }
-  72.7273727273%, 81.8181818182% {
+  72.7372727273%, 81.8181818182% {
     background-position-x: 0%;
     background-position-y: 100%;
   }
-  81.8182818182%, 90.9090909091% {
+  81.8281818182%, 90.9090909091% {
     background-position-x: 33.3333333333%;
     background-position-y: 100%;
   }
-  90.9091909091%, 100% {
+  90.9190909091%, 100% {
     background-position-x: 66.6666666667%;
     background-position-y: 100%;
   }
-  100.0001%, 109.0909090909% {
+  100.01%, 109.0909090909% {
     background-position-x: 100%;
     background-position-y: 100%;
   }
@@ -7949,4 +7892,72 @@ span.m44-dice-result[data-result="4"] {
   background-size: 100% 100%;
   background-position-x: 0%;
   background-position-y: 0%;
+}
+
+@font-face {
+  font-family: "Army";
+  src: url("img/fonts/Army.woff2") format("woff2"), url("img/fonts/Army.woff") format("woff"), url("img/fonts/Army.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gunplay";
+  src: url("img/fonts/Gunplay.woff2") format("woff2"), url("img/fonts/Gunplay.woff") format("woff"), url("img/fonts/Gunplay.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Oswald";
+  src: url("img/fonts/Oswald-Regular.woff2") format("woff2"), url("img/fonts/Oswald-Regular.woff") format("woff"), url("img/fonts/Oswald-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Dax";
+  src: url("img/fonts/DaxLight.woff2") format("woff2"), url("img/fonts/DaxLight.woff") format("woff"), url("img/fonts/DaxLight.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+.phantom {
+  visibility: hidden;
+}
+
+.notransition {
+  transition: none !important;
+}
+
+#logs .roundedbox {
+  background-color: #eadacc;
+  border-radius: 2px;
+}
+
+#logs .timestamp {
+  color: black;
+}
+
+#logs .log-coordinate {
+  font-family: Courier New, serif;
+}
+
+.help-marker-btn {
+  display: inline-block;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  z-index: 900;
+  border: 1px solid black;
+  border-radius: 50%;
+}
+.help-marker-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.help-marker {
+  display: none;
 }/*# sourceMappingURL=memoir.css.map */

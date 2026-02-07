@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 .m44-medal {
   width: 35px;
   height: 35px;
@@ -6,8 +8,8 @@
 
   @for $i from 0 through 8 {
     &[data-sprite='#{$i}'] {
-      background-position-x: ($i % 2) * 100%;
-      background-position-y: (($i - ($i % 2)) / 2) * 100% / 3;
+      background-position-x: calc(math.max($i % 2) * 100%);
+      background-position-y: calc((($i - (math.max($i % 2))) / 2) * 100% / 3);
     }
   }
 
@@ -39,8 +41,8 @@
 
   @for $i from 0 through 8 {
     &[data-sprite='#{$i}'] {
-      background-position-x: ($i % 2) * 100%;
-      background-position-y: (($i - ($i % 2)) / 2) * 100% / 3;
+      background-position-x: calc(math.max($i % 2) * 100%);
+      background-position-y: calc((($i - (math.max($i % 2))) / 2) * 100% / 3);
     }
   }
 

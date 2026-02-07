@@ -60,7 +60,7 @@
 
     @for $i from 1 through 7 {
       &[data-n='#{$i}'] {
-        background-position-x: ($i - 1) * 100% / 5;
+        background-position-x: calc(($i - 1) * 100% / 5);
       }
     }
   }

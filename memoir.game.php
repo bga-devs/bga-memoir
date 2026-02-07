@@ -131,6 +131,7 @@ class memoir extends Table
       'visibility' => Globals::getNightVisibility(),
       'turn' => Globals::getTurn(),
       'isCampaign' => Globals::isCampaign(),
+      'isOverlord' => Globals::isOverlord(),
     ];
   }
 
@@ -374,6 +375,8 @@ SQL;
       Globals::setRollVictoryEventList([]);
     }
 
-
+    if ($from_version <= 2511212004) { // version to be finetuned when overlord release
+      Globals::setDistributedCards(['AXIS' => [], 'ALLIES' => []]); // Overlord 
+    } 
   }
 }

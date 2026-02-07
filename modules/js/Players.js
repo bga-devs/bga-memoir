@@ -172,6 +172,15 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           dojo.place(`<div class="reserve-token" id="${pos}-reserve-2"> </div>`, pos + '-staging-slots');
         }
 
+        if (this.gamedatas.isOverlord) {
+          dojo.place(`<div class="subsection" id="${pos}-subsection-0"> </div>`, pos + '-overlord-inplay-cards-container');
+          dojo.place(`<div class="subsection" id="${pos}-subsection-1"> </div>`, pos + '-overlord-inplay-cards-container');
+          dojo.place(`<div class="subsection" id="${pos}-subsection-2"> </div>`, pos + '-overlord-inplay-cards-container');
+          dojo.place(`<div class="subsection" id="${pos}-subsection-3"> </div>`, pos + '-overlord-inplay-cards-container');
+          dojo.place(`<div class="subsection" id="${pos}-subsection-4"> </div>`, pos + '-overlord-inplay-cards-container');
+          dojo.place(`<div class="subsection" id="${pos}-subsection-5"> </div>`, pos + '-overlord-inplay-cards-container');
+        }
+
         Object.values(team.medals).forEach((medal) => this.addMedal(medal));
         if (this.gamedatas.isCampaign) { 
           Object.values(team.units_on_reserve).forEach((unit, index)=> {
@@ -475,6 +484,90 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         this.addCard(n.args.card, `in-play-${n.args.player_id}`);
       }
       this._handCounters[n.args.player_id].incValue(-1);
+    },
+
+    notif_distributeCard(n) {
+      debug('Notif: distributing cards to sections', n);
+      if (n.args.sectionIds == 6) {
+        if (this.player_id == n.args.player_id) {
+          this.slide('card-' + n.args.card.id, `in-play-${n.args.player_id}`);
+        } else {
+          this.addCard(n.args.card, `in-play-${n.args.player_id}`);
+        }
+      } else {
+        let pos = this.player_id == n.args.player_id ? 'bottom' : 'top'; // top or bottom board
+        playerBottomTeam = this._bottomTeam == this.gamedatas.players[this.player_id].team; // first player is on bottom team or not (to reverse section order for bottom player)
+        subsectionIdTmp = playerBottomTeam ? 5 - n.args.sectionId : n.args.sectionId;
+        subsectionId = pos == 'top' ? 5 - subsectionIdTmp : subsectionIdTmp // reverse section order for bottom player
+        console.log('slide card to section', n.args.sectionId, pos, `${pos}-subsection-${subsectionId}`);
+
+
+        let container = document.getElementById(`${pos}-subsection-${subsectionId}`);
+        if (this.player_id == n.args.player_id) {
+          this.slide('card-' + n.args.card.id, container);
+        } else {
+          this.addCard(n.args.card, container);
+        }
+      }
+
+      this._handCounters[n.args.player_id].incValue(-1);
+    },
+
+    onEnteringStateDistributeCards(args) {
+      console.log('Overlord Distribution Cards State', args);
+      // Make cards selectable
+      let cards = args._private.cards;
+      //let cards317 = args._private.cardsHill317;
+      //let cardsBlowBridge = args._private.cardsBlowBridge;
+      //let cardsArmorBreakthrough = args._private.cardsArmorBreakthrough;
+      Object.keys(cards).forEach((cardId) => {
+        this.onClick(`card-${cardId}`, () => {
+          this.clientState('distributeSectionChoose', _('Choose target section'), { cardId, sections: cards[cardId], selectedSubSections: args._private.selectedSubSections });
+          
+        });
+      });
+    },
+
+    onEnteringStateDistributeSectionChoose(args) {
+      console.log('Choose distribution section', args);
+      let cardId = args.cardId;
+      $(`card-${cardId}`).classList.add('choice');
+      this.addCancelStateBtn();
+      playerBottomTeam = this._bottomTeam == this.gamedatas.players[this.player_id].team;
+      let sections = 
+        {
+        0:_('Left Left'),
+        1:_('Left Right'),
+        2: _('Central Left'),
+        3:_('Central Right'),
+        4:_('Right Left'),
+        5:_('Right Right'),
+        6:_('Chief commander')
+        };
+      let sectionIds = !playerBottomTeam ? [0,1,2,3,4,5,6] : [5,4,3,2,1,0,6];
+         
+      
+      console.log(this._bottomTeam, sections);
+      for (const [key, value] of Object.entries(sections)) {
+        console.log('Check sectionId', key, args.selectedSubSections, sectionIds[key], !args.selectedSubSections.includes(sectionIds[key].toString()), args.sections.includes(sectionIds[key]) );
+          if (!args.selectedSubSections.includes(sectionIds[key].toString()) && args.sections.includes(sectionIds[key])) {
+          console.log('Add button for sectionId', sectionIds[key]);         
+          this.addPrimaryActionButton(`btnSection-${key}`, value , 
+            () => this.takeAction('actDistributeCards', { cardId : cardId, section : sectionIds[key]}),
+          );
+        }
+
+      };
+      /*for (let i = 0; i < sections.length; i++) {
+        console.log('Check sectionId', i, args.selectedSubSections, playerBottomTeam );
+        if (!args.selectedSubSections.includes(i)) {
+
+          console.log('Add button for sectionId', sectionId, i,);         
+          this.addPrimaryActionButton(`btnSection-${i}`, sections[i], 
+            () => this.takeAction('actDistributeCards', { cardId : cardId, section : sectionIds[i] }),
+          );
+        }
+      }*/
     },
 
     notif_discardCard(n) {

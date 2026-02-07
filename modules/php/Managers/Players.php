@@ -163,7 +163,8 @@ class Players extends \M44\Helpers\DB_Manager
   {
     if (Globals::isOverlord()) {
       // TODO : handle Overlord here
-      return [];
+      $pIds = array_keys(Game::get()->loadPlayersBasicInfos());
+      return [[$pIds[0], $pIds[0], $pIds[0], $pIds[0]], [$pIds[1], $pIds[1], $pIds[1], $pIds[1]]];
     } else {
       $pIds = array_keys(Game::get()->loadPlayersBasicInfos());
       return [[$pIds[0], $pIds[0], $pIds[0], $pIds[0]], [$pIds[1], $pIds[1], $pIds[1], $pIds[1]]];

@@ -76,6 +76,8 @@ class Globals extends \M44\Helpers\DB_Manager
     'beginDate' => 'str',
     'armorBreakthrough' => 'obj', // players who can use Armor Breakthrough action
     'armorBreakthroughDone' => 'obj', // array of bool for each player
+    // Overlord
+    'distributedCards' => 'obj', // array of distributed cards by Teams and their affected subsections (to be done Field generals)
   ];
 
   protected static $table = 'global_variables';
@@ -267,7 +269,7 @@ class Globals extends \M44\Helpers\DB_Manager
 
   public static function isOverlord()
   {
-    return Globals::getMode() == OPTION_MODE_OVERLORD;
+    return Globals::getMode() == OPTION_MODE_OVERLORD || Scenario::getMode() == 'OVERLORD';
   }
 
   public static function isCampaign()

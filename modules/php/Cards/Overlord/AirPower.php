@@ -16,4 +16,10 @@ For each flag rolled, unit must retreat 1 hex."),
       clienttranslate('Play this card at the start of the turn, before your Field Generals play any of their cards.'),
     ];
   }
+
+  public function getPlayableSubSections($side = null)
+  {
+    // Overlord mode only
+    return [CHIEF_COMMANDER_SUB_SECTION];
+  }
 }

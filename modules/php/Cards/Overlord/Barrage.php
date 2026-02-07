@@ -10,4 +10,9 @@ class Barrage extends \M44\Cards\Standard\Barrage
       'Play this card at the start of the turn, before your Field Generals play any of their cards.'
     );
   }
+
+  public function getPlayableSubSections($side = null)
+    {
+        return [6];
+    }
 }

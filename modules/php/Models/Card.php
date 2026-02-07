@@ -246,6 +246,12 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
     return null;
   }
 
+  public function getPlayableSubSections($side = null)
+  {
+    // overlord mode only
+    return true;
+  }
+
   public function canHill317()
   {
     return false;

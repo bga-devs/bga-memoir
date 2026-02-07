@@ -620,6 +620,19 @@ html {
     [data-auto-react="1"] & #right-holder #m44-react-settings svg:last-of-type {
       display: none;
     }
+
+    #bottom-overlord-inplay-cards-container, #top-overlord-inplay-cards-container {
+      display: inline-flex;
+      align-items: center;
+
+      .subsection {
+        width: 80px;
+        height: 128px;
+        background-color: royalblue;
+        margin: 0px calc(((var(--memoirBoardScale) * 1500px) - 480px) / 12) 0px calc(((var(--memoirBoardScale) * 1500px) - 480px) / 12);
+        --memoirCardScale: 0.2548;
+      }
+    }
   }
 
   #m44-bottom-container {
@@ -832,22 +845,22 @@ html {
         background-position-x: 0;
       }
       &[data-status="para"] {
-        background-position-x: 1 * 100% / 6;
+        background-position-x: calc(1 * 100% / 6);
       }
       &[data-status="attack"] {
-        background-position-x: 2 * 100% / 6;
+        background-position-x: calc(2 * 100% / 6);
       }
       &[data-status="command"] {
-        background-position-x: 3 * 100% / 6;
+        background-position-x: calc(3 * 100% / 6);
       }
       &[data-status="move"] {
-        background-position-x: 4 * 100% / 6;
+        background-position-x: calc(4 * 100% / 6);
       }
       &[data-status="idle"] {
-        background-position-x: 5 * 100% / 6;
+        background-position-x: calc(5 * 100% / 6);
       }
       &[data-status="commissar"] {
-        background-position-x: 6 * 100% / 6;
+        background-position-x: calc(6 * 100% / 6);
       }
     }
   }

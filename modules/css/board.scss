@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 :root {
   --memoirBoardScale: 1;
 }
@@ -353,8 +355,8 @@
 
   @for $i from 0 through 36 {
     &[data-tile="#{$i}"] {
-      background-position-x: ($i % 6) * 100% / 5;
-      background-position-y: (($i - ($i % 6)) / 6) * 100% / 5;
+      background-position-x: calc((math.max($i % 6)) * 100% / 5);
+      background-position-y: calc((($i - (math.max($i % 6))) / 6) * 100% / 5);
     }
   }
 
@@ -372,8 +374,8 @@
 
   @for $i from 0 through 104 {
     &[data-tile="#{$i}"] {
-      background-position-x: ($i % 10) * 100% / 9;
-      background-position-y: (($i - ($i % 10)) / 10) * 100% / 10;
+      background-position-x: calc((math.max($i % 10)) * 100% / 9);
+      background-position-y: calc((($i - (math.max($i % 10))) / 10) * 100% / 10);
     }
   }
 
@@ -389,8 +391,8 @@
 
   @for $i from 0 through 26 {
     &[data-tile="#{$i}"] {
-      background-position-x: ($i % 6) * 100% / 5;
-      background-position-y: (($i - ($i % 6)) / 6) * 100% / 4;
+      background-position-x: calc((math.max($i % 6)) * 100% / 5);
+      background-position-y: calc((($i - (math.max($i % 6))) / 6) * 100% / 4);
     }
   }
 

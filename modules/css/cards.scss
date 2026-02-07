@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 :root {
   --memoirCardScale: 0.9;
 }
@@ -111,8 +113,8 @@
 
   @for $i from 0 through 16 {
     &[data-type='#{$i}'] .card-resizable {
-      background-position-x: ($i % 5) * 100% / 4;
-      background-position-y: (($i - ($i % 5)) / 5) * 100% / 2;
+      background-position-x: calc((math.max($i % 5)) * 100% / 4);
+      background-position-y: calc((($i - (math.max($i % 5))) / 5) * 100% / 2);
     }
   }
 
@@ -128,8 +130,8 @@
 
   @for $i from 0 through 20 {
     &[data-type='#{$i + 20}'] .card-resizable {
-      background-position-x: ($i % 5) * 100% / 4;
-      background-position-y: (($i - ($i % 5)) / 5) * 100% / 3;
+      background-position-x: calc((math.max($i % 5)) * 100% / 4);
+      background-position-y: calc((($i - (math.max($i % 5))) / 5) * 100% / 3);
     }
   }
 }

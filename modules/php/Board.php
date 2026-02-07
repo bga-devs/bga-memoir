@@ -1470,6 +1470,21 @@ class Board
     return $sections_results;
   }
 
+  public static function getCellSubSections($sideId, $cell)
+  {
+    //OVERLORD BOARD ONLY
+    $mode = Scenario::getMode();
+    $flipped = ($sideId == Scenario::getTopTeam());
+    $sections = Units::$subSections[$mode];
+    $sections_results = [];
+    for ($i = 0; $i < 6; $i++) {
+      if ($sections[$i] <= $cell['x'] && $cell['x'] <= $sections[$i + 1]) {
+        $sections_results[] = $flipped ? 2 - $i : $i;
+      }
+    }
+    return $sections_results;
+  }
+
 
   /**
    * getReachableCellsAtDistance: perform a Disjktra shortest path finding :

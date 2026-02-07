@@ -10,4 +10,9 @@ class InfantryAssault extends \M44\Cards\Standard\InfantryAssault
       'Issue an order to all <INFANTRY> units in 1 section OR the other. Units may move up to 2 hexes and still battle, or move 3 hexes but not battle.'
     );
   }
+
+  public function getPlayableSubSections($side = null)
+  {
+    return [0,1,2,3,4,5];
+  }
 }

@@ -84,6 +84,10 @@ class Units extends \M44\Helpers\Pieces
     OVERLORD_DECK => [0, 17, 33, 50], // TODO : handle subsections
   ];
 
+  public static $subSections = [
+    OVERLORD_DECK => [0, 7, 17, 25, 33, 41, 50],
+  ];
+
   public static function addSectionClause(&$q, $section)
   {
     $mode = Scenario::getMode();

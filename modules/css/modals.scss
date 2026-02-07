@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 .memoir44_popin {
   width: 80%;
   position: relative;
@@ -152,7 +154,7 @@
     
       @for $i from 0 through 4 {
         &[data-sprite='#{$i}'] {
-          background-position-x: ($i % 5) * 100% / 4;
+          background-position-x: calc(math.max($i % 5) * 100% / 4);
           background-position-y: 0%;
         }
       }
@@ -166,7 +168,7 @@
     
       @for $i from 0 through 1 {
         &[data-sprite='#{$i}'] {
-          background-position-x: ($i % 2) * 100% / 1;
+          background-position-x: calc(math.max($i % 2) * 100% / 1);
           background-position-y: 0%;
         }
       }
@@ -213,7 +215,7 @@
       @for $i from 0 through 1 {
         &[data-sprite='#{$i}'] {
           background-position-x: 0%;
-          background-position-y: ($i % 2) * 100% / 1;
+          background-position-y: calc(math.max($i % 2) * 100% / 1);
         }
       }
     }
@@ -285,7 +287,7 @@
     
       @for $i from 0 through 2 {
         &[data-sprite='#{$i}'] {
-          background-position-x: ($i % 3) * 100% / 2;
+          background-position-x: calc(math.max($i % 3) * 100% / 2);
           background-position-y: 0%;
         }
       }
@@ -323,7 +325,7 @@
     
       @for $i from 0 through 3 {
         &[data-sprite='#{$i}'] {
-          background-position-x: ($i % 4) * 100% / 3;
+          background-position-x: calc(math.max($i % 4) * 100% / 3);
           background-position-y: 0%;
         }
       }

@@ -134,4 +134,18 @@ abstract class Utils extends \APP_DbObject
     $xy['y'] = $height - $xy['y'];
     return $xy;
   }
+
+  public static function getSubSectionName($subSectionId)
+  {
+    $subSections = [ 
+      0 => ('Left Left'),
+      1 => clienttranslate('Left Right'),
+      2 => clienttranslate('Center Left'), 
+      3 => clienttranslate('Center Right'), 
+      4 => clienttranslate('Right Left'), 
+      5 => clienttranslate('Right Right'),
+      6 => clienttranslate('Chief commander'),
+      ];
+    return $subSections[$subSectionId];
+  }
 }

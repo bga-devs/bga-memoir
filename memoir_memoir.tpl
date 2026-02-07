@@ -28,10 +28,14 @@
     </div>
     <div id="m44-board-wrapper">
       <div id="m44-board-scrollable">
+        <div id="top-overlord-inplay-cards-container">
+        </div>
         <div id="m44-board">
           <ul id="m44-board-terrains" class='m44-grid'></ul>
           <ul id="m44-board-labels" class='m44-grid'></ul>
           <ul id="m44-board-units" class='m44-grid'></ul>
+        </div>
+        <div id="bottom-overlord-inplay-cards-container">
         </div>
       </div>
     </div>

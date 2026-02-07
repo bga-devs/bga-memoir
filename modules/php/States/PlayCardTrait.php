@@ -158,4 +158,127 @@ trait PlayCardTrait
 
     $this->nextState($nextState);
   }
+
+  function argsDistributeCards($player = NULL) 
+  { // Overlord distribution cards args
+    $singleActive = is_null($player);
+    $player = $player ?? Players::getActive();
+    $teamId = $player ->getTeam()-> getId();
+    $cards = $player
+      ->getCards()
+      ->filter(function ($card) {
+        return $card->getType() != \CARD_AMBUSH;
+      })
+      ->map(function ($card) use ($teamId) {
+        // get subsection restriction (if applicable)
+        return $card->getPlayableSubSections($teamId);
+      });
+
+    $cardsHill317 = [];
+    if ($player->canHill317()) {
+      $cardsHill317 = $player
+        ->getCards()
+        ->filter(function ($card) {
+          return $card->canHill317();
+        })
+        ->getIds();
+    }
+
+    $cardBlowBridge = [];
+    if ($player->canBlowBridge()) {
+      $cardBlowBridge = $player
+        ->getCards()
+        ->filter(function ($card) {
+          return $card->canBlowBridge();
+        })
+        ->getIds();
+    }
+
+    $cardArmorBreakthrough = [];
+    if ($player->canArmorBreakthrough()) {
+      $cardArmorBreakthrough = $player
+        ->getCards()
+        ->filter(function ($card) {
+          return $card->canArmorBreakthrough();
+        })
+        ->getIds();
+    }
+
+    // give list of already distributed cards to avoid double selection 
+    $distributedCards = Globals::getDistributedCards();
+    $teamId = $player ->getTeam()-> getId();
+    if (isset($distributedCards[$teamId])) {
+      foreach ($distributedCards[$teamId] as $distributedCard) {
+        $cardIdDistributed = $distributedCard['cardId'];
+        unset($cards[$cardIdDistributed]);
+      }
+    }
+
+    // give list of selected subSections to avoid double selection
+    $selectedSubSections = [];
+    if (isset($distributedCards[$teamId])) {
+      foreach ($distributedCards[$teamId] as $distributedCard) {
+        $selectedSubSections[] = $distributedCard['subSection'];
+      }
+    }
+
+
+    //only in Campaign Mode (not probable to have Campaign mode in overlord so far)
+    //$hasAirPowerTokens = $player->getTeam()->hasAirPowerTokens();
+    //var_dump('argsDistributeCards called', $selectedSubSections);
+
+    $args = [
+      'cards' => $cards,
+      'cardsHill317' => $cardsHill317,
+      'cardsBlowBridge' => $cardBlowBridge,
+      'cardsArmorBreakthrough' => $cardArmorBreakthrough,
+      'actionCount' => Globals::getActionCount(),
+      'selectedSubSections' => $selectedSubSections,
+    ];
+    $args = $singleActive ? Utils::privatise($args) : $args;
+    return $args;
+  }
+
+  function stDistributeCards()
+  { // Overlord distribution cards state
+    // Commander preparation Choose 1 to 3 cards to be played on mains sections and get list of those cards
+    
+    // TO DO specific Comissar in Est Theater extensions
+    /*if (Globals::getCommissar() != '' && $this->isInitialCommissar()) {
+      $pId = Teams::get(Globals::getCommissar())->getCommander();
+      $this->changeActivePlayerAndJumpTo($pId, \ST_COMMISSAR);
+    }*/
+    $commander = Players::getActive()->getTeam()->getCommander();
+    $this->argsDistributeCards($commander);
+    
+
+  }
+
+  function actDistributeCards($cardId, $sectionId)
+  { // 1 to 3 cards choosen from UI to be played on mains sections and get list of those cards
+    // prepare list of those cards and place them on corresponding main and secondary sections
+    // to be added on Globals card List to be played later
+    // var_dump('choosen card', $cardId, $sectionId);
+
+    // Store the cardId and its selected subSection in Globals database
+    $list = Globals::getDistributedCards();
+    $commander = Players::getActive()->getTeam()->getCommander();
+    $teamId = $commander ->getTeam()-> getId();
+    $list[$teamId][] = ['cardId' => $cardId, 'subSection' => $sectionId];
+    Globals::setDistributedCards($list);
+    // push card in inplay
+    $card = Cards::play($commander, $cardId, $sectionId);
+    // update UI in subSection
+    Notifications::distributeCard($commander, $card, $sectionId);
+
+    // Check if others cards can be still distributed
+    // Condition max number, condition 1 car maxi per sub section and max 1 commander chief
+    if (count($list[$teamId]) >= 3) {
+      // max 3 cards distributed
+      //$this->nextState('nextPlayer'); // Next state after distribution to be confirmed
+    } else {
+      $args = $this->argsDistributeCards($commander);
+      $this->nextState('distributeCards'); // stay in distribution state
+    }
+  }
 }
