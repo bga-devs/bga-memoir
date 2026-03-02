@@ -622,14 +622,18 @@ html {
     }
 
     #bottom-overlord-inplay-cards-container, #top-overlord-inplay-cards-container {
-      display: inline-flex;
-      align-items: center;
+      
+      //align-items: center;
+      width: calc(var(--memoirBoardScale) * 1500px);
+      display: flex;
+      margin:auto;
+      position: relative;
 
       .subsection {
         width: 80px;
         height: 128px;
         background-color: royalblue;
-        margin: 0px calc(((var(--memoirBoardScale) * 1500px) - 480px) / 12) 0px calc(((var(--memoirBoardScale) * 1500px) - 480px) / 12);
+        margin: 0px calc(((var(--memoirBoardScale) * 1500px) - 720px) / 18) 0px calc(((var(--memoirBoardScale) * 1500px) - 720px) / 18);
         --memoirCardScale: 0.2548;
       }
     }

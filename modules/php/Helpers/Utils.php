@@ -3,6 +3,9 @@
 namespace M44\Helpers;
 
 use M44\Scenario;
+use M44\Managers\Players;
+use M44\Core\Globals;
+
 
 abstract class Utils extends \APP_DbObject
 {
@@ -137,8 +140,26 @@ abstract class Utils extends \APP_DbObject
 
   public static function getSubSectionName($subSectionId)
   {
-    $subSections = [ 
-      0 => ('Left Left'),
+    $player = Players::getActive();
+    $scenario = Globals::getScenario();
+    $mode = Scenario::getMode();
+    $sidePlayer1 = isset($scenario['game_info']['side_player1']) ? $scenario['game_info']['side_player1'] : 'AXIS';
+    $flipped = $sidePlayer1 == $player->getTeam()->getId() ;
+  
+
+    $subSections = $flipped ? 
+      [ 
+      0 => clienttranslate('Right Right'),
+      1 => clienttranslate('Right Left'),
+      2 => clienttranslate('Center Right'), 
+      3 => clienttranslate('Center Left'), 
+      4 => clienttranslate('Left Right'), 
+      5 => clienttranslate('Left Left'),
+      6 => clienttranslate('Chief commander'),
+      ]
+      :
+     [ 
+      0 => clienttranslate('Left Left'),
       1 => clienttranslate('Left Right'),
       2 => clienttranslate('Center Left'), 
       3 => clienttranslate('Center Right'), 

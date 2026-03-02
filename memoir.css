@@ -586,14 +586,16 @@ html {
   display: none;
 }
 #m44-container #m44-central-part #bottom-overlord-inplay-cards-container, #m44-container #m44-central-part #top-overlord-inplay-cards-container {
-  display: inline-flex;
-  align-items: center;
+  width: calc(var(--memoirBoardScale) * 1500px);
+  display: flex;
+  margin: auto;
+  position: relative;
 }
 #m44-container #m44-central-part #bottom-overlord-inplay-cards-container .subsection, #m44-container #m44-central-part #top-overlord-inplay-cards-container .subsection {
   width: 80px;
   height: 128px;
   background-color: royalblue;
-  margin: 0px calc((var(--memoirBoardScale) * 1500px - 480px) / 12) 0px calc((var(--memoirBoardScale) * 1500px - 480px) / 12);
+  margin: 0px calc((var(--memoirBoardScale) * 1500px - 720px) / 18) 0px calc((var(--memoirBoardScale) * 1500px - 720px) / 18);
   --memoirCardScale: 0.2548;
 }
 #m44-container #m44-bottom-container {

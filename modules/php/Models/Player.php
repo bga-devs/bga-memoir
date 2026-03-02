@@ -54,6 +54,7 @@ class Player extends \M44\Helpers\DB_Model
       'cards' => $current ? $this->getCards()->toArray() : [],
       'cardsCount' => $this->getCards()->count() + $this->getCardsChoice()->count(),
       'inplay' => $this->getCardInPlay(),
+      'overlordDistributedCards' => $this->getCardsOverlordDistributed()->toArray(),
       'isCommissar' => $this->isCommissar(),
       'commissarCard' => $current ? $this->getCommissarCard() : $this->getCommissarCard() != null,
       'nreservetoken' => $this->getReserveTokens(),
@@ -92,6 +93,23 @@ class Player extends \M44\Helpers\DB_Model
     
     return $card;
   }
+
+  public function getCardsOverlordDistributed()
+  {
+    return Cards::getInLocation(['overlord_distributed', $this->id]);
+  }
+  
+
+  /*public function playCard($cardId, $sectionId)
+  {
+    $card = Cards::play($this, $cardId, $sectionId);
+    $card->onPlay();
+    Notifications::playCard($this, $card);
+
+    // update last played card for this player (used for some card effects)
+    $last = Globals::getRawLastPlayedCards();
+    !$last[$this->getId()] = self::DbQuery("SELECT * FROM `cards` WHERE `card_id` = $cardId");
+  }*/
 
   public function countAllCards()
   {

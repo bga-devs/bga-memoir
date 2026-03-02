@@ -171,7 +171,7 @@ trait PlayCardTrait
       })
       ->map(function ($card) use ($teamId) {
         // get subsection restriction (if applicable)
-        return $card->getPlayableSubSections($teamId);
+        return [$card->getPlayableSubSections($teamId), $card->isOverlord2subsections()];
       });
 
     $cardsHill317 = [];
@@ -218,10 +218,17 @@ trait PlayCardTrait
     $selectedSubSections = [];
     if (isset($distributedCards[$teamId])) {
       foreach ($distributedCards[$teamId] as $distributedCard) {
-        $selectedSubSections[] = $distributedCard['subSection'];
+        // manage case of card with 2 sections selected
+        $distributedCardInstance = Cards::get($distributedCard['cardId']);
+        if ($distributedCardInstance->isOverlord2subsections()) {
+          $sectionId = floor($distributedCard['subSection']/2);    
+          $selectedSubSections[] = $sectionId*2;
+          $selectedSubSections[] = $sectionId*2 + 1;
+        } else {
+        $selectedSubSections[] = intval($distributedCard['subSection']);
+        }
       }
     }
-
 
     //only in Campaign Mode (not probable to have Campaign mode in overlord so far)
     //$hasAirPowerTokens = $player->getTeam()->hasAirPowerTokens();
@@ -254,31 +261,51 @@ trait PlayCardTrait
 
   }
 
-  function actDistributeCards($cardId, $sectionId)
+  function actDistributeCards($cardId, $sectionId, $finished = false)
   { // 1 to 3 cards choosen from UI to be played on mains sections and get list of those cards
     // prepare list of those cards and place them on corresponding main and secondary sections
     // to be added on Globals card List to be played later
     // var_dump('choosen card', $cardId, $sectionId);
 
     // Store the cardId and its selected subSection in Globals database
-    $list = Globals::getDistributedCards();
-    $commander = Players::getActive()->getTeam()->getCommander();
-    $teamId = $commander ->getTeam()-> getId();
-    $list[$teamId][] = ['cardId' => $cardId, 'subSection' => $sectionId];
-    Globals::setDistributedCards($list);
-    // push card in inplay
-    $card = Cards::play($commander, $cardId, $sectionId);
-    // update UI in subSection
-    Notifications::distributeCard($commander, $card, $sectionId);
-
+    if (!$finished) { // if finished, no card is selected but we just want to end distribution phase
+      $list = Globals::getDistributedCards();
+      $commander = Players::getActive()->getTeam()->getCommander();
+      $teamId = $commander ->getTeam()-> getId();
+      $list[$teamId][] = ['cardId' => $cardId, 'subSection' => $sectionId];
+      Globals::setDistributedCards($list);
+      // push card in overlord distributed cards list of player to be able to display them in UI
+      $card = Cards::distribute($commander, $cardId, $sectionId);
+      $card->setExtraDatas('subsection', $sectionId);
+      // update UI in subSection
+      Notifications::distributeCard($commander, $card, $sectionId); 
+    }
+    
     // Check if others cards can be still distributed
     // Condition max number, condition 1 car maxi per sub section and max 1 commander chief
-    if (count($list[$teamId]) >= 3) {
+    if ($finished || count($list[$teamId]) >= 3) {
       // max 3 cards distributed
-      //$this->nextState('nextPlayer'); // Next state after distribution to be confirmed
+      $this->nextState('overlordPlayCard'); // Next state after distribution to be confirmed
     } else {
       $args = $this->argsDistributeCards($commander);
-      $this->nextState('distributeCards'); // stay in distribution state
+      $this->nextState('distributeCards'); // stay in distribution cards state
     }
   }
+
+  function stOverlordPlayCard()
+  {
+    // TO DO 
+  }
+
+  function argsOverlordPlayCard($player = null)
+  {
+    // TO DO 
+  }
+
+  function actOverlordPlayCard($cardId, $sectionId = null)
+  {
+    // TO DO 
+  }
+
+
 }

@@ -11,5 +11,6 @@ class ReconInForce extends \M44\Cards\Standard\ReconInForce
       clienttranslate('Left OR Center OR Right'),
       clienttranslate('Order 1 Unit in each section'),
     ];
+    $this->isOverlord2subsections = true;
   }
 }

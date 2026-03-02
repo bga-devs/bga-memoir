@@ -11,5 +11,6 @@ class GeneralAdvance extends \M44\Cards\Standard\GeneralAdvance
       clienttranslate('Left OR Center OR Right'),
       clienttranslate('Order 2 Units in each section'),
     ];
+    $this->isOverlord2subsections = true;
   }
 }

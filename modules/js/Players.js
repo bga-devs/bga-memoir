@@ -18,6 +18,17 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
       this.forEachPlayer((player) => {
         let pos = player.team == this._bottomTeam ? 'bottom' : 'top';
+        if (this.gamedatas.isOverlord) {
+          dojo.place(`<div class="subsection" id="${pos}-subsection-0"> </div>`, pos + '-overlord-inplay-cards-container');
+          dojo.place(`<div class="subsection" id="${pos}-section-0"> </div>`, pos + '-overlord-inplay-cards-container');
+          dojo.place(`<div class="subsection" id="${pos}-subsection-1"> </div>`, pos + '-overlord-inplay-cards-container');
+          dojo.place(`<div class="subsection" id="${pos}-subsection-2"> </div>`, pos + '-overlord-inplay-cards-container');
+          dojo.place(`<div class="subsection" id="${pos}-section-1"> </div>`, pos + '-overlord-inplay-cards-container');
+          dojo.place(`<div class="subsection" id="${pos}-subsection-3"> </div>`, pos + '-overlord-inplay-cards-container');
+          dojo.place(`<div class="subsection" id="${pos}-subsection-4"> </div>`, pos + '-overlord-inplay-cards-container');
+          dojo.place(`<div class="subsection" id="${pos}-section-2"> </div>`, pos + '-overlord-inplay-cards-container');
+          dojo.place(`<div class="subsection" id="${pos}-subsection-5"> </div>`, pos + '-overlord-inplay-cards-container');
+        }
         this.place('tplPlayerPanel', player, pos + '-team-players');
         dojo.place(
           `
@@ -36,6 +47,29 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         if (player.inplay) {
           this.addCard(player.inplay, 'in-play-' + player.id);
         }
+
+        if (player.overlordDistributedCards && player.overlordDistributedCards.length > 0) {
+          // add cards distributed in overlord mode
+          console.log('add overlord distributed cards for player', player.id, player.overlordDistributedCards);
+          player.overlordDistributedCards.forEach((card) => {
+            subsectionId = card.extraDatas.subsection;
+            if (subsectionId == 6) {
+               this.addCard(card, `in-play-${player.id}`);
+            } else {
+              let pos = this.player_id == player.id ? 'bottom' : 'top'; // top or bottom board
+              playerBottomTeam = this._bottomTeam == this.gamedatas.players[this.player_id].team; // first player is on bottom team or not (to reverse section order for bottom player)
+              subsectionIdTmp = playerBottomTeam ? 5 - subsectionId : subsectionId;
+              subsectionId = pos == 'top' ? 5 - subsectionIdTmp : subsectionIdTmp; // reverse section order for bottom player
+              section2Id = Math.floor(subsectionId/2);
+              console.log('refresh card to section', subsectionId, pos, `${pos}-subsection-${subsectionId}`);
+              let container = card.isOverlord2subsections ? 
+                document.getElementById(`${pos}-section-${section2Id}`) 
+              : document.getElementById(`${pos}-subsection-${subsectionId}`);
+              this.addCard(card, container);
+            }
+          });
+        }
+        
 
         if (player.commissarCard) {
           let container = 'commissar-' + player.id;
@@ -105,6 +139,27 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       if (player.inplay) {
         this.addCard(player.inplay, 'in-play-' + player.id);
       }
+      if (player.overlordDistributedCards) {
+        // add cards distributed in overlord mode
+        console.log('add overlord distributed cards for player', player.id, player.overlordDistributedCards);
+        player.overlordDistributedCards.forEach((card) => {
+          subsectionId = card.extraDatas.subsection;
+          if (subsectionId == 6) {
+              this.addCard(card, `in-play-${player.id}`);
+          } else {
+            let pos = this.player_id == player.id ? 'bottom' : 'top'; // top or bottom board
+            playerBottomTeam = this._bottomTeam == this.gamedatas.players[this.player_id].team; // first player is on bottom team or not (to reverse section order for bottom player)
+            subsectionIdTmp = playerBottomTeam ? 5 - subsectionId : subsectionId;
+            subsectionId = pos == 'top' ? 5 - subsectionIdTmp : subsectionIdTmp; // reverse section order for bottom player
+            console.log('refresh card to section', subsectionId, pos, `${pos}-subsection-${subsectionId}`);
+            section2Id = Math.floor(subsectionId/2);
+            let container = card.isOverlord2subsections ? 
+              document.getElementById(`${pos}-section-${section2Id}`) : 
+              document.getElementById(`${pos}-subsection-${subsectionId}`);
+            this.addCard(card, container);
+          }
+        });
+      }
       if (player.commissarCard) {
         this.addCard(player.commissarCard, 'commissar-' + player.id);
       }
@@ -172,6 +227,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           dojo.place(`<div class="reserve-token" id="${pos}-reserve-2"> </div>`, pos + '-staging-slots');
         }
 
+        /* moved in setupPlayers as setup Teams are performed after setupPlayers and we need to create subsections containers before adding cards in them
         if (this.gamedatas.isOverlord) {
           dojo.place(`<div class="subsection" id="${pos}-subsection-0"> </div>`, pos + '-overlord-inplay-cards-container');
           dojo.place(`<div class="subsection" id="${pos}-subsection-1"> </div>`, pos + '-overlord-inplay-cards-container');
@@ -179,7 +235,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           dojo.place(`<div class="subsection" id="${pos}-subsection-3"> </div>`, pos + '-overlord-inplay-cards-container');
           dojo.place(`<div class="subsection" id="${pos}-subsection-4"> </div>`, pos + '-overlord-inplay-cards-container');
           dojo.place(`<div class="subsection" id="${pos}-subsection-5"> </div>`, pos + '-overlord-inplay-cards-container');
-        }
+        }*/
 
         Object.values(team.medals).forEach((medal) => this.addMedal(medal));
         if (this.gamedatas.isCampaign) { 
@@ -488,7 +544,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
     notif_distributeCard(n) {
       debug('Notif: distributing cards to sections', n);
-      if (n.args.sectionIds == 6) {
+      if (n.args.sectionId == '6') {
         if (this.player_id == n.args.player_id) {
           this.slide('card-' + n.args.card.id, `in-play-${n.args.player_id}`);
         } else {
@@ -499,10 +555,12 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         playerBottomTeam = this._bottomTeam == this.gamedatas.players[this.player_id].team; // first player is on bottom team or not (to reverse section order for bottom player)
         subsectionIdTmp = playerBottomTeam ? 5 - n.args.sectionId : n.args.sectionId;
         subsectionId = pos == 'top' ? 5 - subsectionIdTmp : subsectionIdTmp // reverse section order for bottom player
-        console.log('slide card to section', n.args.sectionId, pos, `${pos}-subsection-${subsectionId}`);
+        sectionNbr = Math.floor(subsectionId/2);
+        console.log('slide card to section', n.args.sectionId, pos, `${pos}-subsection-${subsectionId}`, n.args.card.isOverlord2subsections);
 
 
-        let container = document.getElementById(`${pos}-subsection-${subsectionId}`);
+        let container = n.args.card.isOverlord2subsections ?
+          document.getElementById(`${pos}-section-${sectionNbr}`) :document.getElementById(`${pos}-subsection-${subsectionId}`);
         if (this.player_id == n.args.player_id) {
           this.slide('card-' + n.args.card.id, container);
         } else {
@@ -522,10 +580,15 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       //let cardsArmorBreakthrough = args._private.cardsArmorBreakthrough;
       Object.keys(cards).forEach((cardId) => {
         this.onClick(`card-${cardId}`, () => {
-          this.clientState('distributeSectionChoose', _('Choose target section'), { cardId, sections: cards[cardId], selectedSubSections: args._private.selectedSubSections });
+          this.clientState('distributeSectionChoose', _('Choose target section'), { cardId, sections: cards[cardId][0], selectedSubSections: args._private.selectedSubSections, isOverlord2subsections: cards[cardId][1] });
           
         });
       });
+      if (args._private.selectedSubSections.length > 0) {
+        this.addDangerActionButton(`btnFinished`, _('No further card to distribute'), 
+            () => this.takeAction('actDistributeCards', { cardId : 0, section : 0, finished : true}, ));
+
+      }
     },
 
     onEnteringStateDistributeSectionChoose(args) {
@@ -538,25 +601,39 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         {
         0:_('Left Left'),
         1:_('Left Right'),
-        2: _('Central Left'),
+        2:_('Central Left'),
         3:_('Central Right'),
         4:_('Right Left'),
         5:_('Right Right'),
         6:_('Chief commander')
         };
+      let sections2 = {
+        0:_('Left flank (both sections)'),
+        1:_('Center flank (both sections)'),
+        2:_('Right flank (both sections)'),
+      }
       let sectionIds = !playerBottomTeam ? [0,1,2,3,4,5,6] : [5,4,3,2,1,0,6];
          
       
       console.log(this._bottomTeam, sections);
       for (const [key, value] of Object.entries(sections)) {
-        console.log('Check sectionId', key, args.selectedSubSections, sectionIds[key], !args.selectedSubSections.includes(sectionIds[key].toString()), args.sections.includes(sectionIds[key]) );
-          if (!args.selectedSubSections.includes(sectionIds[key].toString()) && args.sections.includes(sectionIds[key])) {
-          console.log('Add button for sectionId', sectionIds[key]);         
-          this.addPrimaryActionButton(`btnSection-${key}`, value , 
-            () => this.takeAction('actDistributeCards', { cardId : cardId, section : sectionIds[key]}),
-          );
+        console.log('Check sectionId', key, args.selectedSubSections, sectionIds[key], !(args.selectedSubSections.includes(sectionIds[key])), args.sections.includes(sectionIds[key]) );
+        if (!(args.selectedSubSections.includes(sectionIds[key])) && args.sections.includes(sectionIds[key])) {
+          console.log('Add button for sectionId', sectionIds[key]);
+          if (args.isOverlord2subsections) {
+            key2 = Math.floor(key/2);
+            console.log('Check sectionId for 2 subsections', key2, sectionIds[key2 * 2], sectionIds[key2 * 2 + 1], args.selectedSubSections, sectionIds[key2 * 2], sectionIds[(key2 * 2) + 1], !(args.selectedSubSections.includes(sectionIds[key2 * 2])), !(args.selectedSubSections.includes(sectionIds[(key2 * 2) + 1])) );
+            if (!(args.selectedSubSections.includes(sectionIds[key2 * 2])) && !(args.selectedSubSections.includes(sectionIds[(key2 * 2) + 1]))) {
+            this.addPrimaryActionButton(`btnSection2-${key2}`, sections2[key2],
+              () => this.takeAction('actDistributeCards', { cardId : cardId, section : sectionIds[key], finished : false }, ),
+            );
+            }
+          } else {
+            this.addPrimaryActionButton(`btnSection-${key}`, value , 
+            () => this.takeAction('actDistributeCards', { cardId : cardId, section : sectionIds[key], finished : false }, ),
+            );
+          }          
         }
-
       };
       /*for (let i = 0; i < sections.length; i++) {
         console.log('Check sectionId', i, args.selectedSubSections, playerBottomTeam );
@@ -568,6 +645,10 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           );
         }
       }*/
+    },
+
+    onEnteringStateDiscard(args) {
+      console.log('Overlord Play Cards State', args);
     },
 
     notif_discardCard(n) {

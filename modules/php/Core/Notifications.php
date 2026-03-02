@@ -233,7 +233,7 @@ class Notifications
   {
     self::notifyAll(
       'distributeCard',
-      clienttranslate('${player_name} distributes ${card_name} on section ${section_name}'),
+      clienttranslate('${player_name} distributes ${card_name} on his/her section ${section_name}'),
       [
         'player' => $player,
         'card' => $card,
@@ -786,8 +786,9 @@ class Notifications
     foreach ($type as $t => $n) {
       if ($n > 0) {
         $name = 'unit_' . $t . '_name';
+        $number = 'unit_' . $t . '_number';
         $logs[] = '${unit_' . $t . '_number} ${' . $name . '}';
-        $args["unit_${t}_number"] = $n;
+        $args[$number] = $n;
         $args[$name] = $names[$t];
         $args['i18n'][] = $name;
       }

@@ -28,6 +28,8 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
     \DICE_GRENADE => false,
     \DICE_INFANTRY => false,
   ];
+  protected $isOverlord2subsections = false; 
+  // if true, the card will ask the player to choose between 2 subsections of the same section (ex: left section in one of the 2 sides)
 
   /*
    * DYNAMIC INFORMATIONS
@@ -141,6 +143,8 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
       'name' => $this->name,
       'subtitle' => $this->getSubtitle(),
       'text' => $this->getText(),
+      'extraDatas' => $this->extraDatas,
+      'isOverlord2subsections' => $this->isOverlord2subsections,
     ];
   }
 
@@ -201,6 +205,11 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
   public function getCopiedCard()
   {
     return $this;
+  }
+
+  public function isOverlord2subsections()
+  {
+    return $this->isOverlord2subsections;
   }
 
   //////////////////////////////////////////////////////

@@ -36,6 +36,7 @@ define([
         'playCommissarCard',
         'playCard',
         'distributeCards', // Overlord cards distribution
+        'overlordPlayCard', // Overlord cards play
         'orderUnits',
         'moveUnits',
         'opponentAmbush',
@@ -326,6 +327,7 @@ define([
         playCommissarCard: 'command',
         playCard: 'command',
         distributeCards: 'command',
+        overlordPlayCard: 'command',
         orderUnits: 'order',
         moveUnits: 'move',
         ambushResolve: 'move',

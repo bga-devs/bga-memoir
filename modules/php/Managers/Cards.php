@@ -137,6 +137,12 @@ class Cards extends \M44\Helpers\Pieces
     return self::get($cardId);
   }
 
+  public static function distribute($commander, $cardId, $sectionId)
+  {
+   self::move($cardId, ['overlord_distributed', $commander->getId()]);
+   return self::get($cardId);
+  }
+
   public static function draw($n, $location)
   {
     $cards = Cards::pickForLocation($n, 'deck', $location);

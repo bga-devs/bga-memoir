@@ -175,9 +175,27 @@ class action_memoir extends APP_GameAction
     self::setAjaxMode();
     $cardId = self::getArg('cardId', AT_posint, true);
     $section = self::getArg('section', AT_posint, true);
-    $this->game->actDistributeCards($cardId, $section);
+    $finished = self::getArg('finished', AT_bool, true);
+    $this->game->actDistributeCards($cardId, $section, $finished);
     self::ajaxResponse();
   }
+
+   public function actOverlordPlayCard()
+  {
+    self::setAjaxMode();
+    $cardId = self::getArg('cardId', AT_posint, true);
+    $section = self::getArg('section', AT_posint, false);
+    $hill = self::getArg('hill317', AT_bool, false);
+    $blowbridge = self::getArg('blowbridge',AT_bool, false);
+    $airpowertoken = self::getArg('airPowerToken',AT_bool, false);
+    $armorbreakthrough = self::getArg('armorbreakthrough',AT_bool, false);
+    $this->game->actOverlordPlayCard($cardId, $section, $hill, $blowbridge, $airpowertoken, $armorbreakthrough);
+    self::ajaxResponse();
+  }
+
+
+
+
 
   public function actOrderUnits()
   {
