@@ -535,6 +535,7 @@ $machinestates = [
     'transitions' => [
       'overrun' => ST_ARMOR_OVERRUN,
       'nextAttack' => ST_ATTACK_THROW,
+      'endRound' => ST_END_OF_ROUND,
     ],
   ],
 
