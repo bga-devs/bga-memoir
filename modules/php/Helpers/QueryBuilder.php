@@ -62,37 +62,53 @@ class QueryBuilder extends \APP_DbObject
 
   public function values($rows = [])
   {
-    // Fetch starting index if not provided
-    $startingId = null;
-    if ($this->insertPrimaryIndex === false) {
-      $startingId = (int) self::getUniqueValueFromDB(
-        "SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = '{$this->table}';"
-      );
-    }
-
-    $ids = [];
     $vals = [];
+    $ids  = [];
+
     foreach ($rows as $row) {
       $rowValues = [];
+
       foreach ($row as $val) {
-        $rowValues[] = $val === null ? 'NULL' : "'" . mysql_escape_string($val) . "'";
+        $rowValues[] = $val === null
+          ? 'NULL'
+          : "'" . mysql_escape_string($val) . "'";
       }
+
       $vals[] = '(' . implode(',', $rowValues) . ')';
-      $ids[] =
-        $row[$this->primary] ?? ($this->insertPrimaryIndex === false ? $startingId++ : $row[$this->insertPrimaryIndex]);
+
+      // Case 1: Primary key explicitly provided
+      if ($this->insertPrimaryIndex !== false && $this->insertPrimaryIndex !== null) {
+        $ids[] = $row[$this->insertPrimaryIndex];
+      }
     }
 
-    if ($this->log) {
+    $this->sql .= implode(',', $vals);
+
+    // Execute INSERT
+    self::DbQuery($this->sql);
+
+    // Case 2: AUTO_INCREMENT primary key
+    if ($this->insertPrimaryIndex === false) {
+      $firstId = (int) self::getUniqueValueFromDB("SELECT LAST_INSERT_ID()");
+      $count   = count($rows);
+
+      for ($i = 0; $i < $count; $i++) {
+        $ids[] = $firstId + $i;
+      }
+    }
+
+    // Case 3: No primary tracking requested (insertPrimaryIndex === null)
+    // $ids remains as collected (possibly empty)
+
+    if ($this->log && !empty($ids)) {
       Log::addEntry([
-        'table' => $this->table,
+        'table'   => $this->table,
         'primary' => $this->primary,
-        'type' => 'create',
+        'type'    => 'create',
         'affected' => $ids,
       ]);
     }
 
-    $this->sql .= implode(',', $vals);
-    self::DbQuery($this->sql);
     return $ids;
   }
 

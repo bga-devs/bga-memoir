@@ -11,6 +11,7 @@ use M44\Managers\Units;
 use M44\Helpers\Utils;
 use M44\Board;
 use M44\Scenario;
+use M44\Managers\Medals;
 
 trait AirDropTrait
 {
@@ -81,6 +82,8 @@ trait AirDropTrait
         // Notify about it
         Board::addUnit($unit);
         Notifications::airDrop($player, $unit);
+        // Check if medal achieved
+        Medals::checkBoardMedals();
       }
 
       if ($fails > 0) {
