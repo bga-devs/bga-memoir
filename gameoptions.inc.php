@@ -49,12 +49,12 @@ $game_options = [
         'description' => clienttranslate('Breakthrough scenario'),
         //'alpha' => true,
       ],
-      3 => [
+      /*3 => [
         'name' => clienttranslate('Overlord'),
         'tmpdisplay' => clienttranslate('Overlord'),
         'description' => clienttranslate('Overlord scenario'),
         'alpha' => true,
-      ],
+      ],*/
       4 => [
         'name' => clienttranslate('Campaign Mode'),
         'tmdisplay' => clienttranslate('Campaign Mode'),
@@ -804,11 +804,11 @@ $game_options = [
         'id' => 101,
         'value' => 4,
       ],
-      1 => [
+      /*1 => [
         'type' => 'otheroption',
         'id' => 102,
         'value' => 1,
-      ],
+      ],*/
       2 => [
         'type' => 'otheroptionisnot',
         'id' => 102,

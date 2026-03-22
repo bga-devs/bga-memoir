@@ -232,7 +232,7 @@ trait PlayCardTrait
 
     //only in Campaign Mode (not probable to have Campaign mode in overlord so far)
     //$hasAirPowerTokens = $player->getTeam()->hasAirPowerTokens();
-    //var_dump('argsDistributeCards called', $selectedSubSections);
+    
 
     $args = [
       'cards' => $cards,
@@ -265,7 +265,6 @@ trait PlayCardTrait
   { // 1 to 3 cards choosen from UI to be played on mains sections and get list of those cards
     // prepare list of those cards and place them on corresponding main and secondary sections
     // to be added on Globals card List to be played later
-    // var_dump('choosen card', $cardId, $sectionId);
 
     // Store the cardId and its selected subSection in Globals database
     if (!$finished) { // if finished, no card is selected but we just want to end distribution phase

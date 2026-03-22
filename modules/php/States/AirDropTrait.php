@@ -94,8 +94,8 @@ trait AirDropTrait
       }
     }
     if (Globals::getAirDrops() >= $args['nb_drops']) {
-      $this->gamestate->jumpToState(ST_PREPARE_TURN);
       Globals::setAirDrops(0);
+      $this->gamestate->jumpToState(ST_PREPARE_TURN);      
     } else {
       $this->gamestate->jumpToState(ST_AIR_DROP);
     }
@@ -189,8 +189,8 @@ trait AirDropTrait
       }
     }
     if (Globals::getAirDrops() >= $args['nb_drops']) {
-      $this->gamestate->jumpToState(ST_PREPARE_TURN);
       Globals::setAirDrops(0);
+      $this->gamestate->jumpToState(ST_PREPARE_TURN);
     } else {
       $this->gamestate->jumpToState(ST_AIR_DROP);
     }

@@ -44,10 +44,9 @@ class QueryBuilder extends \APP_DbObject
    */
   public function insert($fields = [])
   {
-    $this->multipleInsert(array_keys($fields))->values([array_values($fields)]);
-    return self::DbGetLastId();
+    $key = $this->multipleInsert(array_keys($fields))->values([array_values($fields)]);
+    return $key[0];
   }
-
   /*
    * Multiple insert, syntax is : ->multipleInsert(['field1', 'field2'])->values([ [1, 'test'], [2, 'tester'], ....])
    *   !!!! each values must have the content in same order as the fields

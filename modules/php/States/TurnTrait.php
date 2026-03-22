@@ -190,7 +190,6 @@ trait TurnTrait
       $this->nextState($transition, $player->getId());
     } else {
       // Activate commander in chief only
-      //var_dump('OVERLORD DISTRIBUTION CASE');
       $this->nextState('distributeCards');
     }
   }

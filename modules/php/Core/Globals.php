@@ -1,5 +1,6 @@
 <?php
 namespace M44\Core;
+
 use M44\Core\Game;
 use M44\Managers\Players;
 use M44\Scenario;
@@ -209,6 +210,10 @@ class Globals extends \M44\Helpers\DB_Manager
     Globals::setOfficialScenario($options[\OPTION_SCENARIO_TYPE] == \OPTION_SCENARIO_OFFICIAL);
     // Case Campaign set 1st scenario
     if (Globals::isCampaign()) {
+
+      if(!Globals::getOfficialScenario()) {
+        throw new \InvalidArgumentException("Campaign mode only works with official scenario");
+      }
       // From Campaign file
       $campaignId = $options[\OPTION_CAMPAIGN] ?? 40001;
       Scenario::campaignLoadId($campaignId);
