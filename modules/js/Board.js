@@ -539,7 +539,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           options.japanese_imperial = true;
         }
         // filter option with no rules (like mine_deck_name, ...) that may cause empty tooltip card
-        const no_rules = ['mine_deck_name', 'empty_section_medals', 'deck_reshuffling', 'night_visibility_reverse_rule'];
+        const no_rules = ['mine_deck_name', 'empty_section_medals', 'deck_reshuffling', 'night_visibility_reverse_rule', 'airdrop', 'airdrop2'];
         Object.keys(options).forEach((option) => {
           if (!no_rules.includes(option)) {
             tooltips.push({
@@ -777,6 +777,15 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           '<li>' + _('Unit on Smoke Screen hex may be seen and see out of that hex') + '</li>',
         ];
 
+      } else if (rule.name == 'blowbridge_opt2') {
+        name = _('Blowing up bridge');
+        tile = '';
+        desc = [
+          '<p>' + _('Option 2') + '</p>',
+          '<li>' + _('Play Section card matching Bridge\'s section') + '</li>',
+          '<li>' + _('Roll 2 dice - a star blows Bridge') + '</li>',
+          '<li>' + _('Draw replacement card, regardless of outcome') + '</li>',
+        ];
       }
 
       return `<div class='summary-card summary-rules'>

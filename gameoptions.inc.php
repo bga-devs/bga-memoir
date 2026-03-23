@@ -155,11 +155,6 @@ $game_options = [
         'tmdisplay' => '[11]',
         'description' => clienttranslate('First Assault Wave'),
       ],
-      13 => [
-        'name' => clienttranslate('[OL] [13] Omaha Beach Overlord'),
-        'tmdisplay' => '[13]',
-        'description' => clienttranslate('Omaha Beach Overlord'),
-      ],
       15 => [
         'name' => clienttranslate('[BB] [15] Operation Cobra'),
         'tmdisplay' => '[15]',
