@@ -187,7 +187,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           ownUnits: _('Show/hide my units'),
           summaryHover: _('Enable/disable summary cards when hover on hexes'),
           summaryClick: _(
-            "Enable/disable summary cards when cliking on a hex. Warning: enabling this implies you won't be able to click on your units, don't forget to disable it once you are done examinating the board.",
+            "Enable/disable summary cards when clicking on a hex. Warning: enabling this implies you won't be able to click on your units, don't forget to disable it once you are done examinating the board.",
           ),
         };
 
@@ -1111,7 +1111,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           let msg =
             token.datas.group.length == 1
               ? _('If ${units} occupy this hex, they win ${counts_for} victory medal(s)')
-              : _('If ${units} occupy ${nb} hexes in the group ${hexes}, they win ${counts_for} victory medals(s)');
+              : token.datas.majority ?
+                _('If ${units} occupy hexes in the group ${hexes} and have the majority, they win ${counts_for} victory medal(s)') : 
+                _('If ${units} occupy ${nb} hexes in the group ${hexes}, they win ${counts_for} victory medals(s)');
 
           desc = [
             '<li>' + this.strReplace(msg, subst) + '</li>',

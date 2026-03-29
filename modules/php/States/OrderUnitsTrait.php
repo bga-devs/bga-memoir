@@ -11,6 +11,7 @@ use M44\Managers\Tokens;
 use M44\Helpers\Utils;
 use M44\Board;
 use M44\Dice;
+use M44\Helpers\Log;
 use M44\Scenario;
 
 trait OrderUnitsTrait
@@ -175,10 +176,10 @@ trait OrderUnitsTrait
       // Heal and then disable the unit all together
       $nHealed = $unit->heal($nHeal);
       Notifications::healUnit($player, $nHealed, $unit);
-      $unit->disable();
-      // Notifications::disable($unit);
     }
-
+    $unit->disable();
+    // Notifications::disable($unit);
+    Log::checkpoint(); // Make undo invalid
     $this->nextState('moveUnits');
   }
 
