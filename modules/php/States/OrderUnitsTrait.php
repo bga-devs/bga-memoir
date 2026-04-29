@@ -141,6 +141,102 @@ trait OrderUnitsTrait
     $this->nextState($nextState);
   }
 
+  public function argsOverlordSelectUnits($player = null)
+  {
+    $player = $player ?? Players::getActive();
+    $card = $player->getCardInPlay(); // A affiner avec statut card played ou pas
+    $args = $card->getArgsOrderUnits();
+    $args['actionCount'] = Globals::getActionCount();
+    return $args;
+  }
+
+  public function stOverlordSelectUnits($player = null) 
+  {
+    $player = $player ?? Players::getActive();
+    $args = $this->argsOverlordSelectUnits($player);
+    $tmpSection = [0, 0, 0];
+
+    if ($args['units']->count() <= $args['n']) {
+      // Do the automatic selection only if sections constraints are ok
+      if (isset($args['sections'])) {
+        $unitsPerSections = [0, 0, 0];
+
+        // Start assigning unit with only one section, if possible
+        foreach ($args['units'] as $unit) {
+          if (count($unit['sections']) == 1) {
+            $section = $unit['sections'][0];
+            if ($unitsPerSections[$section] == $args['sections'][$section]) {
+              return;
+            } else {
+              $unitsPerSections[$section]++;
+            }
+          }
+        }
+        // Now tru assigning unit with two sections where it fits
+        foreach ($args['units'] as $unit) {
+          if (count($unit['sections']) > 1) {
+            $section1 = $unit['sections'][0];
+            $section2 = $unit['sections'][1];
+            if ($unitsPerSections[$section1] < $args['sections'][$section1]) {
+              $unitsPerSections[$section1]++;
+            } elseif ($unitsPerSections[$section2] < $args['sections'][$section2]) {
+              $unitsPerSections[$section2]++;
+            } else {
+              return;
+            }
+          }
+        }
+      }
+
+      $this->actOrderUnits($args['units']->getIds(), [], true);
+    }
+  }
+
+  public function actSelectOverlordUnits($unitIds, $onTheMoveIds)
+  {
+    // Sanity checks
+    $this->checkAction('actSelectOverlordUnits');
+    Globals::incActionCount();
+    $player = Players::getCurrent();
+    $args = $this->argsOverlordSelectUnits($player);
+    $sectionId = $args['section'] ?? null;
+    $marineCommand = $args['marineCommand'] ?? false;
+
+    if (count($unitIds) > 1) {
+      throw new \BgaVisibleSystemException('You cannot select more than one unit. Should not happen');
+    }
+    if (count($onTheMoveIds) > 1) {
+      throw new \BgaVisibleSystemException('You cannot select more than one on the move unit. Should not happen');
+    }
+
+    if (count(array_diff($unitIds, $args['units']->getIds())) != 0) {
+      throw new \feException('You selected a unit that cannot be selected');
+    }
+
+    if (count(array_diff($onTheMoveIds, $args['units']->getIds())) != 0) {
+      throw new \feException('You selected a unit that cannot be selected');
+    }
+
+    // Flag the units as activated by the corresponding card
+    $card = $player->getCardInPlay();
+    foreach ($unitIds as $unitId) {
+      Units::get($unitId)->activate($card);
+    }
+    foreach ($onTheMoveIds as $unitId) {
+      Units::get($unitId)->activate($card, true);
+    }
+
+    // Notify
+    if (!empty($unitIds) || !empty($onTheMoveIds)) {
+      Notifications::orderUnits($player, Units::getMany($unitIds), Units::getMany($onTheMoveIds));
+    }
+
+    // Get next state from the card
+    $nextState = $card->nextStateAfterOrder($unitIds, $onTheMoveIds);
+    $this->nextState($nextState);
+  }
+
+
   public function actHealUnit($unitId, $nDice = null)
   {
     self::checkAction('actHealUnit');

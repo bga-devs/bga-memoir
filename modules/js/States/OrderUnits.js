@@ -103,6 +103,10 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       });
     },
 
+    onEnteringStateOverlordOrderUnits(args) {
+      console.log('On entering Overlord Order State', args);
+    },
+
     /////////////////////////////////
     //  __  __  _____     _______
     // |  \/  |/ _ \ \   / / ____|

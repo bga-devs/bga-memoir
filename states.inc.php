@@ -783,25 +783,27 @@ $machinestates = [
   // Commented those 4 states as Overlord is not developped yet
   ST_OVERLORD_PLAY_CARD => [
     'name' => 'overlordPlayCard',
-    'description' => clienttranslate('Players must play a card'),
-    'descriptionmyturn' => clienttranslate('${you} must play a card'),
+    'description' => clienttranslate('Players must play one of their distributed cards'),
+    'descriptionmyturn' => clienttranslate('${you} must play a distributed card'),
     'type' => 'activeplayer',
     'args' => 'argsOverlordPlayCard',
-    'possibleactions' => ['actOverlordPlayCard'],
-    'transitions' => ['selectUnits' => ST_OVERLORD_SELECT_UNIT],
+    'action' => 'stOverlordPlayCard',
+    'possibleactions' => ['actOverlordPlayCard', 'actPlayCard'],
+    'transitions' => ['selectOverlordUnits' => ST_OVERLORD_SELECT_UNIT],
   ],
 
-  /*ST_OVERLORD_SELECT_UNIT => [
-    'name' => 'selectUnits',
-    'description' => clienttranslate('${actplayer} must select units in sections ${section}'),
-    'descriptionmyturn' => clienttranslate('${you} must select units in sections ${section}'),
-    'type' => 'multipleactiveplayer',
+  ST_OVERLORD_SELECT_UNIT => [
+    'name' => 'selectOverlordUnits',
+    'description' => clienttranslate('${actplayer} must select units in sections ${sections}'),
+    'descriptionmyturn' => clienttranslate('${you} must select units in sections ${sections}'),
+    'type' => 'activeplayer',
     'args' => 'argsOverlordSelectUnits',
-    'possibleactions' => ['actSelectUnits'],
+    'action' => 'stOverlordSelectUnits',
+    'possibleactions' => ['actSelectOverlordUnits'],
     'transitions' => ['moveUnits' => ST_MOVE_UNITS],
   ],
 
-  ST_OVERLORD_MOVE_UNIT => [
+  /*ST_OVERLORD_MOVE_UNIT => [
     'name' => 'moveUnits',
     'description' => clienttranslate('${actplayer} must move selected units'),
     'descriptionmyturn' => clienttranslate('${you} must move selected units'),

@@ -468,7 +468,14 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
           } else if (cardsArmorBreakthrough.includes(parseInt(cardId))) {
             this.clientState('playCardArmorBreakthough', _('Do you wish to play it to deploy Armor Breakthrough ?'), { cardId });
           } else {
-            this.takeAction('actPlayCard', { cardId });
+            // TODO ActOverlordPlayCard for overlord card with no specific action
+            if (this.gamedatas.isOverlord) {
+              this.takeAction('actOverlordPlayCard', { cardId });
+            } 
+            else {
+              this.takeAction('actPlayCard', { cardId });
+            }
+            
           }
         });
       });
@@ -529,6 +536,21 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       this.addPrimaryActionButton(`btnArmorBreakthroughNo`, _('No'), () =>
         this.takeAction('actPlayCard', { cardId, armorbreakthrough: false }),
       );
+    },
+
+    onEnteringStateOverlordPlayCard(args) {
+      debug('Notif: choose a card distributed', args);
+
+      let cards = args._private.cards;
+      let cards317 = args._private.cardsHill317;
+      let cardsBlowBridge = args._private.cardsBlowBridge;
+      let cardsArmorBreakthrough = args._private.cardsArmorBreakthrough;  
+      console.log('cards to play', cards);
+      
+      
+      this.PlayCardSelection(args);
+
+
     },
 
 

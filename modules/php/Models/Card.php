@@ -1,9 +1,12 @@
 <?php
 namespace M44\Models;
+
+//use Bga\GameFramework\Db\Globals;
 use M44\Managers\Players;
 use M44\Managers\Units;
 use M44\Managers\Cards;
 use M44\Core\Game;
+use M44\Core\Globals;
 
 class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
 {
@@ -222,7 +225,11 @@ class Card extends \M44\Helpers\DB_Manager implements \JsonSerializable
   //////////////////////////////////////////////////////
   public function nextStateAfterPlay()
   {
-    return 'selectUnits';
+    if (Globals::isOverlord()) {
+      return 'selectOverlordUnits';
+    } else {
+      return 'selectUnits';
+    }
   }
 
   public function getArgsOrderUnits()

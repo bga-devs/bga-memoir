@@ -7,6 +7,7 @@ class Firefight extends \M44\Cards\Standard\Firefight
   {
     parent::__construct($row);
     unset($this->text[2]);
+    $this->isOverlord2subsections = true;
   }
 
   public function getPlayableSubSections($side = null)

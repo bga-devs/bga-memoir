@@ -94,6 +94,11 @@ class Cards extends \M44\Helpers\Pieces
     return self::getInLocation('inplay%');
   }
 
+  public static function getCardsOverlordDistributed($pId)
+  {
+    return self::getInLocation(['overlord_distributed', $pId]);
+  }
+
   /**
    * getByType
    */
