@@ -423,7 +423,7 @@ Hill 195 and Potigny are Temporary Medal Objectives for the Allied forces.'),
       'rules' => clienttranslate('Night Attack rules are in effect (Actions 19 - Night Attacks).
 
 Special Weapon Asset rules (SWAs 1 - Special Weapon Assets) are in effect for the units equipped with Anti-Tank Late war weapons (SWAs 5 - Anti-Tank Gun Late war after 1942).
-Treated as infantry for all purposes, when it moves battles like infantry. In addition when it dose not move, Stars hit on Armor.
+Treated as infantry for all purposes, when it moves battles like infantry. In addition when it does not move, Stars hit on Armor.
 
 Place a badge on Michael Wittmann\'s elite tank unit (Troops 2 - Specialized Units). Moreover, thanks to Wittmann\'s presence, this unit may ignore the first flag rolled against it.
 
